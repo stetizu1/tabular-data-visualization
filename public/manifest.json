@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Table Data Visualizer",
+  "name": "Table Data Visualizer Application",
   "icons": [
     {
       "src": "favicon.ico",
