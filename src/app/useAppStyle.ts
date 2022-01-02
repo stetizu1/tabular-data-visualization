@@ -11,7 +11,7 @@ export const useAppStyle = makeStyles({
     alignItems: `center`,
   },
   appHeader: {
-    backgroundColor: `#282c34`,
+    backgroundColor: COLORS.backgroundColor,
     padding: `10px 0`,
     width: `100%`,
     display: `flex`,
@@ -19,6 +19,6 @@ export const useAppStyle = makeStyles({
     alignItems: `center`,
     justifyContent: `center`,
     fontSize: `calc(10px + 2vmin)`,
-    color: COLORS.FontColor,
+    color: COLORS.fontColor,
   },
 })
