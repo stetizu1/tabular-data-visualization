@@ -1,13 +1,14 @@
-import React from 'react';
-import './App.css';
+import React, { FunctionComponent } from 'react'
+import { useAppStyle } from './useAppStyle'
 
-function App() {
+
+export const App: FunctionComponent = () => {
+  const style = useAppStyle()
+
   return (
-    <div className="App">
-      <header className="App-header">Table Data Visualizer</header>
+    <div className={style.app}>
+      <header className={style.appHeader}>Table Data Visualizer</header>
       <p>Web Application for Table Data Visualization</p>
     </div>
-  );
+  )
 }
-
-export default App;
