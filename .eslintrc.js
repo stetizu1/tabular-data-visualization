@@ -41,7 +41,7 @@ module.exports = {
     'max-classes-per-file': `off`,
     'max-len': `off`,
     'multiline-ternary': `off`,
-    'no-console': [`error`, { allow: [`error`] }],
+    'no-console': [`warn`, { allow: [`error`] }],
     'no-extra-parens': `warn`,
     'no-multi-spaces': `warn`,
     'no-multiple-empty-lines': `warn`,

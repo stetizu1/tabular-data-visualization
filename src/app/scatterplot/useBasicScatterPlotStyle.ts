@@ -5,4 +5,7 @@ export const useBasicScatterPlotStyle = makeStyles({
   svg: {
     backgroundColor: PLOTS.backgroundColor,
   },
+  selected: {
+    opacity: 1,
+  },
 })
