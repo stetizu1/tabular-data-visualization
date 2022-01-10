@@ -8,4 +8,7 @@ export const useBasicScatterPlotStyle = makeStyles({
   selected: {
     opacity: 1,
   },
+  notSelected:  {
+    opacity: 0.25,
+  },
 })

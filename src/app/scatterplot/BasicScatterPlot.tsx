@@ -74,7 +74,7 @@ export const BasicScatterPlot = <T, >({
       .attr(`cy`, d => yScale(getValueY(d)))
       .attr(`r`, 3)
       .attr(`fill`, fill)
-      .attr(`opacity`, 0.25)
+      .attr(`opacity`, 0.7)
 
     addAxes(node, xScale, yScale, innerHeight)
 
@@ -84,8 +84,10 @@ export const BasicScatterPlot = <T, >({
         const extent = selection as [[number, number], [number, number]] // hard retype
         circles.classed(style.selected, (d: T) => {
           return isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
-        },
-        )
+        })
+        circles.classed(style.notSelected, (d: T) => {
+          return !isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
+        })
       }
     }
     select(node).call(
