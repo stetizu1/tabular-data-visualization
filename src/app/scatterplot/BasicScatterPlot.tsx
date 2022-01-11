@@ -14,7 +14,7 @@ import {
 import { Margin, defaultMargin, marginWidth, marginHeight } from '../styles/margin'
 import { useBasicScatterPlotStyle } from './useBasicScatterPlotStyle'
 
-interface ScatterPlotProps<T> {
+interface BasicScatterPlotProps<T> {
   width: number
   height: number
   dataset: T[]
@@ -44,8 +44,8 @@ export const BasicScatterPlot = <T, >({
   height,
   dataset, getValueX, getValueY, getValueCat,
   margin = defaultMargin,
-}: ScatterPlotProps<T>) => {
-  const style = useBasicScatterPlotStyle()
+}: BasicScatterPlotProps<T>) => {
+  const classes = useBasicScatterPlotStyle()
 
   const component = useRef<SVGGElement>(null)
   const [innerWidth, innerHeight] = [width - marginWidth(margin), height - marginHeight(margin)]
@@ -62,7 +62,7 @@ export const BasicScatterPlot = <T, >({
       .append(`circle`)
 
     const [xExtent, yExtent] = [extent(dataset, getValueX), extent(dataset, getValueY)]
-    if (!xExtent[0] || !yExtent[0]) // [undefined, undefined]
+    if (xExtent[0] === undefined || yExtent[0] === undefined) // [undefined, undefined]
       return
     const [xScale, yScale] = [
       scaleLinear().domain(xExtent).range([0, innerWidth]),
@@ -82,10 +82,10 @@ export const BasicScatterPlot = <T, >({
       const selection = brushSelection(node)
       if (selection) {
         const extent = selection as [[number, number], [number, number]] // hard retype
-        circles.classed(style.selected, (d: T) => {
+        circles.classed(classes.selected, (d: T) => {
           return isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
         })
-        circles.classed(style.notSelected, (d: T) => {
+        circles.classed(classes.notSelected, (d: T) => {
           return !isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
         })
       }
@@ -97,12 +97,12 @@ export const BasicScatterPlot = <T, >({
     )
   }, [
     dataset, getValueX, getValueY, getValueCat,
-    innerHeight, innerWidth, component, margin, style,
+    innerHeight, innerWidth, component, margin, classes,
   ])
 
   useEffect(() => createScatterPlot())
   return <>
-    <svg width={width} height={height} className={style.svg}>
+    <svg width={width} height={height} className={classes.svg}>
       <g ref={component} transform={`translate(${margin.left}, ${margin.top})`}/>
     </svg>
   </>

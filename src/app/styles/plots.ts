@@ -1,3 +1,3 @@
 export const PLOTS = {
-  backgroundColor: `#f8f8f8`,
+  backgroundColor: `rgba(250, 250, 250, 0.98)`,
 }
