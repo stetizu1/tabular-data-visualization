@@ -8,11 +8,11 @@ import {
   scaleOrdinal,
   schemeCategory10,
   select,
-  brushSelection,
-  ScaleLinear,
+  ScaleLinear, D3BrushEvent,
 } from 'd3'
 import { Margin, defaultMargin, marginWidth, marginHeight } from '../styles/margin'
 import { useBasicScatterPlotStyle } from './useBasicScatterPlotStyle'
+import { isBrushed } from './brushing'
 
 interface BasicScatterPlotProps<T> {
   width: number
@@ -22,11 +22,6 @@ interface BasicScatterPlotProps<T> {
   getValueY: (data: T) => number
   getValueCat: (data:T) => string
   margin?: Margin
-}
-
-const isBrushed = (brush_coords: [[number, number], [number, number]], cx: number, cy: number) => {
-  const [x0, x1, y0, y1] = [brush_coords[0][0], brush_coords[1][0], brush_coords[0][1], brush_coords[1][1]]
-  return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1
 }
 
 const addAxes = (node: SVGGElement, xScale: ScaleLinear<number, number>, yScale: ScaleLinear<number, number>, innerHeight: number) => {
@@ -78,10 +73,9 @@ export const BasicScatterPlot = <T, >({
 
     addAxes(node, xScale, yScale, innerHeight)
 
-    const startBrushing = () => {
-      const selection = brushSelection(node)
-      if (selection) {
-        const extent = selection as [[number, number], [number, number]] // hard retype
+    const startBrushing = (e: D3BrushEvent<T>) => {
+      if (e.selection) {
+        const extent = e.selection as [[number, number], [number, number]] // hard retype
         circles.classed(classes.selected, (d: T) => {
           return isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
         })
@@ -90,10 +84,18 @@ export const BasicScatterPlot = <T, >({
         })
       }
     }
+
+    const endBrushing = (e: D3BrushEvent<T>) => {
+      if (!e.selection) {
+        circles.classed(classes.selected, false)
+        circles.classed(classes.notSelected, false)
+      }
+    }
     select(node).call(
       brush()
         .extent([[0, -margin.top], [innerWidth, innerHeight]])
-        .on(`start brush`, startBrushing),
+        .on(`start brush`, startBrushing)
+        .on(`start end`, endBrushing),
     )
   }, [
     dataset, getValueX, getValueY, getValueCat,

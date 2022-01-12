@@ -1,10 +1,21 @@
 import { useCallback, useEffect, useRef } from 'react'
-import { axisBottom, axisLeft, extent, scaleLinear, scaleOrdinal, schemeCategory10, select, ValueFn } from 'd3'
+import {
+  axisBottom,
+  axisLeft, brush,
+  D3BrushEvent,
+  extent,
+  scaleLinear,
+  scaleOrdinal,
+  schemeCategory10,
+  select, selectAll,
+  ValueFn,
+} from 'd3'
 import clsx from 'clsx'
 
 import { otherCasesToWhitespaces } from '../helpers/formatText'
 import { Margin, marginHeight, marginWidth } from '../styles/margin'
 import { COLORS } from '../styles/colors'
+import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 
 
@@ -51,7 +62,7 @@ export const ScatterPlotMatrix = <T extends Record<string, number | string | nul
     const domainByTraitsUnchecked = Object.fromEntries(quantAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
     if (Object.values(domainByTraitsUnchecked).some((domain) => domain[0] === undefined))
       return
-    const domainByQuantAttributes = domainByTraitsUnchecked as {[key in keyof T]: [number, number]}
+    const domainByQuantAttributes = domainByTraitsUnchecked as { [key in keyof T]: [number, number] }
 
     const rect = {
       width: width / quantCount - margin.left,
@@ -88,7 +99,7 @@ export const ScatterPlotMatrix = <T extends Record<string, number | string | nul
       .data(quantAttributes)
       .enter().append(`g`)
       .attr(`class`, clsx(classes.y, classes.axis))
-      .attr(`transform`, (d, i) => `translate(0,${i * rect.height })`)
+      .attr(`transform`, (d, i) => `translate(0,${i * rect.height})`)
       .each((d, idx, elements) => {
         y.domain(domainByQuantAttributes[d])
         select(elements[idx]).call(yAxis)
@@ -121,7 +132,7 @@ export const ScatterPlotMatrix = <T extends Record<string, number | string | nul
       .data(makeMatrix(quantAttributes))
       .enter().append(`g`)
       .attr(`class`, classes.cell)
-      .attr(`transform`, (d) => `translate(${ (quantCount - d.i - 1) * rect.width}, ${d.j * rect.height})`)
+      .attr(`transform`, (d) => `translate(${(quantCount - d.i - 1) * rect.width}, ${d.j * rect.height})`)
       .each(plot)
 
     cell.filter((d) => d.i === d.j)
@@ -129,6 +140,48 @@ export const ScatterPlotMatrix = <T extends Record<string, number | string | nul
       .attr(`x`, marginWidth(margin))
       .attr(`y`, marginHeight(margin) + margin.top)
       .text((d) => otherCasesToWhitespaces(String(d.keyX)))
+
+    let brushCell = { i: -1, j: -1 }
+    function startBrush (p: D3BrushEvent<T>, item: MatrixItem<T>) {
+      if (brushCell.i !== item.i || brushCell.j !== item.j) {
+        cell.each((d, idx, elements) => {
+          brush().clear(select(elements[idx]))
+        })
+        brushCell = { i: item.i, j: item.j }
+        x.domain(domainByQuantAttributes[item.keyX])
+        y.domain(domainByQuantAttributes[item.keyY])
+      }
+    }
+
+    function moveBrush (p: D3BrushEvent<T>, item: MatrixItem<T>) {
+      if (p.selection) {
+        const extent = p.selection as [[number, number], [number, number]]
+        const circles = selectAll(`circle`)
+        circles.classed(classes.selected, (dRaw) => {
+          const d = dRaw as T
+          return isBrushed(extent, x(Number(d[item.keyX])), y(Number(d[item.keyY])))
+        })
+        circles.classed(classes.hidden, (dRaw) => {
+          const d = dRaw as T
+          return !isBrushed(extent, x(Number(d[item.keyX])), y(Number(d[item.keyY])))
+        })
+      }
+    }
+
+    function endBrush (p: D3BrushEvent<T>) {
+      if (!p.selection) {
+        selectAll(`.${classes.hidden}`).classed(classes.hidden, false)
+        selectAll(`.${classes.selected}`).classed(classes.selected, false)
+      }
+    }
+
+    const makeBrush = brush<MatrixItem<T>>()
+      .on(`start`, startBrush)
+      .on(`brush`, moveBrush)
+      .on(`end`, endBrush)
+      .extent([[0, 0], [rect.width, rect.height]])
+
+    cell.call(makeBrush)
   }, [dataset, height, width, circleSize, classes])
   useEffect(() => createScatterPlotMatrix())
 

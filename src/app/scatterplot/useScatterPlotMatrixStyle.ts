@@ -42,4 +42,10 @@ export const useScatterPlotMatrixStyle = makeStyles({
       fill: `#ccc`,
     },
   },
+  selected: {
+    fill: `#830606 !important`,
+  },
+  hidden: {
+    fillOpacity: 0.2,
+  },
 })
