@@ -26,6 +26,7 @@ interface ScatterPlotMatrixProps<T extends SelectableDataType> {
   width: number
   setSelected: (selected: boolean[]) => void
   circleSize?: number
+  catAttribute?: keyof T
 }
 
 interface MatrixItem<T> {
@@ -40,6 +41,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
   dataset,
   setSelected,
   circleSize = 4,
+  catAttribute,
 }: ScatterPlotMatrixProps<T>) => {
   const classes = useScatterPlotMatrixStyle()
   const component = useRef<SVGGElement>(null)
@@ -74,12 +76,11 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       return typeof dataset[0][key] === `number`
     })) as Array<keyof T>
     const quantCount = quantAttributes.length
-    const category = Object.keys(dataset[0]).find((key) => typeof dataset[0][key] === `string`) as keyof T | undefined
 
-    const domainByTraitsUnchecked = Object.fromEntries(quantAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
-    if (Object.values(domainByTraitsUnchecked).some((domain) => domain[0] === undefined))
+    const domainByQuantAttributesUnchecked = Object.fromEntries(quantAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
+    if (Object.values(domainByQuantAttributesUnchecked).some((domain) => domain[0] === undefined))
       return
-    const domainByQuantAttributes = domainByTraitsUnchecked as { [key in keyof T]: [number, number] }
+    const domainByQuantAttributes = domainByQuantAttributesUnchecked as { [key in keyof T]: [number, number] }
 
     const rect = {
       width: width / quantCount - margin.left,
@@ -87,8 +88,8 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
     }
 
     const [x, y] = [
-      scaleLinear().range([margin.left, rect.width - margin.left]),
-      scaleLinear().range([rect.height - margin.top, margin.top]),
+      scaleLinear([margin.left, rect.width - margin.left]),
+      scaleLinear([rect.height - margin.top, margin.top]),
     ]
 
     const [xAxis, yAxis] = [axisBottom(x).ticks(6), axisLeft(y).ticks(6)]
@@ -142,7 +143,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
         .attr(`cy`, (d) => y(Number(d[p.keyY])))
         .attr(`r`, circleSize)
         .attr(`class`, classes.circle)
-        .style(`fill`, (d) => category ? color(String(d[category])) : COLORS.scatterPlotNoCategoryColor)
+        .style(`fill`, (d) => catAttribute ? color(String(d[catAttribute])) : COLORS.scatterPlotNoCategoryColor)
     }
 
     const cell = group.selectAll(`.${classes.cell}`)
@@ -196,7 +197,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       .extent([[0, 0], [rect.width, rect.height]])
 
     cell.call(makeBrush)
-  }, [dataset, height, width, circleSize, classes, setSelected])
+  }, [dataset, height, width, circleSize, classes, setSelected, catAttribute])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createScatterPlotMatrix(), [])
