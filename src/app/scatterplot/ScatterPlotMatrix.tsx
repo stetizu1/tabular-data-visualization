@@ -142,34 +142,34 @@ export const ScatterPlotMatrix = <T extends Record<string, number | string | nul
       .text((d) => otherCasesToWhitespaces(String(d.keyX)))
 
     let brushCell = { i: -1, j: -1 }
-    function startBrush (p: D3BrushEvent<T>, item: MatrixItem<T>) {
-      if (brushCell.i !== item.i || brushCell.j !== item.j) {
+    const startBrush = (_: D3BrushEvent<T>, { i, j, keyX, keyY }: MatrixItem<T>) => {
+      if (brushCell.i !== i || brushCell.j !== j) {
         cell.each((d, idx, elements) => {
           brush().clear(select(elements[idx]))
         })
-        brushCell = { i: item.i, j: item.j }
-        x.domain(domainByQuantAttributes[item.keyX])
-        y.domain(domainByQuantAttributes[item.keyY])
+        brushCell = { i, j }
+        x.domain(domainByQuantAttributes[keyX])
+        y.domain(domainByQuantAttributes[keyY])
       }
     }
 
-    function moveBrush (p: D3BrushEvent<T>, item: MatrixItem<T>) {
-      if (p.selection) {
-        const extent = p.selection as [[number, number], [number, number]]
+    function moveBrush ({ selection }: D3BrushEvent<T>, { keyX, keyY }: MatrixItem<T>) {
+      if (selection) {
+        const extent = selection as [[number, number], [number, number]]
         const circles = selectAll(`circle`)
         circles.classed(classes.selected, (dRaw) => {
           const d = dRaw as T
-          return isBrushed(extent, x(Number(d[item.keyX])), y(Number(d[item.keyY])))
+          return isBrushed(extent, x(Number(d[keyX])), y(Number(d[keyY])))
         })
         circles.classed(classes.hidden, (dRaw) => {
           const d = dRaw as T
-          return !isBrushed(extent, x(Number(d[item.keyX])), y(Number(d[item.keyY])))
+          return !isBrushed(extent, x(Number(d[keyX])), y(Number(d[keyY])))
         })
       }
     }
 
-    function endBrush (p: D3BrushEvent<T>) {
-      if (!p.selection) {
+    function endBrush ({ selection }: D3BrushEvent<T>) {
+      if (!selection) {
         selectAll(`.${classes.hidden}`).classed(classes.hidden, false)
         selectAll(`.${classes.selected}`).classed(classes.selected, false)
       }

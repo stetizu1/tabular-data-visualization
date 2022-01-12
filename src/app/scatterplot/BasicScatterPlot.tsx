@@ -73,9 +73,9 @@ export const BasicScatterPlot = <T, >({
 
     addAxes(node, xScale, yScale, innerHeight)
 
-    const startBrushing = (e: D3BrushEvent<T>) => {
-      if (e.selection) {
-        const extent = e.selection as [[number, number], [number, number]] // hard retype
+    const startBrushing = ({ selection }: D3BrushEvent<T>) => {
+      if (selection) {
+        const extent = selection as [[number, number], [number, number]] // hard retype
         circles.classed(classes.selected, (d: T) => {
           return isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
         })
@@ -85,8 +85,8 @@ export const BasicScatterPlot = <T, >({
       }
     }
 
-    const endBrushing = (e: D3BrushEvent<T>) => {
-      if (!e.selection) {
+    const endBrushing = ({ selection }: D3BrushEvent<T>) => {
+      if (!selection) {
         circles.classed(classes.selected, false)
         circles.classed(classes.notSelected, false)
       }
