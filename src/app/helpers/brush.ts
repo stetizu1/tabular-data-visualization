@@ -4,4 +4,4 @@ export enum Brush {
   end = `end`,
 }
 
-export type CleanBrushFunction = (() => void) | null
+export type CleanBrushFunction = (() => void)

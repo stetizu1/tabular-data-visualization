@@ -27,7 +27,7 @@ interface ScatterPlotMatrixProps<T extends SelectableDataType> {
   setSelected: (selected: boolean[]) => void
   circleSize?: number
   catAttribute?: keyof T
-  setCleanScatterPlotBrush: Dispatch<SetStateAction<CleanBrushFunction>>
+  setCleanScatterPlotBrush: Dispatch<SetStateAction<CleanBrushFunction[]>>
 }
 
 interface MatrixItem<T> {
@@ -169,12 +169,12 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       })
     }
 
-    setCleanScatterPlotBrush(() => () => {
+    setCleanScatterPlotBrush((prev) => [...prev, () => {
       clearBrush()
       brushCell = { i: -1, j: -1 }
       dataset.forEach((data) => data.selected = false)
       setSelected(dataset.map((data) => data.selected))
-    })
+    }])
 
     const startBrush = (_: D3BrushEvent<T>, { i, j, keyX, keyY }: MatrixItem<T>) => {
       if (brushCell.i !== i || brushCell.j !== j) {
