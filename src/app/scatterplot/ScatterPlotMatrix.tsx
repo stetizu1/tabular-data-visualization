@@ -13,15 +13,18 @@ import {
 import clsx from 'clsx'
 
 import { otherCasesToWhitespaces } from '../helpers/formatText'
+import { SelectableDataType } from '../helpers/data'
 import { Margin, marginHeight, marginWidth } from '../styles/margin'
 import { COLORS } from '../styles/colors'
+import { BrushActions } from '../helpers/BrushActions'
 import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 
 
-interface ScatterPlotMatrixProps<T extends Record<string, number | string | null>> {
+interface ScatterPlotMatrixProps<T extends SelectableDataType> {
   dataset: T[]
   width: number
+  setSelected: (selected: boolean[]) => void
   circleSize?: number
 }
 
@@ -32,15 +35,29 @@ interface MatrixItem<T> {
   keyY: keyof T
 }
 
-export const ScatterPlotMatrix = <T extends Record<string, number | string | null>>({
+export const ScatterPlotMatrix = <T extends SelectableDataType>({
   width,
   dataset,
+  setSelected,
   circleSize = 4,
 }: ScatterPlotMatrixProps<T>) => {
   const classes = useScatterPlotMatrixStyle()
   const component = useRef<SVGGElement>(null)
   // noinspection JSSuspiciousNameCombination
   const height = width
+  let someSelected = false
+
+  selectAll(`.${classes.circle}`)
+    .classed(classes.selected, (dRaw) => {
+      const d = dRaw as T
+      if (d.selected)
+        someSelected = true
+      return d.selected
+    })
+    .classed(classes.hidden, (dRaw) => {
+      const d = dRaw as T
+      return someSelected && !d.selected
+    })
 
   const createScatterPlotMatrix = useCallback(() => {
     const margin: Margin = { right: 14, left: 14, top: 14, bottom: 14 }
@@ -54,10 +71,10 @@ export const ScatterPlotMatrix = <T extends Record<string, number | string | nul
       .flat()
 
     const quantAttributes = (Object.keys(dataset[0]).filter((key) => {
-      return !isNaN(Number(dataset[0][key]))
+      return typeof dataset[0][key] === `number`
     })) as Array<keyof T>
     const quantCount = quantAttributes.length
-    const category = Object.keys(dataset[0]).find((key) => isNaN(Number(dataset[0][key]))) as keyof T | undefined
+    const category = Object.keys(dataset[0]).find((key) => typeof dataset[0][key] === `string`) as keyof T | undefined
 
     const domainByTraitsUnchecked = Object.fromEntries(quantAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
     if (Object.values(domainByTraitsUnchecked).some((domain) => domain[0] === undefined))
@@ -128,7 +145,7 @@ export const ScatterPlotMatrix = <T extends Record<string, number | string | nul
         .style(`fill`, (d) => category ? color(String(d[category])) : COLORS.scatterPlotNoCategoryColor)
     }
 
-    const cell = group.selectAll(`.cell`)
+    const cell = group.selectAll(`.${classes.cell}`)
       .data(makeMatrix(quantAttributes))
       .enter().append(`g`)
       .attr(`class`, classes.cell)
@@ -153,41 +170,40 @@ export const ScatterPlotMatrix = <T extends Record<string, number | string | nul
       }
     }
 
-    function moveBrush ({ selection }: D3BrushEvent<T>, { keyX, keyY }: MatrixItem<T>) {
+    const moveBrush = ({ selection }: D3BrushEvent<T>, { keyX, keyY }: MatrixItem<T>) => {
       if (selection) {
         const extent = selection as [[number, number], [number, number]]
-        const circles = selectAll(`circle`)
-        circles.classed(classes.selected, (dRaw) => {
-          const d = dRaw as T
-          return isBrushed(extent, x(Number(d[keyX])), y(Number(d[keyY])))
-        })
-        circles.classed(classes.hidden, (dRaw) => {
-          const d = dRaw as T
-          return !isBrushed(extent, x(Number(d[keyX])), y(Number(d[keyY])))
-        })
+        selectAll(`.${classes.circle}`)
+          .each((dRaw) => {
+            const d = dRaw as T
+            d.selected = isBrushed(extent, x(Number(d[keyX])), y(Number(d[keyY])))
+          })
+        setSelected(dataset.map((data) => data.selected))
       }
     }
 
-    function endBrush ({ selection }: D3BrushEvent<T>) {
+    const endBrush = ({ selection }: D3BrushEvent<T>) => {
       if (!selection) {
-        selectAll(`.${classes.hidden}`).classed(classes.hidden, false)
-        selectAll(`.${classes.selected}`).classed(classes.selected, false)
+        dataset.forEach((data) => data.selected = false)
+        setSelected(dataset.map((data) => data.selected))
       }
     }
 
     const makeBrush = brush<MatrixItem<T>>()
-      .on(`start`, startBrush)
-      .on(`brush`, moveBrush)
-      .on(`end`, endBrush)
+      .on(BrushActions.start, startBrush)
+      .on(BrushActions.move, moveBrush)
+      .on(BrushActions.end, endBrush)
       .extent([[0, 0], [rect.width, rect.height]])
 
     cell.call(makeBrush)
-  }, [dataset, height, width, circleSize, classes])
-  useEffect(() => createScatterPlotMatrix())
+  }, [dataset, height, width, circleSize, classes, setSelected])
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => createScatterPlotMatrix(), [])
 
   return (
     <svg width={width} height={height} className={classes.svg}>
-      <g className={`body`} ref={component}/>
+      <g ref={component}/>
     </svg>
   )
 }
