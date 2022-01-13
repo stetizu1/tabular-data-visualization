@@ -61,6 +61,7 @@ export const App: FunctionComponent = () => {
         TOGGLE DATA
       </button>
       <button onClick={() => {
+        setIsBrushingActive(false)
         cleanBrushes.forEach((f) => {
           f()
         })
