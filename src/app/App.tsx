@@ -17,15 +17,16 @@ const useUpdatedRef = <T, >(value: T) => {
 export const App: FunctionComponent = () => {
   const style = useAppStyle()
   const [dataset, setDataset] = useState<Array<SelectableDataType>>(addSelected(peopleData as unknown as DataType[]))
+  const [isBrushingActive, setIsBrushingActive] = useState<boolean>(false)
   const [i, setI] = useState<number>(1)
   const toggleData = () => {
     const data = i % 2 === 0 ? peopleData : flowerData
     setI((prev) => prev + 1)
     setDataset(addSelected(data as unknown as DataType[]))
+    setIsBrushingActive(false)
   }
   const [cleanBrushes, setCleanBrushes] = useState<CleanBrushFunction[]>([])
   const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
-  const [isBrushingActive, setIsBrushingActive] = useState<boolean>(false)
   const setSelected = (selected: boolean[]) => {
     setDataset((prev) => prev.map((data, idx) => ({ ...data, selected: selected[idx] })))
   }
@@ -54,7 +55,7 @@ export const App: FunctionComponent = () => {
         clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`SPM${i}`}
         isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
       />
-      <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute} key={`G${i}`} />
+      <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute} isBrushingActive={isBrushingActive} key={`G${i}`} />
       <button onClick={() => {
         toggleData()
       }} style={{ margin: 20 }}>

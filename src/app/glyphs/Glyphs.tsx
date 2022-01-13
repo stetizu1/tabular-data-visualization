@@ -19,6 +19,7 @@ interface ScatterPlotMatrixProps<T extends SelectableDataType> {
   margin?: Margin
   sortAttribute?: keyof T
   catAttribute?: keyof T
+  isBrushingActive: boolean
 }
 
 export const Glyphs = <T extends SelectableDataType>({
@@ -29,21 +30,19 @@ export const Glyphs = <T extends SelectableDataType>({
   glyphSize = 40,
   sortAttribute,
   catAttribute,
+  isBrushingActive,
 }: ScatterPlotMatrixProps<T>) => {
   const classes = useGlyphsStyle()
   const component = useRef<SVGGElement>(null)
 
-  let someSelected = false
   selectAll(`.${classes.glyph}`)
     .classed(classes.selected, (dRaw) => {
       const d = dRaw as T
-      if (d.selected)
-        someSelected = true
       return d.selected
     })
     .classed(classes.hidden, (dRaw) => {
       const d = dRaw as T
-      return someSelected && !d.selected
+      return isBrushingActive && !d.selected
     })
 
   const createGlyphs = useCallback(() => {
