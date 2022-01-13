@@ -43,23 +43,21 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
   circleSize = 4,
   catAttribute,
   clean, setCleanBrushes, setComponentBrushing,
+  isBrushingActive, setIsBrushingActive,
 }: ScatterPlotMatrixProps<T>) => {
   const classes = useScatterPlotMatrixStyle()
   const component = useRef<SVGGElement>(null)
   // noinspection JSSuspiciousNameCombination
   const height = width
-  let someSelected = false
 
   selectAll(`.${classes.circle}`)
     .classed(classes.selected, (dRaw) => {
       const d = dRaw as T
-      if (d.selected)
-        someSelected = true
       return d.selected
     })
     .classed(classes.hidden, (dRaw) => {
       const d = dRaw as T
-      return someSelected && !d.selected
+      return isBrushingActive && !d.selected
     })
 
   const createScatterPlotMatrix = useCallback(() => {
@@ -184,6 +182,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
         x.domain(domainByQuantAttributes[keyX])
         y.domain(domainByQuantAttributes[keyY])
       }
+      setIsBrushingActive(true)
     }
 
     const moveBrush = ({ selection }: D3BrushEvent<T>, { keyX, keyY }: MatrixItem<T>) => {
@@ -202,6 +201,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       if (!selection) {
         dataset.forEach((data) => data.selected = false)
         setSelected(dataset.map((data) => data.selected))
+        setIsBrushingActive(false)
       }
     }
 
@@ -214,7 +214,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
     cell.call(makeBrush)
   }, [
     dataset, height, width, circleSize, classes, setSelected, catAttribute,
-    clean, setComponentBrushing, setCleanBrushes,
+    clean, setComponentBrushing, setCleanBrushes, setIsBrushingActive,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
