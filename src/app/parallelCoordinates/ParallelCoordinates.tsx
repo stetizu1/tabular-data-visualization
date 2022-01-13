@@ -91,8 +91,8 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
 
     const brush = brushY<keyof T>()
       .extent([
-        [-(brushWidth / 2), 0],
-        [brushWidth / 2, innerHeight],
+        [-(brushWidth / 2), -(margin.top / 2)],
+        [brushWidth / 2, innerHeight + margin.top / 2],
       ])
       .on(Brush.start, () => {
         clean(node)
@@ -156,7 +156,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
       .text((d) => otherCasesToWhitespaces(String(d)))
       .style(`fill`, `black`)
   }, [
-    dataset, innerWidth, innerHeight, classes, catAttribute, setSelected,
+    dataset, innerWidth, innerHeight, classes, catAttribute, setSelected, margin,
     clean, setComponentBrushing, setCleanBrushes, setIsBrushingActive,
   ])
 
@@ -165,7 +165,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
 
   return (
     <svg width={width} height={height} className={classes.svg}>
-      <g ref={component} transform={`translate(${margin.left}, ${margin.top})`} />
+      <g ref={component} transform={`translate(${margin.left}, ${margin.top})`}/>
     </svg>
   )
 }
