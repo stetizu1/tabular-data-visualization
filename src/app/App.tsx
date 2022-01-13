@@ -1,21 +1,69 @@
-import React, { FunctionComponent } from 'react'
+import React, { FunctionComponent, useRef, useState } from 'react'
 import { useAppStyle } from './useAppStyle'
-import { BasicScatterPlot } from './scatterplot/BasicScatterPlot'
-import { TestData, testData } from './test/testData'
+import { ScatterPlotMatrix } from './scatterplot/ScatterPlotMatrix'
+import { addSelected, DataType, SelectableDataType } from './helpers/data'
+import { Glyphs } from './glyphs/Glyphs'
+import { peopleData } from './testData/peopleData'
+import { CleanBrushFunction } from './helpers/brush'
+import { ParallelCoordinates } from './parallelCoordinates/ParallelCoordinates'
+import { flowerData } from './testData/flowerData'
 
+const useUpdatedRef = <T, >(value: T) => {
+  const valueRef = useRef<T>(value)
+  valueRef.current = value
+  return valueRef
+}
 
 export const App: FunctionComponent = () => {
   const style = useAppStyle()
-  const data = testData
-  const getValueX = (d: TestData) => d.sepalLength
-  const getValueY = (d: TestData) => d.petalLength
-  const getValueCat = (d: TestData) => d.species
+  const [dataset, setDataset] = useState<Array<SelectableDataType>>(addSelected(peopleData as unknown as DataType[]))
+  const [i, setI] = useState<number>(1)
+  const toggleData = () => {
+    const data = i % 2 === 0 ? peopleData : flowerData
+    setI((prev) => prev + 1)
+    setDataset(addSelected(data as unknown as DataType[]))
+  }
+  const [cleanBrushes, setCleanBrushes] = useState<CleanBrushFunction[]>([])
+  const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
+  const setSelected = (selected: boolean[]) => {
+    setDataset((prev) => prev.map((data, idx) => ({ ...data, selected: selected[idx] })))
+  }
+  const cleanBrushesRef = useUpdatedRef(cleanBrushes)
+  const componentBrushingRef = useUpdatedRef(componentBrushing)
+  const clean = (newComponentBrushing: SVGGElement) => {
+    if (componentBrushingRef.current === newComponentBrushing)
+      return
+    cleanBrushesRef.current.forEach((f) => {
+      f()
+    })
+  }
+  const catAttribute = `species`
 
   return (
     <div className={style.app}>
       <header className={style.appHeader}>Table Data Visualizer</header>
       <p>Web Application for Table Data Visualization</p>
-      <BasicScatterPlot width={800} height={512} dataset={data} getValueX={getValueX} getValueY={getValueY} getValueCat={getValueCat} />
+      <ParallelCoordinates
+        dataset={dataset} width={960} height={400} setSelected={setSelected} catAttribute={catAttribute}
+        clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`PC${i}`}
+      />
+      <ScatterPlotMatrix
+        dataset={dataset} width={960} setSelected={setSelected} catAttribute={catAttribute}
+        clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`SPM${i}`}
+      />
+      <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute} key={`G${i}`} />
+      <button onClick={() => {
+        toggleData()
+      }} style={{ margin: 20 }}>
+        TOGGLE DATA
+      </button>
+      <button onClick={() => {
+        cleanBrushes.forEach((f) => {
+          f()
+        })
+      }} style={{ margin: 20 }}>
+        CLEAR BRUSHES
+      </button>
     </div>
   )
 }

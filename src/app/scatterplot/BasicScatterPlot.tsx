@@ -8,13 +8,13 @@ import {
   scaleOrdinal,
   schemeCategory10,
   select,
-  brushSelection,
-  ScaleLinear,
+  ScaleLinear, D3BrushEvent,
 } from 'd3'
 import { Margin, defaultMargin, marginWidth, marginHeight } from '../styles/margin'
 import { useBasicScatterPlotStyle } from './useBasicScatterPlotStyle'
+import { isBrushed } from './brushing'
 
-interface ScatterPlotProps<T> {
+interface BasicScatterPlotProps<T> {
   width: number
   height: number
   dataset: T[]
@@ -22,11 +22,6 @@ interface ScatterPlotProps<T> {
   getValueY: (data: T) => number
   getValueCat: (data:T) => string
   margin?: Margin
-}
-
-const isBrushed = (brush_coords: [[number, number], [number, number]], cx: number, cy: number) => {
-  const [x0, x1, y0, y1] = [brush_coords[0][0], brush_coords[1][0], brush_coords[0][1], brush_coords[1][1]]
-  return x0 <= cx && cx <= x1 && y0 <= cy && cy <= y1
 }
 
 const addAxes = (node: SVGGElement, xScale: ScaleLinear<number, number>, yScale: ScaleLinear<number, number>, innerHeight: number) => {
@@ -44,8 +39,8 @@ export const BasicScatterPlot = <T, >({
   height,
   dataset, getValueX, getValueY, getValueCat,
   margin = defaultMargin,
-}: ScatterPlotProps<T>) => {
-  const style = useBasicScatterPlotStyle()
+}: BasicScatterPlotProps<T>) => {
+  const classes = useBasicScatterPlotStyle()
 
   const component = useRef<SVGGElement>(null)
   const [innerWidth, innerHeight] = [width - marginWidth(margin), height - marginHeight(margin)]
@@ -62,7 +57,7 @@ export const BasicScatterPlot = <T, >({
       .append(`circle`)
 
     const [xExtent, yExtent] = [extent(dataset, getValueX), extent(dataset, getValueY)]
-    if (!xExtent[0] || !yExtent[0]) // [undefined, undefined]
+    if (xExtent[0] === undefined || yExtent[0] === undefined) // [undefined, undefined]
       return
     const [xScale, yScale] = [
       scaleLinear().domain(xExtent).range([0, innerWidth]),
@@ -78,31 +73,38 @@ export const BasicScatterPlot = <T, >({
 
     addAxes(node, xScale, yScale, innerHeight)
 
-    const startBrushing = () => {
-      const selection = brushSelection(node)
+    const startBrushing = ({ selection }: D3BrushEvent<T>) => {
       if (selection) {
         const extent = selection as [[number, number], [number, number]] // hard retype
-        circles.classed(style.selected, (d: T) => {
+        circles.classed(classes.selected, (d: T) => {
           return isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
         })
-        circles.classed(style.notSelected, (d: T) => {
+        circles.classed(classes.notSelected, (d: T) => {
           return !isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
         })
+      }
+    }
+
+    const endBrushing = ({ selection }: D3BrushEvent<T>) => {
+      if (!selection) {
+        circles.classed(classes.selected, false)
+        circles.classed(classes.notSelected, false)
       }
     }
     select(node).call(
       brush()
         .extent([[0, -margin.top], [innerWidth, innerHeight]])
-        .on(`start brush`, startBrushing),
+        .on(`start brush`, startBrushing)
+        .on(`start end`, endBrushing),
     )
   }, [
     dataset, getValueX, getValueY, getValueCat,
-    innerHeight, innerWidth, component, margin, style,
+    innerHeight, innerWidth, component, margin, classes,
   ])
 
   useEffect(() => createScatterPlot())
   return <>
-    <svg width={width} height={height} className={style.svg}>
+    <svg width={width} height={height} className={classes.svg}>
       <g ref={component} transform={`translate(${margin.left}, ${margin.top})`}/>
     </svg>
   </>

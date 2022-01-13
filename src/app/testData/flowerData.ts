@@ -1,4 +1,4 @@
-export interface TestData {
+export interface FlowerData {
   sepalLength: number
   sepalWidth: number
   petalLength: number
@@ -6,7 +6,7 @@ export interface TestData {
   species: string
 }
 
-export const testData = [{
+export const flowerData: FlowerData[] = [{
   sepalLength: 5.1,
   sepalWidth: 3.5,
   petalLength: 1.4,
