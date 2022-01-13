@@ -52,8 +52,7 @@ export const BasicScatterPlot = <T, >({
     }
     const circles = select(node)
       .selectAll(`circle`)
-      .data(dataset)
-      .enter()
+      .data(dataset).enter()
       .append(`circle`)
 
     const [xExtent, yExtent] = [extent(dataset, getValueX), extent(dataset, getValueY)]

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import {
   axisLeft,
   brushY,
@@ -38,21 +38,19 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
   catAttribute,
   setSelected,
   clean, setCleanBrushes, setComponentBrushing,
+  isBrushingActive, setIsBrushingActive,
 }: ParallelCoordinatesProps<T>) => {
   const classes = useParallelCoordinatesStyle()
   const component = useRef<SVGGElement>(null)
-  const [isBrushing, setIsBrushing] = useState(false)
-  let someSelected = false
 
   selectAll(`.${classes.line}`)
     .classed(classes.selected, (dRaw) => {
       const d = dRaw as T
-      if (d.selected) someSelected = true
       return d.selected
     })
     .classed(classes.hidden, (dRaw) => {
       const d = dRaw as T
-      return (isBrushing || someSelected) && !d.selected
+      return isBrushingActive && !d.selected
     })
 
   const [innerWidth, innerHeight] = [width - marginWidth(margin), height - marginHeight(margin)]
@@ -89,17 +87,17 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
         })
       })
       setSelected(dataset.map((data) => data.selected))
-      setIsBrushing(true)
     }
 
     const brush = brushY<keyof T>()
       .extent([
-        [-(brushWidth / 2), 0],
-        [brushWidth / 2, innerHeight],
+        [-(brushWidth / 2), -(margin.top / 2)],
+        [brushWidth / 2, innerHeight + margin.top / 2],
       ])
       .on(Brush.start, () => {
         clean(node)
         setComponentBrushing(node)
+        setIsBrushingActive(true)
       })
       .on(Brush.move, (brushEvent: D3BrushEvent<T>, axisName) => {
         selections[axisName] = brushEvent.selection as [number, number] | null // yBrush
@@ -111,7 +109,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
         if (Object.values(selections).every((data) => data === null)) {
           dataset.forEach((data) => data.selected = false)
           setSelected(dataset.map((data) => data.selected))
-          setIsBrushing(false)
+          setIsBrushingActive(false)
           return
         }
         if (brushSelection == null)
@@ -145,7 +143,6 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
     }
 
     setCleanBrushes((prev) => [...prev, () => {
-      setIsBrushing(false)
       clearBrush()
       dimensions.map((key) => selections[key] = null)
       dataset.forEach((data) => data.selected = false)
@@ -159,8 +156,8 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
       .text((d) => otherCasesToWhitespaces(String(d)))
       .style(`fill`, `black`)
   }, [
-    dataset, innerWidth, innerHeight, classes, catAttribute, setSelected,
-    clean, setComponentBrushing, setCleanBrushes,
+    dataset, innerWidth, innerHeight, classes, catAttribute, setSelected, margin,
+    clean, setComponentBrushing, setCleanBrushes, setIsBrushingActive,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -168,7 +165,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
 
   return (
     <svg width={width} height={height} className={classes.svg}>
-      <g ref={component} transform={`translate(${margin.left}, ${margin.top})`} />
+      <g ref={component} transform={`translate(${margin.left}, ${margin.top})`}/>
     </svg>
   )
 }

@@ -9,7 +9,10 @@ export enum Brush {
 export type CleanBrushFunction = () => void
 
 export interface Brushable {
+  isBrushingActive: boolean
+  setIsBrushingActive: Dispatch<SetStateAction<boolean>>
   clean: (key: SVGGElement) => void
   setCleanBrushes: Dispatch<SetStateAction<CleanBrushFunction[]>>
   setComponentBrushing: Dispatch<SetStateAction<SVGGElement | null>>
+  setSelected: (selected: boolean[]) => void
 }

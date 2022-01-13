@@ -17,11 +17,13 @@ const useUpdatedRef = <T, >(value: T) => {
 export const App: FunctionComponent = () => {
   const style = useAppStyle()
   const [dataset, setDataset] = useState<Array<SelectableDataType>>(addSelected(peopleData as unknown as DataType[]))
+  const [isBrushingActive, setIsBrushingActive] = useState<boolean>(false)
   const [i, setI] = useState<number>(1)
   const toggleData = () => {
     const data = i % 2 === 0 ? peopleData : flowerData
     setI((prev) => prev + 1)
     setDataset(addSelected(data as unknown as DataType[]))
+    setIsBrushingActive(false)
   }
   const [cleanBrushes, setCleanBrushes] = useState<CleanBrushFunction[]>([])
   const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
@@ -44,20 +46,23 @@ export const App: FunctionComponent = () => {
       <header className={style.appHeader}>Table Data Visualizer</header>
       <p>Web Application for Table Data Visualization</p>
       <ParallelCoordinates
-        dataset={dataset} width={960} height={400} setSelected={setSelected} catAttribute={catAttribute}
-        clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`PC${i}`}
+        dataset={dataset} width={960} height={400} catAttribute={catAttribute} key={`PC${i}`}
+        clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
+        setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
       />
       <ScatterPlotMatrix
-        dataset={dataset} width={960} setSelected={setSelected} catAttribute={catAttribute}
+        dataset={dataset} width={960} catAttribute={catAttribute}
         clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`SPM${i}`}
+        setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
       />
-      <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute} key={`G${i}`} />
+      <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute} isBrushingActive={isBrushingActive} key={`G${i}`} />
       <button onClick={() => {
         toggleData()
       }} style={{ margin: 20 }}>
         TOGGLE DATA
       </button>
       <button onClick={() => {
+        setIsBrushingActive(false)
         cleanBrushes.forEach((f) => {
           f()
         })

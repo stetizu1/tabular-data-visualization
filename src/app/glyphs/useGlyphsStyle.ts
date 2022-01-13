@@ -7,7 +7,6 @@ export const useGlyphsStyle = makeStyles({
     padding: `10px`,
     backgroundColor: PLOTS.backgroundColor,
   },
-  point: {},
   glyph: {
     opacity: 0.5,
   },
