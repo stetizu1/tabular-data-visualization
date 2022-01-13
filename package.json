@@ -1,5 +1,6 @@
 {
-  "name": "diploma-thesis",
+  "name": "table-data-visualization",
+  "homepage": "https://stetizu1.github.io/table-data-visualization/",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -8,6 +9,7 @@
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
+    "gh-pages": "^3.2.3",
     "typescript": "^4.1.2"
   },
   "dependencies": {
@@ -24,6 +26,8 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
