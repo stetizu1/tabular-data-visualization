@@ -1,4 +1,14 @@
-export const peopleData = [{
+export interface PeopleData {
+  species: string
+  island: string
+  culmen_length_mm: number
+  culmen_depth_mm: number
+  flipper_length_mm: number
+  body_mass_g: number
+  sex: string | null
+}
+
+export const peopleData: PeopleData[] = [{
   species: `Adelie`,
   island: `Torgersen`,
   culmen_length_mm: 39.1,

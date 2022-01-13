@@ -1,11 +1,12 @@
 import React, { FunctionComponent, useRef, useState } from 'react'
 import { useAppStyle } from './useAppStyle'
 import { ScatterPlotMatrix } from './scatterplot/ScatterPlotMatrix'
-import { addSelected } from './helpers/data'
+import { addSelected, DataType, SelectableDataType } from './helpers/data'
 import { Glyphs } from './glyphs/Glyphs'
 import { peopleData } from './testData/peopleData'
 import { CleanBrushFunction } from './helpers/brush'
 import { ParallelCoordinates } from './parallelCoordinates/ParallelCoordinates'
+import { flowerData } from './testData/flowerData'
 
 const useUpdatedRef = <T, >(value: T) => {
   const valueRef = useRef<T>(value)
@@ -15,7 +16,13 @@ const useUpdatedRef = <T, >(value: T) => {
 
 export const App: FunctionComponent = () => {
   const style = useAppStyle()
-  const [dataset, setDataset] = useState(addSelected(peopleData))
+  const [dataset, setDataset] = useState<Array<SelectableDataType>>(addSelected(peopleData as unknown as DataType[]))
+  const [i, setI] = useState<number>(1)
+  const toggleData = () => {
+    const data = i % 2 === 0 ? peopleData : flowerData
+    setI((prev) => prev + 1)
+    setDataset(addSelected(data as unknown as DataType[]))
+  }
   const [cleanBrushes, setCleanBrushes] = useState<CleanBrushFunction[]>([])
   const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
   const setSelected = (selected: boolean[]) => {
@@ -38,18 +45,24 @@ export const App: FunctionComponent = () => {
       <p>Web Application for Table Data Visualization</p>
       <ParallelCoordinates
         dataset={dataset} width={960} height={400} setSelected={setSelected} catAttribute={catAttribute}
-        clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
+        clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`PC${i}`}
       />
       <ScatterPlotMatrix
         dataset={dataset} width={960} setSelected={setSelected} catAttribute={catAttribute}
-        clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
+        clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`SPM${i}`}
       />
-      <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute} />
+      <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute} key={`G${i}`} />
+      <button onClick={() => {
+        toggleData()
+      }} style={{ margin: 20 }}>
+        TOGGLE DATA
+      </button>
       <button onClick={() => {
         cleanBrushes.forEach((f) => {
           f()
         })
-      }} style={{ margin: 20 }}>CLEAR BRUSHES
+      }} style={{ margin: 20 }}>
+        CLEAR BRUSHES
       </button>
     </div>
   )
