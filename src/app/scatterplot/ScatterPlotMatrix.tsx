@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef } from 'react'
 import {
   axisBottom,
   axisLeft, brush,
@@ -16,18 +16,17 @@ import { otherCasesToWhitespaces } from '../helpers/formatText'
 import { SelectableDataType } from '../helpers/data'
 import { Margin, marginHeight, marginWidth } from '../styles/margin'
 import { COLORS } from '../styles/colors'
-import { Brush, CleanBrushFunction } from '../helpers/brush'
+import { Brush, Brushable } from '../helpers/brush'
 import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 
 
-interface ScatterPlotMatrixProps<T extends SelectableDataType> {
+interface ScatterPlotMatrixProps<T extends SelectableDataType> extends Brushable{
   dataset: T[]
   width: number
   setSelected: (selected: boolean[]) => void
   circleSize?: number
   catAttribute?: keyof T
-  setCleanScatterPlotBrush: Dispatch<SetStateAction<CleanBrushFunction[]>>
 }
 
 interface MatrixItem<T> {
@@ -43,7 +42,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
   setSelected,
   circleSize = 4,
   catAttribute,
-  setCleanScatterPlotBrush,
+  clean, setCleanBrushes, setComponentBrushing,
 }: ScatterPlotMatrixProps<T>) => {
   const classes = useScatterPlotMatrixStyle()
   const component = useRef<SVGGElement>(null)
@@ -169,7 +168,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       })
     }
 
-    setCleanScatterPlotBrush((prev) => [...prev, () => {
+    setCleanBrushes((prev) => [...prev, () => {
       clearBrush()
       brushCell = { i: -1, j: -1 }
       dataset.forEach((data) => data.selected = false)
@@ -177,6 +176,8 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
     }])
 
     const startBrush = (_: D3BrushEvent<T>, { i, j, keyX, keyY }: MatrixItem<T>) => {
+      clean(node)
+      setComponentBrushing(node)
       if (brushCell.i !== i || brushCell.j !== j) {
         clearBrush()
         brushCell = { i, j }
@@ -211,7 +212,10 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       .extent([[0, 0], [rect.width, rect.height]])
 
     cell.call(makeBrush)
-  }, [dataset, height, width, circleSize, classes, setSelected, catAttribute, setCleanScatterPlotBrush])
+  }, [
+    dataset, height, width, circleSize, classes, setSelected, catAttribute,
+    clean, setComponentBrushing, setCleanBrushes,
+  ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createScatterPlotMatrix(), [])

@@ -1,29 +1,33 @@
-import { Dispatch, SetStateAction, useCallback, useEffect, useRef } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import {
   axisLeft,
-  extent, line,
+  brushY,
+  D3BrushEvent,
+  extent,
+  line,
   scaleLinear,
-  scaleOrdinal, scalePoint,
+  scaleOrdinal,
+  scalePoint,
   schemeCategory10,
-  select, selectAll,
+  select,
+  selectAll,
 } from 'd3'
 
 import { SelectableDataType } from '../helpers/data'
-import { CleanBrushFunction } from '../helpers/brush'
+import { Brush, Brushable } from '../helpers/brush'
 import { defaultMargin, Margin, marginHeight, marginWidth } from '../styles/margin'
 import { COLORS } from '../styles/colors'
 import { otherCasesToWhitespaces } from '../helpers/formatText'
 import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
 
 
-interface ParallelCoordinatesProps<T extends SelectableDataType> {
+interface ParallelCoordinatesProps<T extends SelectableDataType> extends Brushable {
   dataset: T[]
   width: number
   height: number
   margin?: Margin
-  setSelected?: (selected: boolean[]) => void
+  setSelected: (selected: boolean[]) => void
   catAttribute?: keyof T
-  setCleanScatterPlotBrush: Dispatch<SetStateAction<CleanBrushFunction[]>>
 }
 
 export const ParallelCoordinates = <T extends SelectableDataType>({
@@ -32,17 +36,17 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
   dataset,
   margin = defaultMargin,
   catAttribute,
+  setSelected,
+  clean, setCleanBrushes, setComponentBrushing,
 }: ParallelCoordinatesProps<T>) => {
   const classes = useParallelCoordinatesStyle()
   const component = useRef<SVGGElement>(null)
+  const [someSelected, setSomeSelected] = useState(false)
 
-  let someSelected = false
 
   selectAll(`.${classes.line}`)
     .classed(classes.selected, (dRaw) => {
       const d = dRaw as T
-      if (d.selected)
-        someSelected = true
       return d.selected
     })
     .classed(classes.hidden, (dRaw) => {
@@ -51,6 +55,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
     })
 
   const [innerWidth, innerHeight] = [width - marginWidth(margin), height - marginHeight(margin)]
+  const brushWidth = 30
   const createScatterPlotMatrix = useCallback(() => {
     const node = component.current
     if (!node) {
@@ -71,6 +76,47 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
     const xScale = scalePoint([0, innerWidth])
       .domain(dimensions.map((d) => String(d)))
 
+    const selections = Object.fromEntries(dimensions.map((key) => [key, null])) as { [key in keyof T]: [number, number] | null }
+    const setBrushed = () => {
+      dataset.forEach((data) => {
+        data.selected = dimensions.every((dimension) => {
+          const selectedRange = selections[dimension]
+          if (selectedRange === null)
+            return true
+          const dataPoint = yScales[dimensions.indexOf(dimension)](Number(data[dimension]))
+          return dataPoint > selectedRange[0] && dataPoint < selectedRange[1]
+        })
+      })
+      setSelected(dataset.map((data) => data.selected))
+      setSomeSelected(true)
+    }
+
+    const brush = brushY<keyof T>()
+      .extent([
+        [-(brushWidth / 2), 0],
+        [brushWidth / 2, innerHeight],
+      ])
+      .on(Brush.start, () => {
+        clean(node)
+        setComponentBrushing(node)
+      })
+      .on(Brush.move, (brushEvent: D3BrushEvent<T>, axisName) => {
+        selections[axisName] = brushEvent.selection as [number, number] | null // yBrush
+        setBrushed()
+      })
+      .on(Brush.end, (brushEvent: D3BrushEvent<T>, axisName) => {
+        const brushSelection = brushEvent.selection as [number, number] | null // yBrush
+        selections[axisName] = brushSelection
+        if (Object.values(selections).every((data) => data === null)) {
+          dataset.forEach((data) => data.selected = false)
+          setSelected(dataset.map((data) => data.selected))
+          setSomeSelected(false)
+          return
+        }
+        if (brushSelection == null)
+          setBrushed()
+      })
+
     const color = scaleOrdinal(schemeCategory10)
     svg.selectAll(`path`)
       .data(dataset).enter()
@@ -80,7 +126,8 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
       .style(`fill`, `none`)
       .style(`stroke`, (d) => catAttribute ? color(String(d[catAttribute])) : COLORS.scatterPlotNoCategoryColor)
       .style(`opacity`, 0.5)
-    svg.selectAll(`axes`)
+
+    const axes = svg.selectAll(`axes`)
       .data(dimensions).enter()
       .append(`g`)
       .attr(`transform`, (d) => `translate(${xScale(String(d))}, 0)`)
@@ -88,12 +135,31 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
         select(elements[idx])
           .call(axisLeft(yScales[dimensions.indexOf(d)]),
           ))
+      .call(brush)
+
+    const clearBrush = () => {
+      axes.each((d, idx, elements) => {
+        brushY().clear(select(elements[idx]))
+      })
+    }
+
+    setCleanBrushes((prev) => [...prev, () => {
+      clearBrush()
+      dimensions.map((key) => selections[key] = null)
+      dataset.forEach((data) => data.selected = false)
+      setSelected(dataset.map((data) => data.selected))
+    }])
+
+    axes
       .append(`text`)
       .style(`text-anchor`, `middle`)
       .attr(`y`, -9)
       .text((d) => otherCasesToWhitespaces(String(d)))
       .style(`fill`, `black`)
-  }, [dataset, innerWidth, innerHeight, classes, catAttribute])
+  }, [
+    dataset, innerWidth, innerHeight, classes, catAttribute, setSelected,
+    clean, setComponentBrushing, setCleanBrushes,
+  ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createScatterPlotMatrix(), [])
