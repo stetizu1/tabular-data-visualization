@@ -14,4 +14,5 @@ export interface Brushable {
   clean: (key: SVGGElement) => void
   setCleanBrushes: Dispatch<SetStateAction<CleanBrushFunction[]>>
   setComponentBrushing: Dispatch<SetStateAction<SVGGElement | null>>
+  setSelected: (selected: boolean[]) => void
 }

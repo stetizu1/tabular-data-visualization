@@ -46,14 +46,14 @@ export const App: FunctionComponent = () => {
       <header className={style.appHeader}>Table Data Visualizer</header>
       <p>Web Application for Table Data Visualization</p>
       <ParallelCoordinates
-        dataset={dataset} width={960} height={400} setSelected={setSelected} catAttribute={catAttribute} key={`PC${i}`}
+        dataset={dataset} width={960} height={400} catAttribute={catAttribute} key={`PC${i}`}
         clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
-        isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
+        setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
       />
       <ScatterPlotMatrix
-        dataset={dataset} width={960} setSelected={setSelected} catAttribute={catAttribute}
+        dataset={dataset} width={960} catAttribute={catAttribute}
         clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`SPM${i}`}
-        isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
+        setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
       />
       <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute} isBrushingActive={isBrushingActive} key={`G${i}`} />
       <button onClick={() => {

@@ -81,16 +81,13 @@ export const Glyphs = <T extends SelectableDataType>({
     )
     const color = scaleOrdinal(schemeCategory10)
 
-    svg.selectAll(`circle`)
-      .data(dataset)
-      .attr(`class`, classes.point)
-      .enter()
+    svg.selectAll(`glyphs`)
+      .data(dataset).enter()
       .each((d, idx, elements) => {
         select(elements[idx])
           .append(`g`)
           .selectAll(`path`)
-          .data([d])
-          .enter()
+          .data([d]).enter()
           .append(`path`)
           .attr(`class`, classes.glyph)
           .attr(`d`, d => radialLine(quantAttributes

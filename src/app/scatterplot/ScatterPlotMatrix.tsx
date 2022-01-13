@@ -24,7 +24,6 @@ import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 interface ScatterPlotMatrixProps<T extends SelectableDataType> extends Brushable{
   dataset: T[]
   width: number
-  setSelected: (selected: boolean[]) => void
   circleSize?: number
   catAttribute?: keyof T
 }
@@ -103,8 +102,8 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       .attr(`transform`, `translate(${marginWidth(margin)}, ${margin.top})`)
 
     group.selectAll(`.${classes.x}.${classes.axis}`)
-      .data(quantAttributes)
-      .enter().append(`g`)
+      .data(quantAttributes).enter()
+      .append(`g`)
       .attr(`class`, clsx(classes.x, classes.axis))
       .attr(`transform`, (d, i) => `translate(${(quantCount - i - 1) * rect.width}, 0)`)
       .each((d, idx, elements) => {
@@ -113,8 +112,8 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       })
 
     group.selectAll(`.${classes.y}.${classes.axis}`)
-      .data(quantAttributes)
-      .enter().append(`g`)
+      .data(quantAttributes).enter()
+      .append(`g`)
       .attr(`class`, clsx(classes.y, classes.axis))
       .attr(`transform`, (d, i) => `translate(0,${i * rect.height})`)
       .each((d, idx, elements) => {
@@ -136,8 +135,8 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
         .attr(`height`, rect.height - marginHeight(margin))
 
       cell.selectAll(`circle`)
-        .data(dataset)
-        .enter().append(`circle`)
+        .data(dataset).enter()
+        .append(`circle`)
         .attr(`cx`, (d) => x(Number(d[p.keyX])))
         .attr(`cy`, (d) => y(Number(d[p.keyY])))
         .attr(`r`, circleSize)
@@ -146,8 +145,8 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
     }
 
     const cell = group.selectAll(`.${classes.cell}`)
-      .data(makeMatrix(quantAttributes))
-      .enter().append(`g`)
+      .data(makeMatrix(quantAttributes)).enter()
+      .append(`g`)
       .attr(`class`, classes.cell)
       .attr(`transform`, (d) => `translate(${(quantCount - d.i - 1) * rect.width}, ${d.j * rect.height})`)
       .each(plot)
