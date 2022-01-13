@@ -41,17 +41,18 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
 }: ParallelCoordinatesProps<T>) => {
   const classes = useParallelCoordinatesStyle()
   const component = useRef<SVGGElement>(null)
-  const [someSelected, setSomeSelected] = useState(false)
-
+  const [isBrushing, setIsBrushing] = useState(false)
+  let someSelected = false
 
   selectAll(`.${classes.line}`)
     .classed(classes.selected, (dRaw) => {
       const d = dRaw as T
+      if (d.selected) someSelected = true
       return d.selected
     })
     .classed(classes.hidden, (dRaw) => {
       const d = dRaw as T
-      return someSelected && !d.selected
+      return (isBrushing || someSelected) && !d.selected
     })
 
   const [innerWidth, innerHeight] = [width - marginWidth(margin), height - marginHeight(margin)]
@@ -88,7 +89,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
         })
       })
       setSelected(dataset.map((data) => data.selected))
-      setSomeSelected(true)
+      setIsBrushing(true)
     }
 
     const brush = brushY<keyof T>()
@@ -110,7 +111,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
         if (Object.values(selections).every((data) => data === null)) {
           dataset.forEach((data) => data.selected = false)
           setSelected(dataset.map((data) => data.selected))
-          setSomeSelected(false)
+          setIsBrushing(false)
           return
         }
         if (brushSelection == null)
@@ -144,6 +145,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
     }
 
     setCleanBrushes((prev) => [...prev, () => {
+      setIsBrushing(false)
       clearBrush()
       dimensions.map((key) => selections[key] = null)
       dataset.forEach((data) => data.selected = false)
