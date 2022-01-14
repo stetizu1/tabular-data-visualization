@@ -18,7 +18,7 @@ const useUpdatedRef = <T, >(value: T) => {
 export const App: FunctionComponent = () => {
   const style = useAppStyle()
   const datasets: DataType[] = [flowerData, birdData, carData] as unknown as DataType[]
-  const catAttribute = [`species`, `species`, `cylinders`]
+  const catAttribute = [`species`, `species`, ``]
   const [dataset, setDataset] = useState<Array<SelectableDataType>>(addSelected(datasets[0] as unknown as DataType[]))
   const [isBrushingActive, setIsBrushingActive] = useState<boolean>(false)
   const [i, setI] = useState<number>(0)
