@@ -1,4 +1,4 @@
-interface CarData {
+export interface CarData {
   name: string
   economy_mpg: number
   cylinders: number
