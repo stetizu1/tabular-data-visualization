@@ -3,7 +3,7 @@ import { useAppStyle } from './useAppStyle'
 import { ScatterPlotMatrix } from './views/scatterplot/ScatterPlotMatrix'
 import { addSelected, DataType, SelectableDataType } from './helpers/data'
 import { Glyphs } from './views/glyphs/Glyphs'
-import { peopleData } from './testData/peopleData'
+import { birdData } from './testData/birdData'
 import { CleanBrushFunction } from './helpers/brush'
 import { ParallelCoordinates } from './views/parallelCoordinates/ParallelCoordinates'
 import { flowerData } from './testData/flowerData'
@@ -16,11 +16,11 @@ const useUpdatedRef = <T, >(value: T) => {
 
 export const App: FunctionComponent = () => {
   const style = useAppStyle()
-  const [dataset, setDataset] = useState<Array<SelectableDataType>>(addSelected(peopleData as unknown as DataType[]))
+  const [dataset, setDataset] = useState<Array<SelectableDataType>>(addSelected(birdData as unknown as DataType[]))
   const [isBrushingActive, setIsBrushingActive] = useState<boolean>(false)
   const [i, setI] = useState<number>(1)
   const toggleData = () => {
-    const data = i % 2 === 0 ? peopleData : flowerData
+    const data = i % 2 === 0 ? birdData : flowerData
     setI((prev) => prev + 1)
     setDataset(addSelected(data as unknown as DataType[]))
     setIsBrushingActive(false)

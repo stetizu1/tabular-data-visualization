@@ -155,6 +155,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
       .attr(`y`, -9)
       .text((d) => otherCasesToWhitespaces(String(d)))
       .style(`fill`, `black`)
+      .style(`font-size`, `1.2em`)
   }, [
     dataset, innerWidth, innerHeight, classes, catAttribute, setSelected, margin,
     clean, setComponentBrushing, setCleanBrushes, setIsBrushingActive,
