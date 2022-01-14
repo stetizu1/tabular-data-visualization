@@ -5,9 +5,9 @@ import {
   select, selectAll,
 } from 'd3'
 
-import { SelectableDataType } from '../helpers/data'
-import { defaultMargin, Margin, marginHeight, marginWidth } from '../styles/margin'
-import { COLORS } from '../styles/colors'
+import { SelectableDataType } from '../../helpers/data'
+import { defaultMargin, Margin, marginHeight, marginWidth } from '../../styles/margin'
+import { COLORS } from '../../styles/colors'
 import { useGlyphsStyle } from './useGlyphsStyle'
 
 

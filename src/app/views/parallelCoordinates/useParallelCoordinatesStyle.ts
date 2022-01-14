@@ -1,19 +1,17 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { PLOTS } from '../styles/plots'
+import { PLOTS } from '../../styles/plots'
 
-export const useGlyphsStyle = makeStyles({
+export const useParallelCoordinatesStyle = makeStyles({
   svg: {
     font: `12px sans-serif`,
     padding: `10px`,
     backgroundColor: PLOTS.backgroundColor,
   },
-  glyph: {
-    opacity: 0.5,
-  },
+  line: {},
   selected: {
-    fill: `#830606 !important`,
+    stroke: `#830606 !important`,
   },
   hidden: {
-    fillOpacity: 0.3,
+    strokeOpacity: 0.3,
   },
 })

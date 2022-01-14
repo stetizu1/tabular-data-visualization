@@ -10,7 +10,7 @@ import {
   select,
   ScaleLinear, D3BrushEvent,
 } from 'd3'
-import { Margin, defaultMargin, marginWidth, marginHeight } from '../styles/margin'
+import { Margin, defaultMargin, marginWidth, marginHeight } from '../../styles/margin'
 import { useBasicScatterPlotStyle } from './useBasicScatterPlotStyle'
 import { isBrushed } from './brushing'
 

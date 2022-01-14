@@ -13,11 +13,11 @@ import {
   selectAll,
 } from 'd3'
 
-import { SelectableDataType } from '../helpers/data'
-import { Brush, Brushable } from '../helpers/brush'
-import { defaultMargin, Margin, marginHeight, marginWidth } from '../styles/margin'
-import { COLORS } from '../styles/colors'
-import { otherCasesToWhitespaces } from '../helpers/formatText'
+import { SelectableDataType } from '../../helpers/data'
+import { Brush, Brushable } from '../../helpers/brush'
+import { defaultMargin, Margin, marginHeight, marginWidth } from '../../styles/margin'
+import { COLORS } from '../../styles/colors'
+import { otherCasesToWhitespaces } from '../../helpers/formatText'
 import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
 
 

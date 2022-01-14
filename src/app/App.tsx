@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useRef, useState } from 'react'
 import { useAppStyle } from './useAppStyle'
-import { ScatterPlotMatrix } from './scatterplot/ScatterPlotMatrix'
+import { ScatterPlotMatrix } from './views/scatterplot/ScatterPlotMatrix'
 import { addSelected, DataType, SelectableDataType } from './helpers/data'
-import { Glyphs } from './glyphs/Glyphs'
+import { Glyphs } from './views/glyphs/Glyphs'
 import { peopleData } from './testData/peopleData'
 import { CleanBrushFunction } from './helpers/brush'
-import { ParallelCoordinates } from './parallelCoordinates/ParallelCoordinates'
+import { ParallelCoordinates } from './views/parallelCoordinates/ParallelCoordinates'
 import { flowerData } from './testData/flowerData'
 
 const useUpdatedRef = <T, >(value: T) => {
