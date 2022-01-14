@@ -14,7 +14,6 @@ import { useGlyphsStyle } from './useGlyphsStyle'
 interface ScatterPlotMatrixProps<T extends SelectableDataType> {
   dataset: T[]
   width: number
-  height: number
   glyphSize?: number
   margin?: Margin
   sortAttribute?: keyof T
@@ -24,7 +23,6 @@ interface ScatterPlotMatrixProps<T extends SelectableDataType> {
 
 export const Glyphs = <T extends SelectableDataType>({
   width,
-  height,
   dataset,
   margin = defaultMargin,
   glyphSize = 40,
@@ -34,6 +32,7 @@ export const Glyphs = <T extends SelectableDataType>({
 }: ScatterPlotMatrixProps<T>) => {
   const classes = useGlyphsStyle()
   const component = useRef<SVGGElement>(null)
+  const height = dataset.length * 2.3
 
   selectAll(`.${classes.glyph}`)
     .classed(classes.selected, (dRaw) => {

@@ -23,7 +23,7 @@ export const App: FunctionComponent = () => {
   const [isBrushingActive, setIsBrushingActive] = useState<boolean>(false)
   const [i, setI] = useState<number>(0)
   const toggleData = () => {
-    const newI = i + 1 % 3
+    const newI = (i + 1) % 3
     const data = datasets[newI]
     setDataset(addSelected(data as unknown as DataType[]))
     setIsBrushingActive(false)
@@ -58,7 +58,7 @@ export const App: FunctionComponent = () => {
         clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`SPM${i}`}
         setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
       />
-      <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute[i]} isBrushingActive={isBrushingActive} key={`G${i}`} />
+      <Glyphs dataset={dataset} width={960} catAttribute={catAttribute[i]} isBrushingActive={isBrushingActive} key={`G${i}`} />
       <button onClick={() => {
         toggleData()
       }} style={{ margin: 20 }}>
