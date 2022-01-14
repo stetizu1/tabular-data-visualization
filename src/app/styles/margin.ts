@@ -11,8 +11,8 @@ export const marginHeight = (margin: Margin) => margin.top + margin.bottom
 export const defaultMargin: Margin = {
   top: 20,
   bottom: 25,
-  right: 30,
-  left: 30,
+  right: 50,
+  left: 50,
 }
 
 

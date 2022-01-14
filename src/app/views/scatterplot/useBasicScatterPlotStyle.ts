@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { PLOTS } from '../styles/plots'
+import { PLOTS } from '../../styles/plots'
 
 export const useBasicScatterPlotStyle = makeStyles({
   svg: {
