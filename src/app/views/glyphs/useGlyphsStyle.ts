@@ -12,6 +12,7 @@ export const useGlyphsStyle = makeStyles({
   },
   selected: {
     fill: `#830606 !important`,
+    opacity: 0.9,
   },
   hidden: {
     fillOpacity: 0.3,
