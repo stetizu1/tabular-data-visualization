@@ -3,10 +3,11 @@ import { useAppStyle } from './useAppStyle'
 import { ScatterPlotMatrix } from './views/scatterplot/ScatterPlotMatrix'
 import { addSelected, DataType, SelectableDataType } from './helpers/data'
 import { Glyphs } from './views/glyphs/Glyphs'
-import { birdData } from './testData/birdData'
 import { CleanBrushFunction } from './helpers/brush'
 import { ParallelCoordinates } from './views/parallelCoordinates/ParallelCoordinates'
+import { birdData } from './testData/birdData'
 import { flowerData } from './testData/flowerData'
+import { carData } from './testData/carData'
 
 const useUpdatedRef = <T, >(value: T) => {
   const valueRef = useRef<T>(value)
@@ -16,14 +17,17 @@ const useUpdatedRef = <T, >(value: T) => {
 
 export const App: FunctionComponent = () => {
   const style = useAppStyle()
-  const [dataset, setDataset] = useState<Array<SelectableDataType>>(addSelected(birdData as unknown as DataType[]))
+  const datasets: DataType[] = [flowerData, birdData, carData] as unknown as DataType[]
+  const catAttribute = [`species`, `species`, `cylinders`]
+  const [dataset, setDataset] = useState<Array<SelectableDataType>>(addSelected(datasets[0] as unknown as DataType[]))
   const [isBrushingActive, setIsBrushingActive] = useState<boolean>(false)
-  const [i, setI] = useState<number>(1)
+  const [i, setI] = useState<number>(0)
   const toggleData = () => {
-    const data = i % 2 === 0 ? birdData : flowerData
-    setI((prev) => prev + 1)
+    const newI = i + 1 % 3
+    const data = datasets[newI]
     setDataset(addSelected(data as unknown as DataType[]))
     setIsBrushingActive(false)
+    setI(newI)
   }
   const [cleanBrushes, setCleanBrushes] = useState<CleanBrushFunction[]>([])
   const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
@@ -39,23 +43,22 @@ export const App: FunctionComponent = () => {
       f()
     })
   }
-  const catAttribute = `species`
 
   return (
     <div className={style.app}>
       <header className={style.appHeader}>Table Data Visualizer</header>
       <p>Web Application for Table Data Visualization</p>
       <ParallelCoordinates
-        dataset={dataset} width={960} height={400} catAttribute={catAttribute} key={`PC${i}`}
+        dataset={dataset} width={960} height={400} catAttribute={catAttribute[i]} key={`PC${i}`}
         clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
         setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
       />
       <ScatterPlotMatrix
-        dataset={dataset} width={960} catAttribute={catAttribute}
+        dataset={dataset} width={960} catAttribute={catAttribute[i]}
         clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`SPM${i}`}
         setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
       />
-      <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute} isBrushingActive={isBrushingActive} key={`G${i}`} />
+      <Glyphs dataset={dataset} width={960} height={600} catAttribute={catAttribute[i]} isBrushingActive={isBrushingActive} key={`G${i}`} />
       <button onClick={() => {
         toggleData()
       }} style={{ margin: 20 }}>
