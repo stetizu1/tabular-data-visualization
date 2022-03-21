@@ -13,7 +13,7 @@ import {
 import clsx from 'clsx'
 
 import { otherCasesToWhitespaces } from '../../helpers/formatText'
-import { SelectableDataType } from '../../helpers/data'
+import { SelectableDataType } from '../../types/data/data'
 import { Margin, marginHeight, marginWidth } from '../../styles/margin'
 import { COLORS } from '../../styles/colors'
 import { Brush, Brushable } from '../../helpers/brush'

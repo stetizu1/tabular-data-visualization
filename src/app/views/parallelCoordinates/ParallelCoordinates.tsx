@@ -13,7 +13,7 @@ import {
   selectAll,
 } from 'd3'
 
-import { SelectableDataType } from '../../helpers/data'
+import { SelectableDataType } from '../../types/data/data'
 import { Brush, Brushable } from '../../helpers/brush'
 import { defaultMargin, Margin, marginHeight, marginWidth } from '../../styles/margin'
 import { COLORS } from '../../styles/colors'

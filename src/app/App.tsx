@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useRef, useState } from 'react'
 import { useAppStyle } from './useAppStyle'
 import { ScatterPlotMatrix } from './views/scatterplot/ScatterPlotMatrix'
-import { addSelected, DataType, SelectableDataType } from './helpers/data'
+import { SelectableDataType } from './types/data/data'
 import { Glyphs } from './views/glyphs/Glyphs'
 import { CleanBrushFunction } from './helpers/brush'
 import { ParallelCoordinates } from './views/parallelCoordinates/ParallelCoordinates'
-import { FileReader } from './components/FileReader'
+import { FileReader } from './components/data/FileReader'
 
 const useUpdatedRef = <T, >(value: T) => {
   const valueRef = useRef<T>(value)
@@ -19,9 +19,9 @@ export const App: FunctionComponent = () => {
   const [dataset, setDataset] = useState<Array<SelectableDataType> | null>(null)
   const [isBrushingActive, setIsBrushingActive] = useState<boolean>(false)
   const [i, setI] = useState<number>(0)
-  const setData = (data: DataType[]) => {
+  const setData = (data: SelectableDataType[]) => {
     const newI = (i + 1) % 2
-    setDataset(addSelected(data))
+    setDataset(data)
     setIsBrushingActive(false)
     setI(newI)
   }
