@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
 import {
   extent, lineRadial,
   scaleLinear, scaleOrdinal, scaleRadial, schemeCategory10,
@@ -12,16 +12,16 @@ import { PLOT_COLORS } from '../../../styles/colors'
 import { useGlyphsStyle } from './useGlyphsStyle'
 
 
-interface GlyphsProps<T extends SelectableDataType> extends Highlightable {
-  dataset: T[]
+interface GlyphsProps extends Highlightable {
+  dataset: SelectableDataType[]
   width: number
   glyphSize?: number
   margin?: Margin
-  sortAttribute?: keyof T
-  catAttribute?: keyof T
+  sortAttribute?: keyof SelectableDataType
+  catAttribute?: keyof SelectableDataType
 }
 
-export const Glyphs = <T extends SelectableDataType>({
+export const Glyphs: FunctionComponent<GlyphsProps> = ({
   width,
   dataset,
   margin = defaultMargin,
@@ -29,18 +29,18 @@ export const Glyphs = <T extends SelectableDataType>({
   sortAttribute,
   catAttribute,
   isBrushingActive,
-}: GlyphsProps<T>) => {
+}) => {
   const classes = useGlyphsStyle()
   const component = useRef<SVGGElement>(null)
   const height = dataset.length * 2.3
 
   selectAll(`.${classes.glyph}`)
     .classed(classes.selected, (dRaw) => {
-      const d = dRaw as T
+      const d = dRaw as SelectableDataType
       return d.selected
     })
     .classed(classes.hidden, (dRaw) => {
-      const d = dRaw as T
+      const d = dRaw as SelectableDataType
       return isBrushingActive && !d.selected
     })
 
@@ -51,7 +51,7 @@ export const Glyphs = <T extends SelectableDataType>({
 
     const quantAttributes = (Object.keys(dataset[0]).filter((key) => {
       return typeof dataset[0][key] === `number`
-    })) as Array<keyof T>
+    })) as Array<keyof SelectableDataType>
     const sortAtt = sortAttribute ? sortAttribute : quantAttributes[0]
 
     const svg = select(node)
@@ -72,7 +72,7 @@ export const Glyphs = <T extends SelectableDataType>({
     const domainByQuantAttributesUnchecked = Object.fromEntries(quantAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
     if (Object.values(domainByQuantAttributesUnchecked).some((domain) => domain[0] === undefined))
       return
-    const domainByQuantAttributes = domainByQuantAttributesUnchecked as { [key in keyof T]: [number, number] }
+    const domainByQuantAttributes = domainByQuantAttributesUnchecked as { [key in keyof SelectableDataType]: [number, number] }
 
     const radialLine = lineRadial()
     const radialScales = quantAttributes.map((attribute) =>

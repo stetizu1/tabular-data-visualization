@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
 import {
   axisLeft,
   brushY,
@@ -22,16 +22,16 @@ import { PLOT_COLORS } from '../../../styles/colors'
 import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
 
 
-interface ParallelCoordinatesProps<T extends SelectableDataType> extends Brushable {
-  dataset: T[]
+interface ParallelCoordinatesProps extends Brushable {
+  dataset: SelectableDataType[]
   width: number
   height: number
   margin?: Margin
   setSelected: (selected: boolean[]) => void
-  catAttribute?: keyof T
+  catAttribute?: keyof SelectableDataType
 }
 
-export const ParallelCoordinates = <T extends SelectableDataType>({
+export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = ({
   width,
   height,
   dataset,
@@ -40,17 +40,17 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
   setSelected,
   cleanBrushes, setCleanBrushes, setComponentBrushing,
   isBrushingActive, setIsBrushingActive,
-}: ParallelCoordinatesProps<T>) => {
+}) => {
   const classes = useParallelCoordinatesStyle()
   const component = useRef<SVGGElement>(null)
 
   selectAll(`.${classes.line}`)
     .classed(classes.selected, (dRaw) => {
-      const d = dRaw as T
+      const d = dRaw as SelectableDataType
       return d.selected
     })
     .classed(classes.hidden, (dRaw) => {
-      const d = dRaw as T
+      const d = dRaw as SelectableDataType
       return isBrushingActive && !d.selected
     })
 
@@ -64,19 +64,19 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
     const svg = select(node)
     const dimensions = (Object.keys(dataset[0]).filter((key) => {
       return typeof dataset[0][key] === `number`
-    })) as Array<keyof T>
+    })) as Array<keyof SelectableDataType>
 
     const domainByDimensionsUnchecked = Object.fromEntries(dimensions.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
     if (Object.values(domainByDimensionsUnchecked).some((domain) => domain[0] === undefined))
       return
-    const domainByDimensions = domainByDimensionsUnchecked as { [key in keyof T]: [number, number] }
+    const domainByDimensions = domainByDimensionsUnchecked as { [key in keyof SelectableDataType]: [number, number] }
     const yScales = dimensions.map((attribute) =>
       scaleLinear([innerHeight, 0]).domain(domainByDimensions[attribute]),
     )
     const xScale = scalePoint([0, innerWidth])
       .domain(dimensions.map((d) => String(d)))
 
-    const selections = Object.fromEntries(dimensions.map((key) => [key, null])) as { [key in keyof T]: [number, number] | null }
+    const selections = Object.fromEntries(dimensions.map((key) => [key, null])) as { [key in keyof SelectableDataType]: [number, number] | null }
     const setBrushed = () => {
       dataset.forEach((data) => {
         data.selected = dimensions.every((dimension) => {
@@ -90,7 +90,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
       setSelected(dataset.map((data) => data.selected))
     }
 
-    const brush = brushY<keyof T>()
+    const brush = brushY<keyof SelectableDataType>()
       .extent([
         [-(brushWidth / 2), -(margin.top / 2)],
         [brushWidth / 2, innerHeight + margin.top / 2],
@@ -100,11 +100,11 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
         setComponentBrushing(node)
         setIsBrushingActive(true)
       })
-      .on(BrushAction.move, (brushEvent: D3BrushEvent<T>, axisName) => {
+      .on(BrushAction.move, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
         selections[axisName] = brushEvent.selection as [number, number] | null // yBrush
         setBrushed()
       })
-      .on(BrushAction.end, (brushEvent: D3BrushEvent<T>, axisName) => {
+      .on(BrushAction.end, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
         const brushSelection = brushEvent.selection as [number, number] | null // yBrush
         selections[axisName] = brushSelection
         if (Object.values(selections).every((data) => data === null)) {

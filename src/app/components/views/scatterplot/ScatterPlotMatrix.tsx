@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
 import {
   axisBottom,
   axisLeft, brush,
@@ -22,11 +22,11 @@ import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 
 
-interface ScatterPlotMatrixProps<T extends SelectableDataType> extends Brushable{
-  dataset: T[]
+interface ScatterPlotMatrixProps extends Brushable{
+  dataset: SelectableDataType[]
   width: number
   circleSize?: number
-  catAttribute?: keyof T
+  catAttribute?: keyof SelectableDataType
 }
 
 interface MatrixItem<T> {
@@ -36,7 +36,7 @@ interface MatrixItem<T> {
   keyY: keyof T
 }
 
-export const ScatterPlotMatrix = <T extends SelectableDataType>({
+export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   width,
   dataset,
   setSelected,
@@ -44,7 +44,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
   catAttribute,
   cleanBrushes, setCleanBrushes, setComponentBrushing,
   isBrushingActive, setIsBrushingActive,
-}: ScatterPlotMatrixProps<T>) => {
+}) => {
   const classes = useScatterPlotMatrixStyle()
   const component = useRef<SVGGElement>(null)
   // noinspection JSSuspiciousNameCombination
@@ -52,11 +52,11 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
 
   selectAll(`.${classes.circle}`)
     .classed(classes.selected, (dRaw) => {
-      const d = dRaw as T
+      const d = dRaw as SelectableDataType
       return d.selected
     })
     .classed(classes.hidden, (dRaw) => {
-      const d = dRaw as T
+      const d = dRaw as SelectableDataType
       return isBrushingActive && !d.selected
     })
 
@@ -66,20 +66,20 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
     if (!node) {
       return
     }
-    const makeMatrix = (keys: (keyof T)[]): MatrixItem<T>[] => keys
+    const makeMatrix = (keys: (keyof SelectableDataType)[]): MatrixItem<SelectableDataType>[] => keys
       .map((keyX, i) => keys
         .map((keyY, j) => ({ i, j, keyX, keyY })))
       .flat()
 
     const quantAttributes = (Object.keys(dataset[0]).filter((key) => {
       return typeof dataset[0][key] === `number`
-    })) as Array<keyof T>
+    })) as Array<keyof SelectableDataType>
     const quantCount = quantAttributes.length
 
     const domainByQuantAttributesUnchecked = Object.fromEntries(quantAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
     if (Object.values(domainByQuantAttributesUnchecked).some((domain) => domain[0] === undefined))
       return
-    const domainByQuantAttributes = domainByQuantAttributesUnchecked as { [key in keyof T]: [number, number] }
+    const domainByQuantAttributes = domainByQuantAttributesUnchecked as { [key in keyof SelectableDataType]: [number, number] }
 
     const rect = {
       width: width / quantCount - margin.left,
@@ -122,7 +122,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
         select(elements[idx]).call(yAxis)
       })
 
-    const plot: ValueFn<SVGGElement, MatrixItem<T>, void> = (p, idx, elements) => {
+    const plot: ValueFn<SVGGElement, MatrixItem<SelectableDataType>, void> = (p, idx, elements) => {
       const cell = select(elements[idx])
 
       x.domain(domainByQuantAttributes[p.keyX])
@@ -173,7 +173,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       setSelected(dataset.map((data) => data.selected))
     }])
 
-    const startBrush = (_: D3BrushEvent<T>, { i, j, keyX, keyY }: MatrixItem<T>) => {
+    const startBrush = (_: D3BrushEvent<SelectableDataType>, { i, j, keyX, keyY }: MatrixItem<SelectableDataType>) => {
       cleanBrushes(node)
       setComponentBrushing(node)
       if (brushCell.i !== i || brushCell.j !== j) {
@@ -185,19 +185,19 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       setIsBrushingActive(true)
     }
 
-    const moveBrush = ({ selection }: D3BrushEvent<T>, { keyX, keyY }: MatrixItem<T>) => {
+    const moveBrush = ({ selection }: D3BrushEvent<SelectableDataType>, { keyX, keyY }: MatrixItem<SelectableDataType>) => {
       if (selection) {
         const extent = selection as [[number, number], [number, number]]
         selectAll(`.${classes.circle}`)
           .each((dRaw) => {
-            const d = dRaw as T
+            const d = dRaw as SelectableDataType
             d.selected = isBrushed(extent, x(Number(d[keyX])), y(Number(d[keyY])))
           })
         setSelected(dataset.map((data) => data.selected))
       }
     }
 
-    const endBrush = ({ selection }: D3BrushEvent<T>) => {
+    const endBrush = ({ selection }: D3BrushEvent<SelectableDataType>) => {
       if (!selection) {
         dataset.forEach((data) => data.selected = false)
         setSelected(dataset.map((data) => data.selected))
@@ -205,7 +205,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
       }
     }
 
-    const makeBrush = brush<MatrixItem<T>>()
+    const makeBrush = brush<MatrixItem<SelectableDataType>>()
       .on(BrushAction.start, startBrush)
       .on(BrushAction.move, moveBrush)
       .on(BrushAction.end, endBrush)

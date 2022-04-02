@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react'
+import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
 import {
   axisBottom,
   axisLeft,
@@ -11,16 +11,17 @@ import {
   ScaleLinear, D3BrushEvent,
 } from 'd3'
 import { Margin, defaultMargin } from '../../../types/styling/Margin'
+import { SelectableDataType } from '../../../types/data/data'
 import { useBasicScatterPlotStyle } from './useBasicScatterPlotStyle'
 import { isBrushed } from './brushing'
 
-interface BasicScatterPlotProps<T> {
+interface BasicScatterPlotProps {
   width: number
   height: number
-  dataset: T[]
-  getValueX: (data: T) => number
-  getValueY: (data: T) => number
-  getValueCat: (data:T) => string
+  dataset: SelectableDataType[]
+  getValueX: (data: SelectableDataType) => number
+  getValueY: (data: SelectableDataType) => number
+  getValueCat: (data: SelectableDataType) => string
   margin?: Margin
 }
 
@@ -34,12 +35,12 @@ const addAxes = (node: SVGGElement, xScale: ScaleLinear<number, number>, yScale:
   yAxisG.call(yAxis)
 }
 
-export const BasicScatterPlot = <T, >({
+export const BasicScatterPlot: FunctionComponent<BasicScatterPlotProps> = ({
   width,
   height,
   dataset, getValueX, getValueY, getValueCat,
   margin = defaultMargin,
-}: BasicScatterPlotProps<T>) => {
+}) => {
   const classes = useBasicScatterPlotStyle()
 
   const component = useRef<SVGGElement>(null)
@@ -62,7 +63,7 @@ export const BasicScatterPlot = <T, >({
       scaleLinear().domain(xExtent).range([0, innerWidth]),
       scaleLinear().domain(yExtent).range([innerHeight, 0]),
     ]
-    const fill = (data: T) => scaleOrdinal(schemeCategory10)(getValueCat(data))
+    const fill = (data: SelectableDataType) => scaleOrdinal(schemeCategory10)(getValueCat(data))
     circles
       .attr(`cx`, d => xScale(getValueX(d)))
       .attr(`cy`, d => yScale(getValueY(d)))
@@ -72,19 +73,19 @@ export const BasicScatterPlot = <T, >({
 
     addAxes(node, xScale, yScale, innerHeight)
 
-    const startBrushing = ({ selection }: D3BrushEvent<T>) => {
+    const startBrushing = ({ selection }: D3BrushEvent<SelectableDataType>) => {
       if (selection) {
         const extent = selection as [[number, number], [number, number]] // hard retype
-        circles.classed(classes.selected, (d: T) => {
+        circles.classed(classes.selected, (d: SelectableDataType) => {
           return isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
         })
-        circles.classed(classes.notSelected, (d: T) => {
+        circles.classed(classes.notSelected, (d: SelectableDataType) => {
           return !isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
         })
       }
     }
 
-    const endBrushing = ({ selection }: D3BrushEvent<T>) => {
+    const endBrushing = ({ selection }: D3BrushEvent<SelectableDataType>) => {
       if (!selection) {
         circles.classed(classes.selected, false)
         circles.classed(classes.notSelected, false)
