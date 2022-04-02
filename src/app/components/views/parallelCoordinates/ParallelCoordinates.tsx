@@ -13,11 +13,12 @@ import {
   selectAll,
 } from 'd3'
 
-import { SelectableDataType } from '../../types/data/data'
-import { Brush, Brushable } from '../../helpers/brush'
-import { defaultMargin, Margin, marginHeight, marginWidth } from '../../styles/margin'
-import { COLORS } from '../../styles/colors'
-import { otherCasesToWhitespaces } from '../../helpers/formatText'
+import { SelectableDataType } from '../../../types/data/data'
+import { otherCasesToWhitespaces } from '../../../helpers/data/formatText'
+import { Brushable } from '../../../types/brushing/Brushable'
+import { BrushAction } from '../../../types/brushing/BrushAction'
+import { defaultMargin, Margin } from '../../../types/styling/Margin'
+import { PLOT_COLORS } from '../../../styles/colors'
 import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
 
 
@@ -37,7 +38,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
   margin = defaultMargin,
   catAttribute,
   setSelected,
-  clean, setCleanBrushes, setComponentBrushing,
+  cleanBrushes, setCleanBrushes, setComponentBrushing,
   isBrushingActive, setIsBrushingActive,
 }: ParallelCoordinatesProps<T>) => {
   const classes = useParallelCoordinatesStyle()
@@ -53,7 +54,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
       return isBrushingActive && !d.selected
     })
 
-  const [innerWidth, innerHeight] = [width - marginWidth(margin), height - marginHeight(margin)]
+  const [innerWidth, innerHeight] = [width - margin.width, height - margin.height]
   const brushWidth = 30
   const createScatterPlotMatrix = useCallback(() => {
     const node = component.current
@@ -94,16 +95,16 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
         [-(brushWidth / 2), -(margin.top / 2)],
         [brushWidth / 2, innerHeight + margin.top / 2],
       ])
-      .on(Brush.start, () => {
-        clean(node)
+      .on(BrushAction.start, () => {
+        cleanBrushes(node)
         setComponentBrushing(node)
         setIsBrushingActive(true)
       })
-      .on(Brush.move, (brushEvent: D3BrushEvent<T>, axisName) => {
+      .on(BrushAction.move, (brushEvent: D3BrushEvent<T>, axisName) => {
         selections[axisName] = brushEvent.selection as [number, number] | null // yBrush
         setBrushed()
       })
-      .on(Brush.end, (brushEvent: D3BrushEvent<T>, axisName) => {
+      .on(BrushAction.end, (brushEvent: D3BrushEvent<T>, axisName) => {
         const brushSelection = brushEvent.selection as [number, number] | null // yBrush
         selections[axisName] = brushSelection
         if (Object.values(selections).every((data) => data === null)) {
@@ -123,7 +124,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
       .attr(`d`, (d) => line()(dimensions.map((p) => [Number(xScale(String(p))), yScales[dimensions.indexOf(p)](Number(d[p]))])))
       .attr(`class`, classes.line)
       .style(`fill`, `none`)
-      .style(`stroke`, (d) => catAttribute ? color(String(d[catAttribute])) : COLORS.scatterPlotNoCategoryColor)
+      .style(`stroke`, (d) => catAttribute ? color(String(d[catAttribute])) : PLOT_COLORS.noCategoryColor)
       .style(`opacity`, 0.5)
 
     const axes = svg.selectAll(`axes`)
@@ -158,7 +159,7 @@ export const ParallelCoordinates = <T extends SelectableDataType>({
       .style(`font-size`, `1.2em`)
   }, [
     dataset, innerWidth, innerHeight, classes, catAttribute, setSelected, margin,
-    clean, setComponentBrushing, setCleanBrushes, setIsBrushingActive,
+    cleanBrushes, setComponentBrushing, setCleanBrushes, setIsBrushingActive,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { COLORS } from './styles/colors'
+import { HEADER_COLORS } from './styles/colors'
 
 
 export const useAppStyle = makeStyles({
@@ -11,7 +11,7 @@ export const useAppStyle = makeStyles({
     alignItems: `center`,
   },
   appHeader: {
-    backgroundColor: COLORS.backgroundColor,
+    backgroundColor: HEADER_COLORS.backgroundColor,
     padding: `10px 0`,
     width: `100%`,
     display: `flex`,
@@ -19,6 +19,6 @@ export const useAppStyle = makeStyles({
     alignItems: `center`,
     justifyContent: `center`,
     fontSize: `calc(10px + 2vmin)`,
-    color: COLORS.fontColor,
+    color: HEADER_COLORS.fontColor,
   },
 })

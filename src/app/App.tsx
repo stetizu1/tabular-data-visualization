@@ -1,11 +1,11 @@
 import React, { FunctionComponent, useRef, useState } from 'react'
 import { useAppStyle } from './useAppStyle'
-import { ScatterPlotMatrix } from './views/scatterplot/ScatterPlotMatrix'
+import { ScatterPlotMatrix } from './components/views/scatterplot/ScatterPlotMatrix'
 import { SelectableDataType } from './types/data/data'
-import { Glyphs } from './views/glyphs/Glyphs'
-import { CleanBrushFunction } from './helpers/brush'
-import { ParallelCoordinates } from './views/parallelCoordinates/ParallelCoordinates'
+import { Glyphs } from './components/views/glyphs/Glyphs'
+import { ParallelCoordinates } from './components/views/parallelCoordinates/ParallelCoordinates'
 import { FileReader } from './components/data/FileReader'
+import { SideEffectVoid } from './types/basic/functionTypes'
 
 const useUpdatedRef = <T, >(value: T) => {
   const valueRef = useRef<T>(value)
@@ -26,7 +26,7 @@ export const App: FunctionComponent = () => {
     setI(newI)
   }
 
-  const [cleanBrushes, setCleanBrushes] = useState<CleanBrushFunction[]>([])
+  const [cleanBrushes, setCleanBrushes] = useState<SideEffectVoid[]>([])
   const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
   const setSelected = (selected: boolean[]) => {
     setDataset((prev) => prev ? prev.map((data, idx) => ({ ...data, selected: selected[idx] })) : null)
@@ -49,12 +49,12 @@ export const App: FunctionComponent = () => {
       {dataset && <>
         <ParallelCoordinates
           dataset={dataset} width={960} height={400} catAttribute={catAttribute[i]} key={`PC${i}`}
-          clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
+          cleanBrushes={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
           setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
         />
         <ScatterPlotMatrix
           dataset={dataset} width={960} catAttribute={catAttribute[i]}
-          clean={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`SPM${i}`}
+          cleanBrushes={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing} key={`SPM${i}`}
           setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
         />
         <Glyphs dataset={dataset} width={960} catAttribute={catAttribute[i]} isBrushingActive={isBrushingActive} key={`G${i}`} />

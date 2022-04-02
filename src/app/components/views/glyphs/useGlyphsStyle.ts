@@ -1,11 +1,11 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { PLOTS } from '../../styles/plots'
+import { PLOT_COLORS } from '../../../styles/colors'
 
 export const useGlyphsStyle = makeStyles({
   svg: {
     font: `12px sans-serif`,
     padding: `10px`,
-    backgroundColor: PLOTS.backgroundColor,
+    backgroundColor: PLOT_COLORS.backgroundColor,
   },
   glyph: {
     opacity: 0.5,

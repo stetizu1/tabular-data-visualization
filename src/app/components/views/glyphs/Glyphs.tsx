@@ -5,20 +5,20 @@ import {
   select, selectAll,
 } from 'd3'
 
-import { SelectableDataType } from '../../types/data/data'
-import { defaultMargin, Margin, marginHeight, marginWidth } from '../../styles/margin'
-import { COLORS } from '../../styles/colors'
+import { SelectableDataType } from '../../../types/data/data'
+import { Highlightable } from '../../../types/brushing/Brushable'
+import { defaultMargin, Margin } from '../../../types/styling/Margin'
+import { PLOT_COLORS } from '../../../styles/colors'
 import { useGlyphsStyle } from './useGlyphsStyle'
 
 
-interface ScatterPlotMatrixProps<T extends SelectableDataType> {
+interface GlyphsProps<T extends SelectableDataType> extends Highlightable {
   dataset: T[]
   width: number
   glyphSize?: number
   margin?: Margin
   sortAttribute?: keyof T
   catAttribute?: keyof T
-  isBrushingActive: boolean
 }
 
 export const Glyphs = <T extends SelectableDataType>({
@@ -29,7 +29,7 @@ export const Glyphs = <T extends SelectableDataType>({
   sortAttribute,
   catAttribute,
   isBrushingActive,
-}: ScatterPlotMatrixProps<T>) => {
+}: GlyphsProps<T>) => {
   const classes = useGlyphsStyle()
   const component = useRef<SVGGElement>(null)
   const height = dataset.length * 2.3
@@ -55,8 +55,8 @@ export const Glyphs = <T extends SelectableDataType>({
     const sortAtt = sortAttribute ? sortAttribute : quantAttributes[0]
 
     const svg = select(node)
-    const glyphsCountOnLine = Math.floor((width - marginWidth(margin)) / glyphSize)
-    const glyphsContOnHeight = Math.floor((height - marginHeight(margin)) / glyphSize)
+    const glyphsCountOnLine = Math.floor((width - margin.width) / glyphSize)
+    const glyphsContOnHeight = Math.floor((height - margin.height) / glyphSize)
 
     const sorted = [...dataset].sort((a, b) => Number(a[sortAtt]) - Number(b[sortAtt]))
 
@@ -100,7 +100,7 @@ export const Glyphs = <T extends SelectableDataType>({
             const y = glyphsContOnHeight - Math.floor(idx / glyphsCountOnLine)
             return `translate(${xScale(x)}, ${yScale(y)})`
           })
-          .style(`fill`, (d) => catAttribute ? color(String(d[catAttribute])) : COLORS.scatterPlotNoCategoryColor)
+          .style(`fill`, (d) => catAttribute ? color(String(d[catAttribute])) : PLOT_COLORS.noCategoryColor)
       })
   }, [dataset, width, height, glyphSize, margin, sortAttribute, classes, catAttribute])
 

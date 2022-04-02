@@ -10,7 +10,7 @@ import {
   select,
   ScaleLinear, D3BrushEvent,
 } from 'd3'
-import { Margin, defaultMargin, marginWidth, marginHeight } from '../../styles/margin'
+import { Margin, defaultMargin } from '../../../types/styling/Margin'
 import { useBasicScatterPlotStyle } from './useBasicScatterPlotStyle'
 import { isBrushed } from './brushing'
 
@@ -43,7 +43,7 @@ export const BasicScatterPlot = <T, >({
   const classes = useBasicScatterPlotStyle()
 
   const component = useRef<SVGGElement>(null)
-  const [innerWidth, innerHeight] = [width - marginWidth(margin), height - marginHeight(margin)]
+  const [innerWidth, innerHeight] = [width - margin.width, height - margin.height]
 
   const createScatterPlot = useCallback(() => {
     const node = component.current

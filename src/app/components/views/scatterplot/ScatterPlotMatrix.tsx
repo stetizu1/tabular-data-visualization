@@ -12,11 +12,12 @@ import {
 } from 'd3'
 import clsx from 'clsx'
 
-import { otherCasesToWhitespaces } from '../../helpers/formatText'
-import { SelectableDataType } from '../../types/data/data'
-import { Margin, marginHeight, marginWidth } from '../../styles/margin'
-import { COLORS } from '../../styles/colors'
-import { Brush, Brushable } from '../../helpers/brush'
+import { otherCasesToWhitespaces } from '../../../helpers/data/formatText'
+import { SelectableDataType } from '../../../types/data/data'
+import { Brushable } from '../../../types/brushing/Brushable'
+import { BrushAction } from '../../../types/brushing/BrushAction'
+import { Margin } from '../../../types/styling/Margin'
+import { PLOT_COLORS } from '../../../styles/colors'
 import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 
@@ -41,7 +42,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
   setSelected,
   circleSize = 4,
   catAttribute,
-  clean, setCleanBrushes, setComponentBrushing,
+  cleanBrushes, setCleanBrushes, setComponentBrushing,
   isBrushingActive, setIsBrushingActive,
 }: ScatterPlotMatrixProps<T>) => {
   const classes = useScatterPlotMatrixStyle()
@@ -60,7 +61,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
     })
 
   const createScatterPlotMatrix = useCallback(() => {
-    const margin: Margin = { right: 14, left: 14, top: 14, bottom: 14 }
+    const margin = new Margin(14, 14, 14, 14)
     const node = component.current
     if (!node) {
       return
@@ -97,9 +98,9 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
     yAxis.tickSize(-1 * rect.height * quantCount)
 
     const group = select(node)
-      .attr(`width`, rect.width * quantCount + marginWidth(margin))
-      .attr(`height`, rect.height * quantCount + marginHeight(margin))
-      .attr(`transform`, `translate(${marginWidth(margin)}, ${margin.top})`)
+      .attr(`width`, rect.width * quantCount + margin.width)
+      .attr(`height`, rect.height * quantCount + margin.height)
+      .attr(`transform`, `translate(${margin.width}, ${margin.top})`)
 
     group.selectAll(`.${classes.x}.${classes.axis}`)
       .data(quantAttributes).enter()
@@ -131,8 +132,8 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
         .attr(`class`, classes.frame)
         .attr(`x`, margin.left)
         .attr(`y`, margin.top)
-        .attr(`width`, rect.width - marginWidth(margin))
-        .attr(`height`, rect.height - marginHeight(margin))
+        .attr(`width`, rect.width - margin.width)
+        .attr(`height`, rect.height - margin.height)
 
       cell.selectAll(`circle`)
         .data(dataset).enter()
@@ -141,7 +142,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
         .attr(`cy`, (d) => y(Number(d[p.keyY])))
         .attr(`r`, circleSize)
         .attr(`class`, classes.circle)
-        .style(`fill`, (d) => catAttribute ? color(String(d[catAttribute])) : COLORS.scatterPlotNoCategoryColor)
+        .style(`fill`, (d) => catAttribute ? color(String(d[catAttribute])) : PLOT_COLORS.noCategoryColor)
     }
 
     const cell = group.selectAll(`.${classes.cell}`)
@@ -153,8 +154,8 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
 
     cell.filter((d) => d.i === d.j)
       .append(`text`)
-      .attr(`x`, marginWidth(margin))
-      .attr(`y`, marginHeight(margin) + margin.top)
+      .attr(`x`, margin.width)
+      .attr(`y`, margin.height + margin.top)
       .text((d) => otherCasesToWhitespaces(String(d.keyX)))
 
     let brushCell = { i: -1, j: -1 }
@@ -173,7 +174,7 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
     }])
 
     const startBrush = (_: D3BrushEvent<T>, { i, j, keyX, keyY }: MatrixItem<T>) => {
-      clean(node)
+      cleanBrushes(node)
       setComponentBrushing(node)
       if (brushCell.i !== i || brushCell.j !== j) {
         clearBrush()
@@ -205,15 +206,15 @@ export const ScatterPlotMatrix = <T extends SelectableDataType>({
     }
 
     const makeBrush = brush<MatrixItem<T>>()
-      .on(Brush.start, startBrush)
-      .on(Brush.move, moveBrush)
-      .on(Brush.end, endBrush)
+      .on(BrushAction.start, startBrush)
+      .on(BrushAction.move, moveBrush)
+      .on(BrushAction.end, endBrush)
       .extent([[0, 0], [rect.width, rect.height]])
 
     cell.call(makeBrush)
   }, [
     dataset, height, width, circleSize, classes, setSelected, catAttribute,
-    clean, setComponentBrushing, setCleanBrushes, setIsBrushingActive,
+    cleanBrushes, setComponentBrushing, setCleanBrushes, setIsBrushingActive,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
