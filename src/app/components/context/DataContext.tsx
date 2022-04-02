@@ -6,49 +6,53 @@ import { Glyphs } from '../views/glyphs/Glyphs'
 import { SelectableDataType } from '../../types/data/data'
 import { SideEffectVoid } from '../../types/basic/functionTypes'
 import { useUpdatedRef } from '../../helpers/react/useUpdatedRef'
+import { ClearBrushes } from '../common/buttons/ClearBrushes'
 
 export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<Array<SelectableDataType> | null>(null)
-  const [isBrushingActive, setIsBrushingActive] = useState<boolean>(false)
-  const setData = (data: SelectableDataType[] | null) => {
+  const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
+  const [cleanBrushes, setCleanBrushes] = useState<SideEffectVoid[]>([])
+
+  const cleanBrushesRef = useUpdatedRef(cleanBrushes)
+  const componentBrushingRef = useUpdatedRef(componentBrushing)
+
+  const setDatasetAndRemoveBrushing = (data: SelectableDataType[] | null) => {
     setDataset(data)
-    setIsBrushingActive(false)
+    setComponentBrushing(null)
   }
 
-  const [cleanBrushes, setCleanBrushes] = useState<SideEffectVoid[]>([])
-  const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
   const setSelected = (selected: boolean[]) => {
     setDataset((prev) => prev ? prev.map((data, idx) => ({ ...data, selected: selected[idx] })) : null)
   }
-  const cleanBrushesRef = useUpdatedRef(cleanBrushes)
-  const componentBrushingRef = useUpdatedRef(componentBrushing)
-  const clean = (newComponentBrushing: SVGGElement) => {
+
+  const cleanAllBrushes = () => cleanBrushesRef.current.forEach((f) => f())
+  const clearBrushesOnButton = () => {
+    setComponentBrushing(null)
+    cleanAllBrushes()
+  }
+
+  const cleanBrushesIfNewComponentBrushing = (newComponentBrushing: SVGGElement) => {
     if (componentBrushingRef.current !== newComponentBrushing)
-      cleanBrushesRef.current.forEach((f) => f())
+      cleanAllBrushes()
   }
 
   return <>
-    <FileReader setData={setData} />
+    <FileReader setData={setDatasetAndRemoveBrushing} />
     {dataset && <>
+      <ClearBrushes clearBrushes={clearBrushesOnButton} />
       <ParallelCoordinates
         dataset={dataset} width={960} height={400} catAttribute={`species`}
-        cleanBrushes={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
-        setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
+        cleanBrushes={cleanBrushesIfNewComponentBrushing} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
+        setSelected={setSelected} isBrushingActive={componentBrushingRef.current !== null}
       />
       <ScatterPlotMatrix
         dataset={dataset} width={960} catAttribute={`species`}
-        cleanBrushes={clean} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
-        setSelected={setSelected} isBrushingActive={isBrushingActive} setIsBrushingActive={setIsBrushingActive}
+        cleanBrushes={cleanBrushesIfNewComponentBrushing} setCleanBrushes={setCleanBrushes} setComponentBrushing={setComponentBrushing}
+        setSelected={setSelected} isBrushingActive={componentBrushingRef.current !== null}
       />
-      <Glyphs dataset={dataset} width={960} catAttribute={`species`} isBrushingActive={isBrushingActive} />
-      <button onClick={() => {
-        setIsBrushingActive(false)
-        cleanBrushes.forEach((f) => {
-          f()
-        })
-      }} style={{ margin: 20 }}>
-          CLEAR BRUSHES
-      </button>
+      <Glyphs
+        dataset={dataset} width={960} catAttribute={`species`} isBrushingActive={componentBrushingRef.current !== null}
+      />
     </>}
   </>
 }

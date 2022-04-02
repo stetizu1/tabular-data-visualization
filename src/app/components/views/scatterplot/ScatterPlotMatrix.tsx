@@ -43,7 +43,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   circleSize = 4,
   catAttribute,
   cleanBrushes, setCleanBrushes, setComponentBrushing,
-  isBrushingActive, setIsBrushingActive,
+  isBrushingActive,
 }) => {
   const classes = useScatterPlotMatrixStyle()
   const component = useRef<SVGGElement>(null)
@@ -182,7 +182,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         x.domain(domainByQuantAttributes[keyX])
         y.domain(domainByQuantAttributes[keyY])
       }
-      setIsBrushingActive(true)
     }
 
     const moveBrush = ({ selection }: D3BrushEvent<SelectableDataType>, { keyX, keyY }: MatrixItem<SelectableDataType>) => {
@@ -201,7 +200,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       if (!selection) {
         dataset.forEach((data) => data.selected = false)
         setSelected(dataset.map((data) => data.selected))
-        setIsBrushingActive(false)
+        setComponentBrushing(null)
       }
     }
 
@@ -214,7 +213,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     cell.call(makeBrush)
   }, [
     dataset, height, width, circleSize, classes, setSelected, catAttribute,
-    cleanBrushes, setComponentBrushing, setCleanBrushes, setIsBrushingActive,
+    cleanBrushes, setComponentBrushing, setCleanBrushes,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

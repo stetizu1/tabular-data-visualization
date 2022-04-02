@@ -39,7 +39,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   catAttribute,
   setSelected,
   cleanBrushes, setCleanBrushes, setComponentBrushing,
-  isBrushingActive, setIsBrushingActive,
+  isBrushingActive,
 }) => {
   const classes = useParallelCoordinatesStyle()
   const component = useRef<SVGGElement>(null)
@@ -98,7 +98,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       .on(BrushAction.start, () => {
         cleanBrushes(node)
         setComponentBrushing(node)
-        setIsBrushingActive(true)
       })
       .on(BrushAction.move, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
         selections[axisName] = brushEvent.selection as [number, number] | null // yBrush
@@ -110,7 +109,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         if (Object.values(selections).every((data) => data === null)) {
           dataset.forEach((data) => data.selected = false)
           setSelected(dataset.map((data) => data.selected))
-          setIsBrushingActive(false)
+          setComponentBrushing(null)
           return
         }
         if (brushSelection == null)
@@ -159,7 +158,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       .style(`font-size`, `1.2em`)
   }, [
     dataset, innerWidth, innerHeight, classes, catAttribute, setSelected, margin,
-    cleanBrushes, setComponentBrushing, setCleanBrushes, setIsBrushingActive,
+    cleanBrushes, setComponentBrushing, setCleanBrushes,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
