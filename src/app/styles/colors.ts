@@ -1,7 +1,16 @@
 export const HEADER_COLORS = {
   backgroundColor: `#282c34`,
-  fontColor: `#ffffff`,
-  scatterPlotNoCategoryColor: `#1db0b0`,
+  fontColor: `#d6e1ff`,
+}
+
+export const FOOTER_COLORS = {
+  backgroundColor: `#1f2528`,
+  fontColor: `#a3abc0`,
+}
+
+export const TOP_TOOLBAR_COLORS = {
+  backgroundColor: `#363a46`,
+  fontColor: `#bcc7e7`,
 }
 
 export const PLOT_COLORS = {

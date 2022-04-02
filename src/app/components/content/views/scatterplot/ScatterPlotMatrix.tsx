@@ -12,12 +12,12 @@ import {
 } from 'd3'
 import clsx from 'clsx'
 
-import { otherCasesToWhitespaces } from '../../../helpers/data/formatText'
-import { SelectableDataType } from '../../../types/data/data'
-import { Brushable } from '../../../types/brushing/Brushable'
-import { BrushAction } from '../../../types/brushing/BrushAction'
-import { Margin } from '../../../types/styling/Margin'
-import { PLOT_COLORS } from '../../../styles/colors'
+import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+import { SelectableDataType } from '../../../../types/data/data'
+import { Brushable } from '../../../../types/brushing/Brushable'
+import { BrushAction } from '../../../../types/brushing/BrushAction'
+import { Margin } from '../../../../types/styling/Margin'
+import { PLOT_COLORS } from '../../../../styles/colors'
 import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 

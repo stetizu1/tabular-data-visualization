@@ -5,10 +5,10 @@ import {
   select, selectAll,
 } from 'd3'
 
-import { SelectableDataType } from '../../../types/data/data'
-import { Highlightable } from '../../../types/brushing/Brushable'
-import { defaultMargin, Margin } from '../../../types/styling/Margin'
-import { PLOT_COLORS } from '../../../styles/colors'
+import { SelectableDataType } from '../../../../types/data/data'
+import { Highlightable } from '../../../../types/brushing/Brushable'
+import { defaultMargin, Margin } from '../../../../types/styling/Margin'
+import { PLOT_COLORS } from '../../../../styles/colors'
 import { useGlyphsStyle } from './useGlyphsStyle'
 
 

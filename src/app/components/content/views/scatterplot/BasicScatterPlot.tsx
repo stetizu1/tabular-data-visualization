@@ -10,8 +10,8 @@ import {
   select,
   ScaleLinear, D3BrushEvent,
 } from 'd3'
-import { Margin, defaultMargin } from '../../../types/styling/Margin'
-import { SelectableDataType } from '../../../types/data/data'
+import { Margin, defaultMargin } from '../../../../types/styling/Margin'
+import { SelectableDataType } from '../../../../types/data/data'
 import { useBasicScatterPlotStyle } from './useBasicScatterPlotStyle'
 import { isBrushed } from './brushing'
 
