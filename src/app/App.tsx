@@ -6,6 +6,7 @@ import { Glyphs } from './components/views/glyphs/Glyphs'
 import { ParallelCoordinates } from './components/views/parallelCoordinates/ParallelCoordinates'
 import { FileReader } from './components/data/FileReader'
 import { SideEffectVoid } from './types/basic/functionTypes'
+import { Header } from './components/header/Header'
 
 const useUpdatedRef = <T, >(value: T) => {
   const valueRef = useRef<T>(value)
@@ -43,8 +44,7 @@ export const App: FunctionComponent = () => {
 
   return (
     <div className={style.app}>
-      <header className={style.appHeader}>Table Data Visualizer</header>
-      <p>Web Application for Table Data Visualization</p>
+      <Header title={`Tabular Data Visualizer`} description={`Web Application for Table Data Visualization`} />
       <FileReader setData={setData} />
       {dataset && <>
         <ParallelCoordinates
