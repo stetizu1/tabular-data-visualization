@@ -1,12 +1,12 @@
 import React, { FunctionComponent, useState } from 'react'
 import { TopToolbar } from '../topToolbar/TopToolbar'
-import { ParallelCoordinates } from '../content/views/parallelCoordinates/ParallelCoordinates'
-import { ScatterPlotMatrix } from '../content/views/scatterplot/ScatterPlotMatrix'
-import { Glyphs } from '../content/views/glyphs/Glyphs'
-import { SelectableDataType } from '../../types/data/data'
-import { SideEffectVoid } from '../../types/basic/functionTypes'
-import { useUpdatedRef } from '../../helpers/react/useUpdatedRef'
-import { EmptySite } from '../content/empty/EmptySite'
+import { ParallelCoordinates } from '../views/parallelCoordinates/ParallelCoordinates'
+import { ScatterPlotMatrix } from '../views/scatterplot/ScatterPlotMatrix'
+import { Glyphs } from '../views/glyphs/Glyphs'
+import { SelectableDataType } from '../../../types/data/data'
+import { SideEffectVoid } from '../../../types/basic/functionTypes'
+import { useUpdatedRef } from '../../../helpers/react/useUpdatedRef'
+import { EmptySite } from '../empty/EmptySite'
 
 export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<Array<SelectableDataType> | null>(null)

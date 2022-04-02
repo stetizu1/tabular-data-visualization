@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react'
-import { DataType, SelectableDataType } from '../../../../types/data/data'
+import { DataType, SelectableDataType } from '../../../../../types/data/data'
 import { useFileReaderStyle } from './useFileReaderStyle'
 
 export interface FileReaderDataProps {

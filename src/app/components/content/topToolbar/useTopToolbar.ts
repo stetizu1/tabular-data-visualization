@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles'
-import { TOP_TOOLBAR_COLORS } from '../../styles/colors'
+import { TOP_TOOLBAR_COLORS } from '../../../styles/colors'
 
 export const useTopToolbar = makeStyles({
   toolbar: {
