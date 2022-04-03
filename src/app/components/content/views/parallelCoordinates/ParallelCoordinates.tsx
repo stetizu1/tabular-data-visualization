@@ -13,30 +13,25 @@ import {
   selectAll,
 } from 'd3'
 
+import { QuantitativeVisualization } from '../../../../types/view/QuantitativeVisualization'
 import { SelectableDataType } from '../../../../types/data/data'
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { BrushAction } from '../../../../types/brushing/BrushAction'
-import { defaultMargin, Margin } from '../../../../types/styling/Margin'
+import { defaultMargin } from '../../../../types/styling/Margin'
 import { PLOT_COLORS } from '../../../../styles/colors'
 import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
 
 
-interface ParallelCoordinatesProps extends Brushable {
-  dataset: SelectableDataType[]
-  width: number
-  height: number
-  margin?: Margin
-  setSelected: (selected: boolean[]) => void
-  catAttribute?: keyof SelectableDataType
-}
+export type ParallelCoordinatesProps = Brushable & QuantitativeVisualization
 
 export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = ({
   width,
   height,
   dataset,
   margin = defaultMargin,
-  catAttribute,
+  displayAttributes,
+  categoryAttribute,
   setSelected,
   cleanBrushes, setCleanBrushes, setComponentBrushing,
   isBrushingActive,
@@ -62,28 +57,25 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       return
     }
     const svg = select(node)
-    const dimensions = (Object.keys(dataset[0]).filter((key) => {
-      return typeof dataset[0][key] === `number`
-    })) as Array<keyof SelectableDataType>
 
-    const domainByDimensionsUnchecked = Object.fromEntries(dimensions.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
+    const domainByDimensionsUnchecked = Object.fromEntries(displayAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
     if (Object.values(domainByDimensionsUnchecked).some((domain) => domain[0] === undefined))
       return
     const domainByDimensions = domainByDimensionsUnchecked as { [key in keyof SelectableDataType]: [number, number] }
-    const yScales = dimensions.map((attribute) =>
+    const yScales = displayAttributes.map((attribute) =>
       scaleLinear([innerHeight, 0]).domain(domainByDimensions[attribute]),
     )
     const xScale = scalePoint([0, innerWidth])
-      .domain(dimensions.map((d) => String(d)))
+      .domain(displayAttributes.map((d) => String(d)))
 
-    const selections = Object.fromEntries(dimensions.map((key) => [key, null])) as { [key in keyof SelectableDataType]: [number, number] | null }
+    const selections = Object.fromEntries(displayAttributes.map((key) => [key, null])) as { [key in keyof SelectableDataType]: [number, number] | null }
     const setBrushed = () => {
       dataset.forEach((data) => {
-        data.selected = dimensions.every((dimension) => {
+        data.selected = displayAttributes.every((dimension) => {
           const selectedRange = selections[dimension]
           if (selectedRange === null)
             return true
-          const dataPoint = yScales[dimensions.indexOf(dimension)](Number(data[dimension]))
+          const dataPoint = yScales[displayAttributes.indexOf(dimension)](Number(data[dimension]))
           return dataPoint > selectedRange[0] && dataPoint < selectedRange[1]
         })
       })
@@ -120,19 +112,19 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     svg.selectAll(`path`)
       .data(dataset).enter()
       .append(`path`)
-      .attr(`d`, (d) => line()(dimensions.map((p) => [Number(xScale(String(p))), yScales[dimensions.indexOf(p)](Number(d[p]))])))
+      .attr(`d`, (d) => line()(displayAttributes.map((p) => [Number(xScale(String(p))), yScales[displayAttributes.indexOf(p)](Number(d[p]))])))
       .attr(`class`, classes.line)
       .style(`fill`, `none`)
-      .style(`stroke`, (d) => catAttribute ? color(String(d[catAttribute])) : PLOT_COLORS.noCategoryColor)
+      .style(`stroke`, (d) => categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor)
       .style(`opacity`, 0.5)
 
     const axes = svg.selectAll(`axes`)
-      .data(dimensions).enter()
+      .data(displayAttributes).enter()
       .append(`g`)
       .attr(`transform`, (d) => `translate(${xScale(String(d))}, 0)`)
       .each((d, idx, elements) =>
         select(elements[idx])
-          .call(axisLeft(yScales[dimensions.indexOf(d)]),
+          .call(axisLeft(yScales[displayAttributes.indexOf(d)]),
           ))
       .call(brush)
 
@@ -144,7 +136,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
 
     setCleanBrushes((prev) => [...prev, () => {
       clearBrush()
-      dimensions.map((key) => selections[key] = null)
+      displayAttributes.map((key) => selections[key] = null)
       dataset.forEach((data) => data.selected = false)
       setSelected(dataset.map((data) => data.selected))
     }])
@@ -157,7 +149,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       .style(`fill`, `black`)
       .style(`font-size`, `1.2em`)
   }, [
-    dataset, innerWidth, innerHeight, classes, catAttribute, setSelected, margin,
+    dataset, innerWidth, innerHeight, classes, categoryAttribute, displayAttributes, setSelected, margin,
     cleanBrushes, setComponentBrushing, setCleanBrushes,
   ])
 

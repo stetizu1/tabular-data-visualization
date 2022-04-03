@@ -9,6 +9,7 @@ export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<Array<SelectableDataType> | null>(null)
   const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
   const [cleanBrushes, setCleanBrushes] = useState<SideEffectVoid[]>([])
+  const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
 
   const cleanBrushesRef = useUpdatedRef(cleanBrushes)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
@@ -41,7 +42,7 @@ export const DataContext: FunctionComponent = () => {
     setComponentBrushing,
     setSelected,
     isBrushingActive,
-    catAttribute: `species`, // todo
+    categoryAttribute: `species`, // todo
   }
 
   return <>
@@ -49,7 +50,8 @@ export const DataContext: FunctionComponent = () => {
       clearBrushes={clearBrushesOnButton}
       setData={setDatasetAndRemoveBrushing}
       brushingActive={isBrushingActive}
+      openDrawer={() => setDrawerOpen(true)}
     />
-    <ViewGrid {...viewProps} />
+    <ViewGrid isDrawerOpen={isDrawerOpen} closeDrawer={() => setDrawerOpen(false)} {...viewProps} />
   </>
 }

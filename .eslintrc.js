@@ -43,7 +43,6 @@ module.exports = {
     'max-len': `off`,
     'multiline-ternary': `off`,
     'no-console': [`warn`, { allow: [`error`] }],
-    'no-extra-parens': `warn`,
     'no-multi-spaces': `warn`,
     'no-multiple-empty-lines': [2, { max: 2, maxEOF: 1, maxBOF: 0 }],
     'no-plusplus': `off`,

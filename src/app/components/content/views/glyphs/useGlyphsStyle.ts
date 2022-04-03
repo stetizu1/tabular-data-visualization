@@ -8,7 +8,7 @@ export const useGlyphsStyle = makeStyles({
     backgroundColor: PLOT_COLORS.backgroundColor,
   },
   glyph: {
-    opacity: 0.5,
+    opacity: 0.6,
   },
   selected: {
     fill: `#830606 !important`,

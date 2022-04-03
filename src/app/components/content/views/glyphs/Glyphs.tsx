@@ -6,54 +6,40 @@ import {
 } from 'd3'
 
 import { SelectableDataType } from '../../../../types/data/data'
+import { QuantitativeVisualization } from '../../../../types/view/QuantitativeVisualization'
 import { Highlightable } from '../../../../types/brushing/Brushable'
-import { defaultMargin, Margin } from '../../../../types/styling/Margin'
+import { defaultMargin } from '../../../../types/styling/Margin'
 import { PLOT_COLORS } from '../../../../styles/colors'
 import { useGlyphsStyle } from './useGlyphsStyle'
 
 
-interface GlyphsProps extends Highlightable {
-  dataset: SelectableDataType[]
-  width: number
-  height: number
-  glyphSize?: number
-  margin?: Margin
+interface GlyphsProps extends QuantitativeVisualization, Highlightable {
   sortAttribute?: keyof SelectableDataType
-  catAttribute?: keyof SelectableDataType
+  glyphSize?: number
 }
 
 export const Glyphs: FunctionComponent<GlyphsProps> = ({
-  width, height,
   dataset,
+  width, height,
   margin = defaultMargin,
-  glyphSize = 40,
-  sortAttribute,
-  catAttribute,
+  displayAttributes,
+  categoryAttribute,
   isBrushingActive,
+  sortAttribute,
+  glyphSize = 40,
 }) => {
   const classes = useGlyphsStyle()
   const component = useRef<SVGGElement>(null)
   const innerHeight = dataset.length * 2.3
 
   selectAll(`.${classes.glyph}`)
-    .classed(classes.selected, (dRaw) => {
-      const d = dRaw as SelectableDataType
-      return d.selected
-    })
-    .classed(classes.hidden, (dRaw) => {
-      const d = dRaw as SelectableDataType
-      return isBrushingActive && !d.selected
-    })
+    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
+    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
   const createGlyphs = useCallback(() => {
-    const node = component.current
-    if (!node)
-      return
+    const node = component.current!
 
-    const quantAttributes = (Object.keys(dataset[0]).filter((key) => {
-      return typeof dataset[0][key] === `number`
-    })) as Array<keyof SelectableDataType>
-    const sortAtt = sortAttribute ? sortAttribute : quantAttributes[0]
+    const sortAtt = sortAttribute ? sortAttribute : displayAttributes[0]
 
     const svg = select(node)
     const glyphsCountOnLine = Math.floor((width - margin.width) / glyphSize)
@@ -70,13 +56,13 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
       scaleLinear([innerHeight - margin.bottom, margin.top]).domain(yExtent),
     ]
 
-    const domainByQuantAttributesUnchecked = Object.fromEntries(quantAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
+    const domainByQuantAttributesUnchecked = Object.fromEntries(displayAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
     if (Object.values(domainByQuantAttributesUnchecked).some((domain) => domain[0] === undefined))
       return
     const domainByQuantAttributes = domainByQuantAttributesUnchecked as { [key in keyof SelectableDataType]: [number, number] }
 
     const radialLine = lineRadial()
-    const radialScales = quantAttributes.map((attribute) =>
+    const radialScales = displayAttributes.map((attribute) =>
       scaleRadial([0, glyphSize / 2]).domain(domainByQuantAttributes[attribute]),
     )
     const color = scaleOrdinal(schemeCategory10)
@@ -90,10 +76,10 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
           .data([d]).enter()
           .append(`path`)
           .attr(`class`, classes.glyph)
-          .attr(`d`, d => radialLine(quantAttributes
+          .attr(`d`, d => radialLine(displayAttributes
             .map((key, i) => {
               const v = d[key]
-              return [2 * Math.PI * i / quantAttributes.length, radialScales[i](Number(v))]
+              return [2 * Math.PI * i / displayAttributes.length, radialScales[i](Number(v))]
             })))
           .attr(`transform`, (d) => {
             const idx = sorted.indexOf(d)
@@ -101,9 +87,9 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
             const y = glyphsContOnHeight - Math.floor(idx / glyphsCountOnLine)
             return `translate(${xScale(x)}, ${yScale(y)})`
           })
-          .style(`fill`, (d) => catAttribute ? color(String(d[catAttribute])) : PLOT_COLORS.noCategoryColor)
+          .style(`fill`, (d) => categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor)
       })
-  }, [dataset, width, innerHeight, glyphSize, margin, sortAttribute, classes, catAttribute])
+  }, [dataset, width, innerHeight, glyphSize, margin, sortAttribute, classes, categoryAttribute, displayAttributes])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createGlyphs(), [])

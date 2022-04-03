@@ -9,7 +9,8 @@ import { useViewStyle } from './useViewStyle'
 
 interface ViewDataProps extends Brushable {
   dataset: SelectableDataType[]
-  catAttribute: keyof SelectableDataType
+  categoryAttribute: keyof SelectableDataType
+  displayAttributes: Array<keyof SelectableDataType>
   width: number
   height: number
 }

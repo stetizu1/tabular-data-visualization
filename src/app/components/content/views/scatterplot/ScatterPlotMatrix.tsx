@@ -13,6 +13,7 @@ import {
 import clsx from 'clsx'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+import { QuantitativeVisualization } from '../../../../types/view/QuantitativeVisualization'
 import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { BrushAction } from '../../../../types/brushing/BrushAction'
@@ -22,12 +23,8 @@ import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 
 
-interface ScatterPlotMatrixProps extends Brushable {
-  dataset: SelectableDataType[]
-  width: number
-  height: number
+interface ScatterPlotMatrixProps extends Brushable, QuantitativeVisualization {
   circleSize?: number
-  catAttribute?: keyof SelectableDataType
 }
 
 interface MatrixItem<T> {
@@ -43,7 +40,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   dataset,
   setSelected,
   circleSize = 4,
-  catAttribute,
+  displayAttributes,
+  categoryAttribute,
   cleanBrushes, setCleanBrushes, setComponentBrushing,
   isBrushingActive,
 }) => {
@@ -73,12 +71,9 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         .map((keyY, j) => ({ i, j, keyX, keyY })))
       .flat()
 
-    const quantAttributes = (Object.keys(dataset[0]).filter((key) => {
-      return typeof dataset[0][key] === `number`
-    })) as Array<keyof SelectableDataType>
-    const quantCount = quantAttributes.length
+    const quantCount = displayAttributes.length
 
-    const domainByQuantAttributesUnchecked = Object.fromEntries(quantAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
+    const domainByQuantAttributesUnchecked = Object.fromEntries(displayAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
     if (Object.values(domainByQuantAttributesUnchecked).some((domain) => domain[0] === undefined))
       return
     const domainByQuantAttributes = domainByQuantAttributesUnchecked as { [key in keyof SelectableDataType]: [number, number] }
@@ -105,7 +100,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .attr(`transform`, `translate(${margin.width}, ${margin.top})`)
 
     group.selectAll(`.${classes.x}.${classes.axis}`)
-      .data(quantAttributes).enter()
+      .data(displayAttributes).enter()
       .append(`g`)
       .attr(`class`, clsx(classes.x, classes.axis))
       .attr(`transform`, (d, i) => `translate(${(quantCount - i - 1) * rect.width}, 0)`)
@@ -115,7 +110,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       })
 
     group.selectAll(`.${classes.y}.${classes.axis}`)
-      .data(quantAttributes).enter()
+      .data(displayAttributes).enter()
       .append(`g`)
       .attr(`class`, clsx(classes.y, classes.axis))
       .attr(`transform`, (d, i) => `translate(0,${i * rect.height})`)
@@ -144,11 +139,11 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         .attr(`cy`, (d) => y(Number(d[p.keyY])))
         .attr(`r`, circleSize)
         .attr(`class`, classes.circle)
-        .style(`fill`, (d) => catAttribute ? color(String(d[catAttribute])) : PLOT_COLORS.noCategoryColor)
+        .style(`fill`, (d) => categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor)
     }
 
     const cell = group.selectAll(`.${classes.cell}`)
-      .data(makeMatrix(quantAttributes)).enter()
+      .data(makeMatrix(displayAttributes)).enter()
       .append(`g`)
       .attr(`class`, classes.cell)
       .attr(`transform`, (d) => `translate(${(quantCount - d.i - 1) * rect.width}, ${d.j * rect.height})`)
@@ -214,7 +209,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
 
     cell.call(makeBrush)
   }, [
-    dataset, size, circleSize, classes, setSelected, catAttribute,
+    dataset, size, circleSize, classes, setSelected, categoryAttribute, displayAttributes,
     cleanBrushes, setComponentBrushing, setCleanBrushes,
   ])
 
