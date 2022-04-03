@@ -15,6 +15,7 @@ import { useGlyphsStyle } from './useGlyphsStyle'
 interface GlyphsProps extends Highlightable {
   dataset: SelectableDataType[]
   width: number
+  height: number
   glyphSize?: number
   margin?: Margin
   sortAttribute?: keyof SelectableDataType
@@ -22,7 +23,7 @@ interface GlyphsProps extends Highlightable {
 }
 
 export const Glyphs: FunctionComponent<GlyphsProps> = ({
-  width,
+  width, height,
   dataset,
   margin = defaultMargin,
   glyphSize = 40,
@@ -32,7 +33,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
 }) => {
   const classes = useGlyphsStyle()
   const component = useRef<SVGGElement>(null)
-  const height = dataset.length * 2.3
+  const innerHeight = dataset.length * 2.3
 
   selectAll(`.${classes.glyph}`)
     .classed(classes.selected, (dRaw) => {
@@ -56,7 +57,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
 
     const svg = select(node)
     const glyphsCountOnLine = Math.floor((width - margin.width) / glyphSize)
-    const glyphsContOnHeight = Math.floor((height - margin.height) / glyphSize)
+    const glyphsContOnHeight = Math.floor((innerHeight - margin.height) / glyphSize)
 
     const sorted = [...dataset].sort((a, b) => Number(a[sortAtt]) - Number(b[sortAtt]))
 
@@ -66,7 +67,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     ]
     const [xScale, yScale] = [
       scaleLinear([margin.left, width - margin.right]).domain(xExtent),
-      scaleLinear([height - margin.bottom, margin.top]).domain(yExtent),
+      scaleLinear([innerHeight - margin.bottom, margin.top]).domain(yExtent),
     ]
 
     const domainByQuantAttributesUnchecked = Object.fromEntries(quantAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
@@ -102,13 +103,13 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
           })
           .style(`fill`, (d) => catAttribute ? color(String(d[catAttribute])) : PLOT_COLORS.noCategoryColor)
       })
-  }, [dataset, width, height, glyphSize, margin, sortAttribute, classes, catAttribute])
+  }, [dataset, width, innerHeight, glyphSize, margin, sortAttribute, classes, catAttribute])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createGlyphs(), [])
 
   return (
-    <svg width={width} height={height} className={classes.svg}>
+    <svg width={width} height={innerHeight} className={classes.svg}>
       <g ref={component}/>
     </svg>
   )

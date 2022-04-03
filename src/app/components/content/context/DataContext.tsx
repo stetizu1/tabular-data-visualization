@@ -1,12 +1,9 @@
 import React, { FunctionComponent, useState } from 'react'
-import { TopToolbar } from '../topToolbar/TopToolbar'
-import { ParallelCoordinates } from '../views/parallelCoordinates/ParallelCoordinates'
-import { ScatterPlotMatrix } from '../views/scatterplot/ScatterPlotMatrix'
-import { Glyphs } from '../views/glyphs/Glyphs'
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
 import { useUpdatedRef } from '../../../helpers/react/useUpdatedRef'
-import { EmptySite } from '../empty/EmptySite'
+import { TopToolbar } from '../topToolbar/TopToolbar'
+import { ViewGrid } from '../views/ViewGrid'
 
 export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<Array<SelectableDataType> | null>(null)
@@ -37,6 +34,15 @@ export const DataContext: FunctionComponent = () => {
   }
 
   const isBrushingActive = componentBrushingRef.current !== null
+  const viewProps = {
+    dataset: dataset,
+    cleanBrushes: cleanBrushesIfNewComponentBrushing,
+    setCleanBrushes,
+    setComponentBrushing,
+    setSelected,
+    isBrushingActive,
+    catAttribute: `species`, // todo
+  }
 
   return <>
     <TopToolbar
@@ -44,22 +50,6 @@ export const DataContext: FunctionComponent = () => {
       setData={setDatasetAndRemoveBrushing}
       brushingActive={isBrushingActive}
     />
-    {!dataset ? <EmptySite /> : <>
-      <ParallelCoordinates
-        dataset={dataset} width={960} height={400} catAttribute={`species`}
-        cleanBrushes={cleanBrushesIfNewComponentBrushing} setCleanBrushes={setCleanBrushes}
-        setComponentBrushing={setComponentBrushing}
-        setSelected={setSelected} isBrushingActive={isBrushingActive}
-      />
-      <ScatterPlotMatrix
-        dataset={dataset} width={960} catAttribute={`species`}
-        cleanBrushes={cleanBrushesIfNewComponentBrushing} setCleanBrushes={setCleanBrushes}
-        setComponentBrushing={setComponentBrushing}
-        setSelected={setSelected} isBrushingActive={componentBrushingRef.current !== null}
-      />
-      <Glyphs
-        dataset={dataset} width={960} catAttribute={`species`} isBrushingActive={componentBrushingRef.current !== null}
-      />
-    </>}
+    <ViewGrid {...viewProps} />
   </>
 }

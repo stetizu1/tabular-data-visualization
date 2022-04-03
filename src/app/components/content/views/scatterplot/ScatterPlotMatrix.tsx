@@ -22,9 +22,10 @@ import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 
 
-interface ScatterPlotMatrixProps extends Brushable{
+interface ScatterPlotMatrixProps extends Brushable {
   dataset: SelectableDataType[]
   width: number
+  height: number
   circleSize?: number
   catAttribute?: keyof SelectableDataType
 }
@@ -38,6 +39,7 @@ interface MatrixItem<T> {
 
 export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   width,
+  height,
   dataset,
   setSelected,
   circleSize = 4,
@@ -48,7 +50,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   const classes = useScatterPlotMatrixStyle()
   const component = useRef<SVGGElement>(null)
   // noinspection JSSuspiciousNameCombination
-  const height = width
+  const size = width < height ? width : height
 
   selectAll(`.${classes.circle}`)
     .classed(classes.selected, (dRaw) => {
@@ -82,8 +84,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     const domainByQuantAttributes = domainByQuantAttributesUnchecked as { [key in keyof SelectableDataType]: [number, number] }
 
     const rect = {
-      width: width / quantCount - margin.left,
-      height: height / quantCount - margin.top,
+      width: size / quantCount - margin.left,
+      height: size / quantCount - margin.top,
     }
 
     const [x, y] = [
@@ -212,7 +214,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
 
     cell.call(makeBrush)
   }, [
-    dataset, height, width, circleSize, classes, setSelected, catAttribute,
+    dataset, size, circleSize, classes, setSelected, catAttribute,
     cleanBrushes, setComponentBrushing, setCleanBrushes,
   ])
 
@@ -220,7 +222,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   useEffect(() => createScatterPlotMatrix(), [])
 
   return (
-    <svg width={width} height={height} className={classes.svg}>
+    <svg width={size} height={size} className={classes.svg}>
       <g ref={component}/>
     </svg>
   )
