@@ -1,6 +1,6 @@
 {
-  "short_name": "Table Data Visualizer",
-  "name": "Table Data Visualizer Application",
+  "short_name": "Tabular Data Visualizer",
+  "name": "Tabular Data Visualizer Application",
   "icons": [
     {
       "src": "favicon.ico",

@@ -10,5 +10,6 @@ export const useViewStyle = makeStyles<Theme, StyleProps>(() => ({
   box: {
     width: ({ width }) => width,
     height: ({ height }) => height,
+    overflow: `hidden`,
   },
 }))
