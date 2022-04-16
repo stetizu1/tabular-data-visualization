@@ -10,7 +10,7 @@ export const App: FunctionComponent = () => {
     <div className={style.app}>
       <Header />
       <div className={style.content}>
-        <DataContext/>
+        <DataContext />
       </div>
       <Footer />
     </div>

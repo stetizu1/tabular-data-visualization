@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/styles'
 import { PLOT_COLORS } from '../../../../styles/colors'
 
 export const useScatterPlotMatrixStyle = makeStyles({
@@ -37,7 +37,7 @@ export const useScatterPlotMatrixStyle = makeStyles({
     },
   },
   circle: {
-    fillOpacity: .7,
+    fillOpacity: 0.7,
     '&.hidden': {
       fill: `#ccc`,
     },

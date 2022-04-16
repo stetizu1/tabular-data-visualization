@@ -1,6 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/styles'
 import { PLOT_COLORS } from '../../../../styles/colors'
-
 
 export const useBasicScatterPlotStyle = makeStyles({
   svg: {
@@ -9,7 +8,7 @@ export const useBasicScatterPlotStyle = makeStyles({
   selected: {
     opacity: 1,
   },
-  notSelected:  {
+  notSelected: {
     opacity: 0.25,
   },
 })

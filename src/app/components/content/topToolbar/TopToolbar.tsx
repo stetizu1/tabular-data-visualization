@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react'
-import MenuIcon from '@material-ui/icons/Menu'
-import { IconButton } from '@material-ui/core'
+import { Menu } from '@mui/icons-material'
+import { IconButton } from '@mui/material'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
 import { ClearBrushesButton, ClearBrushesButtonDataProps } from './items/buttons/ClearBrushesButton'
 import { FileReader, FileReaderDataProps } from './items/fileRader/FileReader'
@@ -20,11 +20,13 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
   return (
     <div className={classes.toolbar}>
       <div>
-        <ClearBrushesButton clearBrushes={clearBrushes} brushingActive={brushingActive}/>
+        <ClearBrushesButton clearBrushes={clearBrushes} brushingActive={brushingActive} />
       </div>
       <div>
-        <FileReader setData={setData}/>
-        <IconButton size="small" onClick={openDrawer}><MenuIcon/></IconButton>
+        <FileReader setData={setData} />
+        <IconButton size="small" onClick={openDrawer}>
+          <Menu />
+        </IconButton>
       </div>
     </div>
   )

@@ -10,8 +10,7 @@ export type FileReaderProps = FileReaderDataProps
 
 export const addSelected = (data: DataType[]): SelectableDataType[] => data.map((d) => ({ ...d, selected: false }))
 
-
-export const FileReader: FunctionComponent<FileReaderProps> = ({ setData }) =>
+export const FileReader: FunctionComponent<FileReaderProps> = ({ setData }) => (
   <input
     className={useFileReaderStyle().input}
     type="file"
@@ -27,4 +26,4 @@ export const FileReader: FunctionComponent<FileReaderProps> = ({ setData }) =>
       }
     }}
   />
-
+)

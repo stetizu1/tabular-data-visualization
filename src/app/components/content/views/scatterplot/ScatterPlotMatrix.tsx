@@ -1,13 +1,15 @@
 import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
 import {
   axisBottom,
-  axisLeft, brush,
+  axisLeft,
+  brush,
   D3BrushEvent,
   extent,
   scaleLinear,
   scaleOrdinal,
   schemeCategory10,
-  select, selectAll,
+  select,
+  selectAll,
   ValueFn,
 } from 'd3'
 import clsx from 'clsx'
@@ -21,7 +23,6 @@ import { Margin } from '../../../../types/styling/Margin'
 import { PLOT_COLORS } from '../../../../styles/colors'
 import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
-
 
 interface ScatterPlotMatrixProps extends Brushable, QuantitativeVisualization {
   circleSize?: number
@@ -42,7 +43,9 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   circleSize = 4,
   displayAttributes,
   categoryAttribute,
-  cleanBrushes, setCleanBrushes, setComponentBrushing,
+  cleanBrushes,
+  setCleanBrushes,
+  setComponentBrushing,
   isBrushingActive,
 }) => {
   const classes = useScatterPlotMatrixStyle()
@@ -66,17 +69,18 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     if (!node) {
       return
     }
-    const makeMatrix = (keys: (keyof SelectableDataType)[]): MatrixItem<SelectableDataType>[] => keys
-      .map((keyX, i) => keys
-        .map((keyY, j) => ({ i, j, keyX, keyY })))
-      .flat()
+    const makeMatrix = (keys: (keyof SelectableDataType)[]): MatrixItem<SelectableDataType>[] =>
+      keys.map((keyX, i) => keys.map((keyY, j) => ({ i, j, keyX, keyY }))).flat()
 
     const quantCount = displayAttributes.length
 
-    const domainByQuantAttributesUnchecked = Object.fromEntries(displayAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]))
-    if (Object.values(domainByQuantAttributesUnchecked).some((domain) => domain[0] === undefined))
-      return
-    const domainByQuantAttributes = domainByQuantAttributesUnchecked as { [key in keyof SelectableDataType]: [number, number] }
+    const domainByQuantAttributesUnchecked = Object.fromEntries(
+      displayAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]),
+    )
+    if (Object.values(domainByQuantAttributesUnchecked).some((domain) => domain[0] === undefined)) return
+    const domainByQuantAttributes = domainByQuantAttributesUnchecked as {
+      [key in keyof SelectableDataType]: [number, number]
+    }
 
     const rect = {
       width: size / quantCount - margin.left,
@@ -99,8 +103,10 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .attr(`height`, rect.height * quantCount + margin.height)
       .attr(`transform`, `translate(${margin.width}, ${margin.top})`)
 
-    group.selectAll(`.${classes.x}.${classes.axis}`)
-      .data(displayAttributes).enter()
+    group
+      .selectAll(`.${classes.x}.${classes.axis}`)
+      .data(displayAttributes)
+      .enter()
       .append(`g`)
       .attr(`class`, clsx(classes.x, classes.axis))
       .attr(`transform`, (d, i) => `translate(${(quantCount - i - 1) * rect.width}, 0)`)
@@ -109,8 +115,10 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         select(elements[idx]).call(xAxis)
       })
 
-    group.selectAll(`.${classes.y}.${classes.axis}`)
-      .data(displayAttributes).enter()
+    group
+      .selectAll(`.${classes.y}.${classes.axis}`)
+      .data(displayAttributes)
+      .enter()
       .append(`g`)
       .attr(`class`, clsx(classes.y, classes.axis))
       .attr(`transform`, (d, i) => `translate(0,${i * rect.height})`)
@@ -125,31 +133,37 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       x.domain(domainByQuantAttributes[p.keyX])
       y.domain(domainByQuantAttributes[p.keyY])
 
-      cell.append(`rect`)
+      cell
+        .append(`rect`)
         .attr(`class`, classes.frame)
         .attr(`x`, margin.left)
         .attr(`y`, margin.top)
         .attr(`width`, rect.width - margin.width)
         .attr(`height`, rect.height - margin.height)
 
-      cell.selectAll(`circle`)
-        .data(dataset).enter()
+      cell
+        .selectAll(`circle`)
+        .data(dataset)
+        .enter()
         .append(`circle`)
         .attr(`cx`, (d) => x(Number(d[p.keyX])))
         .attr(`cy`, (d) => y(Number(d[p.keyY])))
         .attr(`r`, circleSize)
         .attr(`class`, classes.circle)
-        .style(`fill`, (d) => categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor)
+        .style(`fill`, (d) => (categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor))
     }
 
-    const cell = group.selectAll(`.${classes.cell}`)
-      .data(makeMatrix(displayAttributes)).enter()
+    const cell = group
+      .selectAll(`.${classes.cell}`)
+      .data(makeMatrix(displayAttributes))
+      .enter()
       .append(`g`)
       .attr(`class`, classes.cell)
       .attr(`transform`, (d) => `translate(${(quantCount - d.i - 1) * rect.width}, ${d.j * rect.height})`)
       .each(plot)
 
-    cell.filter((d) => d.i === d.j)
+    cell
+      .filter((d) => d.i === d.j)
       .append(`text`)
       .attr(`x`, margin.width)
       .attr(`y`, margin.height + margin.top)
@@ -163,12 +177,15 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       })
     }
 
-    setCleanBrushes((prev) => [...prev, () => {
-      clearBrush()
-      brushCell = { i: -1, j: -1 }
-      dataset.forEach((data) => data.selected = false)
-      setSelected(dataset.map((data) => data.selected))
-    }])
+    setCleanBrushes((prev) => [
+      ...prev,
+      () => {
+        clearBrush()
+        brushCell = { i: -1, j: -1 }
+        dataset.forEach((data) => (data.selected = false))
+        setSelected(dataset.map((data) => data.selected))
+      },
+    ])
 
     const startBrush = (_: D3BrushEvent<SelectableDataType>, { i, j, keyX, keyY }: MatrixItem<SelectableDataType>) => {
       cleanBrushes(node)
@@ -181,21 +198,23 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       }
     }
 
-    const moveBrush = ({ selection }: D3BrushEvent<SelectableDataType>, { keyX, keyY }: MatrixItem<SelectableDataType>) => {
+    const moveBrush = (
+      { selection }: D3BrushEvent<SelectableDataType>,
+      { keyX, keyY }: MatrixItem<SelectableDataType>,
+    ) => {
       if (selection) {
         const extent = selection as [[number, number], [number, number]]
-        selectAll(`.${classes.circle}`)
-          .each((dRaw) => {
-            const d = dRaw as SelectableDataType
-            d.selected = isBrushed(extent, x(Number(d[keyX])), y(Number(d[keyY])))
-          })
+        selectAll(`.${classes.circle}`).each((dRaw) => {
+          const d = dRaw as SelectableDataType
+          d.selected = isBrushed(extent, x(Number(d[keyX])), y(Number(d[keyY])))
+        })
         setSelected(dataset.map((data) => data.selected))
       }
     }
 
     const endBrush = ({ selection }: D3BrushEvent<SelectableDataType>) => {
       if (!selection) {
-        dataset.forEach((data) => data.selected = false)
+        dataset.forEach((data) => (data.selected = false))
         setSelected(dataset.map((data) => data.selected))
         setComponentBrushing(null)
       }
@@ -205,20 +224,31 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .on(BrushAction.start, startBrush)
       .on(BrushAction.move, moveBrush)
       .on(BrushAction.end, endBrush)
-      .extent([[0, 0], [rect.width, rect.height]])
+      .extent([
+        [0, 0],
+        [rect.width, rect.height],
+      ])
 
     cell.call(makeBrush)
   }, [
-    dataset, size, circleSize, classes, setSelected, categoryAttribute, displayAttributes,
-    cleanBrushes, setComponentBrushing, setCleanBrushes,
+    dataset,
+    size,
+    circleSize,
+    classes,
+    setSelected,
+    categoryAttribute,
+    displayAttributes,
+    cleanBrushes,
+    setComponentBrushing,
+    setCleanBrushes,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createScatterPlotMatrix(), [])
+  useEffect(() => createScatterPlotMatrix(), [displayAttributes, categoryAttribute])
 
   return (
     <svg width={size} height={size} className={classes.svg}>
-      <g ref={component}/>
+      <g ref={component} />
     </svg>
   )
 }

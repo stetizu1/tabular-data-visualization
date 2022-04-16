@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/styles'
 
-export const useViewGridStyle = makeStyles ({
+export const useViewGridStyle = makeStyles({
   column: {
     display: `flex`,
     flexDirection: `column`,

@@ -1,6 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/styles'
 import { HEADER_COLORS } from '../../styles/colors'
-
 
 export const useHeaderStyle = makeStyles({
   headerContainer: {

@@ -1,6 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@mui/styles'
 import { FOOTER_COLORS } from '../../styles/colors'
-
 
 export const useFooterStyle = makeStyles({
   footerContainer: {

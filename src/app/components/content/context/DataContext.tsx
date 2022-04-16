@@ -20,7 +20,7 @@ export const DataContext: FunctionComponent = () => {
   }
 
   const setSelected = (selected: boolean[]) => {
-    setDataset((prev) => prev ? prev.map((data, idx) => ({ ...data, selected: selected[idx] })) : null)
+    setDataset((prev) => (prev ? prev.map((data, idx) => ({ ...data, selected: selected[idx] })) : null))
   }
 
   const cleanAllBrushes = () => cleanBrushesRef.current.forEach((f) => f())
@@ -30,28 +30,28 @@ export const DataContext: FunctionComponent = () => {
   }
 
   const cleanBrushesIfNewComponentBrushing = (newComponentBrushing: SVGGElement) => {
-    if (componentBrushingRef.current !== newComponentBrushing)
-      cleanAllBrushes()
+    if (componentBrushingRef.current !== newComponentBrushing) cleanAllBrushes()
   }
 
   const isBrushingActive = componentBrushingRef.current !== null
   const viewProps = {
-    dataset: dataset,
+    dataset,
     cleanBrushes: cleanBrushesIfNewComponentBrushing,
     setCleanBrushes,
     setComponentBrushing,
     setSelected,
     isBrushingActive,
-    categoryAttribute: `species`, // todo
   }
 
-  return <>
-    <TopToolbar
-      clearBrushes={clearBrushesOnButton}
-      setData={setDatasetAndRemoveBrushing}
-      brushingActive={isBrushingActive}
-      openDrawer={() => setDrawerOpen(true)}
-    />
-    <ViewGrid isDrawerOpen={isDrawerOpen} closeDrawer={() => setDrawerOpen(false)} {...viewProps} />
-  </>
+  return (
+    <>
+      <TopToolbar
+        clearBrushes={clearBrushesOnButton}
+        setData={setDatasetAndRemoveBrushing}
+        brushingActive={isBrushingActive}
+        openDrawer={() => setDrawerOpen(true)}
+      />
+      <ViewGrid isDrawerOpen={isDrawerOpen} closeDrawer={() => setDrawerOpen(false)} {...viewProps} />
+    </>
+  )
 }

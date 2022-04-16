@@ -4,6 +4,12 @@ export interface DataType {
   [key: string]: JsonValue
 }
 
+export const SelectedKey = `selected`
+
 export interface SelectableDataType extends DataType {
-  selected: boolean
+  [SelectedKey]: boolean
+}
+
+export interface CheckedSelectableDataType {
+  [key: keyof SelectableDataType]: boolean
 }

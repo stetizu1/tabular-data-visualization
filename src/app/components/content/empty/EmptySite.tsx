@@ -4,7 +4,5 @@ import { useEmptySiteStyle } from './useEmptySiteStyle'
 
 export const EmptySite: FunctionComponent = () => {
   const classes = useEmptySiteStyle()
-  return <div className={classes.site}>
-    {EMPTY_SITE_TEXT.content}
-  </div>
+  return <div className={classes.site}>{EMPTY_SITE_TEXT.content}</div>
 }

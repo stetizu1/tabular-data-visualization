@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/core/styles'
-import { Theme } from '@material-ui/core'
+import { Theme } from '@mui/material'
+import { makeStyles } from '@mui/styles'
 
 export interface StyleProps {
   width: number
