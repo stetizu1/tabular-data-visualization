@@ -11,7 +11,7 @@ import {
 import { GLYPHS_MENU_TEXT } from '../../../../text/SiteText'
 import { ViewType } from '../ViewTypes'
 import { Settings } from '../Settings'
-import { GlyphsSettings } from './GlyphsSettings'
+import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 
 export interface GlyphsMenuProps {
   dataset: Array<SelectableDataType>

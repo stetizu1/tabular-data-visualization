@@ -1,5 +1,5 @@
 export enum ViewType {
   Glyphs = `glyphs`,
-  ParallelCoordinates = `paralelCoordinates`,
+  ParallelCoordinates = `parallelCoordinates`,
   ScatterPlotMatrix = `scatterPlotMatrix`,
 }

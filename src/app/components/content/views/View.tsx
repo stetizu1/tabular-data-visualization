@@ -1,14 +1,15 @@
 import React, { FunctionComponent } from 'react'
 import { SelectableDataType } from '../../../types/data/data'
 import { Brushable } from '../../../types/brushing/Brushable'
-import { QuantitativeVisualizationSettings } from '../../../types/view/QuantitativeVisualization'
 import { ViewType } from './ViewTypes'
 import { ParallelCoordinates } from './parallelCoordinates/ParallelCoordinates'
 import { ScatterPlotMatrix } from './scatterplot/ScatterPlotMatrix'
 import { Glyphs } from './glyphs/Glyphs'
 import { useViewStyle } from './useViewStyle'
-import { Settings } from './Settings'
-import { GlyphsSettings } from './glyphs/GlyphsSettings'
+import { Settings, SettingsType } from './Settings'
+import { GlyphsSettings } from '../../../types/views/glyphs/GlyphsSettings'
+import { ParallelCoordinatesSettings } from '../../../types/views/parallelCoordinates/ParallelCoordinatesSettings'
+import { ScatterPlotMatrixSettings } from '../../../types/views/scatterplot/ScatterPlotMatrixSettings'
 
 interface ViewDataProps extends Brushable {
   dataset: SelectableDataType[]
@@ -22,14 +23,12 @@ interface ViewProps extends ViewDataProps {
   defaultDisplayAttributes: Array<keyof SelectableDataType>
 }
 
-type ViewElementFunction = (
-  props: ViewDataProps,
-  settings: GlyphsSettings | QuantitativeVisualizationSettings,
-) => JSX.Element
+type ViewElementFunction = (props: ViewDataProps, settings: SettingsType) => JSX.Element
+
 const options: Record<ViewType, ViewElementFunction> = {
-  [ViewType.Glyphs]: (props, settings) => <Glyphs {...props} {...settings} />,
-  [ViewType.ParallelCoordinates]: (props, settings) => <ParallelCoordinates {...props} {...settings} />,
-  [ViewType.ScatterPlotMatrix]: (props, settings) => <ScatterPlotMatrix {...props} {...settings} />,
+  [ViewType.Glyphs]: (p, s) => <Glyphs {...p} {...(s as GlyphsSettings)} />,
+  [ViewType.ParallelCoordinates]: (p, s) => <ParallelCoordinates {...p} {...(s as ParallelCoordinatesSettings)} />,
+  [ViewType.ScatterPlotMatrix]: (p, s) => <ScatterPlotMatrix {...p} {...(s as ScatterPlotMatrixSettings)} />,
 }
 
 export const View: FunctionComponent<ViewProps> = ({

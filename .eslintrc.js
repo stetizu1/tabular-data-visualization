@@ -1,5 +1,10 @@
 module.exports = {
   root: true,
+  settings: {
+    react: {
+      version: `detect`,
+    },
+  },
   parser: `@typescript-eslint/parser`,
   plugins: [`react`, `react-hooks`, `prettier`],
   extends: [`plugin:@typescript-eslint/recommended`, `plugin:react/recommended`, `prettier`],
@@ -20,5 +25,6 @@ module.exports = {
     'react/react-in-jsx-scope': 0,
     '@typescript-eslint/no-non-null-assertion': 0,
     '@typescript-eslint/explicit-module-boundary-types': 1,
+    '@typescript-eslint/no-empty-interface': 0,
   },
 }

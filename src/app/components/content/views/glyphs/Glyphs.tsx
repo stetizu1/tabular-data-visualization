@@ -2,14 +2,14 @@ import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
 import { extent, lineRadial, scaleLinear, scaleOrdinal, scaleRadial, schemeCategory10, select, selectAll } from 'd3'
 
 import { SelectableDataType } from '../../../../types/data/data'
-import { QuantitativeVisualization } from '../../../../types/view/QuantitativeVisualization'
 import { Highlightable } from '../../../../types/brushing/Brushable'
 import { defaultMargin } from '../../../../types/styling/Margin'
 import { PLOT_COLORS } from '../../../../styles/colors'
 import { useGlyphsStyle } from './useGlyphsStyle'
+import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
+import { Visualization } from '../../../../types/views/Visualization'
 
-interface GlyphsProps extends QuantitativeVisualization, Highlightable {
-  sortAttribute?: keyof SelectableDataType
+interface GlyphsProps extends Visualization, Highlightable, GlyphsSettings {
   glyphSize?: number
 }
 

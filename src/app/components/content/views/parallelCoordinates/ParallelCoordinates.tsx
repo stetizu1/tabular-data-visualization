@@ -13,7 +13,6 @@ import {
   selectAll,
 } from 'd3'
 
-import { QuantitativeVisualization } from '../../../../types/view/QuantitativeVisualization'
 import { SelectableDataType } from '../../../../types/data/data'
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import { Brushable } from '../../../../types/brushing/Brushable'
@@ -21,8 +20,10 @@ import { BrushAction } from '../../../../types/brushing/BrushAction'
 import { defaultMargin } from '../../../../types/styling/Margin'
 import { PLOT_COLORS } from '../../../../styles/colors'
 import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
+import { Visualization } from '../../../../types/views/Visualization'
+import { ParallelCoordinatesSettings } from '../../../../types/views/parallelCoordinates/ParallelCoordinatesSettings'
 
-export type ParallelCoordinatesProps = Brushable & QuantitativeVisualization
+export interface ParallelCoordinatesProps extends Visualization, Brushable, ParallelCoordinatesSettings {}
 
 export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = ({
   width,
