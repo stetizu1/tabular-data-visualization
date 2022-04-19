@@ -7,4 +7,4 @@ export class Margin {
   }
 }
 
-export const defaultMargin = new Margin(20, 25, 50, 50)
+export const defaultMargin = new Margin(20, 25, 25, 25)

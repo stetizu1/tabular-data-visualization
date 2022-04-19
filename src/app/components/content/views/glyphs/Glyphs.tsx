@@ -4,17 +4,19 @@ import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, schemeCategory10, s
 import { SelectableDataType } from '../../../../types/data/data'
 import { Highlightable } from '../../../../types/brushing/Brushable'
 import { defaultMargin } from '../../../../types/styling/Margin'
-import { PLOT_COLORS } from '../../../../styles/colors'
 import { useGlyphsStyle } from './useGlyphsStyle'
 import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 import { Visualization } from '../../../../types/views/Visualization'
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
+import { SVG } from '../../../../constants/svg'
+import { PLOT_COLORS } from '../../../../styles/colors'
 
 interface GlyphsProps extends Visualization, Highlightable, GlyphsSettings {
   glyphSize?: number
 }
 
 const GLYPH_SPACING = 3
+const GLYPHS = `glyphs`
 
 export const Glyphs: FunctionComponent<GlyphsProps> = ({
   dataset,
@@ -50,13 +52,9 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
       ? [...dataset].sort((a, b) => Number(a[sortAttribute]) - Number(b[sortAttribute]))
       : [...dataset]
 
-    const [xExtent, yExtent] = [
-      [0, glyphsCountPerLine],
-      [0, glyphsCountPerHeight],
-    ]
     const [xScale, yScale] = [
-      scaleLinear([0, innerWidth]).domain(xExtent),
-      scaleLinear([innerHeight, 0]).domain(yExtent),
+      scaleLinear([0, innerWidth]).domain([0, glyphsCountPerLine]),
+      scaleLinear([innerHeight, 0]).domain([0, glyphsCountPerHeight]),
     ]
 
     const extentInDomains = getExtendedExtentInDomains(displayAttributes, dataset, 5)
@@ -67,33 +65,41 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     )
     const color = scaleOrdinal(schemeCategory10)
 
+    // functions setting attributes
+    const getCategoryColor = (data: SelectableDataType) =>
+      categoryAttribute ? color(String(data[categoryAttribute])) : PLOT_COLORS.noCategoryColor
+    const getTransform = (data: SelectableDataType) => {
+      const idx = sorted.indexOf(data)
+      const translate = [
+        xScale(idx % glyphsCountPerLine) + glyphRadius + margin.left,
+        yScale(glyphsCountPerHeight - Math.floor(idx / glyphsCountPerLine)) + glyphRadius + margin.top,
+      ]
+      return `translate(${translate[0]}, ${translate[1]})`
+    }
+    const getGlyphPath = (data: SelectableDataType) =>
+      lineRadialGenerator(
+        displayAttributes.map((key, idx) => [
+          (2 * Math.PI * idx) / displayAttributes.length,
+          radialScales[idx](Number(data[key])),
+        ]),
+      )
+
     svg
-      .selectAll(`glyphs`)
+      .selectAll(GLYPHS)
       .data(dataset)
       .enter()
       .each((d, idx, elements) => {
         select(elements[idx])
-          .append(`g`)
-          .selectAll(`path`)
+          .append(SVG.elements.g)
+          .selectAll(SVG.elements.path)
           .data([d])
           .enter()
-          .append(`path`)
-          .attr(`class`, classes.glyph)
-          .attr(`d`, (d) =>
-            lineRadialGenerator(
-              displayAttributes.map((key, i) => {
-                const v = d[key]
-                return [(2 * Math.PI * i) / displayAttributes.length, radialScales[i](Number(v))]
-              }),
-            ),
-          )
-          .attr(`transform`, (d) => {
-            const idx = sorted.indexOf(d)
-            const x = idx % glyphsCountPerLine
-            const y = glyphsCountPerHeight - Math.floor(idx / glyphsCountPerLine)
-            return `translate(${xScale(x) + glyphRadius + margin.left}, ${yScale(y) + glyphRadius + margin.top})`
-          })
-          .style(`fill`, (d) => (categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor))
+
+          .append(SVG.elements.path)
+          .attr(SVG.attributes.class, classes.glyph)
+          .attr(SVG.attributes.d, getGlyphPath)
+          .attr(SVG.attributes.transform, getTransform)
+          .style(SVG.attributes.fill, getCategoryColor)
       })
   }, [
     dataset,

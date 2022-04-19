@@ -83,12 +83,13 @@ export const BasicScatterPlot: FunctionComponent<BasicScatterPlotProps> = ({
     const startBrushing = ({ selection }: D3BrushEvent<SelectableDataType>) => {
       if (selection) {
         const extent = selection as [[number, number], [number, number]] // hard retype
-        circles.classed(classes.selected, (d: SelectableDataType) => {
-          return isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
-        })
-        circles.classed(classes.notSelected, (d: SelectableDataType) => {
-          return !isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d)))
-        })
+        circles.classed(classes.selected, (d: SelectableDataType) =>
+          isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d))),
+        )
+        circles.classed(
+          classes.notSelected,
+          (d: SelectableDataType) => !isBrushed(extent, xScale(getValueX(d)), yScale(getValueY(d))),
+        )
       }
     }
 
