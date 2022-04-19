@@ -3,6 +3,7 @@ export const EMPTY_SITE_TEXT = {
 }
 
 export const GLYPHS_MENU_TEXT = {
+  header: `Glyphs`,
   sorted: `Sorted by`,
   category: `Colored by`,
 }

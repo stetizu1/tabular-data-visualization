@@ -10,6 +10,7 @@ import { Visualization } from '../../../../types/views/Visualization'
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
 import { SVG } from '../../../../constants/svg'
 import { PLOT_COLORS } from '../../../../styles/colors'
+import { GET_EVERYTHING, getClass, getTranslate } from '../../../../helpers/d3/stringSetters'
 
 interface GlyphsProps extends Visualization, Highlightable, GlyphsSettings {
   glyphSize?: number
@@ -39,14 +40,14 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   const glyphRadius = glyphSize / 2
 
   // selected coloring
-  selectAll(`.${classes.glyph}`)
+  selectAll(getClass(classes.glyph))
     .classed(classes.selected, (d) => (d as SelectableDataType).selected)
     .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
   const createGlyphs = useCallback(() => {
     const node = component.current!
     const svg = select(node)
-    svg.selectAll(`*`).remove() // clear
+    svg.selectAll(GET_EVERYTHING).remove() // clear
 
     const sorted = sortAttribute
       ? [...dataset].sort((a, b) => Number(a[sortAttribute]) - Number(b[sortAttribute]))
@@ -70,11 +71,11 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
       categoryAttribute ? color(String(data[categoryAttribute])) : PLOT_COLORS.noCategoryColor
     const getTransform = (data: SelectableDataType) => {
       const idx = sorted.indexOf(data)
-      const translate = [
+      const translate: [number, number] = [
         xScale(idx % glyphsCountPerLine) + glyphRadius + margin.left,
         yScale(glyphsCountPerHeight - Math.floor(idx / glyphsCountPerLine)) + glyphRadius + margin.top,
       ]
-      return `translate(${translate[0]}, ${translate[1]})`
+      return getTranslate(translate)
     }
     const getGlyphPath = (data: SelectableDataType) =>
       lineRadialGenerator(
@@ -88,11 +89,11 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
       .selectAll(GLYPHS)
       .data(dataset)
       .enter()
-      .each((d, idx, elements) => {
+      .each((data, idx, elements) => {
         select(elements[idx])
           .append(SVG.elements.g)
           .selectAll(SVG.elements.path)
-          .data([d])
+          .data([data])
           .enter()
 
           .append(SVG.elements.path)
