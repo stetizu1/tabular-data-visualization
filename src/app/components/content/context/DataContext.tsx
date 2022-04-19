@@ -1,7 +1,10 @@
-import React, { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
+
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
+
 import { useUpdatedRef } from '../../../helpers/react/useUpdatedRef'
+
 import { TopToolbar } from '../topToolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
 

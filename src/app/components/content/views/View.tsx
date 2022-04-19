@@ -1,15 +1,17 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
+
 import { SelectableDataType } from '../../../types/data/data'
 import { Brushable } from '../../../types/brushing/Brushable'
+import { ParallelCoordinatesSettings } from '../../../types/views/parallelCoordinates/ParallelCoordinatesSettings'
+import { ScatterPlotMatrixSettings } from '../../../types/views/scatterplot/ScatterPlotMatrixSettings'
+import { GlyphsSettings } from '../../../types/views/glyphs/GlyphsSettings'
+
 import { ViewType } from './ViewTypes'
+import { Settings, SettingsType } from './Settings'
 import { ParallelCoordinates } from './parallelCoordinates/ParallelCoordinates'
 import { ScatterPlotMatrix } from './scatterplot/ScatterPlotMatrix'
 import { Glyphs } from './glyphs/Glyphs'
 import { useViewStyle } from './useViewStyle'
-import { Settings, SettingsType } from './Settings'
-import { GlyphsSettings } from '../../../types/views/glyphs/GlyphsSettings'
-import { ParallelCoordinatesSettings } from '../../../types/views/parallelCoordinates/ParallelCoordinatesSettings'
-import { ScatterPlotMatrixSettings } from '../../../types/views/scatterplot/ScatterPlotMatrixSettings'
 
 interface ViewDataProps extends Brushable {
   dataset: SelectableDataType[]

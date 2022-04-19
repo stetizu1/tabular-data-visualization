@@ -14,14 +14,18 @@ import {
 } from 'd3'
 
 import { SelectableDataType } from '../../../../types/data/data'
-import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { BrushAction } from '../../../../types/brushing/BrushAction'
-import { defaultMargin } from '../../../../types/styling/Margin'
-import { PLOT_COLORS } from '../../../../styles/colors'
-import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
 import { Visualization } from '../../../../types/views/Visualization'
 import { ParallelCoordinatesSettings } from '../../../../types/views/parallelCoordinates/ParallelCoordinatesSettings'
+
+import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+
+import { defaultMargin } from '../../../../constants/defaultMargin'
+
+import { PLOT_COLORS } from '../../../../styles/colors'
+
+import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
 
 export interface ParallelCoordinatesProps extends Visualization, Brushable, ParallelCoordinatesSettings {}
 

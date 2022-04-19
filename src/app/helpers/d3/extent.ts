@@ -1,4 +1,5 @@
 import { extent } from 'd3'
+
 import { SelectableDataType } from '../../types/data/data'
 
 export type ExtentInDomains = Partial<{ [key in keyof SelectableDataType]: [number, number] }>

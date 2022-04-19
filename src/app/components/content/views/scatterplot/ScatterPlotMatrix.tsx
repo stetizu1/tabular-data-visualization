@@ -14,16 +14,19 @@ import {
 } from 'd3'
 import clsx from 'clsx'
 
-import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import { SelectableDataType } from '../../../../types/data/data'
+import { Visualization } from '../../../../types/views/Visualization'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { BrushAction } from '../../../../types/brushing/BrushAction'
 import { Margin } from '../../../../types/styling/Margin'
+import { ScatterPlotMatrixSettings } from '../../../../types/views/scatterplot/ScatterPlotMatrixSettings'
+
+import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+
 import { PLOT_COLORS } from '../../../../styles/colors'
+
 import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
-import { Visualization } from '../../../../types/views/Visualization'
-import { ScatterPlotMatrixSettings } from '../../../../types/views/scatterplot/ScatterPlotMatrixSettings'
 
 interface ScatterPlotMatrixProps extends Visualization, Brushable, ScatterPlotMatrixSettings {
   circleSize?: number

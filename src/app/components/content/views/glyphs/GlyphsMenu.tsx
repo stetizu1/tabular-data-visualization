@@ -2,16 +2,19 @@ import { Dispatch, FunctionComponent, SetStateAction, useCallback, useEffect, us
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 
 import { CheckedSelectableDataType, SelectableDataType } from '../../../../types/data/data'
+import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
+
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import {
   getCategoryAttributesKeys,
   getDefaultAttributesChecked,
   getPossibleQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
+
 import { GLYPHS_MENU_TEXT } from '../../../../text/SiteText'
+
 import { ViewType } from '../ViewTypes'
 import { Settings } from '../Settings'
-import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 
 export interface GlyphsMenuProps {
   dataset: Array<SelectableDataType>

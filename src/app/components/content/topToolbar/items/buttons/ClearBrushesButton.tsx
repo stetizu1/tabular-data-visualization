@@ -1,6 +1,7 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { Button } from '@mui/material'
 import { FormatColorReset } from '@mui/icons-material'
+
 import { useClearBrushesButton } from './useClearBrushesButton'
 
 export interface ClearBrushesButtonDataProps {

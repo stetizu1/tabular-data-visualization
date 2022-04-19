@@ -11,10 +11,14 @@ import {
   ScaleLinear,
   D3BrushEvent,
 } from 'd3'
-import { Margin, defaultMargin } from '../../../../types/styling/Margin'
+
+import { Margin } from '../../../../types/styling/Margin'
 import { SelectableDataType } from '../../../../types/data/data'
-import { useBasicScatterPlotStyle } from './useBasicScatterPlotStyle'
+
+import { defaultMargin } from '../../../../constants/defaultMargin'
+
 import { isBrushed } from './brushing'
+import { useBasicScatterPlotStyle } from './useBasicScatterPlotStyle'
 
 interface BasicScatterPlotProps {
   width: number

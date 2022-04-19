@@ -6,5 +6,3 @@ export class Margin {
     this.height = this.top + this.bottom
   }
 }
-
-export const defaultMargin = new Margin(20, 25, 25, 25)

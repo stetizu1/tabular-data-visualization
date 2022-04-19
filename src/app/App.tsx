@@ -1,4 +1,5 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
+
 import { Header } from './components/header/Header'
 import { Footer } from './components/footer/Footer'
 import { DataContext } from './components/content/context/DataContext'

@@ -1,7 +1,9 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
 import { Menu } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
+
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
+
 import { ClearBrushesButton, ClearBrushesButtonDataProps } from './items/buttons/ClearBrushesButton'
 import { FileReader, FileReaderDataProps } from './items/fileRader/FileReader'
 import { useTopToolbar } from './useTopToolbar'

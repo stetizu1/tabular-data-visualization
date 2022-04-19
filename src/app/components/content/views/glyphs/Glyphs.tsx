@@ -3,20 +3,25 @@ import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, schemeCategory10, s
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Highlightable } from '../../../../types/brushing/Brushable'
-import { defaultMargin } from '../../../../types/styling/Margin'
-import { useGlyphsStyle } from './useGlyphsStyle'
-import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 import { Visualization } from '../../../../types/views/Visualization'
-import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
+import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
+
+import { defaultMargin } from '../../../../constants/defaultMargin'
 import { SVG } from '../../../../constants/svg'
-import { PLOT_COLORS } from '../../../../styles/colors'
+
+import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
 import { GET_EVERYTHING, getClass, getTranslate } from '../../../../helpers/d3/stringSetters'
+
+import { PLOT_COLORS } from '../../../../styles/colors'
+import { useGlyphsStyle } from './useGlyphsStyle'
 
 interface GlyphsProps extends Visualization, Highlightable, GlyphsSettings {
   glyphSize?: number
 }
 
 const GLYPH_SPACING = 3
+
+export default GLYPH_SPACING
 const GLYPHS = `glyphs`
 
 export const Glyphs: FunctionComponent<GlyphsProps> = ({

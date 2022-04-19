@@ -1,4 +1,5 @@
 import { makeStyles } from '@mui/styles'
+
 import { PLOT_COLORS } from '../../../../styles/colors'
 
 export const useGlyphsStyle = makeStyles({

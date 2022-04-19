@@ -1,11 +1,14 @@
-import React, { FunctionComponent, useState } from 'react'
+import { FunctionComponent, useState } from 'react'
 
 import { Brushable } from '../../../types/brushing/Brushable'
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
+
 import { getDefaultQuantitativeAttributesKeys } from '../../../helpers/data/data'
+
 import { DataDrawer } from '../dataDrawer/DataDrawer'
 import { EmptySite } from '../empty/EmptySite'
+
 import { View } from './View'
 import { ViewType } from './ViewTypes'
 import { Settings } from './Settings'

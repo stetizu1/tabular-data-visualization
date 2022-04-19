@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
+
 import { SideEffectVoid } from '../basic/functionTypes'
 
 export interface Highlightable {

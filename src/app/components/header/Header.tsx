@@ -1,5 +1,7 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
+
 import { HEADER_TEXT } from '../../text/HeaderText'
+
 import { useHeaderStyle } from './useHeaderStyle'
 
 export const Header: FunctionComponent = () => {

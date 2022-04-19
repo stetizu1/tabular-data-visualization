@@ -1,5 +1,7 @@
-import React, { FunctionComponent } from 'react'
+import { FunctionComponent } from 'react'
+
 import { FOOTER_TEXT } from '../../text/FooterText'
+
 import { useFooterStyle } from './useFooterStyle'
 
 export const Footer: FunctionComponent = () => {

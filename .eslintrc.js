@@ -6,8 +6,12 @@ module.exports = {
     },
   },
   parser: `@typescript-eslint/parser`,
-  plugins: [`react`, `react-hooks`, `prettier`],
+  plugins: [`react`, `react-hooks`, `prettier`, `@typescript-eslint`],
   extends: [
+    `react-app`,
+    `react-app/jest`,
+    `eslint:recommended`,
+    `plugin:@typescript-eslint/eslint-recommended`,
     `plugin:@typescript-eslint/recommended`,
     `plugin:react/recommended`,
     `plugin:react-hooks/recommended`,
@@ -32,5 +36,6 @@ module.exports = {
     '@typescript-eslint/no-non-null-assertion': 0,
     '@typescript-eslint/explicit-module-boundary-types': 1,
     '@typescript-eslint/no-empty-interface': 0,
+    'import/order': 1,
   },
 }
