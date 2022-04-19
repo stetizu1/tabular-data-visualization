@@ -6,7 +6,6 @@ export const useScatterPlotMatrixStyle = makeStyles({
   y: {},
   svg: {
     font: `12px sans-serif`,
-    padding: `10px`,
     backgroundColor: PLOT_COLORS.backgroundColor,
   },
   axis: {

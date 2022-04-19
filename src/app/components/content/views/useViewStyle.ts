@@ -6,10 +6,14 @@ export interface StyleProps {
   height: number
 }
 
+const BORDER_SIZE = 5
+
 export const useViewStyle = makeStyles<Theme, StyleProps>(() => ({
   box: {
     width: ({ width }) => width,
-    height: ({ height }) => height,
-    overflow: `hidden`,
+    height: ({ height }) => height + BORDER_SIZE,
+    overflowX: `hidden`,
+    overflowY: `auto`,
+    margin: `5px 0`,
   },
 }))

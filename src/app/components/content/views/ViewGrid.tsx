@@ -57,7 +57,7 @@ export const ViewGrid: FunctionComponent<ViewGridProps> = ({ dataset, isDrawerOp
         <div className={classes.column}>
           <View width={960} height={400} component={ViewType.ParallelCoordinates} {...allViewProps} />
           <View width={960} height={960} component={ViewType.ScatterPlotMatrix} {...allViewProps} />
-          <View width={960} height={520} component={ViewType.Glyphs} {...allViewProps} />
+          <View width={960} height={600} component={ViewType.Glyphs} {...allViewProps} />
         </div>
       </>
     )
