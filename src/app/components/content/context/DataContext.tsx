@@ -32,16 +32,16 @@ export const DataContext: FunctionComponent = () => {
     cleanAllBrushes()
   }
 
-  const cleanBrushesIfNewComponentBrushing = (newComponentBrushing: SVGGElement) => {
-    if (componentBrushingRef.current !== newComponentBrushing) cleanAllBrushes()
+  const setComponentBrushingAndClean = (newComponent: SVGGElement | null): void => {
+    if (componentBrushingRef.current !== newComponent) cleanAllBrushes()
+    setComponentBrushing(newComponent)
   }
 
   const isBrushingActive = componentBrushingRef.current !== null
   const viewProps = {
     dataset,
-    cleanBrushes: cleanBrushesIfNewComponentBrushing,
     setCleanBrushes,
-    setComponentBrushing,
+    setComponentBrushing: setComponentBrushingAndClean,
     setSelected,
     isBrushingActive,
   }

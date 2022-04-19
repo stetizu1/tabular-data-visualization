@@ -7,8 +7,7 @@ export interface Highlightable {
 }
 
 export interface Brushable extends Highlightable {
-  cleanBrushes: (key: SVGGElement) => void
   setCleanBrushes: Dispatch<SetStateAction<SideEffectVoid[]>>
-  setComponentBrushing: Dispatch<SetStateAction<SVGGElement | null>>
+  setComponentBrushing: (newComponent: SVGGElement | null) => void
   setSelected: (selected: boolean[]) => void
 }

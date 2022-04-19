@@ -46,7 +46,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   displayAttributes,
   categoryAttribute,
   setSelected,
-  cleanBrushes,
   setCleanBrushes,
   setComponentBrushing,
   isBrushingActive,
@@ -102,7 +101,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         [BRUSH_WIDTH / 2, innerHeight + margin.top / 2],
       ])
       .on(BrushAction.start, () => {
-        cleanBrushes(node)
         setComponentBrushing(node)
       })
       .on(BrushAction.move, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
@@ -181,7 +179,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     displayAttributes,
     setSelected,
     margin,
-    cleanBrushes,
     setComponentBrushing,
     setCleanBrushes,
   ])

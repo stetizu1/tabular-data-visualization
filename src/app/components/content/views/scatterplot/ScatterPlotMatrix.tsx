@@ -47,7 +47,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   circleSize = 4,
   displayAttributes,
   categoryAttribute,
-  cleanBrushes,
   setCleanBrushes,
   setComponentBrushing,
   isBrushingActive,
@@ -192,7 +191,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     ])
 
     const startBrush = (_: D3BrushEvent<SelectableDataType>, { i, j, keyX, keyY }: MatrixItem<SelectableDataType>) => {
-      cleanBrushes(node)
       setComponentBrushing(node)
       if (brushCell.i !== i || brushCell.j !== j) {
         clearBrush()
@@ -242,7 +240,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     setSelected,
     categoryAttribute,
     displayAttributes,
-    cleanBrushes,
     setComponentBrushing,
     setCleanBrushes,
   ])
