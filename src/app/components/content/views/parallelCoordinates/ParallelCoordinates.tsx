@@ -15,13 +15,15 @@ import {
 import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { BrushAction } from '../../../../types/brushing/BrushAction'
+import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
 import { Visualization } from '../../../../types/views/Visualization'
 import { ParallelCoordinatesSettings } from '../../../../types/views/parallelCoordinates/ParallelCoordinatesSettings'
 
-import { GET_EVERYTHING } from '../../../../helpers/d3/stringSetters'
+import { toStringArray } from '../../../../helpers/basic/retype'
+import { inRange } from '../../../../helpers/basic/numerical'
+import { GET_EVERYTHING, getTranslate } from '../../../../helpers/d3/stringSetters'
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
-import { toStringArray } from '../../../../helpers/data/retype'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
 
 import { defaultMargin } from '../../../../constants/defaultMargin'
@@ -31,6 +33,8 @@ import { PLOT_COLORS } from '../../../../styles/colors'
 import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
 
 const BRUSH_WIDTH = 30
+const TEXT_SPACING_LEFT = 22
+const TEXT_SPACING_RIGHT = 5
 
 export interface ParallelCoordinatesProps extends Visualization, Brushable, ParallelCoordinatesSettings {}
 
@@ -50,7 +54,10 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   const classes = useParallelCoordinatesStyle()
   const component = useRef<SVGGElement>(null)
 
-  const [innerWidth, innerHeight] = [width - margin.width, height - margin.height]
+  const [innerWidth, innerHeight] = [
+    width - margin.width - (TEXT_SPACING_LEFT + TEXT_SPACING_RIGHT),
+    height - margin.height,
+  ]
 
   // selected coloring
   selectAll(`.${classes.line}`)
@@ -69,22 +76,29 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     )
 
     const selections = getDefaultSelectionForAttributes(displayAttributes)
+    const setBrushingInSelection = (selected: boolean[]): void => {
+      selected.forEach((isSelected, idx) => {
+        dataset[idx].selected = isSelected
+      })
+      setSelected(selected)
+    }
 
     const setBrushed = () => {
-      dataset.forEach((data) => {
-        data.selected = displayAttributes.every((dimension) => {
-          const selectedRange = selections[dimension]
-          if (selectedRange === null) return true
-          const dataPoint = yScales[displayAttributes.indexOf(dimension)](Number(data[dimension]))
-          return dataPoint > selectedRange[0] && dataPoint < selectedRange[1]
-        })
-      })
-      setSelected(dataset.map((data) => data.selected))
+      setBrushingInSelection(
+        dataset.map((data) =>
+          displayAttributes.every((dimension, idx) => {
+            const selectedRange = selections[dimension]
+            if (selectedRange === null) return true // nothing in dimension selected, do not block
+            const valueOnAxis = yScales[idx](Number(data[dimension]))
+            return inRange(valueOnAxis, selectedRange)
+          }),
+        ),
+      )
     }
 
     const brush = brushY<keyof SelectableDataType>()
       .extent([
-        [-(BRUSH_WIDTH / 2), -(margin.top / 2)],
+        [-(BRUSH_WIDTH / 2), -(margin.bottom / 2)],
         [BRUSH_WIDTH / 2, innerHeight + margin.top / 2],
       ])
       .on(BrushAction.start, () => {
@@ -92,11 +106,11 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         setComponentBrushing(node)
       })
       .on(BrushAction.move, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
-        selections[axisName] = brushEvent.selection as [number, number] | null // yBrush
+        selections[axisName] = brushEvent.selection as BrushSelection2d
         setBrushed()
       })
       .on(BrushAction.end, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
-        const brushSelection = brushEvent.selection as [number, number] | null // yBrush
+        const brushSelection = brushEvent.selection as BrushSelection2d
         selections[axisName] = brushSelection
         if (Object.values(selections).every((data) => data === null)) {
           dataset.forEach((data) => (data.selected = false))
@@ -177,7 +191,12 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
 
   return (
     <svg width={width} height={height} className={classes.svg}>
-      <g ref={component} transform={`translate(${margin.left}, ${margin.top})`} />
+      <g
+        ref={component}
+        width={innerWidth}
+        height={innerHeight}
+        transform={getTranslate([margin.left + TEXT_SPACING_LEFT, margin.top])}
+      />
     </svg>
   )
 }
