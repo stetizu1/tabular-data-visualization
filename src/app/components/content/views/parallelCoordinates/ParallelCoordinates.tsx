@@ -3,7 +3,6 @@ import {
   axisLeft,
   brushY,
   D3BrushEvent,
-  extent,
   line,
   scaleLinear,
   scaleOrdinal,
@@ -19,13 +18,19 @@ import { BrushAction } from '../../../../types/brushing/BrushAction'
 import { Visualization } from '../../../../types/views/Visualization'
 import { ParallelCoordinatesSettings } from '../../../../types/views/parallelCoordinates/ParallelCoordinatesSettings'
 
+import { GET_EVERYTHING } from '../../../../helpers/d3/stringSetters'
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+import { getExtentInDomains } from '../../../../helpers/d3/extent'
+import { toStringArray } from '../../../../helpers/data/retype'
+import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
 
 import { defaultMargin } from '../../../../constants/defaultMargin'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
 
 import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
+
+const BRUSH_WIDTH = 30
 
 export interface ParallelCoordinatesProps extends Visualization, Brushable, ParallelCoordinatesSettings {}
 
@@ -45,40 +50,26 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   const classes = useParallelCoordinatesStyle()
   const component = useRef<SVGGElement>(null)
 
-  selectAll(`.${classes.line}`)
-    .classed(classes.selected, (dRaw) => {
-      const d = dRaw as SelectableDataType
-      return d.selected
-    })
-    .classed(classes.hidden, (dRaw) => {
-      const d = dRaw as SelectableDataType
-      return isBrushingActive && !d.selected
-    })
-
   const [innerWidth, innerHeight] = [width - margin.width, height - margin.height]
-  const brushWidth = 30
+
+  // selected coloring
+  selectAll(`.${classes.line}`)
+    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
+    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
+
   const createScatterPlotMatrix = useCallback(() => {
-    const node = component.current
-    if (!node) {
-      return
-    }
+    const node = component.current!
     const svg = select(node)
+    svg.selectAll(GET_EVERYTHING).remove() // clear
 
-    const domainByDimensionsUnchecked = Object.fromEntries(
-      displayAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]),
-    )
-    if (Object.values(domainByDimensionsUnchecked).some((domain) => domain[0] === undefined)) return
-    const domainByDimensions = domainByDimensionsUnchecked as {
-      [key in keyof SelectableDataType]: [number, number]
-    }
+    const extentInDomains = getExtentInDomains(displayAttributes, dataset)
+    const xScale = scalePoint([0, innerWidth]).domain(toStringArray(displayAttributes))
     const yScales = displayAttributes.map((attribute) =>
-      scaleLinear([innerHeight, 0]).domain(domainByDimensions[attribute]),
+      scaleLinear([innerHeight, 0]).domain(extentInDomains[attribute]),
     )
-    const xScale = scalePoint([0, innerWidth]).domain(displayAttributes.map((d) => String(d)))
 
-    const selections = Object.fromEntries(displayAttributes.map((key) => [key, null])) as {
-      [key in keyof SelectableDataType]: [number, number] | null
-    }
+    const selections = getDefaultSelectionForAttributes(displayAttributes)
+
     const setBrushed = () => {
       dataset.forEach((data) => {
         data.selected = displayAttributes.every((dimension) => {
@@ -93,8 +84,8 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
 
     const brush = brushY<keyof SelectableDataType>()
       .extent([
-        [-(brushWidth / 2), -(margin.top / 2)],
-        [brushWidth / 2, innerHeight + margin.top / 2],
+        [-(BRUSH_WIDTH / 2), -(margin.top / 2)],
+        [BRUSH_WIDTH / 2, innerHeight + margin.top / 2],
       ])
       .on(BrushAction.start, () => {
         cleanBrushes(node)
@@ -113,7 +104,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
           setComponentBrushing(null)
           return
         }
-        if (brushSelection == null) setBrushed()
+        if (brushSelection === null) setBrushed()
       })
 
     const color = scaleOrdinal(schemeCategory10)

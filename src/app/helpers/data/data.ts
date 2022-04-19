@@ -1,4 +1,9 @@
-import { CheckedSelectableDataType, SelectableDataType, SelectedKey } from '../../types/data/data'
+import {
+  CheckedForSelectableDataType,
+  RangeForSelectableDataType,
+  SelectableDataType,
+  SelectedKey,
+} from '../../types/data/data'
 
 const CATEGORY_LIMIT = 8
 
@@ -21,10 +26,10 @@ export const getCategoryAttributesKeys = (dataset: SelectableDataType[]): Array<
   })
 }
 
-export const getDefaultAttributesChecked = (dataset: SelectableDataType[]): CheckedSelectableDataType => {
+export const getDefaultAttributesChecked = (dataset: SelectableDataType[]): CheckedForSelectableDataType => {
   const defaultQuantitativeAttributesKeys = getDefaultQuantitativeAttributesKeys(dataset)
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
-  const empty: CheckedSelectableDataType = {}
+  const empty: CheckedForSelectableDataType = {}
 
   return possibleQuantitativeAttributesKeys.reduce((acc, key) => {
     acc[key] = defaultQuantitativeAttributesKeys.some((kk) => kk === key)
@@ -32,13 +37,6 @@ export const getDefaultAttributesChecked = (dataset: SelectableDataType[]): Chec
   }, empty)
 }
 
-export const transferDatasetQuantitativeValues = (
-  dataset: SelectableDataType[],
-  keys: Array<keyof SelectableDataType>,
-): SelectableDataType[] =>
-  dataset.map((data) =>
-    keys.reduce((mapped, key) => {
-      mapped[key] = Number(mapped[key])
-      return mapped
-    }, data),
-  )
+export const getDefaultSelectionForAttributes = (
+  displayAttributes: Array<keyof SelectableDataType>,
+): RangeForSelectableDataType => Object.fromEntries(displayAttributes.map((key) => [key, null]))

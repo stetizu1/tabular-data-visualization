@@ -9,7 +9,7 @@ import { TopToolbar } from '../topToolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
 
 export const DataContext: FunctionComponent = () => {
-  const [dataset, setDataset] = useState<Array<SelectableDataType> | null>(null)
+  const [dataset, setDataset] = useState<SelectableDataType[] | null>(null)
   const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
   const [cleanBrushes, setCleanBrushes] = useState<SideEffectVoid[]>([])
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)

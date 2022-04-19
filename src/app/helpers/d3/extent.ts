@@ -2,21 +2,12 @@ import { extent } from 'd3'
 
 import { SelectableDataType } from '../../types/data/data'
 
-export type ExtentInDomains = Partial<{ [key in keyof SelectableDataType]: [number, number] }>
+export type ExtentInDomains = { [key: keyof SelectableDataType]: [number, number] }
 
-export type GetExtentFunction = (
+export const getExtentInDomains = (
   domains: Array<keyof SelectableDataType>,
-  dataset: Array<SelectableDataType>,
-) => ExtentInDomains
-
-export type GetExtendedExtentFunction = (
-  domains: Array<keyof SelectableDataType>,
-  dataset: Array<SelectableDataType>,
-  percentDown: number,
-  percentUp?: number,
-) => ExtentInDomains
-
-export const getExtentInDomains: GetExtentFunction = (domains, dataset) =>
+  dataset: SelectableDataType[],
+): ExtentInDomains =>
   Object.fromEntries(
     domains.map((key) => {
       const calculatedExtent = extent(dataset, (d) => Number(d[key]))
@@ -25,7 +16,12 @@ export const getExtentInDomains: GetExtentFunction = (domains, dataset) =>
     }),
   )
 
-export const getExtendedExtentInDomains: GetExtendedExtentFunction = (domains, dataset, percentDown, percentUp = 0) =>
+export const getExtendedExtentInDomains = (
+  domains: Array<keyof SelectableDataType>,
+  dataset: SelectableDataType[],
+  percentDown: number,
+  percentUp = 0,
+): ExtentInDomains =>
   Object.fromEntries(
     domains.map((key) => {
       const calculatedExtent = extent(dataset, (d) => Number(d[key]))

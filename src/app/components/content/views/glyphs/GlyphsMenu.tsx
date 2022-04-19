@@ -1,7 +1,7 @@
 import { Dispatch, FunctionComponent, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 
-import { CheckedSelectableDataType, SelectableDataType } from '../../../../types/data/data'
+import { CheckedForSelectableDataType, SelectableDataType } from '../../../../types/data/data'
 import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
@@ -17,14 +17,14 @@ import { ViewType } from '../ViewTypes'
 import { Settings } from '../Settings'
 
 export interface GlyphsMenuProps {
-  dataset: Array<SelectableDataType>
+  dataset: SelectableDataType[]
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>
 }
 
 export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settings, setSettings }) => {
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
-  const [checked, setChecked] = useState<CheckedSelectableDataType>(getDefaultAttributesChecked(dataset))
+  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
   const sortableAttributes = possibleQuantitativeAttributesKeys.filter((key) => checked[key])
   const defaultSortAttribute = sortableAttributes?.[0]
@@ -32,7 +32,7 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
   const defaultCategoryAttribute = categoricalAttributes?.[0]
 
-  const getCurrentDisplayAttributes = (currChecked: CheckedSelectableDataType) =>
+  const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
     possibleQuantitativeAttributesKeys.filter((key) => currChecked[key])
 
   // first time empty

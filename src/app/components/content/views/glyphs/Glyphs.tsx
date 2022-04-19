@@ -15,13 +15,12 @@ import { GET_EVERYTHING, getClass, getTranslate } from '../../../../helpers/d3/s
 import { PLOT_COLORS } from '../../../../styles/colors'
 import { useGlyphsStyle } from './useGlyphsStyle'
 
+const GLYPH_SPACING = 3
+
 interface GlyphsProps extends Visualization, Highlightable, GlyphsSettings {
   glyphSize?: number
 }
 
-const GLYPH_SPACING = 3
-
-export default GLYPH_SPACING
 const GLYPHS = `glyphs`
 
 export const Glyphs: FunctionComponent<GlyphsProps> = ({
@@ -67,7 +66,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
 
     const lineRadialGenerator = lineRadial()
     const radialScales = displayAttributes.map((attribute) =>
-      scaleRadial([0, glyphRadius]).domain(extentInDomains[attribute]!),
+      scaleRadial([0, glyphRadius]).domain(extentInDomains[attribute]),
     )
     const color = scaleOrdinal(schemeCategory10)
 

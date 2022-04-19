@@ -10,6 +10,10 @@ export interface SelectableDataType extends DataType {
   [SelectedKey]: boolean
 }
 
-export interface CheckedSelectableDataType {
+export interface CheckedForSelectableDataType {
   [key: keyof SelectableDataType]: boolean
+}
+
+export interface RangeForSelectableDataType {
+  [key: keyof SelectableDataType]: [number, number] | null
 }
