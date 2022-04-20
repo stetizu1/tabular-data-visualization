@@ -15,7 +15,7 @@ import {
 import clsx from 'clsx'
 
 import { SelectableDataType } from '../../../../types/data/data'
-import { Visualization } from '../../../../types/views/Visualization'
+import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { BrushAction } from '../../../../types/brushing/BrushAction'
 import { Margin } from '../../../../types/styling/Margin'
@@ -28,7 +28,7 @@ import { PLOT_COLORS } from '../../../../styles/colors'
 import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 
-interface ScatterPlotMatrixProps extends Visualization, Brushable, ScatterPlotMatrixSettings {
+interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {
   circleSize?: number
 }
 
@@ -43,7 +43,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   width,
   height,
   dataset,
-  setSelected,
+  redraw,
   circleSize = 4,
   displayAttributes,
   categoryAttribute,
@@ -186,7 +186,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         clearBrush()
         brushCell = { i: -1, j: -1 }
         dataset.forEach((data) => (data.selected = false))
-        setSelected(dataset.map((data) => data.selected))
+        redraw()
       },
     ])
 
@@ -210,14 +210,14 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
           const d = dRaw as SelectableDataType
           d.selected = isBrushed(extent, x(Number(d[keyX])), y(Number(d[keyY])))
         })
-        setSelected(dataset.map((data) => data.selected))
+        redraw()
       }
     }
 
     const endBrush = ({ selection }: D3BrushEvent<SelectableDataType>) => {
       if (!selection) {
         dataset.forEach((data) => (data.selected = false))
-        setSelected(dataset.map((data) => data.selected))
+        redraw()
         setComponentBrushing(null)
       }
     }
@@ -237,7 +237,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     size,
     circleSize,
     classes,
-    setSelected,
+    redraw,
     categoryAttribute,
     displayAttributes,
     setComponentBrushing,

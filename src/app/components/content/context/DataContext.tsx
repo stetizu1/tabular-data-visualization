@@ -13,6 +13,7 @@ export const DataContext: FunctionComponent = () => {
   const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
   const [cleanBrushes, setCleanBrushes] = useState<SideEffectVoid[]>([])
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
+  const [redrawTime, setRedrawTime] = useState(Date.now())
 
   const cleanBrushesRef = useUpdatedRef(cleanBrushes)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
@@ -22,8 +23,8 @@ export const DataContext: FunctionComponent = () => {
     setComponentBrushing(null)
   }
 
-  const setSelected = (selected: boolean[]) => {
-    setDataset((prev) => (prev ? prev.map((data, idx) => ({ ...data, selected: selected[idx] })) : null))
+  const redraw = () => {
+    setRedrawTime(Date.now())
   }
 
   const cleanAllBrushes = () => cleanBrushesRef.current.forEach((f) => f())
@@ -42,7 +43,8 @@ export const DataContext: FunctionComponent = () => {
     dataset,
     setCleanBrushes,
     setComponentBrushing: setComponentBrushingAndClean,
-    setSelected,
+    redraw,
+    redrawTime,
     isBrushingActive,
   }
 

@@ -7,18 +7,23 @@ import {
 
 const CATEGORY_LIMIT = 8
 
-const getDatasetSample = (dataset: SelectableDataType[]) => dataset[0]
+const getDatasetSample = (dataset: ReadonlyArray<SelectableDataType>) => dataset[0]
 
-export const getAttributeKeys = (dataset: SelectableDataType[]): Array<keyof SelectableDataType> =>
+export const getAttributeKeys = (dataset: ReadonlyArray<SelectableDataType>): Array<keyof SelectableDataType> =>
   Object.keys(getDatasetSample(dataset)).filter((key) => key !== SelectedKey)
 
-export const getDefaultQuantitativeAttributesKeys = (dataset: SelectableDataType[]): Array<keyof SelectableDataType> =>
-  getAttributeKeys(dataset).filter((key) => typeof dataset[0][key] === `number`)
+export const getDefaultQuantitativeAttributesKeys = (
+  dataset: ReadonlyArray<SelectableDataType>,
+): Array<keyof SelectableDataType> => getAttributeKeys(dataset).filter((key) => typeof dataset[0][key] === `number`)
 
-export const getPossibleQuantitativeAttributesKeys = (dataset: SelectableDataType[]): Array<keyof SelectableDataType> =>
+export const getPossibleQuantitativeAttributesKeys = (
+  dataset: ReadonlyArray<SelectableDataType>,
+): Array<keyof SelectableDataType> =>
   getAttributeKeys(dataset).filter((key) => dataset.every((data) => !isNaN(Number(data[key]))))
 
-export const getCategoryAttributesKeys = (dataset: SelectableDataType[]): Array<keyof SelectableDataType> => {
+export const getCategoryAttributesKeys = (
+  dataset: ReadonlyArray<SelectableDataType>,
+): Array<keyof SelectableDataType> => {
   const keys = getAttributeKeys(dataset)
   return keys.filter((key) => {
     const uniqueValues = new Set(dataset.map((data) => data[key]))
@@ -26,7 +31,9 @@ export const getCategoryAttributesKeys = (dataset: SelectableDataType[]): Array<
   })
 }
 
-export const getDefaultAttributesChecked = (dataset: SelectableDataType[]): CheckedForSelectableDataType => {
+export const getDefaultAttributesChecked = (
+  dataset: ReadonlyArray<SelectableDataType>,
+): CheckedForSelectableDataType => {
   const defaultQuantitativeAttributesKeys = getDefaultQuantitativeAttributesKeys(dataset)
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
   const empty: CheckedForSelectableDataType = {}

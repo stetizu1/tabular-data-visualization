@@ -14,7 +14,7 @@ import { useDataDrawerStyle } from './useDataDrawerStyle'
 export interface DataDrawerProps {
   isOpen: boolean
   close: SideEffectVoid
-  dataset: SelectableDataType[]
+  dataset: ReadonlyArray<SelectableDataType>
   views: ViewType[]
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>

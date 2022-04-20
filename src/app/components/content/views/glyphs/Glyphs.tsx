@@ -3,7 +3,7 @@ import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, schemeCategory10, s
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Highlightable } from '../../../../types/brushing/Brushable'
-import { Visualization } from '../../../../types/views/Visualization'
+import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 
 import { defaultMargin } from '../../../../constants/defaultMargin'
@@ -17,7 +17,7 @@ import { useGlyphsStyle } from './useGlyphsStyle'
 
 const GLYPH_SPACING = 3
 
-interface GlyphsProps extends Visualization, Highlightable, GlyphsSettings {
+interface GlyphsProps extends VisualizationView, Highlightable, GlyphsSettings {
   glyphSize?: number
 }
 
@@ -53,7 +53,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     const svg = select(node)
     svg.selectAll(GET_EVERYTHING).remove() // clear
 
-    const sorted = sortAttribute
+    const sortedDataset = sortAttribute
       ? [...dataset].sort((a, b) => Number(a[sortAttribute]) - Number(b[sortAttribute]))
       : [...dataset]
 
@@ -74,7 +74,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     const getCategoryColor = (data: SelectableDataType) =>
       categoryAttribute ? color(String(data[categoryAttribute])) : PLOT_COLORS.noCategoryColor
     const getTransform = (data: SelectableDataType) => {
-      const idx = sorted.indexOf(data)
+      const idx = sortedDataset.indexOf(data)
       const translate: [number, number] = [
         xScale(idx % glyphsCountPerLine) + glyphRadius + margin.left,
         yScale(glyphsCountPerHeight - Math.floor(idx / glyphsCountPerLine)) + glyphRadius + margin.top,

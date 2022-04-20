@@ -6,7 +6,7 @@ export type ExtentInDomains = { [key: keyof SelectableDataType]: [number, number
 
 export const getExtentInDomains = (
   domains: Array<keyof SelectableDataType>,
-  dataset: SelectableDataType[],
+  dataset: ReadonlyArray<SelectableDataType>,
 ): ExtentInDomains =>
   Object.fromEntries(
     domains.map((key) => {
@@ -18,7 +18,7 @@ export const getExtentInDomains = (
 
 export const getExtendedExtentInDomains = (
   domains: Array<keyof SelectableDataType>,
-  dataset: SelectableDataType[],
+  dataset: ReadonlyArray<SelectableDataType>,
   percentDown: number,
   percentUp = 0,
 ): ExtentInDomains =>

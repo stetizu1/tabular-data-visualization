@@ -17,7 +17,7 @@ import { ViewType } from '../ViewTypes'
 import { Settings } from '../Settings'
 
 export interface GlyphsMenuProps {
-  dataset: SelectableDataType[]
+  dataset: ReadonlyArray<SelectableDataType>
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>
 }

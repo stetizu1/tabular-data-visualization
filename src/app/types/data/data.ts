@@ -1,7 +1,7 @@
 type JsonValue = string | number | boolean | null
 
 export interface DataType {
-  [key: string]: JsonValue
+  readonly [key: string]: JsonValue
 }
 
 export const SelectedKey = `selected`

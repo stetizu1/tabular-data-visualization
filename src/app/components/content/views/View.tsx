@@ -1,5 +1,6 @@
 import { FunctionComponent } from 'react'
 
+import { VisualizationView } from '../../../types/views/VisualizationView'
 import { SelectableDataType } from '../../../types/data/data'
 import { Brushable } from '../../../types/brushing/Brushable'
 import { ParallelCoordinatesSettings } from '../../../types/views/parallelCoordinates/ParallelCoordinatesSettings'
@@ -13,19 +14,13 @@ import { ScatterPlotMatrix } from './scatterplot/ScatterPlotMatrix'
 import { Glyphs } from './glyphs/Glyphs'
 import { useViewStyle } from './useViewStyle'
 
-interface ViewDataProps extends Brushable {
-  dataset: SelectableDataType[]
-  width: number
-  height: number
-}
-
-interface ViewProps extends ViewDataProps {
+interface ViewProps extends Brushable, VisualizationView {
   component: ViewType
   settings: Settings
   defaultDisplayAttributes: Array<keyof SelectableDataType>
 }
 
-type ViewElementFunction = (props: ViewDataProps, settings: SettingsType) => JSX.Element
+type ViewElementFunction = (props: Brushable & VisualizationView, settings: SettingsType) => JSX.Element
 
 const options: Record<ViewType, ViewElementFunction> = {
   [ViewType.Glyphs]: (p, s) => <Glyphs {...p} {...(s as GlyphsSettings)} />,

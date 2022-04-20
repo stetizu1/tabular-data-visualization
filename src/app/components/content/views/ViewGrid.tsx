@@ -15,7 +15,7 @@ import { Settings } from './Settings'
 import { useViewGridStyle } from './useViewGridStyle'
 
 interface ViewGridDataProps extends Brushable {
-  dataset: SelectableDataType[] | null
+  dataset: ReadonlyArray<SelectableDataType> | null
 }
 
 interface ViewGridProps extends ViewGridDataProps {
