@@ -7,7 +7,6 @@ import {
   extent,
   scaleLinear,
   scaleOrdinal,
-  schemeCategory10,
   select,
   selectAll,
   ValueFn,
@@ -44,15 +43,18 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   height,
   dataset,
   setDataSelected,
-  circleSize = 4,
   displayAttributes,
   categoryAttribute,
   registerCleanBrushing,
   setComponentBrushing,
   isBrushingActive,
+  colorCategory,
+  circleSize = 4,
 }) => {
   const classes = useScatterPlotMatrixStyle()
   const component = useRef<SVGGElement>(null)
+  const color = scaleOrdinal(colorCategory)
+
   // noinspection JSSuspiciousNameCombination
   const size = width < height ? width : height
 
@@ -96,7 +98,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     ]
 
     const [xAxis, yAxis] = [axisBottom(x).ticks(6), axisLeft(y).ticks(6)]
-    const color = scaleOrdinal(schemeCategory10)
 
     xAxis.tickSize(rect.width * quantCount)
     yAxis.tickSize(-1 * rect.height * quantCount)
@@ -226,13 +227,14 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   }, [
     dataset,
     size,
-    circleSize,
     classes,
     setDataSelected,
     categoryAttribute,
     displayAttributes,
     setComponentBrushing,
     registerCleanBrushing,
+    circleSize,
+    color,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

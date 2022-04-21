@@ -1,16 +1,5 @@
 import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
-import {
-  axisLeft,
-  brushY,
-  D3BrushEvent,
-  line,
-  scaleLinear,
-  scaleOrdinal,
-  scalePoint,
-  schemeCategory10,
-  select,
-  selectAll,
-} from 'd3'
+import { axisLeft, brushY, D3BrushEvent, line, scaleLinear, scaleOrdinal, scalePoint, select, selectAll } from 'd3'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
@@ -59,9 +48,11 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   registerCleanBrushing,
   setComponentBrushing,
   isBrushingActive,
+  colorCategory,
 }) => {
   const classes = useParallelCoordinatesStyle()
   const component = useRef<SVGGElement>(null)
+  const color = scaleOrdinal(colorCategory)
   const upperPadding = TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
   const [innerWidth, innerHeight] = [
     width - margin.width - (TEXT_SPACING.LEFT + TEXT_SPACING.RIGHT),
@@ -122,8 +113,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         }
         cleanBrushingSelection(true) // nothing is selected
       })
-
-    const color = scaleOrdinal(schemeCategory10)
 
     const getAxisTransform = (attribute: keyof SelectableDataType) => getTranslate([xScale(String(attribute))!, 0])
     const addAxes = (
@@ -187,6 +176,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     setDataSelected,
     setComponentBrushing,
     registerCleanBrushing,
+    color,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

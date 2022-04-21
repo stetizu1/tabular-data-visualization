@@ -1,5 +1,5 @@
 import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
-import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, schemeCategory10, select, selectAll } from 'd3'
+import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Highlightable } from '../../../../types/brushing/Brushable'
@@ -31,10 +31,12 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   categoryAttribute,
   isBrushingActive,
   sortAttribute,
+  colorCategory,
   glyphSize = 40,
 }) => {
   const classes = useGlyphsStyle()
   const component = useRef<SVGGElement>(null)
+  const color = scaleOrdinal(colorCategory)
 
   const innerWidth = width - margin.width
   const glyphSizeWithSpacing = glyphSize + GLYPH_SPACING
@@ -68,7 +70,6 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     const radialScales = displayAttributes.map((attribute) =>
       scaleRadial([0, glyphRadius]).domain(extentInDomains[attribute]),
     )
-    const color = scaleOrdinal(schemeCategory10)
 
     // functions setting attributes
     const getCategoryColor = (data: SelectableDataType) =>
@@ -118,6 +119,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     displayAttributes,
     categoryAttribute,
     sortAttribute,
+    color,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,4 +1,5 @@
 import { FunctionComponent, useState } from 'react'
+import { schemeCategory10 } from 'd3'
 
 import { Brushable } from '../../../types/brushing/Brushable'
 import { SelectableDataType } from '../../../types/data/data'
@@ -40,11 +41,13 @@ export const ViewGrid: FunctionComponent<ViewGridProps> = ({ dataset, isDrawerOp
       setDefaultDisplayAttributes(getDefaultQuantitativeAttributesKeys(dataset))
       return null
     }
+    const defaultColors = schemeCategory10
     const allViewProps = {
       ...viewProps,
       settings,
       dataset,
       defaultDisplayAttributes,
+      defaultColors,
     }
     const views = [ViewType.ParallelCoordinates, ViewType.ScatterPlotMatrix, ViewType.Glyphs]
     return (

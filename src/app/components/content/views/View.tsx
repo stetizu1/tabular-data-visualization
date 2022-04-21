@@ -17,6 +17,7 @@ import { useViewStyle } from './useViewStyle'
 export interface ViewProps extends Brushable, VisualizationView {
   component: ViewType
   settings: Settings
+  defaultColors: ReadonlyArray<string>
   defaultDisplayAttributes: Array<keyof SelectableDataType>
 }
 
@@ -34,12 +35,15 @@ export const View: FunctionComponent<ViewProps> = ({
   component,
   settings,
   defaultDisplayAttributes,
+  defaultColors,
   ...dataProps
 }) => {
   const graph = options[component]
   const classes = useViewStyle({ width, height })
   const settingsCurr = settings[component] || {
     displayAttributes: defaultDisplayAttributes,
+    colorCategory: defaultColors,
+    categoryAttribute: undefined,
   }
   return <div className={classes.box}>{graph({ width, height, ...dataProps }, settingsCurr)}</div>
 }

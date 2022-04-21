@@ -1,4 +1,5 @@
 import { Dispatch, FunctionComponent, SetStateAction, useCallback, useEffect, useState } from 'react'
+import { schemeCategory10 } from 'd3'
 import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
 
 import { CheckedForSelectableDataType, SelectableDataType } from '../../../../types/data/data'
@@ -43,6 +44,7 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
           displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
           sortAttribute: defaultSortAttribute,
           categoryAttribute: defaultCategoryAttribute,
+          colorCategory: schemeCategory10,
         }
         return { ...prev, [ViewType.Glyphs]: newGlyphs }
       })
@@ -93,7 +95,19 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
     })
   }
 
-  const handleSelectCategoryChange = (categoryAttribute: keyof SelectableDataType) => {
+  const handleSelectCategoryChange = (categoryAttribute: keyof SelectableDataType | -1) => {
+    if (categoryAttribute === -1) {
+      setSettings((prev) => {
+        const glyphsSettings = prev[ViewType.Glyphs]!
+        return {
+          ...prev,
+          [ViewType.Glyphs]: {
+            ...glyphsSettings,
+            categoryAttribute: undefined,
+          },
+        }
+      })
+    }
     setSettings((prev) => {
       const glyphsSettings = prev[ViewType.Glyphs]!
       return {
@@ -118,7 +132,7 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
         ))}
         <TextField
           value={settings[ViewType.Glyphs]!.categoryAttribute}
-          onChange={(e) => handleSelectCategoryChange(e.target.value as keyof SelectableDataType)}
+          onChange={(e) => handleSelectCategoryChange(e.target.value)}
           select
           label={GLYPHS_MENU_TEXT.category}
         >
@@ -127,6 +141,7 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
               {otherCasesToWhitespaces(key)}
             </MenuItem>
           ))}
+          <MenuItem value={-1}>---</MenuItem>
         </TextField>
         <TextField
           value={settings[ViewType.Glyphs]!.sortAttribute}
