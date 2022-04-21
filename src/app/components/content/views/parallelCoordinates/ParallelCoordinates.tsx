@@ -117,11 +117,10 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       })
       .on(BrushAction.end, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
         selections[axisName] = brushEvent.selection as BrushSelection2d
-        if (displayAttributes.every((key) => selections[key] === null)) {
-          cleanBrushingSelection(true)
-          return
+        if (displayAttributes.some((key) => selections[key] !== null)) {
+          return setBrushingSelection()
         }
-        if (selections[axisName] === null) setBrushingSelection()
+        cleanBrushingSelection(true) // nothing is selected
       })
 
     const color = scaleOrdinal(schemeCategory10)
