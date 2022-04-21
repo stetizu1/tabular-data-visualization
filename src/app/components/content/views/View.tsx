@@ -14,7 +14,7 @@ import { ScatterPlotMatrix } from './scatterplot/ScatterPlotMatrix'
 import { Glyphs } from './glyphs/Glyphs'
 import { useViewStyle } from './useViewStyle'
 
-interface ViewProps extends Brushable, VisualizationView {
+export interface ViewProps extends Brushable, VisualizationView {
   component: ViewType
   settings: Settings
   defaultDisplayAttributes: Array<keyof SelectableDataType>

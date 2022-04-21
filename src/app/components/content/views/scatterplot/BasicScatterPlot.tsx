@@ -20,7 +20,7 @@ import { defaultMargin } from '../../../../constants/defaultMargin'
 import { isBrushed } from './brushing'
 import { useBasicScatterPlotStyle } from './useBasicScatterPlotStyle'
 
-interface BasicScatterPlotProps {
+export interface BasicScatterPlotProps {
   width: number
   height: number
   dataset: SelectableDataType[]

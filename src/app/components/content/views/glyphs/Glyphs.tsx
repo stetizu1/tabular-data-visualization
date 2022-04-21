@@ -17,7 +17,7 @@ import { useGlyphsStyle } from './useGlyphsStyle'
 
 const GLYPH_SPACING = 3
 
-interface GlyphsProps extends VisualizationView, Highlightable, GlyphsSettings {
+export interface GlyphsProps extends VisualizationView, Highlightable, GlyphsSettings {
   glyphSize?: number
 }
 

@@ -5,12 +5,13 @@ import { DataType, SelectableDataType } from '../../../../../types/data/data'
 import { useFileReaderStyle } from './useFileReaderStyle'
 
 export interface FileReaderDataProps {
-  setData: (data: SelectableDataType[] | null) => void
+  setData: (data: ReadonlyArray<SelectableDataType> | null) => void
 }
 
 export type FileReaderProps = FileReaderDataProps
 
-export const addSelected = (data: DataType[]): SelectableDataType[] => data.map((d) => ({ ...d, selected: false }))
+export const addSelected = (data: ReadonlyArray<DataType>): ReadonlyArray<SelectableDataType> =>
+  data.map((d) => ({ ...d, selected: false }))
 
 export const FileReader: FunctionComponent<FileReaderProps> = ({ setData }) => (
   <input
@@ -22,7 +23,7 @@ export const FileReader: FunctionComponent<FileReaderProps> = ({ setData }) => (
         if (selectedFile) {
           setData(null)
           const text = await selectedFile.text()
-          const data = JSON.parse(text) as DataType[]
+          const data = JSON.parse(text) as ReadonlyArray<DataType>
           setData(addSelected(data))
         }
       }

@@ -14,11 +14,11 @@ import { ViewType } from './ViewTypes'
 import { Settings } from './Settings'
 import { useViewGridStyle } from './useViewGridStyle'
 
-interface ViewGridDataProps extends Brushable {
+export interface ViewGridDataProps extends Brushable {
   dataset: ReadonlyArray<SelectableDataType> | null
 }
 
-interface ViewGridProps extends ViewGridDataProps {
+export interface ViewGridProps extends ViewGridDataProps {
   isDrawerOpen: boolean
   closeDrawer: SideEffectVoid
 }

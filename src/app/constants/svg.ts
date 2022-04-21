@@ -3,28 +3,28 @@
  * that can cause errors if only string type is used with it
  */
 interface SVGType {
-  readonly elements: {
-    readonly svg: `svg`
-    readonly g: `g`
-    readonly path: `path`
-    readonly text: `text`
+  elements: {
+    svg: `svg`
+    g: `g`
+    path: `path`
+    text: `text`
   }
-  readonly attributes: {
-    readonly class: `class`
-    readonly d: `d`
-    readonly transform: `transform`
-    readonly fill: `fill`
-    readonly stroke: `stroke`
-    readonly opacity: `opacity`
-    readonly y: `y`
+  attributes: {
+    class: `class`
+    d: `d`
+    transform: `transform`
+    fill: `fill`
+    stroke: `stroke`
+    opacity: `opacity`
+    y: `y`
   }
-  readonly style: {
-    readonly textAnchor: `text-anchor`
-    readonly fill: `fill`
-    readonly fontSize: `font-size`
+  style: {
+    textAnchor: `text-anchor`
+    fill: `fill`
+    fontSize: `font-size`
   }
-  readonly values: {
-    readonly none: `none`
+  values: {
+    none: `none`
   }
 }
 
