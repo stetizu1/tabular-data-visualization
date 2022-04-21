@@ -1,11 +1,18 @@
 import { SideEffectVoid } from '../basic/functionTypes'
+import { SelectableDataType } from '../data/data'
 
+/**
+ * Interface for views that can show brushed data
+ */
 export interface Highlightable {
+  /**
+   * True if some component is brushing
+   */
   readonly isBrushingActive: boolean
 }
 
 /**
- * Interface for views, that can be brushed
+ * Interface for views, that can use brushing inside
  */
 export interface Brushable extends Highlightable {
   /**
@@ -18,11 +25,12 @@ export interface Brushable extends Highlightable {
    */
   readonly setComponentBrushing: (newComponent: SVGGElement | null) => void
   /**
-   * Function for redrawing components, need to be called after every dataset selection change
+   * Function for setting selected data
    */
-  readonly redraw: () => void
+  readonly setDataSelected: (setFunction: (data: SelectableDataType) => boolean) => void
   /**
-   * Property used to redraw a component using `redraw` function (props change for React)
+   * Property used to redraw a component while setting new selected data (props change for React)
+   * It is not used inside of the component
    */
   readonly redrawTime: number
 }

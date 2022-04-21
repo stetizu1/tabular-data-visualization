@@ -38,5 +38,6 @@ module.exports = {
     '@typescript-eslint/no-empty-interface': 0,
     'import/order': 1,
     'no-console': 1,
+    'object-shorthand': 1,
   },
 }

@@ -55,7 +55,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   margin = defaultMargin,
   displayAttributes,
   categoryAttribute,
-  redraw,
+  setDataSelected,
   registerCleanBrushing,
   setComponentBrushing,
   isBrushingActive,
@@ -85,13 +85,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     )
 
     const selections = getDefaultSelectionForAttributes(displayAttributes)
-
-    const setDataSelected = (setFunction: (data: SelectableDataType) => boolean): void => {
-      dataset.forEach((data) => {
-        data.selected = setFunction(data)
-      })
-      redraw()
-    }
 
     const setBrushingSelection = () => {
       setDataSelected((data) =>
@@ -192,7 +185,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     classes,
     categoryAttribute,
     displayAttributes,
-    redraw,
+    setDataSelected,
     setComponentBrushing,
     registerCleanBrushing,
   ])

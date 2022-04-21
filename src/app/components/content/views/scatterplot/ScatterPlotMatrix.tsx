@@ -43,7 +43,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   width,
   height,
   dataset,
-  redraw,
+  setDataSelected,
   circleSize = 4,
   displayAttributes,
   categoryAttribute,
@@ -183,8 +183,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     registerCleanBrushing(() => {
       clearBrush()
       brushCell = { i: -1, j: -1 }
-      dataset.forEach((data) => (data.selected = false))
-      redraw()
+      setDataSelected((data) => (data.selected = false))
     })
 
     const startBrush = (_: D3BrushEvent<SelectableDataType>, { i, j, keyX, keyY }: MatrixItem<SelectableDataType>) => {
@@ -203,18 +202,13 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     ) => {
       if (selection) {
         const extent = selection as [[number, number], [number, number]]
-        selectAll(`.${classes.circle}`).each((dRaw) => {
-          const d = dRaw as SelectableDataType
-          d.selected = isBrushed(extent, x(Number(d[keyX])), y(Number(d[keyY])))
-        })
-        redraw()
+        setDataSelected((data) => isBrushed(extent, x(Number(data[keyX])), y(Number(data[keyY]))))
       }
     }
 
     const endBrush = ({ selection }: D3BrushEvent<SelectableDataType>) => {
       if (!selection) {
-        dataset.forEach((data) => (data.selected = false))
-        redraw()
+        setDataSelected((data) => (data.selected = false))
         setComponentBrushing(null)
       }
     }
@@ -234,7 +228,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     size,
     circleSize,
     classes,
-    redraw,
+    setDataSelected,
     categoryAttribute,
     displayAttributes,
     setComponentBrushing,

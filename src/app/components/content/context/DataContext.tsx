@@ -10,7 +10,7 @@ import { ViewGrid } from '../views/ViewGrid'
 
 export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<SelectableDataType[] | null>(null)
-  const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
+  const [componentBrushing, setCurrentComponentBrushing] = useState<null | SVGGElement>(null)
   const [cleanBrushing, setCleanBrushing] = useState<SideEffectVoid[]>([])
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [redrawTime, setRedrawTime] = useState(Date.now())
@@ -20,23 +20,28 @@ export const DataContext: FunctionComponent = () => {
 
   const setDatasetAndRemoveBrushing = (data: SelectableDataType[] | null) => {
     setDataset(data)
-    setComponentBrushing(null)
+    setCurrentComponentBrushing(null)
   }
 
-  const redraw = () => {
-    setRedrawTime(Date.now())
+  const setDataSelected = (setFunction: (data: SelectableDataType) => boolean): void => {
+    if (dataset) {
+      dataset.forEach((data) => {
+        data.selected = setFunction(data)
+      })
+      setRedrawTime(Date.now()) // redraw component
+    }
   }
 
   const cleanAllBrushes = () => cleanBrushingRef.current.forEach((f) => f())
 
   const clearBrushesOnButton = () => {
-    setComponentBrushing(null)
+    setCurrentComponentBrushing(null)
     cleanAllBrushes()
   }
 
-  const setComponentBrushingAndClean = (newComponent: SVGGElement | null): void => {
+  const setComponentBrushing = (newComponent: SVGGElement | null): void => {
     if (componentBrushingRef.current !== newComponent) cleanAllBrushes()
-    setComponentBrushing(newComponent)
+    setCurrentComponentBrushing(newComponent)
   }
 
   const registerCleanBrushing = (cleanBrushing: SideEffectVoid) => {
@@ -48,8 +53,8 @@ export const DataContext: FunctionComponent = () => {
   const viewProps = {
     dataset,
     registerCleanBrushing,
-    setComponentBrushing: setComponentBrushingAndClean,
-    redraw,
+    setComponentBrushing,
+    setDataSelected,
     redrawTime,
     isBrushingActive,
   }
