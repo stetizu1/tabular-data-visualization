@@ -21,20 +21,30 @@ import { ParallelCoordinatesSettings } from '../../../../types/views/parallelCoo
 
 import { toStringArray } from '../../../../helpers/basic/retype'
 import { inRange } from '../../../../helpers/basic/numerical'
-import { GET_EVERYTHING, getTranslate } from '../../../../helpers/d3/stringSetters'
-import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+import { GET_EVERYTHING, getAttributesFormatted, getTranslate } from '../../../../helpers/d3/stringSetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
 
 import { defaultMargin } from '../../../../constants/defaultMargin'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
+import { PLOT_FONT, PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 
+import { SVG } from '../../../../constants/svg'
 import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
 
 const BRUSH_WIDTH = 30
-const TEXT_SPACING_LEFT = 22
-const TEXT_SPACING_RIGHT = 5
+const BRUSH_RADIUS = BRUSH_WIDTH / 2
+const BRUSH_OVERLAP = 5
+const TEXT_SPACING = {
+  LEFT: 22,
+  RIGHT: 5,
+}
+const TEXT_Y_SHIFT = 10
+const OPACITY = 0.5
+
+const PARALLEL_COORDINATES = `PARALLEL_COORDINATES`
+const AXES = `AXES`
 
 export interface ParallelCoordinatesProps extends VisualizationView, Brushable, ParallelCoordinatesSettings {}
 
@@ -46,15 +56,16 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   displayAttributes,
   categoryAttribute,
   redraw,
-  setCleanBrushes,
+  registerCleanBrushing,
   setComponentBrushing,
   isBrushingActive,
 }) => {
   const classes = useParallelCoordinatesStyle()
   const component = useRef<SVGGElement>(null)
+  const upperPadding = TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
   const [innerWidth, innerHeight] = [
-    width - margin.width - (TEXT_SPACING_LEFT + TEXT_SPACING_RIGHT),
-    height - margin.height,
+    width - margin.width - (TEXT_SPACING.LEFT + TEXT_SPACING.RIGHT),
+    height - margin.height - upperPadding,
   ]
 
   // selected coloring
@@ -101,8 +112,8 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
 
     const brush = brushY<keyof SelectableDataType>()
       .extent([
-        [-(BRUSH_WIDTH / 2), -(margin.bottom / 2)],
-        [BRUSH_WIDTH / 2, innerHeight + margin.top / 2],
+        [-BRUSH_RADIUS, -BRUSH_OVERLAP],
+        [BRUSH_RADIUS, innerHeight + BRUSH_OVERLAP],
       ])
       .on(BrushAction.start, () => {
         setComponentBrushing(node)
@@ -112,64 +123,68 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         setBrushingSelection()
       })
       .on(BrushAction.end, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
-        const brushSelection = brushEvent.selection as BrushSelection2d
-        selections[axisName] = brushSelection
+        selections[axisName] = brushEvent.selection as BrushSelection2d
         if (displayAttributes.every((key) => selections[key] === null)) {
           cleanBrushingSelection(true)
           return
         }
-        if (brushSelection === null) setBrushingSelection()
+        if (selections[axisName] === null) setBrushingSelection()
       })
 
     const color = scaleOrdinal(schemeCategory10)
-    svg
-      .selectAll(`path`)
-      .data(dataset)
-      .enter()
-      .append(`path`)
-      .attr(`d`, (d) =>
-        line()(
-          displayAttributes.map((p) => [
-            Number(xScale(String(p))),
-            yScales[displayAttributes.indexOf(p)](Number(d[p])),
-          ]),
-        ),
-      )
-      .attr(`class`, classes.line)
-      .style(`fill`, `none`)
-      .style(`stroke`, (d) => (categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor))
-      .style(`opacity`, 0.5)
 
-    const axes = svg
-      .selectAll(`axes`)
+    const getAxisTransform = (attribute: keyof SelectableDataType) => getTranslate([xScale(String(attribute))!, 0])
+    const addAxes = (
+      attribute: keyof SelectableDataType,
+      idx: number,
+      elements: SVGGElement[] | ArrayLike<SVGGElement>,
+    ) => select(elements[idx]).call(axisLeft(yScales[idx]))
+
+    const getDataLinePath = (data: SelectableDataType) =>
+      line()(
+        displayAttributes.map((attribute, idx) => [xScale(String(attribute))!, yScales[idx](Number(data[attribute]))]),
+      )
+    const getDataLineColor = (data: SelectableDataType) =>
+      categoryAttribute ? color(String(data[categoryAttribute])) : PLOT_COLORS.noCategoryColor
+
+    // plot axes, add brush
+    const brushableAxes = svg
+      .selectAll(AXES)
       .data(displayAttributes)
       .enter()
-      .append(`g`)
-      .attr(`transform`, (d) => `translate(${xScale(String(d))}, 0)`)
-      .each((d, idx, elements) => select(elements[idx]).call(axisLeft(yScales[displayAttributes.indexOf(d)])))
+      .append(SVG.elements.g)
+      .attr(SVG.attributes.transform, getAxisTransform)
+      .each(addAxes)
       .call(brush)
 
-    const clearBrush = () => {
-      axes.each((d, idx, elements) => {
-        brushY().clear(select(elements[idx]))
+    // add text to axes
+    brushableAxes
+      .append(SVG.elements.text)
+      .attr(SVG.attributes.y, -TEXT_Y_SHIFT)
+      .text(getAttributesFormatted)
+      .style(SVG.style.textAnchor, PLOT_FONT.textAnchorMiddle)
+      .style(SVG.style.fill, PLOT_COLORS.fontColor)
+      .style(SVG.style.fontSize, PLOT_FONT.fontSize)
+
+    // plot data
+    svg
+      .selectAll(PARALLEL_COORDINATES)
+      .data(dataset)
+      .enter()
+      .append(SVG.elements.path)
+      .attr(SVG.attributes.d, getDataLinePath)
+      .attr(SVG.attributes.class, classes.line)
+      .style(SVG.attributes.fill, SVG.values.none)
+      .style(SVG.attributes.stroke, getDataLineColor)
+      .style(SVG.attributes.opacity, OPACITY)
+
+    registerCleanBrushing(() => {
+      brushableAxes.each((attribute, idx, elements) => {
+        const axis = select(elements[idx])
+        brushY().clear(axis)
       })
-    }
-
-    setCleanBrushes((prev) => [
-      ...prev,
-      () => {
-        clearBrush()
-        cleanBrushingSelection(false)
-      },
-    ])
-
-    axes
-      .append(`text`)
-      .style(`text-anchor`, `middle`)
-      .attr(`y`, -9)
-      .text((d) => otherCasesToWhitespaces(String(d)))
-      .style(`fill`, `black`)
-      .style(`font-size`, `1.2em`)
+      cleanBrushingSelection(false)
+    })
   }, [
     dataset,
     innerWidth,
@@ -178,9 +193,8 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     categoryAttribute,
     displayAttributes,
     redraw,
-    margin,
     setComponentBrushing,
-    setCleanBrushes,
+    registerCleanBrushing,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -192,7 +206,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         ref={component}
         width={innerWidth}
         height={innerHeight}
-        transform={getTranslate([margin.left + TEXT_SPACING_LEFT, margin.top])}
+        transform={getTranslate([margin.left + TEXT_SPACING.LEFT, margin.top + upperPadding])}
       />
     </svg>
   )

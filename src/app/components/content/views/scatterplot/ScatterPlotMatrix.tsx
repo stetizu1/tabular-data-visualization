@@ -47,7 +47,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   circleSize = 4,
   displayAttributes,
   categoryAttribute,
-  setCleanBrushes,
+  registerCleanBrushing,
   setComponentBrushing,
   isBrushingActive,
 }) => {
@@ -180,15 +180,12 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       })
     }
 
-    setCleanBrushes((prev) => [
-      ...prev,
-      () => {
-        clearBrush()
-        brushCell = { i: -1, j: -1 }
-        dataset.forEach((data) => (data.selected = false))
-        redraw()
-      },
-    ])
+    registerCleanBrushing(() => {
+      clearBrush()
+      brushCell = { i: -1, j: -1 }
+      dataset.forEach((data) => (data.selected = false))
+      redraw()
+    })
 
     const startBrush = (_: D3BrushEvent<SelectableDataType>, { i, j, keyX, keyY }: MatrixItem<SelectableDataType>) => {
       setComponentBrushing(node)
@@ -241,7 +238,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     categoryAttribute,
     displayAttributes,
     setComponentBrushing,
-    setCleanBrushes,
+    registerCleanBrushing,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

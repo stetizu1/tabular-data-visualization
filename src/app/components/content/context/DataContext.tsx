@@ -11,11 +11,11 @@ import { ViewGrid } from '../views/ViewGrid'
 export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<SelectableDataType[] | null>(null)
   const [componentBrushing, setComponentBrushing] = useState<null | SVGGElement>(null)
-  const [cleanBrushes, setCleanBrushes] = useState<SideEffectVoid[]>([])
+  const [cleanBrushing, setCleanBrushing] = useState<SideEffectVoid[]>([])
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [redrawTime, setRedrawTime] = useState(Date.now())
 
-  const cleanBrushesRef = useUpdatedRef(cleanBrushes)
+  const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
 
   const setDatasetAndRemoveBrushing = (data: SelectableDataType[] | null) => {
@@ -27,7 +27,8 @@ export const DataContext: FunctionComponent = () => {
     setRedrawTime(Date.now())
   }
 
-  const cleanAllBrushes = () => cleanBrushesRef.current.forEach((f) => f())
+  const cleanAllBrushes = () => cleanBrushingRef.current.forEach((f) => f())
+
   const clearBrushesOnButton = () => {
     setComponentBrushing(null)
     cleanAllBrushes()
@@ -38,10 +39,15 @@ export const DataContext: FunctionComponent = () => {
     setComponentBrushing(newComponent)
   }
 
+  const registerCleanBrushing = (cleanBrushing: SideEffectVoid) => {
+    setCleanBrushing((prev) => [...prev, cleanBrushing])
+  }
+
   const isBrushingActive = componentBrushingRef.current !== null
+
   const viewProps = {
     dataset,
-    setCleanBrushes,
+    registerCleanBrushing,
     setComponentBrushing: setComponentBrushingAndClean,
     redraw,
     redrawTime,

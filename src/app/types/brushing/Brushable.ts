@@ -1,9 +1,7 @@
-import { Dispatch, SetStateAction } from 'react'
-
 import { SideEffectVoid } from '../basic/functionTypes'
 
 export interface Highlightable {
-  isBrushingActive: boolean
+  readonly isBrushingActive: boolean
 }
 
 /**
@@ -11,9 +9,9 @@ export interface Highlightable {
  */
 export interface Brushable extends Highlightable {
   /**
-   * Setter for function array to clean view brushing todo: single
+   * Setter for passing the brushing cleaning function to the Data Context component
    */
-  readonly setCleanBrushes: Dispatch<SetStateAction<SideEffectVoid[]>>
+  readonly registerCleanBrushing: (clean: SideEffectVoid) => void
   /**
    * Set/unset a brushing component
    * @param newComponent SVG `g` element or null if brushing was canceled
