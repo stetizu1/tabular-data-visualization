@@ -8,6 +8,7 @@ import { SideEffectVoid } from '../../../types/basic/functionTypes'
 import { ViewType } from '../views/ViewTypes'
 import { Settings } from '../views/Settings'
 import { GlyphsMenu } from '../views/glyphs/GlyphsMenu'
+import { ParallelCoordinatesMenu } from '../views/parallelCoordinates/ParallelCoordinatesMenu'
 
 import { useDataDrawerStyle } from './useDataDrawerStyle'
 
@@ -18,6 +19,7 @@ export interface DataDrawerProps {
   views: ViewType[]
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>
+  cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
 }
 
 export const DataDrawer: FunctionComponent<DataDrawerProps> = ({
@@ -27,12 +29,23 @@ export const DataDrawer: FunctionComponent<DataDrawerProps> = ({
   views,
   settings,
   setSettings,
+  cleanSelectedIfViewWasBrushing,
 }) => {
   const classes = useDataDrawerStyle()
   const menus = views.map((view, idx) => {
     switch (view) {
       case ViewType.Glyphs:
         return <GlyphsMenu dataset={dataset} settings={settings} setSettings={setSettings} key={idx} />
+      case ViewType.ParallelCoordinates:
+        return (
+          <ParallelCoordinatesMenu
+            dataset={dataset}
+            settings={settings}
+            setSettings={setSettings}
+            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+            key={idx}
+          />
+        )
       default:
         return null
     }
@@ -41,7 +54,7 @@ export const DataDrawer: FunctionComponent<DataDrawerProps> = ({
     <Drawer variant="persistent" anchor="right" open={isOpen} className={classes.drawer}>
       <div className={classes.header}>
         <IconButton onClick={close}>
-          <ChevronRight />
+          <ChevronRight className={classes.chevron} />
         </IconButton>
       </div>
       <Divider />

@@ -20,6 +20,9 @@ import { PLOT_COLORS } from '../../../../styles/colors'
 import { PLOT_FONT, PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 
 import { SVG } from '../../../../constants/svg'
+
+import { ViewType } from '../ViewTypes'
+
 import { useParallelCoordinatesStyle } from './useParallelCoordinatesStyle'
 
 const BRUSH_WIDTH = 30
@@ -88,10 +91,10 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       )
     }
 
-    const cleanBrushingSelection = (componentBrushingEnded: boolean) => {
+    const cleanBrushingSelection = () => {
       displayAttributes.forEach((key) => (selections[key] = null))
       setDataSelected(() => false)
-      if (componentBrushingEnded) setComponentBrushing(null)
+      setComponentBrushing(null)
     }
 
     const brush = brushY<keyof SelectableDataType>()
@@ -100,7 +103,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         [BRUSH_RADIUS, innerHeight + BRUSH_OVERLAP],
       ])
       .on(BrushAction.start, () => {
-        setComponentBrushing(node)
+        setComponentBrushing(ViewType.ParallelCoordinates)
       })
       .on(BrushAction.move, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
         selections[axisName] = brushEvent.selection as BrushSelection2d
@@ -111,7 +114,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         if (displayAttributes.some((key) => selections[key] !== null)) {
           return setBrushingSelection()
         }
-        cleanBrushingSelection(true) // nothing is selected
+        cleanBrushingSelection() // nothing is selected
       })
 
     const getAxisTransform = (attribute: keyof SelectableDataType) => getTranslate([xScale(String(attribute))!, 0])
@@ -164,7 +167,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         const axis = select(elements[idx])
         brushY().clear(axis)
       })
-      cleanBrushingSelection(false)
+      displayAttributes.forEach((key) => (selections[key] = null))
     })
   }, [
     dataset,

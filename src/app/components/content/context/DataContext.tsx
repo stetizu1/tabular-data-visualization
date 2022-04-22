@@ -7,10 +7,12 @@ import { useUpdatedRef } from '../../../helpers/react/useUpdatedRef'
 
 import { TopToolbar } from '../topToolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
+import { SetComponentBrushing } from '../../../types/brushing/Brushable'
+import { ViewType } from '../views/ViewTypes'
 
 export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<ReadonlyArray<SelectableDataType> | null>(null)
-  const [componentBrushing, setCurrentComponentBrushing] = useState<null | SVGGElement>(null)
+  const [componentBrushing, setCurrentComponentBrushing] = useState<null | ViewType>(null)
   const [cleanBrushing, setCleanBrushing] = useState<SideEffectVoid[]>([])
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [redrawTime, setRedrawTime] = useState(Date.now())
@@ -32,20 +34,28 @@ export const DataContext: FunctionComponent = () => {
     }
   }
 
-  const cleanAllBrushes = () => cleanBrushingRef.current.forEach((f) => f())
+  const cleanAllBrushes = () => {
+    setDataSelected((data) => (data.selected = false))
+    cleanBrushingRef.current.forEach((f) => f())
+  }
 
   const clearBrushesOnButton = () => {
     setCurrentComponentBrushing(null)
     cleanAllBrushes()
   }
 
-  const setComponentBrushing = (newComponent: SVGGElement | null): void => {
+  const setComponentBrushing: SetComponentBrushing = (newComponent) => {
     if (componentBrushingRef.current !== newComponent) cleanAllBrushes()
     setCurrentComponentBrushing(newComponent)
   }
 
   const registerCleanBrushing = (cleanBrushing: SideEffectVoid) => {
     setCleanBrushing((prev) => [...prev, cleanBrushing])
+  }
+
+  const cleanSelectedIfViewWasBrushing = (component: ViewType) => {
+    if (componentBrushingRef.current === component) cleanAllBrushes()
+    setCurrentComponentBrushing(null)
   }
 
   const isBrushingActive = componentBrushingRef.current !== null
@@ -67,7 +77,12 @@ export const DataContext: FunctionComponent = () => {
         brushingActive={isBrushingActive}
         openDrawer={() => setDrawerOpen(true)}
       />
-      <ViewGrid isDrawerOpen={isDrawerOpen} closeDrawer={() => setDrawerOpen(false)} {...viewProps} />
+      <ViewGrid
+        isDrawerOpen={isDrawerOpen}
+        closeDrawer={() => setDrawerOpen(false)}
+        cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+        {...viewProps}
+      />
     </>
   )
 }

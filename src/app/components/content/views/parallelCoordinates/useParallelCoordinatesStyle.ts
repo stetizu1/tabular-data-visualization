@@ -12,6 +12,6 @@ export const useParallelCoordinatesStyle = makeStyles({
     stroke: `#830606 !important`,
   },
   hidden: {
-    strokeOpacity: 0.3,
+    strokeOpacity: 0.2,
   },
 })

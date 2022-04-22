@@ -1,5 +1,8 @@
 import { SideEffectVoid } from '../basic/functionTypes'
 import { SelectableDataType } from '../data/data'
+import { ViewType } from '../../components/content/views/ViewTypes'
+
+export type SetComponentBrushing = (newComponent: ViewType | null) => void
 
 /**
  * Interface for views that can show brushed data
@@ -23,7 +26,7 @@ export interface Brushable extends Highlightable {
    * Set/unset a brushing component
    * @param newComponent SVG `g` element or null if brushing was canceled
    */
-  setComponentBrushing: (newComponent: SVGGElement | null) => void
+  setComponentBrushing: SetComponentBrushing
   /**
    * Function for setting selected data
    */

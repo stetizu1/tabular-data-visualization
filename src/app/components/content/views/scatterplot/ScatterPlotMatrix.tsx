@@ -24,6 +24,8 @@ import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
 
+import { ViewType } from '../ViewTypes'
+
 import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 
@@ -184,11 +186,10 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     registerCleanBrushing(() => {
       clearBrush()
       brushCell = { i: -1, j: -1 }
-      setDataSelected((data) => (data.selected = false))
     })
 
     const startBrush = (_: D3BrushEvent<SelectableDataType>, { i, j, keyX, keyY }: MatrixItem<SelectableDataType>) => {
-      setComponentBrushing(node)
+      setComponentBrushing(ViewType.ScatterPlotMatrix)
       if (brushCell.i !== i || brushCell.j !== j) {
         clearBrush()
         brushCell = { i, j }

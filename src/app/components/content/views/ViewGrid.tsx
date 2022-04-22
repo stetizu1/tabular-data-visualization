@@ -22,9 +22,16 @@ export interface ViewGridDataProps extends Brushable {
 export interface ViewGridProps extends ViewGridDataProps {
   isDrawerOpen: boolean
   closeDrawer: SideEffectVoid
+  cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
 }
 
-export const ViewGrid: FunctionComponent<ViewGridProps> = ({ dataset, isDrawerOpen, closeDrawer, ...viewProps }) => {
+export const ViewGrid: FunctionComponent<ViewGridProps> = ({
+  dataset,
+  isDrawerOpen,
+  closeDrawer,
+  cleanSelectedIfViewWasBrushing,
+  ...viewProps
+}) => {
   const classes = useViewGridStyle()
   const [settings, setSettings] = useState<Settings>({})
   const [defaultDisplayAttributes, setDefaultDisplayAttributes] = useState<Array<keyof SelectableDataType> | null>(null)
@@ -59,6 +66,7 @@ export const ViewGrid: FunctionComponent<ViewGridProps> = ({ dataset, isDrawerOp
           views={views}
           settings={settings}
           setSettings={setSettings}
+          cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
         />
         <div className={classes.column}>
           <View width={960} height={400} component={ViewType.ParallelCoordinates} {...allViewProps} />
