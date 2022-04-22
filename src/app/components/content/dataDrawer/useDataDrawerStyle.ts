@@ -30,7 +30,7 @@ export const useDataDrawerStyle = makeStyles({
     display: `flex`,
     flexDirection: `column`,
     textAlign: `left`,
-    backgroundColor: `#e4ebfd`,
+    backgroundColor: `#edf1fd`,
     borderBottom: `1px solid #8e94a2`,
     '& h1': {
       borderBottom: `1px solid #8e94a2`,

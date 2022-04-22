@@ -9,6 +9,7 @@ import { TopToolbar } from '../topToolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
 import { SetComponentBrushing } from '../../../types/brushing/Brushable'
 import { ViewType } from '../views/ViewTypes'
+import { DataLoadState } from '../../../types/data/dataLoadState'
 
 export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<ReadonlyArray<SelectableDataType> | null>(null)
@@ -16,6 +17,7 @@ export const DataContext: FunctionComponent = () => {
   const [cleanBrushing, setCleanBrushing] = useState<SideEffectVoid[]>([])
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [redrawTime, setRedrawTime] = useState(Date.now())
+  const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
 
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
@@ -75,9 +77,12 @@ export const DataContext: FunctionComponent = () => {
         clearBrushes={clearBrushesOnButton}
         setData={setDatasetAndRemoveBrushing}
         brushingActive={isBrushingActive}
+        openDrawerDisabled={dataset === null}
         openDrawer={() => setDrawerOpen(true)}
+        setDataLoadState={setDataLoadState}
       />
       <ViewGrid
+        dataLoadState={dataLoadState}
         isDrawerOpen={isDrawerOpen}
         closeDrawer={() => setDrawerOpen(false)}
         cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}

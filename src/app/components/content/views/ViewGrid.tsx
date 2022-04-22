@@ -4,11 +4,13 @@ import { schemeCategory10 } from 'd3'
 import { Brushable } from '../../../types/brushing/Brushable'
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
+import { DataLoadState } from '../../../types/data/dataLoadState'
 
 import { getDefaultQuantitativeAttributesKeys } from '../../../helpers/data/data'
 
 import { DataDrawer } from '../dataDrawer/DataDrawer'
-import { EmptySite } from '../empty/EmptySite'
+import { EmptyData } from '../noData/EmptyData'
+import { Loading } from '../noData/Loading'
 
 import { View } from './View'
 import { ViewType } from './ViewTypes'
@@ -20,6 +22,7 @@ export interface ViewGridDataProps extends Brushable {
 }
 
 export interface ViewGridProps extends ViewGridDataProps {
+  dataLoadState: DataLoadState
   isDrawerOpen: boolean
   closeDrawer: SideEffectVoid
   cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
@@ -27,6 +30,7 @@ export interface ViewGridProps extends ViewGridDataProps {
 
 export const ViewGrid: FunctionComponent<ViewGridProps> = ({
   dataset,
+  dataLoadState,
   isDrawerOpen,
   closeDrawer,
   cleanSelectedIfViewWasBrushing,
@@ -36,18 +40,19 @@ export const ViewGrid: FunctionComponent<ViewGridProps> = ({
   const [settings, setSettings] = useState<Settings>({})
   const [defaultDisplayAttributes, setDefaultDisplayAttributes] = useState<Array<keyof SelectableDataType> | null>(null)
 
-  const getContent = () => {
-    if (!dataset) {
-      if (defaultDisplayAttributes) {
-        setSettings({})
-        setDefaultDisplayAttributes(null)
-      }
-      return <EmptySite />
-    }
-    if (!defaultDisplayAttributes) {
-      setDefaultDisplayAttributes(getDefaultQuantitativeAttributesKeys(dataset))
-      return null
-    }
+  // reset if dataset is removed
+  if (!dataset && defaultDisplayAttributes) {
+    setSettings({})
+    setDefaultDisplayAttributes(null)
+  }
+  if (dataset && !defaultDisplayAttributes) {
+    setDefaultDisplayAttributes(getDefaultQuantitativeAttributesKeys(dataset))
+  }
+
+  const getContent = (
+    dataset: ReadonlyArray<SelectableDataType>,
+    defaultDisplayAttributes: Array<keyof SelectableDataType>,
+  ) => {
     const defaultColors = schemeCategory10
     const allViewProps = {
       ...viewProps,
@@ -76,5 +81,11 @@ export const ViewGrid: FunctionComponent<ViewGridProps> = ({
       </>
     )
   }
-  return <>{getContent()}</>
+  if (dataLoadState === DataLoadState.NoData) {
+    return <EmptyData />
+  }
+  if (dataLoadState === DataLoadState.Loading || (dataset && !defaultDisplayAttributes)) {
+    return <Loading />
+  }
+  return getContent(dataset!, defaultDisplayAttributes!)
 }

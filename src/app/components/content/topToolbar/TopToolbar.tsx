@@ -10,13 +10,16 @@ import { useTopToolbar } from './useTopToolbar'
 
 export interface TopToolbarProps extends ClearBrushesButtonDataProps, FileReaderDataProps {
   openDrawer: SideEffectVoid
+  openDrawerDisabled: boolean
 }
 
 export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
   clearBrushes,
-  setData,
   brushingActive,
+  setData,
+  setDataLoadState,
   openDrawer,
+  openDrawerDisabled,
 }) => {
   const classes = useTopToolbar()
   return (
@@ -25,8 +28,8 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
         <ClearBrushesButton clearBrushes={clearBrushes} brushingActive={brushingActive} />
       </div>
       <div>
-        <FileReader setData={setData} />
-        <IconButton size="small" onClick={openDrawer}>
+        <FileReader setData={setData} setDataLoadState={setDataLoadState} />
+        <IconButton size="small" disabled={openDrawerDisabled} onClick={openDrawer}>
           <Menu />
         </IconButton>
       </div>

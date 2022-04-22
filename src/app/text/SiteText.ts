@@ -1,4 +1,4 @@
-export const EMPTY_SITE_TEXT = {
+export const EMPTY_DATA_TEXT = {
   content: `To allow visualization, first load a dataset from a JSON file...`,
 }
 
