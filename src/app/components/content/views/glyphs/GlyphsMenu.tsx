@@ -56,7 +56,7 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createGlyphsMenu(), []) // first time empty, call once
 
-  const getSettingsForAttributeChecker = (
+  const getNewSettingsForAttributeChecker = (
     newChecked: CheckedForSelectableDataType,
     prevSettings: GlyphsSettings,
   ): Partial<GlyphsSettings> => {
@@ -77,7 +77,7 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
             <AttributeChecker
               viewType={ViewType.Glyphs}
               attributesKeys={possibleQuantitativeAttributesKeys}
-              getNewSettings={getSettingsForAttributeChecker}
+              getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.attributes}
               checked={checked}

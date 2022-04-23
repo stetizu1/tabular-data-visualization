@@ -6,5 +6,6 @@ export const PARALLEL_COORDINATES_TEXT = {
 
 export const PARALLEL_COORDINATES_MENU_TEXT = {
   header: `Parallel Coordinates`,
+  unavailable: `The parallel coordinates plot cannot be used while data has less than 2 numerical attributes. Try to use different type of visualization that fits your data.`,
   ...MENU_TEXT,
 }

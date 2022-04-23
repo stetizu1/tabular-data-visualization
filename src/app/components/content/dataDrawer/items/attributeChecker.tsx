@@ -11,6 +11,7 @@ import { Settings, SettingsType } from '../../views/Settings'
 export interface AttributeCheckerProps<T extends SettingsType> {
   viewType: ViewType
   attributesKeys: Array<keyof SelectableDataType>
+  handleChangeSettings?: () => void
   getNewSettings: (newChecked: CheckedForSelectableDataType, prevSettings: T) => Partial<T>
   setSettings: Dispatch<SetStateAction<Settings>>
   label: string
@@ -21,16 +22,18 @@ export interface AttributeCheckerProps<T extends SettingsType> {
 
 export const AttributeChecker = <T extends SettingsType>({
   viewType,
-  checked,
-  setChecked,
   attributesKeys,
+  handleChangeSettings,
   getNewSettings,
   setSettings,
   label,
+  checked,
+  setChecked,
 }: AttributeCheckerProps<T>): JSX.Element => {
   const handleCheckboxChange = (eventChecked: boolean, key: keyof SelectableDataType) => {
     const newChecked = { ...checked, [key]: eventChecked }
     setChecked(newChecked)
+    if (handleChangeSettings) handleChangeSettings()
     setSettings((prev) => {
       const prevSettings = prev[viewType]! as T
       const newSettings = getNewSettings(newChecked, prevSettings)

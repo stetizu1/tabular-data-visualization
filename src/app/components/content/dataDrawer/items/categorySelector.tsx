@@ -5,6 +5,8 @@ import { SelectableDataType } from '../../../../types/data/data'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
+import { MENU_TEXT } from '../../../../text/viewsAndMenus/common'
+
 import { ViewType } from '../../views/ViewTypes'
 import { Settings } from '../../views/Settings'
 
@@ -23,27 +25,26 @@ export const CategorySelector: FunctionComponent<CategorySelectorProps> = ({
   setSettings,
   label,
 }) => {
-  const handleSelectCategoryChange = (newCategoryAttribute: keyof SelectableDataType | -1) => {
-    const categoryAttribute = newCategoryAttribute === -1 ? undefined : newCategoryAttribute
+  const handleSelectCategoryChange = (categoryAttribute: keyof SelectableDataType | -1) => {
     setSettings((prev) => {
       const prevSettings = prev[viewType]!
       return {
         ...prev,
         [viewType]: {
           ...prevSettings,
-          categoryAttribute,
+          categoryAttribute: categoryAttribute === -1 ? undefined : categoryAttribute,
         },
       }
     })
   }
   return (
-    <TextField value={value} onChange={(e) => handleSelectCategoryChange(e.target.value)} select label={label}>
+    <TextField value={value ?? -1} onChange={(e) => handleSelectCategoryChange(e.target.value)} select label={label}>
       {attributesKeys.map((key, idx) => (
         <MenuItem value={key} key={`category-${viewType}-${idx}`}>
           {otherCasesToWhitespaces(key)}
         </MenuItem>
       ))}
-      <MenuItem value={-1}>---</MenuItem>
+      <MenuItem value={-1}>{MENU_TEXT.empty}</MenuItem>
     </TextField>
   )
 }
