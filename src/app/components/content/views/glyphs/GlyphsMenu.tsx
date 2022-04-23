@@ -1,11 +1,9 @@
 import { Dispatch, FunctionComponent, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { schemeCategory10 } from 'd3'
-import { MenuItem, TextField } from '@mui/material'
 
 import { CheckedForSelectableDataType, SelectableDataType } from '../../../../types/data/data'
 import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 
-import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import {
   getCategoryAttributesKeys,
   getDefaultAttributesChecked,
@@ -19,7 +17,9 @@ import { GLYPHS_MENU_TEXT } from '../../../../text/viewsAndMenus/glyphs'
 import { ViewType } from '../ViewTypes'
 import { Settings } from '../Settings'
 import { useDataDrawerStyle } from '../../dataDrawer/useDataDrawerStyle'
-import { AttributeSelector } from '../../dataDrawer/items/attributeSelector'
+import { AttributeChecker } from '../../dataDrawer/items/attributeChecker'
+import { CategorySelector } from '../../dataDrawer/items/categorySelector'
+import { SortSelector } from '../../dataDrawer/items/sortSelector'
 
 export interface GlyphsMenuProps {
   dataset: ReadonlyArray<SelectableDataType>
@@ -56,7 +56,7 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createGlyphsMenu(), []) // first time empty, call once
 
-  const getSettingsForAttributeSelector = (
+  const getSettingsForAttributeChecker = (
     newChecked: CheckedForSelectableDataType,
     prevSettings: GlyphsSettings,
   ): Partial<GlyphsSettings> => {
@@ -68,84 +68,35 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
     return { displayAttributes, sortAttribute }
   }
 
-  const handleSelectSortChange = (sortAttribute: keyof SelectableDataType) => {
-    setSettings((prev) => {
-      const glyphsSettings = prev[ViewType.Glyphs]!
-      return {
-        ...prev,
-        [ViewType.Glyphs]: {
-          ...glyphsSettings,
-          sortAttribute,
-        },
-      }
-    })
-  }
-
-  const handleSelectCategoryChange = (categoryAttribute: keyof SelectableDataType | -1) => {
-    if (categoryAttribute === -1) {
-      setSettings((prev) => {
-        const glyphsSettings = prev[ViewType.Glyphs]!
-        return {
-          ...prev,
-          [ViewType.Glyphs]: {
-            ...glyphsSettings,
-            categoryAttribute: undefined,
-          },
-        }
-      })
-    }
-    setSettings((prev) => {
-      const glyphsSettings = prev[ViewType.Glyphs]!
-      return {
-        ...prev,
-        [ViewType.Glyphs]: {
-          ...glyphsSettings,
-          categoryAttribute,
-        },
-      }
-    })
-  }
-
   if (settings[ViewType.Glyphs]) {
     return (
       <div className={drawerItem}>
         <h1>{GLYPHS_MENU_TEXT.header}</h1>
         {possibleQuantitativeAttributesKeys.length >= MIN_GLYPHS_ATTRIBUTE_COUNT ? (
           <>
-            <AttributeSelector
+            <AttributeChecker
               viewType={ViewType.Glyphs}
               attributesKeys={possibleQuantitativeAttributesKeys}
-              getNewSettings={getSettingsForAttributeSelector}
+              getNewSettings={getSettingsForAttributeChecker}
               setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
             />
-            <TextField
-              value={settings[ViewType.Glyphs]!.categoryAttribute}
-              onChange={(e) => handleSelectCategoryChange(e.target.value)}
-              select
+            <CategorySelector
+              viewType={ViewType.Glyphs}
+              value={settings[ViewType.Glyphs]!.categoryAttribute!}
+              attributesKeys={categoricalAttributes}
+              setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.category}
-            >
-              {categoricalAttributes.map((key, idx) => (
-                <MenuItem value={key} key={`select-glyph-${idx}`}>
-                  {otherCasesToWhitespaces(key)}
-                </MenuItem>
-              ))}
-              <MenuItem value={-1}>---</MenuItem>
-            </TextField>
-            <TextField
-              value={settings[ViewType.Glyphs]!.sortAttribute}
-              onChange={(e) => handleSelectSortChange(e.target.value as keyof SelectableDataType)}
-              select
-              label={GLYPHS_MENU_TEXT.sorted}
-            >
-              {sortableAttributes.map((key, idx) => (
-                <MenuItem value={key} key={`select-glyph-${idx}`}>
-                  {otherCasesToWhitespaces(key)}
-                </MenuItem>
-              ))}
-            </TextField>
+            />
+            <SortSelector
+              viewType={ViewType.Glyphs}
+              value={settings[ViewType.Glyphs]!.sortAttribute!}
+              attributesKeys={sortableAttributes}
+              setSettings={setSettings}
+              label={GLYPHS_MENU_TEXT.sorting}
+            />
           </>
         ) : (
           <div className={insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</div>

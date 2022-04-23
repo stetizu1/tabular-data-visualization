@@ -6,7 +6,7 @@ export const GLYPHS_TEXT = {
 
 export const GLYPHS_MENU_TEXT = {
   header: `Glyphs`,
-  sorted: `Sorted by`,
+  sorting: `Sorted by`,
   unavailable: `The glyph plot cannot be used while data has less than 3 numerical attributes. Try to use different type of visualization that fits your data.`,
   ...MENU_TEXT,
 }

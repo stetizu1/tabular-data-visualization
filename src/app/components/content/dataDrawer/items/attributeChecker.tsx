@@ -4,10 +4,11 @@ import { Checkbox, FormControlLabel } from '@mui/material'
 import { CheckedForSelectableDataType, SelectableDataType } from '../../../../types/data/data'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+
 import { ViewType } from '../../views/ViewTypes'
 import { Settings, SettingsType } from '../../views/Settings'
 
-export interface AttributeSelectorProps<T extends SettingsType> {
+export interface AttributeCheckerProps<T extends SettingsType> {
   viewType: ViewType
   attributesKeys: Array<keyof SelectableDataType>
   getNewSettings: (newChecked: CheckedForSelectableDataType, prevSettings: T) => Partial<T>
@@ -18,7 +19,7 @@ export interface AttributeSelectorProps<T extends SettingsType> {
   setChecked: Dispatch<SetStateAction<CheckedForSelectableDataType>>
 }
 
-export const AttributeSelector = <T extends SettingsType>({
+export const AttributeChecker = <T extends SettingsType>({
   viewType,
   checked,
   setChecked,
@@ -26,7 +27,7 @@ export const AttributeSelector = <T extends SettingsType>({
   getNewSettings,
   setSettings,
   label,
-}: AttributeSelectorProps<T>): JSX.Element => {
+}: AttributeCheckerProps<T>): JSX.Element => {
   const handleCheckboxChange = (eventChecked: boolean, key: keyof SelectableDataType) => {
     const newChecked = { ...checked, [key]: eventChecked }
     setChecked(newChecked)
