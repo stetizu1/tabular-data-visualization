@@ -1,0 +1,1 @@
+export const MIN_GLYPHS_ATTRIBUTE_COUNT = 3

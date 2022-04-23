@@ -1,5 +1,8 @@
 type JsonValue = string | number | boolean | null
 
+export const isJsonValue = (value: unknown): value is JsonValue =>
+  typeof value === `number` || typeof value === `string` || typeof value === `boolean` || value === null
+
 export interface DataType {
   readonly [key: string]: JsonValue
 }

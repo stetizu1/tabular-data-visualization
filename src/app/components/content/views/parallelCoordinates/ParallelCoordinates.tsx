@@ -20,6 +20,9 @@ import { PLOT_COLORS } from '../../../../styles/colors'
 import { PLOT_FONT, PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 
 import { SVG } from '../../../../constants/svg'
+import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelCoordinates'
+
+import { PARALLEL_COORDINATES_TEXT } from '../../../../text/viewsAndMenus/parallelCoordinates'
 
 import { ViewType } from '../ViewTypes'
 
@@ -53,7 +56,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   isBrushingActive,
   colorCategory,
 }) => {
-  const classes = useParallelCoordinatesStyle()
+  const classes = useParallelCoordinatesStyle({ width, height, margin })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
   const upperPadding = TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
@@ -114,7 +117,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         if (displayAttributes.some((key) => selections[key] !== null)) {
           return setBrushingSelection()
         }
-        cleanBrushingSelection() // nothing is selected
+        return cleanBrushingSelection() // nothing is selected
       })
 
     const getAxisTransform = (attribute: keyof SelectableDataType) => getTranslate([xScale(String(attribute))!, 0])
@@ -185,14 +188,17 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createParallelCoordinates(), [displayAttributes, categoryAttribute])
 
-  return (
-    <svg width={width} height={height} className={classes.svg}>
-      <g
-        ref={component}
-        width={innerWidth}
-        height={innerHeight}
-        transform={getTranslate([margin.left + TEXT_SPACING.LEFT, margin.top + upperPadding])}
-      />
-    </svg>
-  )
+  if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {
+    return (
+      <svg width={width} height={height} className={classes.svg}>
+        <g
+          ref={component}
+          width={innerWidth}
+          height={innerHeight}
+          transform={getTranslate([margin.left + TEXT_SPACING.LEFT, margin.top + upperPadding])}
+        />
+      </svg>
+    )
+  }
+  return <div className={classes.notDisplayed}>{PARALLEL_COORDINATES_TEXT.unavailable}</div>
 }

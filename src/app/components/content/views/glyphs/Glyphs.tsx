@@ -8,9 +8,12 @@ import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 
 import { defaultMargin } from '../../../../constants/defaultMargin'
 import { SVG } from '../../../../constants/svg'
+import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
 import { GET_EVERYTHING, getClass, getTranslate } from '../../../../helpers/d3/stringSetters'
+
+import { GLYPHS_TEXT } from '../../../../text/viewsAndMenus/glyphs'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
 import { useGlyphsStyle } from './useGlyphsStyle'
@@ -26,6 +29,7 @@ const GLYPHS = `glyphs`
 export const Glyphs: FunctionComponent<GlyphsProps> = ({
   dataset,
   width,
+  height,
   margin = defaultMargin,
   displayAttributes,
   categoryAttribute,
@@ -34,7 +38,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   colorCategory,
   glyphSize = 40,
 }) => {
-  const classes = useGlyphsStyle()
+  const classes = useGlyphsStyle({ width, height, margin })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
@@ -125,9 +129,12 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createGlyphs(), [displayAttributes, categoryAttribute, sortAttribute])
 
-  return (
-    <svg width={width} height={innerHeight + margin.height} className={classes.svg}>
-      <g ref={component} />
-    </svg>
-  )
+  if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {
+    return (
+      <svg width={width} height={innerHeight + margin.height} className={classes.svg}>
+        <g ref={component} />
+      </svg>
+    )
+  }
+  return <div className={classes.notDisplayed}>{GLYPHS_TEXT.unavailable2}</div>
 }

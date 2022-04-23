@@ -11,7 +11,7 @@ import {
   getPossibleQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
-import { PARALLEL_COORDINATES_MENU_TEXT } from '../../../../text/SiteText'
+import { PARALLEL_COORDINATES_MENU_TEXT } from '../../../../text/viewsAndMenus/parallelCoordinates'
 
 import { ViewType } from '../ViewTypes'
 import { Settings } from '../Settings'

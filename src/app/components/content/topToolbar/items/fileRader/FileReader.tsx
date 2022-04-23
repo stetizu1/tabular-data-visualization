@@ -3,10 +3,14 @@ import { Dispatch, FunctionComponent, SetStateAction } from 'react'
 import { DataType, SelectableDataType } from '../../../../../types/data/data'
 import { DataLoadState } from '../../../../../types/data/dataLoadState'
 
+import { CsvParse, isArrayOfDataType } from '../../../../../helpers/data/dataConvertors'
+
+import { FILE_READER_ERROR_TEXT } from '../../../../../text/errorText'
+
 import { useFileReaderStyle } from './useFileReaderStyle'
 
 export interface FileReaderDataProps {
-  setData: (data: ReadonlyArray<SelectableDataType> | null) => void
+  setDataset: (dataset: ReadonlyArray<SelectableDataType> | null) => void
   setDataLoadState: Dispatch<SetStateAction<DataLoadState>>
 }
 
@@ -15,18 +19,47 @@ export type FileReaderProps = FileReaderDataProps
 export const addSelected = (data: ReadonlyArray<DataType>): ReadonlyArray<SelectableDataType> =>
   data.map((d) => ({ ...d, selected: false }))
 
-export const FileReader: FunctionComponent<FileReaderProps> = ({ setData, setDataLoadState }) => (
+enum AcceptableFileTypes {
+  json = `application/json`,
+  csv = `text/csv`,
+}
+
+export const FileReader: FunctionComponent<FileReaderProps> = ({ setDataset, setDataLoadState }) => (
   <input
     className={useFileReaderStyle().input}
     type="file"
     onChange={async (e) => {
       if (e.target.files?.length) {
-        const selectedFile = e.target.files[0]
         setDataLoadState(DataLoadState.Loading)
-        setData(null)
-        const text = await selectedFile.text()
-        const data = JSON.parse(text) as ReadonlyArray<DataType>
-        setData(addSelected(data))
+        setDataset(null)
+
+        const selectedFile = e.target.files[0]
+        const fileType = selectedFile.type
+        let data: DataType[] = []
+
+        switch (fileType) {
+          case AcceptableFileTypes.json: {
+            const text = await selectedFile.text()
+            data = JSON.parse(text)
+            break
+          }
+          case AcceptableFileTypes.csv: {
+            const textCsv = await selectedFile.text()
+            data = CsvParse(textCsv)
+            break
+          }
+          default: {
+            setDataLoadState(DataLoadState.NoData)
+            alert(FILE_READER_ERROR_TEXT.unsupportedFile)
+            return
+          }
+        }
+        if (!isArrayOfDataType(data)) {
+          setDataLoadState(DataLoadState.NoData)
+          alert(FILE_READER_ERROR_TEXT.unsupportedFileFormat)
+          return
+        }
+        setDataset(addSelected(data))
         setDataLoadState(DataLoadState.Loaded)
       }
     }}

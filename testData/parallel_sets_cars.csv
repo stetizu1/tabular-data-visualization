@@ -1,0 +1,393 @@
+economy;cylinders;power;weight;0-60 mph;year
+very good;8;strong;heavy;very good;old
+very good;8;strong;heavy;very good;very old
+good;8;average;average;good;very old
+good;5;week;average;bad;new
+good;5;average;average;average;new
+good;5;week;average;average;new
+average;3;week;light;bad;very new
+good;5;week;light;average;old
+good;5;week;light;good;very old
+good;5;week;light;average;average
+good;5;week;light;average;very old
+good;5;week;light;good;very old
+good;5;week;light;average;very old
+good;5;week;light;average;old
+good;5;week;light;average;old
+good;5;week;average;average;average
+very good;8;average;heavy;average;old
+very good;8;average;heavy;good;very old
+very good;8;average;average;good;old
+very good;5;week;heavy;bad;average
+very good;8;average;heavy;good;average
+very good;5;week;average;average;old
+good;5;week;average;average;very old
+good;5;week;average;average;average
+good;5;week;average;average;average
+very good;8;average;average;good;very old
+average;3;very week;light;average;new
+good;3;week;light;good;old
+good;3;week;light;average;average
+good;3;week;light;good;very old
+bad;3;very week;very light;average;very new
+good;4;week;light;average;new
+bad;4;very week;light;bad;very new
+average;3;week;very light;average;old
+average;3;week;very light;good;very old
+good;3;week;light;good;average
+very good;8;strong;heavy;good;old
+average;5;week;light;average;very new
+very good;8;average;very heavy;good;old
+good;5;week;average;average;new
+good;5;week;heavy;bad;average
+good;5;week;average;average;very new
+very good;8;very strong;very heavy;very good;old
+very good;8;very strong;average;very good;very old
+good;8;average;heavy;average;new
+very good;8;average;very heavy;good;very old
+average;3;very week;very light;average;average
+good;5;strong;average;good;new
+good;5;week;average;average;average
+very good;8;strong;average;good;very old
+average;3;week;light;average;new
+good;5;week;average;average;average
+average;3;week;light;average;very new
+good;8;average;heavy;average;new
+very good;8;strong;heavy;good;average
+very good;5;week;heavy;bad;average
+very good;8;average;very heavy;good;average
+average;3;week;light;average;very new
+very good;8;average;very heavy;good;old
+good;8;average;heavy;average;new
+good;8;average;heavy;good;average
+bad;3;week;light;average;very new
+average;3;week;light;bad;very new
+average;3;week;light;bad;very new
+very good;8;average;heavy;good;very old
+very good;5;week;heavy;average;old
+good;8;average;heavy;good;average
+good;5;week;average;average;very old
+good;8;average;average;good;very old
+average;3;very week;very light;very bad;average
+average;3;very week;very light;average;new
+average;3;very week;very light;average;average
+bad;3;very week;very light;average;very new
+good;5;week;light;good;very new
+average;3;week;light;average;very new
+average;5;week;light;very good;new
+good;5;week;average;average;average
+very good;8;average;very heavy;good;old
+very good;8;strong;heavy;good;very old
+very good;8;strong;heavy;good;very old
+very good;8;very strong;heavy;very good;very old
+good;8;average;average;average;new
+very good;8;average;heavy;good;old
+good;5;week;average;bad;new
+very good;8;strong;heavy;good;average
+good;8;average;average;good;new
+very good;8;average;heavy;good;old
+very good;8;average;heavy;very good;very old
+good;8;week;average;good;average
+very good;5;week;average;average;old
+very good;5;week;average;average;old
+good;5;week;average;average;average
+good;5;week;average;good;average
+good;3;very week;light;bad;very old
+average;3;week;very light;average;very old
+good;3;week;light;bad;very old
+good;3;very week;light;bad;old
+average;3;very week;light;average;old
+average;3;very week;very light;very bad;average
+very good;8;average;heavy;good;average
+very good;8;very strong;heavy;average;very old
+average;3;very week;light;bad;very new
+very good;8;strong;heavy;good;average
+average;3;week;light;good;very new
+good;5;week;average;average;very new
+good;8;average;heavy;good;new
+very good;8;very strong;very heavy;very good;old
+very good;8;strong;heavy;good;very old
+bad;3;very week;very light;average;very old
+good;3;week;light;average;new
+bad;3;week;light;average;very new
+bad;3;very week;very light;bad;new
+bad;3;very week;very light;bad;very new
+very bad;3;very week;very light;bad;very new
+bad;5;average;light;good;very new
+bad;3;very week;very light;average;very new
+bad;3;very week;very light;average;very new
+average;3;week;very light;average;very old
+bad;3;week;light;average;very new
+average;3;week;very light;good;new
+good;3;week;light;average;old
+good;3;week;light;average;average
+bad;3;very week;very light;bad;old
+average;5;average;light;good;very new
+good;5;week;light;good;average
+bad;3;very week;very light;average;average
+very bad;3;very week;very light;bad;new
+average;3;very week;very light;bad;old
+bad;3;very week;very light;average;average
+average;3;week;very light;good;very old
+average;3;week;very light;good;very old
+average;3;week;light;average;very new
+average;3;week;light;good;very new
+good;5;week;average;average;new
+good;5;week;average;average;average
+good;5;week;average;bad;new
+good;5;week;average;bad;very new
+very good;8;strong;average;very good;very old
+bad;3;week;light;good;very new
+average;3;very week;very light;average;very old
+average;3;very week;very light;average;very old
+bad;3;very week;very light;good;new
+bad;3;week;very light;average;average
+average;3;very week;very light;average;average
+average;3;week;light;good;very new
+average;3;very week;very light;good;old
+very good;8;average;heavy;good;average
+very good;8;average;very heavy;good;old
+very good;8;average;heavy;good;old
+very good;8;average;heavy;good;average
+very good;8;very strong;heavy;good;very old
+very good;8;average;average;very good;old
+good;8;average;heavy;good;new
+good;8;average;heavy;good;new
+very good;8;strong;very heavy;good;very old
+very good;8;average;heavy;good;average
+average;3;very week;very light;good;new
+bad;3;week;very light;good;very new
+good;8;average;heavy;average;new
+average;3;week;very light;average;old
+average;3;very week;very light;good;old
+average;3;very week;very light;good;very old
+good;3;very week;very light;average;old
+average;3;very week;very light;bad;old
+average;3;week;light;average;average
+bad;3;very week;very light;good;new
+average;3;very week;very light;average;old
+average;3;week;light;average;average
+very good;8;strong;very heavy;good;very old
+very good;8;average;heavy;good;new
+very good;8;strong;very heavy;good;old
+average;3;very week;light;bad;very new
+bad;3;very week;very light;average;very new
+very good;8;average;heavy;average;average
+very good;8;very strong;very heavy;good;very old
+good;5;week;light;average;new
+average;3;week;light;average;new
+good;3;week;light;average;new
+good;3;week;light;average;very new
+average;3;week;light;bad;very new
+bad;3;very week;very light;good;new
+good;8;average;average;very good;new
+very good;8;average;heavy;good;very old
+very good;8;average;heavy;good;very old
+very good;8;very strong;heavy;very good;very old
+very good;8;average;heavy;average;very old
+very good;8;average;very heavy;average;old
+very good;8;average;heavy;good;old
+very good;8;average;heavy;good;average
+very good;8;average;heavy;good;old
+good;5;very week;average;bad;average
+good;5;week;average;average;very new
+good;5;week;light;good;very new
+good;5;week;average;bad;average
+good;8;average;average;good;new
+very good;8;strong;heavy;good;old
+very good;8;average;very heavy;good;average
+very good;5;very week;average;bad;average
+good;5;week;light;average;old
+good;5;week;light;average;very old
+good;5;very week;light;average;average
+average;3;week;light;average;very new
+average;3;week;light;average;average
+very good;8;average;average;good;average
+good;5;week;average;good;very old
+good;3;week;light;average;very old
+good;3;week;very light;average;very old
+good;5;week;light;good;average
+good;3;week;very light;bad;old
+good;3;week;light;average;average
+average;3;very week;light;average;old
+average;3;very week;light;good;average
+average;3;very week;light;bad;very new
+very good;8;average;heavy;good;average
+good;5;week;average;average;very old
+good;8;average;average;very good;very old
+very good;8;strong;very heavy;bad;very old
+average;3;very week;very light;bad;average
+average;3;very week;very light;average;new
+bad;3;very week;very light;average;very new
+bad;3;very week;very light;good;very new
+bad;3;very week;very light;average;very new
+bad;3;very week;very light;average;very new
+very bad;3;very week;very light;good;very new
+bad;3;very week;very light;average;average
+bad;3;very week;very light;average;new
+good;3;week;light;average;old
+bad;3;very week;very light;average;average
+bad;3;very week;very light;average;very new
+bad;3;very week;very light;good;very new
+bad;3;very week;very light;average;new
+good;3;week;very light;good;old
+average;3;very week;light;average;very new
+bad;3;very week;light;bad;very new
+bad;3;very week;very light;average;very new
+bad;3;very week;very light;bad;very new
+average;3;very week;very light;average;very new
+bad;3;very week;very light;bad;new
+very bad;3;very week;very light;average;very new
+good;3;week;light;good;very old
+good;3;week;light;good;average
+good;3;week;light;good;very new
+average;3;very week;average;very bad;very new
+very good;5;average;heavy;average;average
+average;4;very week;average;bad;new
+good;3;week;very light;good;very old
+good;5;week;light;good;old
+very good;8;average;heavy;average;average
+very good;8;average;heavy;good;new
+bad;3;very week;very light;average;very new
+very good;8;very strong;very heavy;good;old
+very good;8;very strong;very heavy;very good;very old
+good;8;average;average;good;new
+very good;5;very week;average;bad;average
+good;5;week;light;bad;new
+good;5;week;average;average;new
+bad;3;week;very light;good;very new
+bad;5;week;light;average;very new
+average;8;week;average;bad;very new
+good;8;week;average;average;new
+good;8;week;average;very bad;new
+good;8;week;heavy;bad;average
+very good;8;strong;very heavy;good;very old
+average;5;week;light;good;new
+very good;8;strong;average;very good;old
+good;3;week;light;average;new
+very good;8;strong;very heavy;good;old
+average;3;very week;very light;average;average
+average;3;week;very light;good;very old
+good;3;very week;very light;average;old
+average;3;very week;very light;good;old
+average;3;very week;very light;bad;very old
+good;3;week;light;bad;very old
+good;3;week;average;very bad;average
+good;3;week;light;average;average
+average;3;week;light;average;very old
+average;3;very week;average;very bad;new
+average;3;very week;average;bad;very new
+very good;5;average;average;average;new
+average;3;week;very light;average;average
+very good;8;strong;average;very good;very old
+bad;3;very week;very light;average;very new
+average;3;very week;very light;bad;very old
+very good;8;strong;very heavy;good;old
+good;5;week;average;average;old
+good;5;week;light;average;very old
+good;5;week;light;average;old
+very good;8;average;heavy;good;old
+very good;8;average;heavy;good;very old
+very good;8;very strong;heavy;very good;very old
+very good;8;average;heavy;good;very old
+good;5;week;heavy;bad;average
+very good;8;average;very heavy;good;average
+bad;3;very week;very light;average;very new
+bad;3;very week;very light;good;very new
+bad;3;very week;very light;average;new
+bad;3;very week;very light;good;new
+average;3;week;light;average;very new
+average;3;week;light;good;very new
+good;3;week;light;average;new
+very good;8;average;heavy;good;very old
+very good;5;week;average;average;very old
+good;5;week;average;average;old
+good;8;average;average;very good;very old
+good;5;week;average;average;average
+good;5;week;average;average;old
+good;5;week;average;average;average
+good;5;week;average;average;average
+very good;8;average;heavy;good;average
+good;5;week;average;average;new
+good;3;very week;light;bad;average
+very good;8;strong;very heavy;good;very old
+very good;8;strong;heavy;good;very old
+very good;8;very strong;heavy;very good;very old
+very good;8;strong;very heavy;good;average
+good;5;week;average;average;very old
+very good;8;strong;heavy;very good;average
+very good;8;very strong;heavy;very good;old
+average;3;week;light;average;very new
+good;5;week;average;average;new
+good;5;week;average;bad;new
+average;3;week;light;average;very new
+bad;3;week;light;good;new
+very good;8;strong;very heavy;good;very old
+average;3;week;light;average;average
+good;5;week;average;average;average
+average;3;very week;very light;average;very old
+average;3;week;very light;average;average
+bad;3;very week;very light;bad;average
+average;3;week;light;average;very old
+good;3;week;light;average;new
+good;3;week;light;good;old
+average;3;week;light;good;average
+average;3;very week;very light;average;average
+bad;3;very week;very light;average;very new
+average;3;week;light;average;old
+bad;3;very week;very light;average;very new
+good;3;week;very light;bad;old
+good;3;week;light;average;new
+bad;3;week;light;good;very new
+average;3;very week;very light;bad;very old
+bad;3;very week;very light;bad;old
+average;3;week;very light;average;very old
+average;3;very week;very light;bad;average
+bad;3;very week;very light;bad;very new
+average;3;very week;very light;average;average
+average;3;very week;very light;average;average
+bad;3;very week;very light;average;very new
+bad;3;very week;light;average;very new
+bad;3;very week;very light;average;very new
+good;3;week;very light;average;very old
+average;3;week;light;average;very new
+good;3;week;light;average;very old
+good;3;week;light;good;average
+average;3;week;very light;good;very old
+average;3;week;light;good;new
+average;3;very week;very light;average;old
+average;5;week;light;good;very new
+good;5;week;light;average;average
+good;5;average;light;good;old
+very bad;3;very week;very light;average;very new
+bad;3;very week;very light;average;very new
+good;3;week;light;good;very old
+bad;3;week;light;average;very new
+average;3;very week;very light;average;very new
+average;3;very week;very light;bad;very old
+good;3;very week;light;average;very old
+very bad;3;very week;light;very bad;very new
+average;3;very week;very light;average;average
+average;3;very week;very light;average;old
+average;3;very week;very light;good;average
+bad;3;very week;very light;good;very new
+average;3;very week;very light;bad;very old
+very bad;3;very week;very light;very bad;very new
+very bad;3;very week;very light;very bad;very new
+very bad;3;very week;very light;very bad;new
+average;3;very week;very light;good;average
+bad;3;very week;very light;good;new
+bad;3;very week;very light;average;very new
+average;3;very week;very light;good;average
+average;3;very week;very light;good;average
+average;3;very week;very light;good;average
+very bad;3;very week;very light;good;very new
+average;3;very week;very light;average;new
+average;3;very week;very light;bad;old
+good;3;very week;very light;very bad;very old
+good;3;week;light;average;old
+good;3;week;light;good;very old
+good;3;week;light;good;average
+good;3;week;average;average;average
+good;5;average;average;good;new
+average;5;very week;average;bad;very new

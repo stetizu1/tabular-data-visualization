@@ -75,7 +75,7 @@ export const DataContext: FunctionComponent = () => {
     <>
       <TopToolbar
         clearBrushes={clearBrushesOnButton}
-        setData={setDatasetAndRemoveBrushing}
+        setDataset={setDatasetAndRemoveBrushing}
         brushingActive={isBrushingActive}
         openDrawerDisabled={dataset === null}
         openDrawer={() => setDrawerOpen(true)}

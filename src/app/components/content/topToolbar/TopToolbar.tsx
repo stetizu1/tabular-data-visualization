@@ -16,7 +16,7 @@ export interface TopToolbarProps extends ClearBrushesButtonDataProps, FileReader
 export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
   clearBrushes,
   brushingActive,
-  setData,
+  setDataset,
   setDataLoadState,
   openDrawer,
   openDrawerDisabled,
@@ -28,7 +28,7 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
         <ClearBrushesButton clearBrushes={clearBrushes} brushingActive={brushingActive} />
       </div>
       <div>
-        <FileReader setData={setData} setDataLoadState={setDataLoadState} />
+        <FileReader setDataset={setDataset} setDataLoadState={setDataLoadState} />
         <IconButton size="small" disabled={openDrawerDisabled} onClick={openDrawer}>
           <Menu />
         </IconButton>

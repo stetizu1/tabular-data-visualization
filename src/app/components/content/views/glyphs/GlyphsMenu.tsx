@@ -12,7 +12,7 @@ import {
   getPossibleQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
-import { GLYPHS_MENU_TEXT } from '../../../../text/SiteText'
+import { GLYPHS_MENU_TEXT } from '../../../../text/viewsAndMenus/glyphs'
 
 import { ViewType } from '../ViewTypes'
 import { Settings } from '../Settings'
