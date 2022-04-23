@@ -51,4 +51,9 @@ export const useDataDrawerStyle = makeStyles({
       marginTop: `10px`,
     },
   },
+  insufficientAttributeNum: {
+    padding: 10,
+    fontSize: 12,
+    color: `#700000`,
+  },
 })

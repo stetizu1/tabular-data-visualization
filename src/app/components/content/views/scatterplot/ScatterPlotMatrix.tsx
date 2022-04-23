@@ -21,6 +21,12 @@ import { Margin } from '../../../../types/styling/Margin'
 import { ScatterPlotMatrixSettings } from '../../../../types/views/scatterplot/ScatterPlotMatrixSettings'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+import { getClass } from '../../../../helpers/d3/stringSetters'
+
+import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
+import { defaultMargin } from '../../../../constants/defaultMargin'
+
+import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/viewsAndMenus/scatterPlotMatrix'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
 
@@ -30,7 +36,7 @@ import { isBrushed } from './brushing'
 import { useScatterPlotMatrixStyle } from './useScatterPlotMatrixStyle'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {
-  circleSize?: number
+  dataPointSize?: number
 }
 
 interface MatrixItem<T> {
@@ -51,16 +57,16 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   setComponentBrushing,
   isBrushingActive,
   colorCategory,
-  circleSize = 4,
+  dataPointSize = 4,
+  margin = defaultMargin,
 }) => {
-  const classes = useScatterPlotMatrixStyle()
+  const classes = useScatterPlotMatrixStyle({ width, height, margin })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
-  // noinspection JSSuspiciousNameCombination
   const size = width < height ? width : height
 
-  selectAll(`.${classes.circle}`)
+  selectAll(getClass(classes.dataPoint))
     .classed(classes.selected, (dRaw) => {
       const d = dRaw as SelectableDataType
       return d.selected
@@ -154,8 +160,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         .append(`circle`)
         .attr(`cx`, (d) => x(Number(d[p.keyX])))
         .attr(`cy`, (d) => y(Number(d[p.keyY])))
-        .attr(`r`, circleSize)
-        .attr(`class`, classes.circle)
+        .attr(`r`, dataPointSize)
+        .attr(`class`, classes.dataPoint)
         .style(`fill`, (d) => (categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor))
     }
 
@@ -234,16 +240,19 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     displayAttributes,
     setComponentBrushing,
     registerCleanBrushing,
-    circleSize,
+    dataPointSize,
     color,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createScatterPlotMatrix(), [displayAttributes, categoryAttribute])
 
-  return (
-    <svg width={size} height={size} className={classes.svg}>
-      <g ref={component} />
-    </svg>
-  )
+  if (displayAttributes.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT) {
+    return (
+      <svg width={size} height={size} className={classes.svg}>
+        <g ref={component} />
+      </svg>
+    )
+  }
+  return <div className={classes.notDisplayed}>{SCATTER_PLOT_MATRIX_TEXT.unavailable}</div>
 }

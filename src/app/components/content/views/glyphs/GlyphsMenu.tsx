@@ -1,6 +1,6 @@
 import { Dispatch, FunctionComponent, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { schemeCategory10 } from 'd3'
-import { Checkbox, FormControlLabel, MenuItem, TextField } from '@mui/material'
+import { MenuItem, TextField } from '@mui/material'
 
 import { CheckedForSelectableDataType, SelectableDataType } from '../../../../types/data/data'
 import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
@@ -12,11 +12,14 @@ import {
   getPossibleQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
+import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
+
 import { GLYPHS_MENU_TEXT } from '../../../../text/viewsAndMenus/glyphs'
 
 import { ViewType } from '../ViewTypes'
 import { Settings } from '../Settings'
 import { useDataDrawerStyle } from '../../dataDrawer/useDataDrawerStyle'
+import { AttributeSelector } from '../../dataDrawer/items/attributeSelector'
 
 export interface GlyphsMenuProps {
   dataset: ReadonlyArray<SelectableDataType>
@@ -25,7 +28,7 @@ export interface GlyphsMenuProps {
 }
 
 export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settings, setSettings }) => {
-  const { drawerItem } = useDataDrawerStyle()
+  const { drawerItem, insufficientAttributeNum } = useDataDrawerStyle()
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
@@ -38,50 +41,31 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
   const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
     possibleQuantitativeAttributesKeys.filter((key) => currChecked[key])
 
-  // first time empty
   const createGlyphsMenu = useCallback(() => {
-    if (!settings[ViewType.Glyphs]) {
-      setSettings((prev) => {
-        const newGlyphs: GlyphsSettings = {
-          displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
-          sortAttribute: defaultSortAttribute,
-          categoryAttribute: defaultCategoryAttribute,
-          colorCategory: schemeCategory10,
-        }
-        return { ...prev, [ViewType.Glyphs]: newGlyphs }
-      })
-    }
-  }, [
-    checked,
-    possibleQuantitativeAttributesKeys,
-    defaultSortAttribute,
-    defaultCategoryAttribute,
-    settings,
-    setSettings,
-  ])
+    setSettings((prev) => {
+      const newGlyphs: GlyphsSettings = {
+        displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
+        sortAttribute: defaultSortAttribute,
+        categoryAttribute: defaultCategoryAttribute,
+        colorCategory: schemeCategory10,
+      }
+      return { ...prev, [ViewType.Glyphs]: newGlyphs }
+    })
+  }, [checked, possibleQuantitativeAttributesKeys, defaultSortAttribute, defaultCategoryAttribute, setSettings])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createGlyphsMenu(), [])
+  useEffect(() => createGlyphsMenu(), []) // first time empty, call once
 
-  const handleCheckboxChange = (eventChecked: boolean, key: keyof SelectableDataType) => {
-    const newChecked = { ...checked, [key]: eventChecked }
-    setChecked(newChecked)
+  const getSettingsForAttributeSelector = (
+    newChecked: CheckedForSelectableDataType,
+    prevSettings: GlyphsSettings,
+  ): Partial<GlyphsSettings> => {
     const displayAttributes = getCurrentDisplayAttributes(newChecked)
-    setSettings((prev) => {
-      const glyphsSettings = prev[ViewType.Glyphs]!
-      const newSortableAttributes = possibleQuantitativeAttributesKeys.filter((key) => newChecked[key])
-      const sortAttribute = newChecked[glyphsSettings.sortAttribute]
-        ? glyphsSettings.sortAttribute
-        : newSortableAttributes?.[0]
-      return {
-        ...prev,
-        [ViewType.Glyphs]: {
-          ...glyphsSettings,
-          displayAttributes,
-          sortAttribute,
-        },
-      }
-    })
+    const newSortableAttributes = possibleQuantitativeAttributesKeys.filter((key) => newChecked[key])
+    const sortAttribute = newChecked[prevSettings.sortAttribute]
+      ? prevSettings.sortAttribute
+      : newSortableAttributes?.[0]
+    return { displayAttributes, sortAttribute }
   }
 
   const handleSelectSortChange = (sortAttribute: keyof SelectableDataType) => {
@@ -126,39 +110,46 @@ export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settin
     return (
       <div className={drawerItem}>
         <h1>{GLYPHS_MENU_TEXT.header}</h1>
-        <label>{GLYPHS_MENU_TEXT.attributes}</label>
-        {possibleQuantitativeAttributesKeys.map((key, idx) => (
-          <FormControlLabel
-            control={<Checkbox checked={checked[key]} onChange={(e) => handleCheckboxChange(e.target.checked, key)} />}
-            label={otherCasesToWhitespaces(key)}
-            key={`check-glyph-${idx}`}
-          />
-        ))}
-        <TextField
-          value={settings[ViewType.Glyphs]!.categoryAttribute}
-          onChange={(e) => handleSelectCategoryChange(e.target.value)}
-          select
-          label={GLYPHS_MENU_TEXT.category}
-        >
-          {categoricalAttributes.map((key, idx) => (
-            <MenuItem value={key} key={`select-glyph-${idx}`}>
-              {otherCasesToWhitespaces(key)}
-            </MenuItem>
-          ))}
-          <MenuItem value={-1}>---</MenuItem>
-        </TextField>
-        <TextField
-          value={settings[ViewType.Glyphs]!.sortAttribute}
-          onChange={(e) => handleSelectSortChange(e.target.value as keyof SelectableDataType)}
-          select
-          label={GLYPHS_MENU_TEXT.sorted}
-        >
-          {sortableAttributes.map((key, idx) => (
-            <MenuItem value={key} key={`select-glyph-${idx}`}>
-              {otherCasesToWhitespaces(key)}
-            </MenuItem>
-          ))}
-        </TextField>
+        {possibleQuantitativeAttributesKeys.length >= MIN_GLYPHS_ATTRIBUTE_COUNT ? (
+          <>
+            <AttributeSelector
+              viewType={ViewType.Glyphs}
+              attributesKeys={possibleQuantitativeAttributesKeys}
+              getNewSettings={getSettingsForAttributeSelector}
+              setSettings={setSettings}
+              label={GLYPHS_MENU_TEXT.attributes}
+              checked={checked}
+              setChecked={setChecked}
+            />
+            <TextField
+              value={settings[ViewType.Glyphs]!.categoryAttribute}
+              onChange={(e) => handleSelectCategoryChange(e.target.value)}
+              select
+              label={GLYPHS_MENU_TEXT.category}
+            >
+              {categoricalAttributes.map((key, idx) => (
+                <MenuItem value={key} key={`select-glyph-${idx}`}>
+                  {otherCasesToWhitespaces(key)}
+                </MenuItem>
+              ))}
+              <MenuItem value={-1}>---</MenuItem>
+            </TextField>
+            <TextField
+              value={settings[ViewType.Glyphs]!.sortAttribute}
+              onChange={(e) => handleSelectSortChange(e.target.value as keyof SelectableDataType)}
+              select
+              label={GLYPHS_MENU_TEXT.sorted}
+            >
+              {sortableAttributes.map((key, idx) => (
+                <MenuItem value={key} key={`select-glyph-${idx}`}>
+                  {otherCasesToWhitespaces(key)}
+                </MenuItem>
+              ))}
+            </TextField>
+          </>
+        ) : (
+          <div className={insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</div>
+        )}
       </div>
     )
   }

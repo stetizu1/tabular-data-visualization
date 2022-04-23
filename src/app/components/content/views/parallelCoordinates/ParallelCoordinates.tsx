@@ -10,7 +10,7 @@ import { ParallelCoordinatesSettings } from '../../../../types/views/parallelCoo
 
 import { toStringArray } from '../../../../helpers/basic/retype'
 import { inRange } from '../../../../helpers/basic/numerical'
-import { GET_EVERYTHING, getAttributesFormatted, getTranslate } from '../../../../helpers/d3/stringSetters'
+import { GET_EVERYTHING, getAttributesFormatted, getClass, getTranslate } from '../../../../helpers/d3/stringSetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
 
@@ -66,7 +66,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   ]
 
   // selected coloring
-  selectAll(`.${classes.line}`)
+  selectAll(getClass(classes.line))
     .classed(classes.selected, (d) => (d as SelectableDataType).selected)
     .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 

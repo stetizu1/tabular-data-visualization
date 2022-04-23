@@ -1,8 +1,17 @@
+import { Theme } from '@mui/material'
 import { makeStyles } from '@mui/styles'
+
+import { Margin } from '../../../../types/styling/Margin'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
 
-export const useScatterPlotMatrixStyle = makeStyles({
+export interface StyleProps {
+  width: number
+  height: number
+  margin: Margin
+}
+
+export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
   x: {},
   y: {},
   svg: {
@@ -36,7 +45,7 @@ export const useScatterPlotMatrixStyle = makeStyles({
       fill: `black`,
     },
   },
-  circle: {
+  dataPoint: {
     fillOpacity: 0.7,
     '&.hidden': {
       fill: `#ccc`,
@@ -48,4 +57,9 @@ export const useScatterPlotMatrixStyle = makeStyles({
   hidden: {
     fillOpacity: 0.15,
   },
-})
+  notDisplayed: {
+    width: ({ width, margin }) => width - margin.width,
+    height: ({ height, margin }) => height - margin.height,
+    padding: ({ margin }) => `${margin.top}px ${margin.right}px ${margin.bottom}px ${margin.left}px`,
+  },
+}))
