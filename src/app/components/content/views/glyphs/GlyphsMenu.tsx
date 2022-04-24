@@ -1,8 +1,9 @@
-import { Dispatch, FunctionComponent, SetStateAction, useCallback, useEffect, useState } from 'react'
+import { FunctionComponent, useCallback, useEffect, useState } from 'react'
 import { schemeCategory10 } from 'd3'
 
-import { CheckedForSelectableDataType, SelectableDataType } from '../../../../types/data/data'
+import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
+import { MenuProps } from '../../../../types/views/MenuProps'
 
 import {
   getCategoryAttributesKeys,
@@ -15,19 +16,12 @@ import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 import { GLYPHS_MENU_TEXT } from '../../../../text/viewsAndMenus/glyphs'
 
 import { ViewType } from '../ViewTypes'
-import { Settings } from '../Settings'
 import { useDataDrawerStyle } from '../../dataDrawer/useDataDrawerStyle'
 import { AttributeChecker } from '../../dataDrawer/items/attributeChecker'
 import { CategorySelector } from '../../dataDrawer/items/categorySelector'
 import { SortSelector } from '../../dataDrawer/items/sortSelector'
 
-export interface GlyphsMenuProps {
-  dataset: ReadonlyArray<SelectableDataType>
-  settings: Settings
-  setSettings: Dispatch<SetStateAction<Settings>>
-}
-
-export const GlyphsMenu: FunctionComponent<GlyphsMenuProps> = ({ dataset, settings, setSettings }) => {
+export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const { drawerItem, insufficientAttributeNum } = useDataDrawerStyle()
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))

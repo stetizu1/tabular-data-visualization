@@ -1,8 +1,9 @@
-import { Dispatch, FunctionComponent, SetStateAction, useCallback, useEffect, useState } from 'react'
+import { FunctionComponent, useCallback, useEffect, useState } from 'react'
 import { schemeCategory10 } from 'd3'
 
-import { CheckedForSelectableDataType, SelectableDataType } from '../../../../types/data/data'
+import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { ParallelCoordinatesSettings } from '../../../../types/views/parallelCoordinates/ParallelCoordinatesSettings'
+import { BrushableMenuProps } from '../../../../types/views/MenuProps'
 
 import {
   getCategoryAttributesKeys,
@@ -10,24 +11,18 @@ import {
   getPossibleQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
+import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelCoordinates'
+
 import { PARALLEL_COORDINATES_MENU_TEXT } from '../../../../text/viewsAndMenus/parallelCoordinates'
+
 import { AttributeChecker } from '../../dataDrawer/items/attributeChecker'
 import { CategorySelector } from '../../dataDrawer/items/categorySelector'
 
 import { ViewType } from '../ViewTypes'
-import { Settings } from '../Settings'
 
 import { useDataDrawerStyle } from '../../dataDrawer/useDataDrawerStyle'
-import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelCoordinates'
 
-export interface ParallelCoordinatesMenuProps {
-  dataset: ReadonlyArray<SelectableDataType>
-  settings: Settings
-  setSettings: Dispatch<SetStateAction<Settings>>
-  cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
-}
-
-export const ParallelCoordinatesMenu: FunctionComponent<ParallelCoordinatesMenuProps> = ({
+export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
   dataset,
   settings,
   setSettings,
