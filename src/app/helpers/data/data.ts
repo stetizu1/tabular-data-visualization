@@ -36,12 +36,10 @@ export const getDefaultAttributesChecked = (
 ): CheckedForSelectableDataType => {
   const defaultQuantitativeAttributesKeys = getDefaultQuantitativeAttributesKeys(dataset)
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
-  const empty: CheckedForSelectableDataType = {}
 
-  return possibleQuantitativeAttributesKeys.reduce((acc, key) => {
-    acc[key] = defaultQuantitativeAttributesKeys.some((kk) => kk === key)
-    return acc
-  }, empty)
+  return Object.fromEntries(
+    possibleQuantitativeAttributesKeys.map((key) => [key, defaultQuantitativeAttributesKeys.some((kk) => kk === key)]),
+  )
 }
 
 export const getDefaultSelectionForAttributes = (
