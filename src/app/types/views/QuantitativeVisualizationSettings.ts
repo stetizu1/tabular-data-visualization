@@ -1,5 +1,8 @@
 import { SelectableDataType } from '../data/data'
 
+/**
+ * General settings for quantitative visualization
+ */
 export interface QuantitativeVisualizationSettings {
   /**
    * Attributes that will be used to create visualization

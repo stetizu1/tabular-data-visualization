@@ -6,17 +6,17 @@ import { Highlightable } from '../../../../types/brushing/Brushable'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 
+import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
+import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+
 import { defaultMargin } from '../../../../constants/defaultMargin'
 import { SVG } from '../../../../constants/svg'
 import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 
-import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
-import { GET_EVERYTHING, getClass, getTranslate } from '../../../../helpers/d3/stringSetters'
-
-import { GLYPHS_TEXT } from '../../../../text/viewsAndMenus/glyphs'
+import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
-import { useGlyphsStyle } from './useGlyphsStyle'
+import { useGlyphsStyle } from '../../../../components-style/content/views/glyphs/useGlyphsStyle'
 
 const GLYPH_SPACING = 3
 
@@ -57,7 +57,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   const createGlyphs = useCallback(() => {
     const node = component.current!
     const svg = select(node)
-    svg.selectAll(GET_EVERYTHING).remove() // clear
+    svg.selectAll(getEverything()).remove() // clear
 
     const sortedDataset = sortAttribute
       ? [...dataset].sort((a, b) => Number(a[sortAttribute]) - Number(b[sortAttribute]))

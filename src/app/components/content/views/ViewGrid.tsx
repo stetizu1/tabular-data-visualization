@@ -4,18 +4,20 @@ import { schemeCategory10 } from 'd3'
 import { Brushable } from '../../../types/brushing/Brushable'
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
-import { DataLoadState } from '../../../types/data/dataLoadState'
+import { DataLoadState } from '../../../constants/data/dataLoadState'
 
 import { getDefaultQuantitativeAttributesKeys } from '../../../helpers/data/data'
 
-import { DataDrawer } from '../dataDrawer/DataDrawer'
-import { EmptyData } from '../noData/EmptyData'
-import { Loading } from '../noData/Loading'
+import { ViewType } from '../../../constants/views/ViewTypes'
+
+import { useViewGridStyle } from '../../../components-style/content/views/useViewGridStyle'
+
+import { DataDrawer } from '../data-drawer/DataDrawer'
+import { EmptyData } from '../no-data/EmptyData'
+import { Loading } from '../no-data/Loading'
 
 import { View } from './View'
-import { ViewType } from './ViewTypes'
 import { Settings } from './Settings'
-import { useViewGridStyle } from './useViewGridStyle'
 
 export interface ViewGridDataProps extends Brushable {
   dataset: ReadonlyArray<SelectableDataType> | null

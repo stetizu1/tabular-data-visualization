@@ -12,17 +12,19 @@ import {
 } from '../../../../helpers/data/data'
 
 import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
+import { ViewType } from '../../../../constants/views/ViewTypes'
 
-import { GLYPHS_MENU_TEXT } from '../../../../text/viewsAndMenus/glyphs'
+import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/glyphs'
 
-import { ViewType } from '../ViewTypes'
-import { useDataDrawerStyle } from '../../dataDrawer/useDataDrawerStyle'
-import { AttributeChecker } from '../../dataDrawer/items/attributeChecker'
-import { CategorySelector } from '../../dataDrawer/items/categorySelector'
-import { SortSelector } from '../../dataDrawer/items/sortSelector'
+import { useDataDrawerStyle } from '../../../../components-style/content/data-drawer/useDataDrawerStyle'
+
+import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
+import { CategorySelector } from '../../data-drawer/items/CategorySelector'
+import { SortSelector } from '../../data-drawer/items/SortSelector'
 
 export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const { drawerItem, insufficientAttributeNum } = useDataDrawerStyle()
+  const glyphSettings = settings[ViewType.Glyphs]
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
@@ -62,7 +64,7 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
     return { displayAttributes, sortAttribute }
   }
 
-  if (settings[ViewType.Glyphs]) {
+  if (glyphSettings) {
     return (
       <div className={drawerItem}>
         <h1>{GLYPHS_MENU_TEXT.header}</h1>
@@ -79,14 +81,14 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
             />
             <CategorySelector
               viewType={ViewType.Glyphs}
-              value={settings[ViewType.Glyphs]!.categoryAttribute!}
+              value={glyphSettings.categoryAttribute!}
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.category}
             />
             <SortSelector
               viewType={ViewType.Glyphs}
-              value={settings[ViewType.Glyphs]!.sortAttribute!}
+              value={glyphSettings.sortAttribute!}
               attributesKeys={sortableAttributes}
               setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.sorting}

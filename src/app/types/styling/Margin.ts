@@ -1,3 +1,7 @@
+/**
+ * Class for defining margin for the view.
+ * Important especially for the user to be able to reveal axis labels, but also for aesthetic reasons.
+ */
 export class Margin {
   readonly width: number
   readonly height: number

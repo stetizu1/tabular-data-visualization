@@ -1,6 +1,7 @@
+import { ViewType } from '../../constants/views/ViewTypes'
+
 import { SideEffectVoid } from '../basic/functionTypes'
 import { SelectableDataType } from '../data/data'
-import { ViewType } from '../../components/content/views/ViewTypes'
 
 export type SetComponentBrushing = (newComponent: ViewType | null) => void
 

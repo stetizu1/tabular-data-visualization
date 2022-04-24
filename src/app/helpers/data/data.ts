@@ -1,11 +1,11 @@
 import {
   CheckedForSelectableDataType,
-  RangeForSelectableDataType,
+  ExtentForSelectableDataType,
   SelectableDataType,
   SelectedKey,
 } from '../../types/data/data'
 
-const CATEGORY_LIMIT = 8
+import { CATEGORY_LIMIT } from '../../constants/data/data'
 
 const getDatasetSample = (dataset: ReadonlyArray<SelectableDataType>) => dataset[0]
 
@@ -46,4 +46,4 @@ export const getDefaultAttributesChecked = (
 
 export const getDefaultSelectionForAttributes = (
   displayAttributes: Array<keyof SelectableDataType>,
-): RangeForSelectableDataType => Object.fromEntries(displayAttributes.map((key) => [key, null]))
+): ExtentForSelectableDataType => Object.fromEntries(displayAttributes.map((key) => [key, null]))

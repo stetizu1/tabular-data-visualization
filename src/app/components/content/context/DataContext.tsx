@@ -2,14 +2,15 @@ import { FunctionComponent, useState } from 'react'
 
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
+import { SetComponentBrushing } from '../../../types/brushing/Brushable'
 
 import { useUpdatedRef } from '../../../helpers/react/useUpdatedRef'
 
-import { TopToolbar } from '../topToolbar/TopToolbar'
+import { DataLoadState } from '../../../constants/data/dataLoadState'
+import { ViewType } from '../../../constants/views/ViewTypes'
+
+import { TopToolbar } from '../top-toolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
-import { SetComponentBrushing } from '../../../types/brushing/Brushable'
-import { ViewType } from '../views/ViewTypes'
-import { DataLoadState } from '../../../types/data/dataLoadState'
 
 export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<ReadonlyArray<SelectableDataType> | null>(null)

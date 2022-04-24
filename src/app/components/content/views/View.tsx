@@ -3,16 +3,18 @@ import { FunctionComponent } from 'react'
 import { VisualizationView } from '../../../types/views/VisualizationView'
 import { SelectableDataType } from '../../../types/data/data'
 import { Brushable } from '../../../types/brushing/Brushable'
-import { ParallelCoordinatesSettings } from '../../../types/views/parallelCoordinates/ParallelCoordinatesSettings'
-import { ScatterPlotMatrixSettings } from '../../../types/views/scatterplot/ScatterPlotMatrixSettings'
+import { ParallelCoordinatesSettings } from '../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
+import { ScatterPlotMatrixSettings } from '../../../types/views/scatter-plot/ScatterPlotMatrixSettings'
 import { GlyphsSettings } from '../../../types/views/glyphs/GlyphsSettings'
 
-import { ViewType } from './ViewTypes'
+import { ViewType } from '../../../constants/views/ViewTypes'
+
+import { useViewStyle } from '../../../components-style/content/views/useViewStyle'
+
 import { Settings, SettingsType } from './Settings'
-import { ParallelCoordinates } from './parallelCoordinates/ParallelCoordinates'
-import { ScatterPlotMatrix } from './scatterplot/ScatterPlotMatrix'
+import { ParallelCoordinates } from './parallel-coordinates/ParallelCoordinates'
+import { ScatterPlotMatrix } from './scatter-plot/ScatterPlotMatrix'
 import { Glyphs } from './glyphs/Glyphs'
-import { useViewStyle } from './useViewStyle'
 
 export interface ViewProps extends Brushable, VisualizationView {
   component: ViewType

@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react'
 
 import { HEADER_TEXT } from '../../text/HeaderText'
 
-import { useHeaderStyle } from './useHeaderStyle'
+import { useHeaderStyle } from '../../components-style/header/useHeaderStyle'
 
 export const Header: FunctionComponent = () => {
   const style = useHeaderStyle()

@@ -1,8 +1,11 @@
 import { parse } from 'csv-string'
-import { DataType, isJsonValue } from '../../types/data/data'
+import { DataType, JsonValue } from '../../types/data/data'
+
+export const isJsonValue = (value: unknown): value is JsonValue =>
+  typeof value === `number` || typeof value === `string` || typeof value === `boolean` || value === null
 
 export const isArrayOfDataType = (dataset: unknown): dataset is ReadonlyArray<DataType> => {
-  if (Array.isArray(dataset) && dataset.length > 1) {
+  if (Array.isArray(dataset) && dataset.length > 0) {
     const example = dataset[0]
     const keys = Object.keys(example)
     return dataset.every(
