@@ -6,6 +6,8 @@ interface SVGType {
   elements: {
     svg: `svg`
     g: `g`
+    circle: `circle`
+    rect: `rect`
     path: `path`
     text: `text`
   }
@@ -16,7 +18,13 @@ interface SVGType {
     fill: `fill`
     stroke: `stroke`
     opacity: `opacity`
+    x: `x`
     y: `y`
+    width: `width`
+    height: `height`
+    cx: `cx`
+    cy: `cy`
+    r: `r`
   }
   style: {
     textAnchor: `text-anchor`
@@ -36,6 +44,8 @@ export const SVG: SVGType = {
   elements: {
     svg: `svg`,
     g: `g`,
+    circle: `circle`,
+    rect: `rect`,
     path: `path`,
     text: `text`,
   },
@@ -46,7 +56,13 @@ export const SVG: SVGType = {
     fill: `fill`,
     stroke: `stroke`,
     opacity: `opacity`,
+    x: `x`,
     y: `y`,
+    width: `width`,
+    height: `height`,
+    cx: `cx`,
+    cy: `cy`,
+    r: `r`,
   },
   style: {
     textAnchor: `text-anchor`,

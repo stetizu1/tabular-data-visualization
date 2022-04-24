@@ -21,11 +21,12 @@ import { Margin } from '../../../../types/styling/Margin'
 import { ScatterPlotMatrixSettings } from '../../../../types/views/scatter-plot/ScatterPlotMatrixSettings'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
-import { getClass } from '../../../../helpers/d3/stringGetters'
+import { getClass, getTranslate } from '../../../../helpers/d3/stringGetters'
 
-import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
-import { defaultMargin } from '../../../../constants/defaultMargin'
 import { ViewType } from '../../../../constants/views/ViewTypes'
+import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
+import { SVG } from '../../../../constants/svg'
+import { defaultMargin } from '../../../../constants/defaultMargin'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
@@ -39,12 +40,17 @@ export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, Sc
   dataPointSize?: number
 }
 
-interface MatrixItem<T> {
-  i: number
-  j: number
-  keyX: keyof T
-  keyY: keyof T
+interface MatrixItem {
+  col: number
+  row: number
+  keyCol: keyof SelectableDataType
+  keyRow: keyof SelectableDataType
 }
+
+export const DATA_POINT = `dataPoint`
+export const AXIS_X = `axisX`
+export const AXIS_Y = `axisY`
+export const CELL = `cell`
 
 export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   width,
@@ -82,8 +88,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     if (!node) {
       return
     }
-    const makeMatrix = (keys: (keyof SelectableDataType)[]): MatrixItem<SelectableDataType>[] =>
-      keys.map((keyX, i) => keys.map((keyY, j) => ({ i, j, keyX, keyY }))).flat()
+    const makeMatrix = (keys: (keyof SelectableDataType)[]): MatrixItem[] =>
+      keys.map((keyCol, col) => keys.map((keyRow, row) => ({ row, col, keyRow, keyCol }))).flat()
 
     const quantCount = displayAttributes.length
 
@@ -111,77 +117,79 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     yAxis.tickSize(-1 * rect.height * quantCount)
 
     const group = select(node)
-      .attr(`width`, rect.width * quantCount + margin.width)
-      .attr(`height`, rect.height * quantCount + margin.height)
-      .attr(`transform`, `translate(${margin.width}, ${margin.top})`)
+      .attr(SVG.attributes.width, rect.width * quantCount + margin.width)
+      .attr(SVG.attributes.height, rect.height * quantCount + margin.height)
+      .attr(SVG.attributes.transform, getTranslate([margin.width, margin.top]))
 
     group
-      .selectAll(`.${classes.x}.${classes.axis}`)
+      .selectAll(AXIS_X)
       .data(displayAttributes)
       .enter()
-      .append(`g`)
-      .attr(`class`, clsx(classes.x, classes.axis))
-      .attr(`transform`, (d, i) => `translate(${(quantCount - i - 1) * rect.width}, 0)`)
+      .append(SVG.elements.g)
+      .attr(SVG.attributes.class, clsx(classes.x, classes.axis))
+      .attr(SVG.attributes.transform, (d, i) => getTranslate([(quantCount - i - 1) * rect.width, 0]))
       .each((d, idx, elements) => {
         x.domain(domainByQuantAttributes[d])
         select(elements[idx]).call(xAxis)
       })
 
     group
-      .selectAll(`.${classes.y}.${classes.axis}`)
+      .selectAll(AXIS_Y)
       .data(displayAttributes)
       .enter()
-      .append(`g`)
-      .attr(`class`, clsx(classes.y, classes.axis))
-      .attr(`transform`, (d, i) => `translate(0,${i * rect.height})`)
+      .append(SVG.elements.g)
+      .attr(SVG.attributes.class, clsx(classes.y, classes.axis))
+      .attr(SVG.attributes.transform, (d, idx) => getTranslate([0, idx * rect.height]))
       .each((d, idx, elements) => {
         y.domain(domainByQuantAttributes[d])
         select(elements[idx]).call(yAxis)
       })
 
-    const plot: ValueFn<SVGGElement, MatrixItem<SelectableDataType>, void> = (p, idx, elements) => {
+    const plot: ValueFn<SVGGElement, MatrixItem, void> = (p, idx, elements) => {
       const cell = select(elements[idx])
 
-      x.domain(domainByQuantAttributes[p.keyX])
-      y.domain(domainByQuantAttributes[p.keyY])
+      x.domain(domainByQuantAttributes[p.keyRow])
+      y.domain(domainByQuantAttributes[p.keyCol])
 
       cell
-        .append(`rect`)
-        .attr(`class`, classes.frame)
-        .attr(`x`, margin.left)
-        .attr(`y`, margin.top)
-        .attr(`width`, rect.width - margin.width)
-        .attr(`height`, rect.height - margin.height)
+        .append(SVG.elements.rect)
+        .attr(SVG.attributes.class, classes.frame)
+        .attr(SVG.attributes.x, margin.left)
+        .attr(SVG.attributes.y, margin.top)
+        .attr(SVG.attributes.width, rect.width - margin.width)
+        .attr(SVG.attributes.height, rect.height - margin.height)
 
       cell
-        .selectAll(`circle`)
+        .selectAll(DATA_POINT)
         .data(dataset)
         .enter()
-        .append(`circle`)
-        .attr(`cx`, (d) => x(Number(d[p.keyX])))
-        .attr(`cy`, (d) => y(Number(d[p.keyY])))
-        .attr(`r`, dataPointSize)
-        .attr(`class`, classes.dataPoint)
-        .style(`fill`, (d) => (categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor))
+        .append(SVG.elements.circle)
+        .attr(SVG.attributes.cx, (d) => x(Number(d[p.keyRow])))
+        .attr(SVG.attributes.cy, (d) => y(Number(d[p.keyCol])))
+        .attr(SVG.attributes.r, dataPointSize)
+        .attr(SVG.attributes.class, classes.dataPoint)
+        .style(SVG.attributes.fill, (d) =>
+          categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor,
+        )
     }
 
     const cell = group
-      .selectAll(`.${classes.cell}`)
+      .selectAll(CELL)
       .data(makeMatrix(displayAttributes))
       .enter()
-      .append(`g`)
-      .attr(`class`, classes.cell)
-      .attr(`transform`, (d) => `translate(${(quantCount - d.i - 1) * rect.width}, ${d.j * rect.height})`)
+      .append(SVG.elements.g)
+      .attr(SVG.attributes.class, classes.cell)
+      .attr(SVG.attributes.transform, (d) => getTranslate([(quantCount - d.row - 1) * rect.width, d.col * rect.height]))
       .each(plot)
 
     cell
-      .filter((d) => d.i === d.j)
-      .append(`text`)
-      .attr(`x`, margin.width)
-      .attr(`y`, margin.height + margin.top)
-      .text((d) => otherCasesToWhitespaces(String(d.keyX)))
+      .filter((d) => d.row === d.col)
+      .append(SVG.elements.text)
+      .attr(SVG.attributes.x, margin.width)
+      .attr(SVG.attributes.y, margin.height + margin.top)
+      .text((d) => otherCasesToWhitespaces(String(d.keyRow)))
 
-    let brushCell = { i: -1, j: -1 }
+    let brushCell = { row: -1, col: -1 }
 
     const clearBrush = () => {
       cell.each((d, idx, elements) => {
@@ -191,26 +199,23 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
 
     registerCleanBrushing(() => {
       clearBrush()
-      brushCell = { i: -1, j: -1 }
+      brushCell = { row: -1, col: -1 }
     })
 
-    const startBrush = (_: D3BrushEvent<SelectableDataType>, { i, j, keyX, keyY }: MatrixItem<SelectableDataType>) => {
+    const startBrush = (_: D3BrushEvent<SelectableDataType>, { row, col, keyRow, keyCol }: MatrixItem) => {
       setComponentBrushing(ViewType.ScatterPlotMatrix)
-      if (brushCell.i !== i || brushCell.j !== j) {
+      if (brushCell.row !== row || brushCell.col !== col) {
         clearBrush()
-        brushCell = { i, j }
-        x.domain(domainByQuantAttributes[keyX])
-        y.domain(domainByQuantAttributes[keyY])
+        brushCell = { row, col }
+        x.domain(domainByQuantAttributes[keyRow])
+        y.domain(domainByQuantAttributes[keyCol])
       }
     }
 
-    const moveBrush = (
-      { selection }: D3BrushEvent<SelectableDataType>,
-      { keyX, keyY }: MatrixItem<SelectableDataType>,
-    ) => {
+    const moveBrush = ({ selection }: D3BrushEvent<SelectableDataType>, { keyRow, keyCol }: MatrixItem) => {
       if (selection) {
         const extent = selection as [[number, number], [number, number]]
-        setDataSelected((data) => isBrushed(extent, x(Number(data[keyX])), y(Number(data[keyY]))))
+        setDataSelected((data) => isBrushed(extent, x(Number(data[keyRow])), y(Number(data[keyCol]))))
       }
     }
 
@@ -221,7 +226,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       }
     }
 
-    const makeBrush = brush<MatrixItem<SelectableDataType>>()
+    const makeBrush = brush<MatrixItem>()
       .on(BrushAction.start, startBrush)
       .on(BrushAction.move, moveBrush)
       .on(BrushAction.end, endBrush)
