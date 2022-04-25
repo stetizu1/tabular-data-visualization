@@ -66,7 +66,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
-  const size = width < height ? width : height
+  const [innerWidth, innerHeight] = [width - margin.width, height - margin.height]
 
   selectAll(getClass(classes.dataPoint))
     .classed(classes.selected, (d) => (d as SelectableDataType).selected)
@@ -84,8 +84,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     const extentInDomains = getExtentInDomains(displayAttributes, dataset)
 
     const rect = {
-      width: size / attributesCount - SPACING_HORIZONTAL,
-      height: size / attributesCount - SPACING_VERTICAL,
+      width: innerWidth / attributesCount,
+      height: innerHeight / attributesCount,
     }
 
     const [x, y] = [
@@ -95,13 +95,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
 
     const [xAxis, yAxis] = [axisBottom(x).ticks(6), axisLeft(y).ticks(6)]
 
-    xAxis.tickSize(rect.width * attributesCount)
-    yAxis.tickSize(-1 * rect.height * attributesCount)
-
-    svg
-      .attr(SVG.attributes.width, rect.width * attributesCount + 2 * SPACING_HORIZONTAL)
-      .attr(SVG.attributes.height, rect.height * attributesCount + 2 * SPACING_VERTICAL)
-      .attr(SVG.attributes.transform, getTranslate([2 * SPACING_HORIZONTAL, SPACING_VERTICAL]))
+    xAxis.tickSize(rect.width * attributesCount + SPACING_VERTICAL)
+    yAxis.tickSize(-rect.height * attributesCount + SPACING_HORIZONTAL)
 
     svg
       .selectAll(AXIS_X)
@@ -222,7 +217,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     cell.call(makeBrush)
   }, [
     dataset,
-    size,
+    innerWidth,
+    innerHeight,
     classes,
     setDataSelected,
     categoryAttribute,
@@ -238,8 +234,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
 
   if (displayAttributes.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT) {
     return (
-      <svg width={size} height={size} className={classes.svg}>
-        <g ref={component} />
+      <svg width={width} height={height} className={classes.svg}>
+        <g ref={component} transform={getTranslate([margin.left, margin.top])} />
       </svg>
     )
   }
