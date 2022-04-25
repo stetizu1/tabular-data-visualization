@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { axisLeft, brushY, D3BrushEvent, line, scaleLinear, scaleOrdinal, scalePoint, select, selectAll } from 'd3'
 
 import { SelectableDataType } from '../../../../types/data/data'
@@ -6,6 +6,7 @@ import { Brushable } from '../../../../types/brushing/Brushable'
 import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { ParallelCoordinatesSettings } from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
+import { Margin } from '../../../../types/styling/Margin'
 
 import { toStringArray } from '../../../../helpers/basic/retype'
 import { inRange } from '../../../../helpers/basic/numerical'
@@ -15,9 +16,11 @@ import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
 
 import { BrushAction } from '../../../../constants/brushing/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
-import { defaultMargin } from '../../../../constants/defaultMargin'
 import { SVG } from '../../../../constants/svg'
-import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelCoordinates'
+import {
+  MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT,
+  PARALLEL_COORDINATES_DEFAULT_MARGIN,
+} from '../../../../constants/views/parallelCoordinates'
 
 import { PARALLEL_COORDINATES_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
 
@@ -44,7 +47,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   width,
   height,
   dataset,
-  margin = defaultMargin,
   displayAttributes,
   categoryAttribute,
   setDataSelected,
@@ -52,7 +54,9 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   setComponentBrushing,
   isBrushingActive,
   colorCategory,
+  margins = PARALLEL_COORDINATES_DEFAULT_MARGIN,
 }) => {
+  const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useParallelCoordinatesStyle({ width, height, margin })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)

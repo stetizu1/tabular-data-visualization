@@ -1,5 +1,4 @@
 import { SelectableDataType } from '../data/data'
-import { Margin } from '../styling/Margin'
 
 /**
  * Interface for every view window. It assigns dimensions (width, height) and a dataset to the view.
@@ -20,5 +19,5 @@ export interface VisualizationView {
   /**
    * View margin inside svg
    */
-  margin?: Margin
+  margins?: [number, number, number, number]
 }

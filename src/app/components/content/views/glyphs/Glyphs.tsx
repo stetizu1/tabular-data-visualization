@@ -1,17 +1,17 @@
-import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Highlightable } from '../../../../types/brushing/Brushable'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
+import { Margin } from '../../../../types/styling/Margin'
 
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
 import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
 
-import { defaultMargin } from '../../../../constants/defaultMargin'
 import { SVG } from '../../../../constants/svg'
-import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
+import { GLYPHS_DEFAULT_MARGIN, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
@@ -30,14 +30,15 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   dataset,
   width,
   height,
-  margin = defaultMargin,
   displayAttributes,
   categoryAttribute,
   isBrushingActive,
   sortAttribute,
   colorCategory,
   glyphSize = 40,
+  margins = GLYPHS_DEFAULT_MARGIN,
 }) => {
+  const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useGlyphsStyle({ width, height, margin })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)

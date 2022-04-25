@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import {
   axisBottom,
   axisLeft,
@@ -15,8 +15,6 @@ import {
 import { Margin } from '../../../../types/styling/Margin'
 import { SelectableDataType } from '../../../../types/data/data'
 
-import { defaultMargin } from '../../../../constants/defaultMargin'
-
 import { useBasicScatterPlotStyle } from '../../../../components-style/content/views/scatter-plot/useBasicScatterPlotStyle'
 
 import { isBrushed } from './brushing'
@@ -28,7 +26,7 @@ export interface BasicScatterPlotProps {
   getValueX: (data: SelectableDataType) => number
   getValueY: (data: SelectableDataType) => number
   getValueCat: (data: SelectableDataType) => string
-  margin?: Margin
+  margins: [number, number, number, number]
 }
 
 const addAxes = (
@@ -53,8 +51,9 @@ export const BasicScatterPlot: FunctionComponent<BasicScatterPlotProps> = ({
   getValueX,
   getValueY,
   getValueCat,
-  margin = defaultMargin,
+  margins,
 }) => {
+  const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useBasicScatterPlotStyle()
 
   const component = useRef<SVGGElement>(null)

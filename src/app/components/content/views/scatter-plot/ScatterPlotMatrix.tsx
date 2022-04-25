@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useRef } from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import {
   axisBottom,
   axisLeft,
@@ -16,17 +16,19 @@ import clsx from 'clsx'
 import { SelectableDataType } from '../../../../types/data/data'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { Brushable } from '../../../../types/brushing/Brushable'
-import { BrushAction } from '../../../../constants/brushing/BrushAction'
-import { Margin } from '../../../../types/styling/Margin'
 import { ScatterPlotMatrixSettings } from '../../../../types/views/scatter-plot/ScatterPlotMatrixSettings'
+import { Margin } from '../../../../types/styling/Margin'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import { getClass, getTranslate } from '../../../../helpers/d3/stringGetters'
 
+import { BrushAction } from '../../../../constants/brushing/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
-import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
 import { SVG } from '../../../../constants/svg'
-import { defaultMargin } from '../../../../constants/defaultMargin'
+import {
+  MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT,
+  SCATTER_PLOT_DEFAULT_MARGIN,
+} from '../../../../constants/views/scatterPlotMatrix'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
@@ -64,8 +66,9 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   isBrushingActive,
   colorCategory,
   dataPointSize = 4,
-  margin = defaultMargin,
+  margins = SCATTER_PLOT_DEFAULT_MARGIN,
 }) => {
+  const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useScatterPlotMatrixStyle({ width, height, margin })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
@@ -73,17 +76,10 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   const size = width < height ? width : height
 
   selectAll(getClass(classes.dataPoint))
-    .classed(classes.selected, (dRaw) => {
-      const d = dRaw as SelectableDataType
-      return d.selected
-    })
-    .classed(classes.hidden, (dRaw) => {
-      const d = dRaw as SelectableDataType
-      return isBrushingActive && !d.selected
-    })
+    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
+    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
   const createScatterPlotMatrix = useCallback(() => {
-    const margin = new Margin(14, 14, 14, 14)
     const node = component.current
     if (!node) {
       return
@@ -247,6 +243,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     registerCleanBrushing,
     dataPointSize,
     color,
+    margin,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
