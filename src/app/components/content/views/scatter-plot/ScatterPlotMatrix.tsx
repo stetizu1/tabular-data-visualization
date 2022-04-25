@@ -9,7 +9,7 @@ import { ScatterPlotMatrixSettings } from '../../../../types/views/scatter-plot/
 import { Margin } from '../../../../types/styling/Margin'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
-import { getClass, getTranslate } from '../../../../helpers/d3/stringGetters'
+import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
 
 import { BrushAction } from '../../../../constants/brushing/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
@@ -44,6 +44,8 @@ export const DATA_POINT = `dataPoint`
 export const AXIS_X = `axisX`
 export const AXIS_Y = `axisY`
 export const CELL = `cell`
+export const SPACING_HORIZONTAL = 14
+export const SPACING_VERTICAL = 14
 
 export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   width,
@@ -71,10 +73,10 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
   const createScatterPlotMatrix = useCallback(() => {
-    const node = component.current
-    if (!node) {
-      return
-    }
+    const node = component.current!
+    const svg = select(node)
+    svg.selectAll(getEverything()).remove() // clear
+
     const makeMatrix = (keys: (keyof SelectableDataType)[]): MatrixItem[] =>
       keys.map((keyCol, col) => keys.map((keyRow, row) => ({ row, col, keyRow, keyCol }))).flat()
 
@@ -82,13 +84,13 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     const extentInDomains = getExtentInDomains(displayAttributes, dataset)
 
     const rect = {
-      width: size / attributesCount - margin.left,
-      height: size / attributesCount - margin.top,
+      width: size / attributesCount - SPACING_HORIZONTAL,
+      height: size / attributesCount - SPACING_VERTICAL,
     }
 
     const [x, y] = [
-      scaleLinear([margin.left, rect.width - margin.left]),
-      scaleLinear([rect.height - margin.top, margin.top]),
+      scaleLinear([SPACING_HORIZONTAL, rect.width - SPACING_HORIZONTAL]),
+      scaleLinear([rect.height - SPACING_VERTICAL, SPACING_VERTICAL]),
     ]
 
     const [xAxis, yAxis] = [axisBottom(x).ticks(6), axisLeft(y).ticks(6)]
@@ -96,12 +98,12 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     xAxis.tickSize(rect.width * attributesCount)
     yAxis.tickSize(-1 * rect.height * attributesCount)
 
-    const group = select(node)
-      .attr(SVG.attributes.width, rect.width * attributesCount + margin.width)
-      .attr(SVG.attributes.height, rect.height * attributesCount + margin.height)
-      .attr(SVG.attributes.transform, getTranslate([margin.width, margin.top]))
+    svg
+      .attr(SVG.attributes.width, rect.width * attributesCount + 2 * SPACING_HORIZONTAL)
+      .attr(SVG.attributes.height, rect.height * attributesCount + 2 * SPACING_VERTICAL)
+      .attr(SVG.attributes.transform, getTranslate([2 * SPACING_HORIZONTAL, SPACING_VERTICAL]))
 
-    group
+    svg
       .selectAll(AXIS_X)
       .data(displayAttributes)
       .enter()
@@ -113,7 +115,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         select(elements[idx]).call(xAxis)
       })
 
-    group
+    svg
       .selectAll(AXIS_Y)
       .data(displayAttributes)
       .enter()
@@ -134,10 +136,10 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       cell
         .append(SVG.elements.rect)
         .attr(SVG.attributes.class, classes.frame)
-        .attr(SVG.attributes.x, margin.left)
-        .attr(SVG.attributes.y, margin.top)
-        .attr(SVG.attributes.width, rect.width - margin.width)
-        .attr(SVG.attributes.height, rect.height - margin.height)
+        .attr(SVG.attributes.x, SPACING_HORIZONTAL)
+        .attr(SVG.attributes.y, SPACING_VERTICAL)
+        .attr(SVG.attributes.width, rect.width - 2 * SPACING_HORIZONTAL)
+        .attr(SVG.attributes.height, rect.height - 2 * SPACING_VERTICAL)
 
       cell
         .selectAll(DATA_POINT)
@@ -153,7 +155,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         )
     }
 
-    const cell = group
+    const cell = svg
       .selectAll(CELL)
       .data(makeMatrix(displayAttributes))
       .enter()
@@ -167,8 +169,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     cell
       .filter((d) => d.row === d.col)
       .append(SVG.elements.text)
-      .attr(SVG.attributes.x, margin.width)
-      .attr(SVG.attributes.y, margin.height + margin.top)
+      .attr(SVG.attributes.x, 2 * SPACING_HORIZONTAL)
+      .attr(SVG.attributes.y, 3 * SPACING_VERTICAL)
       .text((d) => otherCasesToWhitespaces(String(d.keyRow)))
 
     let brushCell = { row: -1, col: -1 }
@@ -229,7 +231,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     registerCleanBrushing,
     dataPointSize,
     color,
-    margin,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
