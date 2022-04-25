@@ -1,16 +1,5 @@
 import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
-import {
-  axisBottom,
-  axisLeft,
-  brush,
-  D3BrushEvent,
-  extent,
-  scaleLinear,
-  scaleOrdinal,
-  select,
-  selectAll,
-  ValueFn,
-} from 'd3'
+import { axisBottom, axisLeft, brush, D3BrushEvent, scaleLinear, scaleOrdinal, select, selectAll, ValueFn } from 'd3'
 import clsx from 'clsx'
 
 import { SelectableDataType } from '../../../../types/data/data'
@@ -29,6 +18,8 @@ import {
   MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT,
   SCATTER_PLOT_DEFAULT_MARGIN,
 } from '../../../../constants/views/scatterPlotMatrix'
+
+import { getExtentInDomains } from '../../../../helpers/d3/extent'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
@@ -87,19 +78,12 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     const makeMatrix = (keys: (keyof SelectableDataType)[]): MatrixItem[] =>
       keys.map((keyCol, col) => keys.map((keyRow, row) => ({ row, col, keyRow, keyCol }))).flat()
 
-    const quantCount = displayAttributes.length
-
-    const domainByQuantAttributesUnchecked = Object.fromEntries(
-      displayAttributes.map((key) => [key, extent(dataset, (d) => Number(d[key]))]),
-    )
-    if (Object.values(domainByQuantAttributesUnchecked).some((domain) => domain[0] === undefined)) return
-    const domainByQuantAttributes = domainByQuantAttributesUnchecked as {
-      [key in keyof SelectableDataType]: [number, number]
-    }
+    const attributesCount = displayAttributes.length
+    const extentInDomains = getExtentInDomains(displayAttributes, dataset)
 
     const rect = {
-      width: size / quantCount - margin.left,
-      height: size / quantCount - margin.top,
+      width: size / attributesCount - margin.left,
+      height: size / attributesCount - margin.top,
     }
 
     const [x, y] = [
@@ -109,12 +93,12 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
 
     const [xAxis, yAxis] = [axisBottom(x).ticks(6), axisLeft(y).ticks(6)]
 
-    xAxis.tickSize(rect.width * quantCount)
-    yAxis.tickSize(-1 * rect.height * quantCount)
+    xAxis.tickSize(rect.width * attributesCount)
+    yAxis.tickSize(-1 * rect.height * attributesCount)
 
     const group = select(node)
-      .attr(SVG.attributes.width, rect.width * quantCount + margin.width)
-      .attr(SVG.attributes.height, rect.height * quantCount + margin.height)
+      .attr(SVG.attributes.width, rect.width * attributesCount + margin.width)
+      .attr(SVG.attributes.height, rect.height * attributesCount + margin.height)
       .attr(SVG.attributes.transform, getTranslate([margin.width, margin.top]))
 
     group
@@ -123,9 +107,9 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .enter()
       .append(SVG.elements.g)
       .attr(SVG.attributes.class, clsx(classes.x, classes.axis))
-      .attr(SVG.attributes.transform, (d, i) => getTranslate([(quantCount - i - 1) * rect.width, 0]))
+      .attr(SVG.attributes.transform, (d, i) => getTranslate([(attributesCount - i - 1) * rect.width, 0]))
       .each((d, idx, elements) => {
-        x.domain(domainByQuantAttributes[d])
+        x.domain(extentInDomains[d])
         select(elements[idx]).call(xAxis)
       })
 
@@ -137,15 +121,15 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .attr(SVG.attributes.class, clsx(classes.y, classes.axis))
       .attr(SVG.attributes.transform, (d, idx) => getTranslate([0, idx * rect.height]))
       .each((d, idx, elements) => {
-        y.domain(domainByQuantAttributes[d])
+        y.domain(extentInDomains[d])
         select(elements[idx]).call(yAxis)
       })
 
     const plot: ValueFn<SVGGElement, MatrixItem, void> = (p, idx, elements) => {
       const cell = select(elements[idx])
 
-      x.domain(domainByQuantAttributes[p.keyRow])
-      y.domain(domainByQuantAttributes[p.keyCol])
+      x.domain(extentInDomains[p.keyRow])
+      y.domain(extentInDomains[p.keyCol])
 
       cell
         .append(SVG.elements.rect)
@@ -175,7 +159,9 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .enter()
       .append(SVG.elements.g)
       .attr(SVG.attributes.class, classes.cell)
-      .attr(SVG.attributes.transform, (d) => getTranslate([(quantCount - d.row - 1) * rect.width, d.col * rect.height]))
+      .attr(SVG.attributes.transform, (d) =>
+        getTranslate([(attributesCount - d.row - 1) * rect.width, d.col * rect.height]),
+      )
       .each(plot)
 
     cell
@@ -203,8 +189,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       if (brushCell.row !== row || brushCell.col !== col) {
         clearBrush()
         brushCell = { row, col }
-        x.domain(domainByQuantAttributes[keyRow])
-        y.domain(domainByQuantAttributes[keyCol])
+        x.domain(extentInDomains[keyRow])
+        y.domain(extentInDomains[keyCol])
       }
     }
 

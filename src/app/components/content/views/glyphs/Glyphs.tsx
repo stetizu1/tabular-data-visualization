@@ -82,8 +82,8 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     const getTransform = (data: SelectableDataType) => {
       const idx = sortedDataset.indexOf(data)
       const translate: [number, number] = [
-        xScale(idx % glyphsCountPerLine) + glyphRadius + margin.left,
-        yScale(glyphsCountPerHeight - Math.floor(idx / glyphsCountPerLine)) + glyphRadius + margin.top,
+        xScale(idx % glyphsCountPerLine) + glyphRadius,
+        yScale(glyphsCountPerHeight - Math.floor(idx / glyphsCountPerLine)) + glyphRadius,
       ]
       return getTranslate(translate)
     }
@@ -117,7 +117,6 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     classes,
     innerWidth,
     innerHeight,
-    margin,
     glyphsCountPerLine,
     glyphsCountPerHeight,
     glyphRadius,
@@ -133,7 +132,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {
     return (
       <svg width={width} height={innerHeight + margin.height} className={classes.svg}>
-        <g ref={component} />
+        <g ref={component} transform={getTranslate([margin.left, margin.top])} />
       </svg>
     )
   }
