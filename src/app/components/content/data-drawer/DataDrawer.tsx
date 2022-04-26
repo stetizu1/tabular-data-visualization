@@ -12,6 +12,7 @@ import { useDataDrawerStyle } from '../../../components-style/content/data-drawe
 import { Settings } from '../views/Settings'
 import { GlyphsMenu } from '../views/glyphs/GlyphsMenu'
 import { ParallelCoordinatesMenu } from '../views/parallel-coordinates/ParallelCoordinatesMenu'
+import { ScatterPlotMatrixMenu } from '../views/scatter-plot/ScatterPlotMatrixMenu'
 
 export interface DataDrawerProps {
   isOpen: boolean
@@ -40,6 +41,16 @@ export const DataDrawer: FunctionComponent<DataDrawerProps> = ({
       case ViewType.ParallelCoordinates:
         return (
           <ParallelCoordinatesMenu
+            dataset={dataset}
+            settings={settings}
+            setSettings={setSettings}
+            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+            key={idx}
+          />
+        )
+      case ViewType.ScatterPlotMatrix:
+        return (
+          <ScatterPlotMatrixMenu
             dataset={dataset}
             settings={settings}
             setSettings={setSettings}

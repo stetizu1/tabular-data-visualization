@@ -3,13 +3,13 @@ import { axisLeft, brushY, D3BrushEvent, line, scaleLinear, scaleOrdinal, scaleP
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
-import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
+import { BrushSelection1d } from '../../../../types/brushing/BrushSelection'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { ParallelCoordinatesSettings } from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
 import { Margin } from '../../../../types/styling/Margin'
 
 import { toStringArray } from '../../../../helpers/basic/retype'
-import { inRange } from '../../../../helpers/basic/numerical'
+import { isInRange } from '../../../../helpers/basic/numerical'
 import { getAttributesFormatted, getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
@@ -90,7 +90,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
           const selectedRange = selections[dimension]
           if (selectedRange === null) return true // nothing in dimension selected, do not block
           const valueOnAxis = yScales[idx](Number(data[dimension]))
-          return inRange(valueOnAxis, selectedRange)
+          return isInRange(valueOnAxis, selectedRange)
         }),
       )
     }
@@ -110,11 +110,11 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         setComponentBrushing(ViewType.ParallelCoordinates)
       })
       .on(BrushAction.move, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
-        selections[axisName] = brushEvent.selection as BrushSelection2d
+        selections[axisName] = brushEvent.selection as BrushSelection1d
         setBrushingSelection()
       })
       .on(BrushAction.end, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
-        selections[axisName] = brushEvent.selection as BrushSelection2d
+        selections[axisName] = brushEvent.selection as BrushSelection1d
         if (displayAttributes.some((key) => selections[key] !== null)) {
           return setBrushingSelection()
         }

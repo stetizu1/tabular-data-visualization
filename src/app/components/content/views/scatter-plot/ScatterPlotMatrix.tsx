@@ -22,15 +22,15 @@ import {
 } from '../../../../constants/views/scatterPlotMatrix'
 
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
-import { makeMatrix } from '../../../../helpers/d3/matrix'
+import { getMatrix } from '../../../../helpers/d3/matrix'
+import { isInRanges } from '../../../../helpers/basic/numerical'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
 
 import { useScatterPlotMatrixStyle } from '../../../../components-style/content/views/scatter-plot/useScatterPlotMatrixStyle'
-
-import { isBrushed } from './brushing'
+import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {
   dataPointSize?: number
@@ -150,7 +150,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
 
     const cell = svg
       .selectAll(CELL)
-      .data(makeMatrix(displayAttributes))
+      .data(getMatrix(displayAttributes))
       .enter()
       .append(SVG.elements.g)
       .attr(SVG.attributes.class, classes.cell)
@@ -190,9 +190,9 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     }
 
     const moveBrush = ({ selection }: D3BrushEvent<SelectableDataType>, { rowKey, colKey }: MatrixItem) => {
-      if (selection) {
-        const extent = selection as [[number, number], [number, number]]
-        setDataSelected((data) => isBrushed(extent, x(Number(data[rowKey])), y(Number(data[colKey]))))
+      const brushSelection = selection as BrushSelection2d
+      if (brushSelection) {
+        setDataSelected((data) => isInRanges(brushSelection, x(Number(data[rowKey])), y(Number(data[colKey]))))
       }
     }
 
