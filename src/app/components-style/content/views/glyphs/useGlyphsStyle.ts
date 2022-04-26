@@ -2,12 +2,11 @@ import { Theme } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
 import { Margin } from '../../../../types/styling/Margin'
+import { Dimensions } from '../../../../types/basic/dimensions'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
 
-export interface StyleProps {
-  width: number
-  height: number
+interface StyleProps extends Dimensions {
   margin: Margin
 }
 

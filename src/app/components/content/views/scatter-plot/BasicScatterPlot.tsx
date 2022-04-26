@@ -12,21 +12,20 @@ import {
   D3BrushEvent,
 } from 'd3'
 
-import { Margin } from '../../../../types/styling/Margin'
+import { Margin, MarginArray } from '../../../../types/styling/Margin'
 import { SelectableDataType } from '../../../../types/data/data'
+import { Dimensions } from '../../../../types/basic/dimensions'
 
 import { useBasicScatterPlotStyle } from '../../../../components-style/content/views/scatter-plot/useBasicScatterPlotStyle'
 
 import { isBrushed } from './brushing'
 
-export interface BasicScatterPlotProps {
-  width: number
-  height: number
+export interface BasicScatterPlotProps extends Dimensions {
   dataset: SelectableDataType[]
   getValueX: (data: SelectableDataType) => number
   getValueY: (data: SelectableDataType) => number
   getValueCat: (data: SelectableDataType) => string
-  margins: [number, number, number, number]
+  margins: MarginArray
 }
 
 const addAxes = (

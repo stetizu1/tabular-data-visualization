@@ -10,3 +10,8 @@ export class Margin {
     this.height = this.top + this.bottom
   }
 }
+
+/**
+ * Array of margins - top, right, bottom, left
+ */
+export type MarginArray = [number, number, number, number]
