@@ -4,6 +4,8 @@ import { makeStyles } from '@mui/styles'
 import { Margin } from '../../../../types/styling/Margin'
 import { Dimensions } from '../../../../types/basic/dimensions'
 
+import { important } from '../../../../helpers/d3/stringGetters'
+
 import { PLOT_COLORS } from '../../../../styles/colors'
 import { PLOT_FONT } from '../../../../styles/font'
 
@@ -13,7 +15,6 @@ export interface StyleProps extends Dimensions {
 
 export const useParallelCoordinatesStyle = makeStyles<Theme, StyleProps>(() => ({
   svg: {
-    font: `12px sans-serif`,
     backgroundColor: PLOT_COLORS.backgroundColor,
   },
   line: {
@@ -21,7 +22,7 @@ export const useParallelCoordinatesStyle = makeStyles<Theme, StyleProps>(() => (
     opacity: 0.5,
   },
   selected: {
-    stroke: `#830606 !important`,
+    stroke: important(`#830606`),
   },
   hidden: {
     strokeOpacity: 0.2,
@@ -29,7 +30,7 @@ export const useParallelCoordinatesStyle = makeStyles<Theme, StyleProps>(() => (
   notDisplayed: {
     width: ({ width, margin }) => width - margin.width,
     height: ({ height, margin }) => height - margin.height,
-    padding: ({ margin }) => `${margin.top}px ${margin.right}px ${margin.bottom}px ${margin.left}px`,
+    padding: ({ margin }) => margin.toString,
   },
   text: {
     textAnchor: `middle`,

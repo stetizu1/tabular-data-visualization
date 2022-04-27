@@ -1,11 +1,12 @@
 import { makeStyles } from '@mui/styles'
 
+import { calc, px } from '../../helpers/d3/stringGetters'
 import { HEADER_COLORS } from '../../styles/colors'
 
 export const useHeaderStyle = makeStyles({
   headerContainer: {
     backgroundColor: HEADER_COLORS.backgroundColor,
-    padding: `10px 0`,
+    padding: px(10, 0),
     width: `100%`,
     display: `flex`,
     flexDirection: `row`,
@@ -14,11 +15,11 @@ export const useHeaderStyle = makeStyles({
     color: HEADER_COLORS.fontColor,
   },
   title: {
-    fontSize: `calc(5px + 2vmin)`,
-    padding: `0 20px`,
+    fontSize: calc(5, `2vmin`),
+    padding: px(0, 20),
   },
   description: {
-    padding: `0 15px`,
-    fontSize: `calc(2px + 1vmin)`,
+    padding: px(0, 15),
+    fontSize: calc(2, `1vmin`),
   },
 })

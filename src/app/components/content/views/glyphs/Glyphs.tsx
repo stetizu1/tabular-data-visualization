@@ -8,7 +8,13 @@ import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 import { Margin } from '../../../../types/styling/Margin'
 
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
-import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import {
+  getAttributeValuesWithLabel,
+  getClass,
+  getEverything,
+  px,
+  getTranslate,
+} from '../../../../helpers/d3/stringGetters'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
 
 import { SVG } from '../../../../constants/svg'
@@ -17,6 +23,10 @@ import { GLYPHS_DEFAULT_MARGIN, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../c
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
 import { useGlyphsStyle } from '../../../../components-style/content/views/glyphs/useGlyphsStyle'
+import { TOOLTIP } from '../../../../constants/views/tooltip'
+import { MouseActions } from '../../../../constants/actions/MouseActions'
+import { HTML } from '../../../../constants/html'
+import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 
 const GLYPH_SPACING = 3
 
@@ -40,6 +50,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useGlyphsStyle({ width, height, margin })
+  const { tooltip: tooltipClass } = useTooltipStyle()
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
@@ -92,6 +103,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
         ]),
       )
 
+    const tooltip = select(getClass(tooltipClass))
     svg
       .selectAll(GLYPHS)
       .data(dataset)
@@ -102,16 +114,26 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
           .selectAll(SVG.elements.path)
           .data([data])
           .enter()
-
           .append(SVG.elements.path)
           .attr(SVG.attributes.class, classes.glyph)
           .attr(SVG.attributes.d, getGlyphPath)
           .attr(SVG.attributes.transform, getTransform)
+          .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
+            tooltip.transition().duration(TOOLTIP.EASE_IN).style(SVG.style.opacity, TOOLTIP.VISIBLE)
+            tooltip
+              .html(getAttributeValuesWithLabel(data).join(HTML.newLine))
+              .style(SVG.style.left, px(clientX))
+              .style(SVG.style.top, px(clientY))
+          })
+          .on(MouseActions.mouseOut, () => {
+            tooltip.transition().duration(TOOLTIP.EASE_OUT).style(SVG.style.opacity, TOOLTIP.INVISIBLE)
+          })
           .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
       })
   }, [
     dataset,
     classes,
+    tooltipClass,
     innerWidth,
     innerHeight,
     glyphsCountPerLine,
@@ -128,9 +150,12 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
 
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {
     return (
-      <svg width={width} height={innerHeight + margin.height} className={classes.svg}>
-        <g ref={component} transform={getTranslate([margin.left, margin.top])} />
-      </svg>
+      <>
+        <svg width={width} height={innerHeight + margin.height} className={classes.svg}>
+          <g ref={component} transform={getTranslate([margin.left, margin.top])} />
+        </svg>
+        <div className={tooltipClass} />
+      </>
     )
   }
   return <div className={classes.notDisplayed}>{GLYPHS_TEXT.unavailable2}</div>

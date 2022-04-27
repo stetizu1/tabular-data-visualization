@@ -1,12 +1,13 @@
 import { makeStyles } from '@mui/styles'
 
+import { calc, px } from '../../helpers/d3/stringGetters'
 import { FOOTER_COLORS } from '../../styles/colors'
 
 export const useFooterStyle = makeStyles({
   footerContainer: {
     backgroundColor: FOOTER_COLORS.backgroundColor,
     color: FOOTER_COLORS.fontColor,
-    padding: `10px 0`,
+    padding: px(10, 0),
     width: `100%`,
     display: `flex`,
     flexDirection: `column`,
@@ -14,7 +15,7 @@ export const useFooterStyle = makeStyles({
     justifyContent: `flex-end`,
   },
   text: {
-    padding: `0 15px`,
-    fontSize: `calc(2px + 1vmin)`,
+    padding: px(0, 15),
+    fontSize: calc(2, `1vmin`),
   },
 })

@@ -1,14 +1,16 @@
 import { makeStyles } from '@mui/styles'
 
+import { calc, border, px } from '../../../helpers/d3/stringGetters'
+
 export const useDataDrawerStyle = makeStyles({
   drawer: {
-    width: `250px`,
+    width: px(250),
     flexShrink: 0,
     '& .MuiDrawer-paper': {
       backgroundColor: `#23262d`,
-      width: `250px`,
+      width: px(250),
       alignItems: `flex-end`,
-      border: `1px solid #363a46`,
+      border: border(1, `#363a46`),
     },
     '& hr': {
       width: `100%`,
@@ -25,16 +27,16 @@ export const useDataDrawerStyle = makeStyles({
     flexGrow: 1,
   },
   drawerItem: {
-    width: `calc(100% - 20px)`,
-    padding: `10px`,
+    width: calc(-20, `100%`),
+    padding: px(10),
     display: `flex`,
     flexDirection: `column`,
     textAlign: `left`,
     backgroundColor: `#edf1fd`,
-    borderBottom: `1px solid #8e94a2`,
+    borderBottom: border(1, `#8e94a2`),
     '& h1': {
-      borderBottom: `1px solid #8e94a2`,
-      fontSize: `14px`,
+      borderBottom: border(1, `#8e94a2`),
+      fontSize: px(14),
       width: `100%`,
     },
     '& label': {
@@ -42,13 +44,13 @@ export const useDataDrawerStyle = makeStyles({
       color: `#404242`,
     },
     '& .MuiFormControlLabel-root': {
-      padding: `2px 10px`,
+      padding: px(2, 10),
     },
     '& .MuiCheckbox-root ': {
       padding: 0,
     },
     '& > div': {
-      marginTop: `10px`,
+      marginTop: px(10),
     },
   },
   insufficientAttributeNum: {

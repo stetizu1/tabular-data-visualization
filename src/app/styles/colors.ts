@@ -15,6 +15,8 @@ export const TOP_TOOLBAR_COLORS = {
 
 export const PLOT_COLORS = {
   noCategoryColor: `#1db0b0`,
-  backgroundColor: `rgba(250, 250, 250, 0.98)`,
+  backgroundColor: `rgba(250, 250, 250, 0.9)`,
   fontColor: `#1f1f1f`,
+  tooltipBackground: `rgb(0, 66, 70)`,
+  tooltipFont: `#ccffff`,
 }

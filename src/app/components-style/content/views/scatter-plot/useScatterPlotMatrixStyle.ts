@@ -4,6 +4,8 @@ import { makeStyles } from '@mui/styles'
 import { Margin } from '../../../../types/styling/Margin'
 import { Dimensions } from '../../../../types/basic/dimensions'
 
+import { important, px } from '../../../../helpers/d3/stringGetters'
+
 import { PLOT_COLORS } from '../../../../styles/colors'
 
 export interface StyleProps extends Dimensions {
@@ -14,7 +16,7 @@ export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
   x: {},
   y: {},
   svg: {
-    font: `12px sans-serif`,
+    fontSize: px(12),
     backgroundColor: PLOT_COLORS.backgroundColor,
   },
   axis: {
@@ -51,7 +53,7 @@ export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
     },
   },
   selected: {
-    fill: `#830606 !important`,
+    fill: important(`#830606`),
   },
   hidden: {
     fillOpacity: 0.15,
@@ -59,6 +61,6 @@ export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
   notDisplayed: {
     width: ({ width, margin }) => width - margin.width,
     height: ({ height, margin }) => height - margin.height,
-    padding: ({ margin }) => `${margin.top}px ${margin.right}px ${margin.bottom}px ${margin.left}px`,
+    padding: ({ margin }) => margin.toString,
   },
 }))

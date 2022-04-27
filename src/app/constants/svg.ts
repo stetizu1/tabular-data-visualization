@@ -10,6 +10,7 @@ interface SVGType {
     rect: `rect`
     path: `path`
     text: `text`
+    div: `div`
   }
   attributes: {
     class: `class`
@@ -27,6 +28,9 @@ interface SVGType {
   style: {
     fill: `fill`
     stroke: `stroke`
+    opacity: `opacity`
+    left: `left`
+    top: `top`
   }
 }
 
@@ -42,6 +46,7 @@ export const SVG: SVGType = {
     rect: `rect`,
     path: `path`,
     text: `text`,
+    div: `div`,
   },
   attributes: {
     class: `class`,
@@ -59,5 +64,8 @@ export const SVG: SVGType = {
   style: {
     fill: `fill`,
     stroke: `stroke`,
+    opacity: `opacity`,
+    left: `left`,
+    top: `top`,
   },
 }

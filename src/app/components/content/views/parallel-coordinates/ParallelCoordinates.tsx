@@ -14,7 +14,7 @@ import { getAttributeFormatted, getClass, getEverything, getTranslate } from '..
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
 
-import { BrushAction } from '../../../../constants/brushing/BrushAction'
+import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 import { SVG } from '../../../../constants/svg'
 import {

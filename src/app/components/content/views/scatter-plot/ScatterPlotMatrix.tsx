@@ -40,7 +40,7 @@ import {
 import { isInRanges } from '../../../../helpers/basic/range'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
 
-import { BrushAction } from '../../../../constants/brushing/BrushAction'
+import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 import { SVG } from '../../../../constants/svg'
 import {

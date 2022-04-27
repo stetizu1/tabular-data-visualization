@@ -4,6 +4,8 @@ import { makeStyles } from '@mui/styles'
 import { Margin } from '../../../../types/styling/Margin'
 import { Dimensions } from '../../../../types/basic/dimensions'
 
+import { important, px } from '../../../../helpers/d3/stringGetters'
+
 import { PLOT_COLORS } from '../../../../styles/colors'
 
 interface StyleProps extends Dimensions {
@@ -12,14 +14,14 @@ interface StyleProps extends Dimensions {
 
 export const useGlyphsStyle = makeStyles<Theme, StyleProps>(() => ({
   svg: {
-    font: `12px sans-serif`,
+    fontSize: px(12),
     backgroundColor: PLOT_COLORS.backgroundColor,
   },
   glyph: {
     opacity: 0.6,
   },
   selected: {
-    fill: `#830606 !important`,
+    fill: important(`#830606`),
     opacity: 0.9,
   },
   hidden: {
@@ -28,6 +30,6 @@ export const useGlyphsStyle = makeStyles<Theme, StyleProps>(() => ({
   notDisplayed: {
     width: ({ width, margin }) => width - margin.width,
     height: ({ height, margin }) => height - margin.height,
-    padding: ({ margin }) => `${margin.top}px ${margin.right}px ${margin.bottom}px ${margin.left}px`,
+    padding: ({ margin }) => margin.toString,
   },
 }))

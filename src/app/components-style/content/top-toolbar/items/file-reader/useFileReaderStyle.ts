@@ -1,7 +1,9 @@
 import { makeStyles } from '@mui/styles'
 
+import { px } from '../../../../../helpers/d3/stringGetters'
+
 export const useFileReaderStyle = makeStyles({
   input: {
-    width: `220px`,
+    width: px(220),
   },
 })
