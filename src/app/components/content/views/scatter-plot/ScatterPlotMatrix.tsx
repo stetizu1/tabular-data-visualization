@@ -195,7 +195,9 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .attr(SVG.attributes.y, 3 * SPACING.VERTICAL)
       .text(getAttributeFromMatrixFormatted)
 
-    let brushCell: MatrixPosition = { rowIdx: -1, colIdx: -1 }
+    const brushing: { cell: MatrixPosition | null } = {
+      cell: null,
+    }
 
     const clearBrush = () => {
       cell.each((d, idx, elements) => {
@@ -203,45 +205,43 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       })
     }
 
-    registerCleanBrushing(() => {
-      clearBrush()
-      brushCell = { rowIdx: -1, colIdx: -1 }
-    })
-
-    const startBrush = (_: D3BrushEvent<SelectableDataType>, { rowIdx, colIdx, rowKey, colKey }: MatrixItem) => {
-      setComponentBrushing(ViewType.ScatterPlotMatrix)
-      if (brushCell.rowIdx !== rowIdx || brushCell.colIdx !== colIdx) {
-        clearBrush()
-        brushCell = { rowIdx, colIdx }
-        xScale.domain(extentInDomains[rowKey])
-        yScale.domain(extentInDomains[colKey])
-      }
-    }
-
-    const moveBrush = ({ selection }: D3BrushEvent<SelectableDataType>, { rowKey, colKey }: MatrixItem) => {
-      const brushSelection = selection as BrushSelection2d
-      if (brushSelection) {
-        setDataSelected((data) =>
-          isInRanges(brushSelection, xScale(Number(data[rowKey])), yScale(Number(data[colKey]))),
-        )
-      }
-    }
-
-    const endBrush = ({ selection }: D3BrushEvent<SelectableDataType>) => {
-      if (!selection) {
-        setDataSelected((data) => (data.selected = false))
-        setComponentBrushing(null)
+    const setBrushingSelection = ({ rowKey, colKey }: MatrixItem, selection: BrushSelection2d) => {
+      if (selection) {
+        setDataSelected((data) => isInRanges(selection, xScale(Number(data[rowKey])), yScale(Number(data[colKey]))))
       }
     }
 
     const makeBrush = brush<MatrixItem>()
-      .on(BrushAction.start, startBrush)
-      .on(BrushAction.move, moveBrush)
-      .on(BrushAction.end, endBrush)
+      .on(BrushAction.start, (_: D3BrushEvent<SelectableDataType>, { rowIdx, colIdx, rowKey, colKey }: MatrixItem) => {
+        setComponentBrushing(ViewType.ScatterPlotMatrix)
+        if (!brushing.cell || brushing.cell.rowIdx !== rowIdx || brushing.cell.colIdx !== colIdx) {
+          clearBrush()
+          brushing.cell = { rowIdx, colIdx }
+          xScale.domain(extentInDomains[rowKey])
+          yScale.domain(extentInDomains[colKey])
+        }
+      })
+      .on(BrushAction.move, ({ selection }: D3BrushEvent<SelectableDataType>, matrixItem: MatrixItem) => {
+        const brushSelection = selection as BrushSelection2d
+        setBrushingSelection(matrixItem, brushSelection)
+      })
+      .on(BrushAction.end, ({ selection }: D3BrushEvent<SelectableDataType>, matrixItem: MatrixItem) => {
+        const brushSelection = selection as BrushSelection2d
+        setBrushingSelection(matrixItem, brushSelection)
+        if (!brushSelection) {
+          setComponentBrushing(null)
+          setDataSelected((data) => (data.selected = false))
+        }
+      })
       .extent([
         [0, 0],
         [rect.width, rect.height],
       ])
+
+    registerCleanBrushing(() => {
+      clearBrush()
+      brushing.cell = null
+    })
 
     cell.call(makeBrush)
   }, [
