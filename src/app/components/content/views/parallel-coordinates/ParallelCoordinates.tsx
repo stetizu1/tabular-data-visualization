@@ -9,8 +9,8 @@ import { ParallelCoordinatesSettings } from '../../../../types/views/parallel-co
 import { Margin } from '../../../../types/styling/Margin'
 
 import { toStringArray } from '../../../../helpers/basic/retype'
-import { isInRange } from '../../../../helpers/basic/numerical'
-import { getAttributesFormatted, getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import { isInRange } from '../../../../helpers/basic/range'
+import { getAttributeFormatted, getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
 
@@ -24,9 +24,10 @@ import {
 
 import { PARALLEL_COORDINATES_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
 
-import { PLOT_COLORS } from '../../../../styles/colors'
-import { PLOT_FONT, PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
+import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 import { useParallelCoordinatesStyle } from '../../../../components-style/content/views/parallel-coordinates/useParallelCoordinatesStyle'
+import { DataEachG } from '../../../../types/d3-types'
+import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
 
 const BRUSH_WIDTH = 30
 const BRUSH_RADIUS = BRUSH_WIDTH / 2
@@ -36,7 +37,6 @@ const TEXT_SPACING = {
   RIGHT: 5,
 }
 const TEXT_Y_SHIFT = 10
-const OPACITY = 0.5
 
 const PARALLEL_COORDINATES = `PARALLEL_COORDINATES`
 const AXES = `AXES`
@@ -122,18 +122,13 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       })
 
     const getAxisTransform = (attribute: keyof SelectableDataType) => getTranslate([xScale(String(attribute))!, 0])
-    const addAxes = (
-      attribute: keyof SelectableDataType,
-      idx: number,
-      elements: SVGGElement[] | ArrayLike<SVGGElement>,
-    ) => select(elements[idx]).call(axisLeft(yScales[idx]))
+    const addAxes: DataEachG<keyof SelectableDataType> = (attribute, idx, elements) =>
+      select(elements[idx]).call(axisLeft(yScales[idx]))
 
     const getDataLinePath = (data: SelectableDataType) =>
       line()(
         displayAttributes.map((attribute, idx) => [xScale(String(attribute))!, yScales[idx](Number(data[attribute]))]),
       )
-    const getDataLineColor = (data: SelectableDataType) =>
-      categoryAttribute ? color(String(data[categoryAttribute])) : PLOT_COLORS.noCategoryColor
 
     // plot axes, add brush
     const brushableAxes = svg
@@ -149,10 +144,8 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     brushableAxes
       .append(SVG.elements.text)
       .attr(SVG.attributes.y, -TEXT_Y_SHIFT)
-      .text(getAttributesFormatted)
-      .style(SVG.style.textAnchor, PLOT_FONT.textAnchorMiddle)
-      .style(SVG.style.fill, PLOT_COLORS.fontColor)
-      .style(SVG.style.fontSize, PLOT_FONT.fontSize)
+      .text(getAttributeFormatted)
+      .attr(SVG.attributes.class, classes.text)
 
     // plot data
     svg
@@ -162,9 +155,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       .append(SVG.elements.path)
       .attr(SVG.attributes.d, getDataLinePath)
       .attr(SVG.attributes.class, classes.line)
-      .style(SVG.attributes.fill, SVG.values.none)
-      .style(SVG.attributes.stroke, getDataLineColor)
-      .style(SVG.attributes.opacity, OPACITY)
+      .style(SVG.style.stroke, getCategoryColor(categoryAttribute, color))
 
     registerCleanBrushing(() => {
       brushableAxes.each((attribute, idx, elements) => {

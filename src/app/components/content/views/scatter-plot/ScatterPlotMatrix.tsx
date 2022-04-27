@@ -1,5 +1,17 @@
 import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
-import { axisBottom, axisLeft, brush, D3BrushEvent, scaleLinear, scaleOrdinal, select, selectAll, ValueFn } from 'd3'
+import {
+  Axis,
+  axisBottom,
+  axisLeft,
+  brush,
+  D3BrushEvent,
+  NumberValue,
+  ScaleLinear,
+  scaleLinear,
+  scaleOrdinal,
+  select,
+  selectAll,
+} from 'd3'
 import clsx from 'clsx'
 
 import { SelectableDataType } from '../../../../types/data/data'
@@ -9,9 +21,24 @@ import { ScatterPlotMatrixSettings } from '../../../../types/views/scatter-plot/
 import { Margin } from '../../../../types/styling/Margin'
 import { Dimensions } from '../../../../types/basic/dimensions'
 import { MatrixItem, MatrixPosition } from '../../../../types/data/MatrixData'
+import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
+import { DataEachCircle, DataEachG } from '../../../../types/d3-types'
 
-import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
-import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import {
+  getAttributeFromMatrixFormatted,
+  getClass,
+  getEverything,
+  getTranslate,
+} from '../../../../helpers/d3/stringGetters'
+import { getExtentInDomains } from '../../../../helpers/d3/extent'
+import {
+  getMatrix,
+  getCellInnerExtent,
+  getCellInnerSize,
+  getCellTranslateInMatrix,
+} from '../../../../helpers/d3/matrix'
+import { isInRanges } from '../../../../helpers/basic/range'
+import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
 
 import { BrushAction } from '../../../../constants/brushing/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
@@ -21,16 +48,9 @@ import {
   SCATTER_PLOT_DEFAULT_MARGIN,
 } from '../../../../constants/views/scatterPlotMatrix'
 
-import { getExtentInDomains } from '../../../../helpers/d3/extent'
-import { getMatrix } from '../../../../helpers/d3/matrix'
-import { isInRanges } from '../../../../helpers/basic/numerical'
-
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
-import { PLOT_COLORS } from '../../../../styles/colors'
-
 import { useScatterPlotMatrixStyle } from '../../../../components-style/content/views/scatter-plot/useScatterPlotMatrixStyle'
-import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {
   dataPointSize?: number
@@ -87,65 +107,75 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     }
     const extentInDomains = getExtentInDomains(displayAttributes, dataset)
 
-    const [x, y] = [
-      scaleLinear([SPACING.HORIZONTAL, rect.width - SPACING.HORIZONTAL]),
-      scaleLinear([rect.height - SPACING.VERTICAL, SPACING.VERTICAL]),
+    const [xScale, yScale] = [
+      scaleLinear(getCellInnerExtent(rect.width, SPACING.HORIZONTAL)),
+      scaleLinear(getCellInnerExtent(rect.height, SPACING.VERTICAL)),
     ]
 
-    const [xAxis, yAxis] = [axisBottom(x).ticks(TICKS.X), axisLeft(y).ticks(TICKS.Y)]
-    xAxis.tickSize(innerHeight)
-    yAxis.tickSize(-innerWidth)
+    const [xAxis, yAxis] = [axisBottom(xScale), axisLeft(yScale)]
+    xAxis.ticks(TICKS.X).tickSize(innerHeight)
+    yAxis.ticks(TICKS.Y).tickSize(-innerWidth)
 
+    const setAxis =
+      (a: ScaleLinear<number, number>, axis: Axis<NumberValue>): DataEachG<keyof SelectableDataType> =>
+      (attribute, index, elements) => {
+        a.domain(extentInDomains[attribute])
+        select(elements[index]).call(axis)
+      }
+    const getTransformX: DataEachG<keyof SelectableDataType, string> = (attribute, idx) =>
+      getTranslate([(attributesCount - 1 - idx) * rect.width, 0])
+    const getTransformY: DataEachG<keyof SelectableDataType, string> = (attribute, idx) =>
+      getTranslate([0, idx * rect.height])
+
+    // axes on X (vertical)
     svg
       .selectAll(AXIS_X)
       .data(displayAttributes)
       .enter()
       .append(SVG.elements.g)
       .attr(SVG.attributes.class, clsx(classes.x, classes.axis))
-      .attr(SVG.attributes.transform, (d, i) => getTranslate([(attributesCount - i - 1) * rect.width, 0]))
-      .each((d, idx, elements) => {
-        x.domain(extentInDomains[d])
-        select(elements[idx]).call(xAxis)
-      })
+      .attr(SVG.attributes.transform, getTransformX)
+      .each(setAxis(xScale, xAxis))
 
+    // axes on Y (horizontal)
     svg
       .selectAll(AXIS_Y)
       .data(displayAttributes)
       .enter()
       .append(SVG.elements.g)
       .attr(SVG.attributes.class, clsx(classes.y, classes.axis))
-      .attr(SVG.attributes.transform, (d, idx) => getTranslate([0, idx * rect.height]))
-      .each((d, idx, elements) => {
-        y.domain(extentInDomains[d])
-        select(elements[idx]).call(yAxis)
-      })
+      .attr(SVG.attributes.transform, getTransformY)
+      .each(setAxis(yScale, yAxis))
 
-    const plot: ValueFn<SVGGElement, MatrixItem, void> = (p, idx, elements) => {
+    const plotMatrixItem: DataEachG<MatrixItem> = (matrixItem, idx, elements) => {
+      // set domains
+      xScale.domain(extentInDomains[matrixItem.rowKey])
+      yScale.domain(extentInDomains[matrixItem.colKey])
+
       const cell = select(elements[idx])
+      const getCx: DataEachCircle<SelectableDataType, number> = (data) => xScale(Number(data[matrixItem.rowKey]))
+      const getCy: DataEachCircle<SelectableDataType, number> = (data) => yScale(Number(data[matrixItem.colKey]))
 
-      x.domain(extentInDomains[p.rowKey])
-      y.domain(extentInDomains[p.colKey])
-
+      // make rectangle surrounding data
       cell
         .append(SVG.elements.rect)
-        .attr(SVG.attributes.class, classes.frame)
+        .attr(SVG.attributes.class, classes.rect)
         .attr(SVG.attributes.x, SPACING.HORIZONTAL)
         .attr(SVG.attributes.y, SPACING.VERTICAL)
-        .attr(SVG.attributes.width, rect.width - 2 * SPACING.HORIZONTAL)
-        .attr(SVG.attributes.height, rect.height - 2 * SPACING.VERTICAL)
+        .attr(SVG.attributes.width, getCellInnerSize(rect.width, SPACING.HORIZONTAL))
+        .attr(SVG.attributes.height, getCellInnerSize(rect.height, SPACING.VERTICAL))
 
+      // make data points
       cell
         .selectAll(DATA_POINT)
         .data(dataset)
         .enter()
         .append(SVG.elements.circle)
-        .attr(SVG.attributes.cx, (d) => x(Number(d[p.rowKey])))
-        .attr(SVG.attributes.cy, (d) => y(Number(d[p.colKey])))
+        .attr(SVG.attributes.cx, getCx)
+        .attr(SVG.attributes.cy, getCy)
         .attr(SVG.attributes.r, dataPointSize)
         .attr(SVG.attributes.class, classes.dataPoint)
-        .style(SVG.attributes.fill, (d) =>
-          categoryAttribute ? color(String(d[categoryAttribute])) : PLOT_COLORS.noCategoryColor,
-        )
+        .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
     }
 
     const cell = svg
@@ -154,17 +184,16 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .enter()
       .append(SVG.elements.g)
       .attr(SVG.attributes.class, classes.cell)
-      .attr(SVG.attributes.transform, (d) =>
-        getTranslate([(attributesCount - d.rowIdx - 1) * rect.width, d.colIdx * rect.height]),
-      )
-      .each(plot)
+      .attr(SVG.attributes.transform, getCellTranslateInMatrix(rect, attributesCount - 1))
+      .each(plotMatrixItem)
 
+    // add labels to diagonal
     cell
-      .filter((d) => d.rowIdx === d.colIdx)
+      .filter((matrixItem) => matrixItem.rowIdx === matrixItem.colIdx)
       .append(SVG.elements.text)
-      .attr(SVG.attributes.x, 2 * SPACING.HORIZONTAL)
+      .attr(SVG.attributes.x, 3 * SPACING.HORIZONTAL)
       .attr(SVG.attributes.y, 3 * SPACING.VERTICAL)
-      .text((d) => otherCasesToWhitespaces(String(d.rowKey)))
+      .text(getAttributeFromMatrixFormatted)
 
     let brushCell: MatrixPosition = { rowIdx: -1, colIdx: -1 }
 
@@ -184,15 +213,17 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       if (brushCell.rowIdx !== rowIdx || brushCell.colIdx !== colIdx) {
         clearBrush()
         brushCell = { rowIdx, colIdx }
-        x.domain(extentInDomains[rowKey])
-        y.domain(extentInDomains[colKey])
+        xScale.domain(extentInDomains[rowKey])
+        yScale.domain(extentInDomains[colKey])
       }
     }
 
     const moveBrush = ({ selection }: D3BrushEvent<SelectableDataType>, { rowKey, colKey }: MatrixItem) => {
       const brushSelection = selection as BrushSelection2d
       if (brushSelection) {
-        setDataSelected((data) => isInRanges(brushSelection, x(Number(data[rowKey])), y(Number(data[colKey]))))
+        setDataSelected((data) =>
+          isInRanges(brushSelection, xScale(Number(data[rowKey])), yScale(Number(data[colKey]))),
+        )
       }
     }
 

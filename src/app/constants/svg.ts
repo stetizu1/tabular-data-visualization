@@ -15,8 +15,6 @@ interface SVGType {
     class: `class`
     d: `d`
     transform: `transform`
-    fill: `fill`
-    stroke: `stroke`
     opacity: `opacity`
     x: `x`
     y: `y`
@@ -27,12 +25,8 @@ interface SVGType {
     r: `r`
   }
   style: {
-    textAnchor: `text-anchor`
     fill: `fill`
-    fontSize: `font-size`
-  }
-  values: {
-    none: `none`
+    stroke: `stroke`
   }
 }
 
@@ -53,8 +47,6 @@ export const SVG: SVGType = {
     class: `class`,
     d: `d`,
     transform: `transform`,
-    fill: `fill`,
-    stroke: `stroke`,
     opacity: `opacity`,
     x: `x`,
     y: `y`,
@@ -65,11 +57,7 @@ export const SVG: SVGType = {
     r: `r`,
   },
   style: {
-    textAnchor: `text-anchor`,
     fill: `fill`,
-    fontSize: `font-size`,
-  },
-  values: {
-    none: `none`,
+    stroke: `stroke`,
   },
 }

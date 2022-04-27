@@ -26,7 +26,7 @@ export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
       display: `none`,
     },
   },
-  frame: {
+  rect: {
     shapeRendering: `crispEdges`,
     fill: `none`,
     stroke: `#aaa`,

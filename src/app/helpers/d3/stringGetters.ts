@@ -1,5 +1,6 @@
 import { otherCasesToWhitespaces } from '../data/formatText'
 import { SelectableDataType } from '../../types/data/data'
+import { MatrixItem } from '../../types/data/MatrixData'
 
 export const getEverything = (): `*` => `*`
 
@@ -7,5 +8,7 @@ export const getTranslate = (translate: [number, number]): string => `translate(
 
 export const getClass = (className: string): string => `.${className}`
 
-export const getAttributesFormatted = (attribute: keyof SelectableDataType): string =>
+export const getAttributeFormatted = (attribute: keyof SelectableDataType): string =>
   otherCasesToWhitespaces(String(attribute))
+
+export const getAttributeFromMatrixFormatted = (item: MatrixItem): string => getAttributeFormatted(item.rowKey)

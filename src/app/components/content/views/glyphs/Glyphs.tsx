@@ -9,13 +9,13 @@ import { Margin } from '../../../../types/styling/Margin'
 
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
 import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
 
 import { SVG } from '../../../../constants/svg'
 import { GLYPHS_DEFAULT_MARGIN, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
-import { PLOT_COLORS } from '../../../../styles/colors'
 import { useGlyphsStyle } from '../../../../components-style/content/views/glyphs/useGlyphsStyle'
 
 const GLYPH_SPACING = 3
@@ -77,15 +77,12 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     )
 
     // functions setting attributes
-    const getCategoryColor = (data: SelectableDataType) =>
-      categoryAttribute ? color(String(data[categoryAttribute])) : PLOT_COLORS.noCategoryColor
     const getTransform = (data: SelectableDataType) => {
       const idx = sortedDataset.indexOf(data)
-      const translate: [number, number] = [
+      return getTranslate([
         xScale(idx % glyphsCountPerLine) + glyphRadius,
         yScale(glyphsCountPerHeight - Math.floor(idx / glyphsCountPerLine)) + glyphRadius,
-      ]
-      return getTranslate(translate)
+      ])
     }
     const getGlyphPath = (data: SelectableDataType) =>
       lineRadialGenerator(
@@ -110,7 +107,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
           .attr(SVG.attributes.class, classes.glyph)
           .attr(SVG.attributes.d, getGlyphPath)
           .attr(SVG.attributes.transform, getTransform)
-          .style(SVG.attributes.fill, getCategoryColor)
+          .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
       })
   }, [
     dataset,
