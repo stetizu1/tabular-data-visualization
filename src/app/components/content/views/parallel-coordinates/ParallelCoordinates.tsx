@@ -130,6 +130,16 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         displayAttributes.map((attribute, idx) => [xScale(String(attribute))!, yScales[idx](Number(data[attribute]))]),
       )
 
+    // plot data
+    svg
+      .selectAll(PARALLEL_COORDINATES)
+      .data(dataset)
+      .enter()
+      .append(SVG.elements.path)
+      .attr(SVG.attributes.d, getDataLinePath)
+      .attr(SVG.attributes.class, classes.line)
+      .style(SVG.style.stroke, getCategoryColor(categoryAttribute, color))
+
     // plot axes, add brush
     const brushableAxes = svg
       .selectAll(AXES)
@@ -146,16 +156,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       .attr(SVG.attributes.y, -TEXT_Y_SHIFT)
       .text(getAttributeFormatted)
       .attr(SVG.attributes.class, classes.text)
-
-    // plot data
-    svg
-      .selectAll(PARALLEL_COORDINATES)
-      .data(dataset)
-      .enter()
-      .append(SVG.elements.path)
-      .attr(SVG.attributes.d, getDataLinePath)
-      .attr(SVG.attributes.class, classes.line)
-      .style(SVG.style.stroke, getCategoryColor(categoryAttribute, color))
 
     registerCleanBrushing(() => {
       brushableAxes.each((attribute, idx, elements) => {
