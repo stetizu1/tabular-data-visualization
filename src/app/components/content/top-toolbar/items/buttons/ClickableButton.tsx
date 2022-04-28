@@ -5,7 +5,7 @@ import { useButton } from '../../../../../components-style/content/top-toolbar/i
 
 export interface ClickableButtonDataProps {
   onClick: () => void
-  disabled: boolean
+  disabled?: boolean
   icon: JSX.Element
   label: string
 }
