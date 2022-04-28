@@ -19,6 +19,7 @@ export const DataContext: FunctionComponent = () => {
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [redrawTime, setRedrawTime] = useState(Date.now())
   const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
+  const [isDetailsVisible, setIsDetailsVisible] = useState(true)
 
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
@@ -75,16 +76,19 @@ export const DataContext: FunctionComponent = () => {
   return (
     <>
       <TopToolbar
-        clearBrushes={clearBrushesOnButton}
         setDataset={setDatasetAndRemoveBrushing}
-        brushingActive={isBrushingActive}
         openDrawerDisabled={dataset === null}
         openDrawer={() => setDrawerOpen(true)}
         setDataLoadState={setDataLoadState}
+        isDetailsVisible={isDetailsVisible}
+        setIsDetailsVisible={setIsDetailsVisible}
+        isBrushingActive={isBrushingActive}
+        clearBrushes={clearBrushesOnButton}
       />
       <ViewGrid
         dataLoadState={dataLoadState}
         isDrawerOpen={isDrawerOpen}
+        isDetailsVisible={isDetailsVisible}
         closeDrawer={() => setDrawerOpen(false)}
         cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
         {...viewProps}

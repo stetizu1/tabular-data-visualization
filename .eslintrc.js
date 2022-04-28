@@ -19,7 +19,7 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': [
-      2,
+      1,
       {
         arrowParens: `always`,
         bracketSpacing: true,
@@ -30,7 +30,7 @@ module.exports = {
         printWidth: 120,
       },
     ],
-    'arrow-body-style': [2, `as-needed`],
+    'arrow-body-style': [1, `as-needed`],
     quotes: [1, `backtick`],
     'react/react-in-jsx-scope': 0,
     '@typescript-eslint/no-non-null-assertion': 0,

@@ -36,6 +36,14 @@ export interface GlyphsProps extends VisualizationView, Highlightable, GlyphsSet
 
 const GLYPHS = `glyphs`
 
+export const displayDetails = (isDetailsVisible: boolean | undefined, tooltipClass: string): void => {
+  if (isDetailsVisible) {
+    select(getClass(tooltipClass)).style(SVG.style.display, SVG.values.visible)
+    return
+  }
+  select(getClass(tooltipClass)).style(SVG.style.display, SVG.values.none)
+}
+
 export const Glyphs: FunctionComponent<GlyphsProps> = ({
   dataset,
   width,
@@ -47,6 +55,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   colorCategory,
   glyphSize = 40,
   margins = GLYPHS_DEFAULT_MARGIN,
+  isDetailsVisible,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useGlyphsStyle({ width, height, margin })
@@ -147,6 +156,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createGlyphs(), [displayAttributes, categoryAttribute, sortAttribute])
+  displayDetails(isDetailsVisible, tooltipClass)
 
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {
     return (

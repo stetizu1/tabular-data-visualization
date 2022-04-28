@@ -26,6 +26,7 @@ export interface ViewGridDataProps extends Brushable {
 export interface ViewGridProps extends ViewGridDataProps {
   dataLoadState: DataLoadState
   isDrawerOpen: boolean
+  isDetailsVisible: boolean
   closeDrawer: SideEffectVoid
   cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
 }

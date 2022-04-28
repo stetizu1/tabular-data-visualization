@@ -14,4 +14,9 @@ export interface VisualizationView extends Dimensions {
    * View margin inside svg
    */
   margins?: MarginArray
+
+  /**
+   * Says if data details are visible on hover
+   */
+  isDetailsVisible?: boolean
 }

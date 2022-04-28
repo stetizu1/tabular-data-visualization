@@ -31,6 +31,11 @@ interface SVGType {
     opacity: `opacity`
     left: `left`
     top: `top`
+    display: `display`
+  }
+  values: {
+    none: `none`
+    visible: `visible`
   }
 }
 
@@ -67,5 +72,10 @@ export const SVG: SVGType = {
     opacity: `opacity`,
     left: `left`,
     top: `top`,
+    display: `display`,
+  },
+  values: {
+    none: `none`,
+    visible: `visible`,
   },
 }
