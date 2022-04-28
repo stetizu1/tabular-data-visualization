@@ -38,7 +38,7 @@ const GLYPHS = `glyphs`
 
 export const displayDetails = (isDetailsVisible: boolean | undefined, tooltipClass: string): void => {
   if (isDetailsVisible) {
-    select(getClass(tooltipClass)).style(SVG.style.display, SVG.values.visible)
+    select(getClass(tooltipClass)).style(SVG.style.display, SVG.values.block)
     return
   }
   select(getClass(tooltipClass)).style(SVG.style.display, SVG.values.none)

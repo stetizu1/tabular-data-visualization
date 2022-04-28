@@ -35,7 +35,7 @@ interface SVGType {
   }
   values: {
     none: `none`
-    visible: `visible`
+    block: `block`
   }
 }
 
@@ -76,6 +76,6 @@ export const SVG: SVGType = {
   },
   values: {
     none: `none`,
-    visible: `visible`,
+    block: `block`,
   },
 }
