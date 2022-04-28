@@ -5,6 +5,8 @@ import { Info } from '@mui/icons-material'
 
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
 
+import { TOP_TOOLBAR_TEXT } from '../../../text/SiteText'
+
 import { useTopToolbar } from '../../../components-style/content/top-toolbar/useTopToolbar'
 
 import { ClickableButton } from './items/buttons/ClickableButton'
@@ -34,9 +36,19 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
   return (
     <div className={classes.toolbar}>
       <div className={classes.left}>
-        <ToggleButtonSingle icon={<Info />} value={isDetailsVisible} setValue={setIsDetailsVisible} />
+        <ToggleButtonSingle
+          icon={<Info />}
+          value={isDetailsVisible}
+          setValue={setIsDetailsVisible}
+          label={TOP_TOOLBAR_TEXT.labelDetailsVisible}
+        />
         <div className={classes.separator} />
-        <ClickableButton icon={<FormatColorReset />} onClick={clearBrushes} disabled={!isBrushingActive} />
+        <ClickableButton
+          icon={<FormatColorReset />}
+          onClick={clearBrushes}
+          disabled={!isBrushingActive}
+          label={TOP_TOOLBAR_TEXT.labelClearBrushes}
+        />
       </div>
       <div>
         <FileReader setDataset={setDataset} setDataLoadState={setDataLoadState} />
