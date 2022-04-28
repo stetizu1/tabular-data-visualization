@@ -213,7 +213,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .filter((matrixItem) => matrixItem.rowIdx === matrixItem.colIdx)
       .append(SVG.elements.text)
       .attr(SVG.attributes.x, 3 * SPACING.HORIZONTAL)
-      .attr(SVG.attributes.y, 3 * SPACING.VERTICAL)
+      .attr(SVG.attributes.y, 2.5 * SPACING.VERTICAL)
       .text(getAttributeFromMatrixFormatted)
 
     const brushing: { cell: MatrixPosition | null } = {

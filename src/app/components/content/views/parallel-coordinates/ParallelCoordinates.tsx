@@ -46,8 +46,8 @@ const BRUSH_WIDTH = 30
 const BRUSH_RADIUS = BRUSH_WIDTH / 2
 const BRUSH_OVERLAP = 5
 const TEXT_SPACING = {
-  LEFT: 22,
-  RIGHT: 5,
+  LEFT: 26,
+  RIGHT: 9,
 }
 const TEXT_Y_SHIFT = 10
 

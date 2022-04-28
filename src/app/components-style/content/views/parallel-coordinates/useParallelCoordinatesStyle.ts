@@ -15,14 +15,14 @@ export interface StyleProps extends Dimensions {
 
 export const useParallelCoordinatesStyle = makeStyles<Theme, StyleProps>(() => ({
   svg: {
-    backgroundColor: PLOT_COLORS.backgroundColor,
+    background: PLOT_COLORS.backgroundColor,
   },
   line: {
     fill: `none`,
     opacity: 0.5,
   },
   selected: {
-    stroke: important(`#830606`),
+    stroke: important(PLOT_COLORS.brushColor),
   },
   hidden: {
     strokeOpacity: 0.2,
@@ -34,6 +34,7 @@ export const useParallelCoordinatesStyle = makeStyles<Theme, StyleProps>(() => (
   },
   text: {
     textAnchor: `middle`,
+    fontWeight: `bold`,
     fill: PLOT_COLORS.fontColor,
     fontSize: PLOT_FONT.fontSize,
   },

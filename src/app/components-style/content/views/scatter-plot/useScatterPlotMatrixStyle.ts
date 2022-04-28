@@ -4,9 +4,10 @@ import { makeStyles } from '@mui/styles'
 import { Margin } from '../../../../types/styling/Margin'
 import { Dimensions } from '../../../../types/basic/dimensions'
 
-import { important, px } from '../../../../helpers/d3/stringGetters'
+import { important } from '../../../../helpers/d3/stringGetters'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
+import { PLOT_FONT } from '../../../../styles/font'
 
 export interface StyleProps extends Dimensions {
   margin: Margin
@@ -16,13 +17,13 @@ export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
   x: {},
   y: {},
   svg: {
-    fontSize: px(12),
-    backgroundColor: PLOT_COLORS.backgroundColor,
+    fontSize: PLOT_FONT.fontSize,
+    background: PLOT_COLORS.backgroundColor,
   },
   axis: {
     shapeRendering: `crispEdges`,
     '& line': {
-      stroke: `#ddd`,
+      stroke: PLOT_COLORS.axisLines,
     },
     '& path': {
       display: `none`,
@@ -31,10 +32,10 @@ export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
   rect: {
     shapeRendering: `crispEdges`,
     fill: `none`,
-    stroke: `#aaa`,
+    stroke: PLOT_COLORS.dataBox,
   },
   axisLine: {
-    stroke: `#ddd`,
+    stroke: PLOT_COLORS.axisLines,
   },
   axisPath: {
     display: `none`,
@@ -42,18 +43,14 @@ export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
   cell: {
     '& text': {
       fontWeight: `bold`,
-      textTransform: `capitalize`,
       fill: `black`,
     },
   },
   dataPoint: {
     fillOpacity: 0.7,
-    '&.hidden': {
-      fill: `#ccc`,
-    },
   },
   selected: {
-    fill: important(`#830606`),
+    fill: important(PLOT_COLORS.brushColor),
   },
   hidden: {
     fillOpacity: 0.15,

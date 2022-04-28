@@ -1,16 +1,18 @@
 import { makeStyles } from '@mui/styles'
 
 import { calc, border, px } from '../../../helpers/d3/stringGetters'
+import { DATA_DRAWER_COLORS, ERROR_COLORS } from '../../../styles/colors'
+import { DATA_DRAWER_FONT } from '../../../styles/font'
 
 export const useDataDrawerStyle = makeStyles({
   drawer: {
     width: px(250),
     flexShrink: 0,
     '& .MuiDrawer-paper': {
-      backgroundColor: `#23262d`,
+      background: DATA_DRAWER_COLORS.background,
       width: px(250),
       alignItems: `flex-end`,
-      border: border(1, `#363a46`),
+      border: border(1, DATA_DRAWER_COLORS.border),
     },
     '& hr': {
       width: `100%`,
@@ -18,7 +20,7 @@ export const useDataDrawerStyle = makeStyles({
   },
   header: {},
   chevron: {
-    color: `#c4cbdc`,
+    color: DATA_DRAWER_COLORS.icon,
   },
   menu: {
     width: `100%`,
@@ -32,16 +34,16 @@ export const useDataDrawerStyle = makeStyles({
     display: `flex`,
     flexDirection: `column`,
     textAlign: `left`,
-    backgroundColor: `#edf1fd`,
-    borderBottom: border(1, `#8e94a2`),
+    background: DATA_DRAWER_COLORS.drawerItemBackground,
+    borderBottom: border(1, DATA_DRAWER_COLORS.drawerItemBorder),
     '& h1': {
-      borderBottom: border(1, `#8e94a2`),
-      fontSize: px(14),
+      borderBottom: border(1, DATA_DRAWER_COLORS.drawerItemBorder),
+      fontSize: DATA_DRAWER_FONT.headerFontSize,
       width: `100%`,
     },
     '& label': {
-      fontSize: `0.8em`,
-      color: `#404242`,
+      fontSize: DATA_DRAWER_FONT.labelFontSize,
+      color: DATA_DRAWER_COLORS.label,
     },
     '& .MuiFormControlLabel-root': {
       padding: px(2, 10),
@@ -55,7 +57,7 @@ export const useDataDrawerStyle = makeStyles({
   },
   insufficientAttributeNum: {
     padding: 10,
-    fontSize: 12,
-    color: `#700000`,
+    fontSize: DATA_DRAWER_FONT.fontSize,
+    color: ERROR_COLORS.font,
   },
 })

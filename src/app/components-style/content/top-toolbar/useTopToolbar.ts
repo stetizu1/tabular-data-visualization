@@ -10,14 +10,14 @@ export const useTopToolbar = makeStyles({
     display: `flex`,
     justifyContent: `space-between`,
     alignItems: `flex-end`,
-    backgroundColor: TOP_TOOLBAR_COLORS.backgroundColor,
-    color: TOP_TOOLBAR_COLORS.fontColor,
+    background: TOP_TOOLBAR_COLORS.background,
+    color: TOP_TOOLBAR_COLORS.font,
   },
   left: {
     display: `flex`,
   },
   separator: {
     flexGrow: 1,
-    borderLeft: border(2, `#57607a`),
+    borderLeft: border(2, TOP_TOOLBAR_COLORS.border),
   },
 })
