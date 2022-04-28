@@ -7,12 +7,22 @@ import { BrushSelection1d } from '../../../../types/brushing/BrushSelection'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { ParallelCoordinatesSettings } from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
 import { Margin } from '../../../../types/styling/Margin'
+import { DataEachG } from '../../../../types/d3-types'
 
 import { toStringArray } from '../../../../helpers/basic/retype'
 import { isInRange } from '../../../../helpers/basic/range'
-import { getAttributeFormatted, getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
+import { displayDetails } from '../../../../helpers/d3/displayDetails'
+import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
+import {
+  getAttributeFormatted,
+  getAttributeValuesWithLabel,
+  getClass,
+  getEverything,
+  getTranslate,
+  px,
+} from '../../../../helpers/d3/stringGetters'
 
 import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
@@ -21,13 +31,16 @@ import {
   MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT,
   PARALLEL_COORDINATES_DEFAULT_MARGIN,
 } from '../../../../constants/views/parallelCoordinates'
+import { MouseActions } from '../../../../constants/actions/MouseActions'
+import { TOOLTIP } from '../../../../constants/views/tooltip'
+import { HTML } from '../../../../constants/html'
 
 import { PARALLEL_COORDINATES_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
 
-import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 import { useParallelCoordinatesStyle } from '../../../../components-style/content/views/parallel-coordinates/useParallelCoordinatesStyle'
-import { DataEachG } from '../../../../types/d3-types'
-import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
+import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
+
+import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 
 const BRUSH_WIDTH = 30
 const BRUSH_RADIUS = BRUSH_WIDTH / 2
@@ -55,9 +68,11 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   isBrushingActive,
   colorCategory,
   margins = PARALLEL_COORDINATES_DEFAULT_MARGIN,
+  isDetailsVisible,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useParallelCoordinatesStyle({ width, height, margin })
+  const { tooltip: tooltipClass } = useTooltipStyle()
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
   const upperPadding = TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
@@ -130,6 +145,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         displayAttributes.map((attribute, idx) => [xScale(String(attribute))!, yScales[idx](Number(data[attribute]))]),
       )
 
+    const tooltip = select(getClass(tooltipClass))
     // plot data
     svg
       .selectAll(PARALLEL_COORDINATES)
@@ -138,6 +154,16 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       .append(SVG.elements.path)
       .attr(SVG.attributes.d, getDataLinePath)
       .attr(SVG.attributes.class, classes.line)
+      .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
+        tooltip.transition().duration(TOOLTIP.EASE_IN).style(SVG.style.opacity, TOOLTIP.VISIBLE)
+        tooltip
+          .html(getAttributeValuesWithLabel(data).join(HTML.newLine))
+          .style(SVG.style.left, px(clientX))
+          .style(SVG.style.top, px(clientY))
+      })
+      .on(MouseActions.mouseOut, () => {
+        tooltip.transition().duration(TOOLTIP.EASE_OUT).style(SVG.style.opacity, TOOLTIP.INVISIBLE)
+      })
       .style(SVG.style.stroke, getCategoryColor(categoryAttribute, color))
 
     // plot axes, add brush
@@ -169,6 +195,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     innerWidth,
     innerHeight,
     classes,
+    tooltipClass,
     categoryAttribute,
     displayAttributes,
     setDataSelected,
@@ -179,17 +206,21 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createParallelCoordinates(), [displayAttributes, categoryAttribute])
+  displayDetails(isDetailsVisible, tooltipClass)
 
   if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {
     return (
-      <svg width={width} height={height} className={classes.svg}>
-        <g
-          ref={component}
-          width={innerWidth}
-          height={innerHeight}
-          transform={getTranslate([margin.left + TEXT_SPACING.LEFT, margin.top + upperPadding])}
-        />
-      </svg>
+      <>
+        <svg width={width} height={height} className={classes.svg}>
+          <g
+            ref={component}
+            width={innerWidth}
+            height={innerHeight}
+            transform={getTranslate([margin.left + TEXT_SPACING.LEFT, margin.top + upperPadding])}
+          />
+        </svg>
+        <div className={tooltipClass} />
+      </>
     )
   }
   return <div className={classes.notDisplayed}>{PARALLEL_COORDINATES_TEXT.unavailable}</div>

@@ -26,9 +26,11 @@ import { DataEachCircle, DataEachG } from '../../../../types/d3-types'
 
 import {
   getAttributeFromMatrixFormatted,
+  getAttributeValuesWithLabel,
   getClass,
   getEverything,
   getTranslate,
+  px,
 } from '../../../../helpers/d3/stringGetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import {
@@ -39,6 +41,7 @@ import {
 } from '../../../../helpers/d3/matrix'
 import { isInRanges } from '../../../../helpers/basic/range'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
+import { displayDetails } from '../../../../helpers/d3/displayDetails'
 
 import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
@@ -47,10 +50,14 @@ import {
   MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT,
   SCATTER_PLOT_DEFAULT_MARGIN,
 } from '../../../../constants/views/scatterPlotMatrix'
+import { MouseActions } from '../../../../constants/actions/MouseActions'
+import { TOOLTIP } from '../../../../constants/views/tooltip'
+import { HTML } from '../../../../constants/html'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
 import { useScatterPlotMatrixStyle } from '../../../../components-style/content/views/scatter-plot/useScatterPlotMatrixStyle'
+import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {
   dataPointSize?: number
@@ -60,6 +67,7 @@ export const DATA_POINT = `dataPoint`
 export const AXIS_X = `axisX`
 export const AXIS_Y = `axisY`
 export const CELL = `cell`
+export const CELL_DUPLICATES = `cell-dup`
 export const SPACING = {
   HORIZONTAL: 12,
   VERTICAL: 12,
@@ -83,9 +91,11 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   colorCategory,
   dataPointSize = DEFAULT_DATA_POINT_SIZE,
   margins = SCATTER_PLOT_DEFAULT_MARGIN,
+  isDetailsVisible,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useScatterPlotMatrixStyle({ width, height, margin })
+  const { tooltip: tooltipClass } = useTooltipStyle()
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
@@ -147,6 +157,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .attr(SVG.attributes.transform, getTransformY)
       .each(setAxis(yScale, yAxis))
 
+    const tooltip = select(getClass(tooltipClass))
     const plotMatrixItem: DataEachG<MatrixItem> = (matrixItem, idx, elements) => {
       // set domains
       xScale.domain(extentInDomains[matrixItem.rowKey])
@@ -175,6 +186,16 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         .attr(SVG.attributes.cy, getCy)
         .attr(SVG.attributes.r, dataPointSize)
         .attr(SVG.attributes.class, classes.dataPoint)
+        .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
+          tooltip.transition().duration(TOOLTIP.EASE_IN).style(SVG.style.opacity, TOOLTIP.VISIBLE)
+          tooltip
+            .html(getAttributeValuesWithLabel(data).join(HTML.newLine))
+            .style(SVG.style.left, px(clientX))
+            .style(SVG.style.top, px(clientY))
+        })
+        .on(MouseActions.mouseOut, () => {
+          tooltip.transition().duration(TOOLTIP.EASE_OUT).style(SVG.style.opacity, TOOLTIP.INVISIBLE)
+        })
         .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
     }
 
@@ -244,11 +265,22 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     })
 
     cell.call(makeBrush)
+
+    // make points in second layer so details can be displayed
+    svg
+      .selectAll(CELL_DUPLICATES)
+      .data(getMatrix(displayAttributes))
+      .enter()
+      .append(SVG.elements.g)
+      .attr(SVG.attributes.class, [classes.cell, classes.duplicates].join(` `))
+      .attr(SVG.attributes.transform, getCellTranslateInMatrix(rect, attributesCount - 1))
+      .each(plotMatrixItem)
   }, [
     dataset,
     innerWidth,
     innerHeight,
     classes,
+    tooltipClass,
     setDataSelected,
     categoryAttribute,
     displayAttributes,
@@ -260,12 +292,17 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createScatterPlotMatrix(), [displayAttributes, categoryAttribute])
+  displayDetails(isDetailsVisible, tooltipClass)
+  displayDetails(isDetailsVisible, classes.duplicates)
 
   if (displayAttributes.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT) {
     return (
-      <svg width={width} height={height} className={classes.svg}>
-        <g ref={component} transform={getTranslate([margin.left, margin.top])} />
-      </svg>
+      <>
+        <svg width={width} height={height} className={classes.svg}>
+          <g ref={component} transform={getTranslate([margin.left, margin.top])} />
+        </svg>
+        <div className={tooltipClass} />
+      </>
     )
   }
   return <div className={classes.notDisplayed}>{SCATTER_PLOT_MATRIX_TEXT.unavailable}</div>

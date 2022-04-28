@@ -63,4 +63,5 @@ export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
     height: ({ height, margin }) => height - margin.height,
     padding: ({ margin }) => margin.toString,
   },
+  duplicates: {},
 }))

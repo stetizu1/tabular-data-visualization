@@ -8,6 +8,8 @@ import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 import { Margin } from '../../../../types/styling/Margin'
 
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
+import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
+import { displayDetails } from '../../../../helpers/d3/displayDetails'
 import {
   getAttributeValuesWithLabel,
   getClass,
@@ -15,17 +17,16 @@ import {
   px,
   getTranslate,
 } from '../../../../helpers/d3/stringGetters'
-import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
 
 import { SVG } from '../../../../constants/svg'
 import { GLYPHS_DEFAULT_MARGIN, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
+import { TOOLTIP } from '../../../../constants/views/tooltip'
+import { MouseActions } from '../../../../constants/actions/MouseActions'
+import { HTML } from '../../../../constants/html'
 
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
 import { useGlyphsStyle } from '../../../../components-style/content/views/glyphs/useGlyphsStyle'
-import { TOOLTIP } from '../../../../constants/views/tooltip'
-import { MouseActions } from '../../../../constants/actions/MouseActions'
-import { HTML } from '../../../../constants/html'
 import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 
 const GLYPH_SPACING = 3
@@ -35,14 +36,6 @@ export interface GlyphsProps extends VisualizationView, Highlightable, GlyphsSet
 }
 
 const GLYPHS = `glyphs`
-
-export const displayDetails = (isDetailsVisible: boolean | undefined, tooltipClass: string): void => {
-  if (isDetailsVisible) {
-    select(getClass(tooltipClass)).style(SVG.style.display, SVG.values.block)
-    return
-  }
-  select(getClass(tooltipClass)).style(SVG.style.display, SVG.values.none)
-}
 
 export const Glyphs: FunctionComponent<GlyphsProps> = ({
   dataset,
