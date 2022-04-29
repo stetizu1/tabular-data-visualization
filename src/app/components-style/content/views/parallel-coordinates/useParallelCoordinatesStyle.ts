@@ -2,6 +2,7 @@ import { Theme } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
 import { Margin } from '../../../../types/styling/Margin'
+import { Opacity } from '../../../../types/styling/Opacity'
 import { Dimensions } from '../../../../types/basic/dimensions'
 
 import { important } from '../../../../helpers/d3/stringGetters'
@@ -11,6 +12,7 @@ import { PLOT_FONT } from '../../../../styles/font'
 
 export interface StyleProps extends Dimensions {
   margin: Margin
+  opacity: Opacity
 }
 
 export const useParallelCoordinatesStyle = makeStyles<Theme, StyleProps>(() => ({
@@ -19,13 +21,14 @@ export const useParallelCoordinatesStyle = makeStyles<Theme, StyleProps>(() => (
   },
   line: {
     fill: `none`,
-    opacity: 0.5,
+    opacity: ({ opacity }) => opacity[0] / 100,
   },
   selected: {
     stroke: important(PLOT_COLORS.brushColor),
+    opacity: ({ opacity }) => opacity[1] / 100,
   },
   hidden: {
-    strokeOpacity: 0.2,
+    strokeOpacity: ({ opacity }) => opacity[2] / 100,
   },
   notDisplayed: {
     width: ({ width, margin }) => width - margin.width,

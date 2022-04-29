@@ -24,6 +24,7 @@ interface SVGType {
     cx: `cx`
     cy: `cy`
     r: `r`
+    strokeWidth: `stroke-width`
   }
   style: {
     fill: `fill`
@@ -65,6 +66,7 @@ export const SVG: SVGType = {
     cx: `cx`,
     cy: `cy`,
     r: `r`,
+    strokeWidth: `stroke-width`,
   },
   style: {
     fill: `fill`,

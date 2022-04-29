@@ -4,7 +4,10 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { ParallelCoordinatesSettings } from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
+import {
+  lineWidthKey,
+  ParallelCoordinatesSettings,
+} from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
 import { BrushableMenuProps } from '../../../../types/views/MenuProps'
 
 import {
@@ -15,7 +18,7 @@ import {
 
 import {
   MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT,
-  PARALLEL_COORDINATES_DEFAULT_MARGIN,
+  PARALLEL_COORDINATES_DEFAULT,
 } from '../../../../constants/views/parallelCoordinates'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
@@ -26,6 +29,8 @@ import { useDataDrawerMenuStyle } from '../../../../components-style/content/dat
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
+import { OpacityInput } from '../../data-drawer/items/OpacityInput'
+import { NumberInput } from '../../data-drawer/items/NumberInput'
 
 export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
   dataset,
@@ -52,7 +57,7 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
         displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
         categoryAttribute: defaultCategoryAttribute,
         colorCategory: schemeCategory10,
-        margins: PARALLEL_COORDINATES_DEFAULT_MARGIN,
+        ...PARALLEL_COORDINATES_DEFAULT,
       }
       return { ...prev, [ViewType.ParallelCoordinates]: newParallelCoordinates }
     })
@@ -95,6 +100,21 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
               <AccordionDetails>
                 <MarginInput
                   margins={parallelCoordinatesSettings.margins}
+                  setSettings={setSettings}
+                  viewType={ViewType.ParallelCoordinates}
+                />
+                <hr />
+                <NumberInput
+                  value={parallelCoordinatesSettings.lineWidth}
+                  valueKey={lineWidthKey}
+                  setSettings={setSettings}
+                  label={PARALLEL_COORDINATES_MENU_TEXT.lineWidth}
+                  viewType={ViewType.ParallelCoordinates}
+                />
+                <hr />
+                <OpacityInput
+                  header={PARALLEL_COORDINATES_MENU_TEXT.opacity}
+                  opacity={parallelCoordinatesSettings.opacity}
                   setSettings={setSettings}
                   viewType={ViewType.ParallelCoordinates}
                 />

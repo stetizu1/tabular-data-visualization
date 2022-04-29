@@ -5,7 +5,7 @@ import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { BrushableMenuProps } from '../../../../types/views/MenuProps'
-import { ScatterPlotMatrixSettings } from '../../../../types/views/scatter-plot/ScatterPlotMatrixSettings'
+import { pointSizeKey, ScatterPlotMatrixSettings } from '../../../../types/views/scatter-plot/ScatterPlotMatrixSettings'
 
 import {
   getCategoryAttributesKeys,
@@ -16,7 +16,7 @@ import {
 import { ViewType } from '../../../../constants/views/ViewTypes'
 import {
   MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT,
-  SCATTER_PLOT_MATRIX_DEFAULT_MARGIN,
+  SCATTER_PLOT_MATRIX_DEFAULT,
 } from '../../../../constants/views/scatterPlotMatrix'
 
 import { SCATTER_PLOT_MATRIX_MENU_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
@@ -26,6 +26,8 @@ import { useDataDrawerMenuStyle } from '../../../../components-style/content/dat
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
+import { NumberInput } from '../../data-drawer/items/NumberInput'
+import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 
 export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
   dataset,
@@ -52,7 +54,7 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
         displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
         categoryAttribute: defaultCategoryAttribute,
         colorCategory: schemeCategory10,
-        margins: SCATTER_PLOT_MATRIX_DEFAULT_MARGIN,
+        ...SCATTER_PLOT_MATRIX_DEFAULT,
       }
       return { ...prev, [ViewType.ScatterPlotMatrix]: newScatterPlotMatrix }
     })
@@ -95,6 +97,21 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
               <AccordionDetails>
                 <MarginInput
                   margins={scatterPlotMatrixSettings.margins}
+                  setSettings={setSettings}
+                  viewType={ViewType.ScatterPlotMatrix}
+                />
+                <hr />
+                <NumberInput
+                  value={scatterPlotMatrixSettings.pointSize}
+                  valueKey={pointSizeKey}
+                  setSettings={setSettings}
+                  label={SCATTER_PLOT_MATRIX_MENU_TEXT.pointSize}
+                  viewType={ViewType.ScatterPlotMatrix}
+                />
+                <hr />
+                <OpacityInput
+                  header={SCATTER_PLOT_MATRIX_MENU_TEXT.opacity}
+                  opacity={scatterPlotMatrixSettings.opacity}
                   setSettings={setSettings}
                   viewType={ViewType.ScatterPlotMatrix}
                 />

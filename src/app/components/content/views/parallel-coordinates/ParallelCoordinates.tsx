@@ -62,9 +62,11 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   colorCategory,
   margins,
   isDetailsVisible,
+  lineWidth,
+  opacity,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
-  const classes = useParallelCoordinatesStyle({ width, height, margin })
+  const classes = useParallelCoordinatesStyle({ width, height, margin, opacity })
   const { tooltip: tooltipClass } = useTooltipStyle()
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
@@ -72,7 +74,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   const [innerWidth, innerHeight] = [width - margin.width, height - margin.height - upperPadding]
 
   // selected coloring
-  selectAll(getClass(classes.line))
+  selectAll(getClass(PARALLEL_COORDINATES))
     .classed(classes.selected, (d) => (d as SelectableDataType).selected)
     .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
@@ -143,7 +145,9 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       .enter()
       .append(SVG.elements.path)
       .attr(SVG.attributes.d, getDataLinePath)
-      .attr(SVG.attributes.class, classes.line)
+      .attr(SVG.attributes.class, [classes.line, PARALLEL_COORDINATES].join(` `))
+      .attr(SVG.attributes.strokeWidth, lineWidth)
+
       .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
         tooltip.transition().duration(TOOLTIP.EASE_IN).style(SVG.style.opacity, TOOLTIP.VISIBLE)
         tooltip
@@ -192,10 +196,14 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     setComponentBrushing,
     registerCleanBrushing,
     color,
+    lineWidth,
   ])
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createParallelCoordinates(), [displayAttributes, categoryAttribute, innerWidth, innerHeight])
+  useEffect(
+    () => createParallelCoordinates(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [displayAttributes, categoryAttribute, innerWidth, innerHeight, lineWidth],
+  )
   displayDetails(isDetailsVisible, tooltipClass)
 
   if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {

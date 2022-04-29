@@ -1,7 +1,6 @@
 import { FunctionComponent } from 'react'
 
 import { VisualizationView } from '../../../types/views/VisualizationView'
-import { SelectableDataType } from '../../../types/data/data'
 import { Brushable } from '../../../types/brushing/Brushable'
 import { ParallelCoordinatesSettings } from '../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
 import { ScatterPlotMatrixSettings } from '../../../types/views/scatter-plot/ScatterPlotMatrixSettings'
@@ -19,8 +18,6 @@ import { Glyphs } from './glyphs/Glyphs'
 export interface ViewProps extends Brushable, VisualizationView {
   component: ViewType
   settings: Settings
-  defaultColors: ReadonlyArray<string>
-  defaultDisplayAttributes: Array<keyof SelectableDataType>
 }
 
 type ViewElementFunction = (props: Brushable & VisualizationView, settings: SettingsType) => JSX.Element
@@ -31,22 +28,10 @@ const options: Record<ViewType, ViewElementFunction> = {
   [ViewType.ScatterPlotMatrix]: (p, s) => <ScatterPlotMatrix {...p} {...(s as ScatterPlotMatrixSettings)} />,
 }
 
-export const View: FunctionComponent<ViewProps> = ({
-  width,
-  height,
-  component,
-  settings,
-  defaultDisplayAttributes,
-  defaultColors,
-  ...dataProps
-}) => {
+export const View: FunctionComponent<ViewProps> = ({ width, height, component, settings, ...dataProps }) => {
   const graph = options[component]
   const classes = useViewStyle({ width, height })
-  const settingsCurr = settings[component] || {
-    displayAttributes: defaultDisplayAttributes,
-    colorCategory: defaultColors,
-    categoryAttribute: undefined,
-    margins: [0, 0, 0, 0],
-  }
+  const settingsCurr = settings[component]
+  if (!settingsCurr) return null
   return <div className={classes.box}>{graph({ width, height, ...dataProps }, settingsCurr)}</div>
 }

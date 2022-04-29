@@ -2,6 +2,7 @@ import { Theme } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
 import { Margin } from '../../../../types/styling/Margin'
+import { Opacity } from '../../../../types/styling/Opacity'
 import { Dimensions } from '../../../../types/basic/dimensions'
 
 import { important } from '../../../../helpers/d3/stringGetters'
@@ -11,6 +12,7 @@ import { PLOT_FONT } from '../../../../styles/font'
 
 export interface StyleProps extends Dimensions {
   margin: Margin
+  opacity: Opacity
 }
 
 export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
@@ -47,13 +49,14 @@ export const useScatterPlotMatrixStyle = makeStyles<Theme, StyleProps>(() => ({
     },
   },
   dataPoint: {
-    fillOpacity: 0.7,
+    fillOpacity: ({ opacity }) => opacity[0] / 100,
   },
   selected: {
     fill: important(PLOT_COLORS.brushColor),
+    fillOpacity: ({ opacity }) => opacity[1] / 100,
   },
   hidden: {
-    fillOpacity: 0.15,
+    fillOpacity: ({ opacity }) => opacity[2] / 100,
   },
   notDisplayed: {
     width: ({ width, margin }) => width - margin.width,

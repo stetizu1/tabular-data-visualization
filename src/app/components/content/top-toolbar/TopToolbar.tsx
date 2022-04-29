@@ -1,5 +1,5 @@
 import { Dispatch, FunctionComponent, SetStateAction } from 'react'
-import { FormatColorReset, Menu } from '@mui/icons-material'
+import { AutoFixOff, Menu } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 import { Info } from '@mui/icons-material'
 
@@ -44,7 +44,7 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
         />
         <div className={classes.separator} />
         <ClickableButton
-          icon={<FormatColorReset />}
+          icon={<AutoFixOff />}
           onClick={clearBrushes}
           disabled={!isBrushingActive}
           label={TOP_TOOLBAR_TEXT.labelClearBrushes}

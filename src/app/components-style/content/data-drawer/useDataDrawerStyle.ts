@@ -16,6 +16,9 @@ export const useDataDrawerStyle = makeStyles({
     '& hr': {
       width: `100%`,
     },
+    '& .MuiSelect-select': {
+      padding: px(10, 12, 8),
+    },
   },
   header: {},
   chevron: {

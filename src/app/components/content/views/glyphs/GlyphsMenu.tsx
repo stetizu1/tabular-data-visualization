@@ -4,7 +4,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
+import { glyphSizeKey, glyphSpacingKey, GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 import { MenuProps } from '../../../../types/views/MenuProps'
 
 import {
@@ -13,7 +13,7 @@ import {
   getPossibleQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
-import { GLYPHS_DEFAULT_MARGIN, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
+import { GLYPHS_DEFAULT, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/glyphs'
@@ -24,6 +24,8 @@ import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { SortSelector } from '../../data-drawer/items/SortSelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
+import { NumberInput } from '../../data-drawer/items/NumberInput'
+import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 
 export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const classes = useDataDrawerMenuStyle()
@@ -47,7 +49,7 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
         sortAttribute: defaultSortAttribute,
         categoryAttribute: defaultCategoryAttribute,
         colorCategory: schemeCategory10,
-        margins: GLYPHS_DEFAULT_MARGIN,
+        ...GLYPHS_DEFAULT,
       }
       return { ...prev, [ViewType.Glyphs]: newGlyphs }
     })
@@ -103,6 +105,28 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
               </AccordionSummary>
               <AccordionDetails>
                 <MarginInput margins={glyphSettings.margins} setSettings={setSettings} viewType={ViewType.Glyphs} />
+                <hr />
+                <NumberInput
+                  value={glyphSettings.glyphSize}
+                  valueKey={glyphSizeKey}
+                  setSettings={setSettings}
+                  label={GLYPHS_MENU_TEXT.glyphSize}
+                  viewType={ViewType.Glyphs}
+                />
+                <NumberInput
+                  value={glyphSettings.glyphSpacing}
+                  valueKey={glyphSpacingKey}
+                  setSettings={setSettings}
+                  label={GLYPHS_MENU_TEXT.glyphSpacing}
+                  viewType={ViewType.Glyphs}
+                />
+                <hr />
+                <OpacityInput
+                  header={GLYPHS_MENU_TEXT.opacity}
+                  opacity={glyphSettings.opacity}
+                  setSettings={setSettings}
+                  viewType={ViewType.Glyphs}
+                />
               </AccordionDetails>
             </Accordion>
           </>

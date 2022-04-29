@@ -1,5 +1,5 @@
 import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react'
-import { AutoFixNormal } from '@mui/icons-material'
+import { AutoGraph } from '@mui/icons-material'
 
 import { DataType, SelectableDataType } from '../../../../../types/data/data'
 
@@ -72,7 +72,7 @@ export const FileReader: FunctionComponent<FileReaderProps> = ({ setDataset, set
         confirmText={text.alertDialog.confirm}
         alert={true}
       />
-      <ClickableButton onClick={handleMagicClick} icon={<AutoFixNormal />} label={text.sampleDataLabel} />
+      <ClickableButton onClick={handleMagicClick} icon={<AutoGraph />} label={text.sampleDataLabel} />
       <input
         className={useFileReaderStyle().input}
         type="file"

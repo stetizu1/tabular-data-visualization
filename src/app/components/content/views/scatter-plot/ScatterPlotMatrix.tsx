@@ -56,9 +56,7 @@ import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatt
 import { useScatterPlotMatrixStyle } from '../../../../components-style/content/views/scatter-plot/useScatterPlotMatrixStyle'
 import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 
-export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {
-  dataPointSize?: number
-}
+export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {}
 
 export const DATA_POINT = `dataPoint`
 export const AXIS_X = `axisX`
@@ -69,7 +67,6 @@ export const SPACING = {
   HORIZONTAL: 12,
   VERTICAL: 12,
 }
-export const DEFAULT_DATA_POINT_SIZE = 4
 export const TICKS = {
   X: 6,
   Y: 6,
@@ -86,19 +83,20 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   setComponentBrushing,
   isBrushingActive,
   colorCategory,
-  dataPointSize = DEFAULT_DATA_POINT_SIZE,
+  pointSize,
   margins,
   isDetailsVisible,
+  opacity,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
-  const classes = useScatterPlotMatrixStyle({ width, height, margin })
+  const classes = useScatterPlotMatrixStyle({ width, height, margin, opacity })
   const { tooltip: tooltipClass } = useTooltipStyle()
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
   const [innerWidth, innerHeight] = [width - margin.width, height - margin.height]
 
-  selectAll(getClass(classes.dataPoint))
+  selectAll(getClass(DATA_POINT))
     .classed(classes.selected, (d) => (d as SelectableDataType).selected)
     .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
@@ -181,8 +179,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         .append(SVG.elements.circle)
         .attr(SVG.attributes.cx, getCx)
         .attr(SVG.attributes.cy, getCy)
-        .attr(SVG.attributes.r, dataPointSize)
-        .attr(SVG.attributes.class, classes.dataPoint)
+        .attr(SVG.attributes.r, pointSize)
+        .attr(SVG.attributes.class, [classes.dataPoint, DATA_POINT].join(` `))
         .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
           tooltip.transition().duration(TOOLTIP.EASE_IN).style(SVG.style.opacity, TOOLTIP.VISIBLE)
           tooltip
@@ -283,12 +281,12 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     displayAttributes,
     setComponentBrushing,
     registerCleanBrushing,
-    dataPointSize,
+    pointSize,
     color,
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createScatterPlotMatrix(), [displayAttributes, categoryAttribute, innerWidth, innerHeight])
+  useEffect(() => createScatterPlotMatrix(), [displayAttributes, categoryAttribute, innerWidth, innerHeight, pointSize])
   displayDetails(isDetailsVisible, tooltipClass)
   displayDetails(isDetailsVisible, classes.duplicates)
 

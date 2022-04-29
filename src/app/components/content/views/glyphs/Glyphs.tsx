@@ -29,11 +29,7 @@ import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 import { useGlyphsStyle } from '../../../../components-style/content/views/glyphs/useGlyphsStyle'
 import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 
-const GLYPH_SPACING = 3
-
-export interface GlyphsProps extends VisualizationView, Highlightable, GlyphsSettings {
-  glyphSize?: number
-}
+export interface GlyphsProps extends VisualizationView, Highlightable, GlyphsSettings {}
 
 const GLYPHS = `glyphs`
 
@@ -46,25 +42,27 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   isBrushingActive,
   sortAttribute,
   colorCategory,
-  glyphSize = 40,
+  glyphSize,
+  glyphSpacing,
   margins,
   isDetailsVisible,
+  opacity,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
-  const classes = useGlyphsStyle({ width, height, margin })
+  const classes = useGlyphsStyle({ width, height, margin, opacity })
   const { tooltip: tooltipClass } = useTooltipStyle()
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
   const innerWidth = width - margin.width
-  const glyphSizeWithSpacing = glyphSize + GLYPH_SPACING
+  const glyphSizeWithSpacing = glyphSize + glyphSpacing
   const glyphsCountPerLine = Math.floor(innerWidth / glyphSizeWithSpacing)
   const glyphsCountPerHeight = Math.ceil(dataset.length / glyphsCountPerLine)
   const innerHeight = glyphsCountPerHeight * glyphSizeWithSpacing
   const glyphRadius = glyphSize / 2
 
   // selected coloring
-  selectAll(getClass(classes.glyph))
+  selectAll(getClass(GLYPHS))
     .classed(classes.selected, (d) => (d as SelectableDataType).selected)
     .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
@@ -117,7 +115,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
           .data([data])
           .enter()
           .append(SVG.elements.path)
-          .attr(SVG.attributes.class, classes.glyph)
+          .attr(SVG.attributes.class, [classes.glyph, GLYPHS].join(` `))
           .attr(SVG.attributes.d, getGlyphPath)
           .attr(SVG.attributes.transform, getTransform)
           .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
