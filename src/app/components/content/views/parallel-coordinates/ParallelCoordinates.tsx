@@ -27,10 +27,7 @@ import {
 import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 import { SVG } from '../../../../constants/svg'
-import {
-  MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT,
-  PARALLEL_COORDINATES_DEFAULT_MARGIN,
-} from '../../../../constants/views/parallelCoordinates'
+import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelCoordinates'
 import { MouseActions } from '../../../../constants/actions/MouseActions'
 import { TOOLTIP } from '../../../../constants/views/tooltip'
 import { HTML } from '../../../../constants/html'
@@ -45,10 +42,6 @@ import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 const BRUSH_WIDTH = 30
 const BRUSH_RADIUS = BRUSH_WIDTH / 2
 const BRUSH_OVERLAP = 5
-const TEXT_SPACING = {
-  LEFT: 26,
-  RIGHT: 9,
-}
 const TEXT_Y_SHIFT = 10
 
 const PARALLEL_COORDINATES = `PARALLEL_COORDINATES`
@@ -67,7 +60,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   setComponentBrushing,
   isBrushingActive,
   colorCategory,
-  margins = PARALLEL_COORDINATES_DEFAULT_MARGIN,
+  margins,
   isDetailsVisible,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
@@ -76,10 +69,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
   const upperPadding = TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
-  const [innerWidth, innerHeight] = [
-    width - margin.width - (TEXT_SPACING.LEFT + TEXT_SPACING.RIGHT),
-    height - margin.height - upperPadding,
-  ]
+  const [innerWidth, innerHeight] = [width - margin.width, height - margin.height - upperPadding]
 
   // selected coloring
   selectAll(getClass(classes.line))
@@ -205,7 +195,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createParallelCoordinates(), [displayAttributes, categoryAttribute])
+  useEffect(() => createParallelCoordinates(), [displayAttributes, categoryAttribute, innerWidth, innerHeight])
   displayDetails(isDetailsVisible, tooltipClass)
 
   if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {
@@ -216,7 +206,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
             ref={component}
             width={innerWidth}
             height={innerHeight}
-            transform={getTranslate([margin.left + TEXT_SPACING.LEFT, margin.top + upperPadding])}
+            transform={getTranslate([margin.left, margin.top + upperPadding])}
           />
         </svg>
         <div className={tooltipClass} />

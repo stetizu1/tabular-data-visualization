@@ -1,5 +1,7 @@
 import { FunctionComponent, useCallback, useEffect, useState } from 'react'
 import { schemeCategory10 } from 'd3'
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material'
+import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { BrushableMenuProps } from '../../../../types/views/MenuProps'
@@ -12,14 +14,18 @@ import {
 } from '../../../../helpers/data/data'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
+import {
+  MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT,
+  SCATTER_PLOT_MATRIX_DEFAULT_MARGIN,
+} from '../../../../constants/views/scatterPlotMatrix'
 
 import { SCATTER_PLOT_MATRIX_MENU_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
-import { useDataDrawerStyle } from '../../../../components-style/content/data-drawer/useDataDrawerStyle'
+import { useDataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/useDataDrawerMenuStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
-import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
+import { MarginInput } from '../../data-drawer/items/MarginInput'
 
 export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
   dataset,
@@ -27,7 +33,7 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
   setSettings,
   cleanSelectedIfViewWasBrushing,
 }) => {
-  const { drawerItem, insufficientAttributeNum } = useDataDrawerStyle()
+  const classes = useDataDrawerMenuStyle()
   const scatterPlotMatrixSettings = settings[ViewType.ScatterPlotMatrix]
 
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
@@ -46,6 +52,7 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
         displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
         categoryAttribute: defaultCategoryAttribute,
         colorCategory: schemeCategory10,
+        margins: SCATTER_PLOT_MATRIX_DEFAULT_MARGIN,
       }
       return { ...prev, [ViewType.ScatterPlotMatrix]: newScatterPlotMatrix }
     })
@@ -60,7 +67,7 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
 
   if (scatterPlotMatrixSettings) {
     return (
-      <div className={drawerItem}>
+      <div className={classes.drawerMenu}>
         <h1>{SCATTER_PLOT_MATRIX_MENU_TEXT.header}</h1>
         {possibleQuantitativeAttributesKeys.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT ? (
           <>
@@ -81,9 +88,21 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
               setSettings={setSettings}
               label={SCATTER_PLOT_MATRIX_MENU_TEXT.category}
             />
+            <Accordion className={classes.accordion}>
+              <AccordionSummary expandIcon={<ExpandMore />}>
+                <Typography>{SCATTER_PLOT_MATRIX_MENU_TEXT.more}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MarginInput
+                  margins={scatterPlotMatrixSettings.margins}
+                  setSettings={setSettings}
+                  viewType={ViewType.ScatterPlotMatrix}
+                />
+              </AccordionDetails>
+            </Accordion>
           </>
         ) : (
-          <div className={insufficientAttributeNum}>{SCATTER_PLOT_MATRIX_MENU_TEXT.unavailable}</div>
+          <div className={classes.insufficientAttributeNum}>{SCATTER_PLOT_MATRIX_MENU_TEXT.unavailable}</div>
         )}
       </div>
     )

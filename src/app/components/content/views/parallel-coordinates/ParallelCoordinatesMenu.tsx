@@ -1,5 +1,7 @@
 import { FunctionComponent, useCallback, useEffect, useState } from 'react'
 import { schemeCategory10 } from 'd3'
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material'
+import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { ParallelCoordinatesSettings } from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
@@ -11,15 +13,19 @@ import {
   getPossibleQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
-import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelCoordinates'
+import {
+  MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT,
+  PARALLEL_COORDINATES_DEFAULT_MARGIN,
+} from '../../../../constants/views/parallelCoordinates'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { PARALLEL_COORDINATES_MENU_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
 
-import { useDataDrawerStyle } from '../../../../components-style/content/data-drawer/useDataDrawerStyle'
+import { useDataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/useDataDrawerMenuStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
+import { MarginInput } from '../../data-drawer/items/MarginInput'
 
 export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
   dataset,
@@ -27,7 +33,7 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
   setSettings,
   cleanSelectedIfViewWasBrushing,
 }) => {
-  const { drawerItem, insufficientAttributeNum } = useDataDrawerStyle()
+  const classes = useDataDrawerMenuStyle()
   const parallelCoordinatesSettings = settings[ViewType.ParallelCoordinates]
 
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
@@ -46,6 +52,7 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
         displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
         categoryAttribute: defaultCategoryAttribute,
         colorCategory: schemeCategory10,
+        margins: PARALLEL_COORDINATES_DEFAULT_MARGIN,
       }
       return { ...prev, [ViewType.ParallelCoordinates]: newParallelCoordinates }
     })
@@ -60,7 +67,7 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
 
   if (parallelCoordinatesSettings) {
     return (
-      <div className={drawerItem}>
+      <div className={classes.drawerMenu}>
         <h1>{PARALLEL_COORDINATES_MENU_TEXT.header}</h1>
         {possibleQuantitativeAttributesKeys.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT ? (
           <>
@@ -81,9 +88,21 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
               setSettings={setSettings}
               label={PARALLEL_COORDINATES_MENU_TEXT.category}
             />
+            <Accordion className={classes.accordion}>
+              <AccordionSummary expandIcon={<ExpandMore />}>
+                <Typography>{PARALLEL_COORDINATES_MENU_TEXT.more}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MarginInput
+                  margins={parallelCoordinatesSettings.margins}
+                  setSettings={setSettings}
+                  viewType={ViewType.ParallelCoordinates}
+                />
+              </AccordionDetails>
+            </Accordion>
           </>
         ) : (
-          <div className={insufficientAttributeNum}>{PARALLEL_COORDINATES_MENU_TEXT.unavailable}</div>
+          <div className={classes.insufficientAttributeNum}>{PARALLEL_COORDINATES_MENU_TEXT.unavailable}</div>
         )}
       </div>
     )

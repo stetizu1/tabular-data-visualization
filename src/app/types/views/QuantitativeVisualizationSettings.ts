@@ -1,4 +1,5 @@
 import { SelectableDataType } from '../data/data'
+import { MarginArray } from '../styling/Margin'
 
 /**
  * General settings for quantitative visualization
@@ -16,4 +17,9 @@ export interface QuantitativeVisualizationSettings {
    * Category attribute for coloring
    */
   categoryAttribute: keyof SelectableDataType | undefined
+
+  /**
+   * View margin inside svg
+   */
+  margins: MarginArray
 }

@@ -25,6 +25,7 @@ export const DATA_DRAWER_COLORS = {
   border: `#363a46`,
   icon: `#c4cbdc`,
   drawerItemBackground: `#edf1fd`,
+  drawerItemBackgroundDimmed: `#e4eafd`,
   drawerItemBorder: `#8e94a2`,
   label: `#404242`,
 }

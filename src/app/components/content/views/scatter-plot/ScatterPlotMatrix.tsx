@@ -46,10 +46,7 @@ import { displayDetails } from '../../../../helpers/d3/displayDetails'
 import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 import { SVG } from '../../../../constants/svg'
-import {
-  MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT,
-  SCATTER_PLOT_DEFAULT_MARGIN,
-} from '../../../../constants/views/scatterPlotMatrix'
+import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
 import { MouseActions } from '../../../../constants/actions/MouseActions'
 import { TOOLTIP } from '../../../../constants/views/tooltip'
 import { HTML } from '../../../../constants/html'
@@ -90,7 +87,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   isBrushingActive,
   colorCategory,
   dataPointSize = DEFAULT_DATA_POINT_SIZE,
-  margins = SCATTER_PLOT_DEFAULT_MARGIN,
+  margins,
   isDetailsVisible,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
@@ -291,7 +288,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createScatterPlotMatrix(), [displayAttributes, categoryAttribute])
+  useEffect(() => createScatterPlotMatrix(), [displayAttributes, categoryAttribute, innerWidth, innerHeight])
   displayDetails(isDetailsVisible, tooltipClass)
   displayDetails(isDetailsVisible, classes.duplicates)
 

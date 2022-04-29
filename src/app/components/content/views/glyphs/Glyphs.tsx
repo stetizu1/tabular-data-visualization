@@ -19,7 +19,7 @@ import {
 } from '../../../../helpers/d3/stringGetters'
 
 import { SVG } from '../../../../constants/svg'
-import { GLYPHS_DEFAULT_MARGIN, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
+import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 import { TOOLTIP } from '../../../../constants/views/tooltip'
 import { MouseActions } from '../../../../constants/actions/MouseActions'
 import { HTML } from '../../../../constants/html'
@@ -47,7 +47,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   sortAttribute,
   colorCategory,
   glyphSize = 40,
-  margins = GLYPHS_DEFAULT_MARGIN,
+  margins,
   isDetailsVisible,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
@@ -148,7 +148,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   ])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createGlyphs(), [displayAttributes, categoryAttribute, sortAttribute])
+  useEffect(() => createGlyphs(), [displayAttributes, categoryAttribute, sortAttribute, innerWidth, innerHeight])
   displayDetails(isDetailsVisible, tooltipClass)
 
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {

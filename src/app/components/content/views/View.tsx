@@ -46,6 +46,7 @@ export const View: FunctionComponent<ViewProps> = ({
     displayAttributes: defaultDisplayAttributes,
     colorCategory: defaultColors,
     categoryAttribute: undefined,
+    margins: [0, 0, 0, 0],
   }
   return <div className={classes.box}>{graph({ width, height, ...dataProps }, settingsCurr)}</div>
 }

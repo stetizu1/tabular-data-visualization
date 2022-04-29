@@ -1,5 +1,4 @@
 import { SelectableDataType } from '../data/data'
-import { MarginArray } from '../styling/Margin'
 import { Dimensions } from '../basic/dimensions'
 
 /**
@@ -10,10 +9,6 @@ export interface VisualizationView extends Dimensions {
    * Array of rows from loaded tabular data with selected flag. It should be immutable in views, with the exception of selected attribute
    */
   dataset: ReadonlyArray<SelectableDataType>
-  /**
-   * View margin inside svg
-   */
-  margins?: MarginArray
 
   /**
    * Says if data details are visible on hover

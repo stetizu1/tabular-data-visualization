@@ -1,5 +1,7 @@
 import { FunctionComponent, useCallback, useEffect, useState } from 'react'
 import { schemeCategory10 } from 'd3'
+import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material'
+import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
@@ -11,19 +13,20 @@ import {
   getPossibleQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
-import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
+import { GLYPHS_DEFAULT_MARGIN, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/glyphs'
 
-import { useDataDrawerStyle } from '../../../../components-style/content/data-drawer/useDataDrawerStyle'
+import { useDataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/useDataDrawerMenuStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { SortSelector } from '../../data-drawer/items/SortSelector'
+import { MarginInput } from '../../data-drawer/items/MarginInput'
 
 export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
-  const { drawerItem, insufficientAttributeNum } = useDataDrawerStyle()
+  const classes = useDataDrawerMenuStyle()
   const glyphSettings = settings[ViewType.Glyphs]
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
@@ -44,6 +47,7 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
         sortAttribute: defaultSortAttribute,
         categoryAttribute: defaultCategoryAttribute,
         colorCategory: schemeCategory10,
+        margins: GLYPHS_DEFAULT_MARGIN,
       }
       return { ...prev, [ViewType.Glyphs]: newGlyphs }
     })
@@ -66,7 +70,7 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
 
   if (glyphSettings) {
     return (
-      <div className={drawerItem}>
+      <div className={classes.drawerMenu}>
         <h1>{GLYPHS_MENU_TEXT.header}</h1>
         {possibleQuantitativeAttributesKeys.length >= MIN_GLYPHS_ATTRIBUTE_COUNT ? (
           <>
@@ -93,9 +97,17 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
               setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.sorting}
             />
+            <Accordion className={classes.accordion}>
+              <AccordionSummary expandIcon={<ExpandMore />}>
+                <Typography>{GLYPHS_MENU_TEXT.more}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <MarginInput margins={glyphSettings.margins} setSettings={setSettings} viewType={ViewType.Glyphs} />
+              </AccordionDetails>
+            </Accordion>
           </>
         ) : (
-          <div className={insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</div>
+          <div className={classes.insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</div>
         )}
       </div>
     )
