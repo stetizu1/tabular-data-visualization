@@ -33,6 +33,10 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
+  useEffect(() => {
+    setChecked(getDefaultAttributesChecked(dataset))
+  }, [dataset])
+
   const sortableAttributes = possibleQuantitativeAttributesKeys.filter((key) => checked[key])
   const defaultSortAttribute = sortableAttributes?.[0]
 
@@ -56,7 +60,7 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
   }, [checked, possibleQuantitativeAttributesKeys, defaultSortAttribute, defaultCategoryAttribute, setSettings])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createGlyphsMenu(), []) // first time empty, call once
+  useEffect(() => createGlyphsMenu(), [checked]) // first time empty, call once
 
   const getNewSettingsForAttributeChecker = (
     newChecked: CheckedForSelectableDataType,

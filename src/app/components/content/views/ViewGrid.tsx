@@ -1,11 +1,9 @@
-import { FunctionComponent, useState } from 'react'
+import { Dispatch, FunctionComponent, SetStateAction } from 'react'
 
 import { Brushable } from '../../../types/brushing/Brushable'
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
 import { DataLoadState } from '../../../constants/data/dataLoadState'
-
-import { getDefaultQuantitativeAttributesKeys } from '../../../helpers/data/data'
 
 import { ViewType } from '../../../constants/views/ViewTypes'
 
@@ -28,6 +26,8 @@ export interface ViewGridProps extends ViewGridDataProps {
   isDetailsVisible: boolean
   closeDrawer: SideEffectVoid
   cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
+  settings: Settings
+  setSettings: Dispatch<SetStateAction<Settings>>
 }
 
 export const ViewGrid: FunctionComponent<ViewGridProps> = ({
@@ -36,25 +36,15 @@ export const ViewGrid: FunctionComponent<ViewGridProps> = ({
   isDrawerOpen,
   closeDrawer,
   cleanSelectedIfViewWasBrushing,
+  settings,
+  setSettings,
   ...viewProps
 }) => {
   const classes = useViewGridStyle()
-  const [settings, setSettings] = useState<Settings>({})
-  const [defaultDisplayAttributes, setDefaultDisplayAttributes] = useState<Array<keyof SelectableDataType> | null>(null)
-
-  // reset if dataset is removed
-  if (!dataset && defaultDisplayAttributes) {
-    setSettings({})
-    setDefaultDisplayAttributes(null)
-  }
-  if (dataset && !defaultDisplayAttributes) {
-    setDefaultDisplayAttributes(getDefaultQuantitativeAttributesKeys(dataset))
-  }
 
   const getContent = (dataset: ReadonlyArray<SelectableDataType>) => {
     const allViewProps = {
       ...viewProps,
-      settings,
       dataset,
     }
     const views = [ViewType.ParallelCoordinates, ViewType.ScatterPlotMatrix, ViewType.Glyphs]
@@ -69,18 +59,32 @@ export const ViewGrid: FunctionComponent<ViewGridProps> = ({
           setSettings={setSettings}
           cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
         />
-        <div className={classes.column}>
-          <View width={960} height={400} component={ViewType.ParallelCoordinates} {...allViewProps} />
-          <View width={960} height={960} component={ViewType.ScatterPlotMatrix} {...allViewProps} />
-          <View width={960} height={620} component={ViewType.Glyphs} {...allViewProps} />
-        </div>
+        {settings !== null && (
+          <div className={classes.column}>
+            <View
+              width={960}
+              height={400}
+              component={ViewType.ParallelCoordinates}
+              settings={settings}
+              {...allViewProps}
+            />
+            <View
+              width={960}
+              height={960}
+              component={ViewType.ScatterPlotMatrix}
+              settings={settings}
+              {...allViewProps}
+            />
+            <View width={960} height={620} component={ViewType.Glyphs} settings={settings} {...allViewProps} />
+          </div>
+        )}
       </>
     )
   }
   if (dataLoadState === DataLoadState.NoData) {
     return <EmptyData />
   }
-  if (dataLoadState === DataLoadState.Loading || (dataset && !defaultDisplayAttributes)) {
+  if (dataLoadState === DataLoadState.Loading) {
     return <Loading />
   }
   return getContent(dataset!)

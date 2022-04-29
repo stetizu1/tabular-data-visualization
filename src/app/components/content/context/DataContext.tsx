@@ -11,6 +11,7 @@ import { ViewType } from '../../../constants/views/ViewTypes'
 
 import { TopToolbar } from '../top-toolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
+import { Settings } from '../views/Settings'
 
 export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<ReadonlyArray<SelectableDataType> | null>(null)
@@ -20,11 +21,13 @@ export const DataContext: FunctionComponent = () => {
   const [redrawTime, setRedrawTime] = useState(Date.now())
   const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
   const [isDetailsVisible, setIsDetailsVisible] = useState(true)
+  const [settings, setSettings] = useState<Settings>({})
 
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
 
   const setDatasetAndRemoveBrushing = (data: ReadonlyArray<SelectableDataType> | null) => {
+    setSettings({})
     setDataset(data)
     setCurrentComponentBrushing(null)
   }
@@ -91,6 +94,8 @@ export const DataContext: FunctionComponent = () => {
         isDetailsVisible={isDetailsVisible}
         closeDrawer={() => setDrawerOpen(false)}
         cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+        settings={settings}
+        setSettings={setSettings}
         {...viewProps}
       />
     </>

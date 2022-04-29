@@ -39,12 +39,9 @@ export const FileReader: FunctionComponent<FileReaderProps> = ({ setDataset, set
   const text = TOP_TOOLBAR_TEXT.fileReader
   const optionsKeys = Object.values(SampleDataset)
   const handleMagicClick = () => {
-    setDataLoadState(DataLoadState.NoData)
-    setDataset(null)
     setIsSampleDataDialogOpen(true)
   }
   const handleListItemClick = (optionKey: SampleDataset) => {
-    setDataLoadState(DataLoadState.Loading)
     setIsSampleDataDialogOpen(false)
     const dataset = sampleDatasets[optionKey]
     setDataset(addSelected(dataset))

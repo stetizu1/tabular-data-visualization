@@ -1,5 +1,5 @@
 import { Dispatch, FunctionComponent, SetStateAction } from 'react'
-import { AutoFixOff, Menu } from '@mui/icons-material'
+import { AutoFixOff, Settings } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 import { Info } from '@mui/icons-material'
 
@@ -53,7 +53,7 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
       <div>
         <FileReader setDataset={setDataset} setDataLoadState={setDataLoadState} />
         <IconButton size="small" disabled={openDrawerDisabled} onClick={openDrawer}>
-          <Menu />
+          <Settings />
         </IconButton>
       </div>
     </div>
