@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles'
 import { important, px } from '../../../../../helpers/d3/stringGetters'
 import { BUTTON_COLORS } from '../../../../../styles/colors'
 
-export const useButton = makeStyles({
+export const useButtonStyle = makeStyles({
   button: {
     margin: important(px(0, 7)),
     padding: important(px(4)),

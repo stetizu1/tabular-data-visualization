@@ -3,3 +3,8 @@ export enum DataLoadState {
   Loading = `loading`,
   Loaded = `loaded`,
 }
+
+export enum DataLoadError {
+  unsupportedFile = `unsupportedFile`,
+  unsupportedFileFormat = `unsupportedFileFormat`,
+}
