@@ -11,7 +11,7 @@ export interface VisualizationView extends Dimensions {
   dataset: ReadonlyArray<SelectableDataType>
 
   /**
-   * Says if data details are visible on hover
+   * True if data details are visible on hover
    */
   isDetailsVisible?: boolean
 }

@@ -27,6 +27,7 @@ export const DataContext: FunctionComponent = () => {
 
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [isDetailsVisible, setIsDetailsVisible] = useState(true)
+  const [isBrushingOnEndOfMove, setIsBrushingOnEndOfMove] = useState(false)
 
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
@@ -70,6 +71,12 @@ export const DataContext: FunctionComponent = () => {
     setCurrentComponentBrushing(null)
   }
 
+  const setIsBrushingOnEndOfMoveAndRemoveBrushing = (newIsBrushingOnEndOfMove: boolean) => {
+    cleanAllBrushes()
+    setCurrentComponentBrushing(null)
+    setIsBrushingOnEndOfMove(newIsBrushingOnEndOfMove)
+  }
+
   const isBrushingActive = componentBrushingRef.current !== null
 
   const viewProps = {
@@ -78,6 +85,7 @@ export const DataContext: FunctionComponent = () => {
     setDataSelected,
     redrawTime,
     isBrushingActive,
+    isBrushingOnEndOfMove,
   }
 
   const getViewGrid = () => {
@@ -104,14 +112,16 @@ export const DataContext: FunctionComponent = () => {
   return (
     <>
       <TopToolbar
-        setDataset={setDatasetAndRemoveBrushing}
-        isToolsDisabled={dataset === null}
         openDrawer={() => setDrawerOpen(true)}
-        setDataLoadState={setDataLoadState}
+        isToolsDisabled={dataset === null}
         isDetailsVisible={isDetailsVisible}
         setIsDetailsVisible={setIsDetailsVisible}
+        isBrushingOnEndOfMove={isBrushingOnEndOfMove}
+        setIsBrushingOnEndOfMove={setIsBrushingOnEndOfMoveAndRemoveBrushing}
         isBrushingActive={isBrushingActive}
         clearBrushes={clearBrushesOnButton}
+        setDataset={setDatasetAndRemoveBrushing}
+        setDataLoadState={setDataLoadState}
       />
       {getViewGrid()}
     </>

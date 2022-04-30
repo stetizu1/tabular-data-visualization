@@ -60,10 +60,11 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   registerCleanBrushing,
   setComponentBrushing,
   isBrushingActive,
-  colorCategory,
-  margins,
   isDetailsVisible,
+  isBrushingOnEndOfMove,
+  colorCategory,
   lineWidth,
+  margins,
   opacity,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
@@ -118,8 +119,10 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         setComponentBrushing(ViewType.ParallelCoordinates)
       })
       .on(BrushAction.move, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
-        selections[axisName] = brushEvent.selection as BrushSelection1d
-        setBrushingSelection()
+        if (!isBrushingOnEndOfMove) {
+          selections[axisName] = brushEvent.selection as BrushSelection1d
+          setBrushingSelection()
+        }
       })
       .on(BrushAction.end, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
         selections[axisName] = brushEvent.selection as BrushSelection1d
@@ -189,21 +192,22 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     dataset,
     innerWidth,
     innerHeight,
-    classes,
-    tooltipClass,
+    setDataSelected,
     categoryAttribute,
     displayAttributes,
-    setDataSelected,
     setComponentBrushing,
     registerCleanBrushing,
-    color,
+    isBrushingOnEndOfMove,
     lineWidth,
+    color,
+    classes,
+    tooltipClass,
   ])
 
   useEffect(
     () => createParallelCoordinates(),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [displayAttributes, categoryAttribute, innerWidth, innerHeight, lineWidth],
+    [displayAttributes, categoryAttribute, innerWidth, innerHeight, lineWidth, isBrushingOnEndOfMove],
   )
   displayDetails(isDetailsVisible, tooltipClass)
 

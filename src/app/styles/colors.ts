@@ -11,7 +11,7 @@ export const FOOTER_COLORS = {
 export const TOP_TOOLBAR_COLORS = {
   background: `#363a46`,
   font: `#bcc7e7`,
-  border: `#57607a`,
+  border: `rgba(72, 80, 100, 0.8)`,
 }
 
 export const BUTTON_COLORS = {

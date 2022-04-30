@@ -3,9 +3,11 @@ import { ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material'
 
 import { useButtonStyle } from '../../../../../components-style/content/top-toolbar/items/buttons/useButtonStyle'
 
+type SetValue = Dispatch<SetStateAction<boolean>> | ((newValue: boolean) => void)
+
 export interface ToggleButtonProps {
   value: boolean
-  setValue: Dispatch<SetStateAction<boolean>>
+  setValue: SetValue
   icon: JSX.Element
   label: string
   disabled?: boolean

@@ -82,10 +82,11 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   registerCleanBrushing,
   setComponentBrushing,
   isBrushingActive,
+  isDetailsVisible,
+  isBrushingOnEndOfMove,
   colorCategory,
   pointSize,
   margins,
-  isDetailsVisible,
   opacity,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
@@ -238,8 +239,10 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         }
       })
       .on(BrushAction.move, ({ selection }: D3BrushEvent<SelectableDataType>, matrixItem: MatrixItem) => {
-        const brushSelection = selection as BrushSelection2d
-        setBrushingSelection(matrixItem, brushSelection)
+        if (!isBrushingOnEndOfMove) {
+          const brushSelection = selection as BrushSelection2d
+          setBrushingSelection(matrixItem, brushSelection)
+        }
       })
       .on(BrushAction.end, ({ selection }: D3BrushEvent<SelectableDataType>, matrixItem: MatrixItem) => {
         const brushSelection = selection as BrushSelection2d
@@ -274,19 +277,23 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     dataset,
     innerWidth,
     innerHeight,
-    classes,
-    tooltipClass,
     setDataSelected,
     categoryAttribute,
     displayAttributes,
     setComponentBrushing,
     registerCleanBrushing,
+    isBrushingOnEndOfMove,
     pointSize,
     color,
+    classes,
+    tooltipClass,
   ])
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createScatterPlotMatrix(), [displayAttributes, categoryAttribute, innerWidth, innerHeight, pointSize])
+  useEffect(
+    () => createScatterPlotMatrix(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [displayAttributes, categoryAttribute, innerWidth, innerHeight, pointSize, isBrushingOnEndOfMove],
+  )
   displayDetails(isDetailsVisible, tooltipClass)
   displayDetails(isDetailsVisible, classes.duplicates)
 

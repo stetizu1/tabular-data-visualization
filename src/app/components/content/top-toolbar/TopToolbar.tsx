@@ -1,5 +1,5 @@
 import { Dispatch, FunctionComponent, SetStateAction } from 'react'
-import { AutoFixOff } from '@mui/icons-material'
+import { AutoFixOff, SkipNext } from '@mui/icons-material'
 import { Info } from '@mui/icons-material'
 
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
@@ -16,8 +16,12 @@ import { OpenSettingsButton } from './items/buttons/OpenSettingsButton'
 export interface TopToolbarProps extends FileReaderDataProps {
   openDrawer: SideEffectVoid
   isToolsDisabled: boolean
+
   isDetailsVisible: boolean
   setIsDetailsVisible: Dispatch<SetStateAction<boolean>>
+  isBrushingOnEndOfMove: boolean
+  setIsBrushingOnEndOfMove: (newIsBrushingOnEndOfMove: boolean) => void
+
   isBrushingActive: boolean
   clearBrushes: () => void
 }
@@ -27,6 +31,8 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
   isToolsDisabled,
   isDetailsVisible,
   setIsDetailsVisible,
+  isBrushingOnEndOfMove,
+  setIsBrushingOnEndOfMove,
   isBrushingActive,
   clearBrushes,
   setDataset,
@@ -42,6 +48,13 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
           setValue={setIsDetailsVisible}
           disabled={isToolsDisabled}
           label={TOP_TOOLBAR_TEXT.labelDetailsVisible}
+        />
+        <ToggleButtonSingle
+          icon={<SkipNext />}
+          value={isBrushingOnEndOfMove}
+          setValue={setIsBrushingOnEndOfMove}
+          disabled={isToolsDisabled}
+          label={TOP_TOOLBAR_TEXT.labelBrushingOnEOM}
         />
         <div className={classes.separator} />
         <ClickableButton

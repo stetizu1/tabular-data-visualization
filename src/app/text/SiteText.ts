@@ -9,6 +9,7 @@ export const EMPTY_DATA_TEXT = {
 export const TOP_TOOLBAR_TEXT = {
   labelDetailsVisible: `Display details`,
   labelClearBrushes: `Clear brushes`,
+  labelBrushingOnEOM: `Brushing set only at the end of the move`,
   fileReader: {
     sampleDataLabel: `Try it on the sample data`,
     sampleDataDialogTitle: `Select sample dataset`,

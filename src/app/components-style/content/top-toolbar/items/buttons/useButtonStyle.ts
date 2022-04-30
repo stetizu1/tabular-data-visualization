@@ -5,7 +5,7 @@ import { BUTTON_COLORS } from '../../../../../styles/colors'
 
 export const useButtonStyle = makeStyles({
   button: {
-    margin: important(px(0, 7)),
+    margin: important(px(0, 5)),
     padding: important(px(4)),
     minWidth: important(0),
     '&.MuiButtonBase-root': {

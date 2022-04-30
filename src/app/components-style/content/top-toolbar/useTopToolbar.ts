@@ -9,15 +9,18 @@ export const useTopToolbar = makeStyles({
     padding: px(10, 0),
     display: `flex`,
     justifyContent: `space-between`,
-    alignItems: `center`,
+    alignItems: `stretch`,
     background: TOP_TOOLBAR_COLORS.background,
     color: TOP_TOOLBAR_COLORS.font,
   },
   left: {
     display: `flex`,
+    margin: px(0, 12),
+    alignItems: `center`,
   },
   separator: {
-    flexGrow: 1,
+    height: `100%`,
+    margin: px(0, 4),
     borderLeft: border(2, TOP_TOOLBAR_COLORS.border),
   },
   right: {
