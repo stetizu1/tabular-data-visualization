@@ -31,6 +31,7 @@ import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
+import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
 
 export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
   dataset,
@@ -39,7 +40,8 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
   cleanSelectedIfViewWasBrushing,
 }) => {
   const classes = useDataDrawerMenuStyle()
-  const parallelCoordinatesSettings = settings[ViewType.ParallelCoordinates]
+  const viewType = ViewType.ParallelCoordinates
+  const parallelCoordinatesSettings = settings[viewType]
 
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
@@ -81,9 +83,9 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
         {possibleQuantitativeAttributesKeys.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
-              viewType={ViewType.ParallelCoordinates}
+              viewType={viewType}
               attributesKeys={possibleQuantitativeAttributesKeys}
-              handleChangeSettings={() => cleanSelectedIfViewWasBrushing(ViewType.ParallelCoordinates)}
+              handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
               label={PARALLEL_COORDINATES_MENU_TEXT.attributes}
@@ -91,7 +93,7 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
               setChecked={setChecked}
             />
             <CategorySelector
-              viewType={ViewType.ParallelCoordinates}
+              viewType={viewType}
               value={parallelCoordinatesSettings.categoryAttribute!}
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
@@ -105,7 +107,7 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
                 <MarginInput
                   margins={parallelCoordinatesSettings.margins}
                   setSettings={setSettings}
-                  viewType={ViewType.ParallelCoordinates}
+                  viewType={viewType}
                 />
                 <hr />
                 <NumberInput
@@ -113,17 +115,18 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
                   valueKey={lineWidthKey}
                   setSettings={setSettings}
                   label={PARALLEL_COORDINATES_MENU_TEXT.lineWidth}
-                  viewType={ViewType.ParallelCoordinates}
+                  viewType={viewType}
                 />
                 <hr />
                 <OpacityInput
                   header={PARALLEL_COORDINATES_MENU_TEXT.opacity}
                   opacity={parallelCoordinatesSettings.opacity}
                   setSettings={setSettings}
-                  viewType={ViewType.ParallelCoordinates}
+                  viewType={viewType}
                 />
               </AccordionDetails>
             </Accordion>
+            <DataSaveButton viewType={viewType} />
           </>
         ) : (
           <div className={classes.insufficientAttributeNum}>{PARALLEL_COORDINATES_MENU_TEXT.unavailable}</div>

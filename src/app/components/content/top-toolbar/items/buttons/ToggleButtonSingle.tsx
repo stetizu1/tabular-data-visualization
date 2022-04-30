@@ -1,7 +1,7 @@
 import { Dispatch, FunctionComponent, MouseEvent, SetStateAction } from 'react'
 import { ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material'
 
-import { useButtonStyle } from '../../../../../components-style/content/top-toolbar/items/buttons/useButtonStyle'
+import { useTopToolbarButtonStyle } from '../../../../../components-style/content/top-toolbar/items/buttons/useTopToolbarButtonStyle'
 
 type SetValue = Dispatch<SetStateAction<boolean>> | ((newValue: boolean) => void)
 
@@ -20,7 +20,7 @@ export const ToggleButtonSingle: FunctionComponent<ToggleButtonProps> = ({
   label,
   disabled,
 }) => {
-  const classes = useButtonStyle()
+  const classes = useTopToolbarButtonStyle()
   const handleChange = (event: MouseEvent<HTMLElement>, checked: string[]) => {
     if (checked.length && checked[0] === onValue) {
       return setValue(true)

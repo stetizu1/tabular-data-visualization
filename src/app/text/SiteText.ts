@@ -30,4 +30,11 @@ export const TOP_TOOLBAR_TEXT = {
       confirm: `OK`,
     },
   },
+  saveText: {
+    header: `Save to file`,
+    description: `Do you want to save the visualization to an SVG file?`,
+    save: `Save`,
+    confirm: `Save`,
+    cancel: `Cancel`,
+  },
 }

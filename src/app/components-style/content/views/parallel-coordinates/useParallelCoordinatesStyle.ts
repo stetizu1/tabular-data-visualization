@@ -7,6 +7,8 @@ import { Dimensions } from '../../../../types/basic/dimensions'
 
 import { important } from '../../../../helpers/d3/stringGetters'
 
+import { ViewType } from '../../../../constants/views/ViewTypes'
+
 import { PLOT_COLORS } from '../../../../styles/colors'
 import { PLOT_FONT } from '../../../../styles/font'
 
@@ -16,8 +18,10 @@ export interface StyleProps extends Dimensions {
 }
 
 export const useParallelCoordinatesStyle = makeStyles<Theme, StyleProps>(() => ({
-  svg: {
+  // needed for identification while saving
+  [ViewType.ParallelCoordinates]: {
     background: PLOT_COLORS.backgroundColor,
+    font: `12px sans-serif`,
   },
   line: {
     fill: `none`,

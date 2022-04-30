@@ -13,9 +13,9 @@ import { TOP_TOOLBAR_TEXT } from '../../../../../text/SiteText'
 
 import { useFileReaderStyle } from '../../../../../components-style/content/top-toolbar/items/file-reader/useFileReaderStyle'
 
+import { SelectionDialog } from '../../../common/dialogs/SelectionDialog'
+import { InformationDialog } from '../../../common/dialogs/InformationDialog'
 import { ClickableButton } from '../buttons/ClickableButton'
-import { SelectionDialog } from '../dialogs/SelectionDialog'
-import { InformationDialog } from '../dialogs/InformationDialog'
 
 export interface FileReaderDataProps {
   setDataset: (dataset: ReadonlyArray<SelectableDataType> | null) => void

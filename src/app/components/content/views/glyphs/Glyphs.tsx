@@ -15,8 +15,8 @@ import {
   getAttributeValuesWithLabel,
   getClass,
   getEverything,
-  px,
   getTranslate,
+  px,
 } from '../../../../helpers/d3/stringGetters'
 
 import { SVG } from '../../../../constants/svg'
@@ -24,6 +24,8 @@ import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 import { TOOLTIP } from '../../../../constants/views/tooltip'
 import { MouseActions } from '../../../../constants/actions/MouseActions'
 import { HTML } from '../../../../constants/html'
+import { SAVE_ID } from '../../../../constants/save/save'
+import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
@@ -153,7 +155,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {
     return (
       <>
-        <svg width={width} height={innerHeight + margin.height} className={classes.svg}>
+        <svg width={width} height={innerHeight + margin.height} className={classes.svg} id={SAVE_ID[ViewType.Glyphs]}>
           <g ref={component} transform={getTranslate([margin.left, margin.top])} />
         </svg>
         <div className={tooltipClass} />

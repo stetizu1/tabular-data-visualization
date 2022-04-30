@@ -34,10 +34,10 @@ import {
 } from '../../../../helpers/d3/stringGetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import {
-  getMatrix,
   getCellInnerExtent,
   getCellInnerSize,
   getCellTranslateInMatrix,
+  getMatrix,
 } from '../../../../helpers/d3/matrix'
 import { isInRanges } from '../../../../helpers/basic/range'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
@@ -55,6 +55,7 @@ import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatt
 
 import { useScatterPlotMatrixStyle } from '../../../../components-style/content/views/scatter-plot/useScatterPlotMatrixStyle'
 import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
+import { SAVE_ID } from '../../../../constants/save/save'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {}
 
@@ -300,7 +301,12 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   if (displayAttributes.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT) {
     return (
       <>
-        <svg width={width} height={height} className={classes.svg}>
+        <svg
+          width={width}
+          height={height}
+          className={classes[ViewType.ScatterPlotMatrix]}
+          id={SAVE_ID[ViewType.ScatterPlotMatrix]}
+        >
           <g ref={component} transform={getTranslate([margin.left, margin.top])} />
         </svg>
         <div className={tooltipClass} />

@@ -26,10 +26,12 @@ import { SortSelector } from '../../data-drawer/items/SortSelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
+import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
 
 export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const classes = useDataDrawerMenuStyle()
-  const glyphSettings = settings[ViewType.Glyphs]
+  const viewType = ViewType.Glyphs
+  const glyphSettings = settings[viewType]
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
@@ -81,7 +83,7 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
         {possibleQuantitativeAttributesKeys.length >= MIN_GLYPHS_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
-              viewType={ViewType.Glyphs}
+              viewType={viewType}
               attributesKeys={possibleQuantitativeAttributesKeys}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
@@ -90,14 +92,14 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
               setChecked={setChecked}
             />
             <CategorySelector
-              viewType={ViewType.Glyphs}
+              viewType={viewType}
               value={glyphSettings.categoryAttribute!}
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.category}
             />
             <SortSelector
-              viewType={ViewType.Glyphs}
+              viewType={viewType}
               value={glyphSettings.sortAttribute!}
               attributesKeys={sortableAttributes}
               setSettings={setSettings}
@@ -108,31 +110,32 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
                 <Typography>{GLYPHS_MENU_TEXT.more}</Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <MarginInput margins={glyphSettings.margins} setSettings={setSettings} viewType={ViewType.Glyphs} />
+                <MarginInput margins={glyphSettings.margins} setSettings={setSettings} viewType={viewType} />
                 <hr />
                 <NumberInput
                   value={glyphSettings.glyphSize}
                   valueKey={glyphSizeKey}
                   setSettings={setSettings}
                   label={GLYPHS_MENU_TEXT.glyphSize}
-                  viewType={ViewType.Glyphs}
+                  viewType={viewType}
                 />
                 <NumberInput
                   value={glyphSettings.glyphSpacing}
                   valueKey={glyphSpacingKey}
                   setSettings={setSettings}
                   label={GLYPHS_MENU_TEXT.glyphSpacing}
-                  viewType={ViewType.Glyphs}
+                  viewType={viewType}
                 />
                 <hr />
                 <OpacityInput
                   header={GLYPHS_MENU_TEXT.opacity}
                   opacity={glyphSettings.opacity}
                   setSettings={setSettings}
-                  viewType={ViewType.Glyphs}
+                  viewType={viewType}
                 />
               </AccordionDetails>
             </Accordion>
+            <DataSaveButton viewType={viewType} />
           </>
         ) : (
           <div className={classes.insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</div>

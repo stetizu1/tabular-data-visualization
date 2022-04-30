@@ -13,7 +13,12 @@ export interface OpenSettingsButtonProps {
 export const OpenSettingsButton: FunctionComponent<OpenSettingsButtonProps> = ({ disabled, open }) => {
   const classes = useOpenSettingsButtonStyle()
   return (
-    <IconButton size="small" disabled={disabled} onClick={open} className={clsx(!disabled && classes.settings)}>
+    <IconButton
+      size="small"
+      disabled={disabled}
+      onClick={open}
+      className={clsx(classes.settings, !disabled && classes.settingsActive)}
+    >
       <Settings />
     </IconButton>
   )

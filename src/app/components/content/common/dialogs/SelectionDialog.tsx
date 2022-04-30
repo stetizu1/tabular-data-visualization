@@ -1,6 +1,6 @@
 import { Avatar, Dialog, DialogTitle, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material'
 
-import { useDialogStyle } from '../../../../../components-style/content/top-toolbar/items/dialogs/useDialogStyle'
+import { useDialogStyle } from '../../../../components-style/content/top-toolbar/items/dialogs/useDialogStyle'
 
 export interface Option<T> {
   key: T

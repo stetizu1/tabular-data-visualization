@@ -9,7 +9,7 @@ import { Dimensions } from '../../../../types/basic/dimensions'
 import { important } from '../../../../helpers/d3/stringGetters'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
-import { PLOT_FONT } from '../../../../styles/font'
+import { ViewType } from '../../../../constants/views/ViewTypes'
 
 interface StyleProps extends Dimensions {
   margin: Margin
@@ -17,9 +17,10 @@ interface StyleProps extends Dimensions {
 }
 
 export const useGlyphsStyle = makeStyles<Theme, StyleProps>(() => ({
-  svg: {
-    fontSize: PLOT_FONT.fontSize,
+  // needed for identification while saving
+  [ViewType.Glyphs]: {
     background: PLOT_COLORS.backgroundColor,
+    font: `12px sans-serif`,
   },
   glyph: {
     opacity: ({ opacity }) => opacity[0] / 100,

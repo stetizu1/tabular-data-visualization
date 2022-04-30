@@ -16,7 +16,6 @@ interface SVGType {
     class: `class`
     d: `d`
     transform: `transform`
-    opacity: `opacity`
     x: `x`
     y: `y`
     width: `width`
@@ -58,7 +57,6 @@ export const SVG: SVGType = {
     class: `class`,
     d: `d`,
     transform: `transform`,
-    opacity: `opacity`,
     x: `x`,
     y: `y`,
     width: `width`,

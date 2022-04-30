@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react'
+import clsx from 'clsx'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
-import { useDialogStyle } from '../../../../../components-style/content/top-toolbar/items/dialogs/useDialogStyle'
+
+import { useDialogStyle } from '../../../../components-style/content/top-toolbar/items/dialogs/useDialogStyle'
 
 export interface InformationDialogProps {
   isOpen: boolean
@@ -24,7 +26,7 @@ export const InformationDialog: FunctionComponent<InformationDialogProps> = ({
     <Dialog onClose={onClose} open={isOpen}>
       <DialogTitle>{title}</DialogTitle>
       <DialogContent>
-        <DialogContentText className={alert ? classes.alert : ``}>{description}</DialogContentText>
+        <DialogContentText className={clsx(alert && classes.alert)}>{description}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} autoFocus>

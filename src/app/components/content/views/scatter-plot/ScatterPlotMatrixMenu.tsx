@@ -28,6 +28,7 @@ import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
+import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
 
 export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
   dataset,
@@ -36,7 +37,8 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
   cleanSelectedIfViewWasBrushing,
 }) => {
   const classes = useDataDrawerMenuStyle()
-  const scatterPlotMatrixSettings = settings[ViewType.ScatterPlotMatrix]
+  const viewType = ViewType.ScatterPlotMatrix
+  const scatterPlotMatrixSettings = settings[viewType]
 
   const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
@@ -78,9 +80,9 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
         {possibleQuantitativeAttributesKeys.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
-              viewType={ViewType.ScatterPlotMatrix}
+              viewType={viewType}
               attributesKeys={possibleQuantitativeAttributesKeys}
-              handleChangeSettings={() => cleanSelectedIfViewWasBrushing(ViewType.ScatterPlotMatrix)}
+              handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
               label={SCATTER_PLOT_MATRIX_MENU_TEXT.attributes}
@@ -88,7 +90,7 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
               setChecked={setChecked}
             />
             <CategorySelector
-              viewType={ViewType.ScatterPlotMatrix}
+              viewType={viewType}
               value={scatterPlotMatrixSettings.categoryAttribute!}
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
@@ -102,7 +104,7 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
                 <MarginInput
                   margins={scatterPlotMatrixSettings.margins}
                   setSettings={setSettings}
-                  viewType={ViewType.ScatterPlotMatrix}
+                  viewType={viewType}
                 />
                 <hr />
                 <NumberInput
@@ -110,17 +112,18 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
                   valueKey={pointSizeKey}
                   setSettings={setSettings}
                   label={SCATTER_PLOT_MATRIX_MENU_TEXT.pointSize}
-                  viewType={ViewType.ScatterPlotMatrix}
+                  viewType={viewType}
                 />
                 <hr />
                 <OpacityInput
                   header={SCATTER_PLOT_MATRIX_MENU_TEXT.opacity}
                   opacity={scatterPlotMatrixSettings.opacity}
                   setSettings={setSettings}
-                  viewType={ViewType.ScatterPlotMatrix}
+                  viewType={viewType}
                 />
               </AccordionDetails>
             </Accordion>
+            <DataSaveButton viewType={viewType} />
           </>
         ) : (
           <div className={classes.insufficientAttributeNum}>{SCATTER_PLOT_MATRIX_MENU_TEXT.unavailable}</div>

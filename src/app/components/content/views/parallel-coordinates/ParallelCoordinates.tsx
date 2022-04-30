@@ -39,6 +39,7 @@ import { useParallelCoordinatesStyle } from '../../../../components-style/conten
 import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 
 import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
+import { SAVE_ID } from '../../../../constants/save/save'
 
 const BRUSH_WIDTH = 30
 const BRUSH_RADIUS = BRUSH_WIDTH / 2
@@ -214,7 +215,12 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {
     return (
       <>
-        <svg width={width} height={height} className={classes.svg}>
+        <svg
+          width={width}
+          height={height}
+          className={classes[ViewType.ParallelCoordinates]}
+          id={SAVE_ID[ViewType.ParallelCoordinates]}
+        >
           <g
             ref={component}
             width={innerWidth}
