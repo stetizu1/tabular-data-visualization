@@ -5,7 +5,10 @@ import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { BrushableMenuProps } from '../../../../types/views/MenuProps'
-import { pointSizeKey, ScatterPlotMatrixSettings } from '../../../../types/views/scatter-plot/ScatterPlotMatrixSettings'
+import {
+  pointSizeKey,
+  ScatterPlotMatrixSettings,
+} from '../../../../types/views/scatter-plot-matrix/ScatterPlotMatrixSettings'
 import { ColorArray } from '../../../../types/styling/ColorArray'
 
 import {

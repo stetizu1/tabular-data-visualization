@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react'
 import { VisualizationView } from '../../../types/views/VisualizationView'
 import { Brushable } from '../../../types/brushing/Brushable'
 import { ParallelCoordinatesSettings } from '../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
-import { ScatterPlotMatrixSettings } from '../../../types/views/scatter-plot/ScatterPlotMatrixSettings'
+import { ScatterPlotMatrixSettings } from '../../../types/views/scatter-plot-matrix/ScatterPlotMatrixSettings'
 import { GlyphsSettings } from '../../../types/views/glyphs/GlyphsSettings'
 
 import { ViewType } from '../../../constants/views/ViewTypes'
@@ -12,7 +12,7 @@ import { useViewStyle } from '../../../components-style/content/views/useViewSty
 
 import { Settings, SettingsType } from './Settings'
 import { ParallelCoordinates } from './parallel-coordinates/ParallelCoordinates'
-import { ScatterPlotMatrix } from './scatter-plot/ScatterPlotMatrix'
+import { ScatterPlotMatrix } from './scatter-plot-matrix/ScatterPlotMatrix'
 import { Glyphs } from './glyphs/Glyphs'
 
 export interface ViewProps extends Brushable, VisualizationView {

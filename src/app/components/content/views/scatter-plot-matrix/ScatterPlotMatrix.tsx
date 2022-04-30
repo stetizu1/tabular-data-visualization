@@ -17,7 +17,7 @@ import clsx from 'clsx'
 import { SelectableDataType } from '../../../../types/data/data'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { Brushable } from '../../../../types/brushing/Brushable'
-import { ScatterPlotMatrixSettings } from '../../../../types/views/scatter-plot/ScatterPlotMatrixSettings'
+import { ScatterPlotMatrixSettings } from '../../../../types/views/scatter-plot-matrix/ScatterPlotMatrixSettings'
 import { Margin } from '../../../../types/styling/Margin'
 import { Dimensions } from '../../../../types/basic/dimensions'
 import { MatrixItem, MatrixPosition } from '../../../../types/data/MatrixData'
@@ -53,7 +53,7 @@ import { HTML } from '../../../../constants/html'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
-import { useScatterPlotMatrixStyle } from '../../../../components-style/content/views/scatter-plot/useScatterPlotMatrixStyle'
+import { useScatterPlotMatrixStyle } from '../../../../components-style/content/views/scatter-plot-matrix/useScatterPlotMatrixStyle'
 import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 import { SAVE_ID } from '../../../../constants/save/save'
 
