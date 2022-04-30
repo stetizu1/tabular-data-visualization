@@ -16,14 +16,17 @@ import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
 
 export const DataContext: FunctionComponent = () => {
+  const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
+
   const [dataset, setDataset] = useState<ReadonlyArray<SelectableDataType> | null>(null)
+  const [settings, setSettings] = useState<Settings>({})
+
   const [componentBrushing, setCurrentComponentBrushing] = useState<null | ViewType>(null)
   const [cleanBrushing, setCleanBrushing] = useState<SideEffectVoid[]>([])
-  const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [redrawTime, setRedrawTime] = useState(Date.now())
-  const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
+
+  const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [isDetailsVisible, setIsDetailsVisible] = useState(true)
-  const [settings, setSettings] = useState<Settings>({})
 
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
@@ -102,7 +105,7 @@ export const DataContext: FunctionComponent = () => {
     <>
       <TopToolbar
         setDataset={setDatasetAndRemoveBrushing}
-        openDrawerDisabled={dataset === null}
+        isToolsDisabled={dataset === null}
         openDrawer={() => setDrawerOpen(true)}
         setDataLoadState={setDataLoadState}
         isDetailsVisible={isDetailsVisible}

@@ -48,3 +48,8 @@ export const EMPTY_SITE_COLORS = {
 export const ERROR_COLORS = {
   font: `#700000`,
 }
+
+export const HIGHLIGHT_COLOR = {
+  border: `#da3512`,
+  background: `rgba(201, 30, 0, 0.5)`,
+}

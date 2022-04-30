@@ -180,7 +180,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         .attr(SVG.attributes.cx, getCx)
         .attr(SVG.attributes.cy, getCy)
         .attr(SVG.attributes.r, pointSize)
-        .attr(SVG.attributes.class, [classes.dataPoint, DATA_POINT].join(` `))
+        .attr(SVG.attributes.class, clsx(classes.dataPoint, DATA_POINT))
         .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
           tooltip.transition().duration(TOOLTIP.EASE_IN).style(SVG.style.opacity, TOOLTIP.VISIBLE)
           tooltip
@@ -267,7 +267,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .data(getMatrix(displayAttributes))
       .enter()
       .append(SVG.elements.g)
-      .attr(SVG.attributes.class, [classes.cell, classes.duplicates].join(` `))
+      .attr(SVG.attributes.class, clsx(classes.cell, classes.duplicates))
       .attr(SVG.attributes.transform, getCellTranslateInMatrix(rect, attributesCount - 1))
       .each(plotMatrixItem)
   }, [

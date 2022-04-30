@@ -15,7 +15,7 @@ import { ToggleButtonSingle } from './items/buttons/ToggleButtonSingle'
 
 export interface TopToolbarProps extends FileReaderDataProps {
   openDrawer: SideEffectVoid
-  openDrawerDisabled: boolean
+  isToolsDisabled: boolean
   isDetailsVisible: boolean
   setIsDetailsVisible: Dispatch<SetStateAction<boolean>>
   isBrushingActive: boolean
@@ -24,7 +24,7 @@ export interface TopToolbarProps extends FileReaderDataProps {
 
 export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
   openDrawer,
-  openDrawerDisabled,
+  isToolsDisabled,
   isDetailsVisible,
   setIsDetailsVisible,
   isBrushingActive,
@@ -40,6 +40,7 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
           icon={<Info />}
           value={isDetailsVisible}
           setValue={setIsDetailsVisible}
+          disabled={isToolsDisabled}
           label={TOP_TOOLBAR_TEXT.labelDetailsVisible}
         />
         <div className={classes.separator} />
@@ -50,9 +51,9 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
           label={TOP_TOOLBAR_TEXT.labelClearBrushes}
         />
       </div>
-      <div>
-        <FileReader setDataset={setDataset} setDataLoadState={setDataLoadState} />
-        <IconButton size="small" disabled={openDrawerDisabled} onClick={openDrawer}>
+      <div className={classes.right}>
+        <FileReader setDataset={setDataset} setDataLoadState={setDataLoadState} isHighlighted={isToolsDisabled} />
+        <IconButton size="small" disabled={isToolsDisabled} onClick={openDrawer}>
           <Settings />
         </IconButton>
       </div>

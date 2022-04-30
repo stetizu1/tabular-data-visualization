@@ -2,7 +2,7 @@ import { SampleDataset } from '../constants/data/sampleDataset'
 import { DataLoadError } from '../constants/data/dataLoadState'
 
 export const EMPTY_DATA_TEXT = {
-  content: `To allow visualization, first load a dataset from a JSON or CSV file. You can also try this application with the sample data.`,
+  content: `To use the application, first load the dataset from a JSON or CSV file. You can also try this application with sample data.`,
   loading: `Loading...`,
 }
 

@@ -8,9 +8,16 @@ export interface ToggleButtonProps {
   setValue: Dispatch<SetStateAction<boolean>>
   icon: JSX.Element
   label: string
+  disabled?: boolean
 }
 
-export const ToggleButtonSingle: FunctionComponent<ToggleButtonProps> = ({ icon, value, setValue, label }) => {
+export const ToggleButtonSingle: FunctionComponent<ToggleButtonProps> = ({
+  icon,
+  value,
+  setValue,
+  label,
+  disabled,
+}) => {
   const classes = useButtonStyle()
   const handleChange = (event: MouseEvent<HTMLElement>, checked: string[]) => {
     if (checked.length && checked[0] === onValue) {
@@ -21,7 +28,7 @@ export const ToggleButtonSingle: FunctionComponent<ToggleButtonProps> = ({ icon,
   const onValue = `on`
   return (
     <ToggleButtonGroup value={value ? [onValue] : []} onChange={handleChange}>
-      <ToggleButton className={classes.button} value={onValue} aria-label={label}>
+      <ToggleButton className={classes.button} value={onValue} aria-label={label} disabled={disabled}>
         <Tooltip title={label}>{icon}</Tooltip>
       </ToggleButton>
     </ToggleButtonGroup>

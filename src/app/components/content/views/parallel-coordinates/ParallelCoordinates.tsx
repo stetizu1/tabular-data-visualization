@@ -1,5 +1,6 @@
 import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { axisLeft, brushY, D3BrushEvent, line, scaleLinear, scaleOrdinal, scalePoint, select, selectAll } from 'd3'
+import clsx from 'clsx'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
@@ -145,7 +146,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
       .enter()
       .append(SVG.elements.path)
       .attr(SVG.attributes.d, getDataLinePath)
-      .attr(SVG.attributes.class, [classes.line, PARALLEL_COORDINATES].join(` `))
+      .attr(SVG.attributes.class, clsx(classes.line, PARALLEL_COORDINATES))
       .attr(SVG.attributes.strokeWidth, lineWidth)
 
       .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {

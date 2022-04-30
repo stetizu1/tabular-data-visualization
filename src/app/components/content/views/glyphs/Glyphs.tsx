@@ -1,5 +1,6 @@
 import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
+import clsx from 'clsx'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Highlightable } from '../../../../types/brushing/Brushable'
@@ -115,7 +116,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
           .data([data])
           .enter()
           .append(SVG.elements.path)
-          .attr(SVG.attributes.class, [classes.glyph, GLYPHS].join(` `))
+          .attr(SVG.attributes.class, clsx(classes.glyph, GLYPHS))
           .attr(SVG.attributes.d, getGlyphPath)
           .attr(SVG.attributes.transform, getTransform)
           .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {

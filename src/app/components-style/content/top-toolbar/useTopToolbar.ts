@@ -9,7 +9,7 @@ export const useTopToolbar = makeStyles({
     padding: px(10, 0),
     display: `flex`,
     justifyContent: `space-between`,
-    alignItems: `flex-end`,
+    alignItems: `center`,
     background: TOP_TOOLBAR_COLORS.background,
     color: TOP_TOOLBAR_COLORS.font,
   },
@@ -19,5 +19,8 @@ export const useTopToolbar = makeStyles({
   separator: {
     flexGrow: 1,
     borderLeft: border(2, TOP_TOOLBAR_COLORS.border),
+  },
+  right: {
+    display: `flex`,
   },
 })
