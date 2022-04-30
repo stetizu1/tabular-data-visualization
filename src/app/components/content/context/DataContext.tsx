@@ -12,6 +12,8 @@ import { ViewType } from '../../../constants/views/ViewTypes'
 import { TopToolbar } from '../top-toolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
 import { Settings } from '../views/Settings'
+import { EmptyData } from '../no-data/EmptyData'
+import { Loading } from '../no-data/Loading'
 
 export const DataContext: FunctionComponent = () => {
   const [dataset, setDataset] = useState<ReadonlyArray<SelectableDataType> | null>(null)
@@ -68,12 +70,32 @@ export const DataContext: FunctionComponent = () => {
   const isBrushingActive = componentBrushingRef.current !== null
 
   const viewProps = {
-    dataset,
     registerCleanBrushing,
     setComponentBrushing,
     setDataSelected,
     redrawTime,
     isBrushingActive,
+  }
+
+  const getViewGrid = () => {
+    if (dataLoadState === DataLoadState.NoData) {
+      return <EmptyData />
+    }
+    if (dataLoadState === DataLoadState.Loading || !dataset) {
+      return <Loading />
+    }
+    return (
+      <ViewGrid
+        isDrawerOpen={isDrawerOpen}
+        isDetailsVisible={isDetailsVisible}
+        closeDrawer={() => setDrawerOpen(false)}
+        cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+        settings={settings}
+        setSettings={setSettings}
+        dataset={dataset}
+        {...viewProps}
+      />
+    )
   }
 
   return (
@@ -88,16 +110,7 @@ export const DataContext: FunctionComponent = () => {
         isBrushingActive={isBrushingActive}
         clearBrushes={clearBrushesOnButton}
       />
-      <ViewGrid
-        dataLoadState={dataLoadState}
-        isDrawerOpen={isDrawerOpen}
-        isDetailsVisible={isDetailsVisible}
-        closeDrawer={() => setDrawerOpen(false)}
-        cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
-        settings={settings}
-        setSettings={setSettings}
-        {...viewProps}
-      />
+      {getViewGrid()}
     </>
   )
 }

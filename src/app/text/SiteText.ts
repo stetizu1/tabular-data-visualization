@@ -3,6 +3,7 @@ import { DataLoadError } from '../constants/data/dataLoadState'
 
 export const EMPTY_DATA_TEXT = {
   content: `To allow visualization, first load a dataset from a JSON or CSV file. You can also try this application with the sample data.`,
+  loading: `Loading...`,
 }
 
 export const TOP_TOOLBAR_TEXT = {

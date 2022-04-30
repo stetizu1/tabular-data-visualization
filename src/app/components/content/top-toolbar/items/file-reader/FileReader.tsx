@@ -38,9 +38,6 @@ export const FileReader: FunctionComponent<FileReaderProps> = ({ setDataset, set
 
   const text = TOP_TOOLBAR_TEXT.fileReader
   const optionsKeys = Object.values(SampleDataset)
-  const handleMagicClick = () => {
-    setIsSampleDataDialogOpen(true)
-  }
   const handleListItemClick = (optionKey: SampleDataset) => {
     setIsSampleDataDialogOpen(false)
     const dataset = sampleDatasets[optionKey]
@@ -69,15 +66,17 @@ export const FileReader: FunctionComponent<FileReaderProps> = ({ setDataset, set
         confirmText={text.alertDialog.confirm}
         alert={true}
       />
-      <ClickableButton onClick={handleMagicClick} icon={<AutoGraph />} label={text.sampleDataLabel} />
+      <ClickableButton
+        onClick={() => setIsSampleDataDialogOpen(true)}
+        icon={<AutoGraph />}
+        label={text.sampleDataLabel}
+      />
       <input
         className={useFileReaderStyle().input}
         type="file"
         onChange={async (e) => {
           if (e.target.files?.length) {
             setDataLoadState(DataLoadState.Loading)
-            setDataset(null)
-
             const selectedFile = e.target.files[0]
             const fileType = selectedFile.type
             let dataset: DataType[] = []
