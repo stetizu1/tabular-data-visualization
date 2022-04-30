@@ -9,6 +9,7 @@ export const useFileReaderStyle = makeStyles({
   },
   box: {
     transition: `0.15s all ease`,
+    background: HIGHLIGHT_COLOR.backgroundGone,
   },
   highlight: {
     border: border(2, HIGHLIGHT_COLOR.border),

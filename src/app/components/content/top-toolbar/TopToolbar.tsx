@@ -1,6 +1,5 @@
 import { Dispatch, FunctionComponent, SetStateAction } from 'react'
-import { AutoFixOff, Settings } from '@mui/icons-material'
-import { IconButton } from '@mui/material'
+import { AutoFixOff } from '@mui/icons-material'
 import { Info } from '@mui/icons-material'
 
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
@@ -12,6 +11,7 @@ import { useTopToolbar } from '../../../components-style/content/top-toolbar/use
 import { ClickableButton } from './items/buttons/ClickableButton'
 import { FileReader, FileReaderDataProps } from './items/file-reader/FileReader'
 import { ToggleButtonSingle } from './items/buttons/ToggleButtonSingle'
+import { OpenSettingsButton } from './items/buttons/OpenSettingsButton'
 
 export interface TopToolbarProps extends FileReaderDataProps {
   openDrawer: SideEffectVoid
@@ -53,9 +53,7 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
       </div>
       <div className={classes.right}>
         <FileReader setDataset={setDataset} setDataLoadState={setDataLoadState} isHighlighted={isToolsDisabled} />
-        <IconButton size="small" disabled={isToolsDisabled} onClick={openDrawer}>
-          <Settings />
-        </IconButton>
+        <OpenSettingsButton open={openDrawer} disabled={isToolsDisabled} />
       </div>
     </div>
   )

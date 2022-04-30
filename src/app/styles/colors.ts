@@ -52,4 +52,5 @@ export const ERROR_COLORS = {
 export const HIGHLIGHT_COLOR = {
   border: `#da3512`,
   background: `rgba(201, 30, 0, 0.5)`,
+  backgroundGone: `rgba(201, 30, 0, 0)`,
 }

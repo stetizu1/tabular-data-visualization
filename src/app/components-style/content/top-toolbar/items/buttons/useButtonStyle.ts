@@ -11,7 +11,7 @@ export const useButtonStyle = makeStyles({
     '&.MuiButtonBase-root': {
       background: important(BUTTON_COLORS.buttonOffBackground),
     },
-    '&.Mui-selected': {
+    '&.Mui-selected:not(.Mui-disabled)': {
       background: important(BUTTON_COLORS.buttonOnBackground),
     },
     '&.MuiButton-contained:not(.Mui-disabled)': {
