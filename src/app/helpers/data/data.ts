@@ -16,7 +16,7 @@ export const getDefaultQuantitativeAttributesKeys = (
   dataset: ReadonlyArray<SelectableDataType>,
 ): Array<keyof SelectableDataType> => getAttributeKeys(dataset).filter((key) => typeof dataset[0][key] === `number`)
 
-export const getPossibleQuantitativeAttributesKeys = (
+export const getQuantitativeAttributesKeys = (
   dataset: ReadonlyArray<SelectableDataType>,
 ): Array<keyof SelectableDataType> =>
   getAttributeKeys(dataset).filter((key) => dataset.every((data) => !isNaN(Number(data[key]))))
@@ -35,7 +35,7 @@ export const getDefaultAttributesChecked = (
   dataset: ReadonlyArray<SelectableDataType>,
 ): CheckedForSelectableDataType => {
   const defaultQuantitativeAttributesKeys = getDefaultQuantitativeAttributesKeys(dataset)
-  const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
+  const possibleQuantitativeAttributesKeys = getQuantitativeAttributesKeys(dataset)
 
   return Object.fromEntries(
     possibleQuantitativeAttributesKeys.map((key) => [key, defaultQuantitativeAttributesKeys.some((kk) => kk === key)]),

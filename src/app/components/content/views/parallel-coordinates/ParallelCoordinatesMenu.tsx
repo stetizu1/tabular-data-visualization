@@ -14,7 +14,7 @@ import { ColorArray } from '../../../../types/styling/ColorArray'
 import {
   getCategoryAttributesKeys,
   getDefaultAttributesChecked,
-  getPossibleQuantitativeAttributesKeys,
+  getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
 import {
@@ -45,34 +45,35 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
   const viewType = ViewType.ParallelCoordinates
   const parallelCoordinatesSettings = settings[viewType]
 
-  const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
+  const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
   useEffect(() => {
     setChecked(getDefaultAttributesChecked(dataset))
+    setQuantitativeAttributesKeys(getQuantitativeAttributesKeys(dataset))
   }, [dataset])
 
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
   const defaultCategoryAttribute = categoricalAttributes?.[0]
 
   const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
-    possibleQuantitativeAttributesKeys.filter((key) => currChecked[key])
+    quantitativeAttributesKeys.filter((key) => currChecked[key])
 
   // first time empty
   const createParallelCoordinatesMenu = useCallback(() => {
     setSettings((prev) => {
       const newParallelCoordinates: ParallelCoordinatesSettings = {
-        displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
+        displayAttributes: quantitativeAttributesKeys.filter((key) => checked[key]),
         categoryAttribute: defaultCategoryAttribute,
         colorCategory: schemeCategory10 as ColorArray,
         ...PARALLEL_COORDINATES_DEFAULT,
       }
       return { ...prev, [ViewType.ParallelCoordinates]: newParallelCoordinates }
     })
-  }, [checked, possibleQuantitativeAttributesKeys, defaultCategoryAttribute, setSettings])
+  }, [checked, quantitativeAttributesKeys, defaultCategoryAttribute, setSettings])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createParallelCoordinatesMenu(), [checked])
+  useEffect(() => createParallelCoordinatesMenu(), [checked, quantitativeAttributesKeys])
 
   const getNewSettingsForAttributeChecker = (newChecked: CheckedForSelectableDataType) => ({
     displayAttributes: getCurrentDisplayAttributes(newChecked),
@@ -82,17 +83,18 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
     return (
       <div className={classes.drawerMenu}>
         <h1>{PARALLEL_COORDINATES_MENU_TEXT.header}</h1>
-        {possibleQuantitativeAttributesKeys.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT ? (
+        {quantitativeAttributesKeys.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
               viewType={viewType}
-              attributesKeys={possibleQuantitativeAttributesKeys}
+              attributesKeys={quantitativeAttributesKeys}
               handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
               label={PARALLEL_COORDINATES_MENU_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
+              setQuantitativeAttributesKeys={setQuantitativeAttributesKeys}
             />
             <CategorySelector
               viewType={viewType}

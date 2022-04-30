@@ -8,7 +8,8 @@ export const useFileReaderStyle = makeStyles({
     width: px(220),
   },
   box: {
-    transition: `0.15s all ease`,
+    transition: `0.3s all ease`,
+    border: border(0, HIGHLIGHT_COLOR.border),
     background: HIGHLIGHT_COLOR.backgroundGone,
   },
   highlight: {

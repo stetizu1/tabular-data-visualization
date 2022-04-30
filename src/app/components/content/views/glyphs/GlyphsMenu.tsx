@@ -11,7 +11,7 @@ import { ColorArray } from '../../../../types/styling/ColorArray'
 import {
   getCategoryAttributesKeys,
   getDefaultAttributesChecked,
-  getPossibleQuantitativeAttributesKeys,
+  getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
 import { GLYPHS_DEFAULT, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
@@ -34,26 +34,27 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
   const classes = useDataDrawerMenuStyle()
   const viewType = ViewType.Glyphs
   const glyphSettings = settings[viewType]
-  const possibleQuantitativeAttributesKeys = getPossibleQuantitativeAttributesKeys(dataset)
+  const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
   useEffect(() => {
     setChecked(getDefaultAttributesChecked(dataset))
+    setQuantitativeAttributesKeys(getQuantitativeAttributesKeys(dataset))
   }, [dataset])
 
-  const sortableAttributes = possibleQuantitativeAttributesKeys.filter((key) => checked[key])
+  const sortableAttributes = quantitativeAttributesKeys.filter((key) => checked[key])
   const defaultSortAttribute = sortableAttributes?.[0]
 
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
   const defaultCategoryAttribute = categoricalAttributes?.[0]
 
   const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
-    possibleQuantitativeAttributesKeys.filter((key) => currChecked[key])
+    quantitativeAttributesKeys.filter((key) => currChecked[key])
 
   const createGlyphsMenu = useCallback(() => {
     setSettings((prev) => {
       const newGlyphs: GlyphsSettings = {
-        displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
+        displayAttributes: quantitativeAttributesKeys.filter((key) => checked[key]),
         sortAttribute: defaultSortAttribute,
         categoryAttribute: defaultCategoryAttribute,
         colorCategory: schemeCategory10 as ColorArray,
@@ -61,17 +62,17 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
       }
       return { ...prev, [ViewType.Glyphs]: newGlyphs }
     })
-  }, [checked, possibleQuantitativeAttributesKeys, defaultSortAttribute, defaultCategoryAttribute, setSettings])
+  }, [checked, quantitativeAttributesKeys, defaultSortAttribute, defaultCategoryAttribute, setSettings])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createGlyphsMenu(), [checked]) // first time empty, call once
+  useEffect(() => createGlyphsMenu(), [checked, quantitativeAttributesKeys]) // first time empty, call once
 
   const getNewSettingsForAttributeChecker = (
     newChecked: CheckedForSelectableDataType,
     prevSettings: GlyphsSettings,
   ): Partial<GlyphsSettings> => {
     const displayAttributes = getCurrentDisplayAttributes(newChecked)
-    const newSortableAttributes = possibleQuantitativeAttributesKeys.filter((key) => newChecked[key])
+    const newSortableAttributes = quantitativeAttributesKeys.filter((key) => newChecked[key])
     const sortAttribute = newChecked[prevSettings.sortAttribute]
       ? prevSettings.sortAttribute
       : newSortableAttributes?.[0]
@@ -82,16 +83,17 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
     return (
       <div className={classes.drawerMenu}>
         <h1>{GLYPHS_MENU_TEXT.header}</h1>
-        {possibleQuantitativeAttributesKeys.length >= MIN_GLYPHS_ATTRIBUTE_COUNT ? (
+        {quantitativeAttributesKeys.length >= MIN_GLYPHS_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
               viewType={viewType}
-              attributesKeys={possibleQuantitativeAttributesKeys}
+              attributesKeys={quantitativeAttributesKeys}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
+              setQuantitativeAttributesKeys={setQuantitativeAttributesKeys}
             />
             <CategorySelector
               viewType={viewType}
