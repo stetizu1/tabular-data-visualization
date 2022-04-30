@@ -33,7 +33,7 @@ export interface Brushable extends Highlightable {
   /**
    * Function for setting selected data
    */
-  setDataSelected: (setFunction: (data: SelectableDataType) => boolean) => void
+  setDataSelected: (setFunction: (data: SelectableDataType, idx: number) => boolean) => void
 
   /**
    * Property used to redraw a component while setting new selected data (props change for React)

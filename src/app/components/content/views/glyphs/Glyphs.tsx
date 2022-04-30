@@ -3,7 +3,7 @@ import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll }
 import clsx from 'clsx'
 
 import { SelectableDataType } from '../../../../types/data/data'
-import { Highlightable } from '../../../../types/brushing/Brushable'
+import { Brushable } from '../../../../types/brushing/Brushable'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 import { Margin } from '../../../../types/styling/Margin'
@@ -32,7 +32,7 @@ import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 import { useGlyphsStyle } from '../../../../components-style/content/views/glyphs/useGlyphsStyle'
 import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 
-export interface GlyphsProps extends VisualizationView, Highlightable, GlyphsSettings {}
+export interface GlyphsProps extends VisualizationView, Brushable, GlyphsSettings {}
 
 const GLYPHS = `glyphs`
 
@@ -43,6 +43,8 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   displayAttributes,
   categoryAttribute,
   isBrushingActive,
+  setComponentBrushing,
+  setDataSelected,
   sortAttribute,
   colorCategory,
   glyphSize,
@@ -131,6 +133,14 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
           .on(MouseActions.mouseOut, () => {
             tooltip.transition().duration(TOOLTIP.EASE_OUT).style(SVG.style.opacity, TOOLTIP.INVISIBLE)
           })
+          .on(MouseActions.click, (_: MouseEvent, changedData: SelectableDataType) => {
+            setComponentBrushing(ViewType.Glyphs)
+            const selected = dataset.map((data) => (data === changedData ? !data.selected : data.selected))
+            setDataSelected((data, idx) => selected[idx])
+            if (selected.every((value) => !value)) {
+              setComponentBrushing(null)
+            }
+          })
           .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
       })
   }, [
@@ -139,6 +149,8 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     tooltipClass,
     innerWidth,
     innerHeight,
+    setDataSelected,
+    setComponentBrushing,
     glyphsCountPerLine,
     glyphsCountPerHeight,
     glyphRadius,

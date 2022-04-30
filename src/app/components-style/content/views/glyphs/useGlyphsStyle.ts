@@ -24,6 +24,7 @@ export const useGlyphsStyle = makeStyles<Theme, StyleProps>(() => ({
   },
   glyph: {
     opacity: ({ opacity }) => opacity[0] / 100,
+    cursor: `crosshair`,
   },
   selected: {
     fill: important(PLOT_COLORS.brushColor),

@@ -38,10 +38,10 @@ export const DataContext: FunctionComponent = () => {
     setCurrentComponentBrushing(null)
   }
 
-  const setDataSelected = (setFunction: (data: SelectableDataType) => boolean): void => {
+  const setDataSelected = (setFunction: (data: SelectableDataType, idx: number) => boolean): void => {
     if (dataset) {
-      dataset.forEach((data) => {
-        data.selected = setFunction(data)
+      dataset.forEach((data, idx) => {
+        data.selected = setFunction(data, idx)
       })
       setRedrawTime(Date.now()) // redraw component
     }
