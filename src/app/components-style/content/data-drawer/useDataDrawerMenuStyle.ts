@@ -18,6 +18,9 @@ export const useDataDrawerMenuStyle = makeStyles({
       fontSize: DATA_DRAWER_FONT.headerFontSize,
       width: `100%`,
     },
+    '& hr': {
+      margin: px(4, 0, 3),
+    },
     '& label': {
       fontSize: DATA_DRAWER_FONT.labelFontSize,
       color: DATA_DRAWER_COLORS.label,

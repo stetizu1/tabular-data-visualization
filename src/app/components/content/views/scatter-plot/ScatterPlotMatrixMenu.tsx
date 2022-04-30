@@ -1,11 +1,12 @@
 import { FunctionComponent, useCallback, useEffect, useState } from 'react'
 import { schemeCategory10 } from 'd3'
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { BrushableMenuProps } from '../../../../types/views/MenuProps'
 import { pointSizeKey, ScatterPlotMatrixSettings } from '../../../../types/views/scatter-plot/ScatterPlotMatrixSettings'
+import { ColorArray } from '../../../../types/styling/ColorArray'
 
 import {
   getCategoryAttributesKeys,
@@ -29,6 +30,7 @@ import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
+import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
 export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
   dataset,
@@ -59,7 +61,7 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
       const newScatterPlotMatrix: ScatterPlotMatrixSettings = {
         displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
         categoryAttribute: defaultCategoryAttribute,
-        colorCategory: schemeCategory10,
+        colorCategory: schemeCategory10 as ColorArray,
         ...SCATTER_PLOT_MATRIX_DEFAULT,
       }
       return { ...prev, [ViewType.ScatterPlotMatrix]: newScatterPlotMatrix }
@@ -106,7 +108,7 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
                   setSettings={setSettings}
                   viewType={viewType}
                 />
-                <hr />
+                <Divider />
                 <NumberInput
                   value={scatterPlotMatrixSettings.pointSize}
                   valueKey={pointSizeKey}
@@ -114,10 +116,16 @@ export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
                   label={SCATTER_PLOT_MATRIX_MENU_TEXT.pointSize}
                   viewType={viewType}
                 />
-                <hr />
+                <Divider />
                 <OpacityInput
                   header={SCATTER_PLOT_MATRIX_MENU_TEXT.opacity}
                   opacity={scatterPlotMatrixSettings.opacity}
+                  setSettings={setSettings}
+                  viewType={viewType}
+                />
+                <Divider />
+                <PalettePicker
+                  colors={scatterPlotMatrixSettings.colorCategory}
                   setSettings={setSettings}
                   viewType={viewType}
                 />

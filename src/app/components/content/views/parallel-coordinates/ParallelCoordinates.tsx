@@ -208,7 +208,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   useEffect(
     () => createParallelCoordinates(),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [displayAttributes, categoryAttribute, innerWidth, innerHeight, lineWidth, isBrushingOnEndOfMove],
+    [displayAttributes, categoryAttribute, innerWidth, innerHeight, lineWidth, isBrushingOnEndOfMove, colorCategory],
   )
   displayDetails(isDetailsVisible, tooltipClass)
 

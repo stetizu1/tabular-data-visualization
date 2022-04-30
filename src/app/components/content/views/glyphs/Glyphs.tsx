@@ -148,8 +148,11 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     color,
   ])
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createGlyphs(), [displayAttributes, categoryAttribute, sortAttribute, innerWidth, innerHeight])
+  useEffect(
+    () => createGlyphs(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [displayAttributes, categoryAttribute, sortAttribute, innerWidth, innerHeight, colorCategory],
+  )
   displayDetails(isDetailsVisible, tooltipClass)
 
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {

@@ -293,7 +293,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   useEffect(
     () => createScatterPlotMatrix(),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [displayAttributes, categoryAttribute, innerWidth, innerHeight, pointSize, isBrushingOnEndOfMove],
+    [displayAttributes, categoryAttribute, innerWidth, innerHeight, pointSize, isBrushingOnEndOfMove, colorCategory],
   )
   displayDetails(isDetailsVisible, tooltipClass)
   displayDetails(isDetailsVisible, classes.duplicates)

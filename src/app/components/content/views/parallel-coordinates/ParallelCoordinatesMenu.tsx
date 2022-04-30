@@ -1,6 +1,6 @@
 import { FunctionComponent, useCallback, useEffect, useState } from 'react'
 import { schemeCategory10 } from 'd3'
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
@@ -9,6 +9,7 @@ import {
   ParallelCoordinatesSettings,
 } from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
 import { BrushableMenuProps } from '../../../../types/views/MenuProps'
+import { ColorArray } from '../../../../types/styling/ColorArray'
 
 import {
   getCategoryAttributesKeys,
@@ -32,6 +33,7 @@ import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
+import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
 export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
   dataset,
@@ -62,7 +64,7 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
       const newParallelCoordinates: ParallelCoordinatesSettings = {
         displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
         categoryAttribute: defaultCategoryAttribute,
-        colorCategory: schemeCategory10,
+        colorCategory: schemeCategory10 as ColorArray,
         ...PARALLEL_COORDINATES_DEFAULT,
       }
       return { ...prev, [ViewType.ParallelCoordinates]: newParallelCoordinates }
@@ -109,7 +111,7 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
                   setSettings={setSettings}
                   viewType={viewType}
                 />
-                <hr />
+                <Divider />
                 <NumberInput
                   value={parallelCoordinatesSettings.lineWidth}
                   valueKey={lineWidthKey}
@@ -117,10 +119,16 @@ export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
                   label={PARALLEL_COORDINATES_MENU_TEXT.lineWidth}
                   viewType={viewType}
                 />
-                <hr />
+                <Divider />
                 <OpacityInput
                   header={PARALLEL_COORDINATES_MENU_TEXT.opacity}
                   opacity={parallelCoordinatesSettings.opacity}
+                  setSettings={setSettings}
+                  viewType={viewType}
+                />
+                <Divider />
+                <PalettePicker
+                  colors={parallelCoordinatesSettings.colorCategory}
                   setSettings={setSettings}
                   viewType={viewType}
                 />

@@ -1,11 +1,12 @@
 import { FunctionComponent, useCallback, useEffect, useState } from 'react'
 import { schemeCategory10 } from 'd3'
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { glyphSizeKey, glyphSpacingKey, GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
 import { MenuProps } from '../../../../types/views/MenuProps'
+import { ColorArray } from '../../../../types/styling/ColorArray'
 
 import {
   getCategoryAttributesKeys,
@@ -27,6 +28,7 @@ import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
+import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
 export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const classes = useDataDrawerMenuStyle()
@@ -54,7 +56,7 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
         displayAttributes: possibleQuantitativeAttributesKeys.filter((key) => checked[key]),
         sortAttribute: defaultSortAttribute,
         categoryAttribute: defaultCategoryAttribute,
-        colorCategory: schemeCategory10,
+        colorCategory: schemeCategory10 as ColorArray,
         ...GLYPHS_DEFAULT,
       }
       return { ...prev, [ViewType.Glyphs]: newGlyphs }
@@ -111,7 +113,7 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
               </AccordionSummary>
               <AccordionDetails>
                 <MarginInput margins={glyphSettings.margins} setSettings={setSettings} viewType={viewType} />
-                <hr />
+                <Divider />
                 <NumberInput
                   value={glyphSettings.glyphSize}
                   valueKey={glyphSizeKey}
@@ -126,13 +128,15 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
                   label={GLYPHS_MENU_TEXT.glyphSpacing}
                   viewType={viewType}
                 />
-                <hr />
+                <Divider />
                 <OpacityInput
                   header={GLYPHS_MENU_TEXT.opacity}
                   opacity={glyphSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
                 />
+                <Divider />
+                <PalettePicker colors={glyphSettings.colorCategory} setSettings={setSettings} viewType={viewType} />
               </AccordionDetails>
             </Accordion>
             <DataSaveButton viewType={viewType} />

@@ -1,6 +1,7 @@
 import { SelectableDataType } from '../data/data'
 import { MarginArray } from '../styling/Margin'
 import { Opacity } from '../styling/Opacity'
+import { ColorArray } from '../styling/ColorArray'
 
 /**
  * General settings for quantitative visualization
@@ -14,7 +15,7 @@ export interface QuantitativeVisualizationSettings {
   /**
    * Array of colors for category attributes
    */
-  colorCategory: ReadonlyArray<string>
+  colorCategory: ColorArray
 
   /**
    * Category attribute for coloring
