@@ -1,5 +1,5 @@
 import { Dispatch, FunctionComponent, SetStateAction } from 'react'
-import { AddBox, AutoFixOff, SkipNext } from '@mui/icons-material'
+import { AddCircle, AutoFixOff, SkipNext } from '@mui/icons-material'
 import { Info } from '@mui/icons-material'
 
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
@@ -67,7 +67,7 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
           label={TOP_TOOLBAR_TEXT.labelClearBrushes}
         />
         <ClickableButton
-          icon={<AddBox />}
+          icon={<AddCircle />}
           onClick={() => setIsAddViewDialogOpen(true)}
           disabled={isToolsDisabled}
           label={TOP_TOOLBAR_TEXT.labelAddView}

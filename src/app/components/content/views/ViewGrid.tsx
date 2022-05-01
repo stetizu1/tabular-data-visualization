@@ -1,7 +1,7 @@
 import { Dispatch, FunctionComponent, SetStateAction, useCallback, useState } from 'react'
 import GridLayout, { WidthProvider } from 'react-grid-layout'
 import clsx from 'clsx'
-import { AddBox } from '@mui/icons-material'
+import { AddCircle } from '@mui/icons-material'
 
 import { Brushable } from '../../../types/brushing/Brushable'
 import { SelectableDataType } from '../../../types/data/data'
@@ -89,7 +89,7 @@ export const ViewGrid: FunctionComponent<ViewGridProps> = ({
   const availableViews = Object.values(ViewType).filter((viewType) => !views.includes(viewType))
   displayDetails(viewProps.isDetailsVisible, TOOLTIP_CLASS)
 
-  const dialogOptions = availableViews.map((key) => ({ key, label: VIEW_NAMES[key], icon: <AddBox /> }))
+  const dialogOptions = availableViews.map((key) => ({ key, label: VIEW_NAMES[key], icon: <AddCircle /> }))
   return (
     <div>
       <SelectionDialog
