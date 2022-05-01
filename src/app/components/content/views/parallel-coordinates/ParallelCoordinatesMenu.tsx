@@ -30,7 +30,6 @@ import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
-import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
 export const ParallelCoordinatesMenu: FunctionComponent<MenuProps> = ({
@@ -132,7 +131,6 @@ export const ParallelCoordinatesMenu: FunctionComponent<MenuProps> = ({
                 />
               </AccordionDetails>
             </Accordion>
-            <DataSaveButton viewType={viewType} />
           </>
         ) : (
           <div className={classes.insufficientAttributeNum}>{PARALLEL_COORDINATES_MENU_TEXT.unavailable}</div>

@@ -8,6 +8,7 @@ import { DRAG_HANDLE, HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constant
 
 import { useGridItemStyle } from '../../../components-style/content/views/useGridItemStyle'
 
+import { DataSaveButton } from '../data-drawer/items/DataSaveButton'
 import { View } from './View'
 
 type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {
@@ -23,9 +24,12 @@ export const GridItem: FunctionComponent<Props> = ({ onRemove, title, isDragFini
       <div className={classes.gridItem}>
         <div className={clsx(DRAG_HANDLE, classes.header)}>
           <Typography className={classes.text}>{title}</Typography>
-          <IconButton onClick={onRemove}>
-            <Close />
-          </IconButton>
+          <div>
+            <DataSaveButton viewType={rest.component} />
+            <IconButton onClick={onRemove}>
+              <Close />
+            </IconButton>
+          </div>
         </div>
         {isDragFinished && <View width={width} height={height - HEADER_HEIGHT} {...rest} />}
       </div>

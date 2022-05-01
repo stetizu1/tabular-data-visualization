@@ -32,7 +32,6 @@ import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
-import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 import { Selector } from '../../data-drawer/items/Selector'
 
@@ -157,7 +156,6 @@ export const ScatterPlotGlyphsMenu: FunctionComponent<MenuProps> = ({
                 />
               </AccordionDetails>
             </Accordion>
-            <DataSaveButton viewType={viewType} />
           </>
         ) : (
           <div className={classes.insufficientAttributeNum}>{SCATTER_PLOT_GLYPHS_MENU_TEXT.unavailable}</div>

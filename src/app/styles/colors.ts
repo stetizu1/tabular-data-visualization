@@ -18,6 +18,7 @@ export const BUTTON_COLORS = {
   buttonOffBackground: `#363b46`,
   buttonOnBackground: `#d6e1ff`,
   fontOn: `rgba(0, 0, 0, 0.87)`,
+  buttonInlined: `#576e9f`,
 }
 
 export const VIEW_COLORS = {

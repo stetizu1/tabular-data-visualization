@@ -36,7 +36,7 @@ export const DataSaveButton: FunctionComponent<DataSaveButtonProps> = ({ viewTyp
         cancelText={TOP_TOOLBAR_TEXT.saveText.cancel}
       />
       <Button
-        variant="contained"
+        variant="text"
         onClick={() => setIsDialogOpen(true)}
         className={classes.button}
         aria-label={TOP_TOOLBAR_TEXT.saveText.save}

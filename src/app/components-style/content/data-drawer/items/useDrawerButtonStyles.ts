@@ -1,11 +1,12 @@
 import { makeStyles } from '@mui/styles'
-import { important, px } from '../../../../helpers/d3/stringGetters'
+import { important } from '../../../../helpers/d3/stringGetters'
+import { BUTTON_COLORS } from '../../../../styles/colors'
 
 export const useDrawerButtonStyles = makeStyles({
   button: {
-    margin: important(px(15, 0, 0)),
-    padding: important(px(5, 7)),
+    margin: important(0),
+    padding: important(0),
     minWidth: important(0),
-    alignSelf: `flex-end`,
+    color: important(BUTTON_COLORS.buttonInlined),
   },
 })

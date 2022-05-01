@@ -30,7 +30,6 @@ import { Selector } from '../../data-drawer/items/Selector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
-import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
 export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
@@ -142,7 +141,6 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
                 <PalettePicker colors={glyphsSettings.colorCategory} setSettings={setSettings} viewType={viewType} />
               </AccordionDetails>
             </Accordion>
-            <DataSaveButton viewType={viewType} />
           </>
         ) : (
           <div className={classes.insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</div>

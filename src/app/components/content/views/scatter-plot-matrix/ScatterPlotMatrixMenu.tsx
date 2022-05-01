@@ -30,7 +30,6 @@ import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
-import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
 export const ScatterPlotMatrixMenu: FunctionComponent<MenuProps> = ({
@@ -132,7 +131,6 @@ export const ScatterPlotMatrixMenu: FunctionComponent<MenuProps> = ({
                 />
               </AccordionDetails>
             </Accordion>
-            <DataSaveButton viewType={viewType} />
           </>
         ) : (
           <div className={classes.insufficientAttributeNum}>{SCATTER_PLOT_MATRIX_MENU_TEXT.unavailable}</div>
