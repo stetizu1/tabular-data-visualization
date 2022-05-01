@@ -9,7 +9,6 @@ import { Dimensions } from '../../../../types/basic/dimensions'
 import { important } from '../../../../helpers/d3/stringGetters'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
-import { ViewType } from '../../../../constants/views/ViewTypes'
 
 interface StyleProps extends Dimensions {
   margin: Margin
@@ -17,8 +16,7 @@ interface StyleProps extends Dimensions {
 }
 
 export const useScatterPlotGlyphsStyle = makeStyles<Theme, StyleProps>(() => ({
-  // needed for identification while saving
-  [ViewType.ScatterPlotGlyphs]: {
+  svg: {
     background: PLOT_COLORS.backgroundColor,
     font: `12px sans-serif`,
   },

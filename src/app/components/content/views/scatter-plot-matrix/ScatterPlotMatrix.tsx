@@ -296,12 +296,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
   if (displayAttributes.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT) {
     return (
       <>
-        <svg
-          width={width}
-          height={height}
-          className={classes[ViewType.ScatterPlotMatrix]}
-          id={SAVE_ID[ViewType.ScatterPlotMatrix]}
-        >
+        <svg width={width} height={height} className={classes.svg} id={SAVE_ID[ViewType.ScatterPlotMatrix]}>
           <g ref={component} transform={getTranslate([margin.left, margin.top])} />
         </svg>
         <div className={tooltipClass} />

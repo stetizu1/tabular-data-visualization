@@ -214,12 +214,7 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {
     return (
       <>
-        <svg
-          width={width}
-          height={height}
-          className={classes[ViewType.ParallelCoordinates]}
-          id={SAVE_ID[ViewType.ParallelCoordinates]}
-        >
+        <svg width={width} height={height} className={classes.svg} id={SAVE_ID[ViewType.ParallelCoordinates]}>
           <g
             ref={component}
             width={innerWidth}

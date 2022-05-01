@@ -19,7 +19,6 @@ export const saveSvg = (viewType: ViewType): void => {
   const svg = document.querySelector(`#${SAVE_ID[viewType]}`)!
   const newStyleNodes = Array.from(document.querySelectorAll(`style`))
     .map((style) => style.innerHTML)
-    .filter((style) => style.includes(viewType))
     .map((style) => {
       const node = document.createElement(`style`)
       node.innerHTML = style

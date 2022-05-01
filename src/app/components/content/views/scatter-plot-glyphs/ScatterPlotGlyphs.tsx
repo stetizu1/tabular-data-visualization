@@ -223,12 +223,7 @@ export const ScatterPlotGlyphs: FunctionComponent<ScatterPlotGlyphsProps> = ({
 
   return (
     <>
-      <svg
-        width={width}
-        height={height}
-        className={classes[ViewType.ScatterPlotGlyphs]}
-        id={SAVE_ID[ViewType.ScatterPlotGlyphs]}
-      >
+      <svg width={width} height={height} className={classes.svg} id={SAVE_ID[ViewType.ScatterPlotGlyphs]}>
         <g ref={component} transform={getTranslate([margin.left + glyphSize / 2, margin.top + glyphSize / 2])} />
       </svg>
       <div className={tooltipClass} />
