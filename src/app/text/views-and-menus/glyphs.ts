@@ -1,7 +1,7 @@
 import { MENU_TEXT } from './common'
 
 export const GLYPHS_TEXT = {
-  unavailable2: `The glyph plot cannot be displayed with less than 3 attributes. To generate a glyph plot, select multiple attributes from the menu.`,
+  unavailable: `The glyph plot cannot be displayed with less than 3 attributes. To generate a glyph plot, select more attributes from the menu.`,
 }
 
 export const GLYPHS_MENU_TEXT = {

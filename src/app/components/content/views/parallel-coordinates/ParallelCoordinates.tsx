@@ -107,7 +107,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
 
     const cleanBrushingSelection = () => {
       displayAttributes.forEach((key) => (selections[key] = null))
-      setDataSelected(() => false)
       setComponentBrushing(null)
     }
 
@@ -187,7 +186,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
         const axis = select(elements[idx])
         brushY().clear(axis)
       })
-      displayAttributes.forEach((key) => (selections[key] = null))
     })
   }, [
     dataset,

@@ -13,6 +13,7 @@ import { Settings } from '../views/Settings'
 import { GlyphsMenu } from '../views/glyphs/GlyphsMenu'
 import { ParallelCoordinatesMenu } from '../views/parallel-coordinates/ParallelCoordinatesMenu'
 import { ScatterPlotMatrixMenu } from '../views/scatter-plot-matrix/ScatterPlotMatrixMenu'
+import { ScatterPlotGlyphsMenu } from '../views/scatter-plot-glyphs/ScatterPlotGlyphsMenu'
 
 export interface DataDrawerProps {
   isOpen: boolean
@@ -37,7 +38,15 @@ export const DataDrawer: FunctionComponent<DataDrawerProps> = ({
   const menus = views.map((view, idx) => {
     switch (view) {
       case ViewType.Glyphs:
-        return <GlyphsMenu dataset={dataset} settings={settings!} setSettings={setSettings} key={idx} />
+        return (
+          <GlyphsMenu
+            dataset={dataset}
+            settings={settings!}
+            setSettings={setSettings}
+            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+            key={idx}
+          />
+        )
       case ViewType.ParallelCoordinates:
         return (
           <ParallelCoordinatesMenu
@@ -53,6 +62,16 @@ export const DataDrawer: FunctionComponent<DataDrawerProps> = ({
           <ScatterPlotMatrixMenu
             dataset={dataset}
             settings={settings!}
+            setSettings={setSettings}
+            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+            key={idx}
+          />
+        )
+      case ViewType.ScatterPlotGlyphs:
+        return (
+          <ScatterPlotGlyphsMenu
+            dataset={dataset}
+            settings={settings}
             setSettings={setSettings}
             cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
             key={idx}

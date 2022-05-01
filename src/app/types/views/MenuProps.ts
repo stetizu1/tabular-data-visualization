@@ -21,12 +21,6 @@ export interface MenuProps {
    * Setter for the application settings. Only the settings of the respective view should be changed in the specific menu.
    */
   setSettings: Dispatch<SetStateAction<Settings>>
-}
-
-/**
- * Properties needed for creating menu settings item for brushable views.
- */
-export interface BrushableMenuProps extends MenuProps {
   /**
    * Clean function to cancel brushing if viewType is the same as component brushing.
    * Should be called while changing data settings (remove visible axes etc.)

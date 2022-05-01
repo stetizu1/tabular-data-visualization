@@ -177,5 +177,5 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
       </>
     )
   }
-  return <div className={classes.notDisplayed}>{GLYPHS_TEXT.unavailable2}</div>
+  return <div className={classes.notDisplayed}>{GLYPHS_TEXT.unavailable}</div>
 }

@@ -134,7 +134,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     const getTransformY: DataEachG<keyof SelectableDataType, string> = (attribute, idx) =>
       getTranslate([0, idx * rect.height])
 
-    // axes on X (vertical)
+    // axes on X (horizontal)
     svg
       .selectAll(AXIS_X)
       .data(displayAttributes)
@@ -144,7 +144,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .attr(SVG.attributes.transform, getTransformX)
       .each(setAxis(xScale, xAxis))
 
-    // axes on Y (horizontal)
+    // axes on Y (vertical)
     svg
       .selectAll(AXIS_Y)
       .data(displayAttributes)
@@ -250,7 +250,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         setBrushingSelection(matrixItem, brushSelection)
         if (!brushSelection) {
           setComponentBrushing(null)
-          setDataSelected((data) => (data.selected = false))
         }
       })
       .extent([

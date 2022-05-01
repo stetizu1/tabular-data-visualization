@@ -36,10 +36,11 @@ export const ViewGrid: FunctionComponent<ViewGridProps> = ({
   ...viewProps
 }) => {
   const classes = useViewGridStyle()
-  const views = [ViewType.ParallelCoordinates, ViewType.ScatterPlotMatrix, ViewType.Glyphs]
+  const views = [ViewType.ParallelCoordinates, ViewType.ScatterPlotMatrix, ViewType.ScatterPlotGlyphs, ViewType.Glyphs]
   const dimensions: Dimensions[] = [
     { width: 960, height: 400 },
     { width: 960, height: 960 },
+    { width: 960, height: 700 },
     { width: 960, height: 620 },
   ]
   return (

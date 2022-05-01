@@ -4,7 +4,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } fr
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { BrushableMenuProps } from '../../../../types/views/MenuProps'
+import { MenuProps } from '../../../../types/views/MenuProps'
 import {
   pointSizeKey,
   ScatterPlotMatrixSettings,
@@ -35,7 +35,7 @@ import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
-export const ScatterPlotMatrixMenu: FunctionComponent<BrushableMenuProps> = ({
+export const ScatterPlotMatrixMenu: FunctionComponent<MenuProps> = ({
   dataset,
   settings,
   setSettings,

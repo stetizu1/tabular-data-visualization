@@ -8,7 +8,7 @@ import {
   lineWidthKey,
   ParallelCoordinatesSettings,
 } from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
-import { BrushableMenuProps } from '../../../../types/views/MenuProps'
+import { MenuProps } from '../../../../types/views/MenuProps'
 import { ColorArray } from '../../../../types/styling/ColorArray'
 
 import {
@@ -35,7 +35,7 @@ import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
-export const ParallelCoordinatesMenu: FunctionComponent<BrushableMenuProps> = ({
+export const ParallelCoordinatesMenu: FunctionComponent<MenuProps> = ({
   dataset,
   settings,
   setSettings,
