@@ -76,10 +76,6 @@ export const ScatterPlotGlyphs: FunctionComponent<ScatterPlotGlyphsProps> = ({
 
   const [innerWidth, innerHeight] = [width - margin.width - glyphSize, height - margin.height - glyphSize]
 
-  selectAll(getClass(SCATTER_PLOT_GLYPHS))
-    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
-
   const createScatterPlotGlyphs = useCallback(() => {
     const node = component.current!
     const svg = select(node)
@@ -177,8 +173,8 @@ export const ScatterPlotGlyphs: FunctionComponent<ScatterPlotGlyphsProps> = ({
         }
       })
       .extent([
-        [0, 0],
-        [innerWidth, innerHeight],
+        [-glyphSize / 2, -glyphSize / 2],
+        [innerWidth + glyphSize / 2, innerHeight + glyphSize / 2],
       ])
     svg.call(makeBrush)
     registerCleanBrushing(() => {
@@ -202,11 +198,29 @@ export const ScatterPlotGlyphs: FunctionComponent<ScatterPlotGlyphsProps> = ({
     isBrushingOnEndOfMove,
   ])
 
+  useEffect(
+    () => createScatterPlotGlyphs(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      displayAttributes,
+      categoryAttribute,
+      innerWidth,
+      innerHeight,
+      glyphSize,
+      isBrushingOnEndOfMove,
+      colorCategory,
+      xAttribute,
+      yAttribute,
+    ],
+  )
+
+  selectAll(getClass(SCATTER_PLOT_GLYPHS))
+    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
+    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
+
   displayDetails(isDetailsVisible, tooltipClass)
   displayDetails(isDetailsVisible, classes.duplicates)
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createScatterPlotGlyphs(), [])
   return (
     <>
       <svg

@@ -27,8 +27,8 @@ export const useScatterPlotGlyphsStyle = makeStyles<Theme, StyleProps>(() => ({
   },
   axis: {
     shapeRendering: `crispEdges`,
-    '& line': {
-      stroke: PLOT_COLORS.axisLinesDark,
+    '& line, path': {
+      stroke: important(PLOT_COLORS.axisLinesDark),
     },
   },
   selected: {

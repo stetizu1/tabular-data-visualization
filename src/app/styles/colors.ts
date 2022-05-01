@@ -36,7 +36,7 @@ export const PLOT_COLORS = {
   tooltipBackground: `rgb(0, 66, 70)`,
   tooltipFont: `#ccffff`,
   axisLines: `#dddddd`,
-  axisLinesDark: `#696969`,
+  axisLinesDark: `#999999`,
   dataBox: `#aaaaaa`,
   brushColor: `#830606`,
 }

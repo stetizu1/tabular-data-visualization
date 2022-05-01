@@ -73,7 +73,7 @@ export const ScatterPlotMatrixMenu: FunctionComponent<MenuProps> = ({
   }, [checked, quantitativeAttributesKeys, defaultCategoryAttribute, setSettings])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createScatterPlotMatrixMenu(), [checked, quantitativeAttributesKeys])
+  useEffect(() => createScatterPlotMatrixMenu(), [dataset])
 
   const getNewSettingsForAttributeChecker = (newChecked: CheckedForSelectableDataType) => ({
     displayAttributes: getCurrentDisplayAttributes(newChecked),
@@ -94,7 +94,7 @@ export const ScatterPlotMatrixMenu: FunctionComponent<MenuProps> = ({
               label={SCATTER_PLOT_MATRIX_MENU_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
-              setQuantitativeAttributesKeys={setQuantitativeAttributesKeys}
+              setAttributesKeys={setQuantitativeAttributesKeys}
             />
             <CategorySelector
               viewType={viewType}

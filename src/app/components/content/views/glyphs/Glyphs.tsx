@@ -34,7 +34,7 @@ import { useTooltipStyle } from '../../../../components-style/content/views/useT
 
 export interface GlyphsProps extends VisualizationView, Brushable, GlyphsSettings {}
 
-const GLYPHS = `glyphs`
+const GLYPHS = `glyphsItems`
 
 export const Glyphs: FunctionComponent<GlyphsProps> = ({
   dataset,
@@ -65,11 +65,6 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   const glyphsCountPerHeight = Math.ceil(dataset.length / glyphsCountPerLine)
   const innerHeight = glyphsCountPerHeight * glyphSizeWithSpacing
   const glyphRadius = glyphSize / 2
-
-  // selected coloring
-  selectAll(getClass(GLYPHS))
-    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
   const createGlyphs = useCallback(() => {
     const node = component.current!
@@ -143,6 +138,9 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
           })
           .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
       })
+    selectAll(getClass(GLYPHS))
+      .classed(classes.selected, (d) => (d as SelectableDataType).selected)
+      .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
   }, [
     dataset,
     classes,
@@ -158,6 +156,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     categoryAttribute,
     sortAttribute,
     color,
+    isBrushingActive,
   ])
 
   useEffect(
@@ -165,6 +164,11 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [displayAttributes, categoryAttribute, sortAttribute, innerWidth, innerHeight, colorCategory],
   )
+  // selected coloring
+  selectAll(getClass(GLYPHS))
+    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
+    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
+
   displayDetails(isDetailsVisible, tooltipClass)
 
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {

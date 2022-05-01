@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 import { MenuItem, TextField } from '@mui/material'
 
 import { SelectableDataType } from '../../../../types/data/data'
@@ -9,29 +9,34 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { Settings } from '../../views/Settings'
 
-export interface SortSelectorProps {
+export interface SelectorProps<T> {
   viewType: ViewType
   value: keyof SelectableDataType
   attributesKeys: Array<keyof SelectableDataType>
   setSettings: Dispatch<SetStateAction<Settings>>
+  handleChangeSettings?: () => void
   label: string
+  settingsKey: keyof T
 }
 
-export const SortSelector: FunctionComponent<SortSelectorProps> = ({
+export const Selector = <T,>({
   viewType,
   value,
   attributesKeys,
   setSettings,
   label,
-}) => {
-  const handleSelectSortChange = (sortAttribute: keyof SelectableDataType) => {
+  settingsKey,
+  handleChangeSettings,
+}: SelectorProps<T>): JSX.Element => {
+  const handleSelectChange = (newValue: keyof SelectableDataType) => {
+    if (handleChangeSettings) handleChangeSettings()
     setSettings((prev) => {
       const prevSettings = prev[viewType]!
       return {
         ...prev,
         [viewType]: {
           ...prevSettings,
-          sortAttribute,
+          [settingsKey]: newValue,
         },
       }
     })
@@ -39,12 +44,12 @@ export const SortSelector: FunctionComponent<SortSelectorProps> = ({
   return (
     <TextField
       value={value}
-      onChange={(e) => handleSelectSortChange(e.target.value as keyof SelectableDataType)}
+      onChange={(e) => handleSelectChange(e.target.value as keyof SelectableDataType)}
       select
       label={label}
     >
       {attributesKeys.map((key, idx) => (
-        <MenuItem value={key} key={`sort-${viewType}-${idx}`}>
+        <MenuItem value={key} key={`${settingsKey}-${viewType}-${idx}`}>
           {otherCasesToWhitespaces(key)}
         </MenuItem>
       ))}

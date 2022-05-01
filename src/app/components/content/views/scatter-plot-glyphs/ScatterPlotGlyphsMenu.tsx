@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useState } from 'react'
+import { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react'
 import { schemeCategory10 } from 'd3'
 import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
@@ -6,7 +6,12 @@ import { ExpandMore } from '@mui/icons-material'
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
 import { ColorArray } from '../../../../types/styling/ColorArray'
-import { glyphSizeKey } from '../../../../types/views/scatter-plot-glyphs/ScatterPlotGlyphsSettings'
+import {
+  glyphSizeKey,
+  xAttributeKey,
+  yAttributeKey,
+} from '../../../../types/views/scatter-plot-glyphs/ScatterPlotGlyphsSettings'
+import { ScatterPlotGlyphsSettings } from '../../../../types/views/scatter-plot-glyphs/ScatterPlotGlyphsSettings'
 
 import {
   getCategoryAttributesKeys,
@@ -28,12 +33,19 @@ import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { DataSaveButton } from '../../data-drawer/items/DataSaveButton'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
-import { ScatterPlotGlyphsSettings } from '../../../../types/views/scatter-plot-glyphs/ScatterPlotGlyphsSettings'
+import { Selector } from '../../data-drawer/items/Selector'
 
-export const ScatterPlotGlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
+export const ScatterPlotGlyphsMenu: FunctionComponent<MenuProps> = ({
+  dataset,
+  settings,
+  setSettings,
+  cleanSelectedIfViewWasBrushing,
+}) => {
   const classes = useDataDrawerMenuStyle()
   const viewType = ViewType.ScatterPlotGlyphs
   const scatterPlotGlyphsSettings = settings[viewType]
+  const defaultX = useMemo(() => getQuantitativeAttributesKeys(dataset)?.[0], [dataset])
+  const defaultY = useMemo(() => getQuantitativeAttributesKeys(dataset)?.[1], [dataset])
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
@@ -54,22 +66,23 @@ export const ScatterPlotGlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, s
         displayAttributes: quantitativeAttributesKeys.filter((key) => checked[key]),
         categoryAttribute: defaultCategoryAttribute,
         colorCategory: schemeCategory10 as ColorArray,
-        xAttribute: quantitativeAttributesKeys?.[0],
-        yAttribute: quantitativeAttributesKeys?.[1],
+        xAttribute: defaultX,
+        yAttribute: defaultY,
         ...SCATTER_PLOT_GLYPHS_DEFAULT,
       }
       return { ...prev, [ViewType.ScatterPlotGlyphs]: newScatterPlotGlyphsSettings }
     })
-  }, [checked, quantitativeAttributesKeys, defaultCategoryAttribute, setSettings])
+  }, [checked, quantitativeAttributesKeys, defaultCategoryAttribute, setSettings, defaultX, defaultY])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createScatterPlotGlyphsMenu(), [checked, quantitativeAttributesKeys]) // first time empty, call once
+  useEffect(() => createScatterPlotGlyphsMenu(), [dataset]) // first time empty, call once
 
   const getNewSettingsForAttributeChecker = (
     newChecked: CheckedForSelectableDataType,
   ): Partial<ScatterPlotGlyphsSettings> => ({
     displayAttributes: getCurrentDisplayAttributes(newChecked),
   })
+  const handleChangeSettings = () => cleanSelectedIfViewWasBrushing(viewType)
 
   if (scatterPlotGlyphsSettings) {
     return (
@@ -85,7 +98,25 @@ export const ScatterPlotGlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, s
               label={SCATTER_PLOT_GLYPHS_MENU_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
-              setQuantitativeAttributesKeys={setQuantitativeAttributesKeys}
+              setAttributesKeys={setQuantitativeAttributesKeys}
+            />
+            <Selector
+              viewType={viewType}
+              value={scatterPlotGlyphsSettings.xAttribute}
+              attributesKeys={quantitativeAttributesKeys}
+              setSettings={setSettings}
+              label={SCATTER_PLOT_GLYPHS_MENU_TEXT.xAttribute}
+              settingsKey={xAttributeKey}
+              handleChangeSettings={handleChangeSettings}
+            />
+            <Selector
+              viewType={viewType}
+              value={scatterPlotGlyphsSettings.yAttribute}
+              attributesKeys={quantitativeAttributesKeys}
+              setSettings={setSettings}
+              label={SCATTER_PLOT_GLYPHS_MENU_TEXT.yAttribute}
+              settingsKey={yAttributeKey}
+              handleChangeSettings={handleChangeSettings}
             />
             <CategorySelector
               viewType={viewType}

@@ -67,8 +67,10 @@ export const DataContext: FunctionComponent = () => {
   }
 
   const cleanSelectedIfViewWasBrushing = (component: ViewType) => {
-    if (componentBrushingRef.current === component) cleanAllBrushes()
-    setCurrentComponentBrushing(null)
+    if (componentBrushingRef.current === component) {
+      cleanAllBrushes()
+      setCurrentComponentBrushing(null)
+    }
   }
 
   const setIsBrushingOnEndOfMoveAndRemoveBrushing = (newIsBrushingOnEndOfMove: boolean) => {

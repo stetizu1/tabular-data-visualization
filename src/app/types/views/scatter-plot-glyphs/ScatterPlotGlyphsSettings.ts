@@ -4,6 +4,8 @@ import { QuantitativeVisualizationSettings } from '../QuantitativeVisualizationS
 
 export const glyphSizeKey = `glyphSize`
 export const glyphSpacingKey = `glyphSpacing`
+export const xAttributeKey = `xAttribute`
+export const yAttributeKey = `yAttribute`
 
 /**
  * Settings for Scatter Plot Glyphs view
@@ -17,10 +19,10 @@ export interface ScatterPlotGlyphsSettings extends QuantitativeVisualizationSett
   /**
    * Numerical attribute for axis x
    */
-  xAttribute: keyof SelectableDataType
+  [xAttributeKey]: keyof SelectableDataType
 
   /**
    * Numerical attribute for axis y
    */
-  yAttribute: keyof SelectableDataType
+  [yAttributeKey]: keyof SelectableDataType
 }

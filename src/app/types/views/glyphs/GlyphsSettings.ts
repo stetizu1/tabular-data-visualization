@@ -2,6 +2,7 @@ import { SelectableDataType } from '../../data/data'
 
 import { QuantitativeVisualizationSettings } from '../QuantitativeVisualizationSettings'
 
+export const sortAttributeKey = `sortAttribute`
 export const glyphSizeKey = `glyphSize`
 export const glyphSpacingKey = `glyphSpacing`
 
@@ -12,7 +13,7 @@ export interface GlyphsSettings extends QuantitativeVisualizationSettings {
   /**
    * Attribute for sorting glyphs from lowest to highest value
    */
-  sortAttribute: keyof SelectableDataType
+  [sortAttributeKey]: keyof SelectableDataType
   /**
    * Size of a glyph
    */

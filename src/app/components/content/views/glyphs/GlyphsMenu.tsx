@@ -4,7 +4,12 @@ import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } fr
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { glyphSizeKey, glyphSpacingKey, GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
+import {
+  glyphSizeKey,
+  glyphSpacingKey,
+  sortAttributeKey,
+  GlyphsSettings,
+} from '../../../../types/views/glyphs/GlyphsSettings'
 import { MenuProps } from '../../../../types/views/MenuProps'
 import { ColorArray } from '../../../../types/styling/ColorArray'
 
@@ -23,7 +28,7 @@ import { useDataDrawerMenuStyle } from '../../../../components-style/content/dat
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
-import { SortSelector } from '../../data-drawer/items/SortSelector'
+import { Selector } from '../../data-drawer/items/Selector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
@@ -65,7 +70,7 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
   }, [checked, quantitativeAttributesKeys, defaultSortAttribute, defaultCategoryAttribute, setSettings])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createGlyphsMenu(), [checked, quantitativeAttributesKeys]) // first time empty, call once
+  useEffect(() => createGlyphsMenu(), [dataset]) // first time empty, call once
 
   const getNewSettingsForAttributeChecker = (
     newChecked: CheckedForSelectableDataType,
@@ -93,7 +98,7 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
               label={GLYPHS_MENU_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
-              setQuantitativeAttributesKeys={setQuantitativeAttributesKeys}
+              setAttributesKeys={setQuantitativeAttributesKeys}
             />
             <CategorySelector
               viewType={viewType}
@@ -102,12 +107,13 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
               setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.category}
             />
-            <SortSelector
+            <Selector
               viewType={viewType}
               value={glyphsSettings.sortAttribute!}
               attributesKeys={sortableAttributes}
               setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.sorting}
+              settingsKey={sortAttributeKey}
             />
             <Accordion className={classes.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>

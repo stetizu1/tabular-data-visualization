@@ -21,7 +21,7 @@ export interface AttributeCheckerProps<T extends SettingsType> {
 
   checked: CheckedForSelectableDataType
   setChecked: Dispatch<SetStateAction<CheckedForSelectableDataType>>
-  setQuantitativeAttributesKeys: Dispatch<SetStateAction<Array<keyof SelectableDataType>>>
+  setAttributesKeys: Dispatch<SetStateAction<Array<keyof SelectableDataType>>>
 }
 
 export const AttributeChecker = <T extends SettingsType>({
@@ -33,7 +33,7 @@ export const AttributeChecker = <T extends SettingsType>({
   label,
   checked,
   setChecked,
-  setQuantitativeAttributesKeys,
+  setAttributesKeys,
 }: AttributeCheckerProps<T>): JSX.Element => {
   const classes = useAttributeCheckerStyle()
   const handleCheckboxChange = (eventChecked: boolean, key: keyof SelectableDataType) => {
@@ -52,19 +52,30 @@ export const AttributeChecker = <T extends SettingsType>({
       }
     })
   }
-  const onUpButton = (idx: number) => {
-    setQuantitativeAttributesKeys((prev) => {
-      const newVal = [...prev]
-      ;[newVal[idx - 1], newVal[idx]] = [newVal[idx], newVal[idx - 1]]
-      return newVal
+  const handleMove = (newAttributesKeys: Array<keyof SelectableDataType>) => {
+    if (handleChangeSettings) handleChangeSettings()
+    setAttributesKeys(newAttributesKeys)
+    setSettings((prev) => {
+      const prevSettings = prev[viewType]! as T
+      return {
+        ...prev,
+        [viewType]: {
+          ...prevSettings,
+          displayAttributes: newAttributesKeys.filter((key) => checked[key]),
+        },
+      }
     })
   }
+  const onUpButton = (idx: number) => {
+    const newAttributesKeys = [...attributesKeys]
+    ;[newAttributesKeys[idx - 1], newAttributesKeys[idx]] = [newAttributesKeys[idx], newAttributesKeys[idx - 1]]
+    handleMove(newAttributesKeys)
+  }
+
   const onDownButton = (idx: number) => {
-    setQuantitativeAttributesKeys((prev) => {
-      const newVal = [...prev]
-      ;[newVal[idx + 1], newVal[idx]] = [newVal[idx], newVal[idx + 1]]
-      return newVal
-    })
+    const newAttributesKeys = [...attributesKeys]
+    ;[newAttributesKeys[idx + 1], newAttributesKeys[idx]] = [newAttributesKeys[idx], newAttributesKeys[idx + 1]]
+    handleMove(newAttributesKeys)
   }
 
   return (

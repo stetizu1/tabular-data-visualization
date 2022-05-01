@@ -76,11 +76,6 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
   const upperPadding = TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
   const [innerWidth, innerHeight] = [width - margin.width, height - margin.height - upperPadding]
 
-  // selected coloring
-  selectAll(getClass(PARALLEL_COORDINATES))
-    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
-
   const createParallelCoordinates = useCallback(() => {
     const node = component.current!
     const svg = select(node)
@@ -208,6 +203,12 @@ export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [displayAttributes, categoryAttribute, innerWidth, innerHeight, lineWidth, isBrushingOnEndOfMove, colorCategory],
   )
+
+  // selected coloring
+  selectAll(getClass(PARALLEL_COORDINATES))
+    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
+    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
+
   displayDetails(isDetailsVisible, tooltipClass)
 
   if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {

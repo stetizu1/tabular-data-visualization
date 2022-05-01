@@ -73,7 +73,7 @@ export const ParallelCoordinatesMenu: FunctionComponent<MenuProps> = ({
   }, [checked, quantitativeAttributesKeys, defaultCategoryAttribute, setSettings])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createParallelCoordinatesMenu(), [checked, quantitativeAttributesKeys])
+  useEffect(() => createParallelCoordinatesMenu(), [dataset])
 
   const getNewSettingsForAttributeChecker = (newChecked: CheckedForSelectableDataType) => ({
     displayAttributes: getCurrentDisplayAttributes(newChecked),
@@ -94,7 +94,7 @@ export const ParallelCoordinatesMenu: FunctionComponent<MenuProps> = ({
               label={PARALLEL_COORDINATES_MENU_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
-              setQuantitativeAttributesKeys={setQuantitativeAttributesKeys}
+              setAttributesKeys={setQuantitativeAttributesKeys}
             />
             <CategorySelector
               viewType={viewType}

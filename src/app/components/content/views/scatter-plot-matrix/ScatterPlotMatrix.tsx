@@ -98,10 +98,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
 
   const [innerWidth, innerHeight] = [width - margin.width, height - margin.height]
 
-  selectAll(getClass(DATA_POINT))
-    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
-
   const createScatterPlotMatrix = useCallback(() => {
     const node = component.current!
     const svg = select(node)
@@ -294,6 +290,11 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [displayAttributes, categoryAttribute, innerWidth, innerHeight, pointSize, isBrushingOnEndOfMove, colorCategory],
   )
+
+  selectAll(getClass(DATA_POINT))
+    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
+    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
+
   displayDetails(isDetailsVisible, tooltipClass)
   displayDetails(isDetailsVisible, classes.duplicates)
 
