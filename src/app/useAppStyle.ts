@@ -1,6 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
-import { COLORS } from './styles/colors'
-
+import { makeStyles } from '@mui/styles'
 
 export const useAppStyle = makeStyles({
   app: {
@@ -10,15 +8,8 @@ export const useAppStyle = makeStyles({
     flexDirection: `column`,
     alignItems: `center`,
   },
-  appHeader: {
-    backgroundColor: COLORS.backgroundColor,
-    padding: `10px 0`,
+  content: {
+    flexGrow: 1,
     width: `100%`,
-    display: `flex`,
-    flexDirection: `column`,
-    alignItems: `center`,
-    justifyContent: `center`,
-    fontSize: `calc(10px + 2vmin)`,
-    color: COLORS.fontColor,
   },
 })
