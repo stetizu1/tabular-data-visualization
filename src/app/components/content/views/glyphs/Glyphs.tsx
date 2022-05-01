@@ -10,7 +10,6 @@ import { Margin } from '../../../../types/styling/Margin'
 
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
-import { displayDetails } from '../../../../helpers/d3/displayDetails'
 import {
   getAttributeValuesWithLabel,
   getClass,
@@ -21,7 +20,7 @@ import {
 
 import { SVG } from '../../../../constants/svg'
 import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
-import { TOOLTIP } from '../../../../constants/views/tooltip'
+import { TOOLTIP, TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
 import { MouseActions } from '../../../../constants/actions/MouseActions'
 import { HTML } from '../../../../constants/html'
 import { SAVE_ID } from '../../../../constants/save/save'
@@ -30,7 +29,6 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
 import { useGlyphsStyle } from '../../../../components-style/content/views/glyphs/useGlyphsStyle'
-import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 
 export interface GlyphsProps extends VisualizationView, Brushable, GlyphsSettings {}
 
@@ -50,12 +48,10 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   glyphSize,
   glyphSpacing,
   margins,
-  isDetailsVisible,
   opacity,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useGlyphsStyle({ width, height, margin, opacity })
-  const { tooltip: tooltipClass } = useTooltipStyle()
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
@@ -103,7 +99,7 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
         ]),
       )
 
-    const tooltip = select(getClass(tooltipClass))
+    const tooltip = select(getClass(TOOLTIP_CLASS))
     svg
       .selectAll(GLYPHS)
       .data(dataset)
@@ -119,14 +115,14 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
           .attr(SVG.attributes.d, getGlyphPath)
           .attr(SVG.attributes.transform, getTransform)
           .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
-            tooltip.transition().duration(TOOLTIP.EASE_IN).style(SVG.style.opacity, TOOLTIP.VISIBLE)
+            tooltip.transition().duration(TOOLTIP.easeIn).style(SVG.style.opacity, TOOLTIP.visible)
             tooltip
               .html(getAttributeValuesWithLabel(data).join(HTML.newLine))
               .style(SVG.style.left, px(clientX))
               .style(SVG.style.top, px(clientY))
           })
           .on(MouseActions.mouseOut, () => {
-            tooltip.transition().duration(TOOLTIP.EASE_OUT).style(SVG.style.opacity, TOOLTIP.INVISIBLE)
+            tooltip.transition().duration(TOOLTIP.easeOut).style(SVG.style.opacity, TOOLTIP.invisible)
           })
           .on(MouseActions.click, (_: MouseEvent, changedData: SelectableDataType) => {
             setComponentBrushing(ViewType.Glyphs)
@@ -144,7 +140,6 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
   }, [
     dataset,
     classes,
-    tooltipClass,
     innerWidth,
     innerHeight,
     setDataSelected,
@@ -169,15 +164,12 @@ export const Glyphs: FunctionComponent<GlyphsProps> = ({
     .classed(classes.selected, (d) => (d as SelectableDataType).selected)
     .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
-  displayDetails(isDetailsVisible, tooltipClass)
-
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {
     return (
       <>
         <svg width={width} height={innerHeight + margin.height} className={classes.svg} id={SAVE_ID[ViewType.Glyphs]}>
           <g ref={component} transform={getTranslate([margin.left, margin.top])} />
         </svg>
-        <div className={tooltipClass} />
       </>
     )
   }

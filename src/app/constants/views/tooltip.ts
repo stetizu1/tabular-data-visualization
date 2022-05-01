@@ -1,11 +1,13 @@
+export const TOOLTIP_CLASS = `tooltip-class`
+
 export const TOOLTIP = {
-  VISIBLE: 1,
-  INVISIBLE: 0,
-  EASE_IN: 200,
-  EASE_OUT: 500,
-  PADDING: {
-    TOP: 5,
-    BOTTOM: 10,
-    LR: 5,
+  visible: 1,
+  invisible: 0,
+  easeIn: 200,
+  easeOut: 500,
+  padding: {
+    top: 5,
+    bottom: 10,
+    lr: 5,
   },
 }

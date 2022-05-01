@@ -9,7 +9,10 @@ export const EMPTY_DATA_TEXT = {
 export const TOP_TOOLBAR_TEXT = {
   labelDetailsVisible: `Display details`,
   labelClearBrushes: `Clear brushes`,
+  labelAddView: `Add a view`,
   labelBrushingOnEOM: `Brushing set only at the end of the move`,
+  addViewDialogTitle: `Add a view`,
+  noOption: `All view options are currently displayed.`,
   fileReader: {
     sampleDataLabel: `Try it on the sample data`,
     sampleDataDialogTitle: `Select sample dataset`,

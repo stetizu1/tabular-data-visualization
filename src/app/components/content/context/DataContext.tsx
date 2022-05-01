@@ -29,6 +29,8 @@ export const DataContext: FunctionComponent = () => {
   const [isDetailsVisible, setIsDetailsVisible] = useState(true)
   const [isBrushingOnEndOfMove, setIsBrushingOnEndOfMove] = useState(false)
 
+  const [isAddViewDialogOpen, setIsAddViewDialogOpen] = useState(false)
+
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
 
@@ -106,6 +108,8 @@ export const DataContext: FunctionComponent = () => {
         settings={settings}
         setSettings={setSettings}
         dataset={dataset}
+        isAddViewDialogOpen={isAddViewDialogOpen}
+        setIsAddViewDialogOpen={setIsAddViewDialogOpen}
         {...viewProps}
       />
     )
@@ -124,6 +128,7 @@ export const DataContext: FunctionComponent = () => {
         clearBrushes={clearBrushesOnButton}
         setDataset={setDatasetAndRemoveBrushing}
         setDataLoadState={setDataLoadState}
+        setIsAddViewDialogOpen={setIsAddViewDialogOpen}
       />
       {getViewGrid()}
     </>

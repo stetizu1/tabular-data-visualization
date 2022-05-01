@@ -17,7 +17,10 @@ import {
   getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
-import { SCATTER_PLOT_GLYPHS_DEFAULT, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotGlyphs'
+import {
+  MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT,
+  SCATTER_PLOT_GLYPHS_DEFAULT,
+} from '../../../../constants/views/scatterPlotGlyphs'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { SCATTER_PLOT_GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/scatterPlotGlyphs'
@@ -84,7 +87,7 @@ export const ScatterPlotGlyphsMenu: FunctionComponent<MenuProps> = ({
     return (
       <div className={classes.drawerMenu}>
         <h1>{SCATTER_PLOT_GLYPHS_MENU_TEXT.header}</h1>
-        {quantitativeAttributesKeys.length >= MIN_GLYPHS_ATTRIBUTE_COUNT ? (
+        {quantitativeAttributesKeys.length >= MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
               viewType={viewType}

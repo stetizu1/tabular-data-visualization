@@ -1,3 +1,5 @@
+import { ViewType } from '../../constants/views/ViewTypes'
+
 export const MENU_TEXT = {
   attributes: `Display attributes:`,
   category: `Colored by`,
@@ -22,4 +24,11 @@ export const OPACITY_MENU_TEXT = {
 export const PALETTE_PICKER = {
   header: `Category colors`,
   categoriesLabel: [`c1`, `c2`, `c3`, `c4`, `c5`, `c6`, `c7`, `c8`, `c9`, `c10`],
+}
+
+export const VIEW_NAMES: Record<ViewType, string> = {
+  [ViewType.ParallelCoordinates]: `Parallel Coordinates`,
+  [ViewType.ScatterPlotMatrix]: `Scatter Plot Matrix`,
+  [ViewType.Glyphs]: `Glyphs`,
+  [ViewType.ScatterPlotGlyphs]: `Scatter Plot Glyphs`,
 }

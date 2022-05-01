@@ -43,13 +43,12 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 import { SVG } from '../../../../constants/svg'
 import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
 import { MouseActions } from '../../../../constants/actions/MouseActions'
-import { TOOLTIP } from '../../../../constants/views/tooltip'
+import { TOOLTIP, TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
 import { HTML } from '../../../../constants/html'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
 import { useScatterPlotMatrixStyle } from '../../../../components-style/content/views/scatter-plot-matrix/useScatterPlotMatrixStyle'
-import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 import { SAVE_ID } from '../../../../constants/save/save'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {}
@@ -87,7 +86,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useScatterPlotMatrixStyle({ width, height, margin, opacity })
-  const { tooltip: tooltipClass } = useTooltipStyle()
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
@@ -145,7 +143,7 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
       .attr(SVG.attributes.transform, getTransformY)
       .each(setAxis(yScale, yAxis))
 
-    const tooltip = select(getClass(tooltipClass))
+    const tooltip = select(getClass(TOOLTIP_CLASS))
     const plotMatrixItem: DataEachG<MatrixItem> = (matrixItem, idx, elements) => {
       // set domains
       xScale.domain(extentInDomains[matrixItem.rowKey])
@@ -175,14 +173,14 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         .attr(SVG.attributes.r, pointSize)
         .attr(SVG.attributes.class, clsx(classes.dataPoint, DATA_POINT))
         .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
-          tooltip.transition().duration(TOOLTIP.EASE_IN).style(SVG.style.opacity, TOOLTIP.VISIBLE)
+          tooltip.transition().duration(TOOLTIP.easeIn).style(SVG.style.opacity, TOOLTIP.visible)
           tooltip
             .html(getAttributeValuesWithLabel(data).join(HTML.newLine))
             .style(SVG.style.left, px(clientX))
             .style(SVG.style.top, px(clientY))
         })
         .on(MouseActions.mouseOut, () => {
-          tooltip.transition().duration(TOOLTIP.EASE_OUT).style(SVG.style.opacity, TOOLTIP.INVISIBLE)
+          tooltip.transition().duration(TOOLTIP.easeOut).style(SVG.style.opacity, TOOLTIP.invisible)
         })
         .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
     }
@@ -277,7 +275,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     pointSize,
     color,
     classes,
-    tooltipClass,
   ])
 
   useEffect(
@@ -290,7 +287,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     .classed(classes.selected, (d) => (d as SelectableDataType).selected)
     .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
-  displayDetails(isDetailsVisible, tooltipClass)
   displayDetails(isDetailsVisible, classes.duplicates)
 
   if (displayAttributes.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT) {
@@ -299,7 +295,6 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
         <svg width={width} height={height} className={classes.svg} id={SAVE_ID[ViewType.ScatterPlotMatrix]}>
           <g ref={component} transform={getTranslate([margin.left, margin.top])} />
         </svg>
-        <div className={tooltipClass} />
       </>
     )
   }

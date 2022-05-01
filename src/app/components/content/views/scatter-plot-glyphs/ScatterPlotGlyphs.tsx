@@ -36,12 +36,14 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 import { SAVE_ID } from '../../../../constants/save/save'
 import { SVG } from '../../../../constants/svg'
 import { MouseActions } from '../../../../constants/actions/MouseActions'
-import { TOOLTIP } from '../../../../constants/views/tooltip'
+import { TOOLTIP, TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
 import { HTML } from '../../../../constants/html'
 import { BrushAction } from '../../../../constants/actions/BrushAction'
+import { MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotGlyphs'
+
+import { SCATTER_PLOT_GLYPHS_TEXT } from '../../../../text/views-and-menus/scatterPlotGlyphs'
 
 import { useScatterPlotGlyphsStyle } from '../../../../components-style/content/views/scatter-plot-glyphs/useScatterPlotGlyphsStyle'
-import { useTooltipStyle } from '../../../../components-style/content/views/useTooltipStyle'
 
 const SCATTER_PLOT_GLYPHS = `scatterPlotGlyphs`
 const AXIS_X = `axisX`
@@ -70,7 +72,6 @@ export const ScatterPlotGlyphs: FunctionComponent<ScatterPlotGlyphsProps> = ({
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const classes = useScatterPlotGlyphsStyle({ width, height, margin, opacity })
-  const { tooltip: tooltipClass } = useTooltipStyle()
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
@@ -101,7 +102,7 @@ export const ScatterPlotGlyphs: FunctionComponent<ScatterPlotGlyphsProps> = ({
         ]),
       )
 
-    const tooltip = select(getClass(tooltipClass))
+    const tooltip = select(getClass(TOOLTIP_CLASS))
     svg
       .selectAll(SCATTER_PLOT_GLYPHS)
       .data(dataset)
@@ -120,14 +121,14 @@ export const ScatterPlotGlyphs: FunctionComponent<ScatterPlotGlyphsProps> = ({
             getTranslate([xScale(Number(data[xAttribute])), yScale(Number(data[yAttribute]))]),
           )
           .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
-            tooltip.transition().duration(TOOLTIP.EASE_IN).style(SVG.style.opacity, TOOLTIP.VISIBLE)
+            tooltip.transition().duration(TOOLTIP.easeIn).style(SVG.style.opacity, TOOLTIP.visible)
             tooltip
               .html(getAttributeValuesWithLabel(data).join(HTML.newLine))
               .style(SVG.style.left, px(clientX))
               .style(SVG.style.top, px(clientY))
           })
           .on(MouseActions.mouseOut, () => {
-            tooltip.transition().duration(TOOLTIP.EASE_OUT).style(SVG.style.opacity, TOOLTIP.INVISIBLE)
+            tooltip.transition().duration(TOOLTIP.easeOut).style(SVG.style.opacity, TOOLTIP.invisible)
           })
           .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
       })
@@ -183,7 +184,6 @@ export const ScatterPlotGlyphs: FunctionComponent<ScatterPlotGlyphsProps> = ({
   }, [
     dataset,
     classes,
-    tooltipClass,
     innerWidth,
     innerHeight,
     setDataSelected,
@@ -218,15 +218,17 @@ export const ScatterPlotGlyphs: FunctionComponent<ScatterPlotGlyphsProps> = ({
     .classed(classes.selected, (d) => (d as SelectableDataType).selected)
     .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
-  displayDetails(isDetailsVisible, tooltipClass)
   displayDetails(isDetailsVisible, classes.duplicates)
 
-  return (
-    <>
-      <svg width={width} height={height} className={classes.svg} id={SAVE_ID[ViewType.ScatterPlotGlyphs]}>
-        <g ref={component} transform={getTranslate([margin.left + glyphSize / 2, margin.top + glyphSize / 2])} />
-      </svg>
-      <div className={tooltipClass} />
-    </>
-  )
+  if (displayAttributes.length >= MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT) {
+    return (
+      <>
+        <svg width={width} height={height} className={classes.svg} id={SAVE_ID[ViewType.ScatterPlotGlyphs]}>
+          <g ref={component} transform={getTranslate([margin.left + glyphSize / 2, margin.top + glyphSize / 2])} />
+        </svg>
+        <div className={TOOLTIP_CLASS} />
+      </>
+    )
+  }
+  return <div className={classes.notDisplayed}>{SCATTER_PLOT_GLYPHS_TEXT.unavailable}</div>
 }

@@ -8,6 +8,7 @@ import { GlyphsSettings } from '../../../types/views/glyphs/GlyphsSettings'
 import { ScatterPlotGlyphsSettings } from '../../../types/views/scatter-plot-glyphs/ScatterPlotGlyphsSettings'
 
 import { ViewType } from '../../../constants/views/ViewTypes'
+import { VIEW_BORDER_SIZE } from '../../../constants/views/common'
 
 import { useViewStyle } from '../../../components-style/content/views/useViewStyle'
 
@@ -36,5 +37,7 @@ export const View: FunctionComponent<ViewProps> = ({ width, height, component, s
   const classes = useViewStyle({ width, height })
   const settingsCurr = settings[component]
   if (!settingsCurr) return null
-  return <div className={classes.box}>{graph({ width, height, ...dataProps }, settingsCurr)}</div>
+  return (
+    <div className={classes.box}>{graph({ width, height: height - VIEW_BORDER_SIZE, ...dataProps }, settingsCurr)}</div>
+  )
 }

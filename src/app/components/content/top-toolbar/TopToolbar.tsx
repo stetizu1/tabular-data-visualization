@@ -1,5 +1,5 @@
 import { Dispatch, FunctionComponent, SetStateAction } from 'react'
-import { AutoFixOff, SkipNext } from '@mui/icons-material'
+import { AddBox, AutoFixOff, SkipNext } from '@mui/icons-material'
 import { Info } from '@mui/icons-material'
 
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
@@ -24,6 +24,8 @@ export interface TopToolbarProps extends FileReaderDataProps {
 
   isBrushingActive: boolean
   clearBrushes: () => void
+
+  setIsAddViewDialogOpen: Dispatch<SetStateAction<boolean>>
 }
 
 export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
@@ -37,6 +39,7 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
   clearBrushes,
   setDataset,
   setDataLoadState,
+  setIsAddViewDialogOpen,
 }) => {
   const classes = useTopToolbar()
   return (
@@ -62,6 +65,12 @@ export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
           onClick={clearBrushes}
           disabled={!isBrushingActive}
           label={TOP_TOOLBAR_TEXT.labelClearBrushes}
+        />
+        <ClickableButton
+          icon={<AddBox />}
+          onClick={() => setIsAddViewDialogOpen(true)}
+          disabled={isToolsDisabled}
+          label={TOP_TOOLBAR_TEXT.labelAddView}
         />
       </div>
       <div className={classes.right}>

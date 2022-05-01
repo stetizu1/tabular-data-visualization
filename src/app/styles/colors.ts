@@ -20,6 +20,11 @@ export const BUTTON_COLORS = {
   fontOn: `rgba(0, 0, 0, 0.87)`,
 }
 
+export const VIEW_COLORS = {
+  itemBackground: `#f2f3fa`,
+  border: `#9ea8be`,
+}
+
 export const DATA_DRAWER_COLORS = {
   background: `#23262d`,
   border: `#363a46`,
@@ -31,7 +36,7 @@ export const DATA_DRAWER_COLORS = {
 }
 
 export const PLOT_COLORS = {
-  backgroundColor: `rgba(250, 250, 250, 0.9)`,
+  backgroundColor: `rgba(250, 250, 250, 0.7)`,
   fontColor: `#1f1f1f`,
   tooltipBackground: `rgb(0, 66, 70)`,
   tooltipFont: `#ccffff`,
@@ -41,8 +46,8 @@ export const PLOT_COLORS = {
   brushColor: `#830606`,
 }
 
-export const EMPTY_SITE_COLORS = {
-  font: `#198286`,
+export const SITE_COLORS = {
+  font: `#0d4b4d`,
 }
 
 export const ERROR_COLORS = {

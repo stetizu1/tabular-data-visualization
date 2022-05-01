@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
 
 export interface InformationDialogProps {
   isOpen: boolean
@@ -22,6 +22,7 @@ export const ConfirmationDialog: FunctionComponent<InformationDialogProps> = ({
 }) => (
   <Dialog onClose={onClose} open={isOpen}>
     <DialogTitle>{title}</DialogTitle>
+    <Divider />
     <DialogContent>
       <DialogContentText>{description}</DialogContentText>
     </DialogContent>
