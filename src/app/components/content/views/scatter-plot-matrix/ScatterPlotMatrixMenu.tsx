@@ -1,5 +1,4 @@
 import { FunctionComponent, useCallback, useEffect, useState } from 'react'
-import { schemeCategory10 } from 'd3'
 import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
@@ -9,7 +8,6 @@ import {
   pointSizeKey,
   ScatterPlotMatrixSettings,
 } from '../../../../types/views/scatter-plot-matrix/ScatterPlotMatrixSettings'
-import { ColorArray } from '../../../../types/styling/ColorArray'
 
 import {
   getCategoryAttributesKeys,
@@ -48,29 +46,27 @@ export const ScatterPlotMatrixMenu: FunctionComponent<MenuProps> = ({
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
-  useEffect(() => {
-    setChecked(getDefaultAttributesChecked(dataset))
-    setQuantitativeAttributesKeys(getQuantitativeAttributesKeys(dataset))
-  }, [dataset])
-
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
-  const defaultCategoryAttribute = categoricalAttributes?.[0]
 
   const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
     quantitativeAttributesKeys.filter((key) => currChecked[key])
 
   // first time empty
   const createScatterPlotMatrixMenu = useCallback(() => {
+    const newChecked = getDefaultAttributesChecked(dataset)
+    const newQaKeys = getQuantitativeAttributesKeys(dataset)
+    const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
+    setChecked(newChecked)
+    setQuantitativeAttributesKeys(newQaKeys)
     setSettings((prev) => {
       const newScatterPlotMatrix: ScatterPlotMatrixSettings = {
-        displayAttributes: quantitativeAttributesKeys.filter((key) => checked[key]),
+        displayAttributes: newQaKeys.filter((key) => newChecked[key]),
         categoryAttribute: defaultCategoryAttribute,
-        colorCategory: schemeCategory10 as ColorArray,
         ...SCATTER_PLOT_MATRIX_DEFAULT,
       }
       return { ...prev, [ViewType.ScatterPlotMatrix]: newScatterPlotMatrix }
     })
-  }, [checked, quantitativeAttributesKeys, defaultCategoryAttribute, setSettings])
+  }, [setSettings, dataset])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createScatterPlotMatrixMenu(), [dataset])

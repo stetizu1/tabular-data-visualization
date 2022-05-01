@@ -1,5 +1,4 @@
 import { FunctionComponent, useCallback, useEffect, useState } from 'react'
-import { schemeCategory10 } from 'd3'
 import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
@@ -11,7 +10,6 @@ import {
   GlyphsSettings,
 } from '../../../../types/views/glyphs/GlyphsSettings'
 import { MenuProps } from '../../../../types/views/MenuProps'
-import { ColorArray } from '../../../../types/styling/ColorArray'
 
 import {
   getCategoryAttributesKeys,
@@ -42,32 +40,29 @@ export const GlyphsMenu: FunctionComponent<MenuProps> = ({ dataset, settings, se
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
-  useEffect(() => {
-    setChecked(getDefaultAttributesChecked(dataset))
-    setQuantitativeAttributesKeys(getQuantitativeAttributesKeys(dataset))
-  }, [dataset])
-
   const sortableAttributes = quantitativeAttributesKeys.filter((key) => checked[key])
-  const defaultSortAttribute = sortableAttributes?.[0]
-
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
-  const defaultCategoryAttribute = categoricalAttributes?.[0]
 
   const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
     quantitativeAttributesKeys.filter((key) => currChecked[key])
 
   const createGlyphsMenu = useCallback(() => {
+    const newChecked = getDefaultAttributesChecked(dataset)
+    const newQaKeys = getQuantitativeAttributesKeys(dataset)
+    const defaultSortAttribute = newQaKeys.filter((key) => newChecked[key])?.[0]
+    const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
+    setChecked(newChecked)
+    setQuantitativeAttributesKeys(newQaKeys)
     setSettings((prev) => {
       const newGlyphs: GlyphsSettings = {
-        displayAttributes: quantitativeAttributesKeys.filter((key) => checked[key]),
+        displayAttributes: newQaKeys.filter((key) => newChecked[key]),
         sortAttribute: defaultSortAttribute,
         categoryAttribute: defaultCategoryAttribute,
-        colorCategory: schemeCategory10 as ColorArray,
         ...GLYPHS_DEFAULT,
       }
       return { ...prev, [ViewType.Glyphs]: newGlyphs }
     })
-  }, [checked, quantitativeAttributesKeys, defaultSortAttribute, defaultCategoryAttribute, setSettings])
+  }, [setSettings, dataset])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createGlyphsMenu(), [dataset]) // first time empty, call once

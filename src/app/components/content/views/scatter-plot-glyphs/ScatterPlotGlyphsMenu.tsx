@@ -1,11 +1,9 @@
 import { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react'
-import { schemeCategory10 } from 'd3'
 import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
-import { ColorArray } from '../../../../types/styling/ColorArray'
 import {
   glyphSizeKey,
   xAttributeKey,
@@ -49,30 +47,28 @@ export const ScatterPlotGlyphsMenu: FunctionComponent<MenuProps> = ({
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
 
-  useEffect(() => {
-    setChecked(getDefaultAttributesChecked(dataset))
-    setQuantitativeAttributesKeys(getQuantitativeAttributesKeys(dataset))
-  }, [dataset])
-
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
-  const defaultCategoryAttribute = categoricalAttributes?.[0]
 
   const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
     quantitativeAttributesKeys.filter((key) => currChecked[key])
 
   const createScatterPlotGlyphsMenu = useCallback(() => {
+    const newChecked = getDefaultAttributesChecked(dataset)
+    const newQaKeys = getQuantitativeAttributesKeys(dataset)
+    const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
+    setChecked(newChecked)
+    setQuantitativeAttributesKeys(newQaKeys)
     setSettings((prev) => {
       const newScatterPlotGlyphsSettings: ScatterPlotGlyphsSettings = {
-        displayAttributes: quantitativeAttributesKeys.filter((key) => checked[key]),
+        displayAttributes: newQaKeys.filter((key) => newChecked[key]),
         categoryAttribute: defaultCategoryAttribute,
-        colorCategory: schemeCategory10 as ColorArray,
         xAttribute: defaultX,
         yAttribute: defaultY,
         ...SCATTER_PLOT_GLYPHS_DEFAULT,
       }
       return { ...prev, [ViewType.ScatterPlotGlyphs]: newScatterPlotGlyphsSettings }
     })
-  }, [checked, quantitativeAttributesKeys, defaultCategoryAttribute, setSettings, defaultX, defaultY])
+  }, [setSettings, defaultX, defaultY, dataset])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createScatterPlotGlyphsMenu(), [dataset]) // first time empty, call once

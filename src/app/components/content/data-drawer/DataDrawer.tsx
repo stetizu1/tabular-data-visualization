@@ -41,7 +41,7 @@ export const DataDrawer: FunctionComponent<DataDrawerProps> = ({
         return (
           <GlyphsMenu
             dataset={dataset}
-            settings={settings!}
+            settings={settings}
             setSettings={setSettings}
             cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
             key={idx}
@@ -81,10 +81,6 @@ export const DataDrawer: FunctionComponent<DataDrawerProps> = ({
         return null
     }
   })
-  if (settings === null) {
-    setSettings({})
-    return null
-  }
   return (
     <Drawer variant="persistent" anchor="right" open={isOpen} className={classes.drawer}>
       <div className={classes.header}>

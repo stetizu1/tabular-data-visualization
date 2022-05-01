@@ -5,7 +5,7 @@ export const SCATTER_PLOT_GLYPHS_TEXT = {
 }
 
 export const SCATTER_PLOT_GLYPHS_MENU_TEXT = {
-  header: `Scatter plot glyphs`,
+  header: `Scatter Plot Glyphs`,
   xAttribute: `X axis values`,
   yAttribute: `Y axis values`,
   sorting: `Sorted by`,
