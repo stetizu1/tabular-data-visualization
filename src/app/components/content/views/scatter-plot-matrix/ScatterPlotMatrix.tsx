@@ -33,12 +33,7 @@ import {
   px,
 } from '../../../../helpers/d3/stringGetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
-import {
-  getCellInnerExtent,
-  getCellInnerSize,
-  getCellTranslateInMatrix,
-  getMatrix,
-} from '../../../../helpers/d3/matrix'
+import { getCellInnerSize, getCellTranslateInMatrix, getMatrix } from '../../../../helpers/d3/matrix'
 import { isInRanges } from '../../../../helpers/basic/range'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
 import { displayDetails } from '../../../../helpers/d3/displayDetails'
@@ -111,8 +106,8 @@ export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
     const extentInDomains = getExtentInDomains(displayAttributes, dataset)
 
     const [xScale, yScale] = [
-      scaleLinear(getCellInnerExtent(rect.width, SPACING.HORIZONTAL)),
-      scaleLinear(getCellInnerExtent(rect.height, SPACING.VERTICAL)),
+      scaleLinear([SPACING.HORIZONTAL, rect.width - SPACING.HORIZONTAL]),
+      scaleLinear([rect.height - SPACING.HORIZONTAL, SPACING.HORIZONTAL]),
     ]
 
     const [xAxis, yAxis] = [axisBottom(xScale), axisLeft(yScale)]

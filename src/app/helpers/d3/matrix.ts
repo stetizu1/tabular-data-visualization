@@ -6,8 +6,6 @@ import { getTranslate } from './stringGetters'
 export const getMatrix = (keys: Array<keyof SelectableDataType>): MatrixItem[] =>
   keys.map((rowKey, rowIdx) => keys.map((colKey, colIdx) => ({ rowIdx, colIdx, rowKey, colKey }))).flat()
 
-export const getCellInnerExtent = (length: number, spacing: number): [number, number] => [spacing, length - spacing]
-
 export const getCellInnerSize = (length: number, spacing: number): number => length - 2 * spacing
 
 export const getCellTranslateInMatrix =
