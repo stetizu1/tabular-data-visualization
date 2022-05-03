@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { VoidFunctionComponent } from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
 
 export interface InformationDialogProps {
@@ -11,7 +11,7 @@ export interface InformationDialogProps {
   cancelText: string
 }
 
-export const ConfirmationDialog: FunctionComponent<InformationDialogProps> = ({
+export const ConfirmationDialog: VoidFunctionComponent<InformationDialogProps> = ({
   isOpen,
   title,
   description,

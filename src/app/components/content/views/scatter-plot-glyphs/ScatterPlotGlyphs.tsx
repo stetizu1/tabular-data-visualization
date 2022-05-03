@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
+import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import {
   axisBottom,
   axisLeft,
@@ -51,7 +51,7 @@ const AXIS_Y = `axisY`
 
 export interface ScatterPlotGlyphsProps extends VisualizationView, Brushable, ScatterPlotGlyphsSettings {}
 
-export const ScatterPlotGlyphs: FunctionComponent<ScatterPlotGlyphsProps> = ({
+export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = ({
   width,
   height,
   dataset,

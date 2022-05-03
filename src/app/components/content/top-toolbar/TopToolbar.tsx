@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
 import { AddCircle, AutoFixOff, SkipNext } from '@mui/icons-material'
 import { Info } from '@mui/icons-material'
 
@@ -28,7 +28,7 @@ export interface TopToolbarProps extends FileReaderDataProps {
   setIsAddViewDialogOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export const TopToolbar: FunctionComponent<TopToolbarProps> = ({
+export const TopToolbar: VoidFunctionComponent<TopToolbarProps> = ({
   openDrawer,
   isToolsDisabled,
   isDetailsVisible,

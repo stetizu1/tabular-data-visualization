@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
+import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import {
   Axis,
   axisBottom,
@@ -67,7 +67,7 @@ export const TICKS = {
   Y: 6,
 }
 
-export const ScatterPlotMatrix: FunctionComponent<ScatterPlotMatrixProps> = ({
+export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = ({
   width,
   height,
   dataset,

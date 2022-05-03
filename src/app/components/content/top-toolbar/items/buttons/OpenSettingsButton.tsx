@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { VoidFunctionComponent } from 'react'
 import { Settings } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 import clsx from 'clsx'
@@ -10,7 +10,7 @@ export interface OpenSettingsButtonProps {
   open: () => void
 }
 
-export const OpenSettingsButton: FunctionComponent<OpenSettingsButtonProps> = ({ disabled, open }) => {
+export const OpenSettingsButton: VoidFunctionComponent<OpenSettingsButtonProps> = ({ disabled, open }) => {
   const classes = useOpenSettingsButtonStyle()
   return (
     <IconButton

@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, MouseEvent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, MouseEvent, SetStateAction } from 'react'
 import { ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material'
 
 import { useTopToolbarButtonStyle } from '../../../../../components-style/content/top-toolbar/items/buttons/useTopToolbarButtonStyle'
@@ -13,7 +13,7 @@ export interface ToggleButtonProps {
   disabled?: boolean
 }
 
-export const ToggleButtonSingle: FunctionComponent<ToggleButtonProps> = ({
+export const ToggleButtonSingle: VoidFunctionComponent<ToggleButtonProps> = ({
   icon,
   value,
   setValue,

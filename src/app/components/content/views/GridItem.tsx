@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ComponentProps } from 'react'
+import React, { VoidFunctionComponent, ComponentProps } from 'react'
 import { useSize } from 'react-use'
 import { IconButton, Typography } from '@mui/material'
 import { Close } from '@mui/icons-material'
@@ -17,7 +17,7 @@ type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {
   isDragFinished: boolean
 }
 
-export const GridItem: FunctionComponent<Props> = ({ onRemove, title, isDragFinished, ...rest }) => {
+export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isDragFinished, ...rest }) => {
   const classes = useGridItemStyle()
   const [sized] = useSize(
     ({ width, height }) => (

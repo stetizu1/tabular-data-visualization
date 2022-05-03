@@ -1,10 +1,10 @@
-import { FunctionComponent } from 'react'
+import { VoidFunctionComponent } from 'react'
 
 import { HEADER_TEXT } from '../../text/HeaderText'
 
 import { useHeaderStyle } from '../../components-style/header/useHeaderStyle'
 
-export const Header: FunctionComponent = () => {
+export const Header: VoidFunctionComponent = () => {
   const style = useHeaderStyle()
   return (
     <header className={style.headerContainer}>

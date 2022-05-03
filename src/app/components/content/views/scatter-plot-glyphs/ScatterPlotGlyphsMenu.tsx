@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useMemo, useState } from 'react'
+import { VoidFunctionComponent, useCallback, useEffect, useMemo, useState } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
@@ -35,7 +35,7 @@ import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 import { Selector } from '../../data-drawer/items/Selector'
 
-export const ScatterPlotGlyphsMenu: FunctionComponent<MenuProps> = ({
+export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
   dataset,
   settings,
   setSettings,

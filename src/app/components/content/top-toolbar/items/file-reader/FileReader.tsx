@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction, useState } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction, useState } from 'react'
 import { AutoGraph } from '@mui/icons-material'
 import clsx from 'clsx'
 
@@ -34,7 +34,7 @@ enum AcceptableFileTypes {
   csv = `text/csv`,
 }
 
-export const FileReader: FunctionComponent<FileReaderProps> = ({ setDataset, setDataLoadState, isHighlighted }) => {
+export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset, setDataLoadState, isHighlighted }) => {
   const classes = useFileReaderStyle()
   const [isSampleDataDialogOpen, setIsSampleDataDialogOpen] = useState(false)
 

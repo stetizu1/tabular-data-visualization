@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
 import { MenuItem, TextField } from '@mui/material'
 
 import { SelectableDataType } from '../../../../types/data/data'
@@ -19,7 +19,7 @@ export interface CategorySelectorProps {
   label: string
 }
 
-export const CategorySelector: FunctionComponent<CategorySelectorProps> = ({
+export const CategorySelector: VoidFunctionComponent<CategorySelectorProps> = ({
   viewType,
   value,
   attributesKeys,

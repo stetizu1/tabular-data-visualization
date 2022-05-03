@@ -1,10 +1,10 @@
-import { FunctionComponent } from 'react'
+import { VoidFunctionComponent } from 'react'
 
 import { FOOTER_TEXT } from '../../text/FooterText'
 
 import { useFooterStyle } from '../../components-style/footer/useFooterStyle'
 
-export const Footer: FunctionComponent = () => {
+export const Footer: VoidFunctionComponent = () => {
   const style = useFooterStyle()
   return (
     <header className={style.footerContainer}>

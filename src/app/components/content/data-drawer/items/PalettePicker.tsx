@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, FunctionComponent, SetStateAction } from 'react'
+import { ChangeEvent, Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
 import { Typography } from '@mui/material'
 import clsx from 'clsx'
 
@@ -18,7 +18,7 @@ export interface PalettePickerProps {
   setSettings: Dispatch<SetStateAction<Settings>>
 }
 
-export const PalettePicker: FunctionComponent<PalettePickerProps> = ({ colors, setSettings, viewType }) => {
+export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({ colors, setSettings, viewType }) => {
   const classes = usePalettePickerStyle({ colors })
   const handleSetColor = (event: ChangeEvent<HTMLInputElement>, idx: number) => {
     const newColor = event.target.value

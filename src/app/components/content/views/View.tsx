@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { VoidFunctionComponent } from 'react'
 
 import { VisualizationView } from '../../../types/views/VisualizationView'
 import { Brushable } from '../../../types/brushing/Brushable'
@@ -32,7 +32,7 @@ const options: Record<ViewType, ViewElementFunction> = {
   [ViewType.ScatterPlotGlyphs]: (p, s) => <ScatterPlotGlyphs {...p} {...(s as ScatterPlotGlyphsSettings)} />,
 }
 
-export const View: FunctionComponent<ViewProps> = ({ width, height, component, settings, ...dataProps }) => {
+export const View: VoidFunctionComponent<ViewProps> = ({ width, height, component, settings, ...dataProps }) => {
   const graph = options[component]
   const classes = useViewStyle({ width, height })
   const settingsCurr = settings[component]

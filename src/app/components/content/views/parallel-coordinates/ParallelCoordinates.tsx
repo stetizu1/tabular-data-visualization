@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
+import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { axisLeft, brushY, D3BrushEvent, line, scaleLinear, scaleOrdinal, scalePoint, select, selectAll } from 'd3'
 import clsx from 'clsx'
 
@@ -49,7 +49,7 @@ const AXES = `AXES`
 
 export interface ParallelCoordinatesProps extends VisualizationView, Brushable, ParallelCoordinatesSettings {}
 
-export const ParallelCoordinates: FunctionComponent<ParallelCoordinatesProps> = ({
+export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps> = ({
   width,
   height,
   dataset,

@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react'
+import { VoidFunctionComponent, useState } from 'react'
 
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
@@ -15,7 +15,7 @@ import { Settings } from '../views/Settings'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
 
-export const DataContext: FunctionComponent = () => {
+export const DataContext: VoidFunctionComponent = () => {
   const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
 
   const [dataset, setDataset] = useState<ReadonlyArray<SelectableDataType> | null>(null)

@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
 import { TextField, Typography } from '@mui/material'
 
 import { Opacity } from '../../../../types/styling/Opacity'
@@ -18,7 +18,7 @@ export interface OpacityInputProps {
   viewType: ViewType
 }
 
-export const OpacityInput: FunctionComponent<OpacityInputProps> = ({ header, opacity, setSettings, viewType }) => {
+export const OpacityInput: VoidFunctionComponent<OpacityInputProps> = ({ header, opacity, setSettings, viewType }) => {
   const classes = useNumberInputStyles()
   const handleOpacityChange = (newOpacity: number, idx: number) => {
     const newOpacities = [...opacity]

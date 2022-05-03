@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
 import { TextField, Typography } from '@mui/material'
 
 import { MarginArray } from '../../../../types/styling/Margin'
@@ -17,7 +17,7 @@ export interface MarginInputProps {
   viewType: ViewType
 }
 
-export const MarginInput: FunctionComponent<MarginInputProps> = ({ margins, setSettings, viewType }) => {
+export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({ margins, setSettings, viewType }) => {
   const classes = useNumberInputStyles()
   const handleMarginChange = (newMargin: number, idx: number) => {
     const newMargins = [...margins]

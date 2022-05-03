@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction, useCallback, useState } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState } from 'react'
 import GridLayout, { WidthProvider } from 'react-grid-layout'
 import clsx from 'clsx'
 import { AddCircle } from '@mui/icons-material'
@@ -48,7 +48,7 @@ export interface ViewGridProps extends ViewGridDataProps {
 
 const ReactGridLayout = WidthProvider(GridLayout)
 
-export const ViewGrid: FunctionComponent<ViewGridProps> = ({
+export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
   isDrawerOpen,
   closeDrawer,
   cleanSelectedIfViewWasBrushing,

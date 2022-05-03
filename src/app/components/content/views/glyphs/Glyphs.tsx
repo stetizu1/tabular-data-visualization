@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
+import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
 import clsx from 'clsx'
 
@@ -34,7 +34,7 @@ export interface GlyphsProps extends VisualizationView, Brushable, GlyphsSetting
 
 const GLYPHS = `glyphsItems`
 
-export const Glyphs: FunctionComponent<GlyphsProps> = ({
+export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   dataset,
   width,
   height,

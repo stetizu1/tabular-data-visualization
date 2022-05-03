@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useEffect, useState } from 'react'
+import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
@@ -32,7 +32,7 @@ import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
-export const ScatterPlotMatrixMenu: FunctionComponent<MenuProps> = ({
+export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
   dataset,
   settings,
   setSettings,

@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react'
+import { VoidFunctionComponent } from 'react'
 import clsx from 'clsx'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
 
@@ -13,7 +13,7 @@ export interface InformationDialogProps {
   alert?: boolean
 }
 
-export const InformationDialog: FunctionComponent<InformationDialogProps> = ({
+export const InformationDialog: VoidFunctionComponent<InformationDialogProps> = ({
   isOpen,
   onClose,
   title,

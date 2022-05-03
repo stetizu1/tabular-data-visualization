@@ -1,4 +1,4 @@
-import { FunctionComponent, useState } from 'react'
+import { useState, VoidFunctionComponent } from 'react'
 import { Button, Tooltip } from '@mui/material'
 import { Save } from '@mui/icons-material'
 
@@ -16,7 +16,7 @@ export interface DataSaveButtonProps {
   viewType: ViewType
 }
 
-export const DataSaveButton: FunctionComponent<DataSaveButtonProps> = ({ viewType }) => {
+export const DataSaveButton: VoidFunctionComponent<DataSaveButtonProps> = ({ viewType }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const classes = useDrawerButtonStyles()
   const onConfirm = () => {

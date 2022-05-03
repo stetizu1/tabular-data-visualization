@@ -1,4 +1,4 @@
-import { Dispatch, FunctionComponent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
 import { Divider, Drawer, IconButton } from '@mui/material'
 import { ChevronRight } from '@mui/icons-material'
 
@@ -25,7 +25,7 @@ export interface DataDrawerProps {
   cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
 }
 
-export const DataDrawer: FunctionComponent<DataDrawerProps> = ({
+export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
   isOpen,
   close,
   dataset,
