@@ -4,16 +4,12 @@ import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
-import {
-  glyphSizeKey,
-  xAttributeKey,
-  yAttributeKey,
-} from '../../../../types/views/scatter-plot-glyphs/ScatterPlotGlyphsSettings'
-import { ScatterPlotGlyphsSettings } from '../../../../types/views/scatter-plot-glyphs/ScatterPlotGlyphsSettings'
+import { glyphSizeKey, xAttributeKey, yAttributeKey } from '../../../../types/views/settings/ScatterPlotGlyphsSettings'
+import { ScatterPlotGlyphsSettings } from '../../../../types/views/settings/ScatterPlotGlyphsSettings'
 
 import {
   getCategoryAttributesKeys,
-  getDefaultAttributesChecked,
+  getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
@@ -47,7 +43,7 @@ export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
   const defaultX = useMemo(() => getQuantitativeAttributesKeys(dataset)?.[0], [dataset])
   const defaultY = useMemo(() => getQuantitativeAttributesKeys(dataset)?.[1], [dataset])
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
-  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
+  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultQuantitativeAttributesChecked(dataset))
 
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
 
@@ -55,7 +51,7 @@ export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
     quantitativeAttributesKeys.filter((key) => currChecked[key])
 
   const createScatterPlotGlyphsMenu = useCallback(() => {
-    const newChecked = getDefaultAttributesChecked(dataset)
+    const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
     setChecked(newChecked)

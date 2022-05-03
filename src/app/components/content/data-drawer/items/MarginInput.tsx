@@ -9,7 +9,7 @@ import { MARGIN_MENU_TEXT } from '../../../../text/views-and-menus/common'
 
 import { useNumberInputStyles } from '../../../../components-style/content/data-drawer/items/useNumberInputStyles'
 
-import { Settings } from '../../views/Settings'
+import { Settings } from '../../../../types/views/settings/Settings'
 
 export interface MarginInputProps {
   margins: MarginArray

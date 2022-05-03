@@ -6,7 +6,7 @@ import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { BrushSelection1d } from '../../../../types/brushing/BrushSelection'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
-import { ParallelCoordinatesSettings } from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
+import { ParallelCoordinatesSettings } from '../../../../types/views/settings/ParallelCoordinatesSettings'
 import { Margin } from '../../../../types/styling/Margin'
 import { DataEachG } from '../../../../types/d3-types'
 

@@ -1,4 +1,4 @@
-import { VoidFunctionComponent, useState } from 'react'
+import { useState, VoidFunctionComponent } from 'react'
 
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
@@ -11,7 +11,7 @@ import { ViewType } from '../../../constants/views/ViewTypes'
 
 import { TopToolbar } from '../top-toolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
-import { Settings } from '../views/Settings'
+import { Settings } from '../../../types/views/settings/Settings'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
 
@@ -49,8 +49,10 @@ export const DataContext: VoidFunctionComponent = () => {
     }
   }
 
-  const cleanAllBrushes = () => {
-    setDataSelected((data) => (data.selected = false))
+  const cleanAllBrushes = (deletePrevSelection = true) => {
+    if (deletePrevSelection) {
+      setDataSelected((data) => (data.selected = false))
+    }
     cleanBrushingRef.current.forEach((f) => f())
   }
 
@@ -60,7 +62,9 @@ export const DataContext: VoidFunctionComponent = () => {
   }
 
   const setComponentBrushing: SetComponentBrushing = (newComponent) => {
-    if (componentBrushingRef.current !== newComponent) cleanAllBrushes()
+    if (componentBrushingRef.current !== newComponent) {
+      cleanAllBrushes(newComponent !== ViewType.DataTable && newComponent !== ViewType.Glyphs)
+    }
     setCurrentComponentBrushing(newComponent)
   }
 

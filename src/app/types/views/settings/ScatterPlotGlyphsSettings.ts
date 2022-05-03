@@ -1,6 +1,6 @@
 import { SelectableDataType } from '../../data/data'
 
-import { QuantitativeVisualizationSettings } from '../QuantitativeVisualizationSettings'
+import { ViewVisualizationSettings } from './VisualizationSettings'
 
 export const glyphSizeKey = `glyphSize`
 export const glyphSpacingKey = `glyphSpacing`
@@ -10,7 +10,7 @@ export const yAttributeKey = `yAttribute`
 /**
  * Settings for Scatter Plot Glyphs view
  */
-export interface ScatterPlotGlyphsSettings extends QuantitativeVisualizationSettings {
+export interface ScatterPlotGlyphsSettings extends ViewVisualizationSettings {
   /**
    * Size of a glyph
    */

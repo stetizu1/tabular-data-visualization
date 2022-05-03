@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
-import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
+import { GlyphsSettings } from '../../../../types/views/settings/GlyphsSettings'
 import { Margin } from '../../../../types/styling/Margin'
 
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'

@@ -5,4 +5,5 @@ export const SAVE_ID: Record<ViewType, string> = {
   [ViewType.ScatterPlotMatrix]: `spmSvgId`,
   [ViewType.Glyphs]: `glyphSvgId`,
   [ViewType.ScatterPlotGlyphs]: `spgSvgId`,
+  [ViewType.DataTable]: `dataTableId`,
 }

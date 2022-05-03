@@ -1,17 +1,19 @@
-import { SelectableDataType } from '../data/data'
-import { MarginArray } from '../styling/Margin'
-import { Opacity } from '../styling/Opacity'
-import { ColorArray } from '../styling/ColorArray'
+import { SelectableDataType } from '../../data/data'
+import { MarginArray } from '../../styling/Margin'
+import { Opacity } from '../../styling/Opacity'
+import { ColorArray } from '../../styling/ColorArray'
 
-/**
- * General settings for quantitative visualization
- */
-export interface QuantitativeVisualizationSettings {
+export interface VisualizationSettings {
   /**
    * Attributes that will be used to create visualization
    */
   displayAttributes: Array<keyof SelectableDataType>
+}
 
+/**
+ * General settings for quantitative visualization
+ */
+export interface ViewVisualizationSettings extends VisualizationSettings {
   /**
    * Array of colors for category attributes
    */

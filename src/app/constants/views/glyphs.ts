@@ -1,5 +1,5 @@
 import { schemeCategory10 } from 'd3'
-import { GlyphsSettings } from '../../types/views/glyphs/GlyphsSettings'
+import { GlyphsSettings } from '../../types/views/settings/GlyphsSettings'
 import { ColorArray } from '../../types/styling/ColorArray'
 
 export const MIN_GLYPHS_ATTRIBUTE_COUNT = 3

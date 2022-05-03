@@ -7,7 +7,7 @@ import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
-import { Settings } from '../../views/Settings'
+import { Settings } from '../../../../types/views/settings/Settings'
 
 export interface SelectorProps<T> {
   viewType: ViewType

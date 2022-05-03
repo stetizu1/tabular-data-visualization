@@ -45,6 +45,7 @@ export const PLOT_COLORS = {
   axisLinesDark: `#999999`,
   dataBox: `#aaaaaa`,
   brushColor: `#830606`,
+  brushColorTable: `rgb(252, 207, 207)`,
 }
 
 export const SITE_COLORS = {
@@ -59,4 +60,9 @@ export const HIGHLIGHT_COLOR = {
   border: `#da3512`,
   background: `rgba(201, 30, 0, 0.5)`,
   backgroundGone: `rgba(201, 30, 0, 0)`,
+}
+
+export const TABLE_COLORS = {
+  checkColor: `#3a80fa`,
+  headerBackground: `#f7f8fc`,
 }

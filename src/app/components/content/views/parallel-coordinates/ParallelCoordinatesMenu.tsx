@@ -3,15 +3,12 @@ import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } fr
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import {
-  lineWidthKey,
-  ParallelCoordinatesSettings,
-} from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
+import { lineWidthKey, ParallelCoordinatesSettings } from '../../../../types/views/settings/ParallelCoordinatesSettings'
 import { MenuProps } from '../../../../types/views/MenuProps'
 
 import {
   getCategoryAttributesKeys,
-  getDefaultAttributesChecked,
+  getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
@@ -43,7 +40,7 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
   const parallelCoordinatesSettings = settings[viewType]
 
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
-  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
+  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultQuantitativeAttributesChecked(dataset))
 
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
 
@@ -52,7 +49,7 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
 
   // first time empty
   const createParallelCoordinatesMenu = useCallback(() => {
-    const newChecked = getDefaultAttributesChecked(dataset)
+    const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
     setChecked(newChecked)

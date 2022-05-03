@@ -4,14 +4,11 @@ import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
-import {
-  pointSizeKey,
-  ScatterPlotMatrixSettings,
-} from '../../../../types/views/scatter-plot-matrix/ScatterPlotMatrixSettings'
+import { pointSizeKey, ScatterPlotMatrixSettings } from '../../../../types/views/settings/ScatterPlotMatrixSettings'
 
 import {
   getCategoryAttributesKeys,
-  getDefaultAttributesChecked,
+  getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
@@ -43,7 +40,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
   const scatterPlotMatrixSettings = settings[viewType]
 
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
-  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
+  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultQuantitativeAttributesChecked(dataset))
 
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
 
@@ -52,7 +49,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
 
   // first time empty
   const createScatterPlotMatrixMenu = useCallback(() => {
-    const newChecked = getDefaultAttributesChecked(dataset)
+    const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
     setChecked(newChecked)

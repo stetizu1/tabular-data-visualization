@@ -9,11 +9,12 @@ import { ViewType } from '../../../constants/views/ViewTypes'
 
 import { useDataDrawerStyle } from '../../../components-style/content/data-drawer/useDataDrawerStyle'
 
-import { Settings } from '../views/Settings'
+import { Settings } from '../../../types/views/settings/Settings'
 import { GlyphsMenu } from '../views/glyphs/GlyphsMenu'
 import { ParallelCoordinatesMenu } from '../views/parallel-coordinates/ParallelCoordinatesMenu'
 import { ScatterPlotMatrixMenu } from '../views/scatter-plot-matrix/ScatterPlotMatrixMenu'
 import { ScatterPlotGlyphsMenu } from '../views/scatter-plot-glyphs/ScatterPlotGlyphsMenu'
+import { DataTableMenu } from '../views/data-table/DataTableMenu'
 
 export interface DataDrawerProps {
   isOpen: boolean
@@ -70,6 +71,16 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
       case ViewType.ScatterPlotGlyphs:
         return (
           <ScatterPlotGlyphsMenu
+            dataset={dataset}
+            settings={settings}
+            setSettings={setSettings}
+            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+            key={idx}
+          />
+        )
+      case ViewType.DataTable:
+        return (
+          <DataTableMenu
             dataset={dataset}
             settings={settings}
             setSettings={setSettings}

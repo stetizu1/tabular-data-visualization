@@ -4,6 +4,7 @@ import { IconButton, Typography } from '@mui/material'
 import { Close } from '@mui/icons-material'
 import clsx from 'clsx'
 
+import { ViewType } from '../../../constants/views/ViewTypes'
 import { DRAG_HANDLE, HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/views/common'
 
 import { useGridItemStyle } from '../../../components-style/content/views/useGridItemStyle'
@@ -25,7 +26,7 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isDrag
         <div className={clsx(DRAG_HANDLE, classes.header)}>
           <Typography className={classes.text}>{title}</Typography>
           <div>
-            <DataSaveButton viewType={rest.component} />
+            {rest.component !== ViewType.DataTable && <DataSaveButton viewType={rest.component} />}
             <IconButton onClick={onRemove}>
               <Close />
             </IconButton>

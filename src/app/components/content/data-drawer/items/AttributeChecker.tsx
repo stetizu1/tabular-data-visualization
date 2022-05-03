@@ -8,7 +8,7 @@ import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
-import { Settings, SettingsType } from '../../views/Settings'
+import { Settings, SettingsType } from '../../../../types/views/settings/Settings'
 import { useAttributeCheckerStyle } from '../../../../components-style/content/data-drawer/items/useAttributeCheckerStyle'
 
 export interface AttributeCheckerProps<T extends SettingsType> {

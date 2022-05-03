@@ -5,7 +5,7 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { useNumberInputStyles } from '../../../../components-style/content/data-drawer/items/useNumberInputStyles'
 
-import { Settings } from '../../views/Settings'
+import { Settings } from '../../../../types/views/settings/Settings'
 
 export interface NumberInputProps<T> {
   label: string

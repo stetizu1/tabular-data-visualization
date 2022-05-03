@@ -1,10 +1,14 @@
 import { ViewType } from '../../constants/views/ViewTypes'
 
+export const MENU_BASE_TEXT = {
+  more: `More options`,
+  empty: `-----`,
+}
+
 export const MENU_TEXT = {
   attributes: `Display attributes:`,
   category: `Colored by`,
-  more: `More options`,
-  empty: `-----`,
+  ...MENU_BASE_TEXT,
 }
 
 export const MARGIN_MENU_TEXT = {
@@ -31,4 +35,5 @@ export const VIEW_NAMES: Record<ViewType, string> = {
   [ViewType.ScatterPlotMatrix]: `Scatter Plot Matrix`,
   [ViewType.Glyphs]: `Glyphs`,
   [ViewType.ScatterPlotGlyphs]: `Scatter Plot Glyphs`,
+  [ViewType.DataTable]: `Data Table`,
 }

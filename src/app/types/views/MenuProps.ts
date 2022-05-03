@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction } from 'react'
 
-import { Settings } from '../../components/content/views/Settings'
 import { ViewType } from '../../constants/views/ViewTypes'
 
 import { SelectableDataType } from '../data/data'
+import { Settings } from './settings/Settings'
 
 /**
  * Properties needed for creating menu settings item.

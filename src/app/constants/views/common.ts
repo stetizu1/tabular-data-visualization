@@ -32,6 +32,10 @@ export const DEFAULT_VIEW_DIMENSIONS: Record<ViewType, { w: number; h: number }>
     w: 14,
     h: 26,
   },
+  [ViewType.DataTable]: {
+    w: 18,
+    h: 20,
+  },
 }
 
 export const VIEW_LIMITS = {

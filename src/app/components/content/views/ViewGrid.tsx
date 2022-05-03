@@ -7,6 +7,7 @@ import { Brushable } from '../../../types/brushing/Brushable'
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
 import { GridLayoutItem, LayoutArray } from '../../../types/views/Grid'
+import { Settings } from '../../../types/views/settings/Settings'
 
 import { getClass } from '../../../helpers/d3/stringGetters'
 import { displayDetails } from '../../../helpers/d3/displayDetails'
@@ -29,7 +30,6 @@ import { useViewGridStyle } from '../../../components-style/content/views/useVie
 import { DataDrawer } from '../data-drawer/DataDrawer'
 import { SelectionDialog } from '../common/dialogs/SelectionDialog'
 import { GridItem } from './GridItem'
-import { Settings } from './Settings'
 
 export interface ViewGridDataProps extends Brushable {
   dataset: ReadonlyArray<SelectableDataType>

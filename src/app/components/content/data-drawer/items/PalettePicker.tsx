@@ -10,7 +10,7 @@ import { PALETTE_PICKER } from '../../../../text/views-and-menus/common'
 
 import { usePalettePickerStyle } from '../../../../components-style/content/data-drawer/items/usePalettePickerStyle'
 
-import { Settings } from '../../views/Settings'
+import { Settings } from '../../../../types/views/settings/Settings'
 
 export interface PalettePickerProps {
   viewType: ViewType

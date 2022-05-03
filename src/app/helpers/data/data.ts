@@ -31,7 +31,14 @@ export const getCategoryAttributesKeys = (
   })
 }
 
-export const getDefaultAttributesChecked = (
+export const getDefaultAllAttributesChecked = (
+  dataset: ReadonlyArray<SelectableDataType>,
+): CheckedForSelectableDataType => {
+  const keys = getAttributeKeys(dataset)
+  return Object.fromEntries(keys.map((key) => [key, true]))
+}
+
+export const getDefaultQuantitativeAttributesChecked = (
   dataset: ReadonlyArray<SelectableDataType>,
 ): CheckedForSelectableDataType => {
   const defaultQuantitativeAttributesKeys = getDefaultQuantitativeAttributesKeys(dataset)

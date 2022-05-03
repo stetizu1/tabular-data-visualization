@@ -8,12 +8,12 @@ import {
   glyphSpacingKey,
   sortAttributeKey,
   GlyphsSettings,
-} from '../../../../types/views/glyphs/GlyphsSettings'
+} from '../../../../types/views/settings/GlyphsSettings'
 import { MenuProps } from '../../../../types/views/MenuProps'
 
 import {
   getCategoryAttributesKeys,
-  getDefaultAttributesChecked,
+  getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
@@ -37,7 +37,7 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
   const viewType = ViewType.Glyphs
   const glyphsSettings = settings[viewType]
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
-  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
+  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultQuantitativeAttributesChecked(dataset))
 
   const sortableAttributes = quantitativeAttributesKeys.filter((key) => checked[key])
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
@@ -46,7 +46,7 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
     quantitativeAttributesKeys.filter((key) => currChecked[key])
 
   const createGlyphsMenu = useCallback(() => {
-    const newChecked = getDefaultAttributesChecked(dataset)
+    const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultSortAttribute = newQaKeys.filter((key) => newChecked[key])?.[0]
     const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
