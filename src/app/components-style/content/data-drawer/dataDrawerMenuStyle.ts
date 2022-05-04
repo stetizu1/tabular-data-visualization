@@ -1,10 +1,10 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
 
 import { calc, border, px, important } from '../../../helpers/d3/stringGetters'
 import { DATA_DRAWER_COLORS, ERROR_COLORS } from '../../../styles/colors'
 import { DATA_DRAWER_FONT } from '../../../styles/font'
 
-export const useDataDrawerMenuStyle = makeStyles({
+export const dataDrawerMenuStyle: Record<string, SxProps> = {
   drawerMenu: {
     width: calc(-20, `100%`),
     padding: px(10),
@@ -52,4 +52,4 @@ export const useDataDrawerMenuStyle = makeStyles({
       margin: important(px(2, 0, 5)),
     },
   },
-})
+}

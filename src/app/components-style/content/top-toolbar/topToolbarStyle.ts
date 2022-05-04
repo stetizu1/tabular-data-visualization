@@ -1,9 +1,9 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
 
-import { TOP_TOOLBAR_COLORS } from '../../../styles/colors'
 import { border, px } from '../../../helpers/d3/stringGetters'
+import { TOP_TOOLBAR_COLORS } from '../../../styles/colors'
 
-export const useTopToolbar = makeStyles({
+export const topToolbarStyle: Record<string, SxProps> = {
   toolbar: {
     width: `100%`,
     padding: px(10, 0),
@@ -26,4 +26,4 @@ export const useTopToolbar = makeStyles({
   right: {
     display: `flex`,
   },
-})
+}

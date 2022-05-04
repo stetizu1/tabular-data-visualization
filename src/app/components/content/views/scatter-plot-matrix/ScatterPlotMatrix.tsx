@@ -12,7 +12,7 @@ import {
   select,
   selectAll,
 } from 'd3'
-import clsx from 'clsx'
+import { Box } from '@mui/material'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
@@ -48,16 +48,26 @@ import { HTML } from '../../../../constants/html'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
-import { useScatterPlotMatrixStyle } from '../../../../components-style/content/views/scatter-plot-matrix/useScatterPlotMatrixStyle'
-import { SAVE_ID } from '../../../../constants/save/save'
+import {
+  AXIS_CLASS,
+  getScatterPlotMatrixStyle,
+  DATA_POINT_CLASS,
+  RECT_CLASS,
+  SELECTED_CLASS,
+  DUPLICATES_CLASS,
+  CELL_CLASS,
+} from '../../../../components-style/content/views/scatter-plot-matrix/scatterPlotMatrixStyle'
+import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {}
 
-export const DATA_POINT = `dataPoint`
-export const AXIS_X = `axisX`
-export const AXIS_Y = `axisY`
-export const CELL = `cell`
-export const CELL_DUPLICATES = `cell-dup`
+export const DATA_POINT = `DATA_POINT`
+export const AXIS_X = `AXIS_X`
+export const AXIS_Y = `AXIS_Y`
+export const CELL = `CELL`
+export const CELL_DUPLICATES = `CELL_DUPLICATES`
+
 export const SPACING = {
   HORIZONTAL: 12,
   VERTICAL: 12,
@@ -85,7 +95,6 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
   opacity,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
-  const classes = useScatterPlotMatrixStyle({ width, height, margin, opacity })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
@@ -129,7 +138,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       .data(displayAttributes)
       .enter()
       .append(SVG.elements.g)
-      .attr(SVG.attributes.class, clsx(classes.x, classes.axis))
+      .attr(SVG.attributes.class, AXIS_CLASS)
       .attr(SVG.attributes.transform, getTransformX)
       .each(setAxis(xScale, xAxis))
 
@@ -139,7 +148,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       .data(displayAttributes)
       .enter()
       .append(SVG.elements.g)
-      .attr(SVG.attributes.class, clsx(classes.y, classes.axis))
+      .attr(SVG.attributes.class, AXIS_CLASS)
       .attr(SVG.attributes.transform, getTransformY)
       .each(setAxis(yScale, yAxis))
 
@@ -156,7 +165,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       // make rectangle surrounding data
       cell
         .append(SVG.elements.rect)
-        .attr(SVG.attributes.class, classes.rect)
+        .attr(SVG.attributes.class, RECT_CLASS)
         .attr(SVG.attributes.x, SPACING.HORIZONTAL)
         .attr(SVG.attributes.y, SPACING.VERTICAL)
         .attr(SVG.attributes.width, getCellInnerSize(rect.width, SPACING.HORIZONTAL))
@@ -171,7 +180,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
         .attr(SVG.attributes.cx, getCx)
         .attr(SVG.attributes.cy, getCy)
         .attr(SVG.attributes.r, pointSize)
-        .attr(SVG.attributes.class, clsx(classes.dataPoint, DATA_POINT))
+        .attr(SVG.attributes.class, DATA_POINT_CLASS)
         .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
           tooltip.transition().duration(TOOLTIP.easeIn).style(SVG.style.opacity, TOOLTIP.visible)
           tooltip
@@ -190,7 +199,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       .data(getMatrix(displayAttributes))
       .enter()
       .append(SVG.elements.g)
-      .attr(SVG.attributes.class, classes.cell)
+      .attr(SVG.attributes.class, CELL_CLASS)
       .attr(SVG.attributes.transform, getCellTranslateInMatrix(rect, attributesCount - 1))
       .each(plotMatrixItem)
 
@@ -259,7 +268,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       .data(getMatrix(displayAttributes))
       .enter()
       .append(SVG.elements.g)
-      .attr(SVG.attributes.class, clsx(classes.cell, classes.duplicates))
+      .attr(SVG.attributes.class, DUPLICATES_CLASS)
       .attr(SVG.attributes.transform, getCellTranslateInMatrix(rect, attributesCount - 1))
       .each(plotMatrixItem)
   }, [
@@ -274,7 +283,6 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
     isBrushingOnEndOfMove,
     pointSize,
     color,
-    classes,
   ])
 
   useEffect(
@@ -283,20 +291,18 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
     [displayAttributes, categoryAttribute, innerWidth, innerHeight, pointSize, isBrushingOnEndOfMove, colorCategory],
   )
 
-  selectAll(getClass(DATA_POINT))
-    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
+  selectAll(getClass(DATA_POINT_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
 
-  displayDetails(isDetailsVisible, classes.duplicates)
+  displayDetails(isDetailsVisible, DUPLICATES_CLASS)
 
   if (displayAttributes.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT) {
     return (
-      <>
-        <svg width={width} height={height} className={classes.svg} id={SAVE_ID[ViewType.ScatterPlotMatrix]}>
+      <Box sx={getScatterPlotMatrixStyle(opacity, isBrushingActive)} id={CONTAINER_SAVE_ID[ViewType.ScatterPlotMatrix]}>
+        <svg width={width} height={height} id={SAVE_ID[ViewType.ScatterPlotMatrix]}>
           <g ref={component} transform={getTranslate([margin.left, margin.top])} />
         </svg>
-      </>
+      </Box>
     )
   }
-  return <div className={classes.notDisplayed}>{SCATTER_PLOT_MATRIX_TEXT.unavailable}</div>
+  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{SCATTER_PLOT_MATRIX_TEXT.unavailable}</Box>
 }

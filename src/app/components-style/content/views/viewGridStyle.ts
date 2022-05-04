@@ -1,9 +1,9 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
 import { px } from '../../../helpers/d3/stringGetters'
 import { TOOLTIP } from '../../../constants/views/tooltip'
 import { PLOT_COLORS } from '../../../styles/colors'
 
-export const useViewGridStyle = makeStyles({
+export const viewGridStyle: Record<string, SxProps> = {
   tooltip: {
     position: `fixed`,
     padding: px(TOOLTIP.padding.top, TOOLTIP.padding.lr, TOOLTIP.padding.bottom),
@@ -14,4 +14,4 @@ export const useViewGridStyle = makeStyles({
     opacity: 0,
     zIndex: 10,
   },
-})
+}

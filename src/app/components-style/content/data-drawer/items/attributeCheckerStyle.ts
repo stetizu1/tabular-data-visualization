@@ -1,7 +1,7 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
 import { important, px } from '../../../../helpers/d3/stringGetters'
 
-export const useAttributeCheckerStyle = makeStyles({
+export const attributeCheckerStyle: Record<string, SxProps> = {
   buttons: {
     display: `flex`,
     flexDirection: `column`,
@@ -12,4 +12,4 @@ export const useAttributeCheckerStyle = makeStyles({
     minWidth: important(0),
     height: important(px(15)),
   },
-})
+}

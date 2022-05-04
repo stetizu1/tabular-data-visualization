@@ -1,9 +1,9 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
 
 import { important, px } from '../../../../../helpers/d3/stringGetters'
 import { BUTTON_COLORS } from '../../../../../styles/colors'
 
-export const useTopToolbarButtonStyle = makeStyles({
+export const topToolbarButtonStyle: Record<string, SxProps> = {
   button: {
     margin: important(px(0, 5)),
     padding: important(px(4)),
@@ -19,4 +19,4 @@ export const useTopToolbarButtonStyle = makeStyles({
       color: BUTTON_COLORS.fontOn,
     },
   },
-})
+}

@@ -1,6 +1,6 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
 
-export const useAppStyle = makeStyles({
+export const appStyle: Record<string, SxProps> = {
   app: {
     textAlign: `center`,
     minHeight: `100vh`,
@@ -8,8 +8,8 @@ export const useAppStyle = makeStyles({
     flexDirection: `column`,
     alignItems: `center`,
   },
-  content: {
+  contentStyle: {
     flexGrow: 1,
     width: `100%`,
   },
-})
+}

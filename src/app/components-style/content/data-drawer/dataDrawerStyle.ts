@@ -1,9 +1,9 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
 
 import { border, px } from '../../../helpers/d3/stringGetters'
 import { DATA_DRAWER_COLORS } from '../../../styles/colors'
 
-export const useDataDrawerStyle = makeStyles({
+export const dataDrawerStyle: Record<string, SxProps> = {
   drawer: {
     width: px(250),
     flexShrink: 0,
@@ -30,4 +30,4 @@ export const useDataDrawerStyle = makeStyles({
     flexDirection: `column`,
     flexGrow: 1,
   },
-})
+}

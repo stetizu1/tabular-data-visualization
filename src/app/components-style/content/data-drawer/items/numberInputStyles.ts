@@ -1,8 +1,9 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
+
 import { important, px } from '../../../../helpers/d3/stringGetters'
 import { DATA_DRAWER_FONT } from '../../../../styles/font'
 
-export const useNumberInputStyles = makeStyles({
+export const numberInputStyles: Record<string, SxProps> = {
   vertical: {
     display: `flex`,
     flexDirection: `column`,
@@ -23,4 +24,4 @@ export const useNumberInputStyles = makeStyles({
       padding: px(5, 10, 4),
     },
   },
-})
+}

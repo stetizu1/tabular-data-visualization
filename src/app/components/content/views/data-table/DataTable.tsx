@@ -1,5 +1,6 @@
 import { useMemo, useState, VoidFunctionComponent } from 'react'
 import {
+  Box,
   Checkbox,
   Table,
   TableBody,
@@ -10,7 +11,6 @@ import {
   TableSortLabel,
   Tooltip,
 } from '@mui/material'
-import clsx from 'clsx'
 
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { Brushable } from '../../../../types/brushing/Brushable'
@@ -25,8 +25,10 @@ import { MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/data
 import { FORM } from '../../../../constants/form'
 
 import { DATA_TABLE_TEXT } from '../../../../text/views-and-menus/dataTable'
-
-import { useDataTableStyle } from '../../../../components-style/content/views/data-table/useDataTableStyle'
+import {
+  dataTableStyle,
+  getDataTableRowStyle,
+} from '../../../../components-style/content/views/data-table/dataTableStyle'
 
 export interface DataTableProps extends VisualizationView, Brushable, DataTableSettings {}
 
@@ -37,8 +39,6 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   setComponentBrushing,
   rowHeight,
 }) => {
-  const classes = useDataTableStyle({ rowHeight })
-
   const [order, setOrder] = useState<OrderType>(OrderType.asc)
   const [orderBy, setOrderBy] = useState<keyof SelectableDataType>(displayAttributes[0])
   const sortableDataset = useMemo<IndexedSelectableDataType[]>(
@@ -89,12 +89,12 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
     return (
       <TableContainer>
         <Table>
-          <TableHead className={classes.tableHead}>
+          <TableHead sx={dataTableStyle.tableHead}>
             <TableRow>
               <TableCell padding={FORM.checkbox}>
                 <Tooltip title={DATA_TABLE_TEXT.checkboxTooltip}>
                   <Checkbox
-                    className={classes.checkAll}
+                    sx={dataTableStyle.checkAll}
                     indeterminate={someSelected}
                     checked={allSelected}
                     onChange={(event) => handleSelectAllClick(event.target.checked)}
@@ -119,7 +119,7 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
               })}
             </TableRow>
           </TableHead>
-          <TableBody className={classes.tableBody}>
+          <TableBody sx={dataTableStyle.tableBody}>
             {sortedDataset.map((dataCopy, idx) => {
               const selected = dataset[dataCopy.index].selected
               return (
@@ -127,7 +127,7 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
                   hover
                   onClick={() => handleSelectClick(dataCopy.index)}
                   key={idx}
-                  className={clsx(classes.tableRow, selected && classes.selected)}
+                  sx={getDataTableRowStyle(rowHeight, selected)}
                 >
                   <TableCell padding={FORM.checkbox}>
                     <Checkbox checked={selected} />
@@ -143,5 +143,5 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
       </TableContainer>
     )
   }
-  return <div className={classes.notDisplayed}>{DATA_TABLE_TEXT.unavailable}</div>
+  return <Box sx={dataTableStyle.notDisplayed}>{DATA_TABLE_TEXT.unavailable}</Box>
 }

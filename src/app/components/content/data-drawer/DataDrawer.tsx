@@ -1,5 +1,5 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
-import { Divider, Drawer, IconButton } from '@mui/material'
+import { Box, Divider, Drawer, IconButton } from '@mui/material'
 import { ChevronRight } from '@mui/icons-material'
 
 import { SelectableDataType } from '../../../types/data/data'
@@ -7,7 +7,7 @@ import { SideEffectVoid } from '../../../types/basic/functionTypes'
 
 import { ViewType } from '../../../constants/views/ViewTypes'
 
-import { useDataDrawerStyle } from '../../../components-style/content/data-drawer/useDataDrawerStyle'
+import { dataDrawerStyle } from '../../../components-style/content/data-drawer/dataDrawerStyle'
 
 import { Settings } from '../../../types/views/settings/Settings'
 import { GlyphsMenu } from '../views/glyphs/GlyphsMenu'
@@ -35,7 +35,6 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
   setSettings,
   cleanSelectedIfViewWasBrushing,
 }) => {
-  const classes = useDataDrawerStyle()
   const menus = views.map((view, idx) => {
     switch (view) {
       case ViewType.Glyphs:
@@ -93,14 +92,14 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
     }
   })
   return (
-    <Drawer variant="persistent" anchor="right" open={isOpen} className={classes.drawer}>
-      <div className={classes.header}>
+    <Drawer variant="persistent" anchor="right" open={isOpen} sx={dataDrawerStyle.drawer}>
+      <Box sx={dataDrawerStyle.header}>
         <IconButton onClick={close}>
-          <ChevronRight className={classes.chevron} />
+          <ChevronRight sx={dataDrawerStyle.chevron} />
         </IconButton>
-      </div>
+      </Box>
       <Divider />
-      <div className={classes.menu}>{menus.map((menu) => menu)}</div>
+      <Box sx={dataDrawerStyle.menu}>{menus.map((menu) => menu)}</Box>
     </Drawer>
   )
 }

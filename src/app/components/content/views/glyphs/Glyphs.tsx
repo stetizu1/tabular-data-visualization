@@ -1,6 +1,6 @@
 import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
-import clsx from 'clsx'
+import { Box } from '@mui/material'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
@@ -23,16 +23,21 @@ import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 import { TOOLTIP, TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
 import { MouseActions } from '../../../../constants/actions/MouseActions'
 import { HTML } from '../../../../constants/html'
-import { SAVE_ID } from '../../../../constants/save/save'
+import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
-import { useGlyphsStyle } from '../../../../components-style/content/views/glyphs/useGlyphsStyle'
+import {
+  getGlyphsStyle,
+  GLYPHS_CLASS,
+  SELECTED_CLASS,
+} from '../../../../components-style/content/views/glyphs/glyphsStyle'
+import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
 
 export interface GlyphsProps extends VisualizationView, Brushable, GlyphsSettings {}
 
-const GLYPHS = `glyphsItems`
+const GLYPHS = `GLYPHS`
 
 export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   dataset,
@@ -51,7 +56,6 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   opacity,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
-  const classes = useGlyphsStyle({ width, height, margin, opacity })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
@@ -61,6 +65,9 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   const glyphsCountPerHeight = Math.ceil(dataset.length / glyphsCountPerLine)
   const innerHeight = glyphsCountPerHeight * glyphSizeWithSpacing
   const glyphRadius = glyphSize / 2
+
+  // selected coloring
+  selectAll(getClass(GLYPHS_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
 
   const createGlyphs = useCallback(() => {
     const node = component.current!
@@ -111,7 +118,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
           .data([data])
           .enter()
           .append(SVG.elements.path)
-          .attr(SVG.attributes.class, clsx(classes.glyph, GLYPHS))
+          .attr(SVG.attributes.class, GLYPHS_CLASS)
           .attr(SVG.attributes.d, getGlyphPath)
           .attr(SVG.attributes.transform, getTransform)
           .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
@@ -135,12 +142,8 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
           })
           .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
       })
-    selectAll(getClass(GLYPHS))
-      .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-      .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
   }, [
     dataset,
-    classes,
     innerWidth,
     innerHeight,
     setDataSelected,
@@ -152,7 +155,6 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
     categoryAttribute,
     sortAttribute,
     color,
-    isBrushingActive,
   ])
 
   useEffect(
@@ -160,19 +162,15 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [displayAttributes, categoryAttribute, sortAttribute, innerWidth, innerHeight, colorCategory],
   )
-  // selected coloring
-  selectAll(getClass(GLYPHS))
-    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {
     return (
-      <>
-        <svg width={width} height={innerHeight + margin.height} className={classes.svg} id={SAVE_ID[ViewType.Glyphs]}>
+      <Box sx={getGlyphsStyle(opacity, isBrushingActive)} id={CONTAINER_SAVE_ID[ViewType.Glyphs]}>
+        <svg width={width} height={innerHeight + margin.height} id={SAVE_ID[ViewType.Glyphs]}>
           <g ref={component} transform={getTranslate([margin.left, margin.top])} />
         </svg>
-      </>
+      </Box>
     )
   }
-  return <div className={classes.notDisplayed}>{GLYPHS_TEXT.unavailable}</div>
+  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{GLYPHS_TEXT.unavailable}</Box>
 }

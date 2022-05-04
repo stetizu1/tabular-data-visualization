@@ -1,6 +1,5 @@
 import { ChangeEvent, Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
-import { Typography } from '@mui/material'
-import clsx from 'clsx'
+import { Box, Typography } from '@mui/material'
 
 import { ColorArray } from '../../../../types/styling/ColorArray'
 
@@ -8,7 +7,10 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { PALETTE_PICKER } from '../../../../text/views-and-menus/common'
 
-import { usePalettePickerStyle } from '../../../../components-style/content/data-drawer/items/usePalettePickerStyle'
+import {
+  getColorInputStyle,
+  palettePickerStyle,
+} from '../../../../components-style/content/data-drawer/items/palettePickerStyle'
 
 import { Settings } from '../../../../types/views/settings/Settings'
 
@@ -19,7 +21,6 @@ export interface PalettePickerProps {
 }
 
 export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({ colors, setSettings, viewType }) => {
-  const classes = usePalettePickerStyle({ colors })
   const handleSetColor = (event: ChangeEvent<HTMLInputElement>, idx: number) => {
     const newColor = event.target.value
     if (newColor) {
@@ -37,31 +38,19 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({ color
       })
     }
   }
-  const getInput = (idx: number, className: string) => (
-    <div className={classes.col}>
+  const getInput = (idx: number) => (
+    <Box sx={palettePickerStyle.col} key={idx}>
       <label>{PALETTE_PICKER.categoriesLabel[idx]}</label>
-      <div className={clsx(classes.c, className)}>
+      <Box sx={getColorInputStyle(colors, idx)}>
         <input type="color" value={colors[idx]} onChange={(e) => handleSetColor(e, idx)} />
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
   return (
-    <div className={classes.picker}>
-      <Typography className={classes.text}>{PALETTE_PICKER.header}</Typography>
-      <div className={classes.row}>
-        {getInput(0, classes.c0)}
-        {getInput(1, classes.c1)}
-        {getInput(2, classes.c2)}
-        {getInput(3, classes.c3)}
-        {getInput(4, classes.c4)}
-      </div>
-      <div className={classes.row}>
-        {getInput(5, classes.c5)}
-        {getInput(6, classes.c6)}
-        {getInput(7, classes.c7)}
-        {getInput(8, classes.c8)}
-        {getInput(9, classes.c9)}
-      </div>
-    </div>
+    <Box sx={palettePickerStyle.picker}>
+      <Typography sx={palettePickerStyle.text}>{PALETTE_PICKER.header}</Typography>
+      <Box sx={palettePickerStyle.row}>{[0, 1, 2, 3, 4].map((idx) => getInput(idx))}</Box>
+      <Box sx={palettePickerStyle.row}>{[5, 6, 7, 8, 9].map((idx) => getInput(idx))}</Box>
+    </Box>
   )
 }

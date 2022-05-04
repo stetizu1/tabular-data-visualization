@@ -1,9 +1,7 @@
 import { VoidFunctionComponent } from 'react'
+import { Box } from '@mui/material'
 
-import { useLoadingStyle } from '../../../components-style/content/no-data/useLoadingStyle'
+import { loadingStyle } from '../../../components-style/content/no-data/loadingStyle'
 import { EMPTY_DATA_TEXT } from '../../../text/SiteText'
 
-export const Loading: VoidFunctionComponent = () => {
-  const classes = useLoadingStyle()
-  return <div className={classes.load}>{EMPTY_DATA_TEXT.loading}</div>
-}
+export const Loading: VoidFunctionComponent = () => <Box sx={loadingStyle.load}>{EMPTY_DATA_TEXT.loading}</Box>

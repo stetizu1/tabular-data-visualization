@@ -2,11 +2,12 @@ import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
 import { AddCircle, AutoFixOff, SkipNext } from '@mui/icons-material'
 import { Info } from '@mui/icons-material'
 
+import { Box } from '@mui/material'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
 
 import { TOP_TOOLBAR_TEXT } from '../../../text/SiteText'
 
-import { useTopToolbar } from '../../../components-style/content/top-toolbar/useTopToolbar'
+import { topToolbarStyle } from '../../../components-style/content/top-toolbar/topToolbarStyle'
 
 import { ClickableButton } from './items/buttons/ClickableButton'
 import { FileReader, FileReaderDataProps } from './items/file-reader/FileReader'
@@ -40,43 +41,40 @@ export const TopToolbar: VoidFunctionComponent<TopToolbarProps> = ({
   setDataset,
   setDataLoadState,
   setIsAddViewDialogOpen,
-}) => {
-  const classes = useTopToolbar()
-  return (
-    <div className={classes.toolbar}>
-      <div className={classes.left}>
-        <ToggleButtonSingle
-          icon={<Info />}
-          value={isDetailsVisible}
-          setValue={setIsDetailsVisible}
-          disabled={isToolsDisabled}
-          label={TOP_TOOLBAR_TEXT.labelDetailsVisible}
-        />
-        <ToggleButtonSingle
-          icon={<SkipNext />}
-          value={isBrushingOnEndOfMove}
-          setValue={setIsBrushingOnEndOfMove}
-          disabled={isToolsDisabled}
-          label={TOP_TOOLBAR_TEXT.labelBrushingOnEOM}
-        />
-        <div className={classes.separator} />
-        <ClickableButton
-          icon={<AutoFixOff />}
-          onClick={clearBrushes}
-          disabled={!isBrushingActive}
-          label={TOP_TOOLBAR_TEXT.labelClearBrushes}
-        />
-        <ClickableButton
-          icon={<AddCircle />}
-          onClick={() => setIsAddViewDialogOpen(true)}
-          disabled={isToolsDisabled}
-          label={TOP_TOOLBAR_TEXT.labelAddView}
-        />
-      </div>
-      <div className={classes.right}>
-        <FileReader setDataset={setDataset} setDataLoadState={setDataLoadState} isHighlighted={isToolsDisabled} />
-        <OpenSettingsButton open={openDrawer} disabled={isToolsDisabled} />
-      </div>
-    </div>
-  )
-}
+}) => (
+  <Box sx={topToolbarStyle.toolbar}>
+    <Box sx={topToolbarStyle.left}>
+      <ToggleButtonSingle
+        icon={<Info />}
+        value={isDetailsVisible}
+        setValue={setIsDetailsVisible}
+        disabled={isToolsDisabled}
+        label={TOP_TOOLBAR_TEXT.labelDetailsVisible}
+      />
+      <ToggleButtonSingle
+        icon={<SkipNext />}
+        value={isBrushingOnEndOfMove}
+        setValue={setIsBrushingOnEndOfMove}
+        disabled={isToolsDisabled}
+        label={TOP_TOOLBAR_TEXT.labelBrushingOnEOM}
+      />
+      <Box sx={topToolbarStyle.separator} />
+      <ClickableButton
+        icon={<AutoFixOff />}
+        onClick={clearBrushes}
+        disabled={!isBrushingActive}
+        label={TOP_TOOLBAR_TEXT.labelClearBrushes}
+      />
+      <ClickableButton
+        icon={<AddCircle />}
+        onClick={() => setIsAddViewDialogOpen(true)}
+        disabled={isToolsDisabled}
+        label={TOP_TOOLBAR_TEXT.labelAddView}
+      />
+    </Box>
+    <Box sx={topToolbarStyle.right}>
+      <FileReader setDataset={setDataset} setDataLoadState={setDataLoadState} isHighlighted={isToolsDisabled} />
+      <OpenSettingsButton open={openDrawer} disabled={isToolsDisabled} />
+    </Box>
+  </Box>
+)

@@ -1,4 +1,5 @@
 import { VoidFunctionComponent } from 'react'
+import { Box } from '@mui/material'
 
 import { VisualizationView } from '../../../types/views/VisualizationView'
 import { Brushable } from '../../../types/brushing/Brushable'
@@ -11,7 +12,7 @@ import { DataTableSettings } from '../../../types/views/settings/DataTableSettin
 import { ViewType } from '../../../constants/views/ViewTypes'
 import { VIEW_BORDER_SIZE } from '../../../constants/views/common'
 
-import { useViewStyle } from '../../../components-style/content/views/useViewStyle'
+import { getViewBoxStyle } from '../../../components-style/content/views/viewStyle'
 
 import { Settings, SettingsType } from '../../../types/views/settings/Settings'
 import { ParallelCoordinates } from './parallel-coordinates/ParallelCoordinates'
@@ -37,10 +38,11 @@ const options: Record<ViewType, ViewElementFunction> = {
 
 export const View: VoidFunctionComponent<ViewProps> = ({ width, height, component, settings, ...dataProps }) => {
   const graph = options[component]
-  const classes = useViewStyle({ width, height })
   const settingsCurr = settings[component]
   if (!settingsCurr) return null
   return (
-    <div className={classes.box}>{graph({ width, height: height - VIEW_BORDER_SIZE, ...dataProps }, settingsCurr)}</div>
+    <Box sx={getViewBoxStyle(width, height)}>
+      {graph({ width, height: height - VIEW_BORDER_SIZE, ...dataProps }, settingsCurr)}
+    </Box>
   )
 }

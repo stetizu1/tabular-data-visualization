@@ -1,5 +1,5 @@
 import { ViewType } from '../../constants/views/ViewTypes'
-import { SAVE_ID } from '../../constants/save/save'
+import { CONTAINER_SAVE_ID, SAVE_ID } from '../../constants/save/save'
 
 export const saveSvgToFile = (svgEl: Element, fileName: string): void => {
   svgEl.setAttribute(`xmlns`, `http://www.w3.org/2000/svg`)
@@ -16,9 +16,19 @@ export const saveSvgToFile = (svgEl: Element, fileName: string): void => {
 }
 
 export const saveSvg = (viewType: ViewType): void => {
-  const svg = document.querySelector(`#${SAVE_ID[viewType]}`)!
+  const svgContainer = document.querySelector(`#${CONTAINER_SAVE_ID[viewType]}`)
+  const svg = document.querySelector(`#${SAVE_ID[viewType]}`)
+  if (!svgContainer || !svg) {
+    // eslint-disable-next-line no-console
+    console.error(`Identifier class missing, saving is not possible`)
+    return
+  }
+
+  const containerClass = Array.from(svgContainer.classList).filter((cls) => !cls.includes(`MuiBox`))[0]
+
   const newStyleNodes = Array.from(document.querySelectorAll(`style`))
-    .map((style) => style.innerHTML)
+    .filter((e) => e.innerHTML.includes(`.${containerClass}`))
+    .map((style) => style.innerHTML.replace(`.${containerClass} `, ``))
     .map((style) => {
       const node = document.createElement(`style`)
       node.innerHTML = style

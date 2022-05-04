@@ -1,6 +1,6 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useState } from 'react'
 import { AutoGraph } from '@mui/icons-material'
-import clsx from 'clsx'
+import { Box } from '@mui/material'
 
 import { DataType, SelectableDataType } from '../../../../../types/data/data'
 
@@ -11,7 +11,7 @@ import { SampleDataset, sampleDatasetIcons, sampleDatasets } from '../../../../.
 
 import { TOP_TOOLBAR_TEXT } from '../../../../../text/SiteText'
 
-import { useFileReaderStyle } from '../../../../../components-style/content/top-toolbar/items/file-reader/useFileReaderStyle'
+import { getFileReaderBoxStyle } from '../../../../../components-style/content/top-toolbar/items/file-reader/fileReaderStyle'
 
 import { SelectionDialog } from '../../../common/dialogs/SelectionDialog'
 import { InformationDialog } from '../../../common/dialogs/InformationDialog'
@@ -35,7 +35,6 @@ enum AcceptableFileTypes {
 }
 
 export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset, setDataLoadState, isHighlighted }) => {
-  const classes = useFileReaderStyle()
   const [isSampleDataDialogOpen, setIsSampleDataDialogOpen] = useState(false)
 
   const [isAlertDialogOpen, setIsAlertDialogOpen] = useState(false)
@@ -71,14 +70,13 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
         confirmText={text.alertDialog.confirm}
         alert={true}
       />
-      <div className={clsx(isHighlighted && classes.highlight, classes.box)}>
+      <Box sx={getFileReaderBoxStyle(isHighlighted)}>
         <ClickableButton
           onClick={() => setIsSampleDataDialogOpen(true)}
           icon={<AutoGraph />}
           label={text.sampleDataLabel}
         />
         <input
-          className={classes.input}
           type="file"
           onChange={async (e) => {
             if (e.target.files?.length) {
@@ -116,7 +114,7 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
             }
           }}
         />
-      </div>
+      </Box>
     </>
   )
 }

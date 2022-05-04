@@ -1,6 +1,6 @@
 import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
+import { Box } from '@mui/material'
 import { axisLeft, brushY, D3BrushEvent, line, scaleLinear, scaleOrdinal, scalePoint, select, selectAll } from 'd3'
-import clsx from 'clsx'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
@@ -34,18 +34,24 @@ import { HTML } from '../../../../constants/html'
 
 import { PARALLEL_COORDINATES_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
 
-import { useParallelCoordinatesStyle } from '../../../../components-style/content/views/parallel-coordinates/useParallelCoordinatesStyle'
+import {
+  AXES_TEXT_CLASS,
+  getParallelCoordinatesStyle,
+  PARALLEL_COORDINATES_CLASS,
+  SELECTED_CLASS,
+} from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
+import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
 
 import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
-import { SAVE_ID } from '../../../../constants/save/save'
+import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 const BRUSH_WIDTH = 30
 const BRUSH_RADIUS = BRUSH_WIDTH / 2
 const BRUSH_OVERLAP = 5
 const TEXT_Y_SHIFT = 10
 
-const PARALLEL_COORDINATES = `PARALLEL_COORDINATES`
 const AXES = `AXES`
+export const PARALLEL_COORDINATES = `PARALLEL_COORDINATES`
 
 export interface ParallelCoordinatesProps extends VisualizationView, Brushable, ParallelCoordinatesSettings {}
 
@@ -66,7 +72,6 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
   opacity,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
-  const classes = useParallelCoordinatesStyle({ width, height, margin, opacity })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
   const upperPadding = TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
@@ -140,7 +145,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
       .enter()
       .append(SVG.elements.path)
       .attr(SVG.attributes.d, getDataLinePath)
-      .attr(SVG.attributes.class, clsx(classes.line, PARALLEL_COORDINATES))
+      .attr(SVG.attributes.class, PARALLEL_COORDINATES_CLASS)
       .attr(SVG.attributes.strokeWidth, lineWidth)
 
       .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
@@ -170,7 +175,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
       .append(SVG.elements.text)
       .attr(SVG.attributes.y, -TEXT_Y_SHIFT)
       .text(getAttributeFormatted)
-      .attr(SVG.attributes.class, classes.text)
+      .attr(SVG.attributes.class, AXES_TEXT_CLASS)
 
     registerCleanBrushing(() => {
       brushableAxes.each((attribute, idx, elements) => {
@@ -190,7 +195,6 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     isBrushingOnEndOfMove,
     lineWidth,
     color,
-    classes,
   ])
 
   useEffect(
@@ -200,14 +204,15 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
   )
 
   // selected coloring
-  selectAll(getClass(PARALLEL_COORDINATES))
-    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
+  selectAll(getClass(PARALLEL_COORDINATES_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
 
   if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {
     return (
-      <>
-        <svg width={width} height={height} className={classes.svg} id={SAVE_ID[ViewType.ParallelCoordinates]}>
+      <Box
+        sx={getParallelCoordinatesStyle(opacity, isBrushingActive)}
+        id={CONTAINER_SAVE_ID[ViewType.ParallelCoordinates]}
+      >
+        <svg width={width} height={height} id={SAVE_ID[ViewType.ParallelCoordinates]}>
           <g
             ref={component}
             width={innerWidth}
@@ -215,8 +220,8 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
             transform={getTranslate([margin.left, margin.top + upperPadding])}
           />
         </svg>
-      </>
+      </Box>
     )
   }
-  return <div className={classes.notDisplayed}>{PARALLEL_COORDINATES_TEXT.unavailable}</div>
+  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{PARALLEL_COORDINATES_TEXT.unavailable}</Box>
 }

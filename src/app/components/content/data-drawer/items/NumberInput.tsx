@@ -3,7 +3,7 @@ import { TextField } from '@mui/material'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
-import { useNumberInputStyles } from '../../../../components-style/content/data-drawer/items/useNumberInputStyles'
+import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
 
 import { Settings } from '../../../../types/views/settings/Settings'
 
@@ -24,7 +24,6 @@ export const NumberInput = <T,>({
   viewType,
   max,
 }: NumberInputProps<T>): JSX.Element => {
-  const classes = useNumberInputStyles()
   const handleValueChange = (newValue: number) => {
     setSettings((prev) => {
       const prevSettings = prev[viewType]!
@@ -43,7 +42,7 @@ export const NumberInput = <T,>({
       label={label}
       type="number"
       defaultValue={value}
-      className={classes.textField}
+      sx={numberInputStyles.textField}
       inputProps={{ inputMode: `numeric`, min: 0, ...maxVal }}
       onChange={(e) => handleValueChange(Number(e.target.value))}
     />

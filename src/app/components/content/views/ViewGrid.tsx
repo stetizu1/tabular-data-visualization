@@ -1,6 +1,6 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState } from 'react'
 import GridLayout, { WidthProvider } from 'react-grid-layout'
-import clsx from 'clsx'
+import { Box } from '@mui/material'
 import { AddCircle } from '@mui/icons-material'
 
 import { Brushable } from '../../../types/brushing/Brushable'
@@ -25,7 +25,7 @@ import { TOOLTIP_CLASS } from '../../../constants/views/tooltip'
 import { TOP_TOOLBAR_TEXT } from '../../../text/SiteText'
 import { VIEW_NAMES } from '../../../text/views-and-menus/common'
 
-import { useViewGridStyle } from '../../../components-style/content/views/useViewGridStyle'
+import { viewGridStyle } from '../../../components-style/content/views/viewGridStyle'
 
 import { DataDrawer } from '../data-drawer/DataDrawer'
 import { SelectionDialog } from '../common/dialogs/SelectionDialog'
@@ -58,7 +58,6 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
   setIsAddViewDialogOpen,
   ...viewProps
 }) => {
-  const classes = useViewGridStyle()
   const [isGridChanging, setIsGridResizing] = useState(false)
   const [layout, setLayout] = useState<GridLayoutItem[]>(DEFAULT_GRID_LAYOUT)
 
@@ -91,7 +90,7 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
 
   const dialogOptions = availableViews.map((key) => ({ key, label: VIEW_NAMES[key], icon: <AddCircle /> }))
   return (
-    <div>
+    <Box>
       <SelectionDialog
         isOpen={isAddViewDialogOpen}
         onClose={() => setIsAddViewDialogOpen(false)}
@@ -109,7 +108,7 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
         setSettings={setSettings}
         cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
       />
-      <div className={clsx(classes.tooltip, TOOLTIP_CLASS)} />
+      <Box sx={viewGridStyle.tooltip} className={TOOLTIP_CLASS} />
       <ReactGridLayout
         onLayoutChange={updateLayout}
         draggableHandle={getClass(DRAG_HANDLE)}
@@ -120,7 +119,7 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
         isResizable
       >
         {layout.map((view) => (
-          <div key={view.i} data-grid={view}>
+          <Box key={view.i} data-grid={view}>
             <GridItem
               isDragFinished={!isGridChanging}
               title={VIEW_NAMES[view.i]}
@@ -129,9 +128,9 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
               settings={settings}
               {...viewProps}
             />
-          </div>
+          </Box>
         ))}
       </ReactGridLayout>
-    </div>
+    </Box>
   )
 }

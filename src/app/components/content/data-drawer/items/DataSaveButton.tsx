@@ -8,7 +8,7 @@ import { saveSvg } from '../../../../helpers/d3/saveSvg'
 
 import { TOP_TOOLBAR_TEXT } from '../../../../text/SiteText'
 
-import { useDrawerButtonStyles } from '../../../../components-style/content/data-drawer/items/useDrawerButtonStyles'
+import { drawerButtonStyles } from '../../../../components-style/content/data-drawer/items/drawerButtonStyles'
 
 import { ConfirmationDialog } from '../../common/dialogs/ConfirmationDialog'
 
@@ -18,7 +18,6 @@ export interface DataSaveButtonProps {
 
 export const DataSaveButton: VoidFunctionComponent<DataSaveButtonProps> = ({ viewType }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const classes = useDrawerButtonStyles()
   const onConfirm = () => {
     saveSvg(viewType)
     setIsDialogOpen(false)
@@ -38,7 +37,7 @@ export const DataSaveButton: VoidFunctionComponent<DataSaveButtonProps> = ({ vie
       <Button
         variant="text"
         onClick={() => setIsDialogOpen(true)}
-        className={classes.button}
+        sx={drawerButtonStyles.button}
         aria-label={TOP_TOOLBAR_TEXT.saveText.save}
       >
         <Tooltip title={TOP_TOOLBAR_TEXT.saveText.save}>

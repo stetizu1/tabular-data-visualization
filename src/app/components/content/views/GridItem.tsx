@@ -1,13 +1,12 @@
 import React, { VoidFunctionComponent, ComponentProps } from 'react'
 import { useSize } from 'react-use'
-import { IconButton, Typography } from '@mui/material'
+import { Box, IconButton, Typography } from '@mui/material'
 import { Close } from '@mui/icons-material'
-import clsx from 'clsx'
 
 import { ViewType } from '../../../constants/views/ViewTypes'
 import { DRAG_HANDLE, HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/views/common'
 
-import { useGridItemStyle } from '../../../components-style/content/views/useGridItemStyle'
+import { gridItemStyle } from '../../../components-style/content/views/gridItemStyle'
 
 import { DataSaveButton } from '../data-drawer/items/DataSaveButton'
 import { View } from './View'
@@ -19,21 +18,20 @@ type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {
 }
 
 export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isDragFinished, ...rest }) => {
-  const classes = useGridItemStyle()
   const [sized] = useSize(
     ({ width, height }) => (
-      <div className={classes.gridItem}>
-        <div className={clsx(DRAG_HANDLE, classes.header)}>
-          <Typography className={classes.text}>{title}</Typography>
-          <div>
+      <Box sx={gridItemStyle.gridItem}>
+        <Box sx={gridItemStyle.header} className={DRAG_HANDLE}>
+          <Typography sx={gridItemStyle.text}>{title}</Typography>
+          <Box>
             {rest.component !== ViewType.DataTable && <DataSaveButton viewType={rest.component} />}
             <IconButton onClick={onRemove}>
               <Close />
             </IconButton>
-          </div>
-        </div>
+          </Box>
+        </Box>
         {isDragFinished && <View width={width} height={height - HEADER_HEIGHT} {...rest} />}
-      </div>
+      </Box>
     ),
     VIEW_DEFAULT_SIZE,
   )

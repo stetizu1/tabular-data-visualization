@@ -1,13 +1,17 @@
-import { makeStyles } from '@mui/styles'
-import { Theme } from '@mui/material'
+import { SxProps } from '@mui/system'
 import { PLOT_COLORS, TABLE_COLORS } from '../../../../styles/colors'
 import { important } from '../../../../helpers/d3/stringGetters'
 
-export interface StyleProps {
-  rowHeight: number
-}
+export const getDataTableRowStyle = (rowHeight: number, selected: boolean): SxProps => ({
+  height: rowHeight,
+  background: selected ? important(PLOT_COLORS.brushColorTable) : ``,
+  '& .MuiTableCell-root, .MuiCheckbox-root': {
+    paddingTop: 0,
+    paddingBottom: 0,
+  },
+})
 
-export const useDataTableStyle = makeStyles<Theme, StyleProps>({
+export const dataTableStyle: Record<string, SxProps> = {
   tableHead: {
     height: 30,
     background: TABLE_COLORS.headerBackground,
@@ -22,17 +26,7 @@ export const useDataTableStyle = makeStyles<Theme, StyleProps>({
   tableBody: {
     background: TABLE_COLORS.rowsBackground,
   },
-  tableRow: {
-    height: ({ rowHeight }) => rowHeight,
-    '& .MuiTableCell-root, .MuiCheckbox-root': {
-      paddingTop: 0,
-      paddingBottom: 0,
-    },
-  },
   notDisplayed: {
     padding: 10,
   },
-  selected: {
-    background: important(PLOT_COLORS.brushColorTable),
-  },
-})
+}

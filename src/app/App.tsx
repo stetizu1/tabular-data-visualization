@@ -1,20 +1,18 @@
 import { VoidFunctionComponent } from 'react'
+import { Box } from '@mui/material'
 
 import { Header } from './components/header/Header'
 import { Footer } from './components/footer/Footer'
 import { DataContext } from './components/content/context/DataContext'
 
-import { useAppStyle } from './useAppStyle'
+import { appStyle } from './appStyle'
 
-export const App: VoidFunctionComponent = () => {
-  const style = useAppStyle()
-  return (
-    <div className={style.app}>
-      <Header />
-      <div className={style.content}>
-        <DataContext />
-      </div>
-      <Footer />
-    </div>
-  )
-}
+export const App: VoidFunctionComponent = () => (
+  <Box sx={appStyle.app}>
+    <Header />
+    <Box sx={appStyle.contentStyle}>
+      <DataContext />
+    </Box>
+    <Footer />
+  </Box>
+)

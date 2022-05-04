@@ -1,5 +1,5 @@
 import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
@@ -13,13 +13,12 @@ import { DATA_TABLE_DEFAULT, MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../
 
 import { DATA_TABLE_MENU_TEXT } from '../../../../text/views-and-menus/dataTable'
 
-import { useDataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/useDataDrawerMenuStyle'
+import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 
 export const DataTableMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
-  const classes = useDataDrawerMenuStyle()
   const viewType = ViewType.DataTable
   const dataTableSettings = settings[viewType]
   const [attributesKeys, setAttributesKeys] = useState(getAttributeKeys(dataset))
@@ -51,7 +50,7 @@ export const DataTableMenu: VoidFunctionComponent<MenuProps> = ({ dataset, setti
 
   if (dataTableSettings) {
     return (
-      <div className={classes.drawerMenu}>
+      <Box sx={dataDrawerMenuStyle.drawerMenu}>
         <h1>{DATA_TABLE_MENU_TEXT.header}</h1>
         {attributesKeys.length >= MIN_DATA_TABLE_ATTRIBUTE_COUNT ? (
           <>
@@ -65,7 +64,7 @@ export const DataTableMenu: VoidFunctionComponent<MenuProps> = ({ dataset, setti
               setChecked={setChecked}
               setAttributesKeys={setAttributesKeys}
             />
-            <Accordion className={classes.accordion}>
+            <Accordion sx={dataDrawerMenuStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography>{DATA_TABLE_MENU_TEXT.more}</Typography>
               </AccordionSummary>
@@ -81,9 +80,9 @@ export const DataTableMenu: VoidFunctionComponent<MenuProps> = ({ dataset, setti
             </Accordion>
           </>
         ) : (
-          <div className={classes.insufficientAttributeNum}>{DATA_TABLE_MENU_TEXT.unavailable}</div>
+          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{DATA_TABLE_MENU_TEXT.unavailable}</Box>
         )}
-      </div>
+      </Box>
     )
   }
   return null

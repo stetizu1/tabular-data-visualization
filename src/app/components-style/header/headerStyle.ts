@@ -1,10 +1,10 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
 
 import { px } from '../../helpers/d3/stringGetters'
 import { HEADER_COLORS } from '../../styles/colors'
 import { HEADER_FONT } from '../../styles/font'
 
-export const useHeaderStyle = makeStyles({
+export const headerStyle: Record<string, SxProps> = {
   headerContainer: {
     background: HEADER_COLORS.background,
     padding: px(10, 0),
@@ -23,4 +23,4 @@ export const useHeaderStyle = makeStyles({
     padding: px(0, 15),
     fontSize: HEADER_FONT.descriptionFontSize,
   },
-})
+}

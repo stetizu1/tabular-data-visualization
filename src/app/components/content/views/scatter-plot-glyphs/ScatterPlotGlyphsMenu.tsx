@@ -1,5 +1,5 @@
 import { VoidFunctionComponent, useCallback, useEffect, useMemo, useState } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
@@ -21,7 +21,7 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { SCATTER_PLOT_GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/scatterPlotGlyphs'
 
-import { useDataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/useDataDrawerMenuStyle'
+import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -37,7 +37,6 @@ export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
   setSettings,
   cleanSelectedIfViewWasBrushing,
 }) => {
-  const classes = useDataDrawerMenuStyle()
   const viewType = ViewType.ScatterPlotGlyphs
   const scatterPlotGlyphsSettings = settings[viewType]
   const defaultX = useMemo(() => getQuantitativeAttributesKeys(dataset)?.[0], [dataset])
@@ -80,7 +79,7 @@ export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
 
   if (scatterPlotGlyphsSettings) {
     return (
-      <div className={classes.drawerMenu}>
+      <Box sx={dataDrawerMenuStyle.drawerMenu}>
         <h1>{SCATTER_PLOT_GLYPHS_MENU_TEXT.header}</h1>
         {quantitativeAttributesKeys.length >= MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT ? (
           <>
@@ -119,7 +118,7 @@ export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
               setSettings={setSettings}
               label={SCATTER_PLOT_GLYPHS_MENU_TEXT.category}
             />
-            <Accordion className={classes.accordion}>
+            <Accordion sx={dataDrawerMenuStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography>{SCATTER_PLOT_GLYPHS_MENU_TEXT.more}</Typography>
               </AccordionSummary>
@@ -154,9 +153,9 @@ export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
             </Accordion>
           </>
         ) : (
-          <div className={classes.insufficientAttributeNum}>{SCATTER_PLOT_GLYPHS_MENU_TEXT.unavailable}</div>
+          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{SCATTER_PLOT_GLYPHS_MENU_TEXT.unavailable}</Box>
         )}
-      </div>
+      </Box>
     )
   }
   return null

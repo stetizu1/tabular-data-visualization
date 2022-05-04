@@ -1,10 +1,10 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
 
 import { px } from '../../helpers/d3/stringGetters'
 import { FOOTER_COLORS } from '../../styles/colors'
 import { FOOTER_FONT } from '../../styles/font'
 
-export const useFooterStyle = makeStyles({
+export const footerStyle: Record<string, SxProps> = {
   footerContainer: {
     background: FOOTER_COLORS.background,
     color: FOOTER_COLORS.font,
@@ -19,4 +19,4 @@ export const useFooterStyle = makeStyles({
     padding: px(0, 15),
     fontSize: FOOTER_FONT.fontSize,
   },
-})
+}

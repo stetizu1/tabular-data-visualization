@@ -1,8 +1,7 @@
 import { VoidFunctionComponent } from 'react'
-import clsx from 'clsx'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
 
-import { useDialogStyle } from '../../../../components-style/content/top-toolbar/items/dialogs/useDialogStyle'
+import { dialogStyle } from '../../../../components-style/content/top-toolbar/items/dialogs/dialogStyle'
 
 export interface InformationDialogProps {
   isOpen: boolean
@@ -20,20 +19,17 @@ export const InformationDialog: VoidFunctionComponent<InformationDialogProps> = 
   description,
   confirmText,
   alert = false,
-}) => {
-  const classes = useDialogStyle()
-  return (
-    <Dialog onClose={onClose} open={isOpen}>
-      <DialogTitle>{title}</DialogTitle>
-      <Divider />
-      <DialogContent>
-        <DialogContentText className={clsx(alert && classes.alert)}>{description}</DialogContentText>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} autoFocus>
-          {confirmText}
-        </Button>
-      </DialogActions>
-    </Dialog>
-  )
-}
+}) => (
+  <Dialog onClose={onClose} open={isOpen}>
+    <DialogTitle>{title}</DialogTitle>
+    <Divider />
+    <DialogContent>
+      <DialogContentText sx={alert ? dialogStyle.alert : {}}>{description}</DialogContentText>
+    </DialogContent>
+    <DialogActions>
+      <Button onClick={onClose} autoFocus>
+        {confirmText}
+      </Button>
+    </DialogActions>
+  </Dialog>
+)

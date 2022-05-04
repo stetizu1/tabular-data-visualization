@@ -1,5 +1,5 @@
 import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
@@ -22,7 +22,7 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/glyphs'
 
-import { useDataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/useDataDrawerMenuStyle'
+import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -31,9 +31,9 @@ import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
+import { dataDrawerStyle } from '../../../../components-style/content/data-drawer/dataDrawerStyle'
 
 export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
-  const classes = useDataDrawerMenuStyle()
   const viewType = ViewType.Glyphs
   const glyphsSettings = settings[viewType]
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
@@ -80,7 +80,7 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
 
   if (glyphsSettings) {
     return (
-      <div className={classes.drawerMenu}>
+      <Box sx={dataDrawerMenuStyle.drawerMenu}>
         <h1>{GLYPHS_MENU_TEXT.header}</h1>
         {quantitativeAttributesKeys.length >= MIN_GLYPHS_ATTRIBUTE_COUNT ? (
           <>
@@ -109,7 +109,7 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
               label={GLYPHS_MENU_TEXT.sorting}
               settingsKey={sortAttributeKey}
             />
-            <Accordion className={classes.accordion}>
+            <Accordion sx={dataDrawerMenuStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography>{GLYPHS_MENU_TEXT.more}</Typography>
               </AccordionSummary>
@@ -143,9 +143,9 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
             </Accordion>
           </>
         ) : (
-          <div className={classes.insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</div>
+          <Box sx={dataDrawerStyle.insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</Box>
         )}
-      </div>
+      </Box>
     )
   }
   return null

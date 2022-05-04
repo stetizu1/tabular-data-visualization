@@ -1,9 +1,10 @@
-import { makeStyles } from '@mui/styles'
+import { SxProps } from '@mui/system'
+
 import { HEADER_HEIGHT } from '../../../constants/views/common'
 import { px } from '../../../helpers/d3/stringGetters'
 import { VIEW_COLORS } from '../../../styles/colors'
 
-export const useGridItemStyle = makeStyles({
+export const gridItemStyle: Record<string, SxProps> = {
   gridItem: {
     height: `100%`,
     backgroundColor: VIEW_COLORS.itemBackground,
@@ -26,4 +27,4 @@ export const useGridItemStyle = makeStyles({
     borderBottomStyle: `solid`,
     padding: 0,
   },
-})
+}
