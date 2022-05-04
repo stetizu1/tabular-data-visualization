@@ -11,7 +11,7 @@ export const DUPLICATES_CLASS = `scatterPlotGlyphsDuplicates`
 
 export const getScatterPlotGlyphsStyle = (opacity: Opacity, isBrushingActive: boolean): SxProps => ({
   '& svg': {
-    background: PLOT_COLORS.backgroundColor,
+    bgcolor: PLOT_COLORS.backgroundColor,
     font: `12px sans-serif`,
   },
   '& .scatterPlotGlyphs': {

@@ -7,7 +7,7 @@ import { VIEW_COLORS } from '../../../styles/colors'
 export const gridItemStyle: Record<string, SxProps> = {
   gridItem: {
     height: `100%`,
-    backgroundColor: VIEW_COLORS.itemBackground,
+    bgcolor: VIEW_COLORS.itemBackground,
     borderColor: VIEW_COLORS.border,
     borderWidth: 1,
     borderStyle: `solid`,
@@ -21,7 +21,7 @@ export const gridItemStyle: Record<string, SxProps> = {
     alignItems: `center`,
     justifyContent: `space-between`,
     cursor: `all-scroll`,
-    backgroundColor: VIEW_COLORS.itemBackground,
+    bgcolor: VIEW_COLORS.itemBackground,
     borderColor: VIEW_COLORS.border,
     borderBottomWidth: 1,
     borderBottomStyle: `solid`,

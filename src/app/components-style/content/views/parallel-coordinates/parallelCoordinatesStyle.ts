@@ -13,7 +13,7 @@ export const AXES_TEXT_CLASS = `parallelCoordinatesAxesText`
 
 export const getParallelCoordinatesStyle = (opacity: Opacity, isBrushActive: boolean): SxProps => ({
   '& svg': {
-    background: PLOT_COLORS.backgroundColor,
+    bgcolor: PLOT_COLORS.backgroundColor,
     font: `12px sans-serif`,
   },
   '& path': {

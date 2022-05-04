@@ -6,7 +6,7 @@ import { HEADER_FONT } from '../../styles/font'
 
 export const headerStyle: Record<string, SxProps> = {
   headerContainer: {
-    background: HEADER_COLORS.background,
+    bgcolor: HEADER_COLORS.background,
     padding: px(10, 0),
     width: `100%`,
     display: `flex`,

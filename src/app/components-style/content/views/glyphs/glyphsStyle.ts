@@ -10,7 +10,7 @@ export const SELECTED_CLASS = `glyphsSelected`
 
 export const getGlyphsStyle = (opacity: Opacity, isBrushActive: boolean): SxProps => ({
   '& svg': {
-    background: PLOT_COLORS.backgroundColor,
+    bgcolor: PLOT_COLORS.backgroundColor,
     font: `12px sans-serif`,
   },
   '& .glyphs': {

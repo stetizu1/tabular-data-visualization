@@ -11,7 +11,7 @@ export const dataDrawerMenuStyle: Record<string, SxProps> = {
     display: `flex`,
     flexDirection: `column`,
     textAlign: `left`,
-    background: DATA_DRAWER_COLORS.drawerItemBackground,
+    bgcolor: DATA_DRAWER_COLORS.drawerItemBackground,
     borderBottom: border(1, DATA_DRAWER_COLORS.drawerItemBorder),
     '& h1': {
       borderBottom: border(1, DATA_DRAWER_COLORS.drawerItemBorder),
@@ -46,7 +46,7 @@ export const dataDrawerMenuStyle: Record<string, SxProps> = {
     },
     '& .MuiButtonBase-root': {
       minHeight: important(0),
-      background: DATA_DRAWER_COLORS.drawerItemBackgroundDimmed,
+      bgcolor: DATA_DRAWER_COLORS.drawerItemBackgroundDimmed,
     },
     '& .MuiAccordionSummary-content': {
       margin: important(px(2, 0, 5)),

@@ -7,7 +7,7 @@ export const viewGridStyle: Record<string, SxProps> = {
   tooltip: {
     position: `fixed`,
     padding: px(TOOLTIP.padding.top, TOOLTIP.padding.lr, TOOLTIP.padding.bottom),
-    background: PLOT_COLORS.tooltipBackground,
+    bgcolor: PLOT_COLORS.tooltipBackground,
     color: PLOT_COLORS.tooltipFont,
     borderRadius: px(5),
     pointerEvents: `none`,

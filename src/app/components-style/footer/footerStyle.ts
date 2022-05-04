@@ -6,7 +6,7 @@ import { FOOTER_FONT } from '../../styles/font'
 
 export const footerStyle: Record<string, SxProps> = {
   footerContainer: {
-    background: FOOTER_COLORS.background,
+    bgcolor: FOOTER_COLORS.background,
     color: FOOTER_COLORS.font,
     padding: px(10, 0),
     width: `100%`,

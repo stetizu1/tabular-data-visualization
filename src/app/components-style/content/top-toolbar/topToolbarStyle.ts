@@ -10,7 +10,7 @@ export const topToolbarStyle: Record<string, SxProps> = {
     display: `flex`,
     justifyContent: `space-between`,
     alignItems: `stretch`,
-    background: TOP_TOOLBAR_COLORS.background,
+    bgcolor: TOP_TOOLBAR_COLORS.background,
     color: TOP_TOOLBAR_COLORS.font,
   },
   left: {

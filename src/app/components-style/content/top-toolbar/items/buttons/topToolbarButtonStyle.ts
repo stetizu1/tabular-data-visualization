@@ -9,13 +9,13 @@ export const topToolbarButtonStyle: Record<string, SxProps> = {
     padding: important(px(4)),
     minWidth: important(0),
     '&.MuiButtonBase-root': {
-      background: important(BUTTON_COLORS.buttonOffBackground),
+      bgcolor: important(BUTTON_COLORS.buttonOffBackground),
     },
     '&.Mui-selected:not(.Mui-disabled)': {
-      background: important(BUTTON_COLORS.buttonOnBackground),
+      bgcolor: important(BUTTON_COLORS.buttonOnBackground),
     },
     '&.MuiButton-contained:not(.Mui-disabled)': {
-      background: important(BUTTON_COLORS.buttonOnBackground),
+      bgcolor: important(BUTTON_COLORS.buttonOnBackground),
       color: BUTTON_COLORS.fontOn,
     },
   },

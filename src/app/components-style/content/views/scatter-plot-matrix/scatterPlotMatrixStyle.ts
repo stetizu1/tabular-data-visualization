@@ -17,7 +17,7 @@ export const SELECTED_CLASS = `scatterPlotMatrixSelected`
 export const getScatterPlotMatrixStyle = (opacity: Opacity, isBrushingActive: boolean): SxProps => ({
   '& svg': {
     fontSize: PLOT_FONT.fontSize,
-    background: PLOT_COLORS.backgroundColor,
+    bgcolor: PLOT_COLORS.backgroundColor,
     font: `12px sans-serif`,
   },
   '& .scatterPlotMatrixAxis': {

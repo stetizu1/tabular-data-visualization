@@ -8,7 +8,7 @@ export const dataDrawerStyle: Record<string, SxProps> = {
     width: px(250),
     flexShrink: 0,
     '& .MuiDrawer-paper': {
-      background: DATA_DRAWER_COLORS.background,
+      bgcolor: DATA_DRAWER_COLORS.background,
       width: px(250),
       alignItems: `flex-end`,
       border: border(1, DATA_DRAWER_COLORS.border),
