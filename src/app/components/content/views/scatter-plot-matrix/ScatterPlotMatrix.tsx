@@ -59,6 +59,7 @@ import {
 } from '../../../../components-style/content/views/scatter-plot-matrix/scatterPlotMatrixStyle'
 import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
+import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {}
 
@@ -207,8 +208,8 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
     cell
       .filter((matrixItem) => matrixItem.rowIdx === matrixItem.colIdx)
       .append(SVG.elements.text)
-      .attr(SVG.attributes.x, 3 * SPACING.HORIZONTAL)
-      .attr(SVG.attributes.y, 2.5 * SPACING.VERTICAL)
+      .attr(SVG.attributes.x, 1.5 * SPACING.HORIZONTAL)
+      .attr(SVG.attributes.y, SPACING.VERTICAL + PLOT_FONT_BOX_SIZE)
       .text(getAttributeFromMatrixFormatted)
 
     const brushing: { cell: MatrixPosition | null } = {

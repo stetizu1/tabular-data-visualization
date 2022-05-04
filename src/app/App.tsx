@@ -10,7 +10,7 @@ import { appStyle } from './appStyle'
 export const App: VoidFunctionComponent = () => (
   <Box sx={appStyle.app}>
     <Header />
-    <Box sx={appStyle.contentStyle}>
+    <Box sx={appStyle.content}>
       <DataContext />
     </Box>
     <Footer />

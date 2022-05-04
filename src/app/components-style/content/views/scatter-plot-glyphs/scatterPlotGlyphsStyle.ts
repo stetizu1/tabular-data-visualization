@@ -27,7 +27,7 @@ export const getScatterPlotGlyphsStyle = (opacity: Opacity, isBrushingActive: bo
   '& .scatterPlotAxis': {
     shapeRendering: `crispEdges`,
     '& line, path': {
-      stroke: important(PLOT_COLORS.axisLinesDark),
+      stroke: PLOT_COLORS.axisLinesDark,
     },
   },
 })

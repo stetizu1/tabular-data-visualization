@@ -10,7 +10,7 @@ export interface OpenSettingsButtonProps {
 }
 
 export const OpenSettingsButton: VoidFunctionComponent<OpenSettingsButtonProps> = ({ disabled, open }) => (
-  <IconButton size="small" disabled={disabled} onClick={open} sx={openSettingsButtonStyle}>
+  <IconButton size="small" disabled={disabled} onClick={open} sx={openSettingsButtonStyle.settings}>
     <Settings />
   </IconButton>
 )

@@ -99,6 +99,7 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
                 default: {
                   setDataLoadState(DataLoadState.NoData)
                   setAlertDialogText(text.alertDialog[DataLoadError.unsupportedFile])
+                  setDataset(null)
                   setIsAlertDialogOpen(true)
                   return
                 }
@@ -106,6 +107,7 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
               if (!isArrayOfDataType(dataset)) {
                 setDataLoadState(DataLoadState.NoData)
                 setAlertDialogText(text.alertDialog[DataLoadError.unsupportedFileFormat])
+                setDataset(null)
                 setIsAlertDialogOpen(true)
                 return
               }

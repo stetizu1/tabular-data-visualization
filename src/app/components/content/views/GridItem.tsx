@@ -8,7 +8,7 @@ import { DRAG_HANDLE, HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constant
 
 import { gridItemStyle } from '../../../components-style/content/views/gridItemStyle'
 
-import { DataSaveButton } from '../data-drawer/items/DataSaveButton'
+import { DataSaveButton } from '../common/DataSaveButton'
 import { View } from './View'
 
 type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {

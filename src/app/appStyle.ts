@@ -8,7 +8,7 @@ export const appStyle: Record<string, SxProps> = {
     flexDirection: `column`,
     alignItems: `center`,
   },
-  contentStyle: {
+  content: {
     flexGrow: 1,
     width: `100%`,
   },

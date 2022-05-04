@@ -2,15 +2,15 @@ import { useState, VoidFunctionComponent } from 'react'
 import { Button, Tooltip } from '@mui/material'
 import { Save } from '@mui/icons-material'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../constants/views/ViewTypes'
 
-import { saveSvg } from '../../../../helpers/d3/saveSvg'
+import { saveSvg } from '../../../helpers/d3/saveSvg'
 
-import { TOP_TOOLBAR_TEXT } from '../../../../text/SiteText'
+import { TOP_TOOLBAR_TEXT } from '../../../text/SiteText'
 
-import { drawerButtonStyles } from '../../../../components-style/content/data-drawer/items/drawerButtonStyles'
+import { inlineButtonStyles } from '../../../components-style/content/common/inlineButtonStyles'
 
-import { ConfirmationDialog } from '../../common/dialogs/ConfirmationDialog'
+import { ConfirmationDialog } from './dialogs/ConfirmationDialog'
 
 export interface DataSaveButtonProps {
   viewType: ViewType
@@ -37,7 +37,7 @@ export const DataSaveButton: VoidFunctionComponent<DataSaveButtonProps> = ({ vie
       <Button
         variant="text"
         onClick={() => setIsDialogOpen(true)}
-        sx={drawerButtonStyles.button}
+        sx={inlineButtonStyles.button}
         aria-label={TOP_TOOLBAR_TEXT.saveText.save}
       >
         <Tooltip title={TOP_TOOLBAR_TEXT.saveText.save}>

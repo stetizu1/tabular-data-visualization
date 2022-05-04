@@ -1,6 +1,6 @@
 import { SxProps } from '@mui/system'
 
-import { calc, border, px, important } from '../../../helpers/d3/stringGetters'
+import { calc, border, px } from '../../../helpers/d3/stringGetters'
 import { DATA_DRAWER_COLORS, ERROR_COLORS } from '../../../styles/colors'
 import { DATA_DRAWER_FONT } from '../../../styles/font'
 
@@ -36,7 +36,7 @@ export const dataDrawerMenuStyle: Record<string, SxProps> = {
     },
   },
   insufficientAttributeNum: {
-    padding: 10,
+    padding: px(10),
     fontSize: DATA_DRAWER_FONT.fontSize,
     color: ERROR_COLORS.font,
   },
@@ -45,11 +45,23 @@ export const dataDrawerMenuStyle: Record<string, SxProps> = {
       borderRadius: 0,
     },
     '& .MuiButtonBase-root': {
-      minHeight: important(0),
+      minHeight: 0,
       bgcolor: DATA_DRAWER_COLORS.drawerItemBackgroundDimmed,
+      '&.Mui-expanded': {
+        minHeight: 0,
+      },
     },
     '& .MuiAccordionSummary-content': {
-      margin: important(px(2, 0, 5)),
+      margin: px(2, 0, 5),
+      '&.Mui-expanded': {
+        margin: px(2, 0, 5),
+      },
+    },
+    '& .MuiAccordionDetails-root': {
+      padding: 0,
+      '& > *:not(hr)': {
+        padding: px(5, 7),
+      },
     },
   },
 }

@@ -1,7 +1,7 @@
 import { SxProps } from '@mui/system'
 
 import { ColorArray } from '../../../../types/styling/ColorArray'
-import { important, px } from '../../../../helpers/d3/stringGetters'
+import { px } from '../../../../helpers/d3/stringGetters'
 import { DATA_DRAWER_FONT } from '../../../../styles/font'
 
 export const getColorInputStyle = (colors: ColorArray, index: number): SxProps => ({
@@ -18,7 +18,7 @@ export const palettePickerStyle: Record<string, SxProps> = {
     margin: px(5, 7),
   },
   text: {
-    fontSize: important(px(DATA_DRAWER_FONT.fontSize)),
+    fontSize: px(DATA_DRAWER_FONT.fontSize),
   },
   row: {
     display: `flex`,

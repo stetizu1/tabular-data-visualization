@@ -8,7 +8,7 @@ export const GLYPHS_DEFAULT: Pick<
   GlyphsSettings,
   `glyphSize` | `glyphSpacing` | `margins` | `opacity` | `colorCategory`
 > = {
-  glyphSize: 40,
+  glyphSize: 35,
   glyphSpacing: 3,
   margins: [15, 10, 20, 10],
   opacity: [60, 90, 30],

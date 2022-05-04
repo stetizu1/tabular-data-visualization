@@ -1,7 +1,7 @@
 import { VoidFunctionComponent } from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
 
-import { dialogStyle } from '../../../../components-style/content/top-toolbar/items/dialogs/dialogStyle'
+import { dialogStyle } from '../../../../components-style/content/common/dialogStyle'
 
 export interface InformationDialogProps {
   isOpen: boolean

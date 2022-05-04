@@ -9,7 +9,7 @@ export const getFileReaderBoxStyle = (isHighlighted: boolean): SxProps => ({
   bgcolor: isHighlighted ? HIGHLIGHT_COLOR.background : HIGHLIGHT_COLOR.backgroundGone,
 
   padding: isHighlighted ? px(10, 0) : 0,
-  borderRadius: 5,
+  borderRadius: px(10),
   '& input': {
     width: px(220),
   },

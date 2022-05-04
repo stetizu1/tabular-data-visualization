@@ -31,7 +31,6 @@ import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
-import { dataDrawerStyle } from '../../../../components-style/content/data-drawer/dataDrawerStyle'
 
 export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const viewType = ViewType.Glyphs
@@ -143,7 +142,7 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
             </Accordion>
           </>
         ) : (
-          <Box sx={dataDrawerStyle.insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</Box>
+          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</Box>
         )}
       </Box>
     )

@@ -15,10 +15,14 @@ export const TOP_TOOLBAR_COLORS = {
 }
 
 export const BUTTON_COLORS = {
-  buttonOffBackground: `#363b46`,
+  buttonDisableBackground: `#363b46`,
+  buttonOffBackground: `#2d3548`,
   buttonOnBackground: `#d6e1ff`,
   fontOn: `rgba(0, 0, 0, 0.87)`,
+  fontOff: `rgba(214, 225, 255, 0.6)`,
+  fontDisabled: `rgba(0, 0, 0, 0.26)`,
   buttonInlined: `#576e9f`,
+  border: `rgba(0, 0, 0, 0.12)`,
 }
 
 export const VIEW_COLORS = {

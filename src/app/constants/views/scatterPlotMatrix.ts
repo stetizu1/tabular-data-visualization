@@ -9,7 +9,7 @@ export const SCATTER_PLOT_MATRIX_DEFAULT: Pick<
   `margins` | `pointSize` | `opacity` | `colorCategory`
 > = {
   margins: [25, 20, 25, 45],
-  pointSize: 4,
-  opacity: [70, 80, 15],
+  pointSize: 3,
+  opacity: [45, 80, 15],
   colorCategory: schemeCategory10 as ColorArray,
 }

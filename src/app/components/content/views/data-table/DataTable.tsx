@@ -79,7 +79,9 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
     handleRequestSort(property)
   }
   const sortTooltipTitle = (headCellId: keyof SelectableDataType) =>
-    orderBy === headCellId ? DATA_TABLE_TEXT[order] : DATA_TABLE_TEXT[OrderType.asc]
+    orderBy === headCellId
+      ? DATA_TABLE_TEXT[order === OrderType.asc ? OrderType.desc : OrderType.asc]
+      : DATA_TABLE_TEXT[OrderType.asc]
 
   const numSelected = dataset.filter((data) => data.selected).length
   const someSelected = numSelected > 0 && numSelected < dataset.length

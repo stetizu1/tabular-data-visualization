@@ -1,22 +1,25 @@
 import { SxProps } from '@mui/system'
 
-import { important, px } from '../../../../../helpers/d3/stringGetters'
+import { border, px } from '../../../../../helpers/d3/stringGetters'
 import { BUTTON_COLORS } from '../../../../../styles/colors'
 
 export const topToolbarButtonStyle: Record<string, SxProps> = {
   button: {
-    margin: important(px(0, 5)),
-    padding: important(px(4)),
-    minWidth: important(0),
+    margin: px(0, 5),
+    padding: px(4),
+    minWidth: 0,
     '&.MuiButtonBase-root': {
-      bgcolor: important(BUTTON_COLORS.buttonOffBackground),
+      bgcolor: BUTTON_COLORS.buttonDisableBackground,
+      color: BUTTON_COLORS.fontDisabled,
+      border: border(1, BUTTON_COLORS.border),
     },
-    '&.Mui-selected:not(.Mui-disabled)': {
-      bgcolor: important(BUTTON_COLORS.buttonOnBackground),
-    },
-    '&.MuiButton-contained:not(.Mui-disabled)': {
-      bgcolor: important(BUTTON_COLORS.buttonOnBackground),
+    '&.MuiButtonBase-root:not(.Mui-disabled)': {
+      bgcolor: BUTTON_COLORS.buttonOnBackground,
       color: BUTTON_COLORS.fontOn,
+      '&.MuiToggleButton-root:not(.Mui-selected)': {
+        bgcolor: BUTTON_COLORS.buttonOffBackground,
+        color: BUTTON_COLORS.fontOff,
+      },
     },
   },
 }

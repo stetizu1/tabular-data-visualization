@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material'
 
-import { dialogStyle } from '../../../../components-style/content/top-toolbar/items/dialogs/dialogStyle'
+import { dialogStyle } from '../../../../components-style/content/common/dialogStyle'
 
 export interface Option<T> {
   key: T

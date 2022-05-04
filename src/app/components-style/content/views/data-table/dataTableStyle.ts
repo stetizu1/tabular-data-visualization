@@ -4,7 +4,7 @@ import { important } from '../../../../helpers/d3/stringGetters'
 
 export const getDataTableRowStyle = (rowHeight: number, selected: boolean): SxProps => ({
   height: rowHeight,
-  bgcolor: selected ? important(PLOT_COLORS.brushColorTable) : ``,
+  bgcolor: selected ? PLOT_COLORS.brushColorTable : ``,
   '& .MuiTableCell-root, .MuiCheckbox-root': {
     paddingTop: 0,
     paddingBottom: 0,
@@ -17,9 +17,9 @@ export const dataTableStyle: Record<string, SxProps> = {
     bgcolor: TABLE_COLORS.headerBackground,
     fontWeight: `bold`,
     '& .MuiTableCell-root, .MuiCheckbox-root': {
-      color: important(TABLE_COLORS.headerFont),
+      color: TABLE_COLORS.headerFont,
     },
-    '& .Mui-active, .MuiSvgIcon-root': {
+    '& .MuiTableSortLabel-root.Mui-active, .MuiTableSortLabel-root:hover, .MuiTableSortLabel-icon': {
       color: important(TABLE_COLORS.headerFontActive),
     },
   },

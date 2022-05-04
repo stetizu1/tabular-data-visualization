@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import { TextField } from '@mui/material'
+import { Box, TextField } from '@mui/material'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
@@ -38,13 +38,15 @@ export const NumberInput = <T,>({
   }
   const maxVal = max ? { max } : {}
   return (
-    <TextField
-      label={label}
-      type="number"
-      defaultValue={value}
-      sx={numberInputStyles.textField}
-      inputProps={{ inputMode: `numeric`, min: 0, ...maxVal }}
-      onChange={(e) => handleValueChange(Number(e.target.value))}
-    />
+    <Box>
+      <TextField
+        label={label}
+        type="number"
+        defaultValue={value}
+        sx={numberInputStyles.textField}
+        inputProps={{ inputMode: `numeric`, min: 0, ...maxVal }}
+        onChange={(e) => handleValueChange(Number(e.target.value))}
+      />
+    </Box>
   )
 }
