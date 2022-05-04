@@ -17,6 +17,7 @@ import {
   getTranslate,
   px,
 } from '../../../../helpers/d3/stringGetters'
+import { getComparator } from '../../../../helpers/data/comparator'
 
 import { SVG } from '../../../../constants/svg'
 import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
@@ -49,6 +50,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   setComponentBrushing,
   setDataSelected,
   sortAttribute,
+  sortType,
   colorCategory,
   glyphSize,
   glyphSpacing,
@@ -57,6 +59,13 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const component = useRef<SVGGElement>(null)
+
+  const sortableDataset = useMemo<SelectableDataType[]>(() => [...dataset], [dataset])
+  const sortedDataset = useMemo(
+    () => sortableDataset.sort(getComparator(sortType, sortAttribute)),
+    [sortableDataset, sortAttribute, sortType],
+  )
+
   const color = scaleOrdinal(colorCategory)
 
   const innerWidth = width - margin.width
@@ -73,10 +82,6 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
     const node = component.current!
     const svg = select(node)
     svg.selectAll(getEverything()).remove() // clear
-
-    const sortedDataset = sortAttribute
-      ? [...dataset].sort((a, b) => Number(a[sortAttribute]) - Number(b[sortAttribute]))
-      : [...dataset]
 
     const [xScale, yScale] = [
       scaleLinear([0, innerWidth]).domain([0, glyphsCountPerLine]),
@@ -144,6 +149,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
       })
   }, [
     dataset,
+    sortedDataset,
     innerWidth,
     innerHeight,
     setDataSelected,
@@ -153,14 +159,13 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
     glyphRadius,
     displayAttributes,
     categoryAttribute,
-    sortAttribute,
     color,
   ])
 
   useEffect(
     () => createGlyphs(),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [displayAttributes, categoryAttribute, sortAttribute, innerWidth, innerHeight, colorCategory],
+    [displayAttributes, categoryAttribute, sortAttribute, sortType, innerWidth, innerHeight, colorCategory],
   )
 
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {

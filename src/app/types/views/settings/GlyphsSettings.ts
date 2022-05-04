@@ -1,8 +1,11 @@
+import { SortType } from '../../../helpers/data/comparator'
+
 import { SelectableDataType } from '../../data/data'
 
 import { ViewVisualizationSettings } from './VisualizationSettings'
 
 export const sortAttributeKey = `sortAttribute`
+export const sortTypeKey = `sortType`
 export const glyphSizeKey = `glyphSize`
 export const glyphSpacingKey = `glyphSpacing`
 
@@ -14,10 +17,17 @@ export interface GlyphsSettings extends ViewVisualizationSettings {
    * Attribute for sorting glyphs from lowest to highest value
    */
   [sortAttributeKey]: keyof SelectableDataType
+
+  /**
+   * Sort type - asc/desc
+   */
+  [sortTypeKey]: SortType
+
   /**
    * Size of a glyph
    */
   [glyphSizeKey]: number
+
   /**
    * Spacing between glyphs
    */

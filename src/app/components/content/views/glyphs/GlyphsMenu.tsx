@@ -6,8 +6,9 @@ import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import {
   glyphSizeKey,
   glyphSpacingKey,
-  sortAttributeKey,
   GlyphsSettings,
+  sortAttributeKey,
+  sortTypeKey,
 } from '../../../../types/views/settings/GlyphsSettings'
 import { MenuProps } from '../../../../types/views/MenuProps'
 
@@ -31,6 +32,8 @@ import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
+import { ToggleButtons } from '../../data-drawer/items/ToggleButtons'
+import { SortType } from '../../../../helpers/data/comparator'
 
 export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const viewType = ViewType.Glyphs
@@ -107,6 +110,13 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
               setSettings={setSettings}
               label={GLYPHS_MENU_TEXT.sorting}
               settingsKey={sortAttributeKey}
+            />
+            <ToggleButtons
+              viewType={viewType}
+              value={glyphsSettings.sortType}
+              options={Object.values<SortType>(SortType)}
+              setSettings={setSettings}
+              settingsKey={sortTypeKey}
             />
             <Accordion sx={dataDrawerMenuStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>

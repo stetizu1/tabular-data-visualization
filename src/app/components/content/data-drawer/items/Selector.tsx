@@ -9,17 +9,17 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { Settings } from '../../../../types/views/settings/Settings'
 
-export interface SelectorProps<T> {
+export interface SelectorProps<Opt> {
   viewType: ViewType
   value: keyof SelectableDataType
   attributesKeys: Array<keyof SelectableDataType>
   setSettings: Dispatch<SetStateAction<Settings>>
   handleChangeSettings?: () => void
   label: string
-  settingsKey: keyof T
+  settingsKey: keyof Opt
 }
 
-export const Selector = <T,>({
+export const Selector = <Opt,>({
   viewType,
   value,
   attributesKeys,
@@ -27,7 +27,7 @@ export const Selector = <T,>({
   label,
   settingsKey,
   handleChangeSettings,
-}: SelectorProps<T>): JSX.Element => {
+}: SelectorProps<Opt>): JSX.Element => {
   const handleSelectChange = (newValue: keyof SelectableDataType) => {
     if (handleChangeSettings) handleChangeSettings()
     setSettings((prev) => {

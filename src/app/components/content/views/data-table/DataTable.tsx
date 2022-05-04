@@ -18,7 +18,7 @@ import { DataTableSettings } from '../../../../types/views/settings/DataTableSet
 import { IndexedSelectableDataType, SelectableDataType } from '../../../../types/data/data'
 
 import { dataToReadable, otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
-import { getComparator, OrderType } from '../../../../helpers/data/comparator'
+import { getComparator, SortType } from '../../../../helpers/data/comparator'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
 import { MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/dataTable'
@@ -39,7 +39,7 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   setComponentBrushing,
   rowHeight,
 }) => {
-  const [order, setOrder] = useState<OrderType>(OrderType.asc)
+  const [order, setOrder] = useState<SortType>(SortType.asc)
   const [orderBy, setOrderBy] = useState<keyof SelectableDataType>(displayAttributes[0])
   const sortableDataset = useMemo<IndexedSelectableDataType[]>(
     () => dataset.map((data: SelectableDataType, index) => ({ ...data, index })),
@@ -70,8 +70,8 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   }
 
   const handleRequestSort = (property: keyof SelectableDataType) => {
-    const isAsc = orderBy === property && order === OrderType.asc
-    setOrder(isAsc ? OrderType.desc : OrderType.asc)
+    const isAsc = orderBy === property && order === SortType.asc
+    setOrder(isAsc ? SortType.desc : SortType.asc)
     setOrderBy(property)
   }
 
@@ -80,8 +80,8 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   }
   const sortTooltipTitle = (headCellId: keyof SelectableDataType) =>
     orderBy === headCellId
-      ? DATA_TABLE_TEXT[order === OrderType.asc ? OrderType.desc : OrderType.asc]
-      : DATA_TABLE_TEXT[OrderType.asc]
+      ? DATA_TABLE_TEXT[order === SortType.asc ? SortType.desc : SortType.asc]
+      : DATA_TABLE_TEXT[SortType.asc]
 
   const numSelected = dataset.filter((data) => data.selected).length
   const someSelected = numSelected > 0 && numSelected < dataset.length
@@ -110,7 +110,7 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
                     <Tooltip title={sortTooltipTitle(attribute)}>
                       <TableSortLabel
                         active={orderedByActive}
-                        direction={orderedByActive ? order : OrderType.asc}
+                        direction={orderedByActive ? order : SortType.asc}
                         onClick={createSortHandler(attribute)}
                       >
                         {otherCasesToWhitespaces(attribute)}
