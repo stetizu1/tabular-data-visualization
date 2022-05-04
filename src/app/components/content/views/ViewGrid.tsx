@@ -123,7 +123,10 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
             <GridItem
               isDragFinished={!isGridChanging}
               title={VIEW_NAMES[view.i]}
-              onRemove={() => removeView(view.i)}
+              onRemove={() => {
+                cleanSelectedIfViewWasBrushing(view.i)
+                removeView(view.i)
+              }}
               component={view.i}
               settings={settings}
               {...viewProps}
