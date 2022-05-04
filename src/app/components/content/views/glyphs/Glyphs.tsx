@@ -125,12 +125,13 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
             tooltip.transition().duration(TOOLTIP.easeOut).style(SVG.style.opacity, TOOLTIP.invisible)
           })
           .on(MouseActions.click, (_: MouseEvent, changedData: SelectableDataType) => {
-            setComponentBrushing(ViewType.Glyphs)
             const selected = dataset.map((data) => (data === changedData ? !data.selected : data.selected))
-            setDataSelected((data, idx) => selected[idx])
             if (selected.every((value) => !value)) {
               setComponentBrushing(null)
+              return
             }
+            setComponentBrushing(ViewType.Glyphs)
+            setDataSelected((data, idx) => selected[idx])
           })
           .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
       })

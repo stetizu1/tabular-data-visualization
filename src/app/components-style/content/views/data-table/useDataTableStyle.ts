@@ -8,22 +8,21 @@ export interface StyleProps {
 }
 
 export const useDataTableStyle = makeStyles<Theme, StyleProps>({
-  table: {
-    width: `100%`,
-  },
-  checkAll: {
-    '&.MuiCheckbox-root': {
-      color: important(TABLE_COLORS.checkColor),
-    },
-  },
-  tableCellHeader: {
+  tableHead: {
     height: 30,
     background: TABLE_COLORS.headerBackground,
     fontWeight: `bold`,
+    '& .MuiTableCell-root, .MuiCheckbox-root': {
+      color: important(TABLE_COLORS.headerFont),
+    },
+    '& .Mui-active, .MuiSvgIcon-root': {
+      color: important(TABLE_COLORS.headerFontActive),
+    },
+  },
+  tableBody: {
+    background: TABLE_COLORS.rowsBackground,
   },
   tableRow: {
-    display: `flex`,
-    alignItems: `center`,
     height: ({ rowHeight }) => rowHeight,
     '& .MuiTableCell-root, .MuiCheckbox-root': {
       paddingTop: 0,

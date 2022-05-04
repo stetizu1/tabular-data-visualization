@@ -63,6 +63,8 @@ export const HIGHLIGHT_COLOR = {
 }
 
 export const TABLE_COLORS = {
-  checkColor: `#3a80fa`,
-  headerBackground: `#f7f8fc`,
+  headerFont: `#bcc7e7`,
+  headerFontActive: `#e1e7fc`,
+  headerBackground: `#363a46`,
+  rowsBackground: `rgb(250, 250, 254)`,
 }
