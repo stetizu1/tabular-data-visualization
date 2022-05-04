@@ -147,6 +147,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
           })
           .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
       })
+    selectAll(getClass(GLYPHS_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
   }, [
     dataset,
     sortedDataset,
