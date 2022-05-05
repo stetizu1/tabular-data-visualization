@@ -10,7 +10,7 @@ import { DataLoadState } from '../../../constants/data/dataLoadState'
 import { ViewType } from '../../../constants/views/ViewTypes'
 
 import { TopToolbar } from '../top-toolbar/TopToolbar'
-import { ViewGrid } from '../views/ViewGrid'
+import { ViewGrid, ViewGridProps } from '../views/ViewGrid'
 import { Settings } from '../../../types/views/settings/Settings'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
@@ -44,18 +44,14 @@ export const DataContext: VoidFunctionComponent = () => {
     setCurrentComponentBrushing(null)
   }
 
-  const setDataSelected = (setFunction: (data: SelectableDataType, idx: number) => boolean): void => {
-    if (dataset) {
-      dataset.forEach((data, idx) => {
-        data.selected = setFunction(data, idx)
-      })
-      setRedrawTime(Date.now()) // redraw component
-    }
+  const refreshViews = (): void => {
+    setRedrawTime(Date.now()) // redraw component
   }
 
   const cleanAllBrushes = (deletePrevSelection = true) => {
-    if (deletePrevSelection) {
-      setDataSelected((data) => (data.selected = false))
+    if (dataset && deletePrevSelection) {
+      dataset.forEach((data) => (data.selected = false))
+      refreshViews()
     }
     cleanBrushingRef.current.forEach((f) => f())
   }
@@ -91,10 +87,18 @@ export const DataContext: VoidFunctionComponent = () => {
 
   const isBrushingActive = componentBrushingRef.current !== null
 
-  const viewProps = {
+  const viewProps: Pick<
+    ViewGridProps,
+    | `registerCleanBrushing`
+    | `setComponentBrushing`
+    | `refreshViews`
+    | `redrawTime`
+    | `isBrushingActive`
+    | `isBrushingOnEndOfMove`
+  > = {
     registerCleanBrushing,
     setComponentBrushing,
-    setDataSelected,
+    refreshViews,
     redrawTime,
     isBrushingActive,
     isBrushingOnEndOfMove,

@@ -35,7 +35,7 @@ export interface DataTableProps extends VisualizationView, Brushable, DataTableS
 export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   dataset,
   displayAttributes,
-  setDataSelected,
+  refreshViews,
   setComponentBrushing,
   rowHeight,
   selectedBackgroundColor,
@@ -59,7 +59,8 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
       return
     }
     setComponentBrushing(ViewType.DataTable)
-    setDataSelected((data, idx) => (idx === index ? !data.selected : data.selected))
+    dataset[index].selected = true
+    refreshViews()
   }
 
   const handleSelectAllClick = (checked: boolean) => {
@@ -68,7 +69,8 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
       return
     }
     setComponentBrushing(ViewType.DataTable)
-    setDataSelected(() => true)
+    dataset.forEach((data) => (data.selected = true))
+    refreshViews()
   }
 
   const handleRequestSort = (property: keyof SelectableDataType) => {

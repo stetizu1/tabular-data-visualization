@@ -52,7 +52,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
   dataset,
   displayAttributes,
   categoryAttribute,
-  setDataSelected,
+  refreshViews,
   registerCleanBrushing,
   setComponentBrushing,
   isBrushingActive,
@@ -86,14 +86,15 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     const selections = getDefaultSelectionForAttributes(displayAttributes)
 
     const setBrushingSelection = () => {
-      setDataSelected((data) =>
-        displayAttributes.every((dimension, idx) => {
+      dataset.forEach((data) => {
+        data.selected = displayAttributes.every((dimension, idx) => {
           const selectedRange = selections[dimension]
           if (selectedRange === null) return true // nothing in dimension selected, do not block
           const valueOnAxis = yScales[idx](Number(data[dimension]))
           return isInRange(valueOnAxis, selectedRange)
-        }),
-      )
+        })
+      })
+      refreshViews()
     }
 
     const cleanBrushingSelection = () => {
@@ -180,7 +181,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     dataset,
     innerWidth,
     innerHeight,
-    setDataSelected,
+    refreshViews,
     setComponentBrushing,
     categoryAttribute,
     displayAttributes,

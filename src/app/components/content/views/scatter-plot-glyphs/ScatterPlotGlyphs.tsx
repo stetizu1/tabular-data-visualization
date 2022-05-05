@@ -46,7 +46,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
   width,
   height,
   dataset,
-  setDataSelected,
+  refreshViews,
   displayAttributes,
   xAttribute,
   yAttribute,
@@ -139,9 +139,11 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
       .call(axisLeft(yScale))
     const setBrushingSelection = (selection: BrushSelection2d) => {
       if (selection) {
-        setDataSelected((data) =>
-          isInRanges(selection, xScale(Number(data[xAttribute])), yScale(Number(data[yAttribute]))),
+        dataset.forEach(
+          (data) =>
+            (data.selected = isInRanges(selection, xScale(Number(data[xAttribute])), yScale(Number(data[yAttribute])))),
         )
+        refreshViews()
       }
     }
 
@@ -185,7 +187,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
     dataset,
     innerWidth,
     innerHeight,
-    setDataSelected,
+    refreshViews,
     setComponentBrushing,
     xAttribute,
     yAttribute,

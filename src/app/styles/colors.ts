@@ -23,6 +23,7 @@ export const BUTTON_COLORS = {
   fontDisabled: `rgba(0, 0, 0, 0.26)`,
   buttonInlined: `#576e9f`,
   border: `rgba(0, 0, 0, 0.12)`,
+  colorBorder: `#42495d`,
 }
 
 export const VIEW_COLORS = {

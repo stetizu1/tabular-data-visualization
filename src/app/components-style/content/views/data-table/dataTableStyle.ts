@@ -9,8 +9,10 @@ export const getDataTableRowStyle = (
   selectedFontColor: string,
 ): SxProps => ({
   height: rowHeight,
-  bgcolor: selected ? selectedBackgroundColor : ``,
-  color: selected ? selectedFontColor : ``,
+  bgcolor: selected ? important(selectedBackgroundColor) : ``,
+  '& .MuiTableCell-root': {
+    color: selected ? important(selectedFontColor) : ``,
+  },
   '& .MuiTableCell-root, .MuiCheckbox-root': {
     paddingTop: 0,
     paddingBottom: 0,

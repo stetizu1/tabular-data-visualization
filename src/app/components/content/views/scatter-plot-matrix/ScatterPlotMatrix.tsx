@@ -77,7 +77,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
   width,
   height,
   dataset,
-  setDataSelected,
+  refreshViews,
   displayAttributes,
   categoryAttribute,
   registerCleanBrushing,
@@ -221,7 +221,10 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
 
     const setBrushingSelection = ({ rowKey, colKey }: MatrixItem, selection: BrushSelection2d) => {
       if (selection) {
-        setDataSelected((data) => isInRanges(selection, xScale(Number(data[rowKey])), yScale(Number(data[colKey]))))
+        dataset.forEach(
+          (data) => (data.selected = isInRanges(selection, xScale(Number(data[rowKey])), yScale(Number(data[colKey])))),
+        )
+        refreshViews()
       }
     }
 
@@ -282,7 +285,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
     innerHeight,
     horizontalSpacing,
     verticalSpacing,
-    setDataSelected,
+    refreshViews,
     categoryAttribute,
     displayAttributes,
     setComponentBrushing,

@@ -42,7 +42,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   categoryAttribute,
   isBrushingActive,
   setComponentBrushing,
-  setDataSelected,
+  refreshViews,
   sortAttribute,
   sortType,
   colorCategory,
@@ -107,13 +107,14 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
       )
 
     const onMouseClick: OnMouseEvent<SelectableDataType> = (_, changedData) => {
-      const selected = dataset.map((data) => (data === changedData ? !data.selected : data.selected))
-      if (selected.every((value) => !value)) {
+      const idx = dataset.indexOf(changedData)
+      dataset[idx].selected = !dataset[idx].selected
+      if (dataset.every((data) => !data.selected)) {
         setComponentBrushing(null)
         return
       }
       setComponentBrushing(ViewType.Glyphs)
-      setDataSelected((data, idx) => selected[idx])
+      refreshViews()
     }
 
     svg
@@ -142,7 +143,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
     sortedDataset,
     innerWidth,
     innerHeight,
-    setDataSelected,
+    refreshViews,
     setComponentBrushing,
     glyphsCountPerLine,
     glyphsCountPerHeight,
