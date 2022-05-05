@@ -13,13 +13,7 @@ import { getClass } from '../../../helpers/d3/stringGetters'
 import { displayDetails } from '../../../helpers/d3/displayDetails'
 
 import { isViewType, ViewType } from '../../../constants/views/ViewTypes'
-import {
-  COLUMNS_COUNT,
-  DEFAULT_GRID_LAYOUT,
-  DEFAULT_VIEW_DIMENSIONS,
-  DRAG_HANDLE,
-  ROW_HEIGHT,
-} from '../../../constants/views/common'
+import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from '../../../constants/views/common'
 import { TOOLTIP_CLASS } from '../../../constants/views/tooltip'
 import { TOP_TOOLBAR_TEXT } from '../../../text/SiteText'
 import { VIEW_NAMES } from '../../../text/views-and-menus/common'
@@ -41,8 +35,11 @@ export interface ViewGridProps extends ViewGridDataProps {
   cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>
+
   isAddViewDialogOpen: boolean
   setIsAddViewDialogOpen: Dispatch<SetStateAction<boolean>>
+  layout: GridLayoutItem[]
+  setLayout: Dispatch<SetStateAction<GridLayoutItem[]>>
 }
 
 const ReactGridLayout = WidthProvider(GridLayout)
@@ -55,18 +52,20 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
   setSettings,
   isAddViewDialogOpen,
   setIsAddViewDialogOpen,
+  layout,
+  setLayout,
   ...viewProps
 }) => {
   const [isGridChanging, setIsGridResizing] = useState(false)
-  const [layout, setLayout] = useState<GridLayoutItem[]>(DEFAULT_GRID_LAYOUT)
 
-  const views = layout.map((item) => item.i)
-
-  const updateLayout = useCallback((newLayout: LayoutArray) => {
-    if (!newLayout) return
-    const filteredLayout = newLayout.filter((item) => isViewType(item.i))
-    setLayout(filteredLayout as GridLayoutItem[])
-  }, [])
+  const updateLayout = useCallback(
+    (newLayout: LayoutArray) => {
+      if (!newLayout) return
+      const filteredLayout = newLayout.filter((item) => isViewType(item.i))
+      setLayout(filteredLayout as GridLayoutItem[])
+    },
+    [setLayout],
+  )
 
   const addView = useCallback(
     (viewType: ViewType) => {
@@ -77,16 +76,20 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
         return [...layout, { i: viewType, x: 0, y: posY, ...DEFAULT_VIEW_DIMENSIONS[viewType] }]
       })
     },
-    [setIsAddViewDialogOpen],
+    [setIsAddViewDialogOpen, setLayout],
   )
 
-  const removeView = useCallback((viewType: ViewType) => {
-    setLayout((layout) => layout.filter((item) => item.i !== viewType))
-  }, [])
+  const removeView = useCallback(
+    (viewType: ViewType) => {
+      setLayout((layout) => layout.filter((item) => item.i !== viewType))
+    },
+    [setLayout],
+  )
 
-  const availableViews = Object.values(ViewType).filter((viewType) => !views.includes(viewType))
   displayDetails(viewProps.isDetailsVisible, TOOLTIP_CLASS)
 
+  const views = layout.map((item) => item.i)
+  const availableViews = Object.values(ViewType).filter((viewType) => !views.includes(viewType))
   const dialogOptions = availableViews.map((key) => ({ key, label: VIEW_NAMES[key], icon: <AddCircle /> }))
   return (
     <Box>

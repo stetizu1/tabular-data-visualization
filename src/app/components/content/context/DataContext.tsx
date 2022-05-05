@@ -14,6 +14,8 @@ import { ViewGrid } from '../views/ViewGrid'
 import { Settings } from '../../../types/views/settings/Settings'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
+import { GridLayoutItem } from '../../../types/views/Grid'
+import { DEFAULT_GRID_LAYOUT } from '../../../constants/views/common'
 
 export const DataContext: VoidFunctionComponent = () => {
   const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
@@ -30,6 +32,7 @@ export const DataContext: VoidFunctionComponent = () => {
   const [isBrushingOnEndOfMove, setIsBrushingOnEndOfMove] = useState(false)
 
   const [isAddViewDialogOpen, setIsAddViewDialogOpen] = useState(false)
+  const [layout, setLayout] = useState<GridLayoutItem[]>(DEFAULT_GRID_LAYOUT)
 
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
@@ -114,6 +117,8 @@ export const DataContext: VoidFunctionComponent = () => {
         dataset={dataset}
         isAddViewDialogOpen={isAddViewDialogOpen}
         setIsAddViewDialogOpen={setIsAddViewDialogOpen}
+        layout={layout}
+        setLayout={setLayout}
         {...viewProps}
       />
     )

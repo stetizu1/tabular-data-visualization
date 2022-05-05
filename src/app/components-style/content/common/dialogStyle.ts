@@ -3,6 +3,11 @@ import { px } from '../../../helpers/d3/stringGetters'
 import { SITE_COLORS, ERROR_COLORS } from '../../../styles/colors'
 
 export const dialogStyle: Record<string, SxProps> = {
+  dialog: {
+    '& .MuiPaper-root': {
+      minWidth: px(300),
+    },
+  },
   alert: {
     color: ERROR_COLORS.font,
   },

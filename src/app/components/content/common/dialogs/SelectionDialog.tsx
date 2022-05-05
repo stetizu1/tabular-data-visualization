@@ -35,7 +35,7 @@ export const SelectionDialog = <T,>({
   handleListItemClick,
   noOptionText,
 }: SelectionDialogProps<T>): JSX.Element => (
-  <Dialog onClose={onClose} open={isOpen}>
+  <Dialog onClose={onClose} open={isOpen} sx={dialogStyle.dialog}>
     <DialogTitle>{title}</DialogTitle>
     <Divider />
     <List>
