@@ -47,7 +47,7 @@ export const SelectionDialog = <T,>({
           <ListItemText primary={option.label} />
         </ListItem>
       ))}
-      {!options.length && <Typography sx={dialogStyle.text}>{noOptionText}</Typography>}
+      {!options.length && <Typography sx={dialogStyle.description}>{noOptionText}</Typography>}
     </List>
   </Dialog>
 )

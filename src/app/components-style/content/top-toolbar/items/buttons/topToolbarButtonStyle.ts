@@ -16,6 +16,9 @@ export const topToolbarButtonStyle: Record<string, SxProps> = {
     '&.MuiButtonBase-root:not(.Mui-disabled)': {
       bgcolor: BUTTON_COLORS.buttonOnBackground,
       color: BUTTON_COLORS.fontOn,
+      '&:hover': {
+        bgcolor: BUTTON_COLORS.buttonHoverBackground,
+      },
       '&.MuiToggleButton-root:not(.Mui-selected)': {
         bgcolor: BUTTON_COLORS.buttonOffBackground,
         color: BUTTON_COLORS.fontOff,
