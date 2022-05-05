@@ -39,6 +39,8 @@ enum AcceptableFileTypes {
   csv = `text/csv`,
 }
 
+const FILE_INPUT_ID = `FILE_INPUT`
+
 export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset, setDataLoadState, isHighlighted }) => {
   const [isSampleDataDialogOpen, setIsSampleDataDialogOpen] = useState(false)
 
@@ -57,6 +59,11 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
     setDataLoadState(DataLoadState.Loaded)
   }
 
+  const closeDialog = () => {
+    setIsNullDialogOpen(false)
+    setRawDataset([])
+    setNullContainingAttributes([])
+  }
   return (
     <>
       <SelectionDialog
@@ -81,15 +88,15 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
       <NullDialog
         isOpen={isNullDialogOpen}
         onClose={() => {
-          setIsNullDialogOpen(false)
           setDataLoadState(DataLoadState.NoData)
+          closeDialog()
         }}
         nullContainingAttributes={nullContainingAttributes}
         dataset={rawDataset}
         setDataset={(dataset) => {
-          setIsNullDialogOpen(false)
           setDataset(dataset)
           setDataLoadState(DataLoadState.Loaded)
+          closeDialog()
         }}
       />
       <Box sx={getFileReaderBoxStyle(isHighlighted)}>
@@ -104,6 +111,7 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
           <input
             type="file"
             hidden
+            id={FILE_INPUT_ID}
             onChange={async (e) => {
               if (e.target.files?.length) {
                 setDataLoadState(DataLoadState.Loading)
@@ -145,6 +153,8 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
                   setNullContainingAttributes(nullContainingAttributes)
                   setRawDataset(selectableDataset)
                   setIsNullDialogOpen(true)
+                  const fileEl = document.getElementById(FILE_INPUT_ID) as unknown as { value: null }
+                  fileEl.value = null
                   return
                 }
                 setDataset(selectableDataset)
