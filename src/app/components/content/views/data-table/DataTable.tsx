@@ -38,6 +38,8 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   setDataSelected,
   setComponentBrushing,
   rowHeight,
+  selectedBackgroundColor,
+  selectedFontColor,
 }) => {
   const [order, setOrder] = useState<SortType>(SortType.asc)
   const [orderBy, setOrderBy] = useState<keyof SelectableDataType>(displayAttributes[0])
@@ -129,7 +131,7 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
                   hover
                   onClick={() => handleSelectClick(dataCopy.index)}
                   key={idx}
-                  sx={getDataTableRowStyle(rowHeight, selected)}
+                  sx={getDataTableRowStyle(rowHeight, selected, selectedBackgroundColor, selectedFontColor)}
                 >
                   <TableCell padding={FORM.checkbox}>
                     <Checkbox checked={selected} />

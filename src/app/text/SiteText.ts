@@ -11,6 +11,7 @@ export const TOP_TOOLBAR_TEXT = {
   labelClearBrushes: `Clear brushes`,
   labelAddView: `Add a view`,
   labelBrushingOnEOM: `Brushing set only at the end of the move`,
+  labelBrushColor: `Brush color`,
   addViewDialogTitle: `Add a view`,
   noOption: `All view options are currently displayed.`,
   fileReader: {

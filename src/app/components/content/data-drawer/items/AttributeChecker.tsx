@@ -11,11 +11,11 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 import { Settings, SettingsType } from '../../../../types/views/settings/Settings'
 import { attributeCheckerStyle } from '../../../../components-style/content/data-drawer/items/attributeCheckerStyle'
 
-export interface AttributeCheckerProps<T extends SettingsType> {
+export interface AttributeCheckerProps<Opt extends SettingsType> {
   viewType: ViewType
   attributesKeys: Array<keyof SelectableDataType>
   handleChangeSettings?: () => void
-  getNewSettings: (newChecked: CheckedForSelectableDataType, prevSettings: T) => Partial<T>
+  getNewSettings: (newChecked: CheckedForSelectableDataType, prevSettings: Opt) => Partial<Opt>
   setSettings: Dispatch<SetStateAction<Settings>>
   label: string
 
@@ -24,7 +24,7 @@ export interface AttributeCheckerProps<T extends SettingsType> {
   setAttributesKeys: Dispatch<SetStateAction<Array<keyof SelectableDataType>>>
 }
 
-export const AttributeChecker = <T extends SettingsType>({
+export const AttributeChecker = <Opt extends SettingsType>({
   viewType,
   attributesKeys,
   handleChangeSettings,
@@ -34,13 +34,13 @@ export const AttributeChecker = <T extends SettingsType>({
   checked,
   setChecked,
   setAttributesKeys,
-}: AttributeCheckerProps<T>): JSX.Element => {
+}: AttributeCheckerProps<Opt>): JSX.Element => {
   const handleCheckboxChange = (eventChecked: boolean, key: keyof SelectableDataType) => {
     const newChecked = { ...checked, [key]: eventChecked }
     setChecked(newChecked)
     if (handleChangeSettings) handleChangeSettings()
     setSettings((prev) => {
-      const prevSettings = prev[viewType]! as T
+      const prevSettings = prev[viewType]! as Opt
       const newSettings = getNewSettings(newChecked, prevSettings)
       return {
         ...prev,
@@ -55,7 +55,7 @@ export const AttributeChecker = <T extends SettingsType>({
     if (handleChangeSettings) handleChangeSettings()
     setAttributesKeys(newAttributesKeys)
     setSettings((prev) => {
-      const prevSettings = prev[viewType]! as T
+      const prevSettings = prev[viewType]! as Opt
       return {
         ...prev,
         [viewType]: {

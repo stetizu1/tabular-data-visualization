@@ -25,7 +25,7 @@ export const OPACITY_MENU_TEXT = {
   notSelected: `Not selected`,
 }
 
-export const PALETTE_PICKER = {
+export const PALETTE_PICKER_TEXT = {
   header: `Category colors`,
   categoriesLabel: [`c1`, `c2`, `c3`, `c4`, `c5`, `c6`, `c7`, `c8`, `c9`, `c10`],
 }

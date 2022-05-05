@@ -91,6 +91,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
   verticalSpacing,
   margins,
   opacity,
+  brushColor,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const component = useRef<SVGGElement>(null)
@@ -314,7 +315,10 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
     return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{SCATTER_PLOT_MATRIX_TEXT.tooSmall}</Box> // rect not big enough
   if (displayAttributes.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT) {
     return (
-      <Box sx={getScatterPlotMatrixStyle(opacity, isBrushingActive)} id={CONTAINER_SAVE_ID[ViewType.ScatterPlotMatrix]}>
+      <Box
+        sx={getScatterPlotMatrixStyle(opacity, isBrushingActive, brushColor)}
+        id={CONTAINER_SAVE_ID[ViewType.ScatterPlotMatrix]}
+      >
         <svg width={width} height={height} id={SAVE_ID[ViewType.ScatterPlotMatrix]}>
           <g ref={component} transform={getTranslate([margin.left, margin.top])} />
         </svg>

@@ -45,4 +45,9 @@ export interface Brushable extends Highlightable {
    * True if brushing is only done on end of move
    */
   isBrushingOnEndOfMove?: boolean
+
+  /**
+   * Brush color for graphs
+   */
+  brushColor: string
 }

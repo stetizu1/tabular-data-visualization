@@ -8,7 +8,7 @@ import { PLOT_COLORS } from '../../../../styles/colors'
 export const GLYPHS_CLASS = `glyphs`
 export const SELECTED_CLASS = `glyphsSelected`
 
-export const getGlyphsStyle = (opacity: Opacity, isBrushActive: boolean): SxProps => ({
+export const getGlyphsStyle = (opacity: Opacity, isBrushActive: boolean, brushColor: string): SxProps => ({
   '& svg': {
     bgcolor: PLOT_COLORS.backgroundColor,
     font: `12px sans-serif`,
@@ -17,7 +17,7 @@ export const getGlyphsStyle = (opacity: Opacity, isBrushActive: boolean): SxProp
     opacity: !isBrushActive ? opacity[0] / 100 : opacity[2] / 100,
     cursor: `pointer`,
     '&.glyphsSelected': {
-      fill: important(PLOT_COLORS.brushColor),
+      fill: important(brushColor),
       opacity: opacity[1] / 100,
     },
   },

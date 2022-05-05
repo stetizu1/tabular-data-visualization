@@ -7,6 +7,8 @@ export const DATA_TABLE_MENU_TEXT = {
   unavailable: `The dataset seems to have less than one attribute, which makes him not valid. Please choose different dataset.`,
   attributes: `Display columns`,
   rowHeight: `Table row height`,
+  selectedBackgroundColor: `Selected background color`,
+  selectedFontColor: `Selected font color`,
   ...MENU_BASE_TEXT,
 }
 

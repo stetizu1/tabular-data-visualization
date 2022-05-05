@@ -4,7 +4,7 @@ import { ColorArray } from '../../../../types/styling/ColorArray'
 import { px } from '../../../../helpers/d3/stringGetters'
 import { DATA_DRAWER_FONT } from '../../../../styles/font'
 
-export const getColorInputStyle = (colors: ColorArray, index: number): SxProps => ({
+export const getPalettePickerColorInputStyle = (colors: ColorArray, index: number): SxProps => ({
   bgcolor: colors[index],
   '& input': {
     width: `100%`,

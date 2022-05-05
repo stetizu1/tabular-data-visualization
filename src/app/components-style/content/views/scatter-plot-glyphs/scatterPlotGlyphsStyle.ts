@@ -9,7 +9,11 @@ export const SELECTED_CLASS = `scatterPlotGlyphsSelected`
 export const AXIS_CLASS = `scatterPlotAxis`
 export const DUPLICATES_CLASS = `scatterPlotGlyphsDuplicates`
 
-export const getScatterPlotGlyphsStyle = (opacity: Opacity, isBrushingActive: boolean): SxProps => ({
+export const getScatterPlotGlyphsStyle = (
+  opacity: Opacity,
+  isBrushingActive: boolean,
+  brushColor: string,
+): SxProps => ({
   '& svg': {
     bgcolor: PLOT_COLORS.backgroundColor,
     font: `12px sans-serif`,
@@ -17,7 +21,7 @@ export const getScatterPlotGlyphsStyle = (opacity: Opacity, isBrushingActive: bo
   '& .scatterPlotGlyphs': {
     opacity: !isBrushingActive ? opacity[0] / 100 : opacity[2] / 100,
     '&.scatterPlotGlyphsSelected': {
-      fill: important(PLOT_COLORS.brushColor),
+      fill: important(brushColor),
       opacity: opacity[1] / 100,
     },
   },

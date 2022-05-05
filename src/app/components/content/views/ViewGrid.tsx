@@ -40,6 +40,7 @@ export interface ViewGridProps extends ViewGridDataProps {
   setIsAddViewDialogOpen: Dispatch<SetStateAction<boolean>>
   layout: GridLayoutItem[]
   setLayout: Dispatch<SetStateAction<GridLayoutItem[]>>
+  brushColor: string
 }
 
 const ReactGridLayout = WidthProvider(GridLayout)

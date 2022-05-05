@@ -2,6 +2,10 @@ import { GridLayoutItem } from '../../types/views/Grid'
 import { Dimensions } from '../../types/basic/dimensions'
 import { ViewType } from './ViewTypes'
 
+export const DEFAULT_BRUSH_COLOR = `#830606`
+export const DEFAULT_BRUSH_BG_COLOR_TABLE = `#ffcfcf`
+export const DEFAULT_BRUSH_FONT_COLOR_TABLE = `#111111`
+
 export const VIEW_BORDER_SIZE = 5
 
 export const DRAG_HANDLE = `drag-handle`

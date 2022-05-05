@@ -61,6 +61,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
   lineWidth,
   margins,
   opacity,
+  brushColor,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const component = useRef<SVGGElement>(null)
@@ -198,7 +199,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
   if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {
     return (
       <Box
-        sx={getParallelCoordinatesStyle(opacity, isBrushingActive)}
+        sx={getParallelCoordinatesStyle(opacity, isBrushingActive, brushColor)}
         id={CONTAINER_SAVE_ID[ViewType.ParallelCoordinates]}
       >
         <svg width={width} height={height} id={SAVE_ID[ViewType.ParallelCoordinates]}>

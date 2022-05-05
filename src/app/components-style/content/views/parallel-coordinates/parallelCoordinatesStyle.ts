@@ -11,7 +11,7 @@ export const PARALLEL_COORDINATES_CLASS = `parallelCoordinates`
 export const SELECTED_CLASS = `parallelCoordinatesSelected`
 export const AXES_TEXT_CLASS = `parallelCoordinatesAxesText`
 
-export const getParallelCoordinatesStyle = (opacity: Opacity, isBrushActive: boolean): SxProps => ({
+export const getParallelCoordinatesStyle = (opacity: Opacity, isBrushActive: boolean, brushColor: string): SxProps => ({
   '& svg': {
     bgcolor: PLOT_COLORS.backgroundColor,
     font: `12px sans-serif`,
@@ -21,7 +21,7 @@ export const getParallelCoordinatesStyle = (opacity: Opacity, isBrushActive: boo
     opacity: !isBrushActive ? opacity[0] / 100 : opacity[2] / 100,
     '&.parallelCoordinatesSelected': {
       opacity: opacity[1] / 100,
-      stroke: important(PLOT_COLORS.brushColor),
+      stroke: important(brushColor),
     },
   },
   '& .parallelCoordinatesAxesText': {

@@ -60,6 +60,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
   glyphSize,
   margins,
   opacity,
+  brushColor,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const component = useRef<SVGGElement>(null)
@@ -214,7 +215,10 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
 
   if (displayAttributes.length >= MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT) {
     return (
-      <Box sx={getScatterPlotGlyphsStyle(opacity, isBrushingActive)} id={CONTAINER_SAVE_ID[ViewType.ScatterPlotGlyphs]}>
+      <Box
+        sx={getScatterPlotGlyphsStyle(opacity, isBrushingActive, brushColor)}
+        id={CONTAINER_SAVE_ID[ViewType.ScatterPlotGlyphs]}
+      >
         <svg width={width} height={height} id={SAVE_ID[ViewType.ScatterPlotGlyphs]}>
           <g ref={component} transform={getTranslate([margin.left + glyphSize / 2, margin.top + glyphSize / 2])} />
         </svg>

@@ -48,8 +48,6 @@ export const PLOT_COLORS = {
   axisLines: `#dddddd`,
   axisLinesDark: `#999999`,
   dataBox: `#aaaaaa`,
-  brushColor: `#830606`,
-  brushColorTable: `rgb(252, 207, 207)`,
 }
 
 export const SITE_COLORS = {

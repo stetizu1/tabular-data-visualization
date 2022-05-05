@@ -15,7 +15,7 @@ import { Settings } from '../../../types/views/settings/Settings'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
 import { GridLayoutItem } from '../../../types/views/Grid'
-import { DEFAULT_GRID_LAYOUT } from '../../../constants/views/common'
+import { DEFAULT_BRUSH_COLOR, DEFAULT_GRID_LAYOUT } from '../../../constants/views/common'
 
 export const DataContext: VoidFunctionComponent = () => {
   const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
@@ -33,6 +33,7 @@ export const DataContext: VoidFunctionComponent = () => {
 
   const [isAddViewDialogOpen, setIsAddViewDialogOpen] = useState(false)
   const [layout, setLayout] = useState<GridLayoutItem[]>(DEFAULT_GRID_LAYOUT)
+  const [brushColor, setBrushColor] = useState<string>(DEFAULT_BRUSH_COLOR)
 
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
@@ -119,6 +120,7 @@ export const DataContext: VoidFunctionComponent = () => {
         setIsAddViewDialogOpen={setIsAddViewDialogOpen}
         layout={layout}
         setLayout={setLayout}
+        brushColor={brushColor}
         {...viewProps}
       />
     )
@@ -138,6 +140,8 @@ export const DataContext: VoidFunctionComponent = () => {
         setDataset={setDatasetAndRemoveBrushing}
         setDataLoadState={setDataLoadState}
         setIsAddViewDialogOpen={setIsAddViewDialogOpen}
+        brushColor={brushColor}
+        setBrushColor={setBrushColor}
       />
       {getViewGrid()}
     </>

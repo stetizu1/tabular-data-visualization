@@ -7,18 +7,18 @@ import { numberInputStyles } from '../../../../components-style/content/data-dra
 
 import { Settings } from '../../../../types/views/settings/Settings'
 
-export interface NumberInputProps<T> {
+export interface NumberInputProps<Opt> {
+  viewType: ViewType
   label: string
-  valueKey: keyof T
+  valueKey: keyof Opt
   value: number
   setSettings: Dispatch<SetStateAction<Settings>>
-  viewType: ViewType
   min?: number
   max?: number
   handleChangeSettings?: () => void
 }
 
-export const NumberInput = <T,>({
+export const NumberInput = <Opt,>({
   label,
   value,
   valueKey,
@@ -27,7 +27,7 @@ export const NumberInput = <T,>({
   min,
   max,
   handleChangeSettings,
-}: NumberInputProps<T>): JSX.Element => {
+}: NumberInputProps<Opt>): JSX.Element => {
   const handleValueChange = (newValue: number) => {
     if (handleChangeSettings) handleChangeSettings()
     setSettings((prev) => {

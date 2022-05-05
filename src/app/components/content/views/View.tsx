@@ -24,6 +24,7 @@ import { DataTable } from './data-table/DataTable'
 export interface ViewProps extends Brushable, VisualizationView {
   component: ViewType
   settings: Settings
+  brushColor: string
 }
 
 type ViewElementFunction = (props: Brushable & VisualizationView, settings: SettingsType) => JSX.Element

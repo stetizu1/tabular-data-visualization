@@ -14,7 +14,11 @@ export const RECT_CLASS = `scatterPlotMatrixRect`
 export const CELL_CLASS = `scatterPlotMatrixCell`
 export const SELECTED_CLASS = `scatterPlotMatrixSelected`
 
-export const getScatterPlotMatrixStyle = (opacity: Opacity, isBrushingActive: boolean): SxProps => ({
+export const getScatterPlotMatrixStyle = (
+  opacity: Opacity,
+  isBrushingActive: boolean,
+  brushColor: string,
+): SxProps => ({
   '& svg': {
     fontSize: PLOT_FONT.fontSize,
     bgcolor: PLOT_COLORS.backgroundColor,
@@ -43,7 +47,7 @@ export const getScatterPlotMatrixStyle = (opacity: Opacity, isBrushingActive: bo
   '& .scatterPlotMatrixPoint': {
     fillOpacity: !isBrushingActive ? opacity[0] / 100 : opacity[2] / 100,
     '&.scatterPlotMatrixSelected': {
-      fill: important(PLOT_COLORS.brushColor),
+      fill: important(brushColor),
       fillOpacity: opacity[1] / 100,
     },
   },

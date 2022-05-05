@@ -4,7 +4,12 @@ import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
-import { DataTableSettings, rowHeightKey } from '../../../../types/views/settings/DataTableSettings'
+import {
+  DataTableSettings,
+  rowHeightKey,
+  selectedBackgroundColorKey,
+  selectedFontColorKey,
+} from '../../../../types/views/settings/DataTableSettings'
 
 import { getAttributeKeys, getDefaultAllAttributesChecked } from '../../../../helpers/data/data'
 
@@ -17,6 +22,7 @@ import { dataDrawerMenuStyle } from '../../../../components-style/content/data-d
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
+import { ColorPicker } from '../../data-drawer/items/ColorPicker'
 
 export const DataTableMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const viewType = ViewType.DataTable
@@ -70,11 +76,25 @@ export const DataTableMenu: VoidFunctionComponent<MenuProps> = ({ dataset, setti
               </AccordionSummary>
               <AccordionDetails>
                 <NumberInput
+                  viewType={viewType}
                   value={dataTableSettings.rowHeight}
                   valueKey={rowHeightKey}
                   setSettings={setSettings}
                   label={DATA_TABLE_MENU_TEXT.rowHeight}
+                />
+                <ColorPicker
                   viewType={viewType}
+                  color={dataTableSettings.selectedBackgroundColor}
+                  settingsKey={selectedBackgroundColorKey}
+                  setSettings={setSettings}
+                  label={DATA_TABLE_MENU_TEXT.selectedBackgroundColor}
+                />
+                <ColorPicker
+                  viewType={viewType}
+                  color={dataTableSettings.selectedFontColor}
+                  settingsKey={selectedFontColorKey}
+                  setSettings={setSettings}
+                  label={DATA_TABLE_MENU_TEXT.selectedFontColor}
                 />
               </AccordionDetails>
             </Accordion>

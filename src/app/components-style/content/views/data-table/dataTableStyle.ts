@@ -1,10 +1,16 @@
 import { SxProps } from '@mui/system'
-import { PLOT_COLORS, TABLE_COLORS } from '../../../../styles/colors'
+import { TABLE_COLORS } from '../../../../styles/colors'
 import { important } from '../../../../helpers/d3/stringGetters'
 
-export const getDataTableRowStyle = (rowHeight: number, selected: boolean): SxProps => ({
+export const getDataTableRowStyle = (
+  rowHeight: number,
+  selected: boolean,
+  selectedBackgroundColor: string,
+  selectedFontColor: string,
+): SxProps => ({
   height: rowHeight,
-  bgcolor: selected ? PLOT_COLORS.brushColorTable : ``,
+  bgcolor: selected ? selectedBackgroundColor : ``,
+  color: selected ? selectedFontColor : ``,
   '& .MuiTableCell-root, .MuiCheckbox-root': {
     paddingTop: 0,
     paddingBottom: 0,

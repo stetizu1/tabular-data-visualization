@@ -13,17 +13,22 @@ export const topToolbarStyle: Record<string, SxProps> = {
     bgcolor: TOP_TOOLBAR_COLORS.background,
     color: TOP_TOOLBAR_COLORS.font,
   },
-  left: {
-    display: `flex`,
-    margin: px(0, 12),
-    alignItems: `center`,
-  },
   separator: {
     height: `100%`,
     margin: px(0, 4),
     borderLeft: border(2, TOP_TOOLBAR_COLORS.border),
   },
+  left: {
+    display: `flex`,
+    margin: px(0, 12),
+    alignItems: `center`,
+  },
+  middle: {
+    display: `flex`,
+    alignItems: `center`,
+  },
   right: {
     display: `flex`,
+    alignItems: `center`,
   },
 }

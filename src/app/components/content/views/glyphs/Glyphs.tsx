@@ -50,6 +50,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   glyphSpacing,
   margins,
   opacity,
+  brushColor,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const component = useRef<SVGGElement>(null)
@@ -159,7 +160,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
 
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {
     return (
-      <Box sx={getGlyphsStyle(opacity, isBrushingActive)} id={CONTAINER_SAVE_ID[ViewType.Glyphs]}>
+      <Box sx={getGlyphsStyle(opacity, isBrushingActive, brushColor)} id={CONTAINER_SAVE_ID[ViewType.Glyphs]}>
         <svg width={width} height={innerHeight + margin.height} id={SAVE_ID[ViewType.Glyphs]}>
           <g ref={component} transform={getTranslate([margin.left, margin.top])} />
         </svg>
