@@ -56,7 +56,7 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
   setLayout,
   ...viewProps
 }) => {
-  const [isGridChanging, setIsGridResizing] = useState(false)
+  const [viewResizing, setViewResizing] = useState<ViewType | null>(null)
 
   const updateLayout = useCallback(
     (newLayout: LayoutArray) => {
@@ -114,8 +114,8 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
       <ReactGridLayout
         onLayoutChange={updateLayout}
         draggableHandle={getClass(DRAG_HANDLE)}
-        onResizeStart={() => setIsGridResizing(true)}
-        onResizeStop={() => setIsGridResizing(false)}
+        onResizeStart={(_, view) => setViewResizing(view.i as ViewType)}
+        onResizeStop={() => setViewResizing(null)}
         cols={COLUMNS_COUNT}
         rowHeight={ROW_HEIGHT}
         isResizable
@@ -123,7 +123,7 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
         {layout.map((view) => (
           <Box key={view.i} data-grid={view}>
             <GridItem
-              isDragFinished={!isGridChanging}
+              isResizeFinished={view.i !== viewResizing}
               title={VIEW_NAMES[view.i]}
               onRemove={() => {
                 cleanSelectedIfViewWasBrushing(view.i)

@@ -14,10 +14,10 @@ import { View } from './View'
 type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {
   title: string
   onRemove: () => void
-  isDragFinished: boolean
+  isResizeFinished: boolean
 }
 
-export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isDragFinished, ...rest }) => {
+export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResizeFinished, ...rest }) => {
   const [sized] = useSize(
     ({ width, height }) => (
       <Box sx={gridItemStyle.gridItem}>
@@ -30,7 +30,7 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isDrag
             </IconButton>
           </Box>
         </Box>
-        {isDragFinished && <View width={width} height={height - HEADER_HEIGHT} {...rest} />}
+        {isResizeFinished && <View width={width} height={height - HEADER_HEIGHT} {...rest} />}
       </Box>
     ),
     VIEW_DEFAULT_SIZE,
