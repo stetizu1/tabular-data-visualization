@@ -1,4 +1,4 @@
-import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useEffect } from 'react'
 import { Box, Typography } from '@mui/material'
 
 import { ColorArray } from '../../../../types/styling/ColorArray'
@@ -13,6 +13,7 @@ import {
 } from '../../../../components-style/content/data-drawer/items/palettePickerStyle'
 
 import { Settings } from '../../../../types/views/settings/Settings'
+import { useDebounce } from '../../../../helpers/react/useDebounce'
 
 export interface PalettePickerProps {
   viewType: ViewType
@@ -21,22 +22,32 @@ export interface PalettePickerProps {
 }
 
 export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({ colors, setSettings, viewType }) => {
+  const [currentColors, setCurrentColors] = useState<ColorArray>(colors)
+  const debouncedColors = useDebounce(currentColors, 60)
+
   const handleSetColor = (newColor: string, idx: number) => {
     if (newColor) {
-      const newColors = [...colors]
-      newColors[idx] = newColor
-      setSettings((prev) => {
-        const prevSettings = prev[viewType]!
-        return {
-          ...prev,
-          [viewType]: {
-            ...prevSettings,
-            colorCategory: newColors,
-          },
-        }
+      setCurrentColors((oldColors) => {
+        const newColors: ColorArray = [...oldColors]
+        newColors[idx] = newColor
+        return newColors
       })
     }
   }
+
+  useEffect(() => {
+    setSettings((prev) => {
+      const prevSettings = prev[viewType]!
+      return {
+        ...prev,
+        [viewType]: {
+          ...prevSettings,
+          colorCategory: debouncedColors,
+        },
+      }
+    })
+  }, [debouncedColors, setSettings, viewType])
+
   const getInput = (idx: number) => (
     <Box sx={palettePickerStyle.col} key={idx}>
       <label>{PALETTE_PICKER_TEXT.categoriesLabel[idx]}</label>
