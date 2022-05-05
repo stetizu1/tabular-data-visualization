@@ -8,7 +8,7 @@ export const PARALLEL_COORDINATES_DEFAULT: Pick<
   ParallelCoordinatesSettings,
   `margins` | `lineWidth` | `opacity` | `colorCategory`
 > = {
-  margins: [20, 55, 25, 60],
+  margins: [10, 55, 25, 60],
   lineWidth: 1,
   opacity: [50, 60, 20],
   colorCategory: schemeCategory10 as ColorArray,

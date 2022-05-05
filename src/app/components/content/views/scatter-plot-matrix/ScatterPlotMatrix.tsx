@@ -4,7 +4,6 @@ import {
   axisBottom,
   axisLeft,
   brush,
-  D3BrushEvent,
   NumberValue,
   ScaleLinear,
   scaleLinear,
@@ -22,31 +21,31 @@ import { Margin } from '../../../../types/styling/Margin'
 import { Dimensions } from '../../../../types/basic/dimensions'
 import { MatrixItem, MatrixPosition } from '../../../../types/data/MatrixData'
 import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
-import { DataEachCircle, DataEachG } from '../../../../types/d3-types'
+import { BrushExtent, DataEachC, DataEachG, OnBrushEvent } from '../../../../types/d3-types'
 
 import {
   getAttributeFromMatrixFormatted,
-  getAttributeValuesWithLabel,
   getClass,
   getEverything,
   getTranslate,
-  px,
 } from '../../../../helpers/d3/stringGetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getCellInnerSize, getCellTranslateInMatrix, getMatrix } from '../../../../helpers/d3/matrix'
 import { isInRanges } from '../../../../helpers/basic/range'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
 import { displayDetails } from '../../../../helpers/d3/displayDetails'
+import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 import { SVG } from '../../../../constants/svg'
 import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
-import { MouseActions } from '../../../../constants/actions/MouseActions'
-import { TOOLTIP, TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
-import { HTML } from '../../../../constants/html'
+import { MouseAction } from '../../../../constants/actions/MouseAction'
+import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
+
+import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 
 import {
   AXIS_CLASS,
@@ -57,11 +56,11 @@ import {
   DUPLICATES_CLASS,
   CELL_CLASS,
 } from '../../../../components-style/content/views/scatter-plot-matrix/scatterPlotMatrixStyle'
-import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
-import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {}
+
+type CellBrushing = { cell: MatrixPosition | null }
 
 export const DATA_POINT = `DATA_POINT`
 export const AXIS_X = `AXIS_X`
@@ -98,6 +97,11 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
   const color = scaleOrdinal(colorCategory)
 
   const [innerWidth, innerHeight] = [width - margin.width, height - margin.height]
+
+  // selected coloring
+  selectAll(getClass(DATA_POINT_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
+
+  displayDetails(isDetailsVisible, DUPLICATES_CLASS)
 
   const createScatterPlotMatrix = useCallback(() => {
     const node = component.current!
@@ -154,15 +158,14 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       .attr(SVG.attributes.transform, getTransformY)
       .each(setAxis(yScale, yAxis))
 
-    const tooltip = select(getClass(TOOLTIP_CLASS))
     const plotMatrixItem: DataEachG<MatrixItem> = (matrixItem, idx, elements) => {
       // set domains
       xScale.domain(extentInDomains[matrixItem.rowKey])
       yScale.domain(extentInDomains[matrixItem.colKey])
 
       const cell = select(elements[idx])
-      const getCx: DataEachCircle<SelectableDataType, number> = (data) => xScale(Number(data[matrixItem.rowKey]))
-      const getCy: DataEachCircle<SelectableDataType, number> = (data) => yScale(Number(data[matrixItem.colKey]))
+      const getCx: DataEachC<SelectableDataType, number> = (data) => xScale(Number(data[matrixItem.rowKey]))
+      const getCy: DataEachC<SelectableDataType, number> = (data) => yScale(Number(data[matrixItem.colKey]))
 
       // make rectangle surrounding data
       cell
@@ -183,16 +186,8 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
         .attr(SVG.attributes.cy, getCy)
         .attr(SVG.attributes.r, pointSize)
         .attr(SVG.attributes.class, DATA_POINT_CLASS)
-        .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
-          tooltip.transition().duration(TOOLTIP.easeIn).style(SVG.style.opacity, TOOLTIP.visible)
-          tooltip
-            .html(getAttributeValuesWithLabel(data).join(HTML.newLine))
-            .style(SVG.style.left, px(clientX))
-            .style(SVG.style.top, px(clientY))
-        })
-        .on(MouseActions.mouseOut, () => {
-          tooltip.transition().duration(TOOLTIP.easeOut).style(SVG.style.opacity, TOOLTIP.invisible)
-        })
+        .on(MouseAction.mouseOver, onMouseOverTooltip)
+        .on(MouseAction.mouseOut, onMouseOutTooltip)
         .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
     }
 
@@ -213,7 +208,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       .attr(SVG.attributes.y, verticalSpacing + PLOT_FONT_BOX_SIZE)
       .text(getAttributeFromMatrixFormatted)
 
-    const brushing: { cell: MatrixPosition | null } = {
+    const brushing: CellBrushing = {
       cell: null,
     }
 
@@ -229,8 +224,8 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       }
     }
 
-    const makeBrush = brush<MatrixItem>()
-      .on(BrushAction.start, (_: D3BrushEvent<SelectableDataType>, { rowIdx, colIdx, rowKey, colKey }: MatrixItem) => {
+    const onBrush: Record<BrushAction, OnBrushEvent<SelectableDataType, MatrixItem>> = {
+      [BrushAction.start]: (_, { rowIdx, colIdx, rowKey, colKey }) => {
         setComponentBrushing(ViewType.ScatterPlotMatrix)
         if (!brushing.cell || brushing.cell.rowIdx !== rowIdx || brushing.cell.colIdx !== colIdx) {
           clearBrush()
@@ -238,24 +233,31 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
           xScale.domain(extentInDomains[rowKey])
           yScale.domain(extentInDomains[colKey])
         }
-      })
-      .on(BrushAction.move, ({ selection }: D3BrushEvent<SelectableDataType>, matrixItem: MatrixItem) => {
+      },
+      [BrushAction.move]: ({ selection }, matrixItem) => {
         if (!isBrushingOnEndOfMove) {
           const brushSelection = selection as BrushSelection2d
           setBrushingSelection(matrixItem, brushSelection)
         }
-      })
-      .on(BrushAction.end, ({ selection }: D3BrushEvent<SelectableDataType>, matrixItem: MatrixItem) => {
+      },
+      [BrushAction.end]: ({ selection }, matrixItem) => {
         const brushSelection = selection as BrushSelection2d
         setBrushingSelection(matrixItem, brushSelection)
         if (!brushSelection) {
           setComponentBrushing(null)
         }
-      })
-      .extent([
-        [0, 0],
-        [rect.width, rect.height],
-      ])
+      },
+    }
+    const brushExtent: BrushExtent = [
+      [0, 0],
+      [rect.width, rect.height],
+    ]
+
+    const makeBrush = brush<MatrixItem>()
+      .on(BrushAction.start, onBrush[BrushAction.start])
+      .on(BrushAction.move, onBrush[BrushAction.move])
+      .on(BrushAction.end, onBrush[BrushAction.end])
+      .extent(brushExtent)
 
     registerCleanBrushing(() => {
       clearBrush()
@@ -304,10 +306,6 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       colorCategory,
     ],
   )
-
-  selectAll(getClass(DATA_POINT_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
-
-  displayDetails(isDetailsVisible, DUPLICATES_CLASS)
 
   if (
     getCellInnerSize(innerWidth / displayAttributes.length, horizontalSpacing) < 0 ||
