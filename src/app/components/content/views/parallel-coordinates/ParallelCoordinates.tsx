@@ -176,6 +176,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
         const axis = select(elements[idx])
         brushY().clear(axis)
       })
+      Object.keys(selections).forEach((selLKey) => (selections[selLKey] = null))
     })
   }, [
     dataset,
