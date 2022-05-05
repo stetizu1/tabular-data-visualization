@@ -10,6 +10,7 @@ import { OPACITY_MENU_TEXT } from '../../../../text/views-and-menus/common'
 import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
 
 import { Settings } from '../../../../types/views/settings/Settings'
+import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
 
 export interface OpacityInputProps {
   header: string
@@ -36,7 +37,7 @@ export const OpacityInput: VoidFunctionComponent<OpacityInputProps> = ({ header,
   }
   return (
     <Box sx={numberInputStyles.vertical}>
-      <Typography sx={numberInputStyles.text}>{header}</Typography>
+      <Typography sx={menuTextStyle.text}>{header}</Typography>
       <TextField
         label={OPACITY_MENU_TEXT.all}
         type="number"

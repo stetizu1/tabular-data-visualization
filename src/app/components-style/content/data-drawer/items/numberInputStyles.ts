@@ -1,7 +1,6 @@
 import { SxProps } from '@mui/system'
 
 import { px } from '../../../../helpers/d3/stringGetters'
-import { DATA_DRAWER_FONT } from '../../../../styles/font'
 
 export const numberInputStyles: Record<string, SxProps> = {
   vertical: {
@@ -11,10 +10,6 @@ export const numberInputStyles: Record<string, SxProps> = {
   horizontal: {
     display: `flex`,
     flexDirection: `row`,
-  },
-  text: {
-    fontSize: px(DATA_DRAWER_FONT.fontSize),
-    padding: px(6, 5, 3),
   },
   textField: {
     '&.MuiFormControl-root': {

@@ -10,6 +10,7 @@ import { MARGIN_MENU_TEXT } from '../../../../text/views-and-menus/common'
 import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
 
 import { Settings } from '../../../../types/views/settings/Settings'
+import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
 
 export interface MarginInputProps {
   margins: MarginArray
@@ -35,7 +36,7 @@ export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({ margins, 
   }
   return (
     <Box sx={numberInputStyles.vertical}>
-      <Typography sx={numberInputStyles.text}>{MARGIN_MENU_TEXT.header}</Typography>
+      <Typography sx={menuTextStyle.text}>{MARGIN_MENU_TEXT.header}</Typography>
       <Box sx={numberInputStyles.horizontal}>
         <TextField
           label={MARGIN_MENU_TEXT.top}

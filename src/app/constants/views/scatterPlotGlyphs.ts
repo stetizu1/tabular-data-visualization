@@ -8,8 +8,8 @@ export const SCATTER_PLOT_GLYPHS_DEFAULT: Pick<
   ScatterPlotGlyphsSettings,
   `glyphSize` | `margins` | `opacity` | `colorCategory`
 > = {
-  glyphSize: 35,
-  margins: [30, 30, 30, 30],
+  glyphSize: 30,
+  margins: [20, 20, 10, 20],
   opacity: [60, 90, 30],
   colorCategory: schemeCategory10 as ColorArray,
 }

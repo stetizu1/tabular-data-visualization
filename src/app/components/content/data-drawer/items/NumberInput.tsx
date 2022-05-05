@@ -13,7 +13,9 @@ export interface NumberInputProps<T> {
   value: number
   setSettings: Dispatch<SetStateAction<Settings>>
   viewType: ViewType
+  min?: number
   max?: number
+  handleChangeSettings?: () => void
 }
 
 export const NumberInput = <T,>({
@@ -22,9 +24,12 @@ export const NumberInput = <T,>({
   valueKey,
   setSettings,
   viewType,
+  min,
   max,
+  handleChangeSettings,
 }: NumberInputProps<T>): JSX.Element => {
   const handleValueChange = (newValue: number) => {
+    if (handleChangeSettings) handleChangeSettings()
     setSettings((prev) => {
       const prevSettings = prev[viewType]!
       return {
@@ -36,6 +41,7 @@ export const NumberInput = <T,>({
       }
     })
   }
+  const minVal = min ? { min } : { min: 0 }
   const maxVal = max ? { max } : {}
   return (
     <Box>
@@ -44,7 +50,7 @@ export const NumberInput = <T,>({
         type="number"
         defaultValue={value}
         sx={numberInputStyles.textField}
-        inputProps={{ inputMode: `numeric`, min: 0, ...maxVal }}
+        inputProps={{ inputMode: `numeric`, ...minVal, ...maxVal }}
         onChange={(e) => handleValueChange(Number(e.target.value))}
       />
     </Box>

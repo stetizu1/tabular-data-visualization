@@ -19,7 +19,6 @@ import {
   DEFAULT_VIEW_DIMENSIONS,
   DRAG_HANDLE,
   ROW_HEIGHT,
-  VIEW_LIMITS,
 } from '../../../constants/views/common'
 import { TOOLTIP_CLASS } from '../../../constants/views/tooltip'
 import { TOP_TOOLBAR_TEXT } from '../../../text/SiteText'
@@ -75,7 +74,7 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
       setLayout((layout) => {
         if (layout.find((item) => item.i === viewType)) return layout
         const posY = layout.reduce((max, item) => Math.max(item.y, max), 0) + 1
-        return [...layout, { i: viewType, x: 0, y: posY, ...DEFAULT_VIEW_DIMENSIONS[viewType], ...VIEW_LIMITS }]
+        return [...layout, { i: viewType, x: 0, y: posY, ...DEFAULT_VIEW_DIMENSIONS[viewType] }]
       })
     },
     [setIsAddViewDialogOpen],

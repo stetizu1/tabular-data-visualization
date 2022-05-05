@@ -4,7 +4,12 @@ import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
-import { pointSizeKey, ScatterPlotMatrixSettings } from '../../../../types/views/settings/ScatterPlotMatrixSettings'
+import {
+  horizontalSpacingKey,
+  pointSizeKey,
+  ScatterPlotMatrixSettings,
+  verticalSpacingKey,
+} from '../../../../types/views/settings/ScatterPlotMatrixSettings'
 
 import {
   getCategoryAttributesKeys,
@@ -21,6 +26,7 @@ import {
 import { SCATTER_PLOT_MATRIX_MENU_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
 import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
+import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -105,12 +111,29 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                   viewType={viewType}
                 />
                 <Divider />
+                <Typography sx={menuTextStyle.text}>{SCATTER_PLOT_MATRIX_MENU_TEXT.sizes}</Typography>
                 <NumberInput
                   value={scatterPlotMatrixSettings.pointSize}
                   valueKey={pointSizeKey}
                   setSettings={setSettings}
                   label={SCATTER_PLOT_MATRIX_MENU_TEXT.pointSize}
                   viewType={viewType}
+                />
+                <NumberInput
+                  value={scatterPlotMatrixSettings.horizontalSpacing}
+                  valueKey={horizontalSpacingKey}
+                  setSettings={setSettings}
+                  label={SCATTER_PLOT_MATRIX_MENU_TEXT.horizontalSpacing}
+                  viewType={viewType}
+                  handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
+                />
+                <NumberInput
+                  value={scatterPlotMatrixSettings.verticalSpacing}
+                  valueKey={verticalSpacingKey}
+                  setSettings={setSettings}
+                  label={SCATTER_PLOT_MATRIX_MENU_TEXT.verticalSpacing}
+                  viewType={viewType}
+                  handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
                 />
                 <Divider />
                 <OpacityInput
