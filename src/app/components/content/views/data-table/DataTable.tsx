@@ -15,7 +15,7 @@ import {
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { DataTableSettings } from '../../../../types/views/settings/DataTableSettings'
-import { IndexedSelectableDataType, SelectableDataType } from '../../../../types/data/data'
+import { SelectableDataType } from '../../../../types/data/data'
 
 import { dataToReadable, otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import { getComparator, SortType } from '../../../../helpers/data/comparator'
@@ -43,23 +43,21 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
 }) => {
   const [order, setOrder] = useState<SortType>(SortType.asc)
   const [orderBy, setOrderBy] = useState<keyof SelectableDataType>(displayAttributes[0])
-  const sortableDataset = useMemo<IndexedSelectableDataType[]>(
-    () => dataset.map((data: SelectableDataType, index) => ({ ...data, index })),
-    [dataset],
-  )
+  const sortableDataset = useMemo<SelectableDataType[]>(() => [...dataset], [dataset])
 
   const sortedDataset = useMemo(
     () => sortableDataset.sort(getComparator(order, orderBy)),
     [sortableDataset, order, orderBy],
   )
 
-  const handleSelectClick = (index: number) => {
-    if (dataset.filter((data) => data.selected).length === 1 && dataset[index].selected) {
+  const handleSelectClick = (changedData: SelectableDataType) => {
+    const idx = dataset.indexOf(changedData)
+    dataset[idx].selected = !dataset[idx].selected
+    if (dataset.every((data) => !data.selected)) {
       setComponentBrushing(null)
       return
     }
     setComponentBrushing(ViewType.DataTable)
-    dataset[index].selected = true
     refreshViews()
   }
 
@@ -126,12 +124,12 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
             </TableRow>
           </TableHead>
           <TableBody sx={dataTableStyle.tableBody}>
-            {sortedDataset.map((dataCopy, idx) => {
-              const selected = dataset[dataCopy.index].selected
+            {sortedDataset.map((data, idx) => {
+              const selected = data.selected
               return (
                 <TableRow
                   hover
-                  onClick={() => handleSelectClick(dataCopy.index)}
+                  onClick={() => handleSelectClick(data)}
                   key={idx}
                   sx={getDataTableRowStyle(rowHeight, selected, selectedBackgroundColor, selectedFontColor)}
                 >
@@ -139,7 +137,7 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
                     <Checkbox checked={selected} />
                   </TableCell>
                   {displayAttributes.map((attribute) => (
-                    <TableCell key={`${idx}-${attribute}`}>{dataToReadable(dataCopy[attribute])}</TableCell>
+                    <TableCell key={`${idx}-${attribute}`}>{dataToReadable(data[attribute])}</TableCell>
                   ))}
                 </TableRow>
               )
