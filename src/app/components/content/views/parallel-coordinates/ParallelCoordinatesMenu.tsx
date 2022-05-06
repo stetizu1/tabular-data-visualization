@@ -1,4 +1,4 @@
-import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
@@ -70,6 +70,11 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
     displayAttributes: getCurrentDisplayAttributes(newChecked),
   })
 
+  const handleChangeSettings = useCallback(
+    () => cleanSelectedIfViewWasBrushing(ViewType.ParallelCoordinates),
+    [cleanSelectedIfViewWasBrushing],
+  )
+
   if (parallelCoordinatesSettings) {
     return (
       <Box sx={dataDrawerMenuStyle.drawerMenu}>
@@ -79,7 +84,7 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
             <AttributeChecker
               viewType={viewType}
               attributesKeys={quantitativeAttributesKeys}
-              handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
+              handleChangeSettings={handleChangeSettings}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
               label={PARALLEL_COORDINATES_MENU_TEXT.attributes}
@@ -124,6 +129,7 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
                   colors={parallelCoordinatesSettings.colorCategory}
                   setSettings={setSettings}
                   viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
                 />
               </AccordionDetails>
             </Accordion>

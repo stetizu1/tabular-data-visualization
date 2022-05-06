@@ -19,9 +19,15 @@ export interface PalettePickerProps {
   viewType: ViewType
   colors: ColorArray
   setSettings: Dispatch<SetStateAction<Settings>>
+  handleChangeSettings?: () => void
 }
 
-export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({ colors, setSettings, viewType }) => {
+export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
+  colors,
+  setSettings,
+  viewType,
+  handleChangeSettings,
+}) => {
   const [currentColors, setCurrentColors] = useState<ColorArray>(colors)
   const debouncedColors = useDebounce(currentColors, 60)
 
@@ -36,6 +42,7 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({ color
   }
 
   useEffect(() => {
+    if (handleChangeSettings) handleChangeSettings()
     setSettings((prev) => {
       const prevSettings = prev[viewType]!
       return {
@@ -46,7 +53,7 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({ color
         },
       }
     })
-  }, [debouncedColors, setSettings, viewType])
+  }, [debouncedColors, setSettings, viewType, handleChangeSettings])
 
   const getInput = (idx: number) => (
     <Box sx={palettePickerStyle.col} key={idx}>

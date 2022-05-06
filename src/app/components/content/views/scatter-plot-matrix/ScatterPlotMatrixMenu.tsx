@@ -76,6 +76,11 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
     displayAttributes: getCurrentDisplayAttributes(newChecked),
   })
 
+  const handleChangeSettings = useCallback(
+    () => cleanSelectedIfViewWasBrushing(ViewType.ScatterPlotMatrix),
+    [cleanSelectedIfViewWasBrushing],
+  )
+
   if (scatterPlotMatrixSettings) {
     return (
       <Box sx={dataDrawerMenuStyle.drawerMenu}>
@@ -85,7 +90,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
             <AttributeChecker
               viewType={viewType}
               attributesKeys={quantitativeAttributesKeys}
-              handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
+              handleChangeSettings={handleChangeSettings}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
               label={SCATTER_PLOT_MATRIX_MENU_TEXT.attributes}
@@ -125,7 +130,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                   setSettings={setSettings}
                   label={SCATTER_PLOT_MATRIX_MENU_TEXT.horizontalSpacing}
                   viewType={viewType}
-                  handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
+                  handleChangeSettings={handleChangeSettings}
                 />
                 <NumberInput
                   value={scatterPlotMatrixSettings.verticalSpacing}
@@ -133,7 +138,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                   setSettings={setSettings}
                   label={SCATTER_PLOT_MATRIX_MENU_TEXT.verticalSpacing}
                   viewType={viewType}
-                  handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
+                  handleChangeSettings={handleChangeSettings}
                 />
                 <Divider />
                 <OpacityInput
@@ -147,6 +152,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                   colors={scatterPlotMatrixSettings.colorCategory}
                   setSettings={setSettings}
                   viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
                 />
               </AccordionDetails>
             </Accordion>

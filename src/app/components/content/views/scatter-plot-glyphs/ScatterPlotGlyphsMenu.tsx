@@ -1,11 +1,15 @@
-import { VoidFunctionComponent, useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState, VoidFunctionComponent } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
-import { glyphSizeKey, xAttributeKey, yAttributeKey } from '../../../../types/views/settings/ScatterPlotGlyphsSettings'
-import { ScatterPlotGlyphsSettings } from '../../../../types/views/settings/ScatterPlotGlyphsSettings'
+import {
+  glyphSizeKey,
+  ScatterPlotGlyphsSettings,
+  xAttributeKey,
+  yAttributeKey,
+} from '../../../../types/views/settings/ScatterPlotGlyphsSettings'
 
 import {
   getCategoryAttributesKeys,
@@ -75,7 +79,10 @@ export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
   ): Partial<ScatterPlotGlyphsSettings> => ({
     displayAttributes: getCurrentDisplayAttributes(newChecked),
   })
-  const handleChangeSettings = () => cleanSelectedIfViewWasBrushing(viewType)
+  const handleChangeSettings = useCallback(
+    () => cleanSelectedIfViewWasBrushing(ViewType.ScatterPlotGlyphs),
+    [cleanSelectedIfViewWasBrushing],
+  )
 
   if (scatterPlotGlyphsSettings) {
     return (
@@ -148,6 +155,7 @@ export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
                   colors={scatterPlotGlyphsSettings.colorCategory}
                   setSettings={setSettings}
                   viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
                 />
               </AccordionDetails>
             </Accordion>
