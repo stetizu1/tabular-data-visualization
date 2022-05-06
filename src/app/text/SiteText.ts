@@ -22,6 +22,7 @@ export const TOP_TOOLBAR_TEXT = {
     confirm: `Save`,
     cancel: `Cancel`,
   },
+  filter: `Filter`,
 }
 
 export const FILE_READER_TEXT = {

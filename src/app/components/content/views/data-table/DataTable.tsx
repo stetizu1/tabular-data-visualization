@@ -9,8 +9,10 @@ import {
   TableHead,
   TableRow,
   TableSortLabel,
+  TextField,
   Tooltip,
 } from '@mui/material'
+import { FilterListOutlined } from '@mui/icons-material'
 
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { Brushable } from '../../../../types/brushing/Brushable'
@@ -30,7 +32,9 @@ import {
   getDataTableRowStyle,
 } from '../../../../components-style/content/views/data-table/dataTableStyle'
 
-export interface DataTableProps extends VisualizationView, Brushable, DataTableSettings {}
+export interface DataTableProps extends VisualizationView, Brushable, DataTableSettings {
+  showFilter: boolean
+}
 
 export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   dataset,
@@ -40,14 +44,25 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   rowHeight,
   selectedBackgroundColor,
   selectedFontColor,
+  showFilter,
 }) => {
   const [order, setOrder] = useState<SortType>(SortType.asc)
   const [orderBy, setOrderBy] = useState<keyof SelectableDataType>(displayAttributes[0])
-  const sortableDataset = useMemo<SelectableDataType[]>(() => [...dataset], [dataset])
+  const [filterValues, setFilterValues] = useState<{ [p: keyof SelectableDataType]: string }>(
+    Object.fromEntries(displayAttributes.map((key) => [key, ``])),
+  )
+
+  const filteredDataset = useMemo<SelectableDataType[]>(
+    () =>
+      [...dataset].filter((data) =>
+        displayAttributes.every((attribute) => String(data[attribute]).includes(filterValues[attribute])),
+      ),
+    [dataset, displayAttributes, filterValues],
+  )
 
   const sortedDataset = useMemo(
-    () => sortableDataset.sort(getComparator(order, orderBy)),
-    [sortableDataset, order, orderBy],
+    () => filteredDataset.sort(getComparator(order, orderBy)),
+    [filteredDataset, order, orderBy],
   )
 
   const handleSelectClick = (changedData: SelectableDataType) => {
@@ -61,12 +76,12 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   }
 
   const handleSelectAllClick = (checked: boolean) => {
-    if (!checked) {
+    sortedDataset.forEach((data) => (data.selected = checked))
+    if (dataset.every((data) => !data.selected)) {
       setComponentBrushing(null)
       return
     }
     setComponentBrushing(ViewType.DataTable)
-    dataset.forEach((data) => (data.selected = true))
     refreshViews()
   }
 
@@ -74,6 +89,12 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
     const isAsc = orderBy === property && order === SortType.asc
     setOrder(isAsc ? SortType.desc : SortType.asc)
     setOrderBy(property)
+  }
+  const handleFilterValueChange = (newValue: string, key: keyof SelectableDataType) => {
+    setFilterValues((prev) => ({
+      ...prev,
+      [key]: newValue,
+    }))
   }
 
   const createSortHandler = (property: keyof SelectableDataType) => () => {
@@ -84,16 +105,16 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
       ? DATA_TABLE_TEXT[order === SortType.asc ? SortType.desc : SortType.asc]
       : DATA_TABLE_TEXT[SortType.asc]
 
-  const numSelected = dataset.filter((data) => data.selected).length
-  const someSelected = numSelected > 0 && numSelected < dataset.length
-  const allSelected = numSelected === dataset.length
+  const numSelected = sortedDataset.filter((data) => data.selected).length
+  const someSelected = numSelected > 0 && numSelected < sortedDataset.length
+  const allSelected = numSelected === sortedDataset.length
 
   if (displayAttributes.length >= MIN_DATA_TABLE_ATTRIBUTE_COUNT) {
     return (
       <TableContainer>
         <Table>
           <TableHead sx={dataTableStyle.tableHead}>
-            <TableRow>
+            <TableRow sx={dataTableStyle.tableHeadRow}>
               <TableCell padding={FORM.checkbox}>
                 <Tooltip title={DATA_TABLE_TEXT.checkboxTooltip}>
                   <Checkbox
@@ -121,6 +142,22 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
                 )
               })}
             </TableRow>
+            {showFilter && (
+              <TableRow sx={dataTableStyle.filterRow}>
+                <TableCell sx={dataTableStyle.filterIcon} padding={FORM.checkbox}>
+                  <FilterListOutlined />
+                </TableCell>
+                {displayAttributes.map((attribute, idx) => (
+                  <TableCell sx={dataTableStyle.filterCell} key={`filter-${attribute}`}>
+                    <TextField
+                      defaultValue={filterValues[idx]}
+                      sx={dataTableStyle.filter}
+                      onChange={(e) => handleFilterValueChange(e.target.value, attribute)}
+                    />
+                  </TableCell>
+                ))}
+              </TableRow>
+            )}
           </TableHead>
           <TableBody sx={dataTableStyle.tableBody}>
             {sortedDataset.map((data, idx) => {

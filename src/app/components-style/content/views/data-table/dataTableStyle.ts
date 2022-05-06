@@ -1,6 +1,6 @@
 import { SxProps } from '@mui/system'
 import { TABLE_COLORS } from '../../../../styles/colors'
-import { important } from '../../../../helpers/d3/stringGetters'
+import { important, px } from '../../../../helpers/d3/stringGetters'
 
 export const getDataTableRowStyle = (
   rowHeight: number,
@@ -21,8 +21,10 @@ export const getDataTableRowStyle = (
 
 export const dataTableStyle: Record<string, SxProps> = {
   tableHead: {
-    height: 30,
     bgcolor: TABLE_COLORS.headerBackground,
+  },
+  tableHeadRow: {
+    height: 30,
     fontWeight: `bold`,
     '& .MuiTableCell-root, .MuiCheckbox-root': {
       color: TABLE_COLORS.headerFont,
@@ -33,6 +35,27 @@ export const dataTableStyle: Record<string, SxProps> = {
   },
   tableBody: {
     bgcolor: TABLE_COLORS.rowsBackground,
+  },
+  filterRow: {
+    bgcolor: TABLE_COLORS.filterBackground,
+  },
+  filterCell: {
+    padding: px(5),
+  },
+  filter: {
+    width: `90%`,
+    bgcolor: TABLE_COLORS.rowsBackground,
+    borderRadius: px(5),
+    '&.MuiFormControl-root': {
+      margin: 0,
+    },
+    '& input': {
+      padding: px(5, 10, 4),
+    },
+  },
+  filterIcon: {
+    paddingLeft: px(12),
+    color: TABLE_COLORS.filterIconFont,
   },
   notDisplayed: {
     padding: 10,

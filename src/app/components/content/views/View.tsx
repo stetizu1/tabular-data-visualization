@@ -25,25 +25,37 @@ export interface ViewProps extends Brushable, VisualizationView {
   component: ViewType
   settings: Settings
   brushColor: string
+  showFilter?: boolean
 }
 
-type ViewElementFunction = (props: Brushable & VisualizationView, settings: SettingsType) => JSX.Element
+type ViewElementFunction = (
+  props: Brushable & VisualizationView,
+  settings: SettingsType,
+  showFilter?: boolean,
+) => JSX.Element
 
 const options: Record<ViewType, ViewElementFunction> = {
   [ViewType.Glyphs]: (p, s) => <Glyphs {...p} {...(s as GlyphsSettings)} />,
   [ViewType.ParallelCoordinates]: (p, s) => <ParallelCoordinates {...p} {...(s as ParallelCoordinatesSettings)} />,
   [ViewType.ScatterPlotMatrix]: (p, s) => <ScatterPlotMatrix {...p} {...(s as ScatterPlotMatrixSettings)} />,
   [ViewType.ScatterPlotGlyphs]: (p, s) => <ScatterPlotGlyphs {...p} {...(s as ScatterPlotGlyphsSettings)} />,
-  [ViewType.DataTable]: (p, s) => <DataTable {...p} {...(s as DataTableSettings)} />,
+  [ViewType.DataTable]: (p, s, f) => <DataTable {...p} {...(s as DataTableSettings)} showFilter={!!f} />,
 }
 
-export const View: VoidFunctionComponent<ViewProps> = ({ width, height, component, settings, ...dataProps }) => {
+export const View: VoidFunctionComponent<ViewProps> = ({
+  width,
+  height,
+  component,
+  settings,
+  showFilter,
+  ...dataProps
+}) => {
   const graph = options[component]
   const settingsCurr = settings[component]
   if (!settingsCurr) return null
   return (
     <Box sx={getViewBoxStyle(width, height)}>
-      {graph({ width, height: height - VIEW_BORDER_SIZE, ...dataProps }, settingsCurr)}
+      {graph({ width, height: height - VIEW_BORDER_SIZE, ...dataProps }, settingsCurr, showFilter)}
     </Box>
   )
 }

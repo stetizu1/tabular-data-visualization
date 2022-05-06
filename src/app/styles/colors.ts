@@ -23,6 +23,8 @@ export const BUTTON_COLORS = {
   fontOff: `rgba(214, 225, 255, 0.6)`,
   fontDisabled: `rgba(0, 0, 0, 0.26)`,
   buttonInlined: `#576e9f`,
+  buttonInlinedFontOn: `#3965c4`,
+  buttonInlinedBgOn: `#e9eeff`,
   border: `rgba(0, 0, 0, 0.12)`,
   colorBorder: `#42495d`,
   buttonDialogBackground: `#363a46`,
@@ -73,5 +75,7 @@ export const TABLE_COLORS = {
   headerFont: `#bcc7e7`,
   headerFontActive: `#e1e7fc`,
   headerBackground: `#363a46`,
+  filterIconFont: `#656d86`,
+  filterBackground: `#52586c`,
   rowsBackground: `rgb(250, 250, 254)`,
 }
