@@ -17,6 +17,7 @@ export const TOP_TOOLBAR_COLORS = {
 export const BUTTON_COLORS = {
   buttonDisableBackground: `#363b46`,
   buttonOffBackground: `#2d3548`,
+  buttonHoverBackground: `#b3bede`,
   buttonOnBackground: `#d6e1ff`,
   fontOn: `rgba(0, 0, 0, 0.87)`,
   fontOff: `rgba(214, 225, 255, 0.6)`,
@@ -24,6 +25,9 @@ export const BUTTON_COLORS = {
   buttonInlined: `#576e9f`,
   border: `rgba(0, 0, 0, 0.12)`,
   colorBorder: `#42495d`,
+  buttonDialogBackground: `#363a46`,
+  buttonDialogHoverBackground: `#1f2528`,
+  buttonDialogFont: `#d6e1ff`,
 }
 
 export const VIEW_COLORS = {

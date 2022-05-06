@@ -1,9 +1,12 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material'
+
+import { Settings } from '../../../../types/views/settings/Settings'
+
+import { useDebounce } from '../../../../helpers/react/useDebounce'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
-import { Settings } from '../../../../types/views/settings/Settings'
 import {
   colorPickerStyle,
   getColorPickerInputStyle,
@@ -25,20 +28,27 @@ export const ColorPicker = <Opt,>({
   setSettings,
   label,
 }: ColorPickerProps<Opt>): JSX.Element => {
+  const [currentColor, setCurrentColor] = useState(color)
+  const debouncedColor = useDebounce(currentColor, 60)
+
   const handleSetColor = (newColor: string) => {
     if (newColor) {
-      setSettings((prev) => {
-        const prevSettings = prev[viewType]!
-        return {
-          ...prev,
-          [viewType]: {
-            ...prevSettings,
-            [settingsKey]: newColor,
-          },
-        }
-      })
+      setCurrentColor(newColor)
     }
   }
+
+  useEffect(() => {
+    setSettings((prev) => {
+      const prevSettings = prev[viewType]!
+      return {
+        ...prev,
+        [viewType]: {
+          ...prevSettings,
+          [settingsKey]: debouncedColor,
+        },
+      }
+    })
+  }, [debouncedColor, setSettings, settingsKey, viewType])
   return (
     <Box sx={colorPickerStyle.picker}>
       <Typography sx={menuTextStyle.text}>{label}</Typography>

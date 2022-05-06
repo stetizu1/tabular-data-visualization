@@ -1,4 +1,4 @@
-import { VoidFunctionComponent } from 'react'
+import { useEffect, useState, VoidFunctionComponent } from 'react'
 import { Box, Tooltip } from '@mui/material'
 
 import {
@@ -6,6 +6,7 @@ import {
   getColorInputBoxStyle,
   getColorInputStyle,
 } from '../../../../../components-style/content/top-toolbar/items/buttons/colorButtonStyle'
+import { useDebounce } from '../../../../../helpers/react/useDebounce'
 
 export interface ColorButtonProps {
   color: string
@@ -21,14 +22,22 @@ export const ColorButton: VoidFunctionComponent<ColorButtonProps> = ({
   tooltip,
   disabled,
   icon,
-}) => (
-  <Tooltip title={tooltip} disableHoverListener={disabled}>
-    <Box sx={colorInputStyle.inputBox}>
-      <input disabled={disabled} type="color" value={color} onChange={(e) => handleSetColor(e.target.value)} />
-      <Box sx={getColorInputStyle(disabled)}>
-        {icon}
-        <Box sx={getColorInputBoxStyle(color, disabled)} />
+}) => {
+  const [currentColor, setCurrentColor] = useState(color)
+  const debouncedColor = useDebounce(currentColor, 60)
+  useEffect(() => {
+    handleSetColor(debouncedColor)
+  }, [debouncedColor, handleSetColor])
+
+  return (
+    <Tooltip title={tooltip} disableHoverListener={disabled}>
+      <Box sx={colorInputStyle.inputBox}>
+        <input disabled={disabled} type="color" value={color} onChange={(e) => setCurrentColor(e.target.value)} />
+        <Box sx={getColorInputStyle(disabled)}>
+          {icon}
+          <Box sx={getColorInputBoxStyle(color, disabled)} />
+        </Box>
       </Box>
-    </Box>
-  </Tooltip>
-)
+    </Tooltip>
+  )
+}

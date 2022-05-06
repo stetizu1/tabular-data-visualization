@@ -15,6 +15,8 @@ export const saveSvgToFile = (svgEl: Element, fileName: string): void => {
   document.body.removeChild(downloadLink)
 }
 
+type StyleNode = { sheet: CSSStyleSheet }
+
 export const saveSvg = (viewType: ViewType): void => {
   const svgContainer = document.querySelector(`#${CONTAINER_SAVE_ID[viewType]}`)
   const svg = document.querySelector(`#${SAVE_ID[viewType]}`)
@@ -25,10 +27,10 @@ export const saveSvg = (viewType: ViewType): void => {
   }
 
   const containerClass = Array.from(svgContainer.classList).filter((cls) => !cls.includes(`MuiBox`))[0]
-
-  const newStyleNodes = Array.from(document.querySelectorAll(`style`))
-    .filter((e) => e.innerHTML.includes(`.${containerClass}`))
-    .map((style) => style.innerHTML.replace(`.${containerClass} `, ``))
+  const newStyleNodes = ([...document.querySelectorAll(`[data-emotion]`)] as unknown as Array<StyleNode>)
+    .flatMap(({ sheet }) => [...sheet.cssRules].map((rules) => rules.cssText))
+    .filter((sheet) => sheet.includes(`.${containerClass}`))
+    .map((sheet) => sheet.replace(`.${containerClass} `, ``))
     .map((style) => {
       const node = document.createElement(`style`)
       node.innerHTML = style
