@@ -51,8 +51,7 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   )
 
   const handleSelectClick = (changedData: SelectableDataType) => {
-    const idx = dataset.indexOf(changedData)
-    dataset[idx].selected = !dataset[idx].selected
+    changedData.selected = !changedData.selected
     if (dataset.every((data) => !data.selected)) {
       setComponentBrushing(null)
       return

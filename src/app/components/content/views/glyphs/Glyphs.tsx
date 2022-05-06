@@ -107,8 +107,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
       )
 
     const onMouseClick: OnMouseEvent<SelectableDataType> = (_, changedData) => {
-      const idx = dataset.indexOf(changedData)
-      dataset[idx].selected = !dataset[idx].selected
+      changedData.selected = !changedData.selected
       if (dataset.every((data) => !data.selected)) {
         setComponentBrushing(null)
         return
