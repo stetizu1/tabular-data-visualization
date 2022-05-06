@@ -1,19 +1,20 @@
 import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import {
   glyphSizeKey,
   glyphSpacingKey,
-  sortAttributeKey,
   GlyphsSettings,
-} from '../../../../types/views/glyphs/GlyphsSettings'
+  sortAttributeKey,
+  sortTypeKey,
+} from '../../../../types/views/settings/GlyphsSettings'
 import { MenuProps } from '../../../../types/views/MenuProps'
 
 import {
   getCategoryAttributesKeys,
-  getDefaultAttributesChecked,
+  getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
@@ -22,7 +23,7 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/glyphs'
 
-import { useDataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/useDataDrawerMenuStyle'
+import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -31,13 +32,14 @@ import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
+import { ToggleButtons } from '../../data-drawer/items/ToggleButtons'
+import { SortType } from '../../../../helpers/data/comparator'
 
 export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
-  const classes = useDataDrawerMenuStyle()
   const viewType = ViewType.Glyphs
   const glyphsSettings = settings[viewType]
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
-  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
+  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultQuantitativeAttributesChecked(dataset))
 
   const sortableAttributes = quantitativeAttributesKeys.filter((key) => checked[key])
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
@@ -46,7 +48,7 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
     quantitativeAttributesKeys.filter((key) => currChecked[key])
 
   const createGlyphsMenu = useCallback(() => {
-    const newChecked = getDefaultAttributesChecked(dataset)
+    const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultSortAttribute = newQaKeys.filter((key) => newChecked[key])?.[0]
     const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
@@ -80,7 +82,7 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
 
   if (glyphsSettings) {
     return (
-      <div className={classes.drawerMenu}>
+      <Box sx={dataDrawerMenuStyle.drawerMenu}>
         <h1>{GLYPHS_MENU_TEXT.header}</h1>
         {quantitativeAttributesKeys.length >= MIN_GLYPHS_ATTRIBUTE_COUNT ? (
           <>
@@ -109,7 +111,14 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
               label={GLYPHS_MENU_TEXT.sorting}
               settingsKey={sortAttributeKey}
             />
-            <Accordion className={classes.accordion}>
+            <ToggleButtons
+              viewType={viewType}
+              value={glyphsSettings.sortType}
+              options={Object.values<SortType>(SortType)}
+              setSettings={setSettings}
+              settingsKey={sortTypeKey}
+            />
+            <Accordion sx={dataDrawerMenuStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography>{GLYPHS_MENU_TEXT.more}</Typography>
               </AccordionSummary>
@@ -143,9 +152,9 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
             </Accordion>
           </>
         ) : (
-          <div className={classes.insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</div>
+          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</Box>
         )}
-      </div>
+      </Box>
     )
   }
   return null

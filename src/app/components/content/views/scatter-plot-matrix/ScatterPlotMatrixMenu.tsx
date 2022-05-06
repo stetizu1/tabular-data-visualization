@@ -1,17 +1,19 @@
 import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
 import {
+  horizontalSpacingKey,
   pointSizeKey,
   ScatterPlotMatrixSettings,
-} from '../../../../types/views/scatter-plot-matrix/ScatterPlotMatrixSettings'
+  verticalSpacingKey,
+} from '../../../../types/views/settings/ScatterPlotMatrixSettings'
 
 import {
   getCategoryAttributesKeys,
-  getDefaultAttributesChecked,
+  getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
@@ -23,7 +25,8 @@ import {
 
 import { SCATTER_PLOT_MATRIX_MENU_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
-import { useDataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/useDataDrawerMenuStyle'
+import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
+import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -38,12 +41,11 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
   setSettings,
   cleanSelectedIfViewWasBrushing,
 }) => {
-  const classes = useDataDrawerMenuStyle()
   const viewType = ViewType.ScatterPlotMatrix
   const scatterPlotMatrixSettings = settings[viewType]
 
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
-  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
+  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultQuantitativeAttributesChecked(dataset))
 
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
 
@@ -52,7 +54,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
 
   // first time empty
   const createScatterPlotMatrixMenu = useCallback(() => {
-    const newChecked = getDefaultAttributesChecked(dataset)
+    const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
     setChecked(newChecked)
@@ -74,16 +76,21 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
     displayAttributes: getCurrentDisplayAttributes(newChecked),
   })
 
+  const handleChangeSettings = useCallback(
+    () => cleanSelectedIfViewWasBrushing(ViewType.ScatterPlotMatrix),
+    [cleanSelectedIfViewWasBrushing],
+  )
+
   if (scatterPlotMatrixSettings) {
     return (
-      <div className={classes.drawerMenu}>
+      <Box sx={dataDrawerMenuStyle.drawerMenu}>
         <h1>{SCATTER_PLOT_MATRIX_MENU_TEXT.header}</h1>
         {quantitativeAttributesKeys.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
               viewType={viewType}
               attributesKeys={quantitativeAttributesKeys}
-              handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
+              handleChangeSettings={handleChangeSettings}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
               label={SCATTER_PLOT_MATRIX_MENU_TEXT.attributes}
@@ -98,7 +105,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
               setSettings={setSettings}
               label={SCATTER_PLOT_MATRIX_MENU_TEXT.category}
             />
-            <Accordion className={classes.accordion}>
+            <Accordion sx={dataDrawerMenuStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography>{SCATTER_PLOT_MATRIX_MENU_TEXT.more}</Typography>
               </AccordionSummary>
@@ -109,12 +116,29 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                   viewType={viewType}
                 />
                 <Divider />
+                <Typography sx={menuTextStyle.text}>{SCATTER_PLOT_MATRIX_MENU_TEXT.sizes}</Typography>
                 <NumberInput
                   value={scatterPlotMatrixSettings.pointSize}
                   valueKey={pointSizeKey}
                   setSettings={setSettings}
                   label={SCATTER_PLOT_MATRIX_MENU_TEXT.pointSize}
                   viewType={viewType}
+                />
+                <NumberInput
+                  value={scatterPlotMatrixSettings.horizontalSpacing}
+                  valueKey={horizontalSpacingKey}
+                  setSettings={setSettings}
+                  label={SCATTER_PLOT_MATRIX_MENU_TEXT.horizontalSpacing}
+                  viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
+                />
+                <NumberInput
+                  value={scatterPlotMatrixSettings.verticalSpacing}
+                  valueKey={verticalSpacingKey}
+                  setSettings={setSettings}
+                  label={SCATTER_PLOT_MATRIX_MENU_TEXT.verticalSpacing}
+                  viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
                 />
                 <Divider />
                 <OpacityInput
@@ -128,14 +152,15 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                   colors={scatterPlotMatrixSettings.colorCategory}
                   setSettings={setSettings}
                   viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
                 />
               </AccordionDetails>
             </Accordion>
           </>
         ) : (
-          <div className={classes.insufficientAttributeNum}>{SCATTER_PLOT_MATRIX_MENU_TEXT.unavailable}</div>
+          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{SCATTER_PLOT_MATRIX_MENU_TEXT.unavailable}</Box>
         )}
-      </div>
+      </Box>
     )
   }
   return null

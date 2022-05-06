@@ -1,51 +1,48 @@
 import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
-import { axisLeft, brushY, D3BrushEvent, line, scaleLinear, scaleOrdinal, scalePoint, select, selectAll } from 'd3'
-import clsx from 'clsx'
+import { Box } from '@mui/material'
+import { axisLeft, brushY, line, scaleLinear, scaleOrdinal, scalePoint, select, selectAll } from 'd3'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { BrushSelection1d } from '../../../../types/brushing/BrushSelection'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
-import { ParallelCoordinatesSettings } from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
+import { ParallelCoordinatesSettings } from '../../../../types/views/settings/ParallelCoordinatesSettings'
 import { Margin } from '../../../../types/styling/Margin'
-import { DataEachG } from '../../../../types/d3-types'
+import { BrushExtent, DataEachG, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
 
 import { toStringArray } from '../../../../helpers/basic/retype'
 import { isInRange } from '../../../../helpers/basic/range'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
-import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
-import {
-  getAttributeFormatted,
-  getAttributeValuesWithLabel,
-  getClass,
-  getEverything,
-  getTranslate,
-  px,
-} from '../../../../helpers/d3/stringGetters'
+import { getCategoryColor, getTextTogglingYShift, TOGGLE_TEXT_Y_SHIFT } from '../../../../helpers/d3/attributeGetters'
+import { getAttributeFormatted, getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
 import { SVG } from '../../../../constants/svg'
 import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelCoordinates'
-import { MouseActions } from '../../../../constants/actions/MouseActions'
-import { TOOLTIP, TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
-import { HTML } from '../../../../constants/html'
+import { MouseAction } from '../../../../constants/actions/MouseAction'
+import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { PARALLEL_COORDINATES_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
 
-import { useParallelCoordinatesStyle } from '../../../../components-style/content/views/parallel-coordinates/useParallelCoordinatesStyle'
-
 import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
-import { SAVE_ID } from '../../../../constants/save/save'
+
+import {
+  AXES_TEXT_CLASS,
+  getParallelCoordinatesStyle,
+  PARALLEL_COORDINATES_CLASS,
+  SELECTED_CLASS,
+} from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
+import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
 
 const BRUSH_WIDTH = 30
 const BRUSH_RADIUS = BRUSH_WIDTH / 2
 const BRUSH_OVERLAP = 5
-const TEXT_Y_SHIFT = 10
 
-const PARALLEL_COORDINATES = `PARALLEL_COORDINATES`
 const AXES = `AXES`
+export const PARALLEL_COORDINATES = `PARALLEL_COORDINATES`
 
 export interface ParallelCoordinatesProps extends VisualizationView, Brushable, ParallelCoordinatesSettings {}
 
@@ -55,7 +52,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
   dataset,
   displayAttributes,
   categoryAttribute,
-  setDataSelected,
+  refreshViews,
   registerCleanBrushing,
   setComponentBrushing,
   isBrushingActive,
@@ -64,13 +61,16 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
   lineWidth,
   margins,
   opacity,
+  brushColor,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
-  const classes = useParallelCoordinatesStyle({ width, height, margin, opacity })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
-  const upperPadding = TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
+  const upperPadding = TOGGLE_TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
   const [innerWidth, innerHeight] = [width - margin.width, height - margin.height - upperPadding]
+
+  // selected coloring
+  selectAll(getClass(PARALLEL_COORDINATES_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
 
   const createParallelCoordinates = useCallback(() => {
     const node = component.current!
@@ -86,14 +86,15 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     const selections = getDefaultSelectionForAttributes(displayAttributes)
 
     const setBrushingSelection = () => {
-      setDataSelected((data) =>
-        displayAttributes.every((dimension, idx) => {
+      dataset.forEach((data) => {
+        data.selected = displayAttributes.every((dimension, idx) => {
           const selectedRange = selections[dimension]
           if (selectedRange === null) return true // nothing in dimension selected, do not block
           const valueOnAxis = yScales[idx](Number(data[dimension]))
           return isInRange(valueOnAxis, selectedRange)
-        }),
-      )
+        })
+      })
+      refreshViews()
     }
 
     const cleanBrushingSelection = () => {
@@ -101,38 +102,41 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
       setComponentBrushing(null)
     }
 
-    const brush = brushY<keyof SelectableDataType>()
-      .extent([
-        [-BRUSH_RADIUS, -BRUSH_OVERLAP],
-        [BRUSH_RADIUS, innerHeight + BRUSH_OVERLAP],
-      ])
-      .on(BrushAction.start, () => {
-        setComponentBrushing(ViewType.ParallelCoordinates)
-      })
-      .on(BrushAction.move, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
+    const onBrush: Record<BrushAction, OnBrushEvent<SelectableDataType, keyof SelectableDataType>> = {
+      [BrushAction.start]: () => setComponentBrushing(ViewType.ParallelCoordinates),
+      [BrushAction.move]: (brushEvent, axisName) => {
         if (!isBrushingOnEndOfMove) {
           selections[axisName] = brushEvent.selection as BrushSelection1d
           setBrushingSelection()
         }
-      })
-      .on(BrushAction.end, (brushEvent: D3BrushEvent<SelectableDataType>, axisName) => {
+      },
+      [BrushAction.end]: (brushEvent, axisName) => {
         selections[axisName] = brushEvent.selection as BrushSelection1d
         if (displayAttributes.some((key) => selections[key] !== null)) {
           return setBrushingSelection()
         }
         return cleanBrushingSelection() // nothing is selected
-      })
+      },
+    }
+    const brushExtent: BrushExtent = [
+      [-BRUSH_RADIUS, -BRUSH_OVERLAP],
+      [BRUSH_RADIUS, innerHeight + BRUSH_OVERLAP],
+    ]
 
-    const getAxisTransform = (attribute: keyof SelectableDataType) => getTranslate([xScale(String(attribute))!, 0])
+    const brush = brushY<keyof SelectableDataType>()
+      .on(BrushAction.start, onBrush[BrushAction.start])
+      .on(BrushAction.move, onBrush[BrushAction.move])
+      .on(BrushAction.end, onBrush[BrushAction.end])
+      .extent(brushExtent)
+
     const addAxes: DataEachG<keyof SelectableDataType> = (attribute, idx, elements) =>
       select(elements[idx]).call(axisLeft(yScales[idx]))
 
-    const getDataLinePath = (data: SelectableDataType) =>
+    const getDataLinePath: DataEachP<SelectableDataType, string | null> = (data) =>
       line()(
         displayAttributes.map((attribute, idx) => [xScale(String(attribute))!, yScales[idx](Number(data[attribute]))]),
       )
 
-    const tooltip = select(getClass(TOOLTIP_CLASS))
     // plot data
     svg
       .selectAll(PARALLEL_COORDINATES)
@@ -140,20 +144,15 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
       .enter()
       .append(SVG.elements.path)
       .attr(SVG.attributes.d, getDataLinePath)
-      .attr(SVG.attributes.class, clsx(classes.line, PARALLEL_COORDINATES))
+      .attr(SVG.attributes.class, PARALLEL_COORDINATES_CLASS)
       .attr(SVG.attributes.strokeWidth, lineWidth)
 
-      .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
-        tooltip.transition().duration(TOOLTIP.easeIn).style(SVG.style.opacity, TOOLTIP.visible)
-        tooltip
-          .html(getAttributeValuesWithLabel(data).join(HTML.newLine))
-          .style(SVG.style.left, px(clientX))
-          .style(SVG.style.top, px(clientY))
-      })
-      .on(MouseActions.mouseOut, () => {
-        tooltip.transition().duration(TOOLTIP.easeOut).style(SVG.style.opacity, TOOLTIP.invisible)
-      })
+      .on(MouseAction.mouseOver, onMouseOverTooltip)
+      .on(MouseAction.mouseOut, onMouseOutTooltip)
       .style(SVG.style.stroke, getCategoryColor(categoryAttribute, color))
+
+    const getAxisTransform: DataEachG<keyof SelectableDataType, string> = (attribute) =>
+      getTranslate([xScale(String(attribute))!, 0])
 
     // plot axes, add brush
     const brushableAxes = svg
@@ -168,21 +167,22 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     // add text to axes
     brushableAxes
       .append(SVG.elements.text)
-      .attr(SVG.attributes.y, -TEXT_Y_SHIFT)
+      .attr(SVG.attributes.y, getTextTogglingYShift)
       .text(getAttributeFormatted)
-      .attr(SVG.attributes.class, classes.text)
+      .attr(SVG.attributes.class, AXES_TEXT_CLASS)
 
     registerCleanBrushing(() => {
       brushableAxes.each((attribute, idx, elements) => {
         const axis = select(elements[idx])
         brushY().clear(axis)
       })
+      Object.keys(selections).forEach((selLKey) => (selections[selLKey] = null))
     })
   }, [
     dataset,
     innerWidth,
     innerHeight,
-    setDataSelected,
+    refreshViews,
     setComponentBrushing,
     categoryAttribute,
     displayAttributes,
@@ -190,7 +190,6 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     isBrushingOnEndOfMove,
     lineWidth,
     color,
-    classes,
   ])
 
   useEffect(
@@ -199,15 +198,13 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     [displayAttributes, categoryAttribute, innerWidth, innerHeight, lineWidth, isBrushingOnEndOfMove, colorCategory],
   )
 
-  // selected coloring
-  selectAll(getClass(PARALLEL_COORDINATES))
-    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
-
   if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {
     return (
-      <>
-        <svg width={width} height={height} className={classes.svg} id={SAVE_ID[ViewType.ParallelCoordinates]}>
+      <Box
+        sx={getParallelCoordinatesStyle(opacity, isBrushingActive, brushColor)}
+        id={CONTAINER_SAVE_ID[ViewType.ParallelCoordinates]}
+      >
+        <svg width={width} height={height} id={SAVE_ID[ViewType.ParallelCoordinates]}>
           <g
             ref={component}
             width={innerWidth}
@@ -215,8 +212,8 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
             transform={getTranslate([margin.left, margin.top + upperPadding])}
           />
         </svg>
-      </>
+      </Box>
     )
   }
-  return <div className={classes.notDisplayed}>{PARALLEL_COORDINATES_TEXT.unavailable}</div>
+  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{PARALLEL_COORDINATES_TEXT.unavailable}</Box>
 }

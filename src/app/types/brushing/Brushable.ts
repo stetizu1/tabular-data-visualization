@@ -1,7 +1,6 @@
 import { ViewType } from '../../constants/views/ViewTypes'
 
 import { SideEffectVoid } from '../basic/functionTypes'
-import { SelectableDataType } from '../data/data'
 
 export type SetComponentBrushing = (newComponent: ViewType | null) => void
 
@@ -31,9 +30,9 @@ export interface Brushable extends Highlightable {
   setComponentBrushing: SetComponentBrushing
 
   /**
-   * Function for setting selected data
+   * Function for refreshing views after changing selected
    */
-  setDataSelected: (setFunction: (data: SelectableDataType, idx: number) => boolean) => void
+  refreshViews: () => void
 
   /**
    * Property used to redraw a component while setting new selected data (props change for React)
@@ -45,4 +44,9 @@ export interface Brushable extends Highlightable {
    * True if brushing is only done on end of move
    */
   isBrushingOnEndOfMove?: boolean
+
+  /**
+   * Brush color for graphs
+   */
+  brushColor: string
 }

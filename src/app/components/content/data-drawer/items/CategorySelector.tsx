@@ -9,7 +9,7 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { MENU_TEXT } from '../../../../text/views-and-menus/common'
 
-import { Settings } from '../../views/Settings'
+import { Settings } from '../../../../types/views/settings/Settings'
 
 export interface CategorySelectorProps {
   viewType: ViewType

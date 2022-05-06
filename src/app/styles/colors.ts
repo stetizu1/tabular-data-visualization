@@ -15,10 +15,21 @@ export const TOP_TOOLBAR_COLORS = {
 }
 
 export const BUTTON_COLORS = {
-  buttonOffBackground: `#363b46`,
+  buttonDisableBackground: `#363b46`,
+  buttonOffBackground: `#2d3548`,
+  buttonHoverBackground: `#b3bede`,
   buttonOnBackground: `#d6e1ff`,
   fontOn: `rgba(0, 0, 0, 0.87)`,
+  fontOff: `rgba(214, 225, 255, 0.6)`,
+  fontDisabled: `rgba(0, 0, 0, 0.26)`,
   buttonInlined: `#576e9f`,
+  buttonInlinedFontOn: `#3965c4`,
+  buttonInlinedBgOn: `#e9eeff`,
+  border: `rgba(0, 0, 0, 0.12)`,
+  colorBorder: `#42495d`,
+  buttonDialogBackground: `#363a46`,
+  buttonDialogHoverBackground: `#1f2528`,
+  buttonDialogFont: `#d6e1ff`,
 }
 
 export const VIEW_COLORS = {
@@ -44,7 +55,6 @@ export const PLOT_COLORS = {
   axisLines: `#dddddd`,
   axisLinesDark: `#999999`,
   dataBox: `#aaaaaa`,
-  brushColor: `#830606`,
 }
 
 export const SITE_COLORS = {
@@ -59,4 +69,13 @@ export const HIGHLIGHT_COLOR = {
   border: `#da3512`,
   background: `rgba(201, 30, 0, 0.5)`,
   backgroundGone: `rgba(201, 30, 0, 0)`,
+}
+
+export const TABLE_COLORS = {
+  headerFont: `#bcc7e7`,
+  headerFontActive: `#e1e7fc`,
+  headerBackground: `#363a46`,
+  filterIconFont: `#656d86`,
+  filterBackground: `#52586c`,
+  rowsBackground: `rgb(250, 250, 254)`,
 }

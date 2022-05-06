@@ -1,17 +1,14 @@
 import { VoidFunctionComponent } from 'react'
+import { Box } from '@mui/material'
 
 import { FOOTER_TEXT } from '../../text/FooterText'
+import { footerStyle } from '../../components-style/footer/footerStyle'
 
-import { useFooterStyle } from '../../components-style/footer/useFooterStyle'
-
-export const Footer: VoidFunctionComponent = () => {
-  const style = useFooterStyle()
-  return (
-    <header className={style.footerContainer}>
-      <div className={style.text}>{FOOTER_TEXT.author},</div>
-      <div className={style.text}>
-        &copy; {FOOTER_TEXT.school}, {FOOTER_TEXT.year}
-      </div>
-    </header>
-  )
-}
+export const Footer: VoidFunctionComponent = () => (
+  <Box sx={footerStyle.footerContainer}>
+    <Box sx={footerStyle.text}>{FOOTER_TEXT.author},</Box>
+    <Box sx={footerStyle.text}>
+      &copy; {FOOTER_TEXT.school}, {FOOTER_TEXT.year}
+    </Box>
+  </Box>
+)

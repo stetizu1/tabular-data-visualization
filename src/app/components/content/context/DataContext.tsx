@@ -1,4 +1,4 @@
-import { VoidFunctionComponent, useState } from 'react'
+import { useCallback, useMemo, useState, VoidFunctionComponent } from 'react'
 
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
@@ -11,9 +11,11 @@ import { ViewType } from '../../../constants/views/ViewTypes'
 
 import { TopToolbar } from '../top-toolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
-import { Settings } from '../views/Settings'
+import { Settings } from '../../../types/views/settings/Settings'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
+import { GridLayoutItem } from '../../../types/views/Grid'
+import { DEFAULT_BRUSH_COLOR, DEFAULT_GRID_LAYOUT } from '../../../constants/views/common'
 
 export const DataContext: VoidFunctionComponent = () => {
   const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
@@ -30,93 +32,75 @@ export const DataContext: VoidFunctionComponent = () => {
   const [isBrushingOnEndOfMove, setIsBrushingOnEndOfMove] = useState(false)
 
   const [isAddViewDialogOpen, setIsAddViewDialogOpen] = useState(false)
+  const [layout, setLayout] = useState<GridLayoutItem[]>(DEFAULT_GRID_LAYOUT)
+  const [brushColor, setBrushColor] = useState<string>(DEFAULT_BRUSH_COLOR)
 
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
 
-  const setDatasetAndRemoveBrushing = (data: ReadonlyArray<SelectableDataType> | null) => {
+  const setDatasetAndRemoveBrushing = useCallback((data: ReadonlyArray<SelectableDataType> | null) => {
     setSettings({})
     setDataset(data)
     setCurrentComponentBrushing(null)
-  }
+  }, [])
 
-  const setDataSelected = (setFunction: (data: SelectableDataType, idx: number) => boolean): void => {
-    if (dataset) {
-      dataset.forEach((data, idx) => {
-        data.selected = setFunction(data, idx)
-      })
-      setRedrawTime(Date.now()) // redraw component
-    }
-  }
+  const refreshViews = useCallback((): void => {
+    setRedrawTime(Date.now()) // redraw component
+  }, [])
 
-  const cleanAllBrushes = () => {
-    setDataSelected((data) => (data.selected = false))
-    cleanBrushingRef.current.forEach((f) => f())
-  }
+  const cleanAllBrushes = useCallback(
+    (deletePrevSelection = true) => {
+      if (dataset && deletePrevSelection) {
+        dataset.forEach((data) => (data.selected = false))
+        refreshViews()
+      }
+      cleanBrushingRef.current.forEach((f) => f())
+    },
+    [cleanBrushingRef, dataset, refreshViews],
+  )
 
-  const clearBrushesOnButton = () => {
+  const clearBrushesOnButton = useCallback(() => {
     setCurrentComponentBrushing(null)
     cleanAllBrushes()
-  }
+  }, [cleanAllBrushes])
 
-  const setComponentBrushing: SetComponentBrushing = (newComponent) => {
-    if (componentBrushingRef.current !== newComponent) cleanAllBrushes()
-    setCurrentComponentBrushing(newComponent)
-  }
+  const setComponentBrushing: SetComponentBrushing = useCallback(
+    (newComponent) => {
+      if (componentBrushingRef.current !== newComponent) {
+        cleanAllBrushes(newComponent !== ViewType.DataTable && newComponent !== ViewType.Glyphs)
+      }
+      setCurrentComponentBrushing(newComponent)
+    },
+    [cleanAllBrushes, componentBrushingRef],
+  )
 
-  const registerCleanBrushing = (cleanBrushing: SideEffectVoid) => {
+  const registerCleanBrushing = useCallback((cleanBrushing: SideEffectVoid) => {
     setCleanBrushing((prev) => [...prev, cleanBrushing])
-  }
+  }, [])
 
-  const cleanSelectedIfViewWasBrushing = (component: ViewType) => {
-    if (componentBrushingRef.current === component) {
+  const cleanSelectedIfViewWasBrushing = useCallback(
+    (component: ViewType) => {
+      if (componentBrushingRef.current === component) {
+        cleanAllBrushes()
+        setCurrentComponentBrushing(null)
+      }
+    },
+    [cleanAllBrushes, componentBrushingRef],
+  )
+
+  const setIsBrushingOnEndOfMoveAndRemoveBrushing = useCallback(
+    (newIsBrushingOnEndOfMove: boolean) => {
       cleanAllBrushes()
       setCurrentComponentBrushing(null)
-    }
-  }
+      setIsBrushingOnEndOfMove(newIsBrushingOnEndOfMove)
+    },
+    [cleanAllBrushes],
+  )
 
-  const setIsBrushingOnEndOfMoveAndRemoveBrushing = (newIsBrushingOnEndOfMove: boolean) => {
-    cleanAllBrushes()
-    setCurrentComponentBrushing(null)
-    setIsBrushingOnEndOfMove(newIsBrushingOnEndOfMove)
-  }
+  const closeDrawer = useCallback(() => setDrawerOpen(false), [])
 
-  const isBrushingActive = componentBrushingRef.current !== null
-
-  const viewProps = {
-    registerCleanBrushing,
-    setComponentBrushing,
-    setDataSelected,
-    redrawTime,
-    isBrushingActive,
-    isBrushingOnEndOfMove,
-  }
-
-  const getViewGrid = () => {
-    if (dataLoadState === DataLoadState.NoData) {
-      return <EmptyData />
-    }
-    if (dataLoadState === DataLoadState.Loading || !dataset) {
-      return <Loading />
-    }
-    return (
-      <ViewGrid
-        isDrawerOpen={isDrawerOpen}
-        isDetailsVisible={isDetailsVisible}
-        closeDrawer={() => setDrawerOpen(false)}
-        cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
-        settings={settings}
-        setSettings={setSettings}
-        dataset={dataset}
-        isAddViewDialogOpen={isAddViewDialogOpen}
-        setIsAddViewDialogOpen={setIsAddViewDialogOpen}
-        {...viewProps}
-      />
-    )
-  }
-
-  return (
-    <>
+  const topToolbarComponent = useMemo(
+    () => (
       <TopToolbar
         openDrawer={() => setDrawerOpen(true)}
         isToolsDisabled={dataset === null}
@@ -124,13 +108,67 @@ export const DataContext: VoidFunctionComponent = () => {
         setIsDetailsVisible={setIsDetailsVisible}
         isBrushingOnEndOfMove={isBrushingOnEndOfMove}
         setIsBrushingOnEndOfMove={setIsBrushingOnEndOfMoveAndRemoveBrushing}
-        isBrushingActive={isBrushingActive}
+        isBrushingActive={componentBrushingRef.current !== null}
         clearBrushes={clearBrushesOnButton}
         setDataset={setDatasetAndRemoveBrushing}
         setDataLoadState={setDataLoadState}
         setIsAddViewDialogOpen={setIsAddViewDialogOpen}
+        brushColor={brushColor}
+        setBrushColor={setBrushColor}
       />
-      {getViewGrid()}
+    ),
+    [
+      brushColor,
+      clearBrushesOnButton,
+      componentBrushingRef,
+      dataset,
+      isBrushingOnEndOfMove,
+      isDetailsVisible,
+      setDatasetAndRemoveBrushing,
+      setIsBrushingOnEndOfMoveAndRemoveBrushing,
+    ],
+  )
+
+  if (dataLoadState === DataLoadState.NoData) {
+    return (
+      <>
+        {topToolbarComponent}
+        <EmptyData />
+      </>
+    )
+  }
+  if (dataLoadState === DataLoadState.Loading || !dataset) {
+    return (
+      <>
+        {topToolbarComponent}
+        <Loading />
+      </>
+    )
+  }
+
+  return (
+    <>
+      {topToolbarComponent}
+      <ViewGrid
+        isDrawerOpen={isDrawerOpen}
+        isDetailsVisible={isDetailsVisible}
+        closeDrawer={closeDrawer}
+        cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+        settings={settings}
+        setSettings={setSettings}
+        dataset={dataset}
+        isAddViewDialogOpen={isAddViewDialogOpen}
+        setIsAddViewDialogOpen={setIsAddViewDialogOpen}
+        layout={layout}
+        setLayout={setLayout}
+        brushColor={brushColor}
+        registerCleanBrushing={registerCleanBrushing}
+        setComponentBrushing={setComponentBrushing}
+        refreshViews={refreshViews}
+        redrawTime={redrawTime}
+        isBrushingActive={componentBrushingRef.current !== null}
+        isBrushingOnEndOfMove={isBrushingOnEndOfMove}
+      />
     </>
   )
 }

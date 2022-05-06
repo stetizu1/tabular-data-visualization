@@ -1,10 +1,8 @@
 import { VoidFunctionComponent } from 'react'
+import { Box } from '@mui/material'
 
 import { EMPTY_DATA_TEXT } from '../../../text/SiteText'
 
-import { useEmptyDataStyle } from '../../../components-style/content/no-data/useEmptyDataStyle'
+import { emptyDataStyle } from '../../../components-style/content/no-data/emptyDataStyle'
 
-export const EmptyData: VoidFunctionComponent = () => {
-  const classes = useEmptyDataStyle()
-  return <div className={classes.site}>{EMPTY_DATA_TEXT.content}</div>
-}
+export const EmptyData: VoidFunctionComponent = () => <Box sx={emptyDataStyle.site}>{EMPTY_DATA_TEXT.content}</Box>

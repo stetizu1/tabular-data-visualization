@@ -1,6 +1,6 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useState } from 'react'
-import { AutoGraph } from '@mui/icons-material'
-import clsx from 'clsx'
+import { Add, AutoGraph } from '@mui/icons-material'
+import { Box, Button } from '@mui/material'
 
 import { DataType, SelectableDataType } from '../../../../../types/data/data'
 
@@ -9,13 +9,18 @@ import { CsvParse, isArrayOfDataType } from '../../../../../helpers/data/dataCon
 import { DataLoadError, DataLoadState } from '../../../../../constants/data/dataLoadState'
 import { SampleDataset, sampleDatasetIcons, sampleDatasets } from '../../../../../constants/data/sampleDataset'
 
-import { TOP_TOOLBAR_TEXT } from '../../../../../text/SiteText'
+import { FILE_READER_TEXT } from '../../../../../text/SiteText'
 
-import { useFileReaderStyle } from '../../../../../components-style/content/top-toolbar/items/file-reader/useFileReaderStyle'
+import {
+  fileReaderStyle,
+  getFileReaderBoxStyle,
+} from '../../../../../components-style/content/top-toolbar/items/file-reader/fileReaderStyle'
 
 import { SelectionDialog } from '../../../common/dialogs/SelectionDialog'
 import { InformationDialog } from '../../../common/dialogs/InformationDialog'
 import { ClickableButton } from '../buttons/ClickableButton'
+import { getAttributeKeys } from '../../../../../helpers/data/data'
+import { NullDialog } from './NullDialog'
 
 export interface FileReaderDataProps {
   setDataset: (dataset: ReadonlyArray<SelectableDataType> | null) => void
@@ -26,7 +31,7 @@ export interface FileReaderProps extends FileReaderDataProps {
   isHighlighted: boolean
 }
 
-export const addSelected = (data: ReadonlyArray<DataType>): ReadonlyArray<SelectableDataType> =>
+export const addSelected = (data: Array<DataType>): Array<SelectableDataType> =>
   data.map((d) => ({ ...d, selected: false }))
 
 enum AcceptableFileTypes {
@@ -34,14 +39,18 @@ enum AcceptableFileTypes {
   csv = `text/csv`,
 }
 
+const FILE_INPUT_ID = `FILE_INPUT`
+
 export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset, setDataLoadState, isHighlighted }) => {
-  const classes = useFileReaderStyle()
   const [isSampleDataDialogOpen, setIsSampleDataDialogOpen] = useState(false)
+
+  const [isNullDialogOpen, setIsNullDialogOpen] = useState(false)
+  const [nullContainingAttributes, setNullContainingAttributes] = useState<Array<keyof SelectableDataType>>([])
+  const [rawDataset, setRawDataset] = useState<Array<SelectableDataType>>([])
 
   const [isAlertDialogOpen, setIsAlertDialogOpen] = useState(false)
   const [alertDialogText, setAlertDialogText] = useState<{ title: string; description: string } | null>(null)
 
-  const text = TOP_TOOLBAR_TEXT.fileReader
   const optionsKeys = Object.values(SampleDataset)
   const handleListItemClick = (optionKey: SampleDataset) => {
     setIsSampleDataDialogOpen(false)
@@ -50,15 +59,20 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
     setDataLoadState(DataLoadState.Loaded)
   }
 
+  const closeDialog = () => {
+    setIsNullDialogOpen(false)
+    setRawDataset([])
+    setNullContainingAttributes([])
+  }
   return (
     <>
       <SelectionDialog
         isOpen={isSampleDataDialogOpen}
         onClose={() => setIsSampleDataDialogOpen(false)}
-        title={text.sampleDataDialogTitle}
+        title={FILE_READER_TEXT.sampleDataDialogTitle}
         options={optionsKeys.map((key) => ({
           key,
-          label: text.sampleDataDialogText[key],
+          label: FILE_READER_TEXT.sampleDataDialogText[key],
           icon: sampleDatasetIcons[key],
         }))}
         handleListItemClick={handleListItemClick}
@@ -68,55 +82,88 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
         onClose={() => setIsAlertDialogOpen(false)}
         title={alertDialogText?.title}
         description={alertDialogText?.description}
-        confirmText={text.alertDialog.confirm}
+        confirmText={FILE_READER_TEXT.alertDialog.confirm}
         alert={true}
       />
-      <div className={clsx(isHighlighted && classes.highlight, classes.box)}>
+      <NullDialog
+        isOpen={isNullDialogOpen}
+        onClose={() => {
+          setDataLoadState(DataLoadState.NoData)
+          closeDialog()
+        }}
+        nullContainingAttributes={nullContainingAttributes}
+        dataset={rawDataset}
+        setDataset={(dataset) => {
+          setDataset(dataset)
+          setDataLoadState(DataLoadState.Loaded)
+          closeDialog()
+        }}
+      />
+      <Box sx={getFileReaderBoxStyle(isHighlighted)}>
         <ClickableButton
           onClick={() => setIsSampleDataDialogOpen(true)}
           icon={<AutoGraph />}
-          label={text.sampleDataLabel}
+          label={FILE_READER_TEXT.sampleDataLabel}
         />
-        <input
-          className={classes.input}
-          type="file"
-          onChange={async (e) => {
-            if (e.target.files?.length) {
-              setDataLoadState(DataLoadState.Loading)
-              const selectedFile = e.target.files[0]
-              const fileType = selectedFile.type
-              let dataset: DataType[] = []
+        <Button sx={fileReaderStyle.button} variant="contained" component="label">
+          <Add />
+          {FILE_READER_TEXT.button}
+          <input
+            type="file"
+            hidden
+            id={FILE_INPUT_ID}
+            onChange={async (e) => {
+              if (e.target.files?.length) {
+                setDataLoadState(DataLoadState.Loading)
+                const selectedFile = e.target.files[0]
+                const fileType = selectedFile.type
+                let dataset: DataType[] = []
 
-              switch (fileType) {
-                case AcceptableFileTypes.json: {
-                  const text = await selectedFile.text()
-                  dataset = JSON.parse(text)
-                  break
+                switch (fileType) {
+                  case AcceptableFileTypes.json: {
+                    const text = await selectedFile.text()
+                    dataset = JSON.parse(text)
+                    break
+                  }
+                  case AcceptableFileTypes.csv: {
+                    const textCsv = await selectedFile.text()
+                    dataset = CsvParse(textCsv)
+                    break
+                  }
+                  default: {
+                    setDataLoadState(DataLoadState.NoData)
+                    setAlertDialogText(FILE_READER_TEXT.alertDialog[DataLoadError.unsupportedFile])
+                    setDataset(null)
+                    setIsAlertDialogOpen(true)
+                    return
+                  }
                 }
-                case AcceptableFileTypes.csv: {
-                  const textCsv = await selectedFile.text()
-                  dataset = CsvParse(textCsv)
-                  break
-                }
-                default: {
+                if (!isArrayOfDataType(dataset)) {
                   setDataLoadState(DataLoadState.NoData)
-                  setAlertDialogText(text.alertDialog[DataLoadError.unsupportedFile])
+                  setAlertDialogText(FILE_READER_TEXT.alertDialog[DataLoadError.unsupportedFileFormat])
+                  setDataset(null)
                   setIsAlertDialogOpen(true)
                   return
                 }
+                const selectableDataset = addSelected(dataset)
+                const nullContainingAttributes = getAttributeKeys(selectableDataset).filter((att) =>
+                  dataset.some((data) => data[att] === null),
+                )
+                if (nullContainingAttributes.length) {
+                  setNullContainingAttributes(nullContainingAttributes)
+                  setRawDataset(selectableDataset)
+                  setIsNullDialogOpen(true)
+                  const fileEl = document.getElementById(FILE_INPUT_ID) as unknown as { value: null }
+                  fileEl.value = null
+                  return
+                }
+                setDataset(selectableDataset)
+                setDataLoadState(DataLoadState.Loaded)
               }
-              if (!isArrayOfDataType(dataset)) {
-                setDataLoadState(DataLoadState.NoData)
-                setAlertDialogText(text.alertDialog[DataLoadError.unsupportedFileFormat])
-                setIsAlertDialogOpen(true)
-                return
-              }
-              setDataset(addSelected(dataset))
-              setDataLoadState(DataLoadState.Loaded)
-            }
-          }}
-        />
-      </div>
+            }}
+          />
+        </Button>
+      </Box>
     </>
   )
 }

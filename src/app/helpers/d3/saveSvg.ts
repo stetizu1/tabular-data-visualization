@@ -1,5 +1,5 @@
 import { ViewType } from '../../constants/views/ViewTypes'
-import { SAVE_ID } from '../../constants/save/save'
+import { CONTAINER_SAVE_ID, SAVE_ID } from '../../constants/save/save'
 
 export const saveSvgToFile = (svgEl: Element, fileName: string): void => {
   svgEl.setAttribute(`xmlns`, `http://www.w3.org/2000/svg`)
@@ -15,10 +15,22 @@ export const saveSvgToFile = (svgEl: Element, fileName: string): void => {
   document.body.removeChild(downloadLink)
 }
 
+type StyleNode = { sheet: CSSStyleSheet }
+
 export const saveSvg = (viewType: ViewType): void => {
-  const svg = document.querySelector(`#${SAVE_ID[viewType]}`)!
-  const newStyleNodes = Array.from(document.querySelectorAll(`style`))
-    .map((style) => style.innerHTML)
+  const svgContainer = document.querySelector(`#${CONTAINER_SAVE_ID[viewType]}`)
+  const svg = document.querySelector(`#${SAVE_ID[viewType]}`)
+  if (!svgContainer || !svg) {
+    // eslint-disable-next-line no-console
+    console.error(`Identifier class missing, saving is not possible`)
+    return
+  }
+
+  const containerClass = Array.from(svgContainer.classList).filter((cls) => !cls.includes(`MuiBox`))[0]
+  const newStyleNodes = ([...document.querySelectorAll(`[data-emotion]`)] as unknown as Array<StyleNode>)
+    .flatMap(({ sheet }) => [...sheet.cssRules].map((rules) => rules.cssText))
+    .filter((sheet) => sheet.includes(`.${containerClass}`))
+    .map((sheet) => sheet.replace(`.${containerClass} `, ``))
     .map((style) => {
       const node = document.createElement(`style`)
       node.innerHTML = style

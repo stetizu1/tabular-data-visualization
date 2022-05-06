@@ -1,38 +1,38 @@
 import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
-import clsx from 'clsx'
+import { Box } from '@mui/material'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
-import { GlyphsSettings } from '../../../../types/views/glyphs/GlyphsSettings'
+import { GlyphsSettings } from '../../../../types/views/settings/GlyphsSettings'
 import { Margin } from '../../../../types/styling/Margin'
 
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
-import {
-  getAttributeValuesWithLabel,
-  getClass,
-  getEverything,
-  getTranslate,
-  px,
-} from '../../../../helpers/d3/stringGetters'
+import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import { getComparator } from '../../../../helpers/data/comparator'
+import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { SVG } from '../../../../constants/svg'
 import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
-import { TOOLTIP, TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
-import { MouseActions } from '../../../../constants/actions/MouseActions'
-import { HTML } from '../../../../constants/html'
-import { SAVE_ID } from '../../../../constants/save/save'
+import { MouseAction } from '../../../../constants/actions/MouseAction'
 import { ViewType } from '../../../../constants/views/ViewTypes'
+import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
-import { useGlyphsStyle } from '../../../../components-style/content/views/glyphs/useGlyphsStyle'
+import {
+  getGlyphsStyle,
+  GLYPHS_CLASS,
+  SELECTED_CLASS,
+} from '../../../../components-style/content/views/glyphs/glyphsStyle'
+import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
+import { DataEachP, OnMouseEvent } from '../../../../types/d3-types'
 
 export interface GlyphsProps extends VisualizationView, Brushable, GlyphsSettings {}
 
-const GLYPHS = `glyphsItems`
+const GLYPHS = `GLYPHS`
 
 export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   dataset,
@@ -42,17 +42,25 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   categoryAttribute,
   isBrushingActive,
   setComponentBrushing,
-  setDataSelected,
+  refreshViews,
   sortAttribute,
+  sortType,
   colorCategory,
   glyphSize,
   glyphSpacing,
   margins,
   opacity,
+  brushColor,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
-  const classes = useGlyphsStyle({ width, height, margin, opacity })
   const component = useRef<SVGGElement>(null)
+
+  const sortableDataset = useMemo<SelectableDataType[]>(() => [...dataset], [dataset])
+  const sortedDataset = useMemo(
+    () => sortableDataset.sort(getComparator(sortType, sortAttribute)),
+    [sortableDataset, sortAttribute, sortType],
+  )
+
   const color = scaleOrdinal(colorCategory)
 
   const innerWidth = width - margin.width
@@ -62,14 +70,13 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   const innerHeight = glyphsCountPerHeight * glyphSizeWithSpacing
   const glyphRadius = glyphSize / 2
 
+  // selected coloring
+  selectAll(getClass(GLYPHS_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
+
   const createGlyphs = useCallback(() => {
     const node = component.current!
     const svg = select(node)
     svg.selectAll(getEverything()).remove() // clear
-
-    const sortedDataset = sortAttribute
-      ? [...dataset].sort((a, b) => Number(a[sortAttribute]) - Number(b[sortAttribute]))
-      : [...dataset]
 
     const [xScale, yScale] = [
       scaleLinear([0, innerWidth]).domain([0, glyphsCountPerLine]),
@@ -84,14 +91,14 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
     )
 
     // functions setting attributes
-    const getTransform = (data: SelectableDataType) => {
+    const getTransform: DataEachP<SelectableDataType, string> = (data) => {
       const idx = sortedDataset.indexOf(data)
       return getTranslate([
         xScale(idx % glyphsCountPerLine) + glyphRadius,
         yScale(glyphsCountPerHeight - Math.floor(idx / glyphsCountPerLine)) + glyphRadius,
       ])
     }
-    const getGlyphPath = (data: SelectableDataType) =>
+    const getGlyphPath: DataEachP<SelectableDataType, string | null> = (data) =>
       lineRadialGenerator(
         displayAttributes.map((key, idx) => [
           (2 * Math.PI * idx) / displayAttributes.length,
@@ -99,7 +106,16 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
         ]),
       )
 
-    const tooltip = select(getClass(TOOLTIP_CLASS))
+    const onMouseClick: OnMouseEvent<SelectableDataType> = (_, changedData) => {
+      changedData.selected = !changedData.selected
+      if (dataset.every((data) => !data.selected)) {
+        setComponentBrushing(null)
+        return
+      }
+      setComponentBrushing(ViewType.Glyphs)
+      refreshViews()
+    }
+
     svg
       .selectAll(GLYPHS)
       .data(dataset)
@@ -111,67 +127,45 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
           .data([data])
           .enter()
           .append(SVG.elements.path)
-          .attr(SVG.attributes.class, clsx(classes.glyph, GLYPHS))
+          .attr(SVG.attributes.class, GLYPHS_CLASS)
           .attr(SVG.attributes.d, getGlyphPath)
           .attr(SVG.attributes.transform, getTransform)
-          .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
-            tooltip.transition().duration(TOOLTIP.easeIn).style(SVG.style.opacity, TOOLTIP.visible)
-            tooltip
-              .html(getAttributeValuesWithLabel(data).join(HTML.newLine))
-              .style(SVG.style.left, px(clientX))
-              .style(SVG.style.top, px(clientY))
-          })
-          .on(MouseActions.mouseOut, () => {
-            tooltip.transition().duration(TOOLTIP.easeOut).style(SVG.style.opacity, TOOLTIP.invisible)
-          })
-          .on(MouseActions.click, (_: MouseEvent, changedData: SelectableDataType) => {
-            setComponentBrushing(ViewType.Glyphs)
-            const selected = dataset.map((data) => (data === changedData ? !data.selected : data.selected))
-            setDataSelected((data, idx) => selected[idx])
-            if (selected.every((value) => !value)) {
-              setComponentBrushing(null)
-            }
-          })
+          .on(MouseAction.mouseOver, onMouseOverTooltip)
+          .on(MouseAction.mouseOut, onMouseOutTooltip)
+          .on(MouseAction.click, onMouseClick)
           .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
       })
-    selectAll(getClass(GLYPHS))
-      .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-      .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
+    // selected coloring, needed again
+    selectAll(getClass(GLYPHS_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
   }, [
     dataset,
-    classes,
+    sortedDataset,
     innerWidth,
     innerHeight,
-    setDataSelected,
+    refreshViews,
     setComponentBrushing,
     glyphsCountPerLine,
     glyphsCountPerHeight,
     glyphRadius,
     displayAttributes,
     categoryAttribute,
-    sortAttribute,
     color,
-    isBrushingActive,
   ])
 
   useEffect(
     () => createGlyphs(),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [displayAttributes, categoryAttribute, sortAttribute, innerWidth, innerHeight, colorCategory],
+    [displayAttributes, categoryAttribute, sortAttribute, sortType, innerWidth, innerHeight, colorCategory],
   )
-  // selected coloring
-  selectAll(getClass(GLYPHS))
-    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
 
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {
     return (
-      <>
-        <svg width={width} height={innerHeight + margin.height} className={classes.svg} id={SAVE_ID[ViewType.Glyphs]}>
+      <Box sx={getGlyphsStyle(opacity, isBrushingActive, brushColor)} id={CONTAINER_SAVE_ID[ViewType.Glyphs]}>
+        <svg width={width} height={innerHeight + margin.height} id={SAVE_ID[ViewType.Glyphs]}>
           <g ref={component} transform={getTranslate([margin.left, margin.top])} />
         </svg>
-      </>
+      </Box>
     )
   }
-  return <div className={classes.notDisplayed}>{GLYPHS_TEXT.unavailable}</div>
+  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{GLYPHS_TEXT.unavailable}</Box>
 }

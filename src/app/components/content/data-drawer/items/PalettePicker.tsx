@@ -1,67 +1,73 @@
-import { ChangeEvent, Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
-import { Typography } from '@mui/material'
-import clsx from 'clsx'
+import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useEffect } from 'react'
+import { Box, Typography } from '@mui/material'
 
 import { ColorArray } from '../../../../types/styling/ColorArray'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
-import { PALETTE_PICKER } from '../../../../text/views-and-menus/common'
+import { PALETTE_PICKER_TEXT } from '../../../../text/views-and-menus/common'
 
-import { usePalettePickerStyle } from '../../../../components-style/content/data-drawer/items/usePalettePickerStyle'
+import {
+  getPalettePickerColorInputStyle,
+  palettePickerStyle,
+} from '../../../../components-style/content/data-drawer/items/palettePickerStyle'
 
-import { Settings } from '../../views/Settings'
+import { Settings } from '../../../../types/views/settings/Settings'
+import { useDebounce } from '../../../../helpers/react/useDebounce'
 
 export interface PalettePickerProps {
   viewType: ViewType
   colors: ColorArray
   setSettings: Dispatch<SetStateAction<Settings>>
+  handleChangeSettings?: () => void
 }
 
-export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({ colors, setSettings, viewType }) => {
-  const classes = usePalettePickerStyle({ colors })
-  const handleSetColor = (event: ChangeEvent<HTMLInputElement>, idx: number) => {
-    const newColor = event.target.value
+export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
+  colors,
+  setSettings,
+  viewType,
+  handleChangeSettings,
+}) => {
+  const [currentColors, setCurrentColors] = useState<ColorArray>(colors)
+  const debouncedColors = useDebounce(currentColors, 60)
+
+  const handleSetColor = (newColor: string, idx: number) => {
     if (newColor) {
-      const newColors = [...colors]
-      newColors[idx] = newColor
-      setSettings((prev) => {
-        const prevSettings = prev[viewType]!
-        return {
-          ...prev,
-          [viewType]: {
-            ...prevSettings,
-            colorCategory: newColors,
-          },
-        }
+      setCurrentColors((oldColors) => {
+        const newColors: ColorArray = [...oldColors]
+        newColors[idx] = newColor
+        return newColors
       })
     }
   }
-  const getInput = (idx: number, className: string) => (
-    <div className={classes.col}>
-      <label>{PALETTE_PICKER.categoriesLabel[idx]}</label>
-      <div className={clsx(classes.c, className)}>
-        <input type="color" value={colors[idx]} onChange={(e) => handleSetColor(e, idx)} />
-      </div>
-    </div>
+
+  useEffect(() => {
+    if (handleChangeSettings) handleChangeSettings()
+    setSettings((prev) => {
+      const prevSettings = prev[viewType]!
+      return {
+        ...prev,
+        [viewType]: {
+          ...prevSettings,
+          colorCategory: debouncedColors,
+        },
+      }
+    })
+  }, [debouncedColors, setSettings, viewType, handleChangeSettings])
+
+  const getInput = (idx: number) => (
+    <Box sx={palettePickerStyle.col} key={idx}>
+      <label>{PALETTE_PICKER_TEXT.categoriesLabel[idx]}</label>
+      <Box sx={getPalettePickerColorInputStyle(colors, idx)}>
+        <input type="color" value={colors[idx]} onChange={(e) => handleSetColor(e.target.value, idx)} />
+      </Box>
+    </Box>
   )
   return (
-    <div className={classes.picker}>
-      <Typography className={classes.text}>{PALETTE_PICKER.header}</Typography>
-      <div className={classes.row}>
-        {getInput(0, classes.c0)}
-        {getInput(1, classes.c1)}
-        {getInput(2, classes.c2)}
-        {getInput(3, classes.c3)}
-        {getInput(4, classes.c4)}
-      </div>
-      <div className={classes.row}>
-        {getInput(5, classes.c5)}
-        {getInput(6, classes.c6)}
-        {getInput(7, classes.c7)}
-        {getInput(8, classes.c8)}
-        {getInput(9, classes.c9)}
-      </div>
-    </div>
+    <Box sx={palettePickerStyle.picker}>
+      <Typography sx={palettePickerStyle.text}>{PALETTE_PICKER_TEXT.header}</Typography>
+      <Box sx={palettePickerStyle.row}>{[0, 1, 2, 3, 4].map((idx) => getInput(idx))}</Box>
+      <Box sx={palettePickerStyle.row}>{[5, 6, 7, 8, 9].map((idx) => getInput(idx))}</Box>
+    </Box>
   )
 }

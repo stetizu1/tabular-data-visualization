@@ -10,7 +10,7 @@ import {
   Typography,
 } from '@mui/material'
 
-import { useDialogStyle } from '../../../../components-style/content/top-toolbar/items/dialogs/useDialogStyle'
+import { dialogStyle } from '../../../../components-style/content/common/dialogStyle'
 
 export interface Option<T> {
   key: T
@@ -34,23 +34,20 @@ export const SelectionDialog = <T,>({
   options,
   handleListItemClick,
   noOptionText,
-}: SelectionDialogProps<T>): JSX.Element => {
-  const classes = useDialogStyle()
-  return (
-    <Dialog onClose={onClose} open={isOpen}>
-      <DialogTitle>{title}</DialogTitle>
-      <Divider />
-      <List>
-        {options.map((option) => (
-          <ListItem button onClick={() => handleListItemClick(option.key)} key={String(option.key)}>
-            <ListItemAvatar>
-              <Avatar>{option.icon}</Avatar>
-            </ListItemAvatar>
-            <ListItemText primary={option.label} />
-          </ListItem>
-        ))}
-        {!options.length && <Typography className={classes.text}>{noOptionText}</Typography>}
-      </List>
-    </Dialog>
-  )
-}
+}: SelectionDialogProps<T>): JSX.Element => (
+  <Dialog onClose={onClose} open={isOpen} sx={dialogStyle.dialog}>
+    <DialogTitle>{title}</DialogTitle>
+    <Divider />
+    <List>
+      {options.map((option) => (
+        <ListItem button onClick={() => handleListItemClick(option.key)} key={String(option.key)}>
+          <ListItemAvatar>
+            <Avatar>{option.icon}</Avatar>
+          </ListItemAvatar>
+          <ListItemText primary={option.label} />
+        </ListItem>
+      ))}
+      {!options.length && <Typography sx={dialogStyle.description}>{noOptionText}</Typography>}
+    </List>
+  </Dialog>
+)

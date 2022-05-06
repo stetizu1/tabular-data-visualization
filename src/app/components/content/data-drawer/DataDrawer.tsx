@@ -1,5 +1,5 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
-import { Divider, Drawer, IconButton } from '@mui/material'
+import { Box, Divider, Drawer, IconButton } from '@mui/material'
 import { ChevronRight } from '@mui/icons-material'
 
 import { SelectableDataType } from '../../../types/data/data'
@@ -7,13 +7,14 @@ import { SideEffectVoid } from '../../../types/basic/functionTypes'
 
 import { ViewType } from '../../../constants/views/ViewTypes'
 
-import { useDataDrawerStyle } from '../../../components-style/content/data-drawer/useDataDrawerStyle'
+import { dataDrawerStyle } from '../../../components-style/content/data-drawer/dataDrawerStyle'
 
-import { Settings } from '../views/Settings'
+import { Settings } from '../../../types/views/settings/Settings'
 import { GlyphsMenu } from '../views/glyphs/GlyphsMenu'
 import { ParallelCoordinatesMenu } from '../views/parallel-coordinates/ParallelCoordinatesMenu'
 import { ScatterPlotMatrixMenu } from '../views/scatter-plot-matrix/ScatterPlotMatrixMenu'
 import { ScatterPlotGlyphsMenu } from '../views/scatter-plot-glyphs/ScatterPlotGlyphsMenu'
+import { DataTableMenu } from '../views/data-table/DataTableMenu'
 
 export interface DataDrawerProps {
   isOpen: boolean
@@ -34,7 +35,6 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
   setSettings,
   cleanSelectedIfViewWasBrushing,
 }) => {
-  const classes = useDataDrawerStyle()
   const menus = views.map((view, idx) => {
     switch (view) {
       case ViewType.Glyphs:
@@ -77,19 +77,29 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
             key={idx}
           />
         )
+      case ViewType.DataTable:
+        return (
+          <DataTableMenu
+            dataset={dataset}
+            settings={settings}
+            setSettings={setSettings}
+            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+            key={idx}
+          />
+        )
       default:
         return null
     }
   })
   return (
-    <Drawer variant="persistent" anchor="right" open={isOpen} className={classes.drawer}>
-      <div className={classes.header}>
+    <Drawer variant="persistent" anchor="right" open={isOpen} sx={dataDrawerStyle.drawer}>
+      <Box sx={dataDrawerStyle.header}>
         <IconButton onClick={close}>
-          <ChevronRight className={classes.chevron} />
+          <ChevronRight sx={dataDrawerStyle.chevron} />
         </IconButton>
-      </div>
+      </Box>
       <Divider />
-      <div className={classes.menu}>{menus.map((menu) => menu)}</div>
+      <Box sx={dataDrawerStyle.menu}>{menus.map((menu) => menu)}</Box>
     </Drawer>
   )
 }

@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import { Button, Checkbox, FormControlLabel } from '@mui/material'
+import { Box, Button, Checkbox, FormControlLabel } from '@mui/material'
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType, SelectableDataType } from '../../../../types/data/data'
@@ -8,14 +8,14 @@ import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
 
-import { Settings, SettingsType } from '../../views/Settings'
-import { useAttributeCheckerStyle } from '../../../../components-style/content/data-drawer/items/useAttributeCheckerStyle'
+import { Settings, SettingsType } from '../../../../types/views/settings/Settings'
+import { attributeCheckerStyle } from '../../../../components-style/content/data-drawer/items/attributeCheckerStyle'
 
-export interface AttributeCheckerProps<T extends SettingsType> {
+export interface AttributeCheckerProps<Opt extends SettingsType> {
   viewType: ViewType
   attributesKeys: Array<keyof SelectableDataType>
   handleChangeSettings?: () => void
-  getNewSettings: (newChecked: CheckedForSelectableDataType, prevSettings: T) => Partial<T>
+  getNewSettings: (newChecked: CheckedForSelectableDataType, prevSettings: Opt) => Partial<Opt>
   setSettings: Dispatch<SetStateAction<Settings>>
   label: string
 
@@ -24,7 +24,7 @@ export interface AttributeCheckerProps<T extends SettingsType> {
   setAttributesKeys: Dispatch<SetStateAction<Array<keyof SelectableDataType>>>
 }
 
-export const AttributeChecker = <T extends SettingsType>({
+export const AttributeChecker = <Opt extends SettingsType>({
   viewType,
   attributesKeys,
   handleChangeSettings,
@@ -34,14 +34,13 @@ export const AttributeChecker = <T extends SettingsType>({
   checked,
   setChecked,
   setAttributesKeys,
-}: AttributeCheckerProps<T>): JSX.Element => {
-  const classes = useAttributeCheckerStyle()
+}: AttributeCheckerProps<Opt>): JSX.Element => {
   const handleCheckboxChange = (eventChecked: boolean, key: keyof SelectableDataType) => {
     const newChecked = { ...checked, [key]: eventChecked }
     setChecked(newChecked)
     if (handleChangeSettings) handleChangeSettings()
     setSettings((prev) => {
-      const prevSettings = prev[viewType]! as T
+      const prevSettings = prev[viewType]! as Opt
       const newSettings = getNewSettings(newChecked, prevSettings)
       return {
         ...prev,
@@ -56,7 +55,7 @@ export const AttributeChecker = <T extends SettingsType>({
     if (handleChangeSettings) handleChangeSettings()
     setAttributesKeys(newAttributesKeys)
     setSettings((prev) => {
-      const prevSettings = prev[viewType]! as T
+      const prevSettings = prev[viewType]! as Opt
       return {
         ...prev,
         [viewType]: {
@@ -85,18 +84,18 @@ export const AttributeChecker = <T extends SettingsType>({
         <FormControlLabel
           control={
             <>
-              <div className={classes.buttons}>
-                <Button onClick={() => onUpButton(idx)} disabled={idx === 0} className={classes.control}>
+              <Box sx={attributeCheckerStyle.buttons}>
+                <Button onClick={() => onUpButton(idx)} disabled={idx === 0} sx={attributeCheckerStyle.control}>
                   <ArrowDropUp />
                 </Button>
                 <Button
                   onClick={() => onDownButton(idx)}
                   disabled={idx === attributesKeys.length - 1}
-                  className={classes.control}
+                  sx={attributeCheckerStyle.control}
                 >
                   <ArrowDropDown />
                 </Button>
-              </div>
+              </Box>
               <Checkbox checked={checked[key]} onChange={(e) => handleCheckboxChange(e.target.checked, key)} />
             </>
           }

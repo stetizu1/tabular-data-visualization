@@ -1,17 +1,14 @@
-import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Divider, Typography } from '@mui/material'
+import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import {
-  lineWidthKey,
-  ParallelCoordinatesSettings,
-} from '../../../../types/views/parallel-coordinates/ParallelCoordinatesSettings'
+import { lineWidthKey, ParallelCoordinatesSettings } from '../../../../types/views/settings/ParallelCoordinatesSettings'
 import { MenuProps } from '../../../../types/views/MenuProps'
 
 import {
   getCategoryAttributesKeys,
-  getDefaultAttributesChecked,
+  getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
@@ -23,7 +20,7 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 
 import { PARALLEL_COORDINATES_MENU_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
 
-import { useDataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/useDataDrawerMenuStyle'
+import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -38,12 +35,11 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
   setSettings,
   cleanSelectedIfViewWasBrushing,
 }) => {
-  const classes = useDataDrawerMenuStyle()
   const viewType = ViewType.ParallelCoordinates
   const parallelCoordinatesSettings = settings[viewType]
 
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
-  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAttributesChecked(dataset))
+  const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultQuantitativeAttributesChecked(dataset))
 
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
 
@@ -52,7 +48,7 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
 
   // first time empty
   const createParallelCoordinatesMenu = useCallback(() => {
-    const newChecked = getDefaultAttributesChecked(dataset)
+    const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
     setChecked(newChecked)
@@ -74,16 +70,21 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
     displayAttributes: getCurrentDisplayAttributes(newChecked),
   })
 
+  const handleChangeSettings = useCallback(
+    () => cleanSelectedIfViewWasBrushing(ViewType.ParallelCoordinates),
+    [cleanSelectedIfViewWasBrushing],
+  )
+
   if (parallelCoordinatesSettings) {
     return (
-      <div className={classes.drawerMenu}>
+      <Box sx={dataDrawerMenuStyle.drawerMenu}>
         <h1>{PARALLEL_COORDINATES_MENU_TEXT.header}</h1>
         {quantitativeAttributesKeys.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
               viewType={viewType}
               attributesKeys={quantitativeAttributesKeys}
-              handleChangeSettings={() => cleanSelectedIfViewWasBrushing(viewType)}
+              handleChangeSettings={handleChangeSettings}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
               label={PARALLEL_COORDINATES_MENU_TEXT.attributes}
@@ -98,7 +99,7 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
               setSettings={setSettings}
               label={PARALLEL_COORDINATES_MENU_TEXT.category}
             />
-            <Accordion className={classes.accordion}>
+            <Accordion sx={dataDrawerMenuStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography>{PARALLEL_COORDINATES_MENU_TEXT.more}</Typography>
               </AccordionSummary>
@@ -128,14 +129,15 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
                   colors={parallelCoordinatesSettings.colorCategory}
                   setSettings={setSettings}
                   viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
                 />
               </AccordionDetails>
             </Accordion>
           </>
         ) : (
-          <div className={classes.insufficientAttributeNum}>{PARALLEL_COORDINATES_MENU_TEXT.unavailable}</div>
+          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{PARALLEL_COORDINATES_MENU_TEXT.unavailable}</Box>
         )}
-      </div>
+      </Box>
     )
   }
   return null

@@ -9,7 +9,6 @@ export const SCATTER_PLOT_GLYPHS_MENU_TEXT = {
   header: VIEW_NAMES[ViewType.ScatterPlotGlyphs],
   xAttribute: `X axis values`,
   yAttribute: `Y axis values`,
-  sorting: `Sorted by`,
   unavailable: `The scatter plot with glyphs cannot be used while data has less than 3 numerical attributes. Try to use different type of visualization that fits your data.`,
   glyphSize: `Glyph size`,
   opacity: `Opacity of glyphs`,

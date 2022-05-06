@@ -1,51 +1,42 @@
 import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
-import {
-  axisBottom,
-  axisLeft,
-  brush,
-  D3BrushEvent,
-  lineRadial,
-  scaleLinear,
-  scaleOrdinal,
-  scaleRadial,
-  select,
-  selectAll,
-} from 'd3'
-import clsx from 'clsx'
+import { axisBottom, axisLeft, brush, lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
+import { Box } from '@mui/material'
 
 import { SelectableDataType } from '../../../../types/data/data'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { Brushable } from '../../../../types/brushing/Brushable'
-import { ScatterPlotGlyphsSettings } from '../../../../types/views/scatter-plot-glyphs/ScatterPlotGlyphsSettings'
+import { ScatterPlotGlyphsSettings } from '../../../../types/views/settings/ScatterPlotGlyphsSettings'
 import { Margin } from '../../../../types/styling/Margin'
 import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
 
-import {
-  getAttributeValuesWithLabel,
-  getClass,
-  getEverything,
-  getTranslate,
-  px,
-} from '../../../../helpers/d3/stringGetters'
+import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
 import { displayDetails } from '../../../../helpers/d3/displayDetails'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
 import { isInRanges } from '../../../../helpers/basic/range'
+import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
-import { SAVE_ID } from '../../../../constants/save/save'
 import { SVG } from '../../../../constants/svg'
-import { MouseActions } from '../../../../constants/actions/MouseActions'
-import { TOOLTIP, TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
-import { HTML } from '../../../../constants/html'
+import { MouseAction } from '../../../../constants/actions/MouseAction'
 import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotGlyphs'
+import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { SCATTER_PLOT_GLYPHS_TEXT } from '../../../../text/views-and-menus/scatterPlotGlyphs'
 
-import { useScatterPlotGlyphsStyle } from '../../../../components-style/content/views/scatter-plot-glyphs/useScatterPlotGlyphsStyle'
+import {
+  AXIS_CLASS,
+  DUPLICATES_CLASS,
+  getScatterPlotGlyphsStyle,
+  SCATTER_PLOT_GLYPHS_CLASS,
+  SELECTED_CLASS,
+} from '../../../../components-style/content/views/scatter-plot-glyphs/scatterPlotGlyphsStyle'
+import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
+import { BrushExtent, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
+import { TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
 
-const SCATTER_PLOT_GLYPHS = `scatterPlotGlyphs`
+const SCATTER_PLOT_GLYPHS = `SCATTER_PLOT_GLYPHS`
 const AXIS_X = `axisX`
 const AXIS_Y = `axisY`
 
@@ -55,7 +46,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
   width,
   height,
   dataset,
-  setDataSelected,
+  refreshViews,
   displayAttributes,
   xAttribute,
   yAttribute,
@@ -69,13 +60,18 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
   glyphSize,
   margins,
   opacity,
+  brushColor,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
-  const classes = useScatterPlotGlyphsStyle({ width, height, margin, opacity })
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
 
   const [innerWidth, innerHeight] = [width - margin.width - glyphSize, height - margin.height - glyphSize]
+
+  // selected coloring
+  selectAll(getClass(SCATTER_PLOT_GLYPHS_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
+
+  displayDetails(isDetailsVisible, TOOLTIP_CLASS)
 
   const createScatterPlotGlyphs = useCallback(() => {
     const node = component.current!
@@ -94,7 +90,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
       scaleRadial([0, glyphSize / 2]).domain(extentInDomains[attribute]),
     )
 
-    const getGlyphPath = (data: SelectableDataType) =>
+    const getGlyphPath: DataEachP<SelectableDataType, string | null> = (data) =>
       lineRadialGenerator(
         displayAttributes.map((key, idx) => [
           (2 * Math.PI * idx) / displayAttributes.length,
@@ -102,36 +98,29 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
         ]),
       )
 
-    const tooltip = select(getClass(TOOLTIP_CLASS))
-    svg
-      .selectAll(SCATTER_PLOT_GLYPHS)
-      .data(dataset)
-      .enter()
-      .each((data, idx, elements) => {
-        select(elements[idx])
-          .append(SVG.elements.g)
-          .selectAll(SVG.elements.path)
-          .data([data])
-          .enter()
-          .append(SVG.elements.path)
-          .attr(SVG.attributes.class, clsx(classes.glyph, SCATTER_PLOT_GLYPHS))
-          .attr(SVG.attributes.d, getGlyphPath)
-          .attr(
-            SVG.attributes.transform,
-            getTranslate([xScale(Number(data[xAttribute])), yScale(Number(data[yAttribute]))]),
-          )
-          .on(MouseActions.mouseOver, ({ clientX, clientY }: MouseEvent, data: SelectableDataType) => {
-            tooltip.transition().duration(TOOLTIP.easeIn).style(SVG.style.opacity, TOOLTIP.visible)
-            tooltip
-              .html(getAttributeValuesWithLabel(data).join(HTML.newLine))
-              .style(SVG.style.left, px(clientX))
-              .style(SVG.style.top, px(clientY))
-          })
-          .on(MouseActions.mouseOut, () => {
-            tooltip.transition().duration(TOOLTIP.easeOut).style(SVG.style.opacity, TOOLTIP.invisible)
-          })
-          .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
-      })
+    const makeGlyphs = (className: string) =>
+      svg
+        .selectAll(SCATTER_PLOT_GLYPHS)
+        .data(dataset)
+        .enter()
+        .each((data, idx, elements) => {
+          select(elements[idx])
+            .append(SVG.elements.g)
+            .selectAll(SVG.elements.path)
+            .data([data])
+            .enter()
+            .append(SVG.elements.path)
+            .attr(SVG.attributes.class, className)
+            .attr(SVG.attributes.d, getGlyphPath)
+            .attr(
+              SVG.attributes.transform,
+              getTranslate([xScale(Number(data[xAttribute])), yScale(Number(data[yAttribute]))]),
+            )
+            .on(MouseAction.mouseOver, onMouseOverTooltip)
+            .on(MouseAction.mouseOut, onMouseOutTooltip)
+            .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
+        })
+    makeGlyphs(SCATTER_PLOT_GLYPHS_CLASS)
 
     const axisX = svg
       .selectAll(AXIS_X)
@@ -139,54 +128,66 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
       .enter()
       .append(SVG.elements.g)
       .attr(SVG.attributes.transform, getTranslate([0, innerHeight]))
-      .attr(SVG.attributes.class, classes.axis)
+      .attr(SVG.attributes.class, AXIS_CLASS)
     axisX.call(axisBottom(xScale))
     svg
       .selectAll(AXIS_Y)
       .data(dataset)
       .enter()
       .append(SVG.elements.g)
-      .attr(SVG.attributes.class, classes.axis)
+      .attr(SVG.attributes.class, AXIS_CLASS)
       .call(axisLeft(yScale))
     const setBrushingSelection = (selection: BrushSelection2d) => {
       if (selection) {
-        setDataSelected((data) =>
-          isInRanges(selection, xScale(Number(data[xAttribute])), yScale(Number(data[yAttribute]))),
+        dataset.forEach(
+          (data) =>
+            (data.selected = isInRanges(selection, xScale(Number(data[xAttribute])), yScale(Number(data[yAttribute])))),
         )
+        refreshViews()
       }
     }
 
-    const makeBrush = brush()
-      .on(BrushAction.start, () => {
+    const onBrush: Record<BrushAction, OnBrushEvent<SelectableDataType>> = {
+      [BrushAction.start]: () => {
         setComponentBrushing(ViewType.ScatterPlotGlyphs)
-      })
-      .on(BrushAction.move, ({ selection }: D3BrushEvent<SelectableDataType>) => {
+      },
+      [BrushAction.move]: ({ selection }) => {
         if (!isBrushingOnEndOfMove) {
           const brushSelection = selection as BrushSelection2d
           setBrushingSelection(brushSelection)
         }
-      })
-      .on(BrushAction.end, ({ selection }: D3BrushEvent<SelectableDataType>) => {
+      },
+      [BrushAction.end]: ({ selection }) => {
         const brushSelection = selection as BrushSelection2d
         setBrushingSelection(brushSelection)
         if (!brushSelection) {
           setComponentBrushing(null)
         }
-      })
-      .extent([
-        [-glyphSize / 2, -glyphSize / 2],
-        [innerWidth + glyphSize / 2, innerHeight + glyphSize / 2],
-      ])
+      },
+    }
+    const brushExtent: BrushExtent = [
+      [-glyphSize / 2, -glyphSize / 2],
+      [innerWidth + glyphSize / 2, innerHeight + glyphSize / 2],
+    ]
+
+    const makeBrush = brush()
+      .on(BrushAction.start, onBrush[BrushAction.start])
+      .on(BrushAction.move, onBrush[BrushAction.move])
+      .on(BrushAction.end, onBrush[BrushAction.end])
+      .extent(brushExtent)
+
     svg.call(makeBrush)
+
+    // make duplicates for brushing/tooltip
+    makeGlyphs(DUPLICATES_CLASS)
     registerCleanBrushing(() => {
       brush().clear(svg)
     })
   }, [
     dataset,
-    classes,
     innerWidth,
     innerHeight,
-    setDataSelected,
+    refreshViews,
     setComponentBrushing,
     xAttribute,
     yAttribute,
@@ -214,21 +215,17 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
     ],
   )
 
-  selectAll(getClass(SCATTER_PLOT_GLYPHS))
-    .classed(classes.selected, (d) => (d as SelectableDataType).selected)
-    .classed(classes.hidden, (d) => isBrushingActive && !(d as SelectableDataType).selected)
-
-  displayDetails(isDetailsVisible, classes.duplicates)
-
   if (displayAttributes.length >= MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT) {
     return (
-      <>
-        <svg width={width} height={height} className={classes.svg} id={SAVE_ID[ViewType.ScatterPlotGlyphs]}>
+      <Box
+        sx={getScatterPlotGlyphsStyle(opacity, isBrushingActive, brushColor)}
+        id={CONTAINER_SAVE_ID[ViewType.ScatterPlotGlyphs]}
+      >
+        <svg width={width} height={height} id={SAVE_ID[ViewType.ScatterPlotGlyphs]}>
           <g ref={component} transform={getTranslate([margin.left + glyphSize / 2, margin.top + glyphSize / 2])} />
         </svg>
-        <div className={TOOLTIP_CLASS} />
-      </>
+      </Box>
     )
   }
-  return <div className={classes.notDisplayed}>{SCATTER_PLOT_GLYPHS_TEXT.unavailable}</div>
+  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{SCATTER_PLOT_GLYPHS_TEXT.unavailable}</Box>
 }
