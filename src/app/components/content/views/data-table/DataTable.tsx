@@ -1,4 +1,4 @@
-import { useMemo, useState, VoidFunctionComponent } from 'react'
+import { useCallback, useMemo, useState, VoidFunctionComponent } from 'react'
 import {
   Box,
   Checkbox,
@@ -65,49 +65,62 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
     [filteredDataset, order, orderBy],
   )
 
-  const handleSelectClick = (changedData: SelectableDataType) => {
-    changedData.selected = !changedData.selected
-    if (dataset.every((data) => !data.selected)) {
-      setComponentBrushing(null)
-      return
-    }
-    setComponentBrushing(ViewType.DataTable)
-    refreshViews()
-  }
+  const handleSelectClick = useCallback(
+    (changedData: SelectableDataType) => {
+      changedData.selected = !changedData.selected
+      if (dataset.every((data) => !data.selected)) {
+        setComponentBrushing(null)
+        return
+      }
+      setComponentBrushing(ViewType.DataTable)
+      refreshViews()
+    },
+    [dataset, refreshViews, setComponentBrushing],
+  )
 
-  const handleSelectAllClick = (checked: boolean) => {
-    sortedDataset.forEach((data) => (data.selected = checked))
-    if (dataset.every((data) => !data.selected)) {
-      setComponentBrushing(null)
-      return
-    }
-    setComponentBrushing(ViewType.DataTable)
-    refreshViews()
-  }
+  const handleSelectAllClick = useCallback(
+    (checked: boolean) => {
+      sortedDataset.forEach((data) => (data.selected = checked))
+      if (dataset.every((data) => !data.selected)) {
+        setComponentBrushing(null)
+        return
+      }
+      setComponentBrushing(ViewType.DataTable)
+      refreshViews()
+    },
+    [dataset, refreshViews, setComponentBrushing, sortedDataset],
+  )
 
-  const handleRequestSort = (property: keyof SelectableDataType) => {
-    const isAsc = orderBy === property && order === SortType.asc
-    setOrder(isAsc ? SortType.desc : SortType.asc)
-    setOrderBy(property)
-  }
-  const handleFilterValueChange = (newValue: string, key: keyof SelectableDataType) => {
+  const handleRequestSort = useCallback(
+    (property: keyof SelectableDataType) => {
+      const isAsc = orderBy === property && order === SortType.asc
+      setOrder(isAsc ? SortType.desc : SortType.asc)
+      setOrderBy(property)
+    },
+    [order, orderBy],
+  )
+
+  const handleFilterValueChange = useCallback((newValue: string, key: keyof SelectableDataType) => {
     setFilterValues((prev) => ({
       ...prev,
       [key]: newValue,
     }))
-  }
+  }, [])
 
-  const createSortHandler = (property: keyof SelectableDataType) => () => {
-    handleRequestSort(property)
-  }
-  const sortTooltipTitle = (headCellId: keyof SelectableDataType) =>
-    orderBy === headCellId
-      ? DATA_TABLE_TEXT[order === SortType.asc ? SortType.desc : SortType.asc]
-      : DATA_TABLE_TEXT[SortType.asc]
+  const createSortHandler = useCallback(
+    (property: keyof SelectableDataType) => () => {
+      handleRequestSort(property)
+    },
+    [handleRequestSort],
+  )
 
-  const numSelected = sortedDataset.filter((data) => data.selected).length
-  const someSelected = numSelected > 0 && numSelected < sortedDataset.length
-  const allSelected = numSelected === sortedDataset.length
+  const sortTooltipTitle = useCallback(
+    (headCellId: keyof SelectableDataType) =>
+      orderBy === headCellId
+        ? DATA_TABLE_TEXT[order === SortType.asc ? SortType.desc : SortType.asc]
+        : DATA_TABLE_TEXT[SortType.asc],
+    [order, orderBy],
+  )
 
   if (displayAttributes.length >= MIN_DATA_TABLE_ATTRIBUTE_COUNT) {
     return (
@@ -119,8 +132,8 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
                 <Tooltip title={DATA_TABLE_TEXT.checkboxTooltip}>
                   <Checkbox
                     sx={dataTableStyle.checkAll}
-                    indeterminate={someSelected}
-                    checked={allSelected}
+                    indeterminate={sortedDataset.some((data) => data.selected)}
+                    checked={sortedDataset.every((data) => data.selected)}
                     onChange={(event) => handleSelectAllClick(event.target.checked)}
                   />
                 </Tooltip>

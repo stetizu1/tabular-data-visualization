@@ -1,4 +1,4 @@
-import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback } from 'react'
 import { MenuItem, TextField } from '@mui/material'
 
 import { SelectableDataType } from '../../../../types/data/data'
@@ -26,18 +26,22 @@ export const CategorySelector: VoidFunctionComponent<CategorySelectorProps> = ({
   setSettings,
   label,
 }) => {
-  const handleSelectCategoryChange = (categoryAttribute: keyof SelectableDataType | -1) => {
-    setSettings((prev) => {
-      const prevSettings = prev[viewType]!
-      return {
-        ...prev,
-        [viewType]: {
-          ...prevSettings,
-          categoryAttribute: categoryAttribute === -1 ? undefined : categoryAttribute,
-        },
-      }
-    })
-  }
+  const handleSelectCategoryChange = useCallback(
+    (categoryAttribute: keyof SelectableDataType | -1) => {
+      setSettings((prev) => {
+        const prevSettings = prev[viewType]!
+        return {
+          ...prev,
+          [viewType]: {
+            ...prevSettings,
+            categoryAttribute: categoryAttribute === -1 ? undefined : categoryAttribute,
+          },
+        }
+      })
+    },
+    [setSettings, viewType],
+  )
+
   return (
     <TextField value={value ?? -1} onChange={(e) => handleSelectCategoryChange(e.target.value)} select label={label}>
       {attributesKeys.map((key, idx) => (

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material'
 
 import { Settings } from '../../../../types/views/settings/Settings'
@@ -31,11 +31,11 @@ export const ColorPicker = <Opt,>({
   const [currentColor, setCurrentColor] = useState(color)
   const debouncedColor = useDebounce(currentColor, 60)
 
-  const handleSetColor = (newColor: string) => {
+  const handleSetColor = useCallback((newColor: string) => {
     if (newColor) {
       setCurrentColor(newColor)
     }
-  }
+  }, [])
 
   useEffect(() => {
     setSettings((prev) => {

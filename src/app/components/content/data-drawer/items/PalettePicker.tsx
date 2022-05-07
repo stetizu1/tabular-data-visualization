@@ -1,4 +1,4 @@
-import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useEffect } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useEffect, useCallback } from 'react'
 import { Box, Typography } from '@mui/material'
 
 import { ColorArray } from '../../../../types/styling/ColorArray'
@@ -31,7 +31,7 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
   const [currentColors, setCurrentColors] = useState<ColorArray>(colors)
   const debouncedColors = useDebounce(currentColors, 60)
 
-  const handleSetColor = (newColor: string, idx: number) => {
+  const handleSetColor = useCallback((newColor: string, idx: number) => {
     if (newColor) {
       setCurrentColors((oldColors) => {
         const newColors: ColorArray = [...oldColors]
@@ -39,7 +39,7 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
         return newColors
       })
     }
-  }
+  }, [])
 
   useEffect(() => {
     if (handleChangeSettings) handleChangeSettings()
@@ -55,13 +55,16 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
     })
   }, [debouncedColors, setSettings, viewType, handleChangeSettings])
 
-  const getInput = (idx: number) => (
-    <Box sx={palettePickerStyle.col} key={idx}>
-      <label>{PALETTE_PICKER_TEXT.categoriesLabel[idx]}</label>
-      <Box sx={getPalettePickerColorInputStyle(colors, idx)}>
-        <input type="color" value={colors[idx]} onChange={(e) => handleSetColor(e.target.value, idx)} />
+  const getInput = useCallback(
+    (idx: number) => (
+      <Box sx={palettePickerStyle.col} key={idx}>
+        <label>{PALETTE_PICKER_TEXT.categoriesLabel[idx]}</label>
+        <Box sx={getPalettePickerColorInputStyle(colors, idx)}>
+          <input type="color" value={colors[idx]} onChange={(e) => handleSetColor(e.target.value, idx)} />
+        </Box>
       </Box>
-    </Box>
+    ),
+    [colors, handleSetColor],
   )
   return (
     <Box sx={palettePickerStyle.picker}>

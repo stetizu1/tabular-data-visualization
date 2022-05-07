@@ -1,4 +1,4 @@
-import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback } from 'react'
 import { Box, TextField, Typography } from '@mui/material'
 
 import { MarginArray } from '../../../../types/styling/Margin'
@@ -19,21 +19,24 @@ export interface MarginInputProps {
 }
 
 export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({ margins, setSettings, viewType }) => {
-  const handleMarginChange = (newMargin: number, idx: number) => {
-    const newMargins = [...margins]
-    newMargins[idx] = newMargin
+  const handleMarginChange = useCallback(
+    (newMargin: number, idx: number) => {
+      const newMargins = [...margins]
+      newMargins[idx] = newMargin
 
-    setSettings((prev) => {
-      const prevSettings = prev[viewType]!
-      return {
-        ...prev,
-        [viewType]: {
-          ...prevSettings,
-          margins: newMargins,
-        },
-      }
-    })
-  }
+      setSettings((prev) => {
+        const prevSettings = prev[viewType]!
+        return {
+          ...prev,
+          [viewType]: {
+            ...prevSettings,
+            margins: newMargins,
+          },
+        }
+      })
+    },
+    [margins, setSettings, viewType],
+  )
   return (
     <Box sx={numberInputStyles.vertical}>
       <Typography sx={menuTextStyle.text}>{MARGIN_MENU_TEXT.header}</Typography>

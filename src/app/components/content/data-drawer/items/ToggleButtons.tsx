@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useCallback } from 'react'
 import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 import { Settings } from '../../../../types/views/settings/Settings'
@@ -22,18 +22,22 @@ export const ToggleButtons = <T, Opt>({
   setSettings,
   settingsKey,
 }: ToggleButtonsProps<T, Opt>): JSX.Element => {
-  const handleToggleButtonChange = (newValue: T) => {
-    setSettings((prev) => {
-      const prevSettings = prev[viewType]!
-      return {
-        ...prev,
-        [viewType]: {
-          ...prevSettings,
-          [settingsKey]: newValue,
-        },
-      }
-    })
-  }
+  const handleToggleButtonChange = useCallback(
+    (newValue: T) => {
+      setSettings((prev) => {
+        const prevSettings = prev[viewType]!
+        return {
+          ...prev,
+          [viewType]: {
+            ...prevSettings,
+            [settingsKey]: newValue,
+          },
+        }
+      })
+    },
+    [setSettings, settingsKey, viewType],
+  )
+
   return (
     <Box>
       <ToggleButtonGroup

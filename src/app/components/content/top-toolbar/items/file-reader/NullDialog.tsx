@@ -1,4 +1,4 @@
-import { useEffect, useState, VoidFunctionComponent } from 'react'
+import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
 import {
   Box,
   Button,
@@ -47,14 +47,15 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
     setReplaceValue(Array(nullContainingAttributes.length).fill(0))
   }, [nullContainingAttributes])
 
-  const handleNullDialogConfirm = () => {
+  const handleNullDialogConfirm = useCallback(() => {
+    let datasetFixed: SelectableDataType[] = []
     optionsChosen.forEach((option, idx) => {
       switch (option) {
         case OptionType.filter:
-          dataset = dataset.filter((data) => data[nullContainingAttributes[idx]] !== null)
+          datasetFixed = dataset.filter((data) => data[nullContainingAttributes[idx]] !== null)
           break
         case OptionType.change:
-          dataset = dataset.map((data) => {
+          datasetFixed = dataset.map((data) => {
             const att = nullContainingAttributes[idx]
             return {
               ...data,
@@ -63,11 +64,12 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
           })
           break
         case OptionType.leave:
+          datasetFixed = dataset
           break
       }
     })
-    setDataset(dataset)
-  }
+    setDataset(datasetFixed)
+  }, [dataset, nullContainingAttributes, optionsChosen, replaceValue, setDataset])
 
   const handleToggleChange = (val: OptionType, idx: number) => {
     setOptionsChosen((prev) => {
@@ -76,13 +78,14 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
       return newOpts
     })
   }
-  const handleNumberChange = (val: number, idx: number) => {
+  const handleNumberChange = useCallback((val: number, idx: number) => {
     setReplaceValue((prev) => {
       const newVals = [...prev]
       newVals[idx] = val
       return newVals
     })
-  }
+  }, [])
+
   const options = Object.values(OptionType)
   return (
     <Dialog onClose={onClose} open={isOpen}>

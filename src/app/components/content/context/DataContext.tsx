@@ -5,6 +5,7 @@ import { SideEffectVoid } from '../../../types/basic/functionTypes'
 import { SetComponentBrushing } from '../../../types/brushing/Brushable'
 
 import { useUpdatedRef } from '../../../helpers/react/useUpdatedRef'
+import { useDebounce } from '../../../helpers/react/useDebounce'
 
 import { DataLoadState } from '../../../constants/data/dataLoadState'
 import { ViewType } from '../../../constants/views/ViewTypes'
@@ -25,7 +26,9 @@ export const DataContext: VoidFunctionComponent = () => {
 
   const [componentBrushing, setCurrentComponentBrushing] = useState<null | ViewType>(null)
   const [cleanBrushing, setCleanBrushing] = useState<SideEffectVoid[]>([])
-  const [redrawTime, setRedrawTime] = useState(Date.now())
+  const [currentRedrawTime, setRedrawTime] = useState(Date.now())
+
+  const redrawTime = useDebounce(currentRedrawTime, 15) // used for less component re-renders
 
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [isDetailsVisible, setIsDetailsVisible] = useState(true)
@@ -98,11 +101,12 @@ export const DataContext: VoidFunctionComponent = () => {
   )
 
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
+  const openDrawer = useCallback(() => setDrawerOpen(true), [])
 
   const topToolbarComponent = useMemo(
     () => (
       <TopToolbar
-        openDrawer={() => setDrawerOpen(true)}
+        openDrawer={openDrawer}
         isToolsDisabled={dataset === null}
         isDetailsVisible={isDetailsVisible}
         setIsDetailsVisible={setIsDetailsVisible}
@@ -126,6 +130,7 @@ export const DataContext: VoidFunctionComponent = () => {
       isDetailsVisible,
       setDatasetAndRemoveBrushing,
       setIsBrushingOnEndOfMoveAndRemoveBrushing,
+      openDrawer,
     ],
   )
 

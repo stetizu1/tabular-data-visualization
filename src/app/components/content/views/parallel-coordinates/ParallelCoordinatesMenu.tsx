@@ -43,8 +43,10 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
 
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
 
-  const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
-    quantitativeAttributesKeys.filter((key) => currChecked[key])
+  const getCurrentDisplayAttributes = useCallback(
+    (currChecked: CheckedForSelectableDataType) => quantitativeAttributesKeys.filter((key) => currChecked[key]),
+    [quantitativeAttributesKeys],
+  )
 
   // first time empty
   const createParallelCoordinatesMenu = useCallback(() => {
@@ -66,9 +68,12 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createParallelCoordinatesMenu(), [dataset])
 
-  const getNewSettingsForAttributeChecker = (newChecked: CheckedForSelectableDataType) => ({
-    displayAttributes: getCurrentDisplayAttributes(newChecked),
-  })
+  const getNewSettingsForAttributeChecker = useCallback(
+    (newChecked: CheckedForSelectableDataType) => ({
+      displayAttributes: getCurrentDisplayAttributes(newChecked),
+    }),
+    [getCurrentDisplayAttributes],
+  )
 
   const handleChangeSettings = useCallback(
     () => cleanSelectedIfViewWasBrushing(ViewType.ParallelCoordinates),

@@ -87,12 +87,17 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
 
     const setBrushingSelection = () => {
       dataset.forEach((data) => {
-        data.selected = displayAttributes.every((dimension, idx) => {
-          const selectedRange = selections[dimension]
-          if (selectedRange === null) return true // nothing in dimension selected, do not block
-          const valueOnAxis = yScales[idx](Number(data[dimension]))
-          return isInRange(valueOnAxis, selectedRange)
-        })
+        let nullsCount = 0 // count selections, if there is none in every line, false
+        data.selected =
+          displayAttributes.every((dimension, idx) => {
+            const selectedRange = selections[dimension]
+            if (selectedRange === null) {
+              nullsCount++
+              return true // nothing in dimension selected, do not block
+            }
+            const valueOnAxis = yScales[idx](Number(data[dimension]))
+            return isInRange(valueOnAxis, selectedRange)
+          }) && nullsCount !== displayAttributes.length
       })
       refreshViews()
     }

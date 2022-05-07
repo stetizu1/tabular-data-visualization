@@ -44,8 +44,10 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
   const sortableAttributes = quantitativeAttributesKeys.filter((key) => checked[key])
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
 
-  const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
-    quantitativeAttributesKeys.filter((key) => currChecked[key])
+  const getCurrentDisplayAttributes = useCallback(
+    (currChecked: CheckedForSelectableDataType) => quantitativeAttributesKeys.filter((key) => currChecked[key]),
+    [quantitativeAttributesKeys],
+  )
 
   const createGlyphsMenu = useCallback(() => {
     const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
@@ -68,17 +70,17 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createGlyphsMenu(), [dataset]) // first time empty, call once
 
-  const getNewSettingsForAttributeChecker = (
-    newChecked: CheckedForSelectableDataType,
-    prevSettings: GlyphsSettings,
-  ): Partial<GlyphsSettings> => {
-    const displayAttributes = getCurrentDisplayAttributes(newChecked)
-    const newSortableAttributes = quantitativeAttributesKeys.filter((key) => newChecked[key])
-    const sortAttribute = newChecked[prevSettings.sortAttribute]
-      ? prevSettings.sortAttribute
-      : newSortableAttributes?.[0]
-    return { displayAttributes, sortAttribute }
-  }
+  const getNewSettingsForAttributeChecker = useCallback(
+    (newChecked: CheckedForSelectableDataType, prevSettings: GlyphsSettings): Partial<GlyphsSettings> => {
+      const displayAttributes = getCurrentDisplayAttributes(newChecked)
+      const newSortableAttributes = quantitativeAttributesKeys.filter((key) => newChecked[key])
+      const sortAttribute = newChecked[prevSettings.sortAttribute]
+        ? prevSettings.sortAttribute
+        : newSortableAttributes?.[0]
+      return { displayAttributes, sortAttribute }
+    },
+    [getCurrentDisplayAttributes, quantitativeAttributesKeys],
+  )
 
   if (glyphsSettings) {
     return (

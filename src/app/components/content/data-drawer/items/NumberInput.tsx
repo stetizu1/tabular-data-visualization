@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useCallback } from 'react'
 import { Box, TextField } from '@mui/material'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
@@ -28,19 +28,23 @@ export const NumberInput = <Opt,>({
   max,
   handleChangeSettings,
 }: NumberInputProps<Opt>): JSX.Element => {
-  const handleValueChange = (newValue: number) => {
-    if (handleChangeSettings) handleChangeSettings()
-    setSettings((prev) => {
-      const prevSettings = prev[viewType]!
-      return {
-        ...prev,
-        [viewType]: {
-          ...prevSettings,
-          [valueKey]: newValue,
-        },
-      }
-    })
-  }
+  const handleValueChange = useCallback(
+    (newValue: number) => {
+      if (handleChangeSettings) handleChangeSettings()
+      setSettings((prev) => {
+        const prevSettings = prev[viewType]!
+        return {
+          ...prev,
+          [viewType]: {
+            ...prevSettings,
+            [valueKey]: newValue,
+          },
+        }
+      })
+    },
+    [handleChangeSettings, setSettings, valueKey, viewType],
+  )
+
   const minVal = min ? { min } : { min: 0 }
   const maxVal = max ? { max } : {}
   return (
