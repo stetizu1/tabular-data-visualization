@@ -2,8 +2,12 @@ import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useEffect, u
 import { Box, Typography } from '@mui/material'
 
 import { ColorArray } from '../../../../types/styling/ColorArray'
+import { Settings } from '../../../../types/views/settings/Settings'
+
+import { useDebounce } from '../../../../helpers/react/useDebounce'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
+import { COLOR_DEBOUNCE } from '../../../../constants/debounce/debounce'
 
 import { PALETTE_PICKER_TEXT } from '../../../../text/views-and-menus/common'
 
@@ -11,9 +15,6 @@ import {
   getPalettePickerColorInputStyle,
   palettePickerStyle,
 } from '../../../../components-style/content/data-drawer/items/palettePickerStyle'
-
-import { Settings } from '../../../../types/views/settings/Settings'
-import { useDebounce } from '../../../../helpers/react/useDebounce'
 
 export interface PalettePickerProps {
   viewType: ViewType
@@ -29,7 +30,7 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
   handleChangeSettings,
 }) => {
   const [currentColors, setCurrentColors] = useState<ColorArray>(colors)
-  const debouncedColors = useDebounce(currentColors, 60)
+  const debouncedColors = useDebounce(currentColors, COLOR_DEBOUNCE)
 
   const handleSetColor = useCallback((newColor: string, idx: number) => {
     if (newColor) {

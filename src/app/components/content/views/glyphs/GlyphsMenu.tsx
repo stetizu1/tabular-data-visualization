@@ -144,7 +144,7 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
                 <Divider />
                 <OpacityInput
                   header={GLYPHS_MENU_TEXT.opacity}
-                  opacity={glyphsSettings.opacity}
+                  opacities={glyphsSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
                 />

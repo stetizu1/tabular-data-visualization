@@ -119,6 +119,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                   margins={scatterPlotMatrixSettings.margins}
                   setSettings={setSettings}
                   viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
                 />
                 <Divider />
                 <Typography sx={menuTextStyle.text}>{SCATTER_PLOT_MATRIX_MENU_TEXT.sizes}</Typography>
@@ -148,7 +149,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                 <Divider />
                 <OpacityInput
                   header={SCATTER_PLOT_MATRIX_MENU_TEXT.opacity}
-                  opacity={scatterPlotMatrixSettings.opacity}
+                  opacities={scatterPlotMatrixSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
                 />

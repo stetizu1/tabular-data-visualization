@@ -6,6 +6,7 @@ import { Settings } from '../../../../types/views/settings/Settings'
 import { useDebounce } from '../../../../helpers/react/useDebounce'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
+import { COLOR_DEBOUNCE } from '../../../../constants/debounce/debounce'
 
 import {
   colorPickerStyle,
@@ -29,9 +30,9 @@ export const ColorPicker = <Opt,>({
   label,
 }: ColorPickerProps<Opt>): JSX.Element => {
   const [currentColor, setCurrentColor] = useState(color)
-  const debouncedColor = useDebounce(currentColor, 60)
+  const debouncedColor = useDebounce(currentColor, COLOR_DEBOUNCE)
 
-  const handleSetColor = useCallback((newColor: string) => {
+  const handleChangeColor = useCallback((newColor: string) => {
     if (newColor) {
       setCurrentColor(newColor)
     }
@@ -53,7 +54,7 @@ export const ColorPicker = <Opt,>({
     <Box sx={colorPickerStyle.picker}>
       <Typography sx={menuTextStyle.text}>{label}</Typography>
       <Box sx={getColorPickerInputStyle(color)}>
-        <input type="color" value={color} onChange={(e) => handleSetColor(e.target.value)} />
+        <input type="color" value={color} onChange={(e) => handleChangeColor(e.target.value)} />
       </Box>
     </Box>
   )

@@ -3,20 +3,21 @@ import { useCallback, useMemo, useState, VoidFunctionComponent } from 'react'
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
 import { SetComponentBrushing } from '../../../types/brushing/Brushable'
+import { Settings } from '../../../types/views/settings/Settings'
+import { GridLayoutItem } from '../../../types/views/Grid'
 
 import { useUpdatedRef } from '../../../helpers/react/useUpdatedRef'
 import { useDebounce } from '../../../helpers/react/useDebounce'
 
 import { DataLoadState } from '../../../constants/data/dataLoadState'
 import { ViewType } from '../../../constants/views/ViewTypes'
+import { DEFAULT_BRUSH_COLOR, DEFAULT_GRID_LAYOUT } from '../../../constants/views/common'
+import { BRUSH_DEBOUNCE } from '../../../constants/debounce/debounce'
 
 import { TopToolbar } from '../top-toolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
-import { Settings } from '../../../types/views/settings/Settings'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
-import { GridLayoutItem } from '../../../types/views/Grid'
-import { DEFAULT_BRUSH_COLOR, DEFAULT_GRID_LAYOUT } from '../../../constants/views/common'
 
 export const DataContext: VoidFunctionComponent = () => {
   const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
@@ -28,7 +29,7 @@ export const DataContext: VoidFunctionComponent = () => {
   const [cleanBrushing, setCleanBrushing] = useState<SideEffectVoid[]>([])
   const [currentRedrawTime, setRedrawTime] = useState(Date.now())
 
-  const redrawTime = useDebounce(currentRedrawTime, 15) // used for less component re-renders
+  const redrawTime = useDebounce(currentRedrawTime, BRUSH_DEBOUNCE) // used for less component re-renders
 
   const [isDrawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [isDetailsVisible, setIsDetailsVisible] = useState(true)

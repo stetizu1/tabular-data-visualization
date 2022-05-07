@@ -138,6 +138,7 @@ export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
                   margins={scatterPlotGlyphsSettings.margins}
                   setSettings={setSettings}
                   viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
                 />
                 <Divider />
                 <NumberInput
@@ -150,7 +151,7 @@ export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
                 <Divider />
                 <OpacityInput
                   header={SCATTER_PLOT_GLYPHS_MENU_TEXT.opacity}
-                  opacity={scatterPlotGlyphsSettings.opacity}
+                  opacities={scatterPlotGlyphsSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
                 />

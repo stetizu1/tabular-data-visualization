@@ -113,6 +113,7 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
                   margins={parallelCoordinatesSettings.margins}
                   setSettings={setSettings}
                   viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
                 />
                 <Divider />
                 <NumberInput
@@ -125,7 +126,7 @@ export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
                 <Divider />
                 <OpacityInput
                   header={PARALLEL_COORDINATES_MENU_TEXT.opacity}
-                  opacity={parallelCoordinatesSettings.opacity}
+                  opacities={parallelCoordinatesSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
                 />
