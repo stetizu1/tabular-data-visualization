@@ -73,7 +73,8 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
   selectAll(getClass(PARALLEL_COORDINATES_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
 
   const createParallelCoordinates = useCallback(() => {
-    const node = component.current!
+    const node = component.current
+    if (!node) return
     const svg = select(node)
     svg.selectAll(getEverything()).remove() // clear
 
@@ -203,6 +204,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     [displayAttributes, categoryAttribute, innerWidth, innerHeight, lineWidth, isBrushingOnEndOfMove, colorCategory],
   )
 
+  if (innerWidth < 0 || innerHeight < 0) return <Box />
   if (displayAttributes.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT) {
     return (
       <Box

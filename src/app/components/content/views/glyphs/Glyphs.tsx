@@ -74,7 +74,8 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
   selectAll(getClass(GLYPHS_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
 
   const createGlyphs = useCallback(() => {
-    const node = component.current!
+    const node = component.current
+    if (!node) return
     const svg = select(node)
     svg.selectAll(getEverything()).remove() // clear
 
@@ -158,6 +159,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
     [displayAttributes, categoryAttribute, sortAttribute, sortType, innerWidth, innerHeight, colorCategory],
   )
 
+  if (innerWidth < 0 || innerHeight < 0) return <Box />
   if (displayAttributes.length >= MIN_GLYPHS_ATTRIBUTE_COUNT) {
     return (
       <Box sx={getGlyphsStyle(opacity, isBrushingActive, brushColor)} id={CONTAINER_SAVE_ID[ViewType.Glyphs]}>

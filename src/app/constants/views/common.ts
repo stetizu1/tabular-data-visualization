@@ -13,8 +13,8 @@ export const DRAG_HANDLE = `drag-handle`
 export const HEADER_HEIGHT = 30
 
 export const VIEW_DEFAULT_SIZE: Dimensions = {
-  width: 200,
-  height: 200,
+  width: 0,
+  height: 0,
 }
 
 export const COLUMNS_COUNT = 25
