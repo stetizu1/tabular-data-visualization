@@ -49,8 +49,10 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
 
   const categoricalAttributes = getCategoryAttributesKeys(dataset)
 
-  const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
-    quantitativeAttributesKeys.filter((key) => currChecked[key])
+  const getCurrentDisplayAttributes = useCallback(
+    (currChecked: CheckedForSelectableDataType) => quantitativeAttributesKeys.filter((key) => currChecked[key]),
+    [quantitativeAttributesKeys],
+  )
 
   // first time empty
   const createScatterPlotMatrixMenu = useCallback(() => {
@@ -72,9 +74,12 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createScatterPlotMatrixMenu(), [dataset])
 
-  const getNewSettingsForAttributeChecker = (newChecked: CheckedForSelectableDataType) => ({
-    displayAttributes: getCurrentDisplayAttributes(newChecked),
-  })
+  const getNewSettingsForAttributeChecker = useCallback(
+    (newChecked: CheckedForSelectableDataType) => ({
+      displayAttributes: getCurrentDisplayAttributes(newChecked),
+    }),
+    [getCurrentDisplayAttributes],
+  )
 
   const handleChangeSettings = useCallback(
     () => cleanSelectedIfViewWasBrushing(ViewType.ScatterPlotMatrix),
@@ -114,6 +119,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                   margins={scatterPlotMatrixSettings.margins}
                   setSettings={setSettings}
                   viewType={viewType}
+                  handleChangeSettings={handleChangeSettings}
                 />
                 <Divider />
                 <Typography sx={menuTextStyle.text}>{SCATTER_PLOT_MATRIX_MENU_TEXT.sizes}</Typography>
@@ -143,7 +149,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                 <Divider />
                 <OpacityInput
                   header={SCATTER_PLOT_MATRIX_MENU_TEXT.opacity}
-                  opacity={scatterPlotMatrixSettings.opacity}
+                  opacities={scatterPlotMatrixSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
                 />

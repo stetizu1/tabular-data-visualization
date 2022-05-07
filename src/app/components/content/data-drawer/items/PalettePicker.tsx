@@ -1,9 +1,13 @@
-import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useEffect } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useEffect, useCallback } from 'react'
 import { Box, Typography } from '@mui/material'
 
 import { ColorArray } from '../../../../types/styling/ColorArray'
+import { Settings } from '../../../../types/views/settings/Settings'
+
+import { useDebounce } from '../../../../helpers/react/useDebounce'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
+import { COLOR_DEBOUNCE } from '../../../../constants/debounce/debounce'
 
 import { PALETTE_PICKER_TEXT } from '../../../../text/views-and-menus/common'
 
@@ -11,9 +15,6 @@ import {
   getPalettePickerColorInputStyle,
   palettePickerStyle,
 } from '../../../../components-style/content/data-drawer/items/palettePickerStyle'
-
-import { Settings } from '../../../../types/views/settings/Settings'
-import { useDebounce } from '../../../../helpers/react/useDebounce'
 
 export interface PalettePickerProps {
   viewType: ViewType
@@ -29,9 +30,9 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
   handleChangeSettings,
 }) => {
   const [currentColors, setCurrentColors] = useState<ColorArray>(colors)
-  const debouncedColors = useDebounce(currentColors, 60)
+  const debouncedColors = useDebounce(currentColors, COLOR_DEBOUNCE)
 
-  const handleSetColor = (newColor: string, idx: number) => {
+  const handleSetColor = useCallback((newColor: string, idx: number) => {
     if (newColor) {
       setCurrentColors((oldColors) => {
         const newColors: ColorArray = [...oldColors]
@@ -39,7 +40,7 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
         return newColors
       })
     }
-  }
+  }, [])
 
   useEffect(() => {
     if (handleChangeSettings) handleChangeSettings()
@@ -55,13 +56,16 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
     })
   }, [debouncedColors, setSettings, viewType, handleChangeSettings])
 
-  const getInput = (idx: number) => (
-    <Box sx={palettePickerStyle.col} key={idx}>
-      <label>{PALETTE_PICKER_TEXT.categoriesLabel[idx]}</label>
-      <Box sx={getPalettePickerColorInputStyle(colors, idx)}>
-        <input type="color" value={colors[idx]} onChange={(e) => handleSetColor(e.target.value, idx)} />
+  const getInput = useCallback(
+    (idx: number) => (
+      <Box sx={palettePickerStyle.col} key={idx}>
+        <label>{PALETTE_PICKER_TEXT.categoriesLabel[idx]}</label>
+        <Box sx={getPalettePickerColorInputStyle(colors, idx)}>
+          <input type="color" value={colors[idx]} onChange={(e) => handleSetColor(e.target.value, idx)} />
+        </Box>
       </Box>
-    </Box>
+    ),
+    [colors, handleSetColor],
   )
   return (
     <Box sx={palettePickerStyle.picker}>

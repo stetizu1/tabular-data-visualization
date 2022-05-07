@@ -1,4 +1,4 @@
-import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState } from 'react'
+import React, { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState, memo } from 'react'
 import GridLayout, { WidthProvider } from 'react-grid-layout'
 import { Box } from '@mui/material'
 import { AddCircle } from '@mui/icons-material'
@@ -45,7 +45,7 @@ export interface ViewGridProps extends ViewGridDataProps {
 
 const ReactGridLayout = WidthProvider(GridLayout)
 
-export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
+const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
   isDrawerOpen,
   closeDrawer,
   cleanSelectedIfViewWasBrushing,
@@ -140,3 +140,6 @@ export const ViewGrid: VoidFunctionComponent<ViewGridProps> = ({
     </Box>
   )
 }
+
+// do not rerender if props not change
+export const ViewGrid = memo(BaseViewGrid)

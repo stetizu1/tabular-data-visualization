@@ -1,4 +1,4 @@
-import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction, useMemo } from 'react'
 import { Box, Divider, Drawer, IconButton } from '@mui/material'
 import { ChevronRight } from '@mui/icons-material'
 
@@ -35,62 +35,66 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
   setSettings,
   cleanSelectedIfViewWasBrushing,
 }) => {
-  const menus = views.map((view, idx) => {
-    switch (view) {
-      case ViewType.Glyphs:
-        return (
-          <GlyphsMenu
-            dataset={dataset}
-            settings={settings}
-            setSettings={setSettings}
-            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
-            key={idx}
-          />
-        )
-      case ViewType.ParallelCoordinates:
-        return (
-          <ParallelCoordinatesMenu
-            dataset={dataset}
-            settings={settings!}
-            setSettings={setSettings}
-            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
-            key={idx}
-          />
-        )
-      case ViewType.ScatterPlotMatrix:
-        return (
-          <ScatterPlotMatrixMenu
-            dataset={dataset}
-            settings={settings!}
-            setSettings={setSettings}
-            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
-            key={idx}
-          />
-        )
-      case ViewType.ScatterPlotGlyphs:
-        return (
-          <ScatterPlotGlyphsMenu
-            dataset={dataset}
-            settings={settings}
-            setSettings={setSettings}
-            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
-            key={idx}
-          />
-        )
-      case ViewType.DataTable:
-        return (
-          <DataTableMenu
-            dataset={dataset}
-            settings={settings}
-            setSettings={setSettings}
-            cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
-            key={idx}
-          />
-        )
-      default:
-        return null
-    }
-  })
+  const menus = useMemo(
+    () =>
+      views.map((view, idx) => {
+        switch (view) {
+          case ViewType.Glyphs:
+            return (
+              <GlyphsMenu
+                dataset={dataset}
+                settings={settings}
+                setSettings={setSettings}
+                cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+                key={idx}
+              />
+            )
+          case ViewType.ParallelCoordinates:
+            return (
+              <ParallelCoordinatesMenu
+                dataset={dataset}
+                settings={settings!}
+                setSettings={setSettings}
+                cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+                key={idx}
+              />
+            )
+          case ViewType.ScatterPlotMatrix:
+            return (
+              <ScatterPlotMatrixMenu
+                dataset={dataset}
+                settings={settings!}
+                setSettings={setSettings}
+                cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+                key={idx}
+              />
+            )
+          case ViewType.ScatterPlotGlyphs:
+            return (
+              <ScatterPlotGlyphsMenu
+                dataset={dataset}
+                settings={settings}
+                setSettings={setSettings}
+                cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+                key={idx}
+              />
+            )
+          case ViewType.DataTable:
+            return (
+              <DataTableMenu
+                dataset={dataset}
+                settings={settings}
+                setSettings={setSettings}
+                cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+                key={idx}
+              />
+            )
+          default:
+            return null
+        }
+      }),
+    [cleanSelectedIfViewWasBrushing, dataset, setSettings, settings, views],
+  )
   return (
     <Drawer variant="persistent" anchor="right" open={isOpen} sx={dataDrawerStyle.drawer}>
       <Box sx={dataDrawerStyle.header}>

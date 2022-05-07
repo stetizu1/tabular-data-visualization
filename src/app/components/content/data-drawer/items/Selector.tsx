@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useCallback } from 'react'
 import { MenuItem, TextField } from '@mui/material'
 
 import { SelectableDataType } from '../../../../types/data/data'
@@ -28,19 +28,23 @@ export const Selector = <Opt,>({
   settingsKey,
   handleChangeSettings,
 }: SelectorProps<Opt>): JSX.Element => {
-  const handleSelectChange = (newValue: keyof SelectableDataType) => {
-    if (handleChangeSettings) handleChangeSettings()
-    setSettings((prev) => {
-      const prevSettings = prev[viewType]!
-      return {
-        ...prev,
-        [viewType]: {
-          ...prevSettings,
-          [settingsKey]: newValue,
-        },
-      }
-    })
-  }
+  const handleSelectChange = useCallback(
+    (newValue: keyof SelectableDataType) => {
+      if (handleChangeSettings) handleChangeSettings()
+      setSettings((prev) => {
+        const prevSettings = prev[viewType]!
+        return {
+          ...prev,
+          [viewType]: {
+            ...prevSettings,
+            [settingsKey]: newValue,
+          },
+        }
+      })
+    },
+    [handleChangeSettings, setSettings, settingsKey, viewType],
+  )
+
   return (
     <TextField
       value={value}

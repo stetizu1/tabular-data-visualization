@@ -1,39 +1,57 @@
-import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
+import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState, useEffect } from 'react'
 import { Box, TextField, Typography } from '@mui/material'
 
 import { MarginArray } from '../../../../types/styling/Margin'
+import { Settings } from '../../../../types/views/settings/Settings'
+
+import { useDebounce } from '../../../../helpers/react/useDebounce'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
+import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
 
 import { MARGIN_MENU_TEXT } from '../../../../text/views-and-menus/common'
 
 import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
-
-import { Settings } from '../../../../types/views/settings/Settings'
 import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
 
 export interface MarginInputProps {
   margins: MarginArray
   setSettings: Dispatch<SetStateAction<Settings>>
   viewType: ViewType
+  handleChangeSettings?: () => void
 }
 
-export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({ margins, setSettings, viewType }) => {
-  const handleMarginChange = (newMargin: number, idx: number) => {
-    const newMargins = [...margins]
-    newMargins[idx] = newMargin
+export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({
+  margins,
+  setSettings,
+  viewType,
+  handleChangeSettings,
+}) => {
+  const [currentMargins, setCurrentMargins] = useState<MarginArray>(margins)
+  const debouncedMargins = useDebounce(currentMargins, TEXT_INPUT_DEBOUNCE)
 
+  const handleMarginChange = useCallback((newMargin: number, idx: number) => {
+    setCurrentMargins((oldMargins) => {
+      const newMargins: MarginArray = [...oldMargins]
+      newMargins[idx] = newMargin
+      return newMargins
+    })
+  }, [])
+
+  useEffect(() => {
+    if (handleChangeSettings) handleChangeSettings()
     setSettings((prev) => {
       const prevSettings = prev[viewType]!
       return {
         ...prev,
         [viewType]: {
           ...prevSettings,
-          margins: newMargins,
+          margins: debouncedMargins,
         },
       }
     })
-  }
+  }, [debouncedMargins, handleChangeSettings, setSettings, viewType])
+
   return (
     <Box sx={numberInputStyles.vertical}>
       <Typography sx={menuTextStyle.text}>{MARGIN_MENU_TEXT.header}</Typography>

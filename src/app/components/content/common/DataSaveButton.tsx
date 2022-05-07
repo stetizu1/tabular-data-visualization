@@ -1,4 +1,4 @@
-import { useState, VoidFunctionComponent } from 'react'
+import { useCallback, useState, VoidFunctionComponent } from 'react'
 import { Button, Tooltip } from '@mui/material'
 import { Save } from '@mui/icons-material'
 
@@ -18,10 +18,13 @@ export interface DataSaveButtonProps {
 
 export const DataSaveButton: VoidFunctionComponent<DataSaveButtonProps> = ({ viewType }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const onConfirm = () => {
+  const openDialog = useCallback(() => setIsDialogOpen(true), [])
+  const closeDialog = useCallback(() => setIsDialogOpen(false), [])
+
+  const onConfirm = useCallback(() => {
     saveSvg(viewType)
     setIsDialogOpen(false)
-  }
+  }, [viewType])
 
   return (
     <>
@@ -30,13 +33,13 @@ export const DataSaveButton: VoidFunctionComponent<DataSaveButtonProps> = ({ vie
         title={TOP_TOOLBAR_TEXT.saveText.header}
         description={TOP_TOOLBAR_TEXT.saveText.description}
         onConfirm={onConfirm}
-        onClose={() => setIsDialogOpen(false)}
+        onClose={closeDialog}
         confirmText={TOP_TOOLBAR_TEXT.saveText.confirm}
         cancelText={TOP_TOOLBAR_TEXT.saveText.cancel}
       />
       <Button
         variant="text"
-        onClick={() => setIsDialogOpen(true)}
+        onClick={openDialog}
         sx={inlineButtonStyles.button}
         aria-label={TOP_TOOLBAR_TEXT.saveText.save}
       >

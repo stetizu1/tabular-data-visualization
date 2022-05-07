@@ -30,8 +30,10 @@ export const DataTableMenu: VoidFunctionComponent<MenuProps> = ({ dataset, setti
   const [attributesKeys, setAttributesKeys] = useState(getAttributeKeys(dataset))
   const [checked, setChecked] = useState<CheckedForSelectableDataType>(getDefaultAllAttributesChecked(dataset))
 
-  const getCurrentDisplayAttributes = (currChecked: CheckedForSelectableDataType) =>
-    attributesKeys.filter((key) => currChecked[key])
+  const getCurrentDisplayAttributes = useCallback(
+    (currChecked: CheckedForSelectableDataType) => attributesKeys.filter((key) => currChecked[key]),
+    [attributesKeys],
+  )
 
   const createDataTableMenu = useCallback(() => {
     const newChecked = getDefaultAllAttributesChecked(dataset)
@@ -50,9 +52,12 @@ export const DataTableMenu: VoidFunctionComponent<MenuProps> = ({ dataset, setti
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => createDataTableMenu(), [dataset]) // first time empty, call once
 
-  const getNewSettingsForAttributeChecker = (newChecked: CheckedForSelectableDataType): Partial<DataTableSettings> => ({
-    displayAttributes: getCurrentDisplayAttributes(newChecked),
-  })
+  const getNewSettingsForAttributeChecker = useCallback(
+    (newChecked: CheckedForSelectableDataType): Partial<DataTableSettings> => ({
+      displayAttributes: getCurrentDisplayAttributes(newChecked),
+    }),
+    [getCurrentDisplayAttributes],
+  )
 
   if (dataTableSettings) {
     return (

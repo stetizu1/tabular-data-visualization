@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { Dispatch, SetStateAction, useCallback } from 'react'
 import { Box, Button, Checkbox, FormControlLabel } from '@mui/material'
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 
@@ -35,47 +35,60 @@ export const AttributeChecker = <Opt extends SettingsType>({
   setChecked,
   setAttributesKeys,
 }: AttributeCheckerProps<Opt>): JSX.Element => {
-  const handleCheckboxChange = (eventChecked: boolean, key: keyof SelectableDataType) => {
-    const newChecked = { ...checked, [key]: eventChecked }
-    setChecked(newChecked)
-    if (handleChangeSettings) handleChangeSettings()
-    setSettings((prev) => {
-      const prevSettings = prev[viewType]! as Opt
-      const newSettings = getNewSettings(newChecked, prevSettings)
-      return {
-        ...prev,
-        [viewType]: {
-          ...prevSettings,
-          ...newSettings,
-        },
-      }
-    })
-  }
-  const handleMove = (newAttributesKeys: Array<keyof SelectableDataType>) => {
-    if (handleChangeSettings) handleChangeSettings()
-    setAttributesKeys(newAttributesKeys)
-    setSettings((prev) => {
-      const prevSettings = prev[viewType]! as Opt
-      return {
-        ...prev,
-        [viewType]: {
-          ...prevSettings,
-          displayAttributes: newAttributesKeys.filter((key) => checked[key]),
-        },
-      }
-    })
-  }
-  const onUpButton = (idx: number) => {
-    const newAttributesKeys = [...attributesKeys]
-    ;[newAttributesKeys[idx - 1], newAttributesKeys[idx]] = [newAttributesKeys[idx], newAttributesKeys[idx - 1]]
-    handleMove(newAttributesKeys)
-  }
+  const handleCheckboxChange = useCallback(
+    (eventChecked: boolean, key: keyof SelectableDataType) => {
+      const newChecked = { ...checked, [key]: eventChecked }
+      setChecked(newChecked)
+      if (handleChangeSettings) handleChangeSettings()
+      setSettings((prev) => {
+        const prevSettings = prev[viewType]! as Opt
+        const newSettings = getNewSettings(newChecked, prevSettings)
+        return {
+          ...prev,
+          [viewType]: {
+            ...prevSettings,
+            ...newSettings,
+          },
+        }
+      })
+    },
+    [checked, getNewSettings, handleChangeSettings, setChecked, setSettings, viewType],
+  )
+  const handleMove = useCallback(
+    (newAttributesKeys: Array<keyof SelectableDataType>) => {
+      if (handleChangeSettings) handleChangeSettings()
+      setAttributesKeys(newAttributesKeys)
+      setSettings((prev) => {
+        const prevSettings = prev[viewType]! as Opt
+        return {
+          ...prev,
+          [viewType]: {
+            ...prevSettings,
+            displayAttributes: newAttributesKeys.filter((key) => checked[key]),
+          },
+        }
+      })
+    },
+    [checked, handleChangeSettings, setAttributesKeys, setSettings, viewType],
+  )
 
-  const onDownButton = (idx: number) => {
-    const newAttributesKeys = [...attributesKeys]
-    ;[newAttributesKeys[idx + 1], newAttributesKeys[idx]] = [newAttributesKeys[idx], newAttributesKeys[idx + 1]]
-    handleMove(newAttributesKeys)
-  }
+  const onUpButton = useCallback(
+    (idx: number) => {
+      const newAttributesKeys = [...attributesKeys]
+      ;[newAttributesKeys[idx - 1], newAttributesKeys[idx]] = [newAttributesKeys[idx], newAttributesKeys[idx - 1]]
+      handleMove(newAttributesKeys)
+    },
+    [attributesKeys, handleMove],
+  )
+
+  const onDownButton = useCallback(
+    (idx: number) => {
+      const newAttributesKeys = [...attributesKeys]
+      ;[newAttributesKeys[idx + 1], newAttributesKeys[idx]] = [newAttributesKeys[idx], newAttributesKeys[idx + 1]]
+      handleMove(newAttributesKeys)
+    },
+    [attributesKeys, handleMove],
+  )
 
   return (
     <>

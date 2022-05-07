@@ -74,7 +74,8 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
   displayDetails(isDetailsVisible, TOOLTIP_CLASS)
 
   const createScatterPlotGlyphs = useCallback(() => {
-    const node = component.current!
+    const node = component.current
+    if (!node) return
     const svg = select(node)
     svg.selectAll(getEverything()).remove() // clear
 
@@ -215,6 +216,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
     ],
   )
 
+  if (innerWidth < 0 || innerHeight < 0) return <Box />
   if (displayAttributes.length >= MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT) {
     return (
       <Box

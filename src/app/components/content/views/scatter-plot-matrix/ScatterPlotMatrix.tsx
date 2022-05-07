@@ -105,7 +105,8 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
   displayDetails(isDetailsVisible, DUPLICATES_CLASS)
 
   const createScatterPlotMatrix = useCallback(() => {
-    const node = component.current!
+    const node = component.current
+    if (!node) return
     const svg = select(node)
     svg.selectAll(getEverything()).remove() // clear
 
@@ -311,6 +312,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
     ],
   )
 
+  if (innerWidth < 0 || innerHeight < 0) return <Box />
   if (
     getCellInnerSize(innerWidth / displayAttributes.length, horizontalSpacing) < 0 ||
     getCellInnerSize(innerHeight / displayAttributes.length, verticalSpacing) < 0
