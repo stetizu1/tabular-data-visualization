@@ -80,7 +80,7 @@ export const DEFAULT_VIEW_DIMENSIONS: Record<ViewType, Required<Pick<GridLayoutI
   },
 }
 
-export const DEFAULT_GRID_LAYOUT: GridLayoutItem[] = [
+export const DEFAULT_GRID_LAYOUT_QUANTITATIVE: GridLayoutItem[] = [
   {
     i: ViewType.ParallelCoordinates,
     w: 14,
@@ -104,5 +104,16 @@ export const DEFAULT_GRID_LAYOUT: GridLayoutItem[] = [
     x: 0,
     y: 17,
     ...VIEW_LIMITS[ViewType.Glyphs],
+  },
+]
+
+export const DEFAULT_GRID_LAYOUT_NOMINAL: GridLayoutItem[] = [
+  {
+    i: ViewType.ParallelSetsBundled,
+    w: 25,
+    h: 25,
+    x: 0,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
   },
 ]
