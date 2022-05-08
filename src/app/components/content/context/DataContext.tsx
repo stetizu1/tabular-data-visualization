@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, VoidFunctionComponent } from 'react'
+import { useCallback, useState, VoidFunctionComponent } from 'react'
 
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
@@ -71,7 +71,11 @@ export const DataContext: VoidFunctionComponent = () => {
   const setComponentBrushing: SetComponentBrushing = useCallback(
     (newComponent) => {
       if (componentBrushingRef.current !== newComponent) {
-        cleanAllBrushes(newComponent !== ViewType.DataTable && newComponent !== ViewType.Glyphs)
+        cleanAllBrushes(
+          newComponent !== ViewType.DataTable &&
+            newComponent !== ViewType.Glyphs &&
+            newComponent !== ViewType.ParallelSetsBundled,
+        )
       }
       setCurrentComponentBrushing(newComponent)
     },
@@ -104,35 +108,22 @@ export const DataContext: VoidFunctionComponent = () => {
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
   const openDrawer = useCallback(() => setDrawerOpen(true), [])
 
-  const topToolbarComponent = useMemo(
-    () => (
-      <TopToolbar
-        openDrawer={openDrawer}
-        isToolsDisabled={dataset === null}
-        isDetailsVisible={isDetailsVisible}
-        setIsDetailsVisible={setIsDetailsVisible}
-        isBrushingOnEndOfMove={isBrushingOnEndOfMove}
-        setIsBrushingOnEndOfMove={setIsBrushingOnEndOfMoveAndRemoveBrushing}
-        isBrushingActive={componentBrushingRef.current !== null}
-        clearBrushes={clearBrushesOnButton}
-        setDataset={setDatasetAndRemoveBrushing}
-        setDataLoadState={setDataLoadState}
-        setIsAddViewDialogOpen={setIsAddViewDialogOpen}
-        brushColor={brushColor}
-        setBrushColor={setBrushColor}
-      />
-    ),
-    [
-      brushColor,
-      clearBrushesOnButton,
-      componentBrushingRef,
-      dataset,
-      isBrushingOnEndOfMove,
-      isDetailsVisible,
-      setDatasetAndRemoveBrushing,
-      setIsBrushingOnEndOfMoveAndRemoveBrushing,
-      openDrawer,
-    ],
+  const topToolbarComponent = (
+    <TopToolbar
+      openDrawer={openDrawer}
+      isToolsDisabled={dataset === null}
+      isDetailsVisible={isDetailsVisible}
+      setIsDetailsVisible={setIsDetailsVisible}
+      isBrushingOnEndOfMove={isBrushingOnEndOfMove}
+      setIsBrushingOnEndOfMove={setIsBrushingOnEndOfMoveAndRemoveBrushing}
+      isBrushingActive={componentBrushingRef.current !== null}
+      clearBrushes={clearBrushesOnButton}
+      setDataset={setDatasetAndRemoveBrushing}
+      setDataLoadState={setDataLoadState}
+      setIsAddViewDialogOpen={setIsAddViewDialogOpen}
+      brushColor={brushColor}
+      setBrushColor={setBrushColor}
+    />
   )
 
   if (dataLoadState === DataLoadState.NoData) {

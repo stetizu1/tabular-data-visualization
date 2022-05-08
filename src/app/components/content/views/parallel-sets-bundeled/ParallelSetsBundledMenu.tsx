@@ -4,7 +4,13 @@ import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
-import { ParallelSetsBundledSettings } from '../../../../types/views/settings/ParallelSetsBundledSettings'
+import {
+  coloringFromKey,
+  ParallelSetsBundledSettings,
+  tabGapKey,
+  tabSpacingKey,
+  tabWidthKey,
+} from '../../../../types/views/settings/ParallelSetsBundledSettings'
 
 import { getCategoryAttributesKeys, getDefaultNominalAttributesChecked } from '../../../../helpers/data/data'
 
@@ -13,15 +19,19 @@ import {
   MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT,
   PARALLEL_SETS_BUNDLED_DEFAULT,
 } from '../../../../constants/views/parallelSetsBundled'
+import { ColoringFrom } from '../../../../constants/data/ColoringFrom'
 
 import { PARALLEL_SETS_MENU_TEXT } from '../../../../text/views-and-menus/parallelSetsBundled'
 
 import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
+import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
+import { NumberInput } from '../../data-drawer/items/NumberInput'
+import { ToggleButtons } from '../../data-drawer/items/ToggleButtons'
 
 export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const viewType = ViewType.ParallelSetsBundled
@@ -76,6 +86,14 @@ export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ data
               setChecked={setChecked}
               setAttributesKeys={setNominalAttributesKeys}
             />
+            <Typography sx={menuTextStyle.text}>{PARALLEL_SETS_MENU_TEXT.coloringFrom}</Typography>
+            <ToggleButtons
+              viewType={viewType}
+              value={parallelSetsBundledSettings.coloringFrom}
+              options={Object.values<ColoringFrom>(ColoringFrom)}
+              setSettings={setSettings}
+              settingsKey={coloringFromKey}
+            />
             <Accordion sx={dataDrawerMenuStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography>{PARALLEL_SETS_MENU_TEXT.more}</Typography>
@@ -85,6 +103,28 @@ export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ data
                   margins={parallelSetsBundledSettings.margins}
                   setSettings={setSettings}
                   viewType={viewType}
+                />
+                <Divider />
+                <NumberInput
+                  viewType={viewType}
+                  label={PARALLEL_SETS_MENU_TEXT.tabWidth}
+                  valueKey={tabWidthKey}
+                  value={parallelSetsBundledSettings.tabWidth}
+                  setSettings={setSettings}
+                />
+                <NumberInput
+                  viewType={viewType}
+                  label={PARALLEL_SETS_MENU_TEXT.tabSpacing}
+                  valueKey={tabSpacingKey}
+                  value={parallelSetsBundledSettings.tabSpacing}
+                  setSettings={setSettings}
+                />
+                <NumberInput
+                  viewType={viewType}
+                  label={PARALLEL_SETS_MENU_TEXT.tabGap}
+                  valueKey={tabGapKey}
+                  value={parallelSetsBundledSettings.tabGap}
+                  setSettings={setSettings}
                 />
                 <Divider />
                 <OpacityInput

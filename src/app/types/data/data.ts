@@ -23,13 +23,6 @@ export interface SelectableDataType extends DataType {
 }
 
 /**
- * Interface for Selectable data type with index (for sorting etc.)
- */
-export interface IndexedSelectableDataType extends SelectableDataType {
-  index: number
-}
-
-/**
  * Interface that assigns attributes boolean value.
  * Used for selecting what axes to display.
  */
@@ -42,6 +35,7 @@ export interface CheckedForSelectableDataType {
  */
 export interface NominalValueProperties {
   name: string
+  attribute: keyof SelectableDataType
   count: number
   countSelected: number
 }

@@ -24,6 +24,7 @@ import { ViewType } from '../../../../constants/views/ViewTypes'
 import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/glyphs'
 
 import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
+import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -113,6 +114,7 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
               label={GLYPHS_MENU_TEXT.sorting}
               settingsKey={sortAttributeKey}
             />
+            <Typography sx={menuTextStyle.text}>{GLYPHS_MENU_TEXT.sort}</Typography>
             <ToggleButtons
               viewType={viewType}
               value={glyphsSettings.sortType}

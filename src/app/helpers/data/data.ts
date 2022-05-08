@@ -77,6 +77,7 @@ export const getNominalValueProperties = (
     }
     const newNominalValueProperties: NominalValueProperties = {
       name: String(data[attribute]),
+      attribute,
       count: 1,
       countSelected: data.selected ? 1 : 0,
     }

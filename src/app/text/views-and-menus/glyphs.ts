@@ -12,5 +12,6 @@ export const GLYPHS_MENU_TEXT = {
   glyphSize: `Glyph size`,
   glyphSpacing: `Glyph spacing`,
   opacity: `Opacity of glyphs`,
+  sort: `Sort...`,
   ...MENU_TEXT,
 }
