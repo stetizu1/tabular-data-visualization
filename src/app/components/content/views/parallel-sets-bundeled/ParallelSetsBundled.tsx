@@ -46,7 +46,7 @@ export const TABS = `TABS`
 export const TMP_SPACING = 5 // todo switch from params
 export const TMP_PADDING = 10
 export const TMP_WIDTH = 5
-export const TEXT_SHIFT = 5
+export const TEXT_SHIFT = 2
 
 export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps> = ({
   width,
@@ -99,6 +99,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .nodePadding(TMP_PADDING)
         .nodeSort(() => 0)
         .extent(sankeyExtent)
+
       const graph = getGraph(dataset, nominalValuesRecord, displayPair[0], displayPair[1])
       const { nodes, links } = sankeyLayout(graph)
 
@@ -129,17 +130,17 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .style(SVG.style.mixBlendMode, SVG.values.multiply)
 
       const getXShift: DataEach<NodeData, SVGTextElement, number> = (d) => {
-        const isLeft = Number(d.x0) < innerHeight / 2
+        const isLeft = Number(d.x0) < sankeyWidth / 2
         return (isLeft ? Number(d.x1) + TEXT_SHIFT : Number(d.x0) - TEXT_SHIFT) + xShift
       }
       const getYShift: DataEach<NodeData, SVGTextElement, number> = (d) => (Number(d.y1) + Number(d.y0)) / 2
       const getTextAnchor: DataEach<NodeData, SVGTextElement, string> = (d) => {
-        const isLeft = Number(d.x0) < innerHeight / 2
+        const isLeft = Number(d.x0) < sankeyWidth / 2
         return isLeft ? SVG.values.start : SVG.values.end
       }
       const getTextVisible: DataEach<NodeData, SVGTextElement, number> = (d) => {
         if (pairIdx === Math.floor(half)) return 1
-        const isLeft = Number(d.x0) < innerHeight / 2
+        const isLeft = Number(d.x0) < sankeyWidth / 2
         if ((isLeft && pairIdx > half) || (!isLeft && pairIdx < half)) return 0
         return 1
       }
