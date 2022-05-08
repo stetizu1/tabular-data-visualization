@@ -21,7 +21,7 @@ import { Margin } from '../../../../types/styling/Margin'
 import { Dimensions } from '../../../../types/basic/dimensions'
 import { MatrixItem, MatrixPosition } from '../../../../types/data/MatrixData'
 import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
-import { BrushExtent, DataEachC, DataEachG, OnBrushEvent } from '../../../../types/d3-types'
+import { Extent, DataEachC, DataEachG, OnBrushEvent } from '../../../../types/d3-types'
 
 import {
   getAttributeFromMatrixFormatted,
@@ -253,7 +253,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
         }
       },
     }
-    const brushExtent: BrushExtent = [
+    const brushExtent: Extent = [
       [0, 0],
       [rect.width, rect.height],
     ]

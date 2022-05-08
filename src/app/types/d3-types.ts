@@ -32,6 +32,6 @@ export type OnMouseEvent<T> = (event: MouseEvent, data: T) => void
 export type OnBrushEvent<T, K = unknown> = (event: D3BrushEvent<T>, key: K) => void
 
 /**
- * Brush extent
+ * extent
  */
-export type BrushExtent = [[number, number], [number, number]]
+export type Extent = [[number, number], [number, number]]

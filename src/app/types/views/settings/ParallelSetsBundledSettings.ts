@@ -1,6 +1,6 @@
-import { ViewVisualizationSettings } from './VisualizationSettings'
+import { BaseViewVisualizationSettings } from './VisualizationSettings'
 
 /**
  * Settings for Parallel Sets Bundled view
  */
-export interface ParallelSetsBundledSettings extends ViewVisualizationSettings {}
+export interface ParallelSetsBundledSettings extends BaseViewVisualizationSettings {}

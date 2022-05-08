@@ -38,6 +38,19 @@ export interface CheckedForSelectableDataType {
 }
 
 /**
+ * Interface for nominal value properties
+ */
+export interface NominalValueProperties {
+  name: string
+  count: number
+  countSelected: number
+}
+
+export interface NominalRecord {
+  [key: keyof SelectableDataType]: Array<NominalValueProperties>
+}
+
+/**
  * Interface that assigns attributes numerical extent or null.
  * Used for axes' range.
  */
@@ -45,6 +58,10 @@ export interface ExtentForSelectableDataType {
   [key: keyof SelectableDataType]: [number, number] | null
 }
 
+/**
+ * Interface that assigns attributes numerical extent.
+ * Used for axes' range.
+ */
 export interface ExtentReqForSelectableDataType {
   [key: keyof SelectableDataType]: [number, number]
 }

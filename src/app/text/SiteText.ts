@@ -30,9 +30,11 @@ export const FILE_READER_TEXT = {
   sampleDataLabel: `Try it on the sample data`,
   sampleDataDialogTitle: `Select sample dataset`,
   sampleDataDialogText: {
-    [SampleDataset.flower]: `Flower dataset`,
-    [SampleDataset.bird]: `Bird dataset`,
-    [SampleDataset.car]: `Car dataset`,
+    [SampleDataset.flowers]: `Flower dataset`,
+    [SampleDataset.birds]: `Bird dataset`,
+    [SampleDataset.cars]: `Car dataset`,
+    [SampleDataset.titanic]: `Titanic dataset`,
+    [SampleDataset.parallelCars]: `Car parallel dataset`,
   },
   alertDialog: {
     [DataLoadError.unsupportedFile]: {

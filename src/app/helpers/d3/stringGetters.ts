@@ -1,6 +1,7 @@
 import { otherCasesToWhitespaces } from '../data/formatText'
 import { SelectableDataType, SelectedKey } from '../../types/data/data'
 import { MatrixItem } from '../../types/data/MatrixData'
+import { NodeData } from '../../types/d3-sankey'
 
 export const px = (...values: number[]): string => values.map((val) => `${val}px`).join(` `)
 
@@ -25,3 +26,5 @@ export const getAttributeValuesWithLabel = (data: SelectableDataType): string[] 
   Object.keys(data)
     .filter((key) => key !== SelectedKey)
     .map((attribute) => [getAttributeFormatted(attribute), data[attribute] ?? `null`].join(`: `))
+
+export const getParallelSetsLabel = (data: NodeData): string => `${data.name} (${data.value})`

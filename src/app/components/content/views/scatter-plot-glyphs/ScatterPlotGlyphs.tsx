@@ -33,7 +33,7 @@ import {
   SELECTED_CLASS,
 } from '../../../../components-style/content/views/scatter-plot-glyphs/scatterPlotGlyphsStyle'
 import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
-import { BrushExtent, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
+import { Extent, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
 import { TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
 
 const SCATTER_PLOT_GLYPHS = `SCATTER_PLOT_GLYPHS`
@@ -166,7 +166,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
         }
       },
     }
-    const brushExtent: BrushExtent = [
+    const brushExtent: Extent = [
       [-glyphSize / 2, -glyphSize / 2],
       [innerWidth + glyphSize / 2, innerHeight + glyphSize / 2],
     ]

@@ -7,7 +7,7 @@ export const MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT = 2
 
 export const PARALLEL_SETS_BUNDLED_DEFAULT: Pick<ParallelSetsBundledSettings, `margins` | `opacity` | `colorCategory`> =
   {
-    margins: [10, 55, 25, 60],
+    margins: [0, 0, 0, 0],
     opacity: [50, 60, 20],
     colorCategory: schemeCategory10 as ColorArray,
   }

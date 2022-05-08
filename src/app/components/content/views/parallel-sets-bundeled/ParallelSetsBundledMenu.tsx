@@ -19,7 +19,6 @@ import { PARALLEL_SETS_MENU_TEXT } from '../../../../text/views-and-menus/parall
 import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
-import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
@@ -40,13 +39,11 @@ export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ data
   const createParallelSetsBundledMenu = useCallback(() => {
     const newChecked = getDefaultNominalAttributesChecked(dataset)
     const newCatKeys = getCategoryAttributesKeys(dataset)
-    const defaultCategoryAttribute = newCatKeys?.[0]
     setChecked(newChecked)
     setNominalAttributesKeys(newCatKeys)
     setSettings((prev) => {
       const newParallelSetsBundled: ParallelSetsBundledSettings = {
         displayAttributes: newCatKeys.filter((key) => newChecked[key]),
-        categoryAttribute: defaultCategoryAttribute,
         ...PARALLEL_SETS_BUNDLED_DEFAULT,
       }
       return { ...prev, [ViewType.ParallelSetsBundled]: newParallelSetsBundled }
@@ -78,13 +75,6 @@ export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ data
               checked={checked}
               setChecked={setChecked}
               setAttributesKeys={setNominalAttributesKeys}
-            />
-            <CategorySelector
-              viewType={viewType}
-              value={parallelSetsBundledSettings.categoryAttribute!}
-              attributesKeys={nominalAttributesKeys}
-              setSettings={setSettings}
-              label={PARALLEL_SETS_MENU_TEXT.category}
             />
             <Accordion sx={dataDrawerMenuStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>

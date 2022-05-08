@@ -1,0 +1,3138 @@
+[
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "very good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "heavy",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 4,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 4,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "heavy",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "very heavy",
+    "0-60 mph": "very good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "average",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "strong",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "heavy",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "very bad",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "very good",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "heavy",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "very bad",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "very heavy",
+    "0-60 mph": "very good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "very bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 5,
+    "power": "average",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 5,
+    "power": "average",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "average",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "very good",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "very good",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "heavy",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "very heavy",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "very week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "very week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "very heavy",
+    "0-60 mph": "bad",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "very bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "new"
+  },
+  {
+    "economy": "very bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "average",
+    "0-60 mph": "very bad",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 4,
+    "power": "very week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "very heavy",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "very week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 8,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "very bad",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "week",
+    "weight": "heavy",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "average",
+    "0-60 mph": "very good",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "very bad",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "average",
+    "0-60 mph": "very bad",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "average",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "heavy",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "heavy",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "average",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "heavy",
+    "0-60 mph": "very good",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "heavy",
+    "0-60 mph": "very good",
+    "year": "average"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "very strong",
+    "weight": "heavy",
+    "0-60 mph": "very good",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "very good",
+    "cylinders": 8,
+    "power": "strong",
+    "weight": "very heavy",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "very old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "average",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "old"
+  },
+  {
+    "economy": "very bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "very old"
+  },
+  {
+    "economy": "very bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "light",
+    "0-60 mph": "very bad",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "very old"
+  },
+  {
+    "economy": "very bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "very bad",
+    "year": "very new"
+  },
+  {
+    "economy": "very bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "very bad",
+    "year": "very new"
+  },
+  {
+    "economy": "very bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "very bad",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "very bad",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "good",
+    "year": "very new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "average",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "bad",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "very week",
+    "weight": "very light",
+    "0-60 mph": "very bad",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "average",
+    "year": "old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "very old"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "light",
+    "0-60 mph": "good",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 3,
+    "power": "week",
+    "weight": "average",
+    "0-60 mph": "average",
+    "year": "average"
+  },
+  {
+    "economy": "good",
+    "cylinders": 5,
+    "power": "average",
+    "weight": "average",
+    "0-60 mph": "good",
+    "year": "new"
+  },
+  {
+    "economy": "average",
+    "cylinders": 5,
+    "power": "very week",
+    "weight": "average",
+    "0-60 mph": "bad",
+    "year": "very new"
+  }
+]

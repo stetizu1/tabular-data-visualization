@@ -8,7 +8,7 @@ import { BrushSelection1d } from '../../../../types/brushing/BrushSelection'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { ParallelCoordinatesSettings } from '../../../../types/views/settings/ParallelCoordinatesSettings'
 import { Margin } from '../../../../types/styling/Margin'
-import { BrushExtent, DataEachG, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
+import { Extent, DataEachG, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
 
 import { toStringArray } from '../../../../helpers/basic/retype'
 import { isInRange } from '../../../../helpers/basic/range'
@@ -125,7 +125,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
         return cleanBrushingSelection() // nothing is selected
       },
     }
-    const brushExtent: BrushExtent = [
+    const brushExtent: Extent = [
       [-BRUSH_RADIUS, -BRUSH_OVERLAP],
       [BRUSH_RADIUS, innerHeight + BRUSH_OVERLAP],
     ]
