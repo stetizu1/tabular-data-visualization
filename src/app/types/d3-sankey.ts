@@ -4,6 +4,7 @@ import { NominalValueProperties } from './data/data'
 export type SankeyDataLink = {
   source: number
   target: number
+  selected: number
   names: Array<string>
   value: number
 }

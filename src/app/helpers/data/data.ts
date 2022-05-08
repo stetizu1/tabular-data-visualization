@@ -105,14 +105,18 @@ export const getGraph = (
   const toIdxStart = record[attFrom].length
 
   const links = record[attFrom].flatMap((from, idxFrom) =>
-    record[attTo].map((to, idxTo) => ({
-      source: idxFrom,
-      target: idxTo + toIdxStart,
-      names: [from.name, to.name],
-      value: dataset.filter(
+    record[attTo].map((to, idxTo) => {
+      const filtered = dataset.filter(
         (data) => String(data[attFrom]) === String(from.name) && String(data[attTo]) === String(to.name),
-      ).length,
-    })),
+      )
+      return {
+        source: idxFrom,
+        target: idxTo + toIdxStart,
+        names: [from.name, to.name],
+        selected: filtered.filter((data) => data.selected).length,
+        value: filtered.length,
+      }
+    }),
   )
 
   return { nodes, links }
