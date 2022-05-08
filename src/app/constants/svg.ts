@@ -23,6 +23,7 @@ interface SVGType {
     cx: `cx`
     cy: `cy`
     r: `r`
+    stroke: `stroke`
     strokeWidth: `stroke-width`
     textAnchor: `text-anchor`
   }
@@ -33,10 +34,15 @@ interface SVGType {
     left: `left`
     top: `top`
     display: `display`
+    mixBlendMode: `mix-blend-mode`
   }
   values: {
     none: `none`
     block: `block`
+    multiply: `multiply`
+    start: `start`
+    end: `end`
+    middle: `middle`
   }
 }
 
@@ -65,6 +71,7 @@ export const SVG: SVGType = {
     cx: `cx`,
     cy: `cy`,
     r: `r`,
+    stroke: `stroke`,
     strokeWidth: `stroke-width`,
     textAnchor: `text-anchor`,
   },
@@ -75,9 +82,14 @@ export const SVG: SVGType = {
     left: `left`,
     top: `top`,
     display: `display`,
+    mixBlendMode: `mix-blend-mode`,
   },
   values: {
     none: `none`,
     block: `block`,
+    multiply: `multiply`,
+    start: `start`,
+    end: `end`,
+    middle: `middle`,
   },
 }

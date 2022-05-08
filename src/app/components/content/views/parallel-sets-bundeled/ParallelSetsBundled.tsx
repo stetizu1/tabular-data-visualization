@@ -1,16 +1,21 @@
 import { useCallback, useEffect, useMemo, useRef, useState, VoidFunctionComponent } from 'react'
-import { scaleOrdinal, select, selectAll } from 'd3'
+import { scaleOrdinal, select } from 'd3'
 import { sankey, sankeyLinkHorizontal } from 'd3-sankey'
 import { Box } from '@mui/material'
 
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { ParallelSetsBundledSettings } from '../../../../types/views/settings/ParallelSetsBundledSettings'
-import { NominalValueProperties, SelectableDataType } from '../../../../types/data/data'
+import { NominalValueProperties } from '../../../../types/data/data'
 import { Margin } from '../../../../types/styling/Margin'
 
-import { TOGGLE_TEXT_Y_SHIFT } from '../../../../helpers/d3/attributeGetters'
-import { getClass, getEverything, getParallelSetsLabel, getTranslate } from '../../../../helpers/d3/stringGetters'
+import { getTextTogglingYShift, TOGGLE_TEXT_Y_SHIFT } from '../../../../helpers/d3/attributeGetters'
+import {
+  getAttributeFormatted,
+  getEverything,
+  getParallelSetsLabel,
+  getTranslate,
+} from '../../../../helpers/d3/stringGetters'
 import { getGraph, getNeighborAttributes, getNominalValuesRecord } from '../../../../helpers/data/data'
 
 import { ViewType } from '../../../../constants/views/ViewTypes'
@@ -26,14 +31,16 @@ import { getParallelSetsBundledStyle } from '../../../../components-style/conten
 import { NodeData, SankeyDataLink } from '../../../../types/d3-sankey'
 import { DataEach, Extent } from '../../../../types/d3-types'
 import { SVG } from '../../../../constants/svg'
+import { AXES_TEXT_CLASS } from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
 
 export interface ParallelSetsBundledProps extends VisualizationView, Brushable, ParallelSetsBundledSettings {}
 
 export const PARALLEL_SETS_BUNDLED_CLASS = `parallelSetsBundled`
 export const SELECTED_CLASS = `parallelSetsBundledSelected`
 
-export const PARALLEL_SETS_BUNDLED = `PARALLEL_SETS_BUNDLED`
+export const CONNECTORS = `CONNECTORS`
 export const TEXT = `TEXT`
+export const AXES_TEXT = `AXES_TEXT`
 export const TABS = `TABS`
 
 export const TMP_SPACING = 5 // todo switch from params
@@ -65,7 +72,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
   }, [dataset, redrawTime, displayAttributes])
 
   // selected coloring todo
-  selectAll(getClass(PARALLEL_SETS_BUNDLED_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
+  // selectAll(getClass(PARALLEL_SETS_BUNDLED_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
 
   const createParallelSetsBundled = useCallback(() => {
     const node = component.current
@@ -97,46 +104,47 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
 
       const xShift = pairIdx * (sankeyWidth + TMP_SPACING)
       svg
+        .append(SVG.elements.g)
         .selectAll(TABS)
         .data(nodes)
         .enter()
-        .append(`rect`)
-        .attr(`x`, (d) => Number(d.x0) + xShift)
-        .attr(`y`, (d) => Number(d.y0))
-        .attr(`height`, (d) => Number(d.y1) - Number(d.y0))
-        .attr(`width`, (d) => Number(d.x1) - Number(d.x0))
+        .append(SVG.elements.rect)
+        .attr(SVG.attributes.x, (d) => Number(d.x0) + xShift)
+        .attr(SVG.attributes.y, (d) => Number(d.y0))
+        .attr(SVG.attributes.height, (d) => Number(d.y1) - Number(d.y0))
+        .attr(SVG.attributes.width, (d) => Number(d.x1) - Number(d.x0))
 
+      // connectors
       svg
         .append(SVG.elements.g)
-        .style(SVG.style.fill, `none`)
+        .style(SVG.style.fill, SVG.values.none)
         .attr(SVG.attributes.transform, getTranslate([pairIdx * (sankeyWidth + TMP_SPACING), 0]))
-        .selectAll(PARALLEL_SETS_BUNDLED)
+        .selectAll(CONNECTORS)
         .data(links)
         .enter()
-        .append(`path`)
-        .attr(`d`, sankeyLinkHorizontal())
-        .attr(`stroke`, (d) => color(d.names[1])) // todo make switchable
-        .attr(`stroke-width`, (d) => Number(d.width))
-        .style(`mix-blend-mode`, `multiply`)
+        .append(SVG.elements.path)
+        .attr(SVG.attributes.d, sankeyLinkHorizontal())
+        .attr(SVG.attributes.stroke, (d) => color(d.names[1])) // todo make switchable
+        .attr(SVG.attributes.strokeWidth, (d) => Number(d.width))
+        .style(SVG.style.mixBlendMode, SVG.values.multiply)
 
       const getXShift: DataEach<NodeData, SVGTextElement, number> = (d) => {
         const isLeft = Number(d.x0) < innerHeight / 2
         return (isLeft ? Number(d.x1) + TEXT_SHIFT : Number(d.x0) - TEXT_SHIFT) + xShift
       }
       const getYShift: DataEach<NodeData, SVGTextElement, number> = (d) => (Number(d.y1) + Number(d.y0)) / 2
-
       const getTextAnchor: DataEach<NodeData, SVGTextElement, string> = (d) => {
         const isLeft = Number(d.x0) < innerHeight / 2
-        return isLeft ? `start` : `end`
+        return isLeft ? SVG.values.start : SVG.values.end
       }
-
-      const getOpacity: DataEach<NodeData, SVGTextElement, number> = (d) => {
+      const getTextVisible: DataEach<NodeData, SVGTextElement, number> = (d) => {
         if (pairIdx === Math.floor(half)) return 1
         const isLeft = Number(d.x0) < innerHeight / 2
         if ((isLeft && pairIdx > half) || (!isLeft && pairIdx < half)) return 0
         return 1
       }
 
+      // line text
       svg
         .append(SVG.elements.g)
         .selectAll(TEXT)
@@ -146,9 +154,21 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .attr(SVG.attributes.x, getXShift)
         .attr(SVG.attributes.y, getYShift)
         .attr(SVG.attributes.textAnchor, getTextAnchor)
-        .style(SVG.style.opacity, getOpacity)
+        .style(SVG.style.opacity, getTextVisible)
         .text(getParallelSetsLabel)
     })
+    // axis text
+    svg
+      .append(SVG.elements.g)
+      .selectAll(AXES_TEXT)
+      .data(displayAttributes)
+      .enter()
+      .append(SVG.elements.text)
+      .attr(SVG.attributes.textAnchor, SVG.values.middle)
+      .attr(SVG.attributes.x, (_, idx) => idx * (sankeyWidth + TMP_SPACING))
+      .attr(SVG.attributes.y, getTextTogglingYShift)
+      .text(getAttributeFormatted)
+      .attr(SVG.attributes.class, AXES_TEXT_CLASS)
   }, [dataset, displayAttributes, innerHeight, innerWidth, nominalValuesRecord, colorCategory])
 
   useEffect(
