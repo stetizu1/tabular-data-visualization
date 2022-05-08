@@ -36,4 +36,5 @@ export const VIEW_NAMES: Record<ViewType, string> = {
   [ViewType.Glyphs]: `Glyphs`,
   [ViewType.ScatterPlotGlyphs]: `Scatter Plot Glyphs`,
   [ViewType.DataTable]: `Data Table`,
+  [ViewType.ParallelSetsBundled]: `Parallel Sets (bundled layout)`,
 }

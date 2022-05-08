@@ -39,7 +39,7 @@ export const FILE_READER_TEXT = {
       title: `File type not supported`,
       description: `This file type is not supported. Use JSON or CSV file.`,
     },
-    [DataLoadError.unsupportedFileFormat]: {
+    [DataLoadError.unsupportedFormat]: {
       title: `File format not supported`,
       description: `The file format is invalid. The valid json file format is an array of objects with the same keys and simple JSON values (number, string, boolean, null)`,
     },

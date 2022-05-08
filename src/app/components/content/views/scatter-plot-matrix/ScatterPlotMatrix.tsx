@@ -280,6 +280,9 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       .attr(SVG.attributes.class, DUPLICATES_CLASS)
       .attr(SVG.attributes.transform, getCellTranslateInMatrix(rect, attributesCount - 1))
       .each(plotMatrixItem)
+
+    // selected coloring
+    selectAll(getClass(DATA_POINT_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
   }, [
     dataset,
     innerWidth,

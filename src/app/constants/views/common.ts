@@ -41,6 +41,10 @@ export const VIEW_LIMITS: Record<ViewType, Required<Pick<GridLayoutItem, `minW` 
     minW: 4,
     minH: 10,
   },
+  [ViewType.ParallelSetsBundled]: {
+    minW: 4,
+    minH: 8,
+  },
 }
 
 export const DEFAULT_VIEW_DIMENSIONS: Record<ViewType, Required<Pick<GridLayoutItem, `w` | `h` | `minW` | `minH`>>> = {
@@ -68,6 +72,11 @@ export const DEFAULT_VIEW_DIMENSIONS: Record<ViewType, Required<Pick<GridLayoutI
     w: 18,
     h: 20,
     ...VIEW_LIMITS[ViewType.DataTable],
+  },
+  [ViewType.ParallelSetsBundled]: {
+    w: 12,
+    h: 16,
+    ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
   },
 }
 

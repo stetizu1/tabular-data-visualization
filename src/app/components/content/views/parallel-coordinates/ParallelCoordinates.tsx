@@ -87,18 +87,19 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     const selections = getDefaultSelectionForAttributes(displayAttributes)
 
     const setBrushingSelection = () => {
+      if (displayAttributes.every((dimension) => selections[dimension] === null)) {
+        // check selections, if there is none in every line, false
+        dataset.forEach((data) => (data.selected = false))
+        refreshViews()
+        return
+      }
       dataset.forEach((data) => {
-        let nullsCount = 0 // count selections, if there is none in every line, false
-        data.selected =
-          displayAttributes.every((dimension, idx) => {
-            const selectedRange = selections[dimension]
-            if (selectedRange === null) {
-              nullsCount++
-              return true // nothing in dimension selected, do not block
-            }
-            const valueOnAxis = yScales[idx](Number(data[dimension]))
-            return isInRange(valueOnAxis, selectedRange)
-          }) && nullsCount !== displayAttributes.length
+        data.selected = displayAttributes.every((dimension, idx) => {
+          const selectedRange = selections[dimension]
+          if (selectedRange === null) return true // nothing in dimension selected, do not block
+          const valueOnAxis = yScales[idx](Number(data[dimension]))
+          return isInRange(valueOnAxis, selectedRange)
+        })
       })
       refreshViews()
     }
@@ -184,6 +185,9 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
       })
       Object.keys(selections).forEach((selLKey) => (selections[selLKey] = null))
     })
+
+    // selected coloring
+    selectAll(getClass(PARALLEL_COORDINATES_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
   }, [
     dataset,
     innerWidth,

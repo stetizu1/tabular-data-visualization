@@ -15,6 +15,7 @@ import { ParallelCoordinatesMenu } from '../views/parallel-coordinates/ParallelC
 import { ScatterPlotMatrixMenu } from '../views/scatter-plot-matrix/ScatterPlotMatrixMenu'
 import { ScatterPlotGlyphsMenu } from '../views/scatter-plot-glyphs/ScatterPlotGlyphsMenu'
 import { DataTableMenu } from '../views/data-table/DataTableMenu'
+import { ParallelSetsBundledMenu } from '../views/parallel-sets-bundeled/ParallelSetsBundledMenu'
 
 export interface DataDrawerProps {
   isOpen: boolean
@@ -82,6 +83,16 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
           case ViewType.DataTable:
             return (
               <DataTableMenu
+                dataset={dataset}
+                settings={settings}
+                setSettings={setSettings}
+                cleanSelectedIfViewWasBrushing={cleanSelectedIfViewWasBrushing}
+                key={idx}
+              />
+            )
+          case ViewType.ParallelSetsBundled:
+            return (
+              <ParallelSetsBundledMenu
                 dataset={dataset}
                 settings={settings}
                 setSettings={setSettings}

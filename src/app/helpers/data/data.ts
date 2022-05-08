@@ -49,6 +49,10 @@ export const getDefaultQuantitativeAttributesChecked = (
   )
 }
 
+export const getDefaultNominalAttributesChecked = (
+  dataset: ReadonlyArray<SelectableDataType>,
+): CheckedForSelectableDataType => Object.fromEntries(getCategoryAttributesKeys(dataset).map((key) => [key, true]))
+
 export const getDefaultSelectionForAttributes = (
   displayAttributes: Array<keyof SelectableDataType>,
 ): ExtentForSelectableDataType => Object.fromEntries(displayAttributes.map((key) => [key, null]))

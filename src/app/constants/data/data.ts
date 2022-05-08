@@ -5,3 +5,5 @@ export enum OptionType {
   change = `change`,
   filter = `filter`,
 }
+
+export const OPTION_TYPES = Object.values(OptionType)

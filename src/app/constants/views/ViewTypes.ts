@@ -3,7 +3,8 @@ export enum ViewType {
   ParallelCoordinates = `parallelCoordinates`,
   ScatterPlotMatrix = `scatterPlotMatrix`,
   ScatterPlotGlyphs = `ScatterPlotGlyphs`,
-  DataTable = `DataTable`,
+  DataTable = `dataTable`,
+  ParallelSetsBundled = `parallelSetsBundled`,
 }
 
 export const isViewType = (viewType: string): viewType is ViewType =>
