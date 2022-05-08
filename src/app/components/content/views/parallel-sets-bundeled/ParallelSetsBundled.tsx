@@ -134,18 +134,30 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .on(MouseAction.click, onMouseClick)
 
       // connectors
-      svg
+      const connectors = svg
         .append(SVG.elements.g)
         .style(SVG.style.fill, SVG.values.none)
         .attr(SVG.attributes.transform, getTranslate([pairIdx * (sankeyWidth + tabSpacing), 0]))
         .selectAll(CONNECTORS)
         .data(links)
         .enter()
+
+      connectors
         .append(SVG.elements.path)
         .attr(SVG.attributes.d, sankeyLinkHorizontal())
         .attr(SVG.attributes.stroke, (d) => color(d.names[coloringFrom === ColoringFrom.left ? 0 : 1]))
         .attr(SVG.attributes.strokeWidth, (d) => Number(d.width))
         .style(SVG.style.mixBlendMode, SVG.values.multiply)
+
+      connectors
+        .append(SVG.elements.path)
+        .attr(SVG.attributes.d, sankeyLinkHorizontal())
+        .attr(SVG.attributes.stroke, (d) => `red`)
+        .attr(SVG.attributes.transform, (d) => {
+          const yShift = d.width ? -(Number(d.width) - Number(d.width) * (d.selected / d.value)) / 2 : 0
+          return getTranslate([0, yShift])
+        })
+        .attr(SVG.attributes.strokeWidth, (d) => Number(d.width) * (d.selected / d.value))
 
       const getXShift: DataEach<NodeData, SVGTextElement, number> = (d) => {
         const isLeft = Number(d.x0) < sankeyWidth / 2
