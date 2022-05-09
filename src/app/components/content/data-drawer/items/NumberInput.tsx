@@ -7,7 +7,7 @@ import { numberInputStyles } from '../../../../components-style/content/data-dra
 
 import { Settings } from '../../../../types/views/settings/Settings'
 import { useDebounce } from '../../../../helpers/react/useDebounce'
-import { COLOR_DEBOUNCE } from '../../../../constants/debounce/debounce'
+import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
 
 export interface NumberInputProps<Opt> {
   viewType: ViewType
@@ -31,7 +31,7 @@ export const NumberInput = <Opt,>({
   handleChangeSettings,
 }: NumberInputProps<Opt>): JSX.Element => {
   const [currentValue, setCurrentValue] = useState(value)
-  const debouncedValue = useDebounce(currentValue, COLOR_DEBOUNCE)
+  const debouncedValue = useDebounce(currentValue, TEXT_INPUT_DEBOUNCE)
 
   const handleChangeValue = useCallback((newValue: number) => {
     setCurrentValue(newValue)
