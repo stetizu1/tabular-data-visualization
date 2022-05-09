@@ -1,7 +1,7 @@
-import React, { VoidFunctionComponent, ComponentProps, useState } from 'react'
+import React, { ComponentProps, useState, VoidFunctionComponent } from 'react'
 import { useSize } from 'react-use'
 import { Box, IconButton, Typography } from '@mui/material'
-import { Close } from '@mui/icons-material'
+import { Close, RotateRight } from '@mui/icons-material'
 
 import { ViewType } from '../../../constants/views/ViewType'
 import { DRAG_HANDLE, HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/views/common'
@@ -9,6 +9,7 @@ import { DRAG_HANDLE, HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constant
 import { gridItemStyle } from '../../../components-style/content/views/gridItemStyle'
 
 import { DataSaveButton } from '../common/DataSaveButton'
+import { otherCasesToWhitespaces } from '../../../helpers/data/formatText'
 import { View } from './View'
 import { DataFilterButton } from './data-table/DataFilterButton'
 
@@ -20,17 +21,34 @@ type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {
 
 export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResizeFinished, viewType, ...rest }) => {
   const [showFilter, setShowFilter] = useState<boolean | undefined>(undefined)
+  const topButton =
+    viewType !== ViewType.DataTable ? (
+      <DataSaveButton viewType={viewType} />
+    ) : (
+      <DataFilterButton showFilter={showFilter} setShowFilter={setShowFilter} />
+    )
+  const glyphAxesText =
+    viewType === ViewType.Glyphs && rest.settings[viewType] ? (
+      <Typography sx={gridItemStyle.text}>
+        <RotateRight sx={gridItemStyle.textIcon} />
+        {`(`}
+        {rest.settings[viewType]!.displayAttributes.map((attribute) =>
+          otherCasesToWhitespaces(attribute).toLowerCase(),
+        ).join(`; `)}
+        {`)`}
+      </Typography>
+    ) : null
+
   const [sized] = useSize(
     ({ width, height }) => (
       <Box sx={gridItemStyle.gridItem}>
         <Box sx={gridItemStyle.header} className={DRAG_HANDLE}>
-          <Typography sx={gridItemStyle.text}>{title}</Typography>
-          <Box>
-            {viewType !== ViewType.DataTable ? (
-              <DataSaveButton viewType={viewType} />
-            ) : (
-              <DataFilterButton showFilter={showFilter} setShowFilter={setShowFilter} />
-            )}
+          <Box sx={gridItemStyle.textBox}>
+            <Typography> {title} </Typography>
+            {glyphAxesText}
+          </Box>
+          <Box sx={gridItemStyle.right}>
+            {topButton}
             <IconButton onClick={onRemove}>
               <Close />
             </IconButton>
