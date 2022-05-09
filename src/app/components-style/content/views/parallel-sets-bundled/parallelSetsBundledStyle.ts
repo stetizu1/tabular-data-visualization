@@ -10,6 +10,7 @@ export const TABS_CLASS = `psbTabs`
 export const LINE_NOT_SELECTED_CLASS = `psbLine`
 export const CONNECTORS_CLASS = `psbConnector`
 export const INNER_TEXT_CLASS = `psbInnerText`
+export const TABS_SELECTED_CLASS = `psbTabsSelected`
 
 export const getParallelSetsBundledStyle = (
   opacity: Opacity,
@@ -21,11 +22,14 @@ export const getParallelSetsBundledStyle = (
     bgcolor: PLOT_COLORS.backgroundColor,
     font: `12px sans-serif`,
   },
-  '& .psbTabs': {
-    cursor: `pointer`,
-  },
   '& .psbConnector': {
     fill: `none`,
+  },
+  '& .psbTabs': {
+    cursor: `pointer`,
+    '&.psbTabsSelected': {
+      fill: important(brushColor),
+    },
   },
   '& path': {
     '&.parallelSetsBundledSelected': {

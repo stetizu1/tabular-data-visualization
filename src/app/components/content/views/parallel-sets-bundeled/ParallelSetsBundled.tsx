@@ -41,6 +41,7 @@ import {
   LINE_NOT_SELECTED_CLASS,
   SELECTED_CLASS,
   TABS_CLASS,
+  TABS_SELECTED_CLASS,
 } from '../../../../components-style/content/views/parallel-sets-bundled/parallelSetsBundledStyle'
 
 export interface ParallelSetsBundledProps extends VisualizationView, Brushable, ParallelSetsBundledSettings {}
@@ -137,7 +138,9 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .data(nodes)
         .enter()
         .append(SVG.elements.rect)
-        .attr(SVG.attributes.class, TABS_CLASS)
+        .attr(SVG.attributes.class, (d) =>
+          d.count === d.countSelected ? `${TABS_CLASS} ${TABS_SELECTED_CLASS}` : TABS_CLASS,
+        )
         .attr(SVG.attributes.x, (d) => Number(d.x0) + xShift)
         .attr(SVG.attributes.y, (d) => Number(d.y0))
         .attr(SVG.attributes.height, (d) => Number(d.y1) - Number(d.y0))
