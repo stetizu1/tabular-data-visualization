@@ -40,6 +40,7 @@ export const DataContext: VoidFunctionComponent = () => {
   const [isDetailsVisible, setIsDetailsVisible] = useState(true)
   const [isBrushingOnEndOfMove, setIsBrushingOnEndOfMove] = useState(false)
 
+  const [isLayoutDialogOpen, setIsLayoutDialogOpen] = useState(false)
   const [isAddViewDialogOpen, setIsAddViewDialogOpen] = useState(false)
   const [layout, setLayout] = useState<GridLayoutItem[] | null>(null)
   const [brushColor, setBrushColor] = useState<string>(DEFAULT_BRUSH_COLOR)
@@ -134,6 +135,8 @@ export const DataContext: VoidFunctionComponent = () => {
       clearBrushes={clearBrushesOnButton}
       setDataset={setDatasetAndRemoveBrushing}
       setDataLoadState={setDataLoadState}
+      setIsLayoutDialogOpen={setIsLayoutDialogOpen}
+      removeLayout={() => setLayout([])}
       setIsAddViewDialogOpen={setIsAddViewDialogOpen}
       brushColor={brushColor}
       setBrushColor={setBrushColor}
@@ -170,6 +173,8 @@ export const DataContext: VoidFunctionComponent = () => {
         settings={settings}
         setSettings={setSettings}
         dataset={dataset}
+        isLayoutDialogOpen={isLayoutDialogOpen}
+        setIsLayoutDialogOpen={setIsLayoutDialogOpen}
         isAddViewDialogOpen={isAddViewDialogOpen}
         setIsAddViewDialogOpen={setIsAddViewDialogOpen}
         layout={layout}

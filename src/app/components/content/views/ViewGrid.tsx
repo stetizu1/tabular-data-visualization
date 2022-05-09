@@ -1,4 +1,4 @@
-import React, { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState, memo } from 'react'
+import React, { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState, memo, useEffect } from 'react'
 import GridLayout, { WidthProvider } from 'react-grid-layout'
 import { Box } from '@mui/material'
 import { AddCircle } from '@mui/icons-material'
@@ -21,6 +21,7 @@ import { VIEW_NAMES } from '../../../text/views-and-menus/common'
 import { viewGridStyle } from '../../../components-style/content/views/viewGridStyle'
 
 import { DataDrawer } from '../data-drawer/DataDrawer'
+import { LayoutDialog } from '../top-toolbar/items/layout/LayoutDialog'
 import { SelectionDialog } from '../common/dialogs/SelectionDialog'
 import { GridItem } from './GridItem'
 
@@ -36,6 +37,8 @@ export interface ViewGridProps extends ViewGridDataProps {
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>
 
+  isLayoutDialogOpen: boolean
+  setIsLayoutDialogOpen: Dispatch<SetStateAction<boolean>>
   isAddViewDialogOpen: boolean
   setIsAddViewDialogOpen: Dispatch<SetStateAction<boolean>>
   layout: GridLayoutItem[]
@@ -53,19 +56,29 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
   setSettings,
   isAddViewDialogOpen,
   setIsAddViewDialogOpen,
+  isLayoutDialogOpen,
+  setIsLayoutDialogOpen,
   layout,
   setLayout,
   ...viewProps
 }) => {
   const [viewResizing, setViewResizing] = useState<ViewType | null>(null)
+  const [lastLayout, setLastLayout] = useState(layout)
+
+  useEffect(
+    () => () => {
+      if (layout !== null) setLastLayout(layout)
+    },
+    [layout],
+  )
 
   const updateLayout = useCallback(
     (newLayout: LayoutArray) => {
-      if (!newLayout) return
+      if (!newLayout || layout.length === 0) return
       const filteredLayout = newLayout.filter((item) => isViewType(item.i))
       setLayout(filteredLayout as GridLayoutItem[])
     },
-    [setLayout],
+    [setLayout, layout],
   )
 
   const addView = useCallback(
@@ -105,6 +118,12 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
         options={dialogOptions}
         noOptionText={TOP_TOOLBAR_TEXT.noOption}
         handleListItemClick={addView}
+      />
+      <LayoutDialog
+        isOpen={isLayoutDialogOpen}
+        setLayout={setLayout}
+        onClose={() => setIsLayoutDialogOpen(false)}
+        lastLayout={lastLayout}
       />
       <DataDrawer
         isOpen={isDrawerOpen}

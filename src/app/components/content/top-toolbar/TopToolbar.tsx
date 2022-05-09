@@ -1,8 +1,7 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
-import { AddCircle, AutoFixOff, Brush, SkipNext } from '@mui/icons-material'
-import { Info } from '@mui/icons-material'
-
+import { AddCircle, AutoFixOff, Brush, Dashboard, Info, SkipNext } from '@mui/icons-material'
 import { Box } from '@mui/material'
+
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
 
 import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
@@ -27,7 +26,9 @@ export interface TopToolbarProps extends FileReaderDataProps {
   isBrushingActive: boolean
   clearBrushes: () => void
 
+  setIsLayoutDialogOpen: Dispatch<SetStateAction<boolean>>
   setIsAddViewDialogOpen: Dispatch<SetStateAction<boolean>>
+  removeLayout: () => void
 
   brushColor: string
   setBrushColor: Dispatch<SetStateAction<string>>
@@ -45,6 +46,8 @@ export const TopToolbar: VoidFunctionComponent<TopToolbarProps> = ({
   setDataset,
   setDataLoadState,
   setIsAddViewDialogOpen,
+  setIsLayoutDialogOpen,
+  removeLayout,
   brushColor,
   setBrushColor,
 }) => (
@@ -55,6 +58,15 @@ export const TopToolbar: VoidFunctionComponent<TopToolbarProps> = ({
         onClick={() => setIsAddViewDialogOpen(true)}
         disabled={isToolsDisabled}
         label={TOP_TOOLBAR_TEXT.labelAddView}
+      />
+      <ClickableButton
+        onClick={() => {
+          setIsLayoutDialogOpen(true)
+          removeLayout()
+        }}
+        icon={<Dashboard />}
+        disabled={isToolsDisabled}
+        label={TOP_TOOLBAR_TEXT.labelDialogTitle}
       />
       <Box sx={topToolbarStyle.separator} />
       <ToggleButtonSingle

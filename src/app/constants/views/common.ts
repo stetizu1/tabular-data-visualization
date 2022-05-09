@@ -112,9 +112,112 @@ export const DEFAULT_GRID_LAYOUT_NOMINAL: GridLayoutItem[] = [
   {
     i: ViewType.ParallelSetsBundled,
     w: 25,
-    h: 25,
+    h: 17,
     x: 0,
     y: 0,
     ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
   },
+  {
+    i: ViewType.DataTable,
+    w: 25,
+    h: 13,
+    x: 23,
+    y: 0,
+  },
+]
+
+export const LAYOUT_OPT_2: GridLayoutItem[] = [
+  {
+    i: ViewType.ParallelCoordinates,
+    w: 30,
+    h: 16,
+    x: 0,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ParallelCoordinates],
+  },
+  {
+    i: ViewType.ParallelSetsBundled,
+    w: 30,
+    h: 14,
+    x: 17,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
+  },
+]
+
+export const LAYOUT_OPT_3: GridLayoutItem[] = [
+  {
+    i: ViewType.ParallelCoordinates,
+    w: 14,
+    h: 16,
+    x: 0,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ParallelCoordinates],
+  },
+  {
+    i: ViewType.ScatterPlotMatrix,
+    w: 11,
+    h: 20,
+    x: 14,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ScatterPlotMatrix],
+  },
+  {
+    i: ViewType.Glyphs,
+    w: 11,
+    h: 10,
+    x: 14,
+    y: 20,
+    ...VIEW_LIMITS[ViewType.Glyphs],
+  },
+  {
+    i: ViewType.ParallelSetsBundled,
+    w: 14,
+    h: 14,
+    x: 0,
+    y: 16,
+    ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
+  },
+]
+export const LAYOUT_OPT_4: GridLayoutItem[] = [
+  {
+    i: ViewType.ParallelCoordinates,
+    w: 14,
+    h: 15,
+    x: 11,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ParallelCoordinates],
+  },
+  {
+    i: ViewType.ScatterPlotMatrix,
+    w: 11,
+    h: 30,
+    x: 0,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ScatterPlotMatrix],
+  },
+  {
+    i: ViewType.ScatterPlotGlyphs,
+    w: 14,
+    h: 15,
+    x: 11,
+    y: 15,
+    ...VIEW_LIMITS[ViewType.ScatterPlotGlyphs],
+  },
+]
+
+export const LAYOUT_OPTIONS = [
+  DEFAULT_GRID_LAYOUT_QUANTITATIVE,
+  DEFAULT_GRID_LAYOUT_NOMINAL,
+  LAYOUT_OPT_2,
+  LAYOUT_OPT_3,
+  LAYOUT_OPT_4,
+]
+
+export const LAYOUT_IMAGES = [
+  `/images/layout_0.png`,
+  `/images/layout_1.png`,
+  `/images/layout_2.png`,
+  `/images/layout_3.png`,
+  `/images/layout_4.png`,
 ]

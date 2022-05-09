@@ -14,6 +14,7 @@ export const TOP_TOOLBAR_TEXT = {
   labelBrushingOnEOM: `Brushing set only at the end of the move`,
   labelBrushColor: `Brush color`,
   addViewDialogTitle: `Add a view`,
+  labelDialogTitle: `Set predefined layout`,
   noOption: `All view options are currently displayed.`,
   saveText: {
     header: `Save to file`,
@@ -64,4 +65,9 @@ export const FILE_READER_TEXT = {
     changeTo: `Change to`,
     attribute: `Attribute:`,
   },
+}
+
+export const LAYOUT_DIALOG_TEXT = {
+  title: `Set a layout`,
+  alt: `Layout `,
 }
