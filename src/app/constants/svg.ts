@@ -34,12 +34,10 @@ interface SVGType {
     left: `left`
     top: `top`
     display: `display`
-    mixBlendMode: `mix-blend-mode`
   }
   values: {
     none: `none`
     block: `block`
-    multiply: `multiply`
     start: `start`
     end: `end`
     middle: `middle`
@@ -82,12 +80,10 @@ export const SVG: SVGType = {
     left: `left`,
     top: `top`,
     display: `display`,
-    mixBlendMode: `mix-blend-mode`,
   },
   values: {
     none: `none`,
     block: `block`,
-    multiply: `multiply`,
     start: `start`,
     end: `end`,
     middle: `middle`,

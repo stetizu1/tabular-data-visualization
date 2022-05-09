@@ -5,6 +5,7 @@ import { ViewType } from './ViewTypes'
 export const DEFAULT_BRUSH_COLOR = `#830606`
 export const DEFAULT_BRUSH_BG_COLOR_TABLE = `#ffcfcf`
 export const DEFAULT_BRUSH_FONT_COLOR_TABLE = `#111111`
+export const DEFAULT_FONT_COLOR_PARALLEL_SETS = `#252525`
 
 export const VIEW_BORDER_SIZE = 5
 

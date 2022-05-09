@@ -8,6 +8,8 @@ import { Brushable } from '../../../../types/brushing/Brushable'
 import { ParallelSetsBundledSettings } from '../../../../types/views/settings/ParallelSetsBundledSettings'
 import { NominalValueProperties } from '../../../../types/data/data'
 import { Margin } from '../../../../types/styling/Margin'
+import { DataLink, NodeData, NodeDataPoint } from '../../../../types/d3-sankey'
+import { DataEach, Extent, OnMouseEvent } from '../../../../types/d3-types'
 
 import { getTextTogglingYShift, TOGGLE_TEXT_Y_SHIFT } from '../../../../helpers/d3/attributeGetters'
 import {
@@ -21,6 +23,11 @@ import { getGraph, getNeighborAttributes, getNominalValuesRecord } from '../../.
 import { ViewType } from '../../../../constants/views/ViewTypes'
 import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 import { MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelSetsBundled'
+import { SVG } from '../../../../constants/svg'
+import { AXES_TEXT_CLASS } from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
+import { MouseAction } from '../../../../constants/actions/MouseAction'
+import { ColoringFrom } from '../../../../constants/data/ColoringFrom'
+import { ParallelSetsBrushingType } from '../../../../constants/data/ParallelSetsBrushingType'
 
 import { PARALLEL_SETS_BUNDLED_TEXT } from '../../../../text/views-and-menus/parallelSetsBundled'
 
@@ -28,17 +35,13 @@ import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 
 import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
 import {
+  CONNECTORS_CLASS,
   getParallelSetsBundledStyle,
+  INNER_TEXT_CLASS,
   LINE_NOT_SELECTED_CLASS,
   SELECTED_CLASS,
+  TABS_CLASS,
 } from '../../../../components-style/content/views/parallel-sets-bundled/parallelSetsBundledStyle'
-import { DataLink, NodeData, NodeDataPoint } from '../../../../types/d3-sankey'
-import { DataEach, Extent, OnMouseEvent } from '../../../../types/d3-types'
-import { SVG } from '../../../../constants/svg'
-import { AXES_TEXT_CLASS } from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
-import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { ColoringFrom } from '../../../../constants/data/ColoringFrom'
-import { ParallelSetsBrushingType } from '../../../../constants/data/ParallelSetsBrushingType'
 
 export interface ParallelSetsBundledProps extends VisualizationView, Brushable, ParallelSetsBundledSettings {}
 
@@ -67,6 +70,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
   tabGap,
   coloringFrom,
   brushingType,
+  fontColor,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const component = useRef<SVGGElement>(null)
@@ -133,6 +137,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .data(nodes)
         .enter()
         .append(SVG.elements.rect)
+        .attr(SVG.attributes.class, TABS_CLASS)
         .attr(SVG.attributes.x, (d) => Number(d.x0) + xShift)
         .attr(SVG.attributes.y, (d) => Number(d.y0))
         .attr(SVG.attributes.height, (d) => Number(d.y1) - Number(d.y0))
@@ -142,7 +147,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
       // connectors
       const connectors = svg
         .append(SVG.elements.g)
-        .style(SVG.style.fill, SVG.values.none)
+        .attr(SVG.attributes.class, CONNECTORS_CLASS)
         .attr(SVG.attributes.transform, getTranslate([pairIdx * (pairWidth + tabSpacing), 0]))
         .selectAll(CONNECTORS)
         .data(links)
@@ -167,7 +172,6 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
           const yShift = d.width ? (Number(d.width) - Number(d.width) * ((d.value - d.selected) / d.value)) / 2 : 0
           return getTranslate([0, yShift])
         })
-        .style(SVG.style.mixBlendMode, SVG.values.multiply)
 
       //brushing
       connectors
@@ -196,6 +200,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .data(nodes)
         .enter()
         .append(SVG.elements.text)
+        .attr(SVG.attributes.class, INNER_TEXT_CLASS)
         .attr(SVG.attributes.x, (d) => (isLeft(d) ? Number(d.x1) + TEXT_SHIFT : Number(d.x0) - TEXT_SHIFT) + xShift)
         .attr(SVG.attributes.y, (d) => (Number(d.y1) + Number(d.y0)) / 2)
         .attr(SVG.attributes.textAnchor, (d) => (isLeft(d) ? SVG.values.start : SVG.values.end))
@@ -251,7 +256,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
   if (displayAttributes.length >= MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT) {
     return (
       <Box
-        sx={getParallelSetsBundledStyle(opacity, isBrushingActive, brushColor)}
+        sx={getParallelSetsBundledStyle(opacity, isBrushingActive, brushColor, fontColor)}
         id={CONTAINER_SAVE_ID[ViewType.ParallelSetsBundled]}
       >
         <svg width={width} height={height} id={SAVE_ID[ViewType.ParallelSetsBundled]}>

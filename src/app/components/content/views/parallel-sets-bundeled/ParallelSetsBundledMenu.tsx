@@ -7,6 +7,7 @@ import { MenuProps } from '../../../../types/views/MenuProps'
 import {
   brushingTypeKey,
   coloringFromKey,
+  fontColorKey,
   ParallelSetsBundledSettings,
   tabGapKey,
   tabSpacingKey,
@@ -34,6 +35,7 @@ import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { ToggleButtons } from '../../data-drawer/items/ToggleButtons'
+import { ColorPicker } from '../../data-drawer/items/ColorPicker'
 
 export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const viewType = ViewType.ParallelSetsBundled
@@ -135,6 +137,14 @@ export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ data
                   valueKey={tabGapKey}
                   value={parallelSetsBundledSettings.tabGap}
                   setSettings={setSettings}
+                />
+                <Divider />
+                <ColorPicker
+                  viewType={viewType}
+                  color={parallelSetsBundledSettings.fontColor}
+                  settingsKey={fontColorKey}
+                  setSettings={setSettings}
+                  label={PARALLEL_SETS_MENU_TEXT.fontColor}
                 />
                 <Divider />
                 <OpacityInput

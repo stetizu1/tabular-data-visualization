@@ -8,11 +8,21 @@ export const tabSpacingKey = `tabSpacing`
 export const tabGapKey = `tabGap`
 export const coloringFromKey = `coloringFrom`
 export const brushingTypeKey = `brushingType`
+export const fontColorKey = `fontColor`
 
 /**
  * Settings for Parallel Sets Bundled view
  */
 export interface ParallelSetsBundledSettings extends BaseViewVisualizationSettings {
+  /**
+   * Is coloring from left side
+   */
+  [coloringFromKey]: ColoringFrom
+
+  /**
+   * Brushing - displayed from top top or overlay
+   */
+  [brushingTypeKey]: ParallelSetsBrushingType
   /**
    * Width of a tab
    */
@@ -29,12 +39,7 @@ export interface ParallelSetsBundledSettings extends BaseViewVisualizationSettin
   [tabGapKey]: number
 
   /**
-   * Is coloring from left side
+   * Font color
    */
-  [coloringFromKey]: ColoringFrom
-
-  /**
-   * Brushing - from top top or overlay
-   */
-  [brushingTypeKey]: ParallelSetsBrushingType
+  [fontColorKey]: string
 }

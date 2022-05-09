@@ -14,5 +14,6 @@ export const PARALLEL_SETS_MENU_TEXT = {
   tabGap: `Gap between tabs`,
   coloringFrom: `Coloring from...`,
   brushing: `Brushing...`,
+  fontColor: `Inner font color`,
   ...MENU_TEXT,
 }
