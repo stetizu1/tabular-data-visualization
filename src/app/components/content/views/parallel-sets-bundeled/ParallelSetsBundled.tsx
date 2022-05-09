@@ -15,7 +15,8 @@ import { getTextTogglingYShift, TOGGLE_TEXT_Y_SHIFT } from '../../../../helpers/
 import {
   getAttributeFormatted,
   getEverything,
-  getParallelSetsLabel,
+  getLinkDataPointValuesWithLabel,
+  getNodeDataPointValuesWithLabel,
   getTranslate,
 } from '../../../../helpers/d3/stringGetters'
 import { getGraph, getNeighborAttributes, getNominalValuesRecord } from '../../../../helpers/data/data'
@@ -43,6 +44,7 @@ import {
   TABS_CLASS,
   TABS_SELECTED_CLASS,
 } from '../../../../components-style/content/views/parallel-sets-bundled/parallelSetsBundledStyle'
+import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 export interface ParallelSetsBundledProps extends VisualizationView, Brushable, ParallelSetsBundledSettings {}
 
@@ -145,6 +147,8 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .attr(SVG.attributes.y, (d) => Number(d.y0))
         .attr(SVG.attributes.height, (d) => Number(d.y1) - Number(d.y0))
         .attr(SVG.attributes.width, (d) => Number(d.x1) - Number(d.x0))
+        .on(MouseAction.mouseOver, onMouseOverTooltip(getNodeDataPointValuesWithLabel))
+        .on(MouseAction.mouseOut, onMouseOutTooltip)
         .on(MouseAction.click, onMouseClick)
 
       // connectors
@@ -178,6 +182,8 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
           const yShift = d.width ? (Number(d.width) - Number(d.width) * ((d.value - d.selected) / d.value)) / 2 : 0
           return getTranslate([0, yShift])
         })
+        .on(MouseAction.mouseOver, onMouseOverTooltip(getLinkDataPointValuesWithLabel))
+        .on(MouseAction.mouseOut, onMouseOutTooltip)
 
       //brushing
       connectors
@@ -192,6 +198,8 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
           const yShift = d.width ? -(Number(d.width) - Number(d.width) * (d.selected / d.value)) / 2 : 0
           return getTranslate([0, yShift])
         })
+        .on(MouseAction.mouseOver, onMouseOverTooltip(getLinkDataPointValuesWithLabel))
+        .on(MouseAction.mouseOut, onMouseOutTooltip)
 
       const getTextVisible: DataEach<NodeData, SVGTextElement, number> = (d) => {
         if (pairIdx === Math.floor(half)) return 1
@@ -211,7 +219,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .attr(SVG.attributes.y, (d) => (Number(d.y1) + Number(d.y0)) / 2)
         .attr(SVG.attributes.textAnchor, (d) => (isLeft(d) ? SVG.values.start : SVG.values.end))
         .style(SVG.style.opacity, getTextVisible)
-        .text(getParallelSetsLabel)
+        .text((d) => getAttributeFormatted(d.name))
     })
     // axis text
     svg

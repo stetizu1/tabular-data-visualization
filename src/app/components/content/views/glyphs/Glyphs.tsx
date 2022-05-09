@@ -10,7 +10,12 @@ import { Margin } from '../../../../types/styling/Margin'
 
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
-import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import {
+  getAttributeValuesWithLabel,
+  getClass,
+  getEverything,
+  getTranslate,
+} from '../../../../helpers/d3/stringGetters'
 import { getComparator } from '../../../../helpers/data/comparator'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
@@ -131,7 +136,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
           .attr(SVG.attributes.class, GLYPHS_CLASS)
           .attr(SVG.attributes.d, getGlyphPath)
           .attr(SVG.attributes.transform, getTransform)
-          .on(MouseAction.mouseOver, onMouseOverTooltip)
+          .on(MouseAction.mouseOver, onMouseOverTooltip(getAttributeValuesWithLabel))
           .on(MouseAction.mouseOut, onMouseOutTooltip)
           .on(MouseAction.click, onMouseClick)
           .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))

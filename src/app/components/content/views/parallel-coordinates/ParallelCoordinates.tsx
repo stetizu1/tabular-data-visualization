@@ -15,7 +15,13 @@ import { isInRange } from '../../../../helpers/basic/range'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
 import { getCategoryColor, getTextTogglingYShift, TOGGLE_TEXT_Y_SHIFT } from '../../../../helpers/d3/attributeGetters'
-import { getAttributeFormatted, getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import {
+  getAttributeFormatted,
+  getAttributeValuesWithLabel,
+  getClass,
+  getEverything,
+  getTranslate,
+} from '../../../../helpers/d3/stringGetters'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { BrushAction } from '../../../../constants/actions/BrushAction'
@@ -154,7 +160,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
       .attr(SVG.attributes.class, PARALLEL_COORDINATES_CLASS)
       .attr(SVG.attributes.strokeWidth, lineWidth)
 
-      .on(MouseAction.mouseOver, onMouseOverTooltip)
+      .on(MouseAction.mouseOver, onMouseOverTooltip(getAttributeValuesWithLabel))
       .on(MouseAction.mouseOut, onMouseOutTooltip)
       .style(SVG.style.stroke, getCategoryColor(categoryAttribute, color))
 

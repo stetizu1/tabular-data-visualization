@@ -25,6 +25,7 @@ import { Extent, DataEachC, DataEachG, OnBrushEvent } from '../../../../types/d3
 
 import {
   getAttributeFromMatrixFormatted,
+  getAttributeValuesWithLabel,
   getClass,
   getEverything,
   getTranslate,
@@ -188,7 +189,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
         .attr(SVG.attributes.cy, getCy)
         .attr(SVG.attributes.r, pointSize)
         .attr(SVG.attributes.class, DATA_POINT_CLASS)
-        .on(MouseAction.mouseOver, onMouseOverTooltip)
+        .on(MouseAction.mouseOver, onMouseOverTooltip(getAttributeValuesWithLabel))
         .on(MouseAction.mouseOut, onMouseOutTooltip)
         .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
     }

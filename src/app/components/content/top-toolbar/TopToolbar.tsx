@@ -50,6 +50,13 @@ export const TopToolbar: VoidFunctionComponent<TopToolbarProps> = ({
 }) => (
   <Box sx={topToolbarStyle.toolbar}>
     <Box sx={topToolbarStyle.left}>
+      <ClickableButton
+        icon={<AddCircle />}
+        onClick={() => setIsAddViewDialogOpen(true)}
+        disabled={isToolsDisabled}
+        label={TOP_TOOLBAR_TEXT.labelAddView}
+      />
+      <Box sx={topToolbarStyle.separator} />
       <ToggleButtonSingle
         icon={<Info />}
         value={isDetailsVisible}
@@ -64,19 +71,6 @@ export const TopToolbar: VoidFunctionComponent<TopToolbarProps> = ({
         disabled={isToolsDisabled}
         label={TOP_TOOLBAR_TEXT.labelBrushingOnEOM}
       />
-      <Box sx={topToolbarStyle.separator} />
-      <ClickableButton
-        icon={<AutoFixOff />}
-        onClick={clearBrushes}
-        disabled={!isBrushingActive}
-        label={TOP_TOOLBAR_TEXT.labelClearBrushes}
-      />
-      <ClickableButton
-        icon={<AddCircle />}
-        onClick={() => setIsAddViewDialogOpen(true)}
-        disabled={isToolsDisabled}
-        label={TOP_TOOLBAR_TEXT.labelAddView}
-      />
     </Box>
     <Box sx={topToolbarStyle.middle}>
       <ColorButton
@@ -85,6 +79,13 @@ export const TopToolbar: VoidFunctionComponent<TopToolbarProps> = ({
         icon={<Brush />}
         disabled={isToolsDisabled}
         tooltip={TOP_TOOLBAR_TEXT.labelBrushColor}
+      />
+      <Box sx={topToolbarStyle.separator} />
+      <ClickableButton
+        icon={<AutoFixOff />}
+        onClick={clearBrushes}
+        disabled={!isBrushingActive}
+        label={TOP_TOOLBAR_TEXT.labelClearBrushes}
       />
     </Box>
     <Box sx={topToolbarStyle.right}>

@@ -9,7 +9,12 @@ import { ScatterPlotGlyphsSettings } from '../../../../types/views/settings/Scat
 import { Margin } from '../../../../types/styling/Margin'
 import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
 
-import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import {
+  getAttributeValuesWithLabel,
+  getClass,
+  getEverything,
+  getTranslate,
+} from '../../../../helpers/d3/stringGetters'
 import { displayDetails } from '../../../../helpers/d3/displayDetails'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
@@ -117,7 +122,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
               SVG.attributes.transform,
               getTranslate([xScale(Number(data[xAttribute])), yScale(Number(data[yAttribute]))]),
             )
-            .on(MouseAction.mouseOver, onMouseOverTooltip)
+            .on(MouseAction.mouseOver, onMouseOverTooltip(getAttributeValuesWithLabel))
             .on(MouseAction.mouseOut, onMouseOutTooltip)
             .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
         })
