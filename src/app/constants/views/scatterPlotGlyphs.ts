@@ -9,7 +9,7 @@ export const SCATTER_PLOT_GLYPHS_DEFAULT: Pick<
   `glyphSize` | `margins` | `opacity` | `colorCategory`
 > = {
   glyphSize: 30,
-  margins: [20, 20, 10, 20],
+  margins: [20, 20, 20, 30],
   opacity: [60, 90, 30],
   colorCategory: schemeCategory10 as ColorArray,
 }

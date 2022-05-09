@@ -22,7 +22,7 @@ import {
 import { getGraph, getNeighborAttributes, getNominalValuesRecord } from '../../../../helpers/data/data'
 
 import { ViewType } from '../../../../constants/views/ViewType'
-import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 import { MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelSetsBundled'
 import { SVG } from '../../../../constants/svg'
 import { AXES_TEXT_CLASS } from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
@@ -284,5 +284,9 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
       </Box>
     )
   }
-  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{PARALLEL_SETS_BUNDLED_TEXT.unavailable}</Box>
+  return (
+    <Box sx={getViewsNotDisplayStyle(width, height, margin)} id={CONTAINER_EMPTY[ViewType.ParallelSetsBundled]}>
+      {PARALLEL_SETS_BUNDLED_TEXT.unavailable}
+    </Box>
+  )
 }

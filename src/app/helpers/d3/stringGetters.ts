@@ -18,7 +18,7 @@ export const getTranslate = (translate: [number, number]): string => `translate(
 export const getClass = (className: string): string => `.${className}`
 
 export const getAttributeFormatted = (attribute: keyof SelectableDataType): string =>
-  otherCasesToWhitespaces(String(attribute)).toLowerCase()
+  otherCasesToWhitespaces(String(attribute))
 
 export const getAttributeFromMatrixFormatted = (item: MatrixItem): string => getAttributeFormatted(item.rowKey)
 

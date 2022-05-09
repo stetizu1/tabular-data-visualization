@@ -3,13 +3,14 @@ import { useSize } from 'react-use'
 import { Box, IconButton, Typography } from '@mui/material'
 import { Close, RotateRight } from '@mui/icons-material'
 
+import { otherCasesToWhitespaces } from '../../../helpers/data/formatText'
+
 import { ViewType } from '../../../constants/views/ViewType'
 import { DRAG_HANDLE, HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/views/common'
 
 import { gridItemStyle } from '../../../components-style/content/views/gridItemStyle'
 
 import { DataSaveButton } from '../common/DataSaveButton'
-import { otherCasesToWhitespaces } from '../../../helpers/data/formatText'
 import { View } from './View'
 import { DataFilterButton } from './data-table/DataFilterButton'
 
@@ -32,9 +33,7 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResi
       <Typography sx={gridItemStyle.text}>
         <RotateRight sx={gridItemStyle.textIcon} />
         {`(`}
-        {rest.settings[viewType]!.displayAttributes.map((attribute) =>
-          otherCasesToWhitespaces(attribute).toLowerCase(),
-        ).join(`; `)}
+        {rest.settings[viewType]!.displayAttributes.map((attribute) => otherCasesToWhitespaces(attribute)).join(`; `)}
         {`)`}
       </Typography>
     ) : null

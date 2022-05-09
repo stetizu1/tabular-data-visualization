@@ -29,7 +29,7 @@ import { ViewType } from '../../../../constants/views/ViewType'
 import { SVG } from '../../../../constants/svg'
 import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelCoordinates'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { PARALLEL_COORDINATES_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
 
@@ -232,5 +232,9 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
       </Box>
     )
   }
-  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{PARALLEL_COORDINATES_TEXT.unavailable}</Box>
+  return (
+    <Box sx={getViewsNotDisplayStyle(width, height, margin)} id={CONTAINER_EMPTY[ViewType.ParallelCoordinates]}>
+      {PARALLEL_COORDINATES_TEXT.unavailable}
+    </Box>
+  )
 }

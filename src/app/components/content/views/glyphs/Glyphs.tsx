@@ -23,7 +23,7 @@ import { SVG } from '../../../../constants/svg'
 import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
 import { ViewType } from '../../../../constants/views/ViewType'
-import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
@@ -174,5 +174,9 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
       </Box>
     )
   }
-  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{GLYPHS_TEXT.unavailable}</Box>
+  return (
+    <Box sx={getViewsNotDisplayStyle(width, height, margin)} id={CONTAINER_EMPTY[ViewType.Glyphs]}>
+      {GLYPHS_TEXT.unavailable}
+    </Box>
+  )
 }

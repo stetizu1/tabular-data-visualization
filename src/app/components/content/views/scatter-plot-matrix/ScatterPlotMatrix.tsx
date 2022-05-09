@@ -42,7 +42,7 @@ import { ViewType } from '../../../../constants/views/ViewType'
 import { SVG } from '../../../../constants/svg'
 import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
@@ -321,7 +321,11 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
     getCellInnerSize(innerWidth / displayAttributes.length, horizontalSpacing) < 0 ||
     getCellInnerSize(innerHeight / displayAttributes.length, verticalSpacing) < 0
   )
-    return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{SCATTER_PLOT_MATRIX_TEXT.tooSmall}</Box> // rect not big enough
+    return (
+      <Box sx={getViewsNotDisplayStyle(width, height, margin)} id={CONTAINER_EMPTY[ViewType.ScatterPlotMatrix]}>
+        {SCATTER_PLOT_MATRIX_TEXT.tooSmall}
+      </Box>
+    )
   if (displayAttributes.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT) {
     return (
       <Box
@@ -334,5 +338,9 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       </Box>
     )
   }
-  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{SCATTER_PLOT_MATRIX_TEXT.unavailable}</Box>
+  return (
+    <Box sx={getViewsNotDisplayStyle(width, height, margin)} id={CONTAINER_EMPTY[ViewType.ScatterPlotMatrix]}>
+      {SCATTER_PLOT_MATRIX_TEXT.unavailable}
+    </Box>
+  )
 }

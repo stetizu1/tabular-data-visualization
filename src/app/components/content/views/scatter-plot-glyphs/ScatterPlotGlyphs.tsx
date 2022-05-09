@@ -10,6 +10,7 @@ import { Margin } from '../../../../types/styling/Margin'
 import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
 
 import {
+  getAttributeFormatted,
   getAttributeValuesWithLabel,
   getClass,
   getEverything,
@@ -26,12 +27,13 @@ import { SVG } from '../../../../constants/svg'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
 import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotGlyphs'
-import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { SCATTER_PLOT_GLYPHS_TEXT } from '../../../../text/views-and-menus/scatterPlotGlyphs'
 
 import {
   AXIS_CLASS,
+  AXIS_TEXT_CLASS,
   DUPLICATES_CLASS,
   getScatterPlotGlyphsStyle,
   SCATTER_PLOT_GLYPHS_CLASS,
@@ -44,6 +46,8 @@ import { TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
 const SCATTER_PLOT_GLYPHS = `SCATTER_PLOT_GLYPHS`
 const AXIS_X = `axisX`
 const AXIS_Y = `axisY`
+
+const Y_AXIS_TEXT_SHIFT = 30
 
 export interface ScatterPlotGlyphsProps extends VisualizationView, Brushable, ScatterPlotGlyphsSettings {}
 
@@ -107,6 +111,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
     const makeGlyphs = (className: string) =>
       svg
         .selectAll(SCATTER_PLOT_GLYPHS)
+        .append(SVG.elements.g)
         .data(dataset)
         .enter()
         .each((data, idx, elements) => {
@@ -130,19 +135,39 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
 
     const axisX = svg
       .selectAll(AXIS_X)
-      .data(dataset)
+      .data([xAttribute])
       .enter()
       .append(SVG.elements.g)
       .attr(SVG.attributes.transform, getTranslate([0, innerHeight]))
       .attr(SVG.attributes.class, AXIS_CLASS)
-    axisX.call(axisBottom(xScale))
-    svg
+
+    const axisY = svg
       .selectAll(AXIS_Y)
-      .data(dataset)
+      .data([yAttribute])
       .enter()
       .append(SVG.elements.g)
       .attr(SVG.attributes.class, AXIS_CLASS)
-      .call(axisLeft(yScale))
+
+    axisX.call(axisBottom(xScale))
+    axisY.call(axisLeft(yScale))
+
+    // axis X label
+    axisX
+      .append(SVG.elements.text)
+      .attr(SVG.attributes.x, innerWidth)
+      .attr(SVG.attributes.y, Y_AXIS_TEXT_SHIFT)
+      .text(getAttributeFormatted)
+      .attr(SVG.attributes.class, AXIS_TEXT_CLASS)
+      .attr(SVG.attributes.textAnchor, SVG.values.end)
+    // axis Y label
+    axisY
+      .append(SVG.elements.text)
+      .attr(SVG.attributes.transform, `rotate(-90)`)
+      .attr(SVG.attributes.y, -Y_AXIS_TEXT_SHIFT)
+      .text(getAttributeFormatted)
+      .attr(SVG.attributes.class, AXIS_TEXT_CLASS)
+      .attr(SVG.attributes.textAnchor, SVG.values.end)
+
     const setBrushingSelection = (selection: BrushSelection2d) => {
       if (selection) {
         dataset.forEach(
@@ -234,5 +259,9 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
       </Box>
     )
   }
-  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{SCATTER_PLOT_GLYPHS_TEXT.unavailable}</Box>
+  return (
+    <Box sx={getViewsNotDisplayStyle(width, height, margin)} id={CONTAINER_EMPTY[ViewType.ScatterPlotGlyphs]}>
+      {SCATTER_PLOT_GLYPHS_TEXT.unavailable}
+    </Box>
+  )
 }

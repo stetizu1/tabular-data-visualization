@@ -1,5 +1,5 @@
 import { ViewType } from '../../constants/views/ViewType'
-import { CONTAINER_SAVE_ID, SAVE_ID } from '../../constants/save/save'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../constants/save/save'
 
 export const saveSvgToFile = (svgEl: Element, fileName: string): void => {
   svgEl.setAttribute(`xmlns`, `http://www.w3.org/2000/svg`)
@@ -43,4 +43,5 @@ export const saveSvg = (viewType: ViewType): void => {
 }
 
 export const getSaveIsDisabled = (viewType: ViewType): boolean =>
+  document.querySelector(`#${CONTAINER_EMPTY[viewType]}`) !== null &&
   document.querySelector(`#${SAVE_ID[viewType]}`) === null
