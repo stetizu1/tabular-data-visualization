@@ -1,32 +1,35 @@
-import { Air, DirectionsCar, LocalFlorist } from '@mui/icons-material'
+import { Air, AirportShuttle, DirectionsBoat, DirectionsCar, LocalFlorist } from '@mui/icons-material'
 
 import flowerJson from '../../../test-data/flowerData.json'
 import birdJson from '../../../test-data/birdData.json'
 import carJson from '../../../test-data/carData.json'
+import titanicJson from '../../../test-data/titanicData.json'
+import parallelCarsJson from '../../../test-data/parallelCarsData.json'
+
 import { DataType } from '../../types/data/data'
 
 export enum SampleDataset {
-  flower = `flower`,
-  bird = `bird`,
-  car = `car`,
+  flowers = `flower`,
+  birds = `bird`,
+  cars = `car`,
+  titanic = `titanic`,
+  parallelCars = `parallelCars`,
 }
 
 export const SAMPLE_DATASET_OPTIONS = Object.values(SampleDataset)
 
-export const sampleDatasetFiles: Record<SampleDataset, string> = {
-  [SampleDataset.flower]: `flowerData.json`,
-  [SampleDataset.bird]: `birdData.json`,
-  [SampleDataset.car]: `carData.json`,
-}
-
 export const sampleDatasetIcons: Record<SampleDataset, JSX.Element> = {
-  [SampleDataset.flower]: <LocalFlorist />,
-  [SampleDataset.bird]: <Air />,
-  [SampleDataset.car]: <DirectionsCar />,
+  [SampleDataset.flowers]: <LocalFlorist />,
+  [SampleDataset.birds]: <Air />,
+  [SampleDataset.cars]: <DirectionsCar />,
+  [SampleDataset.titanic]: <DirectionsBoat />,
+  [SampleDataset.parallelCars]: <AirportShuttle />,
 }
 
 export const sampleDatasets: Record<SampleDataset, DataType[]> = {
-  [SampleDataset.flower]: flowerJson,
-  [SampleDataset.bird]: birdJson,
-  [SampleDataset.car]: carJson,
+  [SampleDataset.flowers]: flowerJson,
+  [SampleDataset.birds]: birdJson,
+  [SampleDataset.cars]: carJson,
+  [SampleDataset.titanic]: titanicJson,
+  [SampleDataset.parallelCars]: parallelCarsJson,
 }

@@ -39,7 +39,7 @@ export interface ViewGridProps extends ViewGridDataProps {
   isAddViewDialogOpen: boolean
   setIsAddViewDialogOpen: Dispatch<SetStateAction<boolean>>
   layout: GridLayoutItem[]
-  setLayout: Dispatch<SetStateAction<GridLayoutItem[]>>
+  setLayout: Dispatch<SetStateAction<GridLayoutItem[] | null>>
   brushColor: string
 }
 
@@ -72,6 +72,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
     (viewType: ViewType) => {
       setIsAddViewDialogOpen(false)
       setLayout((layout) => {
+        if (layout === null) return layout // should not happen
         if (layout.find((item) => item.i === viewType)) return layout
         const posY = layout.reduce((max, item) => Math.max(item.y, max), 0) + 1
         return [...layout, { i: viewType, x: 0, y: posY, ...DEFAULT_VIEW_DIMENSIONS[viewType] }]
@@ -82,7 +83,10 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
 
   const removeView = useCallback(
     (viewType: ViewType) => {
-      setLayout((layout) => layout.filter((item) => item.i !== viewType))
+      setLayout((layout) => {
+        if (layout === null) return layout // should not happen
+        return layout.filter((item) => item.i !== viewType)
+      })
     },
     [setLayout],
   )

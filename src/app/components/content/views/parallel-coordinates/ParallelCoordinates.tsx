@@ -8,14 +8,20 @@ import { BrushSelection1d } from '../../../../types/brushing/BrushSelection'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { ParallelCoordinatesSettings } from '../../../../types/views/settings/ParallelCoordinatesSettings'
 import { Margin } from '../../../../types/styling/Margin'
-import { BrushExtent, DataEachG, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
+import { Extent, DataEachG, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
 
 import { toStringArray } from '../../../../helpers/basic/retype'
 import { isInRange } from '../../../../helpers/basic/range'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
 import { getCategoryColor, getTextTogglingYShift, TOGGLE_TEXT_Y_SHIFT } from '../../../../helpers/d3/attributeGetters'
-import { getAttributeFormatted, getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import {
+  getAttributeFormatted,
+  getAttributeValuesWithLabel,
+  getClass,
+  getEverything,
+  getTranslate,
+} from '../../../../helpers/d3/stringGetters'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { BrushAction } from '../../../../constants/actions/BrushAction'
@@ -87,18 +93,19 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     const selections = getDefaultSelectionForAttributes(displayAttributes)
 
     const setBrushingSelection = () => {
+      if (displayAttributes.every((dimension) => selections[dimension] === null)) {
+        // check selections, if there is none in every line, false
+        dataset.forEach((data) => (data.selected = false))
+        refreshViews()
+        return
+      }
       dataset.forEach((data) => {
-        let nullsCount = 0 // count selections, if there is none in every line, false
-        data.selected =
-          displayAttributes.every((dimension, idx) => {
-            const selectedRange = selections[dimension]
-            if (selectedRange === null) {
-              nullsCount++
-              return true // nothing in dimension selected, do not block
-            }
-            const valueOnAxis = yScales[idx](Number(data[dimension]))
-            return isInRange(valueOnAxis, selectedRange)
-          }) && nullsCount !== displayAttributes.length
+        data.selected = displayAttributes.every((dimension, idx) => {
+          const selectedRange = selections[dimension]
+          if (selectedRange === null) return true // nothing in dimension selected, do not block
+          const valueOnAxis = yScales[idx](Number(data[dimension]))
+          return isInRange(valueOnAxis, selectedRange)
+        })
       })
       refreshViews()
     }
@@ -124,7 +131,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
         return cleanBrushingSelection() // nothing is selected
       },
     }
-    const brushExtent: BrushExtent = [
+    const brushExtent: Extent = [
       [-BRUSH_RADIUS, -BRUSH_OVERLAP],
       [BRUSH_RADIUS, innerHeight + BRUSH_OVERLAP],
     ]
@@ -153,7 +160,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
       .attr(SVG.attributes.class, PARALLEL_COORDINATES_CLASS)
       .attr(SVG.attributes.strokeWidth, lineWidth)
 
-      .on(MouseAction.mouseOver, onMouseOverTooltip)
+      .on(MouseAction.mouseOver, onMouseOverTooltip(getAttributeValuesWithLabel))
       .on(MouseAction.mouseOut, onMouseOutTooltip)
       .style(SVG.style.stroke, getCategoryColor(categoryAttribute, color))
 
@@ -184,6 +191,9 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
       })
       Object.keys(selections).forEach((selLKey) => (selections[selLKey] = null))
     })
+
+    // selected coloring
+    selectAll(getClass(PARALLEL_COORDINATES_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
   }, [
     dataset,
     innerWidth,

@@ -18,7 +18,7 @@ import { SelectableDataType } from '../../../../../types/data/data'
 
 import { otherCasesToWhitespaces } from '../../../../../helpers/data/formatText'
 
-import { OptionType } from '../../../../../constants/data/data'
+import { OPTION_TYPES, OptionType } from '../../../../../constants/data/data'
 
 import { FILE_READER_TEXT } from '../../../../../text/SiteText'
 
@@ -39,62 +39,72 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
   dataset,
   setDataset,
 }) => {
-  const [optionsChosen, setOptionsChosen] = useState<Array<OptionType>>([])
-  const [replaceValue, setReplaceValue] = useState<Array<number>>([])
+  const [optionsChosen, setOptionsChosen] = useState<Record<keyof SelectableDataType, OptionType>>(
+    Object.fromEntries(nullContainingAttributes.map((att) => [att, OptionType.leave])),
+  )
+  const [replaceValue, setReplaceValue] = useState<Record<keyof SelectableDataType, string>>(
+    Object.fromEntries(nullContainingAttributes.map((att) => [att, ``])),
+  )
 
   useEffect(() => {
-    setOptionsChosen(Array(nullContainingAttributes.length).fill(OptionType.leave))
-    setReplaceValue(Array(nullContainingAttributes.length).fill(0))
+    setOptionsChosen(Object.fromEntries(nullContainingAttributes.map((att) => [att, OptionType.leave])))
+    setReplaceValue(Object.fromEntries(nullContainingAttributes.map((att) => [att, ``])))
   }, [nullContainingAttributes])
 
-  const handleNullDialogConfirm = useCallback(() => {
-    let datasetFixed: SelectableDataType[] = []
-    optionsChosen.forEach((option, idx) => {
-      switch (option) {
+  const getFixedDataset = useCallback(
+    (dataset: SelectableDataType[], attribute: keyof SelectableDataType) => {
+      switch (optionsChosen[attribute]) {
         case OptionType.filter:
-          datasetFixed = dataset.filter((data) => data[nullContainingAttributes[idx]] !== null)
-          break
-        case OptionType.change:
-          datasetFixed = dataset.map((data) => {
-            const att = nullContainingAttributes[idx]
-            return {
-              ...data,
-              [att]: data[att] === null ? Number(replaceValue[idx]) : data[att],
-            }
-          })
-          break
+          return dataset.filter((data) => data[attribute] !== null)
+        case OptionType.change: {
+          const newValue = !isNaN(Number(replaceValue[attribute]))
+            ? Number(replaceValue[attribute])
+            : replaceValue[attribute]
+          return dataset.map((data) => ({
+            ...data,
+            [attribute]: data[attribute] === null ? newValue : data[attribute],
+          }))
+        }
         case OptionType.leave:
-          datasetFixed = dataset
-          break
+          return dataset
       }
+    },
+    [optionsChosen, replaceValue],
+  )
+
+  const handleNullDialogConfirm = useCallback(() => {
+    let datasetFixed: SelectableDataType[] = dataset
+    nullContainingAttributes.forEach((attribute) => {
+      datasetFixed = getFixedDataset(datasetFixed, attribute)
     })
     setDataset(datasetFixed)
-  }, [dataset, nullContainingAttributes, optionsChosen, replaceValue, setDataset])
+  }, [dataset, getFixedDataset, nullContainingAttributes, setDataset])
 
-  const handleToggleChange = (val: OptionType, idx: number) => {
-    setOptionsChosen((prev) => {
-      const newOpts = [...prev]
-      newOpts[idx] = val
-      return newOpts
-    })
-  }
-  const handleNumberChange = useCallback((val: number, idx: number) => {
-    setReplaceValue((prev) => {
-      const newVals = [...prev]
-      newVals[idx] = val
-      return newVals
-    })
-  }, [])
+  const handleToggleChange = useCallback(
+    (value: OptionType, attribute: keyof SelectableDataType) =>
+      setOptionsChosen((prev) => ({
+        ...prev,
+        [attribute]: value,
+      })),
+    [],
+  )
+  const handleReplaceChange = useCallback(
+    (value: string, attribute: keyof SelectableDataType) =>
+      setReplaceValue((prev) => ({
+        ...prev,
+        [attribute]: value,
+      })),
+    [],
+  )
 
-  const options = Object.values(OptionType)
   return (
     <Dialog onClose={onClose} open={isOpen}>
       <DialogTitle>{FILE_READER_TEXT.nullDialog.title}</DialogTitle>
       <Divider />
       <DialogContent>
         <DialogContentText sx={dialogStyle.description}>{FILE_READER_TEXT.nullDialog.description}</DialogContentText>
-        {nullContainingAttributes.map((attribute, idx) => {
-          const option = optionsChosen[idx]
+        {nullContainingAttributes.map((attribute) => {
+          const option = optionsChosen[attribute]
           return (
             <Box key={attribute} sx={dialogStyle.innerContent}>
               <Typography sx={dialogStyle.attHeader}>{`${
@@ -104,11 +114,11 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
                 sx={dialogStyle.toggleDialogGroup}
                 value={option}
                 exclusive
-                onChange={(e, value) => handleToggleChange(value, idx)}
+                onChange={(e, value) => handleToggleChange(value, attribute)}
               >
-                {options.map((opt, idx) => (
-                  <ToggleButton sx={dialogStyle.toggleDialogButton} value={opt} key={idx}>
-                    {FILE_READER_TEXT.nullDialog.optionsText[opt]}
+                {OPTION_TYPES.map((optType, idx) => (
+                  <ToggleButton sx={dialogStyle.toggleDialogButton} value={optType} key={idx}>
+                    {FILE_READER_TEXT.nullDialog.optionsText[optType]}
                   </ToggleButton>
                 ))}
               </ToggleButtonGroup>
@@ -117,10 +127,9 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
                 {option === OptionType.change && (
                   <TextField
                     label={FILE_READER_TEXT.nullDialog.changeTo}
-                    type="number"
-                    sx={dialogStyle.numInput}
-                    defaultValue={replaceValue[idx]}
-                    onChange={(e) => handleNumberChange(Number(e.target.value), idx)}
+                    sx={dialogStyle.textInput}
+                    defaultValue={replaceValue[attribute]}
+                    onChange={(e) => handleReplaceChange(e.target.value, attribute)}
                   />
                 )}
               </Box>

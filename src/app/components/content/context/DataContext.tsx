@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, VoidFunctionComponent } from 'react'
+import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
 
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
@@ -11,13 +11,18 @@ import { useDebounce } from '../../../helpers/react/useDebounce'
 
 import { DataLoadState } from '../../../constants/data/dataLoadState'
 import { ViewType } from '../../../constants/views/ViewTypes'
-import { DEFAULT_BRUSH_COLOR, DEFAULT_GRID_LAYOUT } from '../../../constants/views/common'
+import {
+  DEFAULT_BRUSH_COLOR,
+  DEFAULT_GRID_LAYOUT_QUANTITATIVE,
+  DEFAULT_GRID_LAYOUT_NOMINAL,
+} from '../../../constants/views/common'
 import { BRUSH_DEBOUNCE } from '../../../constants/debounce/debounce'
 
 import { TopToolbar } from '../top-toolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
+import { getCategoryAttributesKeys, getDefaultQuantitativeAttributesKeys } from '../../../helpers/data/data'
 
 export const DataContext: VoidFunctionComponent = () => {
   const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
@@ -36,8 +41,17 @@ export const DataContext: VoidFunctionComponent = () => {
   const [isBrushingOnEndOfMove, setIsBrushingOnEndOfMove] = useState(false)
 
   const [isAddViewDialogOpen, setIsAddViewDialogOpen] = useState(false)
-  const [layout, setLayout] = useState<GridLayoutItem[]>(DEFAULT_GRID_LAYOUT)
+  const [layout, setLayout] = useState<GridLayoutItem[] | null>(null)
   const [brushColor, setBrushColor] = useState<string>(DEFAULT_BRUSH_COLOR)
+
+  useEffect(() => {
+    if (!dataset || layout !== null) return
+    setLayout(
+      getCategoryAttributesKeys(dataset).length > getDefaultQuantitativeAttributesKeys(dataset).length
+        ? DEFAULT_GRID_LAYOUT_NOMINAL
+        : DEFAULT_GRID_LAYOUT_QUANTITATIVE,
+    )
+  }, [dataset, layout])
 
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
@@ -71,7 +85,11 @@ export const DataContext: VoidFunctionComponent = () => {
   const setComponentBrushing: SetComponentBrushing = useCallback(
     (newComponent) => {
       if (componentBrushingRef.current !== newComponent) {
-        cleanAllBrushes(newComponent !== ViewType.DataTable && newComponent !== ViewType.Glyphs)
+        cleanAllBrushes(
+          newComponent !== ViewType.DataTable &&
+            newComponent !== ViewType.Glyphs &&
+            newComponent !== ViewType.ParallelSetsBundled,
+        )
       }
       setCurrentComponentBrushing(newComponent)
     },
@@ -104,35 +122,22 @@ export const DataContext: VoidFunctionComponent = () => {
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
   const openDrawer = useCallback(() => setDrawerOpen(true), [])
 
-  const topToolbarComponent = useMemo(
-    () => (
-      <TopToolbar
-        openDrawer={openDrawer}
-        isToolsDisabled={dataset === null}
-        isDetailsVisible={isDetailsVisible}
-        setIsDetailsVisible={setIsDetailsVisible}
-        isBrushingOnEndOfMove={isBrushingOnEndOfMove}
-        setIsBrushingOnEndOfMove={setIsBrushingOnEndOfMoveAndRemoveBrushing}
-        isBrushingActive={componentBrushingRef.current !== null}
-        clearBrushes={clearBrushesOnButton}
-        setDataset={setDatasetAndRemoveBrushing}
-        setDataLoadState={setDataLoadState}
-        setIsAddViewDialogOpen={setIsAddViewDialogOpen}
-        brushColor={brushColor}
-        setBrushColor={setBrushColor}
-      />
-    ),
-    [
-      brushColor,
-      clearBrushesOnButton,
-      componentBrushingRef,
-      dataset,
-      isBrushingOnEndOfMove,
-      isDetailsVisible,
-      setDatasetAndRemoveBrushing,
-      setIsBrushingOnEndOfMoveAndRemoveBrushing,
-      openDrawer,
-    ],
+  const topToolbarComponent = (
+    <TopToolbar
+      openDrawer={openDrawer}
+      isToolsDisabled={dataset === null}
+      isDetailsVisible={isDetailsVisible}
+      setIsDetailsVisible={setIsDetailsVisible}
+      isBrushingOnEndOfMove={isBrushingOnEndOfMove}
+      setIsBrushingOnEndOfMove={setIsBrushingOnEndOfMoveAndRemoveBrushing}
+      isBrushingActive={componentBrushingRef.current !== null}
+      clearBrushes={clearBrushesOnButton}
+      setDataset={setDatasetAndRemoveBrushing}
+      setDataLoadState={setDataLoadState}
+      setIsAddViewDialogOpen={setIsAddViewDialogOpen}
+      brushColor={brushColor}
+      setBrushColor={setBrushColor}
+    />
   )
 
   if (dataLoadState === DataLoadState.NoData) {
@@ -151,6 +156,8 @@ export const DataContext: VoidFunctionComponent = () => {
       </>
     )
   }
+
+  if (!layout) return null
 
   return (
     <>

@@ -39,7 +39,7 @@ export const ToggleButtons = <T, Opt>({
   )
 
   return (
-    <Box>
+    <Box sx={toggleButtonsStyle.box}>
       <ToggleButtonGroup
         sx={toggleButtonsStyle.group}
         value={value}

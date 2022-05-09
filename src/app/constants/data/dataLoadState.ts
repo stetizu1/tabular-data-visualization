@@ -6,5 +6,5 @@ export enum DataLoadState {
 
 export enum DataLoadError {
   unsupportedFile = `unsupportedFile`,
-  unsupportedFileFormat = `unsupportedFileFormat`,
+  unsupportedFormat = `unsupportedFileFormat`,
 }

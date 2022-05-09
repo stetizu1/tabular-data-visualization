@@ -23,7 +23,9 @@ interface SVGType {
     cx: `cx`
     cy: `cy`
     r: `r`
+    stroke: `stroke`
     strokeWidth: `stroke-width`
+    textAnchor: `text-anchor`
   }
   style: {
     fill: `fill`
@@ -36,6 +38,9 @@ interface SVGType {
   values: {
     none: `none`
     block: `block`
+    start: `start`
+    end: `end`
+    middle: `middle`
   }
 }
 
@@ -64,7 +69,9 @@ export const SVG: SVGType = {
     cx: `cx`,
     cy: `cy`,
     r: `r`,
+    stroke: `stroke`,
     strokeWidth: `stroke-width`,
+    textAnchor: `text-anchor`,
   },
   style: {
     fill: `fill`,
@@ -77,5 +84,8 @@ export const SVG: SVGType = {
   values: {
     none: `none`,
     block: `block`,
+    start: `start`,
+    end: `end`,
+    middle: `middle`,
   },
 }

@@ -1,8 +1,11 @@
 import { SxProps } from '@mui/system'
-import { px } from '../../../../helpers/d3/stringGetters'
+import { important, px } from '../../../../helpers/d3/stringGetters'
 import { BUTTON_COLORS } from '../../../../styles/colors'
 
 export const toggleButtonsStyle: Record<string, SxProps> = {
+  box: {
+    marginTop: important(0),
+  },
   group: {
     width: `100%`,
     display: `flex`,

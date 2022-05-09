@@ -5,6 +5,7 @@ import { ScatterPlotMatrixSettings } from './ScatterPlotMatrixSettings'
 import { GlyphsSettings } from './GlyphsSettings'
 import { ScatterPlotGlyphsSettings } from './ScatterPlotGlyphsSettings'
 import { DataTableSettings } from './DataTableSettings'
+import { ParallelSetsBundledSettings } from './ParallelSetsBundledSettings'
 
 /**
  * Settings types for all views
@@ -15,6 +16,7 @@ export type Settings = Partial<{
   [ViewType.Glyphs]: GlyphsSettings
   [ViewType.ScatterPlotGlyphs]: ScatterPlotGlyphsSettings
   [ViewType.DataTable]: DataTableSettings
+  [ViewType.ParallelSetsBundled]: ParallelSetsBundledSettings
 }>
 
 /**
@@ -26,3 +28,4 @@ export type SettingsType =
   | GlyphsSettings
   | ScatterPlotGlyphsSettings
   | DataTableSettings
+  | ParallelSetsBundledSettings

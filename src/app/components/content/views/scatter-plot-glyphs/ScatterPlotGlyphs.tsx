@@ -9,7 +9,12 @@ import { ScatterPlotGlyphsSettings } from '../../../../types/views/settings/Scat
 import { Margin } from '../../../../types/styling/Margin'
 import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
 
-import { getClass, getEverything, getTranslate } from '../../../../helpers/d3/stringGetters'
+import {
+  getAttributeValuesWithLabel,
+  getClass,
+  getEverything,
+  getTranslate,
+} from '../../../../helpers/d3/stringGetters'
 import { displayDetails } from '../../../../helpers/d3/displayDetails'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
@@ -33,7 +38,7 @@ import {
   SELECTED_CLASS,
 } from '../../../../components-style/content/views/scatter-plot-glyphs/scatterPlotGlyphsStyle'
 import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
-import { BrushExtent, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
+import { Extent, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
 import { TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
 
 const SCATTER_PLOT_GLYPHS = `SCATTER_PLOT_GLYPHS`
@@ -117,7 +122,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
               SVG.attributes.transform,
               getTranslate([xScale(Number(data[xAttribute])), yScale(Number(data[yAttribute]))]),
             )
-            .on(MouseAction.mouseOver, onMouseOverTooltip)
+            .on(MouseAction.mouseOver, onMouseOverTooltip(getAttributeValuesWithLabel))
             .on(MouseAction.mouseOut, onMouseOutTooltip)
             .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
         })
@@ -166,7 +171,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
         }
       },
     }
-    const brushExtent: BrushExtent = [
+    const brushExtent: Extent = [
       [-glyphSize / 2, -glyphSize / 2],
       [innerWidth + glyphSize / 2, innerHeight + glyphSize / 2],
     ]

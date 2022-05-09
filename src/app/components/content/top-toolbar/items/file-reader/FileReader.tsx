@@ -72,40 +72,42 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
     setNullContainingAttributes([])
   }, [])
 
+  const getDatasetFromFile = useCallback(
+    async (fileType: AcceptableFileTypes | string, selectedFile: File): Promise<DataType[] | null> => {
+      switch (fileType) {
+        case AcceptableFileTypes.json: {
+          const text = await selectedFile.text()
+          return JSON.parse(text)
+        }
+        case AcceptableFileTypes.csv: {
+          const textCsv = await selectedFile.text()
+          return CsvParse(textCsv)
+        }
+        default: {
+          return null
+        }
+      }
+    },
+    [],
+  )
+
   const handleFileChange = useCallback(
     async (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.files?.length) {
         setDataLoadState(DataLoadState.Loading)
         const selectedFile = e.target.files[0]
         const fileType = selectedFile.type
-        let dataset: DataType[] = []
+        const dataset = await getDatasetFromFile(fileType, selectedFile)
 
-        switch (fileType) {
-          case AcceptableFileTypes.json: {
-            const text = await selectedFile.text()
-            dataset = JSON.parse(text)
-            break
-          }
-          case AcceptableFileTypes.csv: {
-            const textCsv = await selectedFile.text()
-            dataset = CsvParse(textCsv)
-            break
-          }
-          default: {
-            setDataLoadState(DataLoadState.NoData)
-            setAlertDialogText(FILE_READER_TEXT.alertDialog[DataLoadError.unsupportedFile])
-            setDataset(null)
-            setIsAlertDialogOpen(true)
-            return
-          }
-        }
-        if (!isArrayOfDataType(dataset)) {
+        if (dataset === null || !isArrayOfDataType(dataset)) {
+          const dataLoadErrorType = dataset === null ? DataLoadError.unsupportedFile : DataLoadError.unsupportedFormat
           setDataLoadState(DataLoadState.NoData)
-          setAlertDialogText(FILE_READER_TEXT.alertDialog[DataLoadError.unsupportedFileFormat])
-          setDataset(null)
+          setAlertDialogText(FILE_READER_TEXT.alertDialog[dataLoadErrorType])
           setIsAlertDialogOpen(true)
+          setDataset(null)
           return
         }
+
         const selectableDataset = addSelected(dataset)
         const nullContainingAttributes = getAttributeKeys(selectableDataset).filter((att) =>
           dataset.some((data) => data[att] === null),
@@ -122,7 +124,7 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
         setDataLoadState(DataLoadState.Loaded)
       }
     },
-    [setDataLoadState, setDataset],
+    [getDatasetFromFile, setDataLoadState, setDataset],
   )
 
   return (

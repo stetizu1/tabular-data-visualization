@@ -11,18 +11,13 @@ export interface VisualizationSettings {
 }
 
 /**
- * General settings for quantitative visualization
+ * General settings for visualization with d3.js
  */
-export interface ViewVisualizationSettings extends VisualizationSettings {
+export interface BaseViewVisualizationSettings extends VisualizationSettings {
   /**
    * Array of colors for category attributes
    */
   colorCategory: ColorArray
-
-  /**
-   * Category attribute for coloring
-   */
-  categoryAttribute: keyof SelectableDataType | undefined
 
   /**
    * View margin inside svg
@@ -33,4 +28,14 @@ export interface ViewVisualizationSettings extends VisualizationSettings {
    * Opacity of data items
    */
   opacity: Opacity
+}
+
+/**
+ * General settings for quantitative visualization
+ */
+export interface ViewVisualizationSettings extends BaseViewVisualizationSettings {
+  /**
+   * Category attribute for coloring
+   */
+  categoryAttribute: keyof SelectableDataType | undefined
 }

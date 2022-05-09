@@ -30,16 +30,18 @@ export const FILE_READER_TEXT = {
   sampleDataLabel: `Try it on the sample data`,
   sampleDataDialogTitle: `Select sample dataset`,
   sampleDataDialogText: {
-    [SampleDataset.flower]: `Flower dataset`,
-    [SampleDataset.bird]: `Bird dataset`,
-    [SampleDataset.car]: `Car dataset`,
+    [SampleDataset.flowers]: `Flower dataset`,
+    [SampleDataset.birds]: `Bird dataset`,
+    [SampleDataset.cars]: `Car dataset`,
+    [SampleDataset.titanic]: `Titanic dataset`,
+    [SampleDataset.parallelCars]: `Car parallel dataset`,
   },
   alertDialog: {
     [DataLoadError.unsupportedFile]: {
       title: `File type not supported`,
       description: `This file type is not supported. Use JSON or CSV file.`,
     },
-    [DataLoadError.unsupportedFileFormat]: {
+    [DataLoadError.unsupportedFormat]: {
       title: `File format not supported`,
       description: `The file format is invalid. The valid json file format is an array of objects with the same keys and simple JSON values (number, string, boolean, null)`,
     },

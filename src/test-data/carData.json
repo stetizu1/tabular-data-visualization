@@ -5,7 +5,7 @@
   "displacement_cc": 360,
   "power_hp": 175,
   "weight_lb": 3821,
-  "_0_to_60_mph_s": 11,
+  "0_to_60_mph_s": 11,
   "year": 73
 }, {
   "name": "AMC Ambassador DPL",
@@ -14,7 +14,7 @@
   "displacement_cc": 390,
   "power_hp": 190,
   "weight_lb": 3850,
-  "_0_to_60_mph_s": 8.5,
+  "0_to_60_mph_s": 8.5,
   "year": 70
 }, {
   "name": "AMC Ambassador SST",
@@ -23,7 +23,7 @@
   "displacement_cc": 304,
   "power_hp": 150,
   "weight_lb": 3672,
-  "_0_to_60_mph_s": 11.5,
+  "0_to_60_mph_s": 11.5,
   "year": 72
 }, {
   "name": "AMC Concord DL 6",
@@ -32,7 +32,7 @@
   "displacement_cc": 232,
   "power_hp": 90,
   "weight_lb": 3265,
-  "_0_to_60_mph_s": 18.2,
+  "0_to_60_mph_s": 18.2,
   "year": 79
 }, {
   "name": "AMC Concord DL",
@@ -41,7 +41,7 @@
   "displacement_cc": 258,
   "power_hp": 120,
   "weight_lb": 3410,
-  "_0_to_60_mph_s": 15.1,
+  "0_to_60_mph_s": 15.1,
   "year": 78
 }, {
   "name": "AMC Concord",
@@ -50,7 +50,7 @@
   "displacement_cc": 232,
   "power_hp": 90,
   "weight_lb": 3210,
-  "_0_to_60_mph_s": 17.2,
+  "0_to_60_mph_s": 17.2,
   "year": 78
 }, {
   "name": "AMC Concord",
@@ -59,7 +59,7 @@
   "displacement_cc": 151,
   "power_hp": 90,
   "weight_lb": 3003,
-  "_0_to_60_mph_s": 20.1,
+  "0_to_60_mph_s": 20.1,
   "year": 80
 }, {
   "name": "AMC Gremlin",
@@ -68,7 +68,7 @@
   "displacement_cc": 232,
   "power_hp": 100,
   "weight_lb": 2789,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 73
 }, {
   "name": "AMC Gremlin",
@@ -77,7 +77,7 @@
   "displacement_cc": 232,
   "power_hp": 100,
   "weight_lb": 2634,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 71
 }, {
   "name": "AMC Gremlin",
@@ -86,7 +86,7 @@
   "displacement_cc": 232,
   "power_hp": 100,
   "weight_lb": 2914,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 75
 }, {
   "name": "AMC Gremlin",
@@ -95,7 +95,7 @@
   "displacement_cc": 199,
   "power_hp": 90,
   "weight_lb": 2648,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 70
 }, {
   "name": "AMC Hornet Sportabout (Wagon)",
@@ -104,7 +104,7 @@
   "displacement_cc": 258,
   "power_hp": 110,
   "weight_lb": 2962,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 71
 }, {
   "name": "AMC Hornet",
@@ -113,7 +113,7 @@
   "displacement_cc": 199,
   "power_hp": 97,
   "weight_lb": 2774,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 70
 }, {
   "name": "AMC Hornet",
@@ -122,7 +122,7 @@
   "displacement_cc": 232,
   "power_hp": 100,
   "weight_lb": 2945,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 73
 }, {
   "name": "AMC Hornet",
@@ -131,7 +131,7 @@
   "displacement_cc": 232,
   "power_hp": 100,
   "weight_lb": 2901,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 74
 }, {
   "name": "AMC Hornet",
@@ -140,7 +140,7 @@
   "displacement_cc": 232,
   "power_hp": 90,
   "weight_lb": 3085,
-  "_0_to_60_mph_s": 17.6,
+  "0_to_60_mph_s": 17.6,
   "year": 76
 }, {
   "name": "AMC Matador (Wagon)",
@@ -149,7 +149,7 @@
   "displacement_cc": 304,
   "power_hp": 150,
   "weight_lb": 4257,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 74
 }, {
   "name": "AMC Matador (Wagon)",
@@ -158,7 +158,7 @@
   "displacement_cc": 304,
   "power_hp": 150,
   "weight_lb": 3892,
-  "_0_to_60_mph_s": 12.5,
+  "0_to_60_mph_s": 12.5,
   "year": 72
 }, {
   "name": "AMC Matador",
@@ -167,7 +167,7 @@
   "displacement_cc": 304,
   "power_hp": 150,
   "weight_lb": 3672,
-  "_0_to_60_mph_s": 11.5,
+  "0_to_60_mph_s": 11.5,
   "year": 73
 }, {
   "name": "AMC Matador",
@@ -176,7 +176,7 @@
   "displacement_cc": 258,
   "power_hp": 110,
   "weight_lb": 3730,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 75
 }, {
   "name": "AMC Matador",
@@ -185,7 +185,7 @@
   "displacement_cc": 304,
   "power_hp": 120,
   "weight_lb": 3962,
-  "_0_to_60_mph_s": 13.9,
+  "0_to_60_mph_s": 13.9,
   "year": 76
 }, {
   "name": "AMC Matador",
@@ -194,7 +194,7 @@
   "displacement_cc": 258,
   "power_hp": 110,
   "weight_lb": 3632,
-  "_0_to_60_mph_s": 18,
+  "0_to_60_mph_s": 18,
   "year": 74
 }, {
   "name": "AMC Matador",
@@ -203,7 +203,7 @@
   "displacement_cc": 232,
   "power_hp": 100,
   "weight_lb": 3288,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 71
 }, {
   "name": "AMC Pacer D/L",
@@ -212,7 +212,7 @@
   "displacement_cc": 258,
   "power_hp": 95,
   "weight_lb": 3193,
-  "_0_to_60_mph_s": 17.8,
+  "0_to_60_mph_s": 17.8,
   "year": 76
 }, {
   "name": "AMC Pacer",
@@ -221,7 +221,7 @@
   "displacement_cc": 232,
   "power_hp": 90,
   "weight_lb": 3211,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 75
 }, {
   "name": "AMC Rebel SST",
@@ -230,7 +230,7 @@
   "displacement_cc": 304,
   "power_hp": 150,
   "weight_lb": 3433,
-  "_0_to_60_mph_s": 12,
+  "0_to_60_mph_s": 12,
   "year": 70
 }, {
   "name": "AMC Spirit DL",
@@ -239,7 +239,7 @@
   "displacement_cc": 121,
   "power_hp": 80,
   "weight_lb": 2670,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 79
 }, {
   "name": "Audi 100 LS",
@@ -248,7 +248,7 @@
   "displacement_cc": 114,
   "power_hp": 91,
   "weight_lb": 2582,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 73
 }, {
   "name": "Audi 100 LS",
@@ -257,7 +257,7 @@
   "displacement_cc": 115,
   "power_hp": 95,
   "weight_lb": 2694,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 75
 }, {
   "name": "Audi 100 LS",
@@ -266,7 +266,7 @@
   "displacement_cc": 107,
   "power_hp": 90,
   "weight_lb": 2430,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 70
 }, {
   "name": "Audi 4000",
@@ -275,7 +275,7 @@
   "displacement_cc": 97,
   "power_hp": 78,
   "weight_lb": 2188,
-  "_0_to_60_mph_s": 15.8,
+  "0_to_60_mph_s": 15.8,
   "year": 80
 }, {
   "name": "Audi 5000",
@@ -284,7 +284,7 @@
   "displacement_cc": 131,
   "power_hp": 103,
   "weight_lb": 2830,
-  "_0_to_60_mph_s": 15.9,
+  "0_to_60_mph_s": 15.9,
   "year": 78
 }, {
   "name": "Audi 5000S (Diesel)",
@@ -293,7 +293,7 @@
   "displacement_cc": 121,
   "power_hp": 67,
   "weight_lb": 2950,
-  "_0_to_60_mph_s": 19.9,
+  "0_to_60_mph_s": 19.9,
   "year": 80
 }, {
   "name": "Audi Fox",
@@ -302,7 +302,7 @@
   "displacement_cc": 98,
   "power_hp": 83,
   "weight_lb": 2219,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 74
 }, {
   "name": "BMW 2002",
@@ -311,7 +311,7 @@
   "displacement_cc": 121,
   "power_hp": 113,
   "weight_lb": 2234,
-  "_0_to_60_mph_s": 12.5,
+  "0_to_60_mph_s": 12.5,
   "year": 70
 }, {
   "name": "BMW 320i",
@@ -320,7 +320,7 @@
   "displacement_cc": 121,
   "power_hp": 110,
   "weight_lb": 2600,
-  "_0_to_60_mph_s": 12.8,
+  "0_to_60_mph_s": 12.8,
   "year": 77
 }, {
   "name": "Buick Century 350",
@@ -329,7 +329,7 @@
   "displacement_cc": 350,
   "power_hp": 175,
   "weight_lb": 4100,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 73
 }, {
   "name": "Buick Century Limited",
@@ -338,7 +338,7 @@
   "displacement_cc": 181,
   "power_hp": 110,
   "weight_lb": 2945,
-  "_0_to_60_mph_s": 16.4,
+  "0_to_60_mph_s": 16.4,
   "year": 82
 }, {
   "name": "Buick Century Luxus (Wagon)",
@@ -347,7 +347,7 @@
   "displacement_cc": 350,
   "power_hp": 150,
   "weight_lb": 4699,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 74
 }, {
   "name": "Buick Century Special",
@@ -356,7 +356,7 @@
   "displacement_cc": 231,
   "power_hp": 105,
   "weight_lb": 3380,
-  "_0_to_60_mph_s": 15.8,
+  "0_to_60_mph_s": 15.8,
   "year": 78
 }, {
   "name": "Buick Century",
@@ -365,7 +365,7 @@
   "displacement_cc": 231,
   "power_hp": 110,
   "weight_lb": 3907,
-  "_0_to_60_mph_s": 21,
+  "0_to_60_mph_s": 21,
   "year": 75
 }, {
   "name": "Buick Century",
@@ -374,7 +374,7 @@
   "displacement_cc": 231,
   "power_hp": 110,
   "weight_lb": 3415,
-  "_0_to_60_mph_s": 15.8,
+  "0_to_60_mph_s": 15.8,
   "year": 81
 }, {
   "name": "Buick Electra 225 Custom",
@@ -383,7 +383,7 @@
   "displacement_cc": 455,
   "power_hp": 225,
   "weight_lb": 4951,
-  "_0_to_60_mph_s": 11,
+  "0_to_60_mph_s": 11,
   "year": 73
 }, {
   "name": "Buick Estate Wagon (Wagon)",
@@ -392,7 +392,7 @@
   "displacement_cc": 455,
   "power_hp": 225,
   "weight_lb": 3086,
-  "_0_to_60_mph_s": 10,
+  "0_to_60_mph_s": 10,
   "year": 70
 }, {
   "name": "Buick Estate Wagon (Wagon)",
@@ -401,7 +401,7 @@
   "displacement_cc": 350,
   "power_hp": 155,
   "weight_lb": 4360,
-  "_0_to_60_mph_s": 14.9,
+  "0_to_60_mph_s": 14.9,
   "year": 79
 }, {
   "name": "Buick Lesabre Custom",
@@ -410,7 +410,7 @@
   "displacement_cc": 350,
   "power_hp": 155,
   "weight_lb": 4502,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 72
 }, {
   "name": "Buick Opel Isuzu Deluxe",
@@ -419,7 +419,7 @@
   "displacement_cc": 111,
   "power_hp": 80,
   "weight_lb": 2155,
-  "_0_to_60_mph_s": 14.8,
+  "0_to_60_mph_s": 14.8,
   "year": 77
 }, {
   "name": "Buick Regal Sport Coupe (Turbo)",
@@ -428,7 +428,7 @@
   "displacement_cc": 231,
   "power_hp": 165,
   "weight_lb": 3445,
-  "_0_to_60_mph_s": 13.4,
+  "0_to_60_mph_s": 13.4,
   "year": 78
 }, {
   "name": "Buick Skyhawk",
@@ -437,7 +437,7 @@
   "displacement_cc": 231,
   "power_hp": 110,
   "weight_lb": 3039,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 75
 }, {
   "name": "Buick Skylark 320",
@@ -446,7 +446,7 @@
   "displacement_cc": 350,
   "power_hp": 165,
   "weight_lb": 3693,
-  "_0_to_60_mph_s": 11.5,
+  "0_to_60_mph_s": 11.5,
   "year": 70
 }, {
   "name": "Buick Skylark Limited",
@@ -455,7 +455,7 @@
   "displacement_cc": 151,
   "power_hp": 90,
   "weight_lb": 2670,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 79
 }, {
   "name": "Buick Skylark",
@@ -464,7 +464,7 @@
   "displacement_cc": 231,
   "power_hp": 105,
   "weight_lb": 3425,
-  "_0_to_60_mph_s": 16.9,
+  "0_to_60_mph_s": 16.9,
   "year": 77
 }, {
   "name": "Buick Skylark",
@@ -473,7 +473,7 @@
   "displacement_cc": 151,
   "power_hp": 84,
   "weight_lb": 2635,
-  "_0_to_60_mph_s": 16.4,
+  "0_to_60_mph_s": 16.4,
   "year": 81
 }, {
   "name": "Cadillac Eldorado",
@@ -482,7 +482,7 @@
   "displacement_cc": 350,
   "power_hp": 125,
   "weight_lb": 3900,
-  "_0_to_60_mph_s": 17.4,
+  "0_to_60_mph_s": 17.4,
   "year": 79
 }, {
   "name": "Cadillac Seville",
@@ -491,7 +491,7 @@
   "displacement_cc": 350,
   "power_hp": 180,
   "weight_lb": 4380,
-  "_0_to_60_mph_s": 12.1,
+  "0_to_60_mph_s": 12.1,
   "year": 76
 }, {
   "name": "Chevroelt Chevelle Malibu",
@@ -500,7 +500,7 @@
   "displacement_cc": 250,
   "power_hp": 105,
   "weight_lb": 3897,
-  "_0_to_60_mph_s": 18.5,
+  "0_to_60_mph_s": 18.5,
   "year": 75
 }, {
   "name": "Chevrolet Bel Air",
@@ -509,7 +509,7 @@
   "displacement_cc": 350,
   "power_hp": 145,
   "weight_lb": 4440,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 75
 }, {
   "name": "Chevrolet Camaro",
@@ -518,7 +518,7 @@
   "displacement_cc": 151,
   "power_hp": 90,
   "weight_lb": 2950,
-  "_0_to_60_mph_s": 17.3,
+  "0_to_60_mph_s": 17.3,
   "year": 82
 }, {
   "name": "Chevrolet Caprice Classic",
@@ -527,7 +527,7 @@
   "displacement_cc": 400,
   "power_hp": 150,
   "weight_lb": 4464,
-  "_0_to_60_mph_s": 12,
+  "0_to_60_mph_s": 12,
   "year": 73
 }, {
   "name": "Chevrolet Caprice Classic",
@@ -536,7 +536,7 @@
   "displacement_cc": 305,
   "power_hp": 130,
   "weight_lb": 3840,
-  "_0_to_60_mph_s": 15.4,
+  "0_to_60_mph_s": 15.4,
   "year": 79
 }, {
   "name": "Chevrolet Caprice Classic",
@@ -545,7 +545,7 @@
   "displacement_cc": 305,
   "power_hp": 145,
   "weight_lb": 3880,
-  "_0_to_60_mph_s": 12.5,
+  "0_to_60_mph_s": 12.5,
   "year": 77
 }, {
   "name": "Chevrolet Cavalier 2-Door",
@@ -554,7 +554,7 @@
   "displacement_cc": 112,
   "power_hp": 88,
   "weight_lb": 2395,
-  "_0_to_60_mph_s": 18,
+  "0_to_60_mph_s": 18,
   "year": 82
 }, {
   "name": "Chevrolet Cavalier Wagon",
@@ -563,7 +563,7 @@
   "displacement_cc": 112,
   "power_hp": 88,
   "weight_lb": 2640,
-  "_0_to_60_mph_s": 18.6,
+  "0_to_60_mph_s": 18.6,
   "year": 82
 }, {
   "name": "Chevrolet Cavalier",
@@ -572,7 +572,7 @@
   "displacement_cc": 112,
   "power_hp": 88,
   "weight_lb": 2605,
-  "_0_to_60_mph_s": 19.6,
+  "0_to_60_mph_s": 19.6,
   "year": 82
 }, {
   "name": "Chevrolet Chevelle Concours (Wagon)",
@@ -581,7 +581,7 @@
   "displacement_cc": 307,
   "power_hp": 130,
   "weight_lb": 4098,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 72
 }, {
   "name": "Chevrolet Chevelle Malibu Classic",
@@ -590,7 +590,7 @@
   "displacement_cc": 250,
   "power_hp": 100,
   "weight_lb": 3781,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 74
 }, {
   "name": "Chevrolet Chevelle Malibu Classic",
@@ -599,7 +599,7 @@
   "displacement_cc": 305,
   "power_hp": 140,
   "weight_lb": 4215,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 76
 }, {
   "name": "Chevrolet Chevelle Malibu",
@@ -608,7 +608,7 @@
   "displacement_cc": 250,
   "power_hp": 100,
   "weight_lb": 3329,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 71
 }, {
   "name": "Chevrolet Chevelle Malibu",
@@ -617,7 +617,7 @@
   "displacement_cc": 307,
   "power_hp": 130,
   "weight_lb": 3504,
-  "_0_to_60_mph_s": 12,
+  "0_to_60_mph_s": 12,
   "year": 70
 }, {
   "name": "Chevrolet Chevette",
@@ -626,7 +626,7 @@
   "displacement_cc": 85,
   "power_hp": 52,
   "weight_lb": 2035,
-  "_0_to_60_mph_s": 22.2,
+  "0_to_60_mph_s": 22.2,
   "year": 76
 }, {
   "name": "Chevrolet Chevette",
@@ -635,7 +635,7 @@
   "displacement_cc": 98,
   "power_hp": 68,
   "weight_lb": 2155,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 78
 }, {
   "name": "Chevrolet Chevette",
@@ -644,7 +644,7 @@
   "displacement_cc": 98,
   "power_hp": 63,
   "weight_lb": 2051,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 77
 }, {
   "name": "Chevrolet Chevette",
@@ -653,7 +653,7 @@
   "displacement_cc": 98,
   "power_hp": 70,
   "weight_lb": 2120,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 80
 }, {
   "name": "Chevrolet Citation",
@@ -662,7 +662,7 @@
   "displacement_cc": 173,
   "power_hp": 110,
   "weight_lb": 2725,
-  "_0_to_60_mph_s": 12.6,
+  "0_to_60_mph_s": 12.6,
   "year": 81
 }, {
   "name": "Chevrolet Citation",
@@ -671,7 +671,7 @@
   "displacement_cc": 151,
   "power_hp": 90,
   "weight_lb": 2678,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 80
 }, {
   "name": "Chevrolet Citation",
@@ -680,7 +680,7 @@
   "displacement_cc": 173,
   "power_hp": 115,
   "weight_lb": 2595,
-  "_0_to_60_mph_s": 11.3,
+  "0_to_60_mph_s": 11.3,
   "year": 79
 }, {
   "name": "Chevrolet Concours",
@@ -689,7 +689,7 @@
   "displacement_cc": 250,
   "power_hp": 110,
   "weight_lb": 3520,
-  "_0_to_60_mph_s": 16.4,
+  "0_to_60_mph_s": 16.4,
   "year": 77
 }, {
   "name": "Chevrolet Impala",
@@ -698,7 +698,7 @@
   "displacement_cc": 400,
   "power_hp": 150,
   "weight_lb": 4997,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 73
 }, {
   "name": "Chevrolet Impala",
@@ -707,7 +707,7 @@
   "displacement_cc": 350,
   "power_hp": 165,
   "weight_lb": 4274,
-  "_0_to_60_mph_s": 12,
+  "0_to_60_mph_s": 12,
   "year": 72
 }, {
   "name": "Chevrolet Impala",
@@ -716,7 +716,7 @@
   "displacement_cc": 350,
   "power_hp": 165,
   "weight_lb": 4209,
-  "_0_to_60_mph_s": 12,
+  "0_to_60_mph_s": 12,
   "year": 71
 }, {
   "name": "Chevrolet Impala",
@@ -725,7 +725,7 @@
   "displacement_cc": 454,
   "power_hp": 220,
   "weight_lb": 4354,
-  "_0_to_60_mph_s": 9,
+  "0_to_60_mph_s": 9,
   "year": 70
 }, {
   "name": "Chevrolet Malibu Classic (Wagon)",
@@ -734,7 +734,7 @@
   "displacement_cc": 267,
   "power_hp": 125,
   "weight_lb": 3605,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 79
 }, {
   "name": "Chevrolet Malibu",
@@ -743,7 +743,7 @@
   "displacement_cc": 350,
   "power_hp": 145,
   "weight_lb": 3988,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 73
 }, {
   "name": "Chevrolet Malibu",
@@ -752,7 +752,7 @@
   "displacement_cc": 200,
   "power_hp": 95,
   "weight_lb": 3155,
-  "_0_to_60_mph_s": 18.2,
+  "0_to_60_mph_s": 18.2,
   "year": 78
 }, {
   "name": "Chevrolet Monte Carlo Landau",
@@ -761,7 +761,7 @@
   "displacement_cc": 350,
   "power_hp": 170,
   "weight_lb": 4165,
-  "_0_to_60_mph_s": 11.4,
+  "0_to_60_mph_s": 11.4,
   "year": 77
 }, {
   "name": "Chevrolet Monte Carlo Landau",
@@ -770,7 +770,7 @@
   "displacement_cc": 305,
   "power_hp": 145,
   "weight_lb": 3425,
-  "_0_to_60_mph_s": 13.2,
+  "0_to_60_mph_s": 13.2,
   "year": 78
 }, {
   "name": "Chevrolet Monte Carlo S",
@@ -779,7 +779,7 @@
   "displacement_cc": 350,
   "power_hp": 145,
   "weight_lb": 4082,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 73
 }, {
   "name": "Chevrolet Monte Carlo",
@@ -788,7 +788,7 @@
   "displacement_cc": 400,
   "power_hp": 150,
   "weight_lb": 3761,
-  "_0_to_60_mph_s": 9.5,
+  "0_to_60_mph_s": 9.5,
   "year": 70
 }, {
   "name": "Chevrolet Monza 2+2",
@@ -797,7 +797,7 @@
   "displacement_cc": 262,
   "power_hp": 110,
   "weight_lb": 3221,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 75
 }, {
   "name": "Chevrolet Nova Custom",
@@ -806,7 +806,7 @@
   "displacement_cc": 250,
   "power_hp": 100,
   "weight_lb": 3278,
-  "_0_to_60_mph_s": 18,
+  "0_to_60_mph_s": 18,
   "year": 73
 }, {
   "name": "Chevrolet Nova",
@@ -815,7 +815,7 @@
   "displacement_cc": 250,
   "power_hp": 100,
   "weight_lb": 3336,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 74
 }, {
   "name": "Chevrolet Nova",
@@ -824,7 +824,7 @@
   "displacement_cc": 250,
   "power_hp": 105,
   "weight_lb": 3459,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 75
 }, {
   "name": "Chevrolet Nova",
@@ -833,7 +833,7 @@
   "displacement_cc": 250,
   "power_hp": 105,
   "weight_lb": 3353,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 76
 }, {
   "name": "Chevrolet Vega (Wagon)",
@@ -842,7 +842,7 @@
   "displacement_cc": 140,
   "power_hp": 72,
   "weight_lb": 2408,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 71
 }, {
   "name": "Chevrolet Vega 2300",
@@ -851,7 +851,7 @@
   "displacement_cc": 140,
   "power_hp": 90,
   "weight_lb": 2264,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 71
 }, {
   "name": "Chevrolet Vega",
@@ -860,7 +860,7 @@
   "displacement_cc": 140,
   "power_hp": 90,
   "weight_lb": 2408,
-  "_0_to_60_mph_s": 19.5,
+  "0_to_60_mph_s": 19.5,
   "year": 72
 }, {
   "name": "Chevrolet Vega",
@@ -869,7 +869,7 @@
   "displacement_cc": 140,
   "power_hp": 72,
   "weight_lb": 2401,
-  "_0_to_60_mph_s": 19.5,
+  "0_to_60_mph_s": 19.5,
   "year": 73
 }, {
   "name": "Chevrolet Vega",
@@ -878,7 +878,7 @@
   "displacement_cc": 140,
   "power_hp": 75,
   "weight_lb": 2542,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 74
 }, {
   "name": "Chevrolet Woody",
@@ -887,7 +887,7 @@
   "displacement_cc": 98,
   "power_hp": 60,
   "weight_lb": 2164,
-  "_0_to_60_mph_s": 22.1,
+  "0_to_60_mph_s": 22.1,
   "year": 76
 }, {
   "name": "Chevy C10",
@@ -896,7 +896,7 @@
   "displacement_cc": 350,
   "power_hp": 145,
   "weight_lb": 4055,
-  "_0_to_60_mph_s": 12,
+  "0_to_60_mph_s": 12,
   "year": 76
 }, {
   "name": "Chevy C20",
@@ -905,7 +905,7 @@
   "displacement_cc": 307,
   "power_hp": 200,
   "weight_lb": 4376,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 70
 }, {
   "name": "Chevy S-10",
@@ -914,7 +914,7 @@
   "displacement_cc": 119,
   "power_hp": 82,
   "weight_lb": 2720,
-  "_0_to_60_mph_s": 19.4,
+  "0_to_60_mph_s": 19.4,
   "year": 82
 }, {
   "name": "Chrysler Cordoba",
@@ -923,7 +923,7 @@
   "displacement_cc": 400,
   "power_hp": 190,
   "weight_lb": 4325,
-  "_0_to_60_mph_s": 12.2,
+  "0_to_60_mph_s": 12.2,
   "year": 77
 }, {
   "name": "Chrysler Lebaron Medallion",
@@ -932,7 +932,7 @@
   "displacement_cc": 156,
   "power_hp": 92,
   "weight_lb": 2585,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 82
 }, {
   "name": "Chrysler Lebaron Salon",
@@ -941,7 +941,7 @@
   "displacement_cc": 225,
   "power_hp": 85,
   "weight_lb": 3465,
-  "_0_to_60_mph_s": 16.6,
+  "0_to_60_mph_s": 16.6,
   "year": 81
 }, {
   "name": "Chrysler Lebaron Town & Country (Wagon)",
@@ -950,7 +950,7 @@
   "displacement_cc": 360,
   "power_hp": 150,
   "weight_lb": 3940,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 79
 }, {
   "name": "Chrysler New Yorker Brougham",
@@ -959,7 +959,7 @@
   "displacement_cc": 440,
   "power_hp": 215,
   "weight_lb": 4735,
-  "_0_to_60_mph_s": 11,
+  "0_to_60_mph_s": 11,
   "year": 73
 }, {
   "name": "Chrysler Newport Royal",
@@ -968,7 +968,7 @@
   "displacement_cc": 400,
   "power_hp": 190,
   "weight_lb": 4422,
-  "_0_to_60_mph_s": 12.5,
+  "0_to_60_mph_s": 12.5,
   "year": 72
 }, {
   "name": "Datsun 1200",
@@ -977,7 +977,7 @@
   "displacement_cc": 72,
   "power_hp": 69,
   "weight_lb": 1613,
-  "_0_to_60_mph_s": 18,
+  "0_to_60_mph_s": 18,
   "year": 71
 }, {
   "name": "Datsun 200SX",
@@ -986,7 +986,7 @@
   "displacement_cc": 119,
   "power_hp": 97,
   "weight_lb": 2405,
-  "_0_to_60_mph_s": 14.9,
+  "0_to_60_mph_s": 14.9,
   "year": 78
 }, {
   "name": "Datsun 200SX",
@@ -995,7 +995,7 @@
   "displacement_cc": 119,
   "power_hp": 100,
   "weight_lb": 2615,
-  "_0_to_60_mph_s": 14.8,
+  "0_to_60_mph_s": 14.8,
   "year": 81
 }, {
   "name": "Datsun 210",
@@ -1004,7 +1004,7 @@
   "displacement_cc": 85,
   "power_hp": 65,
   "weight_lb": 2020,
-  "_0_to_60_mph_s": 19.2,
+  "0_to_60_mph_s": 19.2,
   "year": 79
 }, {
   "name": "Datsun 210",
@@ -1013,7 +1013,7 @@
   "displacement_cc": 85,
   "power_hp": 65,
   "weight_lb": 1975,
-  "_0_to_60_mph_s": 19.4,
+  "0_to_60_mph_s": 19.4,
   "year": 81
 }, {
   "name": "Datsun 210",
@@ -1022,7 +1022,7 @@
   "displacement_cc": 85,
   "power_hp": 65,
   "weight_lb": 2110,
-  "_0_to_60_mph_s": 19.2,
+  "0_to_60_mph_s": 19.2,
   "year": 80
 }, {
   "name": "Datsun 280ZX",
@@ -1031,7 +1031,7 @@
   "displacement_cc": 168,
   "power_hp": 132,
   "weight_lb": 2910,
-  "_0_to_60_mph_s": 11.4,
+  "0_to_60_mph_s": 11.4,
   "year": 80
 }, {
   "name": "Datsun 310 GX",
@@ -1040,7 +1040,7 @@
   "displacement_cc": 91,
   "power_hp": 67,
   "weight_lb": 1995,
-  "_0_to_60_mph_s": 16.2,
+  "0_to_60_mph_s": 16.2,
   "year": 82
 }, {
   "name": "Datsun 310",
@@ -1049,7 +1049,7 @@
   "displacement_cc": 86,
   "power_hp": 65,
   "weight_lb": 2019,
-  "_0_to_60_mph_s": 16.4,
+  "0_to_60_mph_s": 16.4,
   "year": 80
 }, {
   "name": "Datsun 510 (Wagon)",
@@ -1058,7 +1058,7 @@
   "displacement_cc": 97,
   "power_hp": 92,
   "weight_lb": 2288,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 72
 }, {
   "name": "Datsun 510 Hatchback",
@@ -1067,7 +1067,7 @@
   "displacement_cc": 119,
   "power_hp": 92,
   "weight_lb": 2434,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 80
 }, {
   "name": "Datsun 510",
@@ -1076,7 +1076,7 @@
   "displacement_cc": 119,
   "power_hp": 97,
   "weight_lb": 2300,
-  "_0_to_60_mph_s": 14.7,
+  "0_to_60_mph_s": 14.7,
   "year": 78
 }, {
   "name": "Datsun 610",
@@ -1085,7 +1085,7 @@
   "displacement_cc": 108,
   "power_hp": 94,
   "weight_lb": 2379,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 73
 }, {
   "name": "Datsun 710",
@@ -1094,7 +1094,7 @@
   "displacement_cc": 119,
   "power_hp": 97,
   "weight_lb": 2545,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 75
 }, {
   "name": "Datsun 710",
@@ -1103,7 +1103,7 @@
   "displacement_cc": 83,
   "power_hp": 61,
   "weight_lb": 2003,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 74
 }, {
   "name": "Datsun 810 Maxima",
@@ -1112,7 +1112,7 @@
   "displacement_cc": 146,
   "power_hp": 120,
   "weight_lb": 2930,
-  "_0_to_60_mph_s": 13.8,
+  "0_to_60_mph_s": 13.8,
   "year": 81
 }, {
   "name": "Datsun 810",
@@ -1121,7 +1121,7 @@
   "displacement_cc": 146,
   "power_hp": 97,
   "weight_lb": 2815,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 77
 }, {
   "name": "Datsun B-210",
@@ -1130,7 +1130,7 @@
   "displacement_cc": 85,
   "power_hp": 70,
   "weight_lb": 1990,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 76
 }, {
   "name": "Datsun B210 GX",
@@ -1139,7 +1139,7 @@
   "displacement_cc": 85,
   "power_hp": 70,
   "weight_lb": 2070,
-  "_0_to_60_mph_s": 18.6,
+  "0_to_60_mph_s": 18.6,
   "year": 78
 }, {
   "name": "Datsun B210",
@@ -1148,7 +1148,7 @@
   "displacement_cc": 79,
   "power_hp": 67,
   "weight_lb": 1950,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 74
 }, {
   "name": "Datsun F-10 Hatchback",
@@ -1157,7 +1157,7 @@
   "displacement_cc": 85,
   "power_hp": 70,
   "weight_lb": 1945,
-  "_0_to_60_mph_s": 16.8,
+  "0_to_60_mph_s": 16.8,
   "year": 77
 }, {
   "name": "Datsun PL510",
@@ -1166,7 +1166,7 @@
   "displacement_cc": 97,
   "power_hp": 88,
   "weight_lb": 2130,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 70
 }, {
   "name": "Datsun PL510",
@@ -1175,7 +1175,7 @@
   "displacement_cc": 97,
   "power_hp": 88,
   "weight_lb": 2130,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 71
 }, {
   "name": "Dodge Aries SE",
@@ -1184,7 +1184,7 @@
   "displacement_cc": 135,
   "power_hp": 84,
   "weight_lb": 2525,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 82
 }, {
   "name": "Dodge Aries Wagon (Wagon)",
@@ -1193,7 +1193,7 @@
   "displacement_cc": 156,
   "power_hp": 92,
   "weight_lb": 2620,
-  "_0_to_60_mph_s": 14.4,
+  "0_to_60_mph_s": 14.4,
   "year": 81
 }, {
   "name": "Dodge Aspen 6",
@@ -1202,7 +1202,7 @@
   "displacement_cc": 225,
   "power_hp": 110,
   "weight_lb": 3360,
-  "_0_to_60_mph_s": 16.6,
+  "0_to_60_mph_s": 16.6,
   "year": 79
 }, {
   "name": "Dodge Aspen SE",
@@ -1211,7 +1211,7 @@
   "displacement_cc": 225,
   "power_hp": 100,
   "weight_lb": 3651,
-  "_0_to_60_mph_s": 17.7,
+  "0_to_60_mph_s": 17.7,
   "year": 76
 }, {
   "name": "Dodge Aspen",
@@ -1220,7 +1220,7 @@
   "displacement_cc": 225,
   "power_hp": 110,
   "weight_lb": 3620,
-  "_0_to_60_mph_s": 18.7,
+  "0_to_60_mph_s": 18.7,
   "year": 78
 }, {
   "name": "Dodge Aspen",
@@ -1229,7 +1229,7 @@
   "displacement_cc": 225,
   "power_hp": 90,
   "weight_lb": 3381,
-  "_0_to_60_mph_s": 18.7,
+  "0_to_60_mph_s": 18.7,
   "year": 80
 }, {
   "name": "Dodge Challenger SE",
@@ -1238,7 +1238,7 @@
   "displacement_cc": 383,
   "power_hp": 170,
   "weight_lb": 3563,
-  "_0_to_60_mph_s": 10,
+  "0_to_60_mph_s": 10,
   "year": 70
 }, {
   "name": "Dodge Charger 2.2",
@@ -1247,7 +1247,7 @@
   "displacement_cc": 135,
   "power_hp": 84,
   "weight_lb": 2370,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 82
 }, {
   "name": "Dodge Colt (Wagon)",
@@ -1256,7 +1256,7 @@
   "displacement_cc": 98,
   "power_hp": 80,
   "weight_lb": 2164,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 72
 }, {
   "name": "Dodge Colt Hardtop",
@@ -1265,7 +1265,7 @@
   "displacement_cc": 97.5,
   "power_hp": 80,
   "weight_lb": 2126,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 72
 }, {
   "name": "Dodge Colt Hatchback Custom",
@@ -1274,7 +1274,7 @@
   "displacement_cc": 98,
   "power_hp": 80,
   "weight_lb": 1915,
-  "_0_to_60_mph_s": 14.4,
+  "0_to_60_mph_s": 14.4,
   "year": 79
 }, {
   "name": "Dodge Colt M/M",
@@ -1283,7 +1283,7 @@
   "displacement_cc": 98,
   "power_hp": 83,
   "weight_lb": 2075,
-  "_0_to_60_mph_s": 15.9,
+  "0_to_60_mph_s": 15.9,
   "year": 77
 }, {
   "name": "Dodge Colt",
@@ -1292,7 +1292,7 @@
   "displacement_cc": 98,
   "power_hp": 79,
   "weight_lb": 2255,
-  "_0_to_60_mph_s": 17.7,
+  "0_to_60_mph_s": 17.7,
   "year": 76
 }, {
   "name": "Dodge Colt",
@@ -1301,7 +1301,7 @@
   "displacement_cc": 156,
   "power_hp": 105,
   "weight_lb": 2800,
-  "_0_to_60_mph_s": 14.4,
+  "0_to_60_mph_s": 14.4,
   "year": 80
 }, {
   "name": "Dodge Colt",
@@ -1310,7 +1310,7 @@
   "displacement_cc": 90,
   "power_hp": 75,
   "weight_lb": 2125,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 74
 }, {
   "name": "Dodge Coronet Brougham",
@@ -1319,7 +1319,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 4190,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 76
 }, {
   "name": "Dodge Coronet Custom (Wagon)",
@@ -1328,7 +1328,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 4457,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 74
 }, {
   "name": "Dodge Coronet Custom",
@@ -1337,7 +1337,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 3777,
-  "_0_to_60_mph_s": 12.5,
+  "0_to_60_mph_s": 12.5,
   "year": 73
 }, {
   "name": "Dodge D100",
@@ -1346,7 +1346,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 3755,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 76
 }, {
   "name": "Dodge D200",
@@ -1355,7 +1355,7 @@
   "displacement_cc": 318,
   "power_hp": 210,
   "weight_lb": 4382,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 70
 }, {
   "name": "Dodge Dart Custom",
@@ -1364,7 +1364,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 3399,
-  "_0_to_60_mph_s": 11,
+  "0_to_60_mph_s": 11,
   "year": 73
 }, {
   "name": "Dodge Diplomat",
@@ -1373,7 +1373,7 @@
   "displacement_cc": 318,
   "power_hp": 140,
   "weight_lb": 3735,
-  "_0_to_60_mph_s": 13.2,
+  "0_to_60_mph_s": 13.2,
   "year": 78
 }, {
   "name": "Dodge Magnum XE",
@@ -1382,7 +1382,7 @@
   "displacement_cc": 318,
   "power_hp": 140,
   "weight_lb": 4080,
-  "_0_to_60_mph_s": 13.7,
+  "0_to_60_mph_s": 13.7,
   "year": 78
 }, {
   "name": "Dodge Monaco (Wagon)",
@@ -1391,7 +1391,7 @@
   "displacement_cc": 383,
   "power_hp": 180,
   "weight_lb": 4955,
-  "_0_to_60_mph_s": 11.5,
+  "0_to_60_mph_s": 11.5,
   "year": 71
 }, {
   "name": "Dodge Monaco Brougham",
@@ -1400,7 +1400,7 @@
   "displacement_cc": 318,
   "power_hp": 145,
   "weight_lb": 4140,
-  "_0_to_60_mph_s": 13.7,
+  "0_to_60_mph_s": 13.7,
   "year": 77
 }, {
   "name": "Dodge Omni",
@@ -1409,7 +1409,7 @@
   "displacement_cc": 105,
   "power_hp": 75,
   "weight_lb": 2230,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 78
 }, {
   "name": "Dodge Rampage",
@@ -1418,7 +1418,7 @@
   "displacement_cc": 135,
   "power_hp": 84,
   "weight_lb": 2295,
-  "_0_to_60_mph_s": 11.6,
+  "0_to_60_mph_s": 11.6,
   "year": 82
 }, {
   "name": "Dodge St. Regis",
@@ -1427,7 +1427,7 @@
   "displacement_cc": 318,
   "power_hp": 135,
   "weight_lb": 3830,
-  "_0_to_60_mph_s": 15.2,
+  "0_to_60_mph_s": 15.2,
   "year": 79
 }, {
   "name": "Fiat 124 Sport Coupe",
@@ -1436,7 +1436,7 @@
   "displacement_cc": 98,
   "power_hp": 90,
   "weight_lb": 2265,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 73
 }, {
   "name": "Fiat 124 TC",
@@ -1445,7 +1445,7 @@
   "displacement_cc": 116,
   "power_hp": 75,
   "weight_lb": 2246,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 74
 }, {
   "name": "Fiat 124B",
@@ -1454,7 +1454,7 @@
   "displacement_cc": 88,
   "power_hp": 76,
   "weight_lb": 2065,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 71
 }, {
   "name": "Fiat 128",
@@ -1463,7 +1463,7 @@
   "displacement_cc": 90,
   "power_hp": 75,
   "weight_lb": 2108,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 74
 }, {
   "name": "Fiat 128",
@@ -1472,7 +1472,7 @@
   "displacement_cc": 68,
   "power_hp": 49,
   "weight_lb": 1867,
-  "_0_to_60_mph_s": 19.5,
+  "0_to_60_mph_s": 19.5,
   "year": 73
 }, {
   "name": "Fiat 131",
@@ -1481,7 +1481,7 @@
   "displacement_cc": 107,
   "power_hp": 86,
   "weight_lb": 2464,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 76
 }, {
   "name": "Fiat Strada Custom",
@@ -1490,7 +1490,7 @@
   "displacement_cc": 91,
   "power_hp": 69,
   "weight_lb": 2130,
-  "_0_to_60_mph_s": 14.7,
+  "0_to_60_mph_s": 14.7,
   "year": 79
 }, {
   "name": "Fiat X1.9",
@@ -1499,7 +1499,7 @@
   "displacement_cc": 79,
   "power_hp": 67,
   "weight_lb": 2000,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 74
 }, {
   "name": "Ford Capri II",
@@ -1508,7 +1508,7 @@
   "displacement_cc": 140,
   "power_hp": 92,
   "weight_lb": 2572,
-  "_0_to_60_mph_s": 14.9,
+  "0_to_60_mph_s": 14.9,
   "year": 76
 }, {
   "name": "Ford Country Squire (Wagon)",
@@ -1517,7 +1517,7 @@
   "displacement_cc": 400,
   "power_hp": 170,
   "weight_lb": 4746,
-  "_0_to_60_mph_s": 12,
+  "0_to_60_mph_s": 12,
   "year": 71
 }, {
   "name": "Ford Country Squire (Wagon)",
@@ -1526,7 +1526,7 @@
   "displacement_cc": 351,
   "power_hp": 142,
   "weight_lb": 4054,
-  "_0_to_60_mph_s": 14.3,
+  "0_to_60_mph_s": 14.3,
   "year": 79
 }, {
   "name": "Ford Country",
@@ -1535,7 +1535,7 @@
   "displacement_cc": 400,
   "power_hp": 167,
   "weight_lb": 4906,
-  "_0_to_60_mph_s": 12.5,
+  "0_to_60_mph_s": 12.5,
   "year": 73
 }, {
   "name": "Ford Escort 2H",
@@ -1544,7 +1544,7 @@
   "displacement_cc": 98,
   "power_hp": 65,
   "weight_lb": 2380,
-  "_0_to_60_mph_s": 20.7,
+  "0_to_60_mph_s": 20.7,
   "year": 81
 }, {
   "name": "Ford Escort 4W",
@@ -1553,7 +1553,7 @@
   "displacement_cc": 98,
   "power_hp": 65,
   "weight_lb": 2045,
-  "_0_to_60_mph_s": 16.2,
+  "0_to_60_mph_s": 16.2,
   "year": 81
 }, {
   "name": "Ford F108",
@@ -1562,7 +1562,7 @@
   "displacement_cc": 302,
   "power_hp": 130,
   "weight_lb": 3870,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 76
 }, {
   "name": "Ford F250",
@@ -1571,7 +1571,7 @@
   "displacement_cc": 360,
   "power_hp": 215,
   "weight_lb": 4615,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 70
 }, {
   "name": "Ford Fairmont (Auto)",
@@ -1580,7 +1580,7 @@
   "displacement_cc": 200,
   "power_hp": 85,
   "weight_lb": 2965,
-  "_0_to_60_mph_s": 15.8,
+  "0_to_60_mph_s": 15.8,
   "year": 78
 }, {
   "name": "Ford Fairmont (Man)",
@@ -1589,7 +1589,7 @@
   "displacement_cc": 140,
   "power_hp": 88,
   "weight_lb": 2720,
-  "_0_to_60_mph_s": 15.4,
+  "0_to_60_mph_s": 15.4,
   "year": 78
 }, {
   "name": "Ford Fairmont 4",
@@ -1598,7 +1598,7 @@
   "displacement_cc": 140,
   "power_hp": 88,
   "weight_lb": 2890,
-  "_0_to_60_mph_s": 17.3,
+  "0_to_60_mph_s": 17.3,
   "year": 79
 }, {
   "name": "Ford Fairmont Futura",
@@ -1607,7 +1607,7 @@
   "displacement_cc": 140,
   "power_hp": 92,
   "weight_lb": 2865,
-  "_0_to_60_mph_s": 16.4,
+  "0_to_60_mph_s": 16.4,
   "year": 82
 }, {
   "name": "Ford Fairmont",
@@ -1616,7 +1616,7 @@
   "displacement_cc": 140,
   "power_hp": 88,
   "weight_lb": 2870,
-  "_0_to_60_mph_s": 18.1,
+  "0_to_60_mph_s": 18.1,
   "year": 80
 }, {
   "name": "Ford Fiesta",
@@ -1625,7 +1625,7 @@
   "displacement_cc": 98,
   "power_hp": 66,
   "weight_lb": 1800,
-  "_0_to_60_mph_s": 14.4,
+  "0_to_60_mph_s": 14.4,
   "year": 78
 }, {
   "name": "Ford Futura",
@@ -1634,7 +1634,7 @@
   "displacement_cc": 302,
   "power_hp": 139,
   "weight_lb": 3205,
-  "_0_to_60_mph_s": 11.2,
+  "0_to_60_mph_s": 11.2,
   "year": 78
 }, {
   "name": "Ford Galaxie 500",
@@ -1643,7 +1643,7 @@
   "displacement_cc": 351,
   "power_hp": 153,
   "weight_lb": 4129,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 72
 }, {
   "name": "Ford Galaxie 500",
@@ -1652,7 +1652,7 @@
   "displacement_cc": 351,
   "power_hp": 153,
   "weight_lb": 4154,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 71
 }, {
   "name": "Ford Galaxie 500",
@@ -1661,7 +1661,7 @@
   "displacement_cc": 429,
   "power_hp": 198,
   "weight_lb": 4341,
-  "_0_to_60_mph_s": 10,
+  "0_to_60_mph_s": 10,
   "year": 70
 }, {
   "name": "Ford Gran Torino (Wagon)",
@@ -1670,7 +1670,7 @@
   "displacement_cc": 302,
   "power_hp": 140,
   "weight_lb": 4294,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 72
 }, {
   "name": "Ford Gran Torino (Wagon)",
@@ -1679,7 +1679,7 @@
   "displacement_cc": 302,
   "power_hp": 140,
   "weight_lb": 4638,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 74
 }, {
   "name": "Ford Gran Torino",
@@ -1688,7 +1688,7 @@
   "displacement_cc": 302,
   "power_hp": 137,
   "weight_lb": 4042,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 73
 }, {
   "name": "Ford Gran Torino",
@@ -1697,7 +1697,7 @@
   "displacement_cc": 351,
   "power_hp": 152,
   "weight_lb": 4215,
-  "_0_to_60_mph_s": 12.8,
+  "0_to_60_mph_s": 12.8,
   "year": 76
 }, {
   "name": "Ford Gran Torino",
@@ -1706,7 +1706,7 @@
   "displacement_cc": 302,
   "power_hp": 140,
   "weight_lb": 4141,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 74
 }, {
   "name": "Ford Granada Ghia",
@@ -1715,7 +1715,7 @@
   "displacement_cc": 250,
   "power_hp": 78,
   "weight_lb": 3574,
-  "_0_to_60_mph_s": 21,
+  "0_to_60_mph_s": 21,
   "year": 76
 }, {
   "name": "Ford Granada GL",
@@ -1724,7 +1724,7 @@
   "displacement_cc": 200,
   "power_hp": 88,
   "weight_lb": 3060,
-  "_0_to_60_mph_s": 17.1,
+  "0_to_60_mph_s": 17.1,
   "year": 81
 }, {
   "name": "Ford Granada L",
@@ -1733,7 +1733,7 @@
   "displacement_cc": 232,
   "power_hp": 112,
   "weight_lb": 2835,
-  "_0_to_60_mph_s": 14.7,
+  "0_to_60_mph_s": 14.7,
   "year": 82
 }, {
   "name": "Ford Granada",
@@ -1742,7 +1742,7 @@
   "displacement_cc": 250,
   "power_hp": 98,
   "weight_lb": 3525,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 77
 }, {
   "name": "Ford LTD Landau",
@@ -1751,7 +1751,7 @@
   "displacement_cc": 302,
   "power_hp": 129,
   "weight_lb": 3725,
-  "_0_to_60_mph_s": 13.4,
+  "0_to_60_mph_s": 13.4,
   "year": 79
 }, {
   "name": "Ford LTD",
@@ -1760,7 +1760,7 @@
   "displacement_cc": 351,
   "power_hp": 158,
   "weight_lb": 4363,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 73
 }, {
   "name": "Ford LTD",
@@ -1769,7 +1769,7 @@
   "displacement_cc": 351,
   "power_hp": 148,
   "weight_lb": 4657,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 75
 }, {
   "name": "Ford Maverick",
@@ -1778,7 +1778,7 @@
   "displacement_cc": 250,
   "power_hp": 72,
   "weight_lb": 3158,
-  "_0_to_60_mph_s": 19.5,
+  "0_to_60_mph_s": 19.5,
   "year": 75
 }, {
   "name": "Ford Maverick",
@@ -1787,7 +1787,7 @@
   "displacement_cc": 250,
   "power_hp": 88,
   "weight_lb": 3021,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 73
 }, {
   "name": "Ford Maverick",
@@ -1796,7 +1796,7 @@
   "displacement_cc": 200,
   "power_hp": 85,
   "weight_lb": 2587,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 70
 }, {
   "name": "Ford Maverick",
@@ -1805,7 +1805,7 @@
   "displacement_cc": 200,
   "power_hp": 81,
   "weight_lb": 3012,
-  "_0_to_60_mph_s": 17.6,
+  "0_to_60_mph_s": 17.6,
   "year": 76
 }, {
   "name": "Ford Mustang GL",
@@ -1814,7 +1814,7 @@
   "displacement_cc": 140,
   "power_hp": 86,
   "weight_lb": 2790,
-  "_0_to_60_mph_s": 15.6,
+  "0_to_60_mph_s": 15.6,
   "year": 82
 }, {
   "name": "Ford Mustang II 2+2",
@@ -1823,7 +1823,7 @@
   "displacement_cc": 140,
   "power_hp": 89,
   "weight_lb": 2755,
-  "_0_to_60_mph_s": 15.8,
+  "0_to_60_mph_s": 15.8,
   "year": 77
 }, {
   "name": "Ford Mustang II",
@@ -1832,7 +1832,7 @@
   "displacement_cc": 302,
   "power_hp": 129,
   "weight_lb": 3169,
-  "_0_to_60_mph_s": 12,
+  "0_to_60_mph_s": 12,
   "year": 75
 }, {
   "name": "Ford Mustang",
@@ -1841,7 +1841,7 @@
   "displacement_cc": 250,
   "power_hp": 88,
   "weight_lb": 3139,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 71
 }, {
   "name": "Ford Pinto (Wagon)",
@@ -1850,7 +1850,7 @@
   "displacement_cc": 122,
   "power_hp": 86,
   "weight_lb": 2395,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 72
 }, {
   "name": "Ford Pinto Runabout",
@@ -1859,7 +1859,7 @@
   "displacement_cc": 122,
   "power_hp": 86,
   "weight_lb": 2226,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 72
 }, {
   "name": "Ford Pinto",
@@ -1868,7 +1868,7 @@
   "displacement_cc": 171,
   "power_hp": 97,
   "weight_lb": 2984,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 75
 }, {
   "name": "Ford Pinto",
@@ -1877,7 +1877,7 @@
   "displacement_cc": 122,
   "power_hp": 85,
   "weight_lb": 2310,
-  "_0_to_60_mph_s": 18.5,
+  "0_to_60_mph_s": 18.5,
   "year": 73
 }, {
   "name": "Ford Pinto",
@@ -1886,7 +1886,7 @@
   "displacement_cc": 140,
   "power_hp": 83,
   "weight_lb": 2639,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 75
 }, {
   "name": "Ford Pinto",
@@ -1895,7 +1895,7 @@
   "displacement_cc": 122,
   "power_hp": 80,
   "weight_lb": 2451,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 74
 }, {
   "name": "Ford Pinto",
@@ -1904,7 +1904,7 @@
   "displacement_cc": 140,
   "power_hp": 72,
   "weight_lb": 2565,
-  "_0_to_60_mph_s": 13.6,
+  "0_to_60_mph_s": 13.6,
   "year": 76
 }, {
   "name": "Ford Ranger",
@@ -1913,7 +1913,7 @@
   "displacement_cc": 120,
   "power_hp": 79,
   "weight_lb": 2625,
-  "_0_to_60_mph_s": 18.6,
+  "0_to_60_mph_s": 18.6,
   "year": 82
 }, {
   "name": "Ford Thunderbird",
@@ -1922,7 +1922,7 @@
   "displacement_cc": 351,
   "power_hp": 149,
   "weight_lb": 4335,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 77
 }, {
   "name": "Ford Torino 500",
@@ -1931,7 +1931,7 @@
   "displacement_cc": 250,
   "power_hp": 88,
   "weight_lb": 3302,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 71
 }, {
   "name": "Ford Torino",
@@ -1940,7 +1940,7 @@
   "displacement_cc": 302,
   "power_hp": 140,
   "weight_lb": 3449,
-  "_0_to_60_mph_s": 10.5,
+  "0_to_60_mph_s": 10.5,
   "year": 70
 }, {
   "name": "Hi 1200D",
@@ -1949,7 +1949,7 @@
   "displacement_cc": 304,
   "power_hp": 193,
   "weight_lb": 4732,
-  "_0_to_60_mph_s": 18.5,
+  "0_to_60_mph_s": 18.5,
   "year": 70
 }, {
   "name": "Honda Accord CVCC",
@@ -1958,7 +1958,7 @@
   "displacement_cc": 98,
   "power_hp": 68,
   "weight_lb": 2045,
-  "_0_to_60_mph_s": 18.5,
+  "0_to_60_mph_s": 18.5,
   "year": 77
 }, {
   "name": "Honda Accord LX",
@@ -1967,7 +1967,7 @@
   "displacement_cc": 98,
   "power_hp": 68,
   "weight_lb": 2135,
-  "_0_to_60_mph_s": 16.6,
+  "0_to_60_mph_s": 16.6,
   "year": 78
 }, {
   "name": "Honda Accord",
@@ -1976,7 +1976,7 @@
   "displacement_cc": 107,
   "power_hp": 72,
   "weight_lb": 2290,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 80
 }, {
   "name": "Honda Accord",
@@ -1985,7 +1985,7 @@
   "displacement_cc": 107,
   "power_hp": 75,
   "weight_lb": 2205,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 82
 }, {
   "name": "Honda Civic (Auto)",
@@ -1994,7 +1994,7 @@
   "displacement_cc": 91,
   "power_hp": 67,
   "weight_lb": 1965,
-  "_0_to_60_mph_s": 15.7,
+  "0_to_60_mph_s": 15.7,
   "year": 82
 }, {
   "name": "Honda Civic 1300",
@@ -2003,7 +2003,7 @@
   "displacement_cc": 81,
   "power_hp": 60,
   "weight_lb": 1760,
-  "_0_to_60_mph_s": 16.1,
+  "0_to_60_mph_s": 16.1,
   "year": 81
 }, {
   "name": "Honda Civic 1500 GL",
@@ -2012,7 +2012,7 @@
   "displacement_cc": 91,
   "power_hp": 67,
   "weight_lb": 1850,
-  "_0_to_60_mph_s": 13.8,
+  "0_to_60_mph_s": 13.8,
   "year": 80
 }, {
   "name": "Honda Civic CVCC",
@@ -2021,7 +2021,7 @@
   "displacement_cc": 91,
   "power_hp": 53,
   "weight_lb": 1795,
-  "_0_to_60_mph_s": 17.5,
+  "0_to_60_mph_s": 17.5,
   "year": 75
 }, {
   "name": "Honda Civic CVCC",
@@ -2030,7 +2030,7 @@
   "displacement_cc": 91,
   "power_hp": 60,
   "weight_lb": 1800,
-  "_0_to_60_mph_s": 16.4,
+  "0_to_60_mph_s": 16.4,
   "year": 78
 }, {
   "name": "Honda Civic",
@@ -2039,7 +2039,7 @@
   "displacement_cc": 120,
   "power_hp": 97,
   "weight_lb": 2489,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 74
 }, {
   "name": "Honda Civic",
@@ -2048,7 +2048,7 @@
   "displacement_cc": 91,
   "power_hp": 53,
   "weight_lb": 1795,
-  "_0_to_60_mph_s": 17.4,
+  "0_to_60_mph_s": 17.4,
   "year": 76
 }, {
   "name": "Honda Civic",
@@ -2057,7 +2057,7 @@
   "displacement_cc": 91,
   "power_hp": 67,
   "weight_lb": 1965,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 82
 }, {
   "name": "Honda Prelude",
@@ -2066,7 +2066,7 @@
   "displacement_cc": 107,
   "power_hp": 75,
   "weight_lb": 2210,
-  "_0_to_60_mph_s": 14.4,
+  "0_to_60_mph_s": 14.4,
   "year": 81
 }, {
   "name": "Maxda GLC Deluxe",
@@ -2075,7 +2075,7 @@
   "displacement_cc": 86,
   "power_hp": 65,
   "weight_lb": 1975,
-  "_0_to_60_mph_s": 15.2,
+  "0_to_60_mph_s": 15.2,
   "year": 79
 }, {
   "name": "Maxda RX-3",
@@ -2084,7 +2084,7 @@
   "displacement_cc": 70,
   "power_hp": 90,
   "weight_lb": 2124,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 73
 }, {
   "name": "Mazda 626",
@@ -2093,7 +2093,7 @@
   "displacement_cc": 120,
   "power_hp": 75,
   "weight_lb": 2542,
-  "_0_to_60_mph_s": 17.5,
+  "0_to_60_mph_s": 17.5,
   "year": 80
 }, {
   "name": "Mazda 626",
@@ -2102,7 +2102,7 @@
   "displacement_cc": 120,
   "power_hp": 74,
   "weight_lb": 2635,
-  "_0_to_60_mph_s": 18.3,
+  "0_to_60_mph_s": 18.3,
   "year": 81
 }, {
   "name": "Mazda GLC 4",
@@ -2111,7 +2111,7 @@
   "displacement_cc": 91,
   "power_hp": 68,
   "weight_lb": 1985,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 81
 }, {
   "name": "Mazda GLC Custom L",
@@ -2120,7 +2120,7 @@
   "displacement_cc": 91,
   "power_hp": 68,
   "weight_lb": 2025,
-  "_0_to_60_mph_s": 18.2,
+  "0_to_60_mph_s": 18.2,
   "year": 82
 }, {
   "name": "Mazda GLC Custom",
@@ -2129,7 +2129,7 @@
   "displacement_cc": 91,
   "power_hp": 68,
   "weight_lb": 1970,
-  "_0_to_60_mph_s": 17.6,
+  "0_to_60_mph_s": 17.6,
   "year": 82
 }, {
   "name": "Mazda GLC Deluxe",
@@ -2138,7 +2138,7 @@
   "displacement_cc": 78,
   "power_hp": 52,
   "weight_lb": 1985,
-  "_0_to_60_mph_s": 19.4,
+  "0_to_60_mph_s": 19.4,
   "year": 78
 }, {
   "name": "Mazda GLC",
@@ -2147,7 +2147,7 @@
   "displacement_cc": 86,
   "power_hp": 65,
   "weight_lb": 2110,
-  "_0_to_60_mph_s": 17.9,
+  "0_to_60_mph_s": 17.9,
   "year": 80
 }, {
   "name": "Mazda RX-2 Coupe",
@@ -2156,7 +2156,7 @@
   "displacement_cc": 70,
   "power_hp": 97,
   "weight_lb": 2330,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 72
 }, {
   "name": "Mazda RX-4",
@@ -2165,7 +2165,7 @@
   "displacement_cc": 80,
   "power_hp": 110,
   "weight_lb": 2720,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 77
 }, {
   "name": "Mazda RX-7 Gs",
@@ -2174,7 +2174,7 @@
   "displacement_cc": 70,
   "power_hp": 100,
   "weight_lb": 2420,
-  "_0_to_60_mph_s": 12.5,
+  "0_to_60_mph_s": 12.5,
   "year": 80
 }, {
   "name": "Mercedes-Benz 240D",
@@ -2183,7 +2183,7 @@
   "displacement_cc": 146,
   "power_hp": 67,
   "weight_lb": 3250,
-  "_0_to_60_mph_s": 21.8,
+  "0_to_60_mph_s": 21.8,
   "year": 80
 }, {
   "name": "Mercedes-Benz 280S",
@@ -2192,7 +2192,7 @@
   "displacement_cc": 168,
   "power_hp": 120,
   "weight_lb": 3820,
-  "_0_to_60_mph_s": 16.7,
+  "0_to_60_mph_s": 16.7,
   "year": 76
 }, {
   "name": "Mercedes-Benz 300D",
@@ -2201,7 +2201,7 @@
   "displacement_cc": 183,
   "power_hp": 77,
   "weight_lb": 3530,
-  "_0_to_60_mph_s": 20.1,
+  "0_to_60_mph_s": 20.1,
   "year": 79
 }, {
   "name": "Mercury Capri 2000",
@@ -2210,7 +2210,7 @@
   "displacement_cc": 122,
   "power_hp": 86,
   "weight_lb": 2220,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 71
 }, {
   "name": "Mercury Capri V6",
@@ -2219,7 +2219,7 @@
   "displacement_cc": 155,
   "power_hp": 107,
   "weight_lb": 2472,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 73
 }, {
   "name": "Mercury Cougar Brougham",
@@ -2228,7 +2228,7 @@
   "displacement_cc": 302,
   "power_hp": 130,
   "weight_lb": 4295,
-  "_0_to_60_mph_s": 14.9,
+  "0_to_60_mph_s": 14.9,
   "year": 77
 }, {
   "name": "Mercury Grand Marquis",
@@ -2237,7 +2237,7 @@
   "displacement_cc": 351,
   "power_hp": 138,
   "weight_lb": 3955,
-  "_0_to_60_mph_s": 13.2,
+  "0_to_60_mph_s": 13.2,
   "year": 79
 }, {
   "name": "Mercury Lynx L",
@@ -2246,7 +2246,7 @@
   "displacement_cc": 98,
   "power_hp": 70,
   "weight_lb": 2125,
-  "_0_to_60_mph_s": 17.3,
+  "0_to_60_mph_s": 17.3,
   "year": 82
 }, {
   "name": "Mercury Marquis Brougham",
@@ -2255,7 +2255,7 @@
   "displacement_cc": 429,
   "power_hp": 198,
   "weight_lb": 4952,
-  "_0_to_60_mph_s": 11.5,
+  "0_to_60_mph_s": 11.5,
   "year": 73
 }, {
   "name": "Mercury Marquis",
@@ -2264,7 +2264,7 @@
   "displacement_cc": 429,
   "power_hp": 208,
   "weight_lb": 4633,
-  "_0_to_60_mph_s": 11,
+  "0_to_60_mph_s": 11,
   "year": 72
 }, {
   "name": "Mercury Monarch Ghia",
@@ -2273,7 +2273,7 @@
   "displacement_cc": 302,
   "power_hp": 139,
   "weight_lb": 3570,
-  "_0_to_60_mph_s": 12.8,
+  "0_to_60_mph_s": 12.8,
   "year": 78
 }, {
   "name": "Mercury Monarch",
@@ -2282,7 +2282,7 @@
   "displacement_cc": 250,
   "power_hp": 72,
   "weight_lb": 3432,
-  "_0_to_60_mph_s": 21,
+  "0_to_60_mph_s": 21,
   "year": 75
 }, {
   "name": "Mercury Zephyr 6",
@@ -2291,7 +2291,7 @@
   "displacement_cc": 200,
   "power_hp": 85,
   "weight_lb": 2990,
-  "_0_to_60_mph_s": 18.2,
+  "0_to_60_mph_s": 18.2,
   "year": 79
 }, {
   "name": "Mercury Zephyr",
@@ -2300,7 +2300,7 @@
   "displacement_cc": 200,
   "power_hp": 85,
   "weight_lb": 3070,
-  "_0_to_60_mph_s": 16.7,
+  "0_to_60_mph_s": 16.7,
   "year": 78
 }, {
   "name": "Nissan Stanza XE",
@@ -2309,7 +2309,7 @@
   "displacement_cc": 120,
   "power_hp": 88,
   "weight_lb": 2160,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 82
 }, {
   "name": "Oldsmobile Cutlass Ciera (Diesel)",
@@ -2318,7 +2318,7 @@
   "displacement_cc": 262,
   "power_hp": 85,
   "weight_lb": 3015,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 82
 }, {
   "name": "Oldsmobile Cutlass LS",
@@ -2327,7 +2327,7 @@
   "displacement_cc": 350,
   "power_hp": 105,
   "weight_lb": 3725,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 81
 }, {
   "name": "Oldsmobile Cutlass Salon Brougham",
@@ -2336,7 +2336,7 @@
   "displacement_cc": 260,
   "power_hp": 110,
   "weight_lb": 3365,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 78
 }, {
   "name": "Oldsmobile Cutlass Salon Brougham",
@@ -2345,7 +2345,7 @@
   "displacement_cc": 260,
   "power_hp": 90,
   "weight_lb": 3420,
-  "_0_to_60_mph_s": 22.2,
+  "0_to_60_mph_s": 22.2,
   "year": 79
 }, {
   "name": "Oldsmobile Cutlass Supreme",
@@ -2354,7 +2354,7 @@
   "displacement_cc": 260,
   "power_hp": 110,
   "weight_lb": 4060,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 77
 }, {
   "name": "Oldsmobile Delta 88 Royale",
@@ -2363,7 +2363,7 @@
   "displacement_cc": 350,
   "power_hp": 160,
   "weight_lb": 4456,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 72
 }, {
   "name": "Oldsmobile Omega Brougham",
@@ -2372,7 +2372,7 @@
   "displacement_cc": 173,
   "power_hp": 115,
   "weight_lb": 2700,
-  "_0_to_60_mph_s": 12.9,
+  "0_to_60_mph_s": 12.9,
   "year": 79
 }, {
   "name": "Oldsmobile Omega",
@@ -2381,7 +2381,7 @@
   "displacement_cc": 350,
   "power_hp": 180,
   "weight_lb": 3664,
-  "_0_to_60_mph_s": 11,
+  "0_to_60_mph_s": 11,
   "year": 73
 }, {
   "name": "Oldsmobile Starfire SX",
@@ -2390,7 +2390,7 @@
   "displacement_cc": 151,
   "power_hp": 85,
   "weight_lb": 2855,
-  "_0_to_60_mph_s": 17.6,
+  "0_to_60_mph_s": 17.6,
   "year": 78
 }, {
   "name": "Oldsmobile Vista Cruiser",
@@ -2399,7 +2399,7 @@
   "displacement_cc": 350,
   "power_hp": 180,
   "weight_lb": 4499,
-  "_0_to_60_mph_s": 12.5,
+  "0_to_60_mph_s": 12.5,
   "year": 73
 }, {
   "name": "Opel 1900",
@@ -2408,7 +2408,7 @@
   "displacement_cc": 116,
   "power_hp": 81,
   "weight_lb": 2220,
-  "_0_to_60_mph_s": 16.9,
+  "0_to_60_mph_s": 16.9,
   "year": 76
 }, {
   "name": "Opel 1900",
@@ -2417,7 +2417,7 @@
   "displacement_cc": 116,
   "power_hp": 90,
   "weight_lb": 2123,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 71
 }, {
   "name": "Opel Manta",
@@ -2426,7 +2426,7 @@
   "displacement_cc": 116,
   "power_hp": 75,
   "weight_lb": 2158,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 73
 }, {
   "name": "Opel Manta",
@@ -2435,7 +2435,7 @@
   "displacement_cc": 97,
   "power_hp": 78,
   "weight_lb": 2300,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 74
 }, {
   "name": "Peugeot 304",
@@ -2444,7 +2444,7 @@
   "displacement_cc": 79,
   "power_hp": 70,
   "weight_lb": 2074,
-  "_0_to_60_mph_s": 19.5,
+  "0_to_60_mph_s": 19.5,
   "year": 71
 }, {
   "name": "Peugeot 504 (Wagon)",
@@ -2453,7 +2453,7 @@
   "displacement_cc": 120,
   "power_hp": 87,
   "weight_lb": 2979,
-  "_0_to_60_mph_s": 19.5,
+  "0_to_60_mph_s": 19.5,
   "year": 72
 }, {
   "name": "Peugeot 504",
@@ -2462,7 +2462,7 @@
   "displacement_cc": 120,
   "power_hp": 88,
   "weight_lb": 3270,
-  "_0_to_60_mph_s": 21.9,
+  "0_to_60_mph_s": 21.9,
   "year": 76
 }, {
   "name": "Peugeot 504",
@@ -2471,7 +2471,7 @@
   "displacement_cc": 120,
   "power_hp": 88,
   "weight_lb": 2957,
-  "_0_to_60_mph_s": 17,
+  "0_to_60_mph_s": 17,
   "year": 75
 }, {
   "name": "Peugeot 504",
@@ -2480,7 +2480,7 @@
   "displacement_cc": 110,
   "power_hp": 87,
   "weight_lb": 2672,
-  "_0_to_60_mph_s": 17.5,
+  "0_to_60_mph_s": 17.5,
   "year": 70
 }, {
   "name": "Peugeot 504",
@@ -2489,7 +2489,7 @@
   "displacement_cc": 141,
   "power_hp": 71,
   "weight_lb": 3190,
-  "_0_to_60_mph_s": 24.8,
+  "0_to_60_mph_s": 24.8,
   "year": 79
 }, {
   "name": "Peugeot 505S Turbo Diesel",
@@ -2498,7 +2498,7 @@
   "displacement_cc": 141,
   "power_hp": 80,
   "weight_lb": 3230,
-  "_0_to_60_mph_s": 20.4,
+  "0_to_60_mph_s": 20.4,
   "year": 81
 }, {
   "name": "Peugeot 604SL",
@@ -2507,7 +2507,7 @@
   "displacement_cc": 163,
   "power_hp": 133,
   "weight_lb": 3410,
-  "_0_to_60_mph_s": 15.8,
+  "0_to_60_mph_s": 15.8,
   "year": 78
 }, {
   "name": "Plymouth Arrow GS",
@@ -2516,7 +2516,7 @@
   "displacement_cc": 122,
   "power_hp": 96,
   "weight_lb": 2300,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 77
 }, {
   "name": "Plymouth Barracuda 340",
@@ -2525,7 +2525,7 @@
   "displacement_cc": 340,
   "power_hp": 160,
   "weight_lb": 3609,
-  "_0_to_60_mph_s": 8,
+  "0_to_60_mph_s": 8,
   "year": 70
 }, {
   "name": "Plymouth Champ",
@@ -2534,7 +2534,7 @@
   "displacement_cc": 86,
   "power_hp": 64,
   "weight_lb": 1875,
-  "_0_to_60_mph_s": 16.4,
+  "0_to_60_mph_s": 16.4,
   "year": 81
 }, {
   "name": "Plymouth Cricket",
@@ -2543,7 +2543,7 @@
   "displacement_cc": 91,
   "power_hp": 70,
   "weight_lb": 1955,
-  "_0_to_60_mph_s": 20.5,
+  "0_to_60_mph_s": 20.5,
   "year": 71
 }, {
   "name": "Plymouth Custom Suburb",
@@ -2552,7 +2552,7 @@
   "displacement_cc": 360,
   "power_hp": 170,
   "weight_lb": 4654,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 73
 }, {
   "name": "Plymouth Duster",
@@ -2561,7 +2561,7 @@
   "displacement_cc": 198,
   "power_hp": 95,
   "weight_lb": 3102,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 74
 }, {
   "name": "Plymouth Duster",
@@ -2570,7 +2570,7 @@
   "displacement_cc": 198,
   "power_hp": 95,
   "weight_lb": 2833,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 70
 }, {
   "name": "Plymouth Duster",
@@ -2579,7 +2579,7 @@
   "displacement_cc": 198,
   "power_hp": 95,
   "weight_lb": 2904,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 73
 }, {
   "name": "Plymouth Fury Gran Sedan",
@@ -2588,7 +2588,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 4237,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 73
 }, {
   "name": "Plymouth Fury III",
@@ -2597,7 +2597,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 4096,
-  "_0_to_60_mph_s": 13,
+  "0_to_60_mph_s": 13,
   "year": 71
 }, {
   "name": "Plymouth Fury III",
@@ -2606,7 +2606,7 @@
   "displacement_cc": 440,
   "power_hp": 215,
   "weight_lb": 4312,
-  "_0_to_60_mph_s": 8.5,
+  "0_to_60_mph_s": 8.5,
   "year": 70
 }, {
   "name": "Plymouth Fury III",
@@ -2615,7 +2615,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 4135,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 72
 }, {
   "name": "Plymouth Fury",
@@ -2624,7 +2624,7 @@
   "displacement_cc": 225,
   "power_hp": 95,
   "weight_lb": 3785,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 75
 }, {
   "name": "Plymouth Grand Fury",
@@ -2633,7 +2633,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 4498,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 75
 }, {
   "name": "Plymouth Horizon 4",
@@ -2642,7 +2642,7 @@
   "displacement_cc": 105,
   "power_hp": 63,
   "weight_lb": 2215,
-  "_0_to_60_mph_s": 14.9,
+  "0_to_60_mph_s": 14.9,
   "year": 81
 }, {
   "name": "Plymouth Horizon Miser",
@@ -2651,7 +2651,7 @@
   "displacement_cc": 105,
   "power_hp": 63,
   "weight_lb": 2125,
-  "_0_to_60_mph_s": 14.7,
+  "0_to_60_mph_s": 14.7,
   "year": 82
 }, {
   "name": "Plymouth Horizon TC3",
@@ -2660,7 +2660,7 @@
   "displacement_cc": 105,
   "power_hp": 70,
   "weight_lb": 2150,
-  "_0_to_60_mph_s": 14.9,
+  "0_to_60_mph_s": 14.9,
   "year": 79
 }, {
   "name": "Plymouth Horizon",
@@ -2669,7 +2669,7 @@
   "displacement_cc": 105,
   "power_hp": 70,
   "weight_lb": 2200,
-  "_0_to_60_mph_s": 13.2,
+  "0_to_60_mph_s": 13.2,
   "year": 79
 }, {
   "name": "Plymouth Reliant",
@@ -2678,7 +2678,7 @@
   "displacement_cc": 135,
   "power_hp": 84,
   "weight_lb": 2490,
-  "_0_to_60_mph_s": 15.7,
+  "0_to_60_mph_s": 15.7,
   "year": 81
 }, {
   "name": "Plymouth Reliant",
@@ -2687,7 +2687,7 @@
   "displacement_cc": 135,
   "power_hp": 84,
   "weight_lb": 2385,
-  "_0_to_60_mph_s": 12.9,
+  "0_to_60_mph_s": 12.9,
   "year": 81
 }, {
   "name": "Plymouth Sapporo",
@@ -2696,7 +2696,7 @@
   "displacement_cc": 156,
   "power_hp": 105,
   "weight_lb": 2745,
-  "_0_to_60_mph_s": 16.7,
+  "0_to_60_mph_s": 16.7,
   "year": 78
 }, {
   "name": "Plymouth Satellite Custom (Wagon)",
@@ -2705,7 +2705,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 4077,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 72
 }, {
   "name": "Plymouth Satellite Custom",
@@ -2714,7 +2714,7 @@
   "displacement_cc": 225,
   "power_hp": 105,
   "weight_lb": 3439,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 71
 }, {
   "name": "Plymouth Satellite Sebring",
@@ -2723,7 +2723,7 @@
   "displacement_cc": 225,
   "power_hp": 105,
   "weight_lb": 3613,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 74
 }, {
   "name": "Plymouth Satellite",
@@ -2732,7 +2732,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 3436,
-  "_0_to_60_mph_s": 11,
+  "0_to_60_mph_s": 11,
   "year": 70
 }, {
   "name": "Plymouth Valiant Custom",
@@ -2741,7 +2741,7 @@
   "displacement_cc": 225,
   "power_hp": 95,
   "weight_lb": 3264,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 75
 }, {
   "name": "Plymouth Valiant",
@@ -2750,7 +2750,7 @@
   "displacement_cc": 225,
   "power_hp": 105,
   "weight_lb": 3121,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 73
 }, {
   "name": "Plymouth Valiant",
@@ -2759,7 +2759,7 @@
   "displacement_cc": 225,
   "power_hp": 100,
   "weight_lb": 3233,
-  "_0_to_60_mph_s": 15.4,
+  "0_to_60_mph_s": 15.4,
   "year": 76
 }, {
   "name": "Plymouth Volare Custom",
@@ -2768,7 +2768,7 @@
   "displacement_cc": 225,
   "power_hp": 100,
   "weight_lb": 3630,
-  "_0_to_60_mph_s": 17.7,
+  "0_to_60_mph_s": 17.7,
   "year": 77
 }, {
   "name": "Plymouth Volare Premier V8",
@@ -2777,7 +2777,7 @@
   "displacement_cc": 318,
   "power_hp": 150,
   "weight_lb": 3940,
-  "_0_to_60_mph_s": 13.2,
+  "0_to_60_mph_s": 13.2,
   "year": 76
 }, {
   "name": "Plymouth Volare",
@@ -2786,7 +2786,7 @@
   "displacement_cc": 225,
   "power_hp": 100,
   "weight_lb": 3430,
-  "_0_to_60_mph_s": 17.2,
+  "0_to_60_mph_s": 17.2,
   "year": 78
 }, {
   "name": "Pontiac Astro",
@@ -2795,7 +2795,7 @@
   "displacement_cc": 140,
   "power_hp": 78,
   "weight_lb": 2592,
-  "_0_to_60_mph_s": 18.5,
+  "0_to_60_mph_s": 18.5,
   "year": 75
 }, {
   "name": "Pontiac Catalina Brougham",
@@ -2804,7 +2804,7 @@
   "displacement_cc": 400,
   "power_hp": 175,
   "weight_lb": 4464,
-  "_0_to_60_mph_s": 11.5,
+  "0_to_60_mph_s": 11.5,
   "year": 71
 }, {
   "name": "Pontiac Catalina",
@@ -2813,7 +2813,7 @@
   "displacement_cc": 400,
   "power_hp": 175,
   "weight_lb": 4385,
-  "_0_to_60_mph_s": 12,
+  "0_to_60_mph_s": 12,
   "year": 72
 }, {
   "name": "Pontiac Catalina",
@@ -2822,7 +2822,7 @@
   "displacement_cc": 455,
   "power_hp": 225,
   "weight_lb": 4425,
-  "_0_to_60_mph_s": 10,
+  "0_to_60_mph_s": 10,
   "year": 70
 }, {
   "name": "Pontiac Catalina",
@@ -2831,7 +2831,7 @@
   "displacement_cc": 400,
   "power_hp": 170,
   "weight_lb": 4668,
-  "_0_to_60_mph_s": 11.5,
+  "0_to_60_mph_s": 11.5,
   "year": 75
 }, {
   "name": "Pontiac Firebird",
@@ -2840,7 +2840,7 @@
   "displacement_cc": 250,
   "power_hp": 100,
   "weight_lb": 3282,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 71
 }, {
   "name": "Pontiac Grand Prix Lj",
@@ -2849,7 +2849,7 @@
   "displacement_cc": 400,
   "power_hp": 180,
   "weight_lb": 4220,
-  "_0_to_60_mph_s": 11.1,
+  "0_to_60_mph_s": 11.1,
   "year": 77
 }, {
   "name": "Pontiac Grand Prix",
@@ -2858,7 +2858,7 @@
   "displacement_cc": 400,
   "power_hp": 230,
   "weight_lb": 4278,
-  "_0_to_60_mph_s": 9.5,
+  "0_to_60_mph_s": 9.5,
   "year": 73
 }, {
   "name": "Pontiac J2000 Se Hatchback",
@@ -2867,7 +2867,7 @@
   "displacement_cc": 112,
   "power_hp": 85,
   "weight_lb": 2575,
-  "_0_to_60_mph_s": 16.2,
+  "0_to_60_mph_s": 16.2,
   "year": 82
 }, {
   "name": "Pontiac Lemans V6",
@@ -2876,7 +2876,7 @@
   "displacement_cc": 231,
   "power_hp": 115,
   "weight_lb": 3245,
-  "_0_to_60_mph_s": 15.4,
+  "0_to_60_mph_s": 15.4,
   "year": 79
 }, {
   "name": "Pontiac Phoenix LJ",
@@ -2885,7 +2885,7 @@
   "displacement_cc": 231,
   "power_hp": 105,
   "weight_lb": 3535,
-  "_0_to_60_mph_s": 19.2,
+  "0_to_60_mph_s": 19.2,
   "year": 78
 }, {
   "name": "Pontiac Phoenix",
@@ -2894,7 +2894,7 @@
   "displacement_cc": 151,
   "power_hp": 90,
   "weight_lb": 2735,
-  "_0_to_60_mph_s": 18,
+  "0_to_60_mph_s": 18,
   "year": 82
 }, {
   "name": "Pontiac Phoenix",
@@ -2903,7 +2903,7 @@
   "displacement_cc": 151,
   "power_hp": 90,
   "weight_lb": 2556,
-  "_0_to_60_mph_s": 13.2,
+  "0_to_60_mph_s": 13.2,
   "year": 79
 }, {
   "name": "Pontiac Safari (Wagon)",
@@ -2912,7 +2912,7 @@
   "displacement_cc": 400,
   "power_hp": 175,
   "weight_lb": 5140,
-  "_0_to_60_mph_s": 12,
+  "0_to_60_mph_s": 12,
   "year": 71
 }, {
   "name": "Pontiac Sunbird Coupe",
@@ -2921,7 +2921,7 @@
   "displacement_cc": 151,
   "power_hp": 88,
   "weight_lb": 2740,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 77
 }, {
   "name": "Pontiac Ventura Sj",
@@ -2930,7 +2930,7 @@
   "displacement_cc": 250,
   "power_hp": 110,
   "weight_lb": 3645,
-  "_0_to_60_mph_s": 16.2,
+  "0_to_60_mph_s": 16.2,
   "year": 76
 }, {
   "name": "Renault 12 (Wagon)",
@@ -2939,7 +2939,7 @@
   "displacement_cc": 96,
   "power_hp": 69,
   "weight_lb": 2189,
-  "_0_to_60_mph_s": 18,
+  "0_to_60_mph_s": 18,
   "year": 72
 }, {
   "name": "Renault 12TL",
@@ -2948,7 +2948,7 @@
   "displacement_cc": 101,
   "power_hp": 83,
   "weight_lb": 2202,
-  "_0_to_60_mph_s": 15.3,
+  "0_to_60_mph_s": 15.3,
   "year": 76
 }, {
   "name": "Renault 5 Gtl",
@@ -2957,7 +2957,7 @@
   "displacement_cc": 79,
   "power_hp": 58,
   "weight_lb": 1825,
-  "_0_to_60_mph_s": 18.6,
+  "0_to_60_mph_s": 18.6,
   "year": 77
 }, {
   "name": "Saab 99E",
@@ -2966,7 +2966,7 @@
   "displacement_cc": 104,
   "power_hp": 95,
   "weight_lb": 2375,
-  "_0_to_60_mph_s": 17.5,
+  "0_to_60_mph_s": 17.5,
   "year": 70
 }, {
   "name": "Saab 99GLE",
@@ -2975,7 +2975,7 @@
   "displacement_cc": 121,
   "power_hp": 115,
   "weight_lb": 2795,
-  "_0_to_60_mph_s": 15.7,
+  "0_to_60_mph_s": 15.7,
   "year": 78
 }, {
   "name": "Saab 99LE",
@@ -2984,7 +2984,7 @@
   "displacement_cc": 121,
   "power_hp": 110,
   "weight_lb": 2660,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 73
 }, {
   "name": "Saab 99LE",
@@ -2993,7 +2993,7 @@
   "displacement_cc": 121,
   "power_hp": 115,
   "weight_lb": 2671,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 75
 }, {
   "name": "Subaru DL",
@@ -3002,7 +3002,7 @@
   "displacement_cc": 97,
   "power_hp": 67,
   "weight_lb": 1985,
-  "_0_to_60_mph_s": 16.4,
+  "0_to_60_mph_s": 16.4,
   "year": 77
 }, {
   "name": "Subaru DL",
@@ -3011,7 +3011,7 @@
   "displacement_cc": 97,
   "power_hp": 67,
   "weight_lb": 2145,
-  "_0_to_60_mph_s": 18,
+  "0_to_60_mph_s": 18,
   "year": 80
 }, {
   "name": "Subaru",
@@ -3020,7 +3020,7 @@
   "displacement_cc": 108,
   "power_hp": 93,
   "weight_lb": 2391,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 74
 }, {
   "name": "Subaru",
@@ -3029,7 +3029,7 @@
   "displacement_cc": 97,
   "power_hp": 67,
   "weight_lb": 2065,
-  "_0_to_60_mph_s": 17.8,
+  "0_to_60_mph_s": 17.8,
   "year": 81
 }, {
   "name": "Toyota Carina",
@@ -3038,7 +3038,7 @@
   "displacement_cc": 97,
   "power_hp": 88,
   "weight_lb": 2279,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 73
 }, {
   "name": "Toyota Celica GT Liftback",
@@ -3047,7 +3047,7 @@
   "displacement_cc": 134,
   "power_hp": 95,
   "weight_lb": 2515,
-  "_0_to_60_mph_s": 14.8,
+  "0_to_60_mph_s": 14.8,
   "year": 78
 }, {
   "name": "Toyota Celica GT",
@@ -3056,7 +3056,7 @@
   "displacement_cc": 144,
   "power_hp": 96,
   "weight_lb": 2665,
-  "_0_to_60_mph_s": 13.9,
+  "0_to_60_mph_s": 13.9,
   "year": 82
 }, {
   "name": "Toyota Corolla 1200",
@@ -3065,7 +3065,7 @@
   "displacement_cc": 71,
   "power_hp": 65,
   "weight_lb": 1773,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 71
 }, {
   "name": "Toyota Corolla 1200",
@@ -3074,7 +3074,7 @@
   "displacement_cc": 71,
   "power_hp": 65,
   "weight_lb": 1836,
-  "_0_to_60_mph_s": 21,
+  "0_to_60_mph_s": 21,
   "year": 74
 }, {
   "name": "Toyota Corolla 1600 (Wagon)",
@@ -3083,7 +3083,7 @@
   "displacement_cc": 97,
   "power_hp": 88,
   "weight_lb": 2100,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 72
 }, {
   "name": "Toyota Corolla Liftback",
@@ -3092,7 +3092,7 @@
   "displacement_cc": 97,
   "power_hp": 75,
   "weight_lb": 2265,
-  "_0_to_60_mph_s": 18.2,
+  "0_to_60_mph_s": 18.2,
   "year": 77
 }, {
   "name": "Toyota Corolla Tercel",
@@ -3101,7 +3101,7 @@
   "displacement_cc": 89,
   "power_hp": 60,
   "weight_lb": 1968,
-  "_0_to_60_mph_s": 18.8,
+  "0_to_60_mph_s": 18.8,
   "year": 80
 }, {
   "name": "Toyota Corolla",
@@ -3110,7 +3110,7 @@
   "displacement_cc": 97,
   "power_hp": 75,
   "weight_lb": 2155,
-  "_0_to_60_mph_s": 16.4,
+  "0_to_60_mph_s": 16.4,
   "year": 76
 }, {
   "name": "Toyota Corolla",
@@ -3119,7 +3119,7 @@
   "displacement_cc": 97,
   "power_hp": 75,
   "weight_lb": 2171,
-  "_0_to_60_mph_s": 16,
+  "0_to_60_mph_s": 16,
   "year": 75
 }, {
   "name": "Toyota Corolla",
@@ -3128,7 +3128,7 @@
   "displacement_cc": 108,
   "power_hp": 75,
   "weight_lb": 2265,
-  "_0_to_60_mph_s": 15.2,
+  "0_to_60_mph_s": 15.2,
   "year": 80
 }, {
   "name": "Toyota Corolla",
@@ -3137,7 +3137,7 @@
   "displacement_cc": 108,
   "power_hp": 75,
   "weight_lb": 2350,
-  "_0_to_60_mph_s": 16.8,
+  "0_to_60_mph_s": 16.8,
   "year": 81
 }, {
   "name": "Toyota Corolla",
@@ -3146,7 +3146,7 @@
   "displacement_cc": 108,
   "power_hp": 70,
   "weight_lb": 2245,
-  "_0_to_60_mph_s": 16.9,
+  "0_to_60_mph_s": 16.9,
   "year": 82
 }, {
   "name": "Toyota Corona Hardtop",
@@ -3155,7 +3155,7 @@
   "displacement_cc": 113,
   "power_hp": 95,
   "weight_lb": 2278,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 72
 }, {
   "name": "Toyota Corona Liftback",
@@ -3164,7 +3164,7 @@
   "displacement_cc": 134,
   "power_hp": 90,
   "weight_lb": 2711,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 80
 }, {
   "name": "Toyota Corona Mark II",
@@ -3173,7 +3173,7 @@
   "displacement_cc": 113,
   "power_hp": 95,
   "weight_lb": 2372,
-  "_0_to_60_mph_s": 15,
+  "0_to_60_mph_s": 15,
   "year": 70
 }, {
   "name": "Toyota Corona",
@@ -3182,7 +3182,7 @@
   "displacement_cc": 134,
   "power_hp": 96,
   "weight_lb": 2702,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 75
 }, {
   "name": "Toyota Corona",
@@ -3191,7 +3191,7 @@
   "displacement_cc": 113,
   "power_hp": 95,
   "weight_lb": 2228,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 71
 }, {
   "name": "Toyota Corona",
@@ -3200,7 +3200,7 @@
   "displacement_cc": 134,
   "power_hp": 95,
   "weight_lb": 2560,
-  "_0_to_60_mph_s": 14.2,
+  "0_to_60_mph_s": 14.2,
   "year": 78
 }, {
   "name": "Toyota Corona",
@@ -3209,7 +3209,7 @@
   "displacement_cc": 76,
   "power_hp": 52,
   "weight_lb": 1649,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 74
 }, {
   "name": "Toyota Cressida",
@@ -3218,7 +3218,7 @@
   "displacement_cc": 168,
   "power_hp": 116,
   "weight_lb": 2900,
-  "_0_to_60_mph_s": 12.6,
+  "0_to_60_mph_s": 12.6,
   "year": 81
 }, {
   "name": "Toyota Mark II",
@@ -3227,7 +3227,7 @@
   "displacement_cc": 156,
   "power_hp": 108,
   "weight_lb": 2930,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 76
 }, {
   "name": "Toyota Mark II",
@@ -3236,7 +3236,7 @@
   "displacement_cc": 156,
   "power_hp": 122,
   "weight_lb": 2807,
-  "_0_to_60_mph_s": 13.5,
+  "0_to_60_mph_s": 13.5,
   "year": 73
 }, {
   "name": "Toyota Starlet",
@@ -3245,7 +3245,7 @@
   "displacement_cc": 79,
   "power_hp": 58,
   "weight_lb": 1755,
-  "_0_to_60_mph_s": 16.9,
+  "0_to_60_mph_s": 16.9,
   "year": 81
 }, {
   "name": "Toyota Tercel",
@@ -3254,7 +3254,7 @@
   "displacement_cc": 89,
   "power_hp": 62,
   "weight_lb": 2050,
-  "_0_to_60_mph_s": 17.3,
+  "0_to_60_mph_s": 17.3,
   "year": 81
 }, {
   "name": "Toyouta Corona Mark II (Wagon)",
@@ -3263,7 +3263,7 @@
   "displacement_cc": 120,
   "power_hp": 97,
   "weight_lb": 2506,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 72
 }, {
   "name": "Triumph TR7 Coupe",
@@ -3272,7 +3272,7 @@
   "displacement_cc": 122,
   "power_hp": 88,
   "weight_lb": 2500,
-  "_0_to_60_mph_s": 15.1,
+  "0_to_60_mph_s": 15.1,
   "year": 80
 }, {
   "name": "Vokswagen Rabbit",
@@ -3281,7 +3281,7 @@
   "displacement_cc": 89,
   "power_hp": 62,
   "weight_lb": 1845,
-  "_0_to_60_mph_s": 15.3,
+  "0_to_60_mph_s": 15.3,
   "year": 80
 }, {
   "name": "Volkswagen 1131 Deluxe Sedan",
@@ -3290,7 +3290,7 @@
   "displacement_cc": 97,
   "power_hp": 46,
   "weight_lb": 1835,
-  "_0_to_60_mph_s": 20.5,
+  "0_to_60_mph_s": 20.5,
   "year": 70
 }, {
   "name": "Volkswagen 411 (Wagon)",
@@ -3299,7 +3299,7 @@
   "displacement_cc": 121,
   "power_hp": 76,
   "weight_lb": 2511,
-  "_0_to_60_mph_s": 18,
+  "0_to_60_mph_s": 18,
   "year": 72
 }, {
   "name": "Volkswagen Dasher (Diesel)",
@@ -3308,7 +3308,7 @@
   "displacement_cc": 90,
   "power_hp": 48,
   "weight_lb": 2335,
-  "_0_to_60_mph_s": 23.7,
+  "0_to_60_mph_s": 23.7,
   "year": 80
 }, {
   "name": "Volkswagen Dasher",
@@ -3317,7 +3317,7 @@
   "displacement_cc": 90,
   "power_hp": 71,
   "weight_lb": 2223,
-  "_0_to_60_mph_s": 16.5,
+  "0_to_60_mph_s": 16.5,
   "year": 75
 }, {
   "name": "Volkswagen Dasher",
@@ -3326,7 +3326,7 @@
   "displacement_cc": 79,
   "power_hp": 67,
   "weight_lb": 1963,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 74
 }, {
   "name": "Volkswagen Dasher",
@@ -3335,7 +3335,7 @@
   "displacement_cc": 97,
   "power_hp": 78,
   "weight_lb": 2190,
-  "_0_to_60_mph_s": 14.1,
+  "0_to_60_mph_s": 14.1,
   "year": 77
 }, {
   "name": "Volkswagen Jetta",
@@ -3344,7 +3344,7 @@
   "displacement_cc": 105,
   "power_hp": 74,
   "weight_lb": 2190,
-  "_0_to_60_mph_s": 14.2,
+  "0_to_60_mph_s": 14.2,
   "year": 81
 }, {
   "name": "Volkswagen Model 111",
@@ -3353,7 +3353,7 @@
   "displacement_cc": 97,
   "power_hp": 60,
   "weight_lb": 1834,
-  "_0_to_60_mph_s": 19,
+  "0_to_60_mph_s": 19,
   "year": 71
 }, {
   "name": "Volkswagen Pickup",
@@ -3362,7 +3362,7 @@
   "displacement_cc": 97,
   "power_hp": 52,
   "weight_lb": 2130,
-  "_0_to_60_mph_s": 24.6,
+  "0_to_60_mph_s": 24.6,
   "year": 82
 }, {
   "name": "Volkswagen Rabbit C (Diesel)",
@@ -3371,7 +3371,7 @@
   "displacement_cc": 90,
   "power_hp": 48,
   "weight_lb": 2085,
-  "_0_to_60_mph_s": 21.7,
+  "0_to_60_mph_s": 21.7,
   "year": 80
 }, {
   "name": "Volkswagen Rabbit Custom Diesel",
@@ -3380,7 +3380,7 @@
   "displacement_cc": 90,
   "power_hp": 48,
   "weight_lb": 1985,
-  "_0_to_60_mph_s": 21.5,
+  "0_to_60_mph_s": 21.5,
   "year": 78
 }, {
   "name": "Volkswagen Rabbit Custom",
@@ -3389,7 +3389,7 @@
   "displacement_cc": 97,
   "power_hp": 78,
   "weight_lb": 1940,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 77
 }, {
   "name": "Volkswagen Rabbit Custom",
@@ -3398,7 +3398,7 @@
   "displacement_cc": 89,
   "power_hp": 71,
   "weight_lb": 1925,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 79
 }, {
   "name": "Volkswagen Rabbit L",
@@ -3407,7 +3407,7 @@
   "displacement_cc": 105,
   "power_hp": 74,
   "weight_lb": 1980,
-  "_0_to_60_mph_s": 15.3,
+  "0_to_60_mph_s": 15.3,
   "year": 82
 }, {
   "name": "Volkswagen Rabbit",
@@ -3416,7 +3416,7 @@
   "displacement_cc": 90,
   "power_hp": 70,
   "weight_lb": 1937,
-  "_0_to_60_mph_s": 14,
+  "0_to_60_mph_s": 14,
   "year": 75
 }, {
   "name": "Volkswagen Rabbit",
@@ -3425,7 +3425,7 @@
   "displacement_cc": 90,
   "power_hp": 70,
   "weight_lb": 1937,
-  "_0_to_60_mph_s": 14.2,
+  "0_to_60_mph_s": 14.2,
   "year": 76
 }, {
   "name": "Volkswagen Rabbit",
@@ -3434,7 +3434,7 @@
   "displacement_cc": 97,
   "power_hp": 71,
   "weight_lb": 1825,
-  "_0_to_60_mph_s": 12.2,
+  "0_to_60_mph_s": 12.2,
   "year": 76
 }, {
   "name": "Volkswagen Rabbit",
@@ -3443,7 +3443,7 @@
   "displacement_cc": 98,
   "power_hp": 76,
   "weight_lb": 2144,
-  "_0_to_60_mph_s": 14.7,
+  "0_to_60_mph_s": 14.7,
   "year": 80
 }, {
   "name": "Volkswagen Scirocco",
@@ -3452,7 +3452,7 @@
   "displacement_cc": 89,
   "power_hp": 71,
   "weight_lb": 1990,
-  "_0_to_60_mph_s": 14.9,
+  "0_to_60_mph_s": 14.9,
   "year": 78
 }, {
   "name": "Volkswagen Super Beetle",
@@ -3461,7 +3461,7 @@
   "displacement_cc": 97,
   "power_hp": 46,
   "weight_lb": 1950,
-  "_0_to_60_mph_s": 21,
+  "0_to_60_mph_s": 21,
   "year": 73
 }, {
   "name": "Volkswagen Type 3",
@@ -3470,7 +3470,7 @@
   "displacement_cc": 97,
   "power_hp": 54,
   "weight_lb": 2254,
-  "_0_to_60_mph_s": 23.5,
+  "0_to_60_mph_s": 23.5,
   "year": 72
 }, {
   "name": "Volvo 144EA",
@@ -3479,7 +3479,7 @@
   "displacement_cc": 121,
   "power_hp": 112,
   "weight_lb": 2868,
-  "_0_to_60_mph_s": 15.5,
+  "0_to_60_mph_s": 15.5,
   "year": 73
 }, {
   "name": "Volvo 145E (Wagon)",
@@ -3488,7 +3488,7 @@
   "displacement_cc": 121,
   "power_hp": 112,
   "weight_lb": 2933,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 72
 }, {
   "name": "Volvo 244DL",
@@ -3497,7 +3497,7 @@
   "displacement_cc": 121,
   "power_hp": 98,
   "weight_lb": 2945,
-  "_0_to_60_mph_s": 14.5,
+  "0_to_60_mph_s": 14.5,
   "year": 75
 }, {
   "name": "Volvo 245",
@@ -3506,7 +3506,7 @@
   "displacement_cc": 130,
   "power_hp": 102,
   "weight_lb": 3150,
-  "_0_to_60_mph_s": 15.7,
+  "0_to_60_mph_s": 15.7,
   "year": 76
 }, {
   "name": "Volvo 264GL",
@@ -3515,7 +3515,7 @@
   "displacement_cc": 163,
   "power_hp": 125,
   "weight_lb": 3140,
-  "_0_to_60_mph_s": 13.6,
+  "0_to_60_mph_s": 13.6,
   "year": 78
 }, {
   "name": "Volvo Diesel",
@@ -3524,6 +3524,6 @@
   "displacement_cc": 145,
   "power_hp": 76,
   "weight_lb": 3160,
-  "_0_to_60_mph_s": 19.6,
+  "0_to_60_mph_s": 19.6,
   "year": 81
 }]

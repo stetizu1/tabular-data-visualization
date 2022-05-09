@@ -5,6 +5,7 @@ import { ViewType } from './ViewTypes'
 export const DEFAULT_BRUSH_COLOR = `#830606`
 export const DEFAULT_BRUSH_BG_COLOR_TABLE = `#ffcfcf`
 export const DEFAULT_BRUSH_FONT_COLOR_TABLE = `#111111`
+export const DEFAULT_FONT_COLOR_PARALLEL_SETS = `#252525`
 
 export const VIEW_BORDER_SIZE = 5
 
@@ -41,6 +42,10 @@ export const VIEW_LIMITS: Record<ViewType, Required<Pick<GridLayoutItem, `minW` 
     minW: 4,
     minH: 10,
   },
+  [ViewType.ParallelSetsBundled]: {
+    minW: 4,
+    minH: 8,
+  },
 }
 
 export const DEFAULT_VIEW_DIMENSIONS: Record<ViewType, Required<Pick<GridLayoutItem, `w` | `h` | `minW` | `minH`>>> = {
@@ -69,9 +74,14 @@ export const DEFAULT_VIEW_DIMENSIONS: Record<ViewType, Required<Pick<GridLayoutI
     h: 20,
     ...VIEW_LIMITS[ViewType.DataTable],
   },
+  [ViewType.ParallelSetsBundled]: {
+    w: 12,
+    h: 16,
+    ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
+  },
 }
 
-export const DEFAULT_GRID_LAYOUT: GridLayoutItem[] = [
+export const DEFAULT_GRID_LAYOUT_QUANTITATIVE: GridLayoutItem[] = [
   {
     i: ViewType.ParallelCoordinates,
     w: 14,
@@ -95,5 +105,16 @@ export const DEFAULT_GRID_LAYOUT: GridLayoutItem[] = [
     x: 0,
     y: 17,
     ...VIEW_LIMITS[ViewType.Glyphs],
+  },
+]
+
+export const DEFAULT_GRID_LAYOUT_NOMINAL: GridLayoutItem[] = [
+  {
+    i: ViewType.ParallelSetsBundled,
+    w: 25,
+    h: 25,
+    x: 0,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
   },
 ]

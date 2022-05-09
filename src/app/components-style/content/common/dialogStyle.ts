@@ -51,7 +51,7 @@ export const dialogStyle: Record<string, SxProps> = {
     paddingBottom: px(4),
     color: SITE_COLORS.font,
   },
-  numInput: {
+  textInput: {
     minWidth: `95%`,
     alignSelf: `center`,
     '&.MuiFormControl-root': {

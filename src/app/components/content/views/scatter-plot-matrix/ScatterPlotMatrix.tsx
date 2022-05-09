@@ -21,10 +21,11 @@ import { Margin } from '../../../../types/styling/Margin'
 import { Dimensions } from '../../../../types/basic/dimensions'
 import { MatrixItem, MatrixPosition } from '../../../../types/data/MatrixData'
 import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
-import { BrushExtent, DataEachC, DataEachG, OnBrushEvent } from '../../../../types/d3-types'
+import { Extent, DataEachC, DataEachG, OnBrushEvent } from '../../../../types/d3-types'
 
 import {
   getAttributeFromMatrixFormatted,
+  getAttributeValuesWithLabel,
   getClass,
   getEverything,
   getTranslate,
@@ -188,7 +189,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
         .attr(SVG.attributes.cy, getCy)
         .attr(SVG.attributes.r, pointSize)
         .attr(SVG.attributes.class, DATA_POINT_CLASS)
-        .on(MouseAction.mouseOver, onMouseOverTooltip)
+        .on(MouseAction.mouseOver, onMouseOverTooltip(getAttributeValuesWithLabel))
         .on(MouseAction.mouseOut, onMouseOutTooltip)
         .style(SVG.style.fill, getCategoryColor(categoryAttribute, color))
     }
@@ -253,7 +254,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
         }
       },
     }
-    const brushExtent: BrushExtent = [
+    const brushExtent: Extent = [
       [0, 0],
       [rect.width, rect.height],
     ]
@@ -280,6 +281,9 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       .attr(SVG.attributes.class, DUPLICATES_CLASS)
       .attr(SVG.attributes.transform, getCellTranslateInMatrix(rect, attributesCount - 1))
       .each(plotMatrixItem)
+
+    // selected coloring
+    selectAll(getClass(DATA_POINT_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
   }, [
     dataset,
     innerWidth,
