@@ -215,9 +215,9 @@ export const LAYOUT_OPTIONS = [
 ]
 
 export const LAYOUT_IMAGES = [
-  `/images/layout_0.png`,
-  `/images/layout_1.png`,
-  `/images/layout_2.png`,
-  `/images/layout_3.png`,
-  `/images/layout_4.png`,
+  `/table-data-visualization/images/layout_0.png`,
+  `/table-data-visualization/images/layout_1.png`,
+  `/table-data-visualization/images/layout_2.png`,
+  `/table-data-visualization/images/layout_3.png`,
+  `/table-data-visualization/images/layout_4.png`,
 ]
