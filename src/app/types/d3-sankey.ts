@@ -1,7 +1,7 @@
 import { SankeyLink, SankeyNode } from '../../lib/d3-sankey'
 import { NominalValueProperties } from './data/data'
 
-export type SankeyDataLink = {
+export type DataLink = {
   source: number
   target: number
   selected: number
@@ -9,11 +9,11 @@ export type SankeyDataLink = {
   value: number
 }
 
-export type NodeDataPoint = SankeyNode<NominalValueProperties, SankeyDataLink>
+export type NodeDataPoint = SankeyNode<NominalValueProperties, DataLink>
 
-export type LinkDataPoint = SankeyLink<NominalValueProperties, SankeyDataLink>
+export type LinkDataPoint = SankeyLink<NominalValueProperties, DataLink>
 
-export type NodeData = SankeyNode<NominalValueProperties, SankeyDataLink>
+export type NodeData = SankeyNode<NominalValueProperties, DataLink>
 
 export type SankeyGraph = {
   nodes: Array<NodeDataPoint>

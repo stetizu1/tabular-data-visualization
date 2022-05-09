@@ -5,6 +5,7 @@ import { ExpandMore } from '@mui/icons-material'
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
 import {
+  brushingTypeKey,
   coloringFromKey,
   ParallelSetsBundledSettings,
   tabGapKey,
@@ -20,6 +21,7 @@ import {
   PARALLEL_SETS_BUNDLED_DEFAULT,
 } from '../../../../constants/views/parallelSetsBundled'
 import { ColoringFrom } from '../../../../constants/data/ColoringFrom'
+import { ParallelSetsBrushingType } from '../../../../constants/data/ParallelSetsBrushingType'
 
 import { PARALLEL_SETS_MENU_TEXT } from '../../../../text/views-and-menus/parallelSetsBundled'
 
@@ -93,6 +95,14 @@ export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ data
               options={Object.values<ColoringFrom>(ColoringFrom)}
               setSettings={setSettings}
               settingsKey={coloringFromKey}
+            />
+            <Typography sx={menuTextStyle.text}>{PARALLEL_SETS_MENU_TEXT.brushing}</Typography>
+            <ToggleButtons
+              viewType={viewType}
+              value={parallelSetsBundledSettings.brushingType}
+              options={Object.values<ParallelSetsBrushingType>(ParallelSetsBrushingType)}
+              setSettings={setSettings}
+              settingsKey={brushingTypeKey}
             />
             <Accordion sx={dataDrawerMenuStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>

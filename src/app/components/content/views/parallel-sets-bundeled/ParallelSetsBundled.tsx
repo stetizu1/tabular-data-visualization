@@ -27,13 +27,18 @@ import { PARALLEL_SETS_BUNDLED_TEXT } from '../../../../text/views-and-menus/par
 import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 
 import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
-import { getParallelSetsBundledStyle } from '../../../../components-style/content/views/parallel-sets-bundled/parallelSetsBundledStyle'
-import { NodeData, NodeDataPoint, SankeyDataLink } from '../../../../types/d3-sankey'
+import {
+  getParallelSetsBundledStyle,
+  LINE_NOT_SELECTED_CLASS,
+  SELECTED_CLASS,
+} from '../../../../components-style/content/views/parallel-sets-bundled/parallelSetsBundledStyle'
+import { DataLink, NodeData, NodeDataPoint } from '../../../../types/d3-sankey'
 import { DataEach, Extent, OnMouseEvent } from '../../../../types/d3-types'
 import { SVG } from '../../../../constants/svg'
 import { AXES_TEXT_CLASS } from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
 import { ColoringFrom } from '../../../../constants/data/ColoringFrom'
+import { ParallelSetsBrushingType } from '../../../../constants/data/ParallelSetsBrushingType'
 
 export interface ParallelSetsBundledProps extends VisualizationView, Brushable, ParallelSetsBundledSettings {}
 
@@ -61,6 +66,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
   tabSpacing,
   tabGap,
   coloringFrom,
+  brushingType,
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const component = useRef<SVGGElement>(null)
@@ -73,9 +79,6 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
     setNominalValuesRecord(getNominalValuesRecord(dataset))
   }, [dataset, redrawTime, displayAttributes])
 
-  // selected coloring todo
-  // selectAll(getClass(PARALLEL_SETS_BUNDLED_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
-
   const createParallelSetsBundled = useCallback(() => {
     const node = component.current
     if (!node) return
@@ -83,11 +86,14 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
     svg.selectAll(getEverything()).remove() // clear
 
     const displayPairs = getNeighborAttributes(displayAttributes)
-    const sankeyWidth = (innerWidth - (displayAttributes.length - 2) * tabSpacing) / (displayAttributes.length - 1)
+    const pairWidth = (innerWidth - (displayAttributes.length - 2) * tabSpacing) / (displayAttributes.length - 1)
     const valueCounts = displayAttributes.map((att) => nominalValuesRecord[att]).map((arr) => arr.length)
     const spacesAllMax = Math.max(...valueCounts) - 1
+    const isLeft = (d: NodeData): boolean => Number(d.x0) < pairWidth / 2
 
     const half = (displayAttributes.length - 1) / 2
+
+    // brushing
     const onMouseClick: OnMouseEvent<NodeDataPoint> = (_, { attribute, name, count, countSelected }) => {
       dataset.forEach((data) => {
         if (String(data[attribute]) === name) {
@@ -105,22 +111,22 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
 
     displayPairs.forEach((displayPair, pairIdx) => {
       const spacesPairMax = Math.max(valueCounts[pairIdx], valueCounts[pairIdx + 1]) - 1
-      const sankeyExtent: Extent = [
+      const pairExtent: Extent = [
         [0, 0],
-        [sankeyWidth, innerHeight - (spacesAllMax - spacesPairMax) * tabGap],
+        [pairWidth, innerHeight - (spacesAllMax - spacesPairMax) * tabGap],
       ]
 
       const color = scaleOrdinal(colorCategory)
-      const sankeyLayout = sankey<NominalValueProperties, SankeyDataLink>()
+      const sankeyLayout = sankey<NominalValueProperties, DataLink>()
         .nodeWidth(tabWidth)
         .nodePadding(tabGap)
         .nodeSort((a, b) => Number(a.name) - Number(b.name))
-        .extent(sankeyExtent)
+        .extent(pairExtent)
 
       const graph = getGraph(dataset, nominalValuesRecord, displayPair[0], displayPair[1])
       const { nodes, links } = sankeyLayout(graph)
 
-      const xShift = pairIdx * (sankeyWidth + tabSpacing)
+      const xShift = pairIdx * (pairWidth + tabSpacing)
       svg
         .append(SVG.elements.g)
         .selectAll(TABS)
@@ -137,41 +143,49 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
       const connectors = svg
         .append(SVG.elements.g)
         .style(SVG.style.fill, SVG.values.none)
-        .attr(SVG.attributes.transform, getTranslate([pairIdx * (sankeyWidth + tabSpacing), 0]))
+        .attr(SVG.attributes.transform, getTranslate([pairIdx * (pairWidth + tabSpacing), 0]))
         .selectAll(CONNECTORS)
         .data(links)
         .enter()
 
+      // base
       connectors
         .append(SVG.elements.path)
+        .attr(SVG.attributes.class, LINE_NOT_SELECTED_CLASS)
         .attr(SVG.attributes.d, sankeyLinkHorizontal())
         .attr(SVG.attributes.stroke, (d) => color(d.names[coloringFrom === ColoringFrom.left ? 0 : 1]))
-        .attr(SVG.attributes.strokeWidth, (d) => Number(d.width))
+        .attr(SVG.attributes.strokeWidth, (d) => {
+          if (!d.value || brushingType === ParallelSetsBrushingType.overlay) {
+            return Number(d.width)
+          }
+          return Number(d.width) * ((d.value - d.selected) / d.value)
+        })
+        .attr(SVG.attributes.transform, (d) => {
+          if (brushingType === ParallelSetsBrushingType.overlay) {
+            return getTranslate([0, 0])
+          }
+          const yShift = d.width ? (Number(d.width) - Number(d.width) * ((d.value - d.selected) / d.value)) / 2 : 0
+          return getTranslate([0, yShift])
+        })
         .style(SVG.style.mixBlendMode, SVG.values.multiply)
 
+      //brushing
       connectors
         .append(SVG.elements.path)
+        .attr(SVG.attributes.class, SELECTED_CLASS)
         .attr(SVG.attributes.d, sankeyLinkHorizontal())
-        .attr(SVG.attributes.stroke, (d) => `red`)
+        .attr(SVG.attributes.strokeWidth, (d) => (d.value ? Number(d.width) * (d.selected / d.value) : 0))
         .attr(SVG.attributes.transform, (d) => {
+          if (brushingType === ParallelSetsBrushingType.overlay) {
+            return getTranslate([0, 0])
+          }
           const yShift = d.width ? -(Number(d.width) - Number(d.width) * (d.selected / d.value)) / 2 : 0
           return getTranslate([0, yShift])
         })
-        .attr(SVG.attributes.strokeWidth, (d) => Number(d.width) * (d.selected / d.value))
 
-      const getXShift: DataEach<NodeData, SVGTextElement, number> = (d) => {
-        const isLeft = Number(d.x0) < sankeyWidth / 2
-        return (isLeft ? Number(d.x1) + TEXT_SHIFT : Number(d.x0) - TEXT_SHIFT) + xShift
-      }
-      const getYShift: DataEach<NodeData, SVGTextElement, number> = (d) => (Number(d.y1) + Number(d.y0)) / 2
-      const getTextAnchor: DataEach<NodeData, SVGTextElement, string> = (d) => {
-        const isLeft = Number(d.x0) < sankeyWidth / 2
-        return isLeft ? SVG.values.start : SVG.values.end
-      }
       const getTextVisible: DataEach<NodeData, SVGTextElement, number> = (d) => {
         if (pairIdx === Math.floor(half)) return 1
-        const isLeft = Number(d.x0) < sankeyWidth / 2
-        if ((isLeft && pairIdx > half) || (!isLeft && pairIdx < half)) return 0
+        if ((isLeft(d) && pairIdx > half) || (!isLeft(d) && pairIdx < half)) return 0
         return 1
       }
 
@@ -182,9 +196,9 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .data(nodes)
         .enter()
         .append(SVG.elements.text)
-        .attr(SVG.attributes.x, getXShift)
-        .attr(SVG.attributes.y, getYShift)
-        .attr(SVG.attributes.textAnchor, getTextAnchor)
+        .attr(SVG.attributes.x, (d) => (isLeft(d) ? Number(d.x1) + TEXT_SHIFT : Number(d.x0) - TEXT_SHIFT) + xShift)
+        .attr(SVG.attributes.y, (d) => (Number(d.y1) + Number(d.y0)) / 2)
+        .attr(SVG.attributes.textAnchor, (d) => (isLeft(d) ? SVG.values.start : SVG.values.end))
         .style(SVG.style.opacity, getTextVisible)
         .text(getParallelSetsLabel)
     })
@@ -196,7 +210,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
       .enter()
       .append(SVG.elements.text)
       .attr(SVG.attributes.textAnchor, SVG.values.middle)
-      .attr(SVG.attributes.x, (_, idx) => idx * (sankeyWidth + tabSpacing))
+      .attr(SVG.attributes.x, (_, idx) => idx * (pairWidth + tabSpacing))
       .attr(SVG.attributes.y, getTextTogglingYShift)
       .text(getAttributeFormatted)
       .attr(SVG.attributes.class, AXES_TEXT_CLASS)
@@ -213,6 +227,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
     colorCategory,
     tabSpacing,
     coloringFrom,
+    brushingType,
   ])
 
   useEffect(
@@ -228,6 +243,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
       tabSpacing,
       tabGap,
       coloringFrom,
+      brushingType,
     ],
   )
 

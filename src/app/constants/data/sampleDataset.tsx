@@ -18,14 +18,6 @@ export enum SampleDataset {
 
 export const SAMPLE_DATASET_OPTIONS = Object.values(SampleDataset)
 
-export const sampleDatasetFiles: Record<SampleDataset, string> = {
-  [SampleDataset.flowers]: `flowerData.json`,
-  [SampleDataset.birds]: `birdData.json`,
-  [SampleDataset.cars]: `carData.json`,
-  [SampleDataset.titanic]: `titanicData.json`,
-  [SampleDataset.parallelCars]: `parallelCarsData.json`,
-}
-
 export const sampleDatasetIcons: Record<SampleDataset, JSX.Element> = {
   [SampleDataset.flowers]: <LocalFlorist />,
   [SampleDataset.birds]: <Air />,

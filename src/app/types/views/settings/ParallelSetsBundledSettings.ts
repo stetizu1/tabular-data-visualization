@@ -1,10 +1,13 @@
 import { ColoringFrom } from '../../../constants/data/ColoringFrom'
+import { ParallelSetsBrushingType } from '../../../constants/data/ParallelSetsBrushingType'
+
 import { BaseViewVisualizationSettings } from './VisualizationSettings'
 
 export const tabWidthKey = `tabWidth`
 export const tabSpacingKey = `tabSpacing`
 export const tabGapKey = `tabGap`
 export const coloringFromKey = `coloringFrom`
+export const brushingTypeKey = `brushingType`
 
 /**
  * Settings for Parallel Sets Bundled view
@@ -29,4 +32,9 @@ export interface ParallelSetsBundledSettings extends BaseViewVisualizationSettin
    * Is coloring from left side
    */
   [coloringFromKey]: ColoringFrom
+
+  /**
+   * Brushing - from top top or overlay
+   */
+  [brushingTypeKey]: ParallelSetsBrushingType
 }
