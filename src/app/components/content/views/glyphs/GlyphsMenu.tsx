@@ -19,7 +19,7 @@ import {
 } from '../../../../helpers/data/data'
 
 import { GLYPHS_DEFAULT, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 
 import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/glyphs'
 

@@ -1,8 +1,7 @@
 import { VoidFunctionComponent } from 'react'
 import { Box } from '@mui/material'
 
-import { HEADER_TEXT } from '../../text/HeaderText'
-
+import { HEADER_TEXT } from '../../text/headerText'
 import { headerStyle } from '../../components-style/header/headerStyle'
 
 export const Header: VoidFunctionComponent = () => (

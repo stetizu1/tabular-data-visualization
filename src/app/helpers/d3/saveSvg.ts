@@ -1,4 +1,4 @@
-import { ViewType } from '../../constants/views/ViewTypes'
+import { ViewType } from '../../constants/views/ViewType'
 import { CONTAINER_SAVE_ID, SAVE_ID } from '../../constants/save/save'
 
 export const saveSvgToFile = (svgEl: Element, fileName: string): void => {
@@ -41,3 +41,6 @@ export const saveSvg = (viewType: ViewType): void => {
 
   newStyleNodes.forEach((node) => node.remove())
 }
+
+export const getSaveIsDisabled = (viewType: ViewType): boolean =>
+  document.querySelector(`#${SAVE_ID[viewType]}`) === null

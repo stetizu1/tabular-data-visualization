@@ -15,7 +15,7 @@ import { ScatterPlotGlyphs } from '../../components/content/views/scatter-plot-g
 import { DataTable } from '../../components/content/views/data-table/DataTable'
 import { ParallelSetsBundled } from '../../components/content/views/parallel-sets-bundeled/ParallelSetsBundled'
 
-import { ViewType } from './ViewTypes'
+import { ViewType } from './ViewType'
 
 type ViewElementFunction = (
   props: Brushable & VisualizationView,

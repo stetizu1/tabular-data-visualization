@@ -1,6 +1,6 @@
 import { GridLayoutItem } from '../../types/views/Grid'
 import { Dimensions } from '../../types/basic/dimensions'
-import { ViewType } from './ViewTypes'
+import { ViewType } from './ViewType'
 
 export const DEFAULT_BRUSH_COLOR = `#830606`
 export const DEFAULT_BRUSH_BG_COLOR_TABLE = `#ffcfcf`

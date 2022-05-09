@@ -10,7 +10,7 @@ import { useUpdatedRef } from '../../../helpers/react/useUpdatedRef'
 import { useDebounce } from '../../../helpers/react/useDebounce'
 
 import { DataLoadState } from '../../../constants/data/dataLoadState'
-import { ViewType } from '../../../constants/views/ViewTypes'
+import { ViewType } from '../../../constants/views/ViewType'
 import {
   DEFAULT_BRUSH_COLOR,
   DEFAULT_GRID_LAYOUT_QUANTITATIVE,

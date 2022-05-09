@@ -1,7 +1,7 @@
 import { VoidFunctionComponent } from 'react'
 import { Box } from '@mui/material'
 
-import { EMPTY_DATA_TEXT } from '../../../text/SiteText'
+import { EMPTY_DATA_TEXT } from '../../../text/siteText'
 
 import { emptyDataStyle } from '../../../components-style/content/no-data/emptyDataStyle'
 

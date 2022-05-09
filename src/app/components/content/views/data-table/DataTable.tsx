@@ -22,7 +22,7 @@ import { SelectableDataType } from '../../../../types/data/data'
 import { dataToReadable, otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import { getComparator, SortType } from '../../../../helpers/data/comparator'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 import { MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/dataTable'
 import { FORM } from '../../../../constants/form'
 

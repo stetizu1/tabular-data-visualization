@@ -1,4 +1,4 @@
-import { ViewType } from '../../constants/views/ViewTypes'
+import { ViewType } from '../../constants/views/ViewType'
 
 import { SideEffectVoid } from '../basic/functionTypes'
 

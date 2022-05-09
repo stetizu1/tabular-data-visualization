@@ -38,7 +38,7 @@ import { displayDetails } from '../../../../helpers/d3/displayDetails'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { BrushAction } from '../../../../constants/actions/BrushAction'
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 import { SVG } from '../../../../constants/svg'
 import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
 import { MouseAction } from '../../../../constants/actions/MouseAction'

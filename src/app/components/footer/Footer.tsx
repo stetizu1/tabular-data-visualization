@@ -1,7 +1,7 @@
 import { VoidFunctionComponent } from 'react'
 import { Box } from '@mui/material'
 
-import { FOOTER_TEXT } from '../../text/FooterText'
+import { FOOTER_TEXT } from '../../text/footerText'
 import { footerStyle } from '../../components-style/footer/footerStyle'
 
 export const Footer: VoidFunctionComponent = () => (

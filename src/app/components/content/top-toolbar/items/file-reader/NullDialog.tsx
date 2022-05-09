@@ -20,7 +20,7 @@ import { otherCasesToWhitespaces } from '../../../../../helpers/data/formatText'
 
 import { OPTION_TYPES, OptionType } from '../../../../../constants/data/data'
 
-import { FILE_READER_TEXT } from '../../../../../text/SiteText'
+import { FILE_READER_TEXT } from '../../../../../text/siteText'
 
 import { dialogStyle } from '../../../../../components-style/content/common/dialogStyle'
 

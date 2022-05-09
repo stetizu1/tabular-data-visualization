@@ -3,7 +3,7 @@ import { useSize } from 'react-use'
 import { Box, IconButton, Typography } from '@mui/material'
 import { Close } from '@mui/icons-material'
 
-import { ViewType } from '../../../constants/views/ViewTypes'
+import { ViewType } from '../../../constants/views/ViewType'
 import { DRAG_HANDLE, HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/views/common'
 
 import { gridItemStyle } from '../../../components-style/content/views/gridItemStyle'

@@ -21,7 +21,7 @@ import {
 } from '../../../../helpers/d3/stringGetters'
 import { getGraph, getNeighborAttributes, getNominalValuesRecord } from '../../../../helpers/data/data'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 import { MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelSetsBundled'
 import { SVG } from '../../../../constants/svg'

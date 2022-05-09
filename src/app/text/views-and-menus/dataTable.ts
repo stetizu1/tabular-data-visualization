@@ -1,4 +1,4 @@
-import { ViewType } from '../../constants/views/ViewTypes'
+import { ViewType } from '../../constants/views/ViewType'
 import { SortType } from '../../helpers/data/comparator'
 import { MENU_BASE_TEXT, VIEW_NAMES } from './common'
 

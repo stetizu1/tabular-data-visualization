@@ -6,7 +6,7 @@ import { Settings } from '../../../../types/views/settings/Settings'
 
 import { useDebounce } from '../../../../helpers/react/useDebounce'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
 
 import { OPACITY_MENU_TEXT } from '../../../../text/views-and-menus/common'

@@ -12,10 +12,10 @@ import { Settings } from '../../../types/views/settings/Settings'
 import { getClass } from '../../../helpers/d3/stringGetters'
 import { displayDetails } from '../../../helpers/d3/displayDetails'
 
-import { isViewType, ViewType } from '../../../constants/views/ViewTypes'
+import { isViewType, ViewType } from '../../../constants/views/ViewType'
 import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from '../../../constants/views/common'
 import { TOOLTIP_CLASS } from '../../../constants/views/tooltip'
-import { TOP_TOOLBAR_TEXT } from '../../../text/SiteText'
+import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
 import { VIEW_NAMES } from '../../../text/views-and-menus/common'
 
 import { viewGridStyle } from '../../../components-style/content/views/viewGridStyle'

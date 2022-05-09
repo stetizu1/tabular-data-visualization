@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react'
 
-import { ViewType } from '../../constants/views/ViewTypes'
+import { ViewType } from '../../constants/views/ViewType'
 
 import { SelectableDataType } from '../data/data'
 import { Settings } from './settings/Settings'

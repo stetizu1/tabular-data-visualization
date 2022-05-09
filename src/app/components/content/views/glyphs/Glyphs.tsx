@@ -22,7 +22,7 @@ import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/to
 import { SVG } from '../../../../constants/svg'
 import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'

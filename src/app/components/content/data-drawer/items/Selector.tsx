@@ -5,7 +5,7 @@ import { SelectableDataType } from '../../../../types/data/data'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 
 import { Settings } from '../../../../types/views/settings/Settings'
 

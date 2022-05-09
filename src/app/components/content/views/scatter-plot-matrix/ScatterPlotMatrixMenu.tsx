@@ -17,7 +17,7 @@ import {
   getQuantitativeAttributesKeys,
 } from '../../../../helpers/data/data'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 import {
   MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT,
   SCATTER_PLOT_MATRIX_DEFAULT,

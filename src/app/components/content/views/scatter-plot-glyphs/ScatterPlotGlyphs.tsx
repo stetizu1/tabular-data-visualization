@@ -21,7 +21,7 @@ import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
 import { isInRanges } from '../../../../helpers/basic/range'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 import { SVG } from '../../../../constants/svg'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
 import { BrushAction } from '../../../../constants/actions/BrushAction'

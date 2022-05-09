@@ -21,7 +21,7 @@ import {
   MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT,
   SCATTER_PLOT_GLYPHS_DEFAULT,
 } from '../../../../constants/views/scatterPlotGlyphs'
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 
 import { SCATTER_PLOT_GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/scatterPlotGlyphs'
 

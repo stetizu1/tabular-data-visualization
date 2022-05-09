@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { Box, TextField } from '@mui/material'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 
 import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
 

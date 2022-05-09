@@ -6,7 +6,7 @@ import { CheckedForSelectableDataType, SelectableDataType } from '../../../../ty
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 
 import { Settings, SettingsType } from '../../../../types/views/settings/Settings'
 import { attributeCheckerStyle } from '../../../../components-style/content/data-drawer/items/attributeCheckerStyle'

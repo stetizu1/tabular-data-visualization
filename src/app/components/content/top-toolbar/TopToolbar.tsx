@@ -5,7 +5,7 @@ import { Info } from '@mui/icons-material'
 import { Box } from '@mui/material'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
 
-import { TOP_TOOLBAR_TEXT } from '../../../text/SiteText'
+import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
 
 import { topToolbarStyle } from '../../../components-style/content/top-toolbar/topToolbarStyle'
 

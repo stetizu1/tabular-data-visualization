@@ -14,7 +14,7 @@ import {
   sampleDatasets,
 } from '../../../../../constants/data/sampleDataset'
 
-import { FILE_READER_TEXT } from '../../../../../text/SiteText'
+import { FILE_READER_TEXT } from '../../../../../text/siteText'
 
 import {
   fileReaderStyle,

@@ -1,4 +1,4 @@
-import { ViewType } from '../../constants/views/ViewTypes'
+import { ViewType } from '../../constants/views/ViewType'
 import { MENU_TEXT, VIEW_NAMES } from './common'
 
 export const PARALLEL_COORDINATES_TEXT = {

@@ -1,11 +1,11 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useMemo } from 'react'
-import { Box, Divider, Drawer, IconButton } from '@mui/material'
-import { ChevronRight } from '@mui/icons-material'
+import { Box, Divider, Drawer, IconButton, Link, Typography } from '@mui/material'
+import { ChevronRight, GitHub } from '@mui/icons-material'
 
 import { SelectableDataType } from '../../../types/data/data'
 import { SideEffectVoid } from '../../../types/basic/functionTypes'
 
-import { ViewType } from '../../../constants/views/ViewTypes'
+import { ViewType } from '../../../constants/views/ViewType'
 
 import { dataDrawerStyle } from '../../../components-style/content/data-drawer/dataDrawerStyle'
 
@@ -16,6 +16,7 @@ import { ScatterPlotMatrixMenu } from '../views/scatter-plot-matrix/ScatterPlotM
 import { ScatterPlotGlyphsMenu } from '../views/scatter-plot-glyphs/ScatterPlotGlyphsMenu'
 import { DataTableMenu } from '../views/data-table/DataTableMenu'
 import { ParallelSetsBundledMenu } from '../views/parallel-sets-bundeled/ParallelSetsBundledMenu'
+import { DATA_DRAWER_TEXT, GITHUB_LINK } from '../../../text/dataDrawerText'
 
 export interface DataDrawerProps {
   isOpen: boolean
@@ -115,6 +116,15 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
       </Box>
       <Divider />
       <Box sx={dataDrawerStyle.menu}>{menus.map((menu) => menu)}</Box>
+      <Box sx={dataDrawerStyle.fill} />
+      <Box sx={dataDrawerStyle.footer}>
+        <Typography sx={dataDrawerStyle.text}>{DATA_DRAWER_TEXT.description}</Typography>
+        <Typography sx={dataDrawerStyle.text}>{DATA_DRAWER_TEXT.openSource}</Typography>
+        <Link href={GITHUB_LINK} sx={dataDrawerStyle.text}>
+          <GitHub sx={dataDrawerStyle.githubIcon} />
+          {DATA_DRAWER_TEXT.github}
+        </Link>
+      </Box>
     </Drawer>
   )
 }

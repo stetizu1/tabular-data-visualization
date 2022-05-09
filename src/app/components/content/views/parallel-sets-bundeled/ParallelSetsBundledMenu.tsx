@@ -16,7 +16,7 @@ import {
 
 import { getCategoryAttributesKeys, getDefaultNominalAttributesChecked } from '../../../../helpers/data/data'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views/ViewType'
 import {
   MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT,
   PARALLEL_SETS_BUNDLED_DEFAULT,
