@@ -18,7 +18,7 @@ type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {
   isResizeFinished: boolean
 }
 
-export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResizeFinished, ...rest }) => {
+export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResizeFinished, viewType, ...rest }) => {
   const [showFilter, setShowFilter] = useState<boolean | undefined>(undefined)
   const [sized] = useSize(
     ({ width, height }) => (
@@ -26,8 +26,8 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResi
         <Box sx={gridItemStyle.header} className={DRAG_HANDLE}>
           <Typography sx={gridItemStyle.text}>{title}</Typography>
           <Box>
-            {rest.component !== ViewType.DataTable ? (
-              <DataSaveButton viewType={rest.component} />
+            {viewType !== ViewType.DataTable ? (
+              <DataSaveButton viewType={viewType} />
             ) : (
               <DataFilterButton showFilter={showFilter} setShowFilter={setShowFilter} />
             )}
@@ -36,7 +36,9 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResi
             </IconButton>
           </Box>
         </Box>
-        {isResizeFinished && <View width={width} height={height - HEADER_HEIGHT} {...rest} showFilter={showFilter} />}
+        {isResizeFinished && (
+          <View width={width} height={height - HEADER_HEIGHT} viewType={viewType} {...rest} showFilter={showFilter} />
+        )}
       </Box>
     ),
     VIEW_DEFAULT_SIZE,

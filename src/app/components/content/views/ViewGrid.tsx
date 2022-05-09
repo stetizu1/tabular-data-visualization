@@ -134,7 +134,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
                 cleanSelectedIfViewWasBrushing(view.i)
                 removeView(view.i)
               }}
-              component={view.i}
+              viewType={view.i}
               settings={settings}
               {...viewProps}
             />

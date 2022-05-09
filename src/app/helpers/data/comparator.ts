@@ -2,8 +2,12 @@ import { SelectableDataType } from '../../types/data/data'
 
 type Comparator = (a: SelectableDataType, b: SelectableDataType) => number
 
-const descCompare = <T>(a: T, b: T, orderBy: keyof T) =>
-  b[orderBy] < a[orderBy] ? -1 : b[orderBy] > a[orderBy] ? 1 : 0
+const descCompare = <T extends SelectableDataType>(a: T, b: T, orderBy: keyof T) => {
+  if (a[orderBy] === true) return b[orderBy] === true ? 0 : 1
+  if (a[orderBy] === false) return b[orderBy] === false ? 0 : -1
+
+  return b[orderBy] < a[orderBy] ? -1 : b[orderBy] > a[orderBy] ? 1 : 0
+}
 
 export enum SortType {
   asc = `asc`,

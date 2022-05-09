@@ -1,9 +1,8 @@
-import { useCallback, useMemo, useState, VoidFunctionComponent } from 'react'
+import { useCallback, useEffect, useMemo, useState, VoidFunctionComponent } from 'react'
 import {
   Box,
   Checkbox,
   Table,
-  TableBody,
   TableCell,
   TableContainer,
   TableHead,
@@ -17,9 +16,9 @@ import { FilterListOutlined } from '@mui/icons-material'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { Brushable } from '../../../../types/brushing/Brushable'
 import { DataTableSettings } from '../../../../types/views/settings/DataTableSettings'
-import { SelectableDataType } from '../../../../types/data/data'
+import { SelectableDataType, SelectedKey } from '../../../../types/data/data'
 
-import { dataToReadable, otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 import { getComparator, SortType } from '../../../../helpers/data/comparator'
 
 import { ViewType } from '../../../../constants/views/ViewType'
@@ -27,10 +26,8 @@ import { MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/data
 import { FORM } from '../../../../constants/form'
 
 import { DATA_TABLE_TEXT } from '../../../../text/views-and-menus/dataTable'
-import {
-  dataTableStyle,
-  getDataTableRowStyle,
-} from '../../../../components-style/content/views/data-table/dataTableStyle'
+import { dataTableStyle } from '../../../../components-style/content/views/data-table/dataTableStyle'
+import { DataTableBody } from './DataTableBody'
 
 export interface DataTableProps extends VisualizationView, Brushable, DataTableSettings {
   showFilter: boolean
@@ -45,9 +42,11 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   selectedBackgroundColor,
   selectedFontColor,
   showFilter,
+  redrawTime,
 }) => {
   const [order, setOrder] = useState<SortType>(SortType.asc)
   const [orderBy, setOrderBy] = useState<keyof SelectableDataType>(displayAttributes[0])
+  const [doResort, setDoResort] = useState(0)
   const [filterValues, setFilterValues] = useState<{ [p: keyof SelectableDataType]: string }>(
     Object.fromEntries(displayAttributes.map((key) => [key, ``])),
   )
@@ -62,7 +61,18 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
 
   const sortedDataset = useMemo(
     () => filteredDataset.sort(getComparator(order, orderBy)),
-    [filteredDataset, order, orderBy],
+    // `doResort` is needed for resorting after changing select
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [filteredDataset, order, orderBy, doResort],
+  )
+
+  useEffect(
+    () => () => {
+      if (orderBy === SelectedKey) {
+        setDoResort((prev) => prev + 1) // reorder
+      }
+    },
+    [orderBy, redrawTime],
   )
 
   const handleSelectClick = useCallback(
@@ -122,76 +132,92 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
     [order, orderBy],
   )
 
+  const getTableHead = useCallback(
+    (indeterminate: boolean, allChecked: boolean) => (
+      <TableHead sx={dataTableStyle.tableHead}>
+        <TableRow sx={dataTableStyle.tableHeadRow}>
+          <TableCell padding={FORM.none}>
+            <Box sx={dataTableStyle.checkboxAll}>
+              <Tooltip title={DATA_TABLE_TEXT.checkboxTooltip}>
+                <Checkbox
+                  sx={dataTableStyle.checkAll}
+                  indeterminate={indeterminate && !allChecked}
+                  checked={allChecked}
+                  onChange={(event) => handleSelectAllClick(event.target.checked)}
+                />
+              </Tooltip>
+              <TableSortLabel
+                active={orderBy === SelectedKey}
+                direction={orderBy === SelectedKey ? order : SortType.asc}
+                onClick={createSortHandler(SelectedKey)}
+              />
+            </Box>
+          </TableCell>
+          {displayAttributes.map((attribute) => {
+            const orderedByActive = orderBy === attribute
+            return (
+              <TableCell key={attribute} sortDirection={orderedByActive ? order : false}>
+                <Tooltip title={sortTooltipTitle(attribute)}>
+                  <TableSortLabel
+                    active={orderedByActive}
+                    direction={orderedByActive ? order : SortType.asc}
+                    onClick={createSortHandler(attribute)}
+                  >
+                    {otherCasesToWhitespaces(attribute)}
+                  </TableSortLabel>
+                </Tooltip>
+              </TableCell>
+            )
+          })}
+        </TableRow>
+        {showFilter && (
+          <TableRow sx={dataTableStyle.filterRow}>
+            <TableCell padding={FORM.none}>
+              <FilterListOutlined sx={dataTableStyle.filterIcon} />
+            </TableCell>
+            {displayAttributes.map((attribute, idx) => (
+              <TableCell sx={dataTableStyle.filterCell} key={`filter-${attribute}`}>
+                <TextField
+                  defaultValue={filterValues[idx]}
+                  sx={dataTableStyle.filter}
+                  onChange={(e) => handleFilterValueChange(e.target.value, attribute)}
+                />
+              </TableCell>
+            ))}
+          </TableRow>
+        )}
+      </TableHead>
+    ),
+    [
+      createSortHandler,
+      displayAttributes,
+      filterValues,
+      handleFilterValueChange,
+      handleSelectAllClick,
+      order,
+      orderBy,
+      showFilter,
+      sortTooltipTitle,
+    ],
+  )
+
   if (displayAttributes.length >= MIN_DATA_TABLE_ATTRIBUTE_COUNT) {
     return (
       <TableContainer>
-        <Table>
-          <TableHead sx={dataTableStyle.tableHead}>
-            <TableRow sx={dataTableStyle.tableHeadRow}>
-              <TableCell padding={FORM.checkbox}>
-                <Tooltip title={DATA_TABLE_TEXT.checkboxTooltip}>
-                  <Checkbox
-                    sx={dataTableStyle.checkAll}
-                    indeterminate={sortedDataset.some((data) => data.selected)}
-                    checked={sortedDataset.every((data) => data.selected)}
-                    onChange={(event) => handleSelectAllClick(event.target.checked)}
-                  />
-                </Tooltip>
-              </TableCell>
-              {displayAttributes.map((attribute) => {
-                const orderedByActive = orderBy === attribute
-                return (
-                  <TableCell key={attribute} sortDirection={orderedByActive ? order : false}>
-                    <Tooltip title={sortTooltipTitle(attribute)}>
-                      <TableSortLabel
-                        active={orderedByActive}
-                        direction={orderedByActive ? order : SortType.asc}
-                        onClick={createSortHandler(attribute)}
-                      >
-                        {otherCasesToWhitespaces(attribute)}
-                      </TableSortLabel>
-                    </Tooltip>
-                  </TableCell>
-                )
-              })}
-            </TableRow>
-            {showFilter && (
-              <TableRow sx={dataTableStyle.filterRow}>
-                <TableCell sx={dataTableStyle.filterIcon} padding={FORM.checkbox}>
-                  <FilterListOutlined />
-                </TableCell>
-                {displayAttributes.map((attribute, idx) => (
-                  <TableCell sx={dataTableStyle.filterCell} key={`filter-${attribute}`}>
-                    <TextField
-                      defaultValue={filterValues[idx]}
-                      sx={dataTableStyle.filter}
-                      onChange={(e) => handleFilterValueChange(e.target.value, attribute)}
-                    />
-                  </TableCell>
-                ))}
-              </TableRow>
-            )}
-          </TableHead>
-          <TableBody sx={dataTableStyle.tableBody}>
-            {sortedDataset.map((data, idx) => {
-              const selected = data.selected
-              return (
-                <TableRow
-                  hover
-                  onClick={() => handleSelectClick(data)}
-                  key={idx}
-                  sx={getDataTableRowStyle(rowHeight, selected, selectedBackgroundColor, selectedFontColor)}
-                >
-                  <TableCell padding={FORM.checkbox}>
-                    <Checkbox checked={selected} />
-                  </TableCell>
-                  {displayAttributes.map((attribute) => (
-                    <TableCell key={`${idx}-${attribute}`}>{dataToReadable(data[attribute])}</TableCell>
-                  ))}
-                </TableRow>
-              )
-            })}
-          </TableBody>
+        <Table sx={dataTableStyle.container}>
+          {getTableHead(
+            sortedDataset.some((data) => data.selected),
+            sortedDataset.every((data) => data.selected),
+          )}
+          <DataTableBody
+            displayAttributes={displayAttributes}
+            sortedDataset={sortedDataset}
+            handleSelectClick={handleSelectClick}
+            rowHeight={rowHeight}
+            selectedBackgroundColor={selectedBackgroundColor}
+            selectedFontColor={selectedFontColor}
+            redrawTime={redrawTime}
+          />
         </Table>
       </TableContainer>
     )
