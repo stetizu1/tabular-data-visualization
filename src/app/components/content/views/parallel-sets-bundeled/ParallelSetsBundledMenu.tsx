@@ -6,7 +6,7 @@ import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { MenuProps } from '../../../../types/views/MenuProps'
 import {
   brushingTypeKey,
-  coloringFromKey,
+  coloringTypeKey,
   fontColorKey,
   ParallelSetsBundledSettings,
   tabGapKey,
@@ -21,7 +21,7 @@ import {
   MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT,
   PARALLEL_SETS_BUNDLED_DEFAULT,
 } from '../../../../constants/views/parallelSetsBundled'
-import { ColoringFrom } from '../../../../constants/data/ColoringFrom'
+import { ColoringType } from '../../../../constants/data/ColoringType'
 import { ParallelSetsBrushingType } from '../../../../constants/data/ParallelSetsBrushingType'
 
 import { PARALLEL_SETS_MENU_TEXT } from '../../../../text/views-and-menus/parallelSetsBundled'
@@ -90,13 +90,13 @@ export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ data
               setChecked={setChecked}
               setAttributesKeys={setNominalAttributesKeys}
             />
-            <Typography sx={menuTextStyle.text}>{PARALLEL_SETS_MENU_TEXT.coloringFrom}</Typography>
+            <Typography sx={menuTextStyle.text}>{PARALLEL_SETS_MENU_TEXT.coloringType}</Typography>
             <ToggleButtons
               viewType={viewType}
-              value={parallelSetsBundledSettings.coloringFrom}
-              options={Object.values<ColoringFrom>(ColoringFrom)}
+              value={parallelSetsBundledSettings.coloringType}
+              options={Object.values<ColoringType>(ColoringType)}
               setSettings={setSettings}
-              settingsKey={coloringFromKey}
+              settingsKey={coloringTypeKey}
             />
             <Typography sx={menuTextStyle.text}>{PARALLEL_SETS_MENU_TEXT.brushing}</Typography>
             <ToggleButtons

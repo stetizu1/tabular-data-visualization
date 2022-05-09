@@ -26,7 +26,7 @@ import { MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT } from '../../../../constants
 import { SVG } from '../../../../constants/svg'
 import { AXES_TEXT_CLASS } from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { ColoringFrom } from '../../../../constants/data/ColoringFrom'
+import { ColoringType } from '../../../../constants/data/ColoringType'
 import { ParallelSetsBrushingType } from '../../../../constants/data/ParallelSetsBrushingType'
 
 import { PARALLEL_SETS_BUNDLED_TEXT } from '../../../../text/views-and-menus/parallelSetsBundled'
@@ -69,7 +69,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
   tabWidth,
   tabSpacing,
   tabGap,
-  coloringFrom,
+  coloringType,
   brushingType,
   fontColor,
 }) => {
@@ -161,7 +161,10 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .append(SVG.elements.path)
         .attr(SVG.attributes.class, LINE_NOT_SELECTED_CLASS)
         .attr(SVG.attributes.d, sankeyLinkHorizontal())
-        .attr(SVG.attributes.stroke, (d) => color(d.names[coloringFrom === ColoringFrom.left ? 0 : 1]))
+        .attr(SVG.attributes.stroke, (d) => {
+          if (coloringType === ColoringType.no) return color(`1`) // one category (first) for all
+          return color(d.names[coloringType === ColoringType.left ? 0 : 1])
+        })
         .attr(SVG.attributes.strokeWidth, (d) => {
           if (!d.value || brushingType === ParallelSetsBrushingType.overlay) {
             return Number(d.width)
@@ -234,7 +237,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
     tabGap,
     colorCategory,
     tabSpacing,
-    coloringFrom,
+    coloringType,
     brushingType,
   ])
 
@@ -250,7 +253,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
       tabWidth,
       tabSpacing,
       tabGap,
-      coloringFrom,
+      coloringType,
       brushingType,
     ],
   )
