@@ -28,7 +28,7 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResi
       <DataFilterButton showFilter={showFilter} setShowFilter={setShowFilter} />
     )
   const glyphAxesText =
-    viewType === ViewType.Glyphs && rest.settings[viewType] ? (
+    (viewType === ViewType.Glyphs || viewType === ViewType.ScatterPlotGlyphs) && rest.settings[viewType] ? (
       <Typography sx={gridItemStyle.text}>
         <RotateRight sx={gridItemStyle.textIcon} />
         {`(`}
