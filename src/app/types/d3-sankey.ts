@@ -1,14 +1,5 @@
 import { SankeyLink, SankeyNode } from '../../lib/d3-sankey'
-import { NominalValueProperties } from './data/data'
-
-export type DataLink = {
-  source: number
-  target: number
-  catAttributesCounts: number[] | undefined
-  selected: number[]
-  names: Array<string>
-  value: number
-}
+import { DataLink, NominalValueProperties } from './data/data'
 
 export type NodeDataPoint = SankeyNode<NominalValueProperties, DataLink>
 

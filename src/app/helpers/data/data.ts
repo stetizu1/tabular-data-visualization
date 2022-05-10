@@ -1,5 +1,6 @@
 import {
   CheckedForSelectableDataType,
+  DataLink,
   ExtentForSelectableDataType,
   NominalRecord,
   NominalValueProperties,
@@ -110,7 +111,7 @@ export const getGraph = (
 
   const catAttributeOptions = categoryAttribute ? record[categoryAttribute].map((props) => props.name) : []
 
-  const links = record[attFrom].flatMap((from, idxFrom) =>
+  const links: DataLink[] = record[attFrom].flatMap((from, idxFrom) =>
     record[attTo].map((to, idxTo) => {
       const filtered = dataset.filter(
         (data) => String(data[attFrom]) === String(from.name) && String(data[attTo]) === String(to.name),
@@ -119,7 +120,7 @@ export const getGraph = (
         source: idxFrom,
         target: idxTo + toIdxStart,
         names: [from.name, to.name],
-        catAttributesCounts: catAttributeOptions.length
+        catAttributeValuesCounts: catAttributeOptions.length
           ? catAttributeOptions.map(
               (value) => filtered.filter((data) => String(data[categoryAttribute!]) === value).length,
             )

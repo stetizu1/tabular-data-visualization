@@ -31,7 +31,7 @@ export interface CheckedForSelectableDataType {
 }
 
 /**
- * Interface for nominal value properties
+ * Interface for properties of nominal value of attributes
  */
 export interface NominalValueProperties {
   name: string
@@ -41,8 +41,25 @@ export interface NominalValueProperties {
   countSelected: number
 }
 
+/**
+ * Interface for nominal value records
+ * -- every attribute has array of possible values with additional info
+ */
 export interface NominalRecord {
   [key: keyof SelectableDataType]: Array<NominalValueProperties>
+}
+
+/**
+ * Interface for properties of pair of data, used for on graph
+ * Also can include properties counts for third attribute values
+ */
+export type DataLink = {
+  source: number
+  target: number
+  catAttributeValuesCounts: number[] | undefined
+  selected: number[]
+  names: Array<string>
+  value: number
 }
 
 /**
