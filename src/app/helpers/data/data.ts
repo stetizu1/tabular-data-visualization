@@ -64,26 +64,29 @@ export const getNominalValueProperties = (
   dataset: ReadonlyArray<SelectableDataType>,
   attribute: keyof SelectableDataType,
 ): Array<NominalValueProperties> =>
-  dataset.reduce((nominalValuePropertiesArr, data) => {
-    const containedIdx = nominalValuePropertiesArr.findIndex((values) => values.name === String(data[attribute]))
-    if (containedIdx !== -1) {
-      const prev = nominalValuePropertiesArr[containedIdx]
-      nominalValuePropertiesArr[containedIdx] = {
-        ...prev,
-        count: nominalValuePropertiesArr[containedIdx].count + 1,
-        countSelected: nominalValuePropertiesArr[containedIdx].countSelected + (data.selected ? 1 : 0),
+  dataset
+    .reduce((nominalValuePropertiesArr, data) => {
+      const containedIdx = nominalValuePropertiesArr.findIndex((values) => values.name === String(data[attribute]))
+      if (containedIdx !== -1) {
+        const prev = nominalValuePropertiesArr[containedIdx]
+        nominalValuePropertiesArr[containedIdx] = {
+          ...prev,
+          count: prev.count + 1,
+          countSelected: prev.countSelected + (data.selected ? 1 : 0),
+        }
+        return nominalValuePropertiesArr
       }
+      const newNominalValueProperties: Omit<NominalValueProperties, `order`> = {
+        name: String(data[attribute]),
+        attribute,
+        count: 1,
+        countSelected: data.selected ? 1 : 0,
+      }
+      nominalValuePropertiesArr = [...nominalValuePropertiesArr, newNominalValueProperties]
       return nominalValuePropertiesArr
-    }
-    const newNominalValueProperties: NominalValueProperties = {
-      name: String(data[attribute]),
-      attribute,
-      count: 1,
-      countSelected: data.selected ? 1 : 0,
-    }
-    nominalValuePropertiesArr = [...nominalValuePropertiesArr, newNominalValueProperties]
-    return nominalValuePropertiesArr
-  }, [] as Array<NominalValueProperties>)
+    }, [] as Array<Omit<NominalValueProperties, `order`>>)
+    .sort((a, b) => (b.name < a.name ? 1 : b.name > a.name ? -1 : 0))
+    .map((nvp, idx) => ({ ...nvp, order: idx }))
 
 export const getNominalValuesRecord = (dataset: ReadonlyArray<SelectableDataType>): NominalRecord =>
   Object.fromEntries(

@@ -37,6 +37,7 @@ export interface NominalValueProperties {
   name: string
   attribute: keyof SelectableDataType
   count: number
+  order: number
   countSelected: number
 }
 

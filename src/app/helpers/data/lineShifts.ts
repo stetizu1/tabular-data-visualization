@@ -22,7 +22,7 @@ const getYCatShiftAndCurrentWidth = (
   isBrush: boolean,
   isOverlay: boolean,
 ): number => {
-  if (!attributesCount) return 0
+  if (!currentCount || !attributesCount) return 0
 
   const currentWidth = getCurrentWidth(currentCount, all, width)
 
