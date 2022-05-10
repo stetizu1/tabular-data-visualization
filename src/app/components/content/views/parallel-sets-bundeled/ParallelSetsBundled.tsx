@@ -22,6 +22,7 @@ import {
 } from '../../../../helpers/stringGetters'
 import { getGraph, getNeighborAttributes, getNominalValuesRecord } from '../../../../helpers/data/data'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
+import { getStrokeWidth, getYShift } from '../../../../helpers/data/lineShifts'
 
 import { ViewType } from '../../../../constants/views-general/ViewType'
 import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
@@ -132,6 +133,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
 
       const graph = getGraph(dataset, categoryAttribute, nominalValuesRecord, displayPair[0], displayPair[1])
       const { nodes, links } = sankeyLayout(graph)
+      const getPath = sankeyLinkHorizontal()
 
       const xShift = pairIdx * (pairWidth + tabSpacing)
       svg
@@ -140,13 +142,13 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .data(nodes)
         .enter()
         .append(SVG.elements.rect)
-        .attr(SVG.attributes.class, (d) =>
-          d.count === d.countSelected ? getSpaced(TABS_CLASS, TABS_SELECTED_CLASS) : TABS_CLASS,
+        .attr(SVG.attributes.class, (node) =>
+          node.count === node.countSelected ? getSpaced(TABS_CLASS, TABS_SELECTED_CLASS) : TABS_CLASS,
         )
-        .attr(SVG.attributes.x, (d) => Number(d.x0) + xShift)
-        .attr(SVG.attributes.y, (d) => Number(d.y0))
-        .attr(SVG.attributes.height, (d) => Number(d.y1) - Number(d.y0))
-        .attr(SVG.attributes.width, (d) => Number(d.x1) - Number(d.x0))
+        .attr(SVG.attributes.x, (node) => Number(node.x0) + xShift)
+        .attr(SVG.attributes.y, (node) => Number(node.y0))
+        .attr(SVG.attributes.height, (node) => Number(node.y1) - Number(node.y0))
+        .attr(SVG.attributes.width, (node) => Number(node.x1) - Number(node.x0))
         .on(MouseAction.mouseOver, onMouseOverTooltip(getNodeDataPointValuesWithLabel))
         .on(MouseAction.mouseOut, onMouseOutTooltip)
         .on(MouseAction.click, onMouseClick)
@@ -161,44 +163,17 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .enter()
 
       const colorCategories = categoryAttribute ? nominalValuesRecord[categoryAttribute].map((att) => att.name) : [`1`] // one category
+      const isOverlay = brushingType === ParallelSetsBrushingType.overlay
       // for each value runs once
       colorCategories.forEach((category, idx) => {
         // base
         connectors
           .append(SVG.elements.path)
           .attr(SVG.attributes.class, LINE_NOT_SELECTED_CLASS)
-          .attr(SVG.attributes.d, sankeyLinkHorizontal())
+          .attr(SVG.attributes.d, getPath)
           .attr(SVG.attributes.stroke, color(category))
-          .attr(SVG.attributes.strokeWidth, (d) => {
-            const currentCount = d.catAttributesCounts ? d.catAttributesCounts[idx] : d.value
-            if (!d.width || !currentCount) return 0
-            const fraction = currentCount / d.value
-            const wholeWidth = d.width * fraction
-            if (brushingType === ParallelSetsBrushingType.overlay) {
-              return wholeWidth
-            }
-            const notSelectedFraction = 1 - d.selected[idx] / currentCount
-            return wholeWidth * notSelectedFraction
-          })
-          .attr(SVG.attributes.transform, (d) => {
-            const currentCount = d.catAttributesCounts ? d.catAttributesCounts[idx] : d.value
-            if (!d.width || !currentCount) return null
-            const fraction = currentCount / d.value
-            const former = d.catAttributesCounts
-              ? d.catAttributesCounts.slice(0, idx).reduce((accumulator, curr) => accumulator + curr, 0)
-              : 0
-            const formerFraction = former / d.value
-            const yFormerShift = d.width * formerFraction
-            const currWidth = d.width * fraction
-            const yCatShift = -d.width / 2 + yFormerShift + currWidth / 2
-
-            if (brushingType === ParallelSetsBrushingType.overlay) {
-              return getTranslate([0, yCatShift])
-            }
-            const selectedFraction = d.selected[idx] / currentCount
-            const yBrushShift = (currWidth * selectedFraction) / 2
-            return getTranslate([0, yCatShift + yBrushShift])
-          })
+          .attr(SVG.attributes.strokeWidth, (link) => getStrokeWidth(link, idx, false, isOverlay))
+          .attr(SVG.attributes.transform, (link) => getTranslate([0, getYShift(link, idx, false, isOverlay)]))
           .on(MouseAction.mouseOver, onMouseOverTooltip(getLinkDataPointValuesWithLabel))
           .on(MouseAction.mouseOut, onMouseOutTooltip)
 
@@ -206,41 +181,16 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         connectors
           .append(SVG.elements.path)
           .attr(SVG.attributes.class, SELECTED_CLASS)
-          .attr(SVG.attributes.d, sankeyLinkHorizontal())
-          .attr(SVG.attributes.strokeWidth, (d) => {
-            const currentCount = d.catAttributesCounts ? d.catAttributesCounts[idx] : d.value
-            if (!d.width || !currentCount) return 0
-            const fraction = currentCount / d.value
-            const wholeWidth = d.width * fraction
-            const selectedFraction = d.selected[idx] / currentCount
-            return wholeWidth * selectedFraction
-          })
-          .attr(SVG.attributes.transform, (d) => {
-            const currentCount = d.catAttributesCounts ? d.catAttributesCounts[idx] : d.value
-            if (!d.width || !currentCount) return null
-            const fraction = currentCount / d.value
-            const former = d.catAttributesCounts
-              ? d.catAttributesCounts.slice(0, idx).reduce((accumulator, curr) => accumulator + curr, 0)
-              : 0
-            const formerFraction = former / d.value
-            const yFormerShift = d.width * formerFraction
-            const currWidth = d.width * fraction
-            const yCatShift = -d.width / 2 + yFormerShift + currWidth / 2
-
-            if (brushingType === ParallelSetsBrushingType.overlay) {
-              return getTranslate([0, yCatShift])
-            }
-            const notSelectedFraction = 1 - d.selected[idx] / currentCount
-            const yBrushShift = (currWidth * notSelectedFraction) / 2
-            return getTranslate([0, yCatShift - yBrushShift])
-          })
+          .attr(SVG.attributes.d, getPath)
+          .attr(SVG.attributes.strokeWidth, (link) => getStrokeWidth(link, idx, true))
+          .attr(SVG.attributes.transform, (link) => getTranslate([0, getYShift(link, idx, true, isOverlay)]))
           .on(MouseAction.mouseOver, onMouseOverTooltip(getLinkDataPointValuesWithLabel))
           .on(MouseAction.mouseOut, onMouseOutTooltip)
       })
 
-      const getTextVisible: DataEach<NodeData, SVGTextElement, number> = (d) => {
+      const getTextVisible: DataEach<NodeData, SVGTextElement, number> = (node) => {
         if (pairIdx === Math.floor(half)) return 1
-        if ((isLeft(d) && pairIdx > half) || (!isLeft(d) && pairIdx < half)) return 0
+        if ((isLeft(node) && pairIdx > half) || (!isLeft(node) && pairIdx < half)) return 0
         return 1
       }
 
@@ -252,11 +202,14 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .enter()
         .append(SVG.elements.text)
         .attr(SVG.attributes.class, INNER_TEXT_CLASS)
-        .attr(SVG.attributes.x, (d) => (isLeft(d) ? Number(d.x1) + TEXT_SHIFT : Number(d.x0) - TEXT_SHIFT) + xShift)
-        .attr(SVG.attributes.y, (d) => (Number(d.y1) + Number(d.y0)) / 2)
-        .attr(SVG.attributes.textAnchor, (d) => (isLeft(d) ? SVG.values.start : SVG.values.end))
+        .attr(
+          SVG.attributes.x,
+          (node) => (isLeft(node) ? Number(node.x1) + TEXT_SHIFT : Number(node.x0) - TEXT_SHIFT) + xShift,
+        )
+        .attr(SVG.attributes.y, (node) => (Number(node.y1) + Number(node.y0)) / 2)
+        .attr(SVG.attributes.textAnchor, (node) => (isLeft(node) ? SVG.values.start : SVG.values.end))
         .style(SVG.style.opacity, getTextVisible)
-        .text((d) => getAttributeFormatted(d.name))
+        .text((node) => getAttributeFormatted(node.name))
     })
     // axis text
     svg
