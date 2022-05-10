@@ -72,6 +72,9 @@ export const dialogStyle: Record<string, SxProps> = {
     bgcolor: CARD_COLORS.background,
     '&:hover': {
       bgcolor: important(CARD_COLORS.backgroundHover),
+      '& img': {
+        opacity: 0.6,
+      },
     },
   },
   image: {
