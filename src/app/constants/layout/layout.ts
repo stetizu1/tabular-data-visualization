@@ -105,17 +105,10 @@ export const DEFAULT_GRID_LAYOUT_NOMINAL: GridLayoutItem[] = [
   {
     i: ViewType.ParallelSetsBundled,
     w: 25,
-    h: 17,
+    h: 20,
     x: 0,
     y: 0,
     ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
-  },
-  {
-    i: ViewType.DataTable,
-    w: 25,
-    h: 13,
-    x: 23,
-    y: 0,
   },
 ]
 

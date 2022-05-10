@@ -37,9 +37,9 @@ export type FilterKeys = Pick<LinkDataPoint, `y0` | `y1` | `width`>
 export const getLinkDataPointValuesWithLabel = (data: LinkDataPoint): string[] => {
   const filteredData: Record<string, string> = {
     from: data.names[0],
-    to: data.names[0],
+    to: data.names[1],
     count: String(data.value),
-    selected: String(data.selected),
+    selected: String(data.selected.reduce((acc, sel) => acc + sel, 0)),
   }
   return Object.keys(filteredData).map((key) => `${getAttributeFormatted(key)}: ${filteredData[key]}`)
 }

@@ -4,7 +4,8 @@ import { NominalValueProperties } from './data/data'
 export type DataLink = {
   source: number
   target: number
-  selected: number
+  catAttributesCounts: number[] | undefined
+  selected: number[]
   names: Array<string>
   value: number
 }
