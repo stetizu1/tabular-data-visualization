@@ -23,14 +23,15 @@ export const ToggleButtons = <T, Opt>({
   settingsKey,
 }: ToggleButtonsProps<T, Opt>): JSX.Element => {
   const handleToggleButtonChange = useCallback(
-    (newValue: T) => {
+    (newValue: T | null) => {
       setSettings((prev) => {
         const prevSettings = prev[viewType]!
+        const newSetting = newValue ? { [settingsKey]: newValue } : {}
         return {
           ...prev,
           [viewType]: {
             ...prevSettings,
-            [settingsKey]: newValue,
+            ...newSetting,
           },
         }
       })

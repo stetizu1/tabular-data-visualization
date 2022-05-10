@@ -83,10 +83,10 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
   }, [dataset, getFixedDataset, nullContainingAttributes, setDataset])
 
   const handleToggleChange = useCallback(
-    (value: DataNullOptionType, attribute: keyof SelectableDataType) =>
+    (value: DataNullOptionType | null, attribute: keyof SelectableDataType) =>
       setOptionsChosen((prev) => ({
         ...prev,
-        [attribute]: value,
+        [attribute]: value ? value : prev[attribute],
       })),
     [],
   )
