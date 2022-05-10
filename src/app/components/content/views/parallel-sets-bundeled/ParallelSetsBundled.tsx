@@ -128,7 +128,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
       const sankeyLayout = sankey<NominalValueProperties, DataLink>()
         .nodeWidth(tabWidth)
         .nodePadding(tabGap)
-        .nodeSort((a, b) => Number(a.name) - Number(b.name))
+        .nodeSort((a, b) => a.order - b.order)
         .extent(pairExtent)
 
       const graph = getGraph(dataset, categoryAttribute, nominalValuesRecord, displayPair[0], displayPair[1])
