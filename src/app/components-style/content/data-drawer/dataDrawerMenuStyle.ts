@@ -1,6 +1,7 @@
 import { SxProps } from '@mui/system'
 
-import { calc, border, px } from '../../../helpers/d3/stringGetters'
+import { calc, border, px } from '../../../helpers/stringGetters'
+
 import { DATA_DRAWER_COLORS, ERROR_COLORS } from '../../../styles/colors'
 import { DATA_DRAWER_FONT } from '../../../styles/font'
 

@@ -1,17 +1,10 @@
-import { GridLayoutItem } from '../../types/views/Grid'
 import { Dimensions } from '../../types/basic/dimensions'
-import { ViewType } from './ViewTypes'
+import { GridLayoutItem } from '../../types/views/Grid'
+import { ViewType } from '../views-general/ViewType'
 
-export const DEFAULT_BRUSH_COLOR = `#830606`
-export const DEFAULT_BRUSH_BG_COLOR_TABLE = `#ffcfcf`
-export const DEFAULT_BRUSH_FONT_COLOR_TABLE = `#111111`
-export const DEFAULT_FONT_COLOR_PARALLEL_SETS = `#252525`
-
-export const VIEW_BORDER_SIZE = 5
+export const GRID_HEADER_HEIGHT = 30
 
 export const DRAG_HANDLE = `drag-handle`
-
-export const HEADER_HEIGHT = 30
 
 export const VIEW_DEFAULT_SIZE: Dimensions = {
   width: 0,
@@ -112,9 +105,97 @@ export const DEFAULT_GRID_LAYOUT_NOMINAL: GridLayoutItem[] = [
   {
     i: ViewType.ParallelSetsBundled,
     w: 25,
-    h: 25,
+    h: 20,
     x: 0,
     y: 0,
     ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
   },
+]
+
+export const LAYOUT_OPT_2: GridLayoutItem[] = [
+  {
+    i: ViewType.ParallelCoordinates,
+    w: 30,
+    h: 16,
+    x: 0,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ParallelCoordinates],
+  },
+  {
+    i: ViewType.ParallelSetsBundled,
+    w: 30,
+    h: 14,
+    x: 17,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
+  },
+]
+
+export const LAYOUT_OPT_3: GridLayoutItem[] = [
+  {
+    i: ViewType.ParallelCoordinates,
+    w: 14,
+    h: 16,
+    x: 0,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ParallelCoordinates],
+  },
+  {
+    i: ViewType.ScatterPlotMatrix,
+    w: 11,
+    h: 20,
+    x: 14,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ScatterPlotMatrix],
+  },
+  {
+    i: ViewType.Glyphs,
+    w: 11,
+    h: 10,
+    x: 14,
+    y: 20,
+    ...VIEW_LIMITS[ViewType.Glyphs],
+  },
+  {
+    i: ViewType.ParallelSetsBundled,
+    w: 14,
+    h: 14,
+    x: 0,
+    y: 16,
+    ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
+  },
+]
+export const LAYOUT_OPT_4: GridLayoutItem[] = [
+  {
+    i: ViewType.ParallelCoordinates,
+    w: 14,
+    h: 15,
+    x: 11,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ParallelCoordinates],
+  },
+  {
+    i: ViewType.ScatterPlotMatrix,
+    w: 11,
+    h: 30,
+    x: 0,
+    y: 0,
+    ...VIEW_LIMITS[ViewType.ScatterPlotMatrix],
+  },
+  {
+    i: ViewType.ScatterPlotGlyphs,
+    w: 14,
+    h: 15,
+    x: 11,
+    y: 15,
+    ...VIEW_LIMITS[ViewType.ScatterPlotGlyphs],
+  },
+]
+
+export const LAYOUT_OPTIONS = [
+  DEFAULT_GRID_LAYOUT_QUANTITATIVE,
+  DEFAULT_GRID_LAYOUT_NOMINAL,
+  LAYOUT_OPT_2,
+  LAYOUT_OPT_3,
+  LAYOUT_OPT_4,
 ]

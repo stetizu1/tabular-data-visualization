@@ -13,7 +13,7 @@ export interface VisualizationSettings {
 /**
  * General settings for visualization with d3.js
  */
-export interface BaseViewVisualizationSettings extends VisualizationSettings {
+export interface ViewVisualizationSettings extends VisualizationSettings {
   /**
    * Array of colors for category attributes
    */
@@ -28,12 +28,7 @@ export interface BaseViewVisualizationSettings extends VisualizationSettings {
    * Opacity of data items
    */
   opacity: Opacity
-}
 
-/**
- * General settings for quantitative visualization
- */
-export interface ViewVisualizationSettings extends BaseViewVisualizationSettings {
   /**
    * Category attribute for coloring
    */

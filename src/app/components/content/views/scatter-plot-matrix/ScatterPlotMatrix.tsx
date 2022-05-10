@@ -29,20 +29,20 @@ import {
   getClass,
   getEverything,
   getTranslate,
-} from '../../../../helpers/d3/stringGetters'
+} from '../../../../helpers/stringGetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
-import { getCellInnerSize, getCellTranslateInMatrix, getMatrix } from '../../../../helpers/d3/matrix'
+import { getCellInnerSize, getCellTranslateInMatrix, getMatrix } from '../../../../helpers/views/matrix'
 import { isInRanges } from '../../../../helpers/basic/range'
-import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
-import { displayDetails } from '../../../../helpers/d3/displayDetails'
+import { getCategoryColor } from '../../../../helpers/d3/categoryColor'
+import { setDisplay } from '../../../../helpers/d3/setDisplay'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { BrushAction } from '../../../../constants/actions/BrushAction'
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { SVG } from '../../../../constants/svg'
 import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
 
@@ -103,7 +103,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
   // selected coloring
   selectAll(getClass(DATA_POINT_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
 
-  displayDetails(isDetailsVisible, DUPLICATES_CLASS)
+  setDisplay(isDetailsVisible, DUPLICATES_CLASS)
 
   const createScatterPlotMatrix = useCallback(() => {
     const node = component.current
@@ -321,7 +321,11 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
     getCellInnerSize(innerWidth / displayAttributes.length, horizontalSpacing) < 0 ||
     getCellInnerSize(innerHeight / displayAttributes.length, verticalSpacing) < 0
   )
-    return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{SCATTER_PLOT_MATRIX_TEXT.tooSmall}</Box> // rect not big enough
+    return (
+      <Box sx={getViewsNotDisplayStyle(width, height, margin)} id={CONTAINER_EMPTY[ViewType.ScatterPlotMatrix]}>
+        {SCATTER_PLOT_MATRIX_TEXT.tooSmall}
+      </Box>
+    )
   if (displayAttributes.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT) {
     return (
       <Box
@@ -334,5 +338,9 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
       </Box>
     )
   }
-  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{SCATTER_PLOT_MATRIX_TEXT.unavailable}</Box>
+  return (
+    <Box sx={getViewsNotDisplayStyle(width, height, margin)} id={CONTAINER_EMPTY[ViewType.ScatterPlotMatrix]}>
+      {SCATTER_PLOT_MATRIX_TEXT.unavailable}
+    </Box>
+  )
 }

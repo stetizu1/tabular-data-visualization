@@ -1,24 +1,17 @@
-import { ColoringType } from '../../../constants/data/ColoringType'
-import { ParallelSetsBrushingType } from '../../../constants/data/ParallelSetsBrushingType'
+import { ParallelSetsBrushingType } from '../../../constants/brushing-type/ParallelSetsBrushingType'
 
-import { BaseViewVisualizationSettings } from './VisualizationSettings'
+import { ViewVisualizationSettings } from './VisualizationSettings'
 
 export const tabWidthKey = `tabWidth`
 export const tabSpacingKey = `tabSpacing`
 export const tabGapKey = `tabGap`
-export const coloringTypeKey = `coloringType`
 export const brushingTypeKey = `brushingType`
 export const fontColorKey = `fontColor`
 
 /**
  * Settings for Parallel Sets Bundled view
  */
-export interface ParallelSetsBundledSettings extends BaseViewVisualizationSettings {
-  /**
-   * Is coloring from left side
-   */
-  [coloringTypeKey]: ColoringType
-
+export interface ParallelSetsBundledSettings extends ViewVisualizationSettings {
   /**
    * Brushing - displayed from top top or overlay
    */

@@ -1,5 +1,7 @@
 import { SxProps } from '@mui/system'
-import { border, px } from '../../../../../helpers/d3/stringGetters'
+
+import { border, px } from '../../../../../helpers/stringGetters'
+
 import { BUTTON_COLORS } from '../../../../../styles/colors'
 
 export const getColorInputStyle = (disabled?: boolean): SxProps => ({

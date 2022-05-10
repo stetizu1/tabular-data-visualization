@@ -1,26 +1,27 @@
-import React, { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState, memo } from 'react'
+import React, { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState, memo, useEffect } from 'react'
 import GridLayout, { WidthProvider } from 'react-grid-layout'
 import { Box } from '@mui/material'
 import { AddCircle } from '@mui/icons-material'
 
 import { Brushable } from '../../../types/brushing/Brushable'
 import { SelectableDataType } from '../../../types/data/data'
-import { SideEffectVoid } from '../../../types/basic/functionTypes'
 import { GridLayoutItem, LayoutArray } from '../../../types/views/Grid'
 import { Settings } from '../../../types/views/settings/Settings'
 
-import { getClass } from '../../../helpers/d3/stringGetters'
-import { displayDetails } from '../../../helpers/d3/displayDetails'
+import { getClass } from '../../../helpers/stringGetters'
+import { setDisplay } from '../../../helpers/d3/setDisplay'
 
-import { isViewType, ViewType } from '../../../constants/views/ViewTypes'
-import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from '../../../constants/views/common'
-import { TOOLTIP_CLASS } from '../../../constants/views/tooltip'
-import { TOP_TOOLBAR_TEXT } from '../../../text/SiteText'
+import { isViewType, ViewType } from '../../../constants/views-general/ViewType'
+import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from '../../../constants/layout/layout'
+import { TOOLTIP_CLASS } from '../../../constants/views-general/tooltip'
+
+import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
 import { VIEW_NAMES } from '../../../text/views-and-menus/common'
 
 import { viewGridStyle } from '../../../components-style/content/views/viewGridStyle'
 
 import { DataDrawer } from '../data-drawer/DataDrawer'
+import { LayoutDialog } from '../top-toolbar/items/layout/LayoutDialog'
 import { SelectionDialog } from '../common/dialogs/SelectionDialog'
 import { GridItem } from './GridItem'
 
@@ -31,11 +32,13 @@ export interface ViewGridDataProps extends Brushable {
 export interface ViewGridProps extends ViewGridDataProps {
   isDrawerOpen: boolean
   isDetailsVisible: boolean
-  closeDrawer: SideEffectVoid
+  closeDrawer: () => void
   cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>
 
+  isLayoutDialogOpen: boolean
+  setIsLayoutDialogOpen: Dispatch<SetStateAction<boolean>>
   isAddViewDialogOpen: boolean
   setIsAddViewDialogOpen: Dispatch<SetStateAction<boolean>>
   layout: GridLayoutItem[]
@@ -53,19 +56,29 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
   setSettings,
   isAddViewDialogOpen,
   setIsAddViewDialogOpen,
+  isLayoutDialogOpen,
+  setIsLayoutDialogOpen,
   layout,
   setLayout,
   ...viewProps
 }) => {
   const [viewResizing, setViewResizing] = useState<ViewType | null>(null)
+  const [lastLayout, setLastLayout] = useState(layout)
+
+  useEffect(
+    () => () => {
+      if (layout !== null) setLastLayout(layout)
+    },
+    [layout],
+  )
 
   const updateLayout = useCallback(
     (newLayout: LayoutArray) => {
-      if (!newLayout) return
+      if (!newLayout || layout.length === 0) return
       const filteredLayout = newLayout.filter((item) => isViewType(item.i))
       setLayout(filteredLayout as GridLayoutItem[])
     },
-    [setLayout],
+    [setLayout, layout],
   )
 
   const addView = useCallback(
@@ -91,7 +104,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
     [setLayout],
   )
 
-  displayDetails(viewProps.isDetailsVisible, TOOLTIP_CLASS)
+  setDisplay(viewProps.isDetailsVisible, TOOLTIP_CLASS)
 
   const views = layout.map((item) => item.i)
   const availableViews = Object.values(ViewType).filter((viewType) => !views.includes(viewType))
@@ -105,6 +118,12 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
         options={dialogOptions}
         noOptionText={TOP_TOOLBAR_TEXT.noOption}
         handleListItemClick={addView}
+      />
+      <LayoutDialog
+        isOpen={isLayoutDialogOpen}
+        setLayout={setLayout}
+        onClose={() => setIsLayoutDialogOpen(false)}
+        lastLayout={lastLayout}
       />
       <DataDrawer
         isOpen={isDrawerOpen}
@@ -134,7 +153,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
                 cleanSelectedIfViewWasBrushing(view.i)
                 removeView(view.i)
               }}
-              component={view.i}
+              viewType={view.i}
               settings={settings}
               {...viewProps}
             />

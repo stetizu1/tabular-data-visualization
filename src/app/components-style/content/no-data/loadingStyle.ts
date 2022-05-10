@@ -1,5 +1,6 @@
 import { SxProps } from '@mui/system'
-import { px } from '../../../helpers/d3/stringGetters'
+
+import { px } from '../../../helpers/stringGetters'
 
 export const loadingStyle: Record<string, SxProps> = {
   load: {

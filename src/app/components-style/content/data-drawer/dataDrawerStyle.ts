@@ -1,6 +1,7 @@
 import { SxProps } from '@mui/system'
 
-import { border, px } from '../../../helpers/d3/stringGetters'
+import { border, calc, px } from '../../../helpers/stringGetters'
+
 import { DATA_DRAWER_COLORS } from '../../../styles/colors'
 
 export const dataDrawerStyle: Record<string, SxProps> = {
@@ -20,6 +21,9 @@ export const dataDrawerStyle: Record<string, SxProps> = {
       padding: px(10, 12, 8),
     },
   },
+  fill: {
+    flexGrow: 1,
+  },
   header: {},
   chevron: {
     color: DATA_DRAWER_COLORS.icon,
@@ -29,5 +33,20 @@ export const dataDrawerStyle: Record<string, SxProps> = {
     display: `flex`,
     flexDirection: `column`,
     flexGrow: 1,
+  },
+  footer: {
+    width: calc(-20, `100%`),
+    padding: px(10),
+  },
+  githubIcon: {
+    paddingRight: px(6),
+    fontSize: px(18),
+  },
+  text: {
+    color: DATA_DRAWER_COLORS.icon,
+    fontSize: px(9),
+    display: `flex`,
+    alignItems: `center`,
+    justifyContent: `center`,
   },
 }

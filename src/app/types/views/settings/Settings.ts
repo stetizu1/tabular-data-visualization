@@ -1,4 +1,4 @@
-import { ViewType } from '../../../constants/views/ViewTypes'
+import { ViewType } from '../../../constants/views-general/ViewType'
 
 import { ParallelCoordinatesSettings } from './ParallelCoordinatesSettings'
 import { ScatterPlotMatrixSettings } from './ScatterPlotMatrixSettings'

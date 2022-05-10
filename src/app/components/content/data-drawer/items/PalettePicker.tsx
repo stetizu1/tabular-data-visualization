@@ -6,8 +6,9 @@ import { Settings } from '../../../../types/views/settings/Settings'
 
 import { useDebounce } from '../../../../helpers/react/useDebounce'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { COLOR_DEBOUNCE } from '../../../../constants/debounce/debounce'
+import { INPUT_TYPE } from '../../../../constants/others'
 
 import { PALETTE_PICKER_TEXT } from '../../../../text/views-and-menus/common'
 
@@ -61,7 +62,7 @@ export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
       <Box sx={palettePickerStyle.col} key={idx}>
         <label>{PALETTE_PICKER_TEXT.categoriesLabel[idx]}</label>
         <Box sx={getPalettePickerColorInputStyle(colors, idx)}>
-          <input type="color" value={colors[idx]} onChange={(e) => handleSetColor(e.target.value, idx)} />
+          <input type={INPUT_TYPE.color} value={colors[idx]} onChange={(e) => handleSetColor(e.target.value, idx)} />
         </Box>
       </Box>
     ),

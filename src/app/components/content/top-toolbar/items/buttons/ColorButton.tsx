@@ -4,6 +4,7 @@ import { Box, Tooltip } from '@mui/material'
 import { useDebounce } from '../../../../../helpers/react/useDebounce'
 
 import { COLOR_DEBOUNCE } from '../../../../../constants/debounce/debounce'
+import { INPUT_TYPE } from '../../../../../constants/others'
 
 import {
   colorInputStyle,
@@ -35,7 +36,12 @@ export const ColorButton: VoidFunctionComponent<ColorButtonProps> = ({
   return (
     <Tooltip title={tooltip} disableHoverListener={disabled}>
       <Box sx={colorInputStyle.inputBox}>
-        <input disabled={disabled} type="color" value={color} onChange={(e) => setCurrentColor(e.target.value)} />
+        <input
+          disabled={disabled}
+          type={INPUT_TYPE.color}
+          value={color}
+          onChange={(e) => setCurrentColor(e.target.value)}
+        />
         <Box sx={getColorInputStyle(disabled)}>
           {icon}
           <Box sx={getColorInputBoxStyle(color, disabled)} />

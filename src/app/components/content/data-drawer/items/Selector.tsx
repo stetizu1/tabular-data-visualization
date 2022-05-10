@@ -2,12 +2,11 @@ import { Dispatch, SetStateAction, useCallback } from 'react'
 import { MenuItem, TextField } from '@mui/material'
 
 import { SelectableDataType } from '../../../../types/data/data'
+import { Settings } from '../../../../types/views/settings/Settings'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
-
-import { Settings } from '../../../../types/views/settings/Settings'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 
 export interface SelectorProps<Opt> {
   viewType: ViewType

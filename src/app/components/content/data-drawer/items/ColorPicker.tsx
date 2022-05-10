@@ -5,8 +5,9 @@ import { Settings } from '../../../../types/views/settings/Settings'
 
 import { useDebounce } from '../../../../helpers/react/useDebounce'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { COLOR_DEBOUNCE } from '../../../../constants/debounce/debounce'
+import { INPUT_TYPE } from '../../../../constants/others'
 
 import {
   colorPickerStyle,
@@ -54,7 +55,7 @@ export const ColorPicker = <Opt,>({
     <Box sx={colorPickerStyle.picker}>
       <Typography sx={menuTextStyle.text}>{label}</Typography>
       <Box sx={getColorPickerInputStyle(color)}>
-        <input type="color" value={color} onChange={(e) => handleChangeColor(e.target.value)} />
+        <input type={INPUT_TYPE.color} value={color} onChange={(e) => handleChangeColor(e.target.value)} />
       </Box>
     </Box>
   )

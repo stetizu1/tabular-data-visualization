@@ -5,9 +5,11 @@ import { Opacity } from '../../../../types/styling/Opacity'
 import { Settings } from '../../../../types/views/settings/Settings'
 
 import { useDebounce } from '../../../../helpers/react/useDebounce'
+import { getInputPropsPositiveNumber } from '../../../../helpers/basic/getInputPropsPositiveNumber'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
+import { INPUT_TYPE } from '../../../../constants/others'
 
 import { OPACITY_MENU_TEXT } from '../../../../text/views-and-menus/common'
 
@@ -56,27 +58,27 @@ export const OpacityInput: VoidFunctionComponent<OpacityInputProps> = ({
       <Typography sx={menuTextStyle.text}>{header}</Typography>
       <TextField
         label={OPACITY_MENU_TEXT.all}
-        type="number"
+        type={INPUT_TYPE.number}
         defaultValue={opacities[0]}
         sx={numberInputStyles.textField}
-        inputProps={{ min: 0, max: 100 }}
+        inputProps={getInputPropsPositiveNumber({ max: 100 })}
         onChange={(e) => handleOpacityChange(Number(e.target.value), 0)}
       />
       <Box sx={numberInputStyles.horizontal}>
         <TextField
           label={OPACITY_MENU_TEXT.selected}
-          type="number"
+          type={INPUT_TYPE.number}
           defaultValue={opacities[1]}
           sx={numberInputStyles.textField}
-          inputProps={{ min: 0, max: 100 }}
+          inputProps={getInputPropsPositiveNumber({ max: 100 })}
           onChange={(e) => handleOpacityChange(Number(e.target.value), 1)}
         />
         <TextField
           label={OPACITY_MENU_TEXT.notSelected}
-          type="number"
+          type={INPUT_TYPE.number}
           defaultValue={opacities[2]}
           sx={numberInputStyles.textField}
-          inputProps={{ min: 0, max: 100 }}
+          inputProps={getInputPropsPositiveNumber({ max: 100 })}
           onChange={(e) => handleOpacityChange(Number(e.target.value), 2)}
         />
       </Box>

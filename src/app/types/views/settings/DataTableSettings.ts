@@ -17,6 +17,7 @@ export interface DataTableSettings extends VisualizationSettings {
    * Selected background color
    */
   [selectedBackgroundColorKey]: string
+
   /**
    * Selected font color
    */

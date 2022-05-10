@@ -1,6 +1,7 @@
 import { SxProps } from '@mui/system'
 
-import { px } from '../../helpers/d3/stringGetters'
+import { px } from '../../helpers/stringGetters'
+
 import { HEADER_COLORS } from '../../styles/colors'
 import { HEADER_FONT } from '../../styles/font'
 

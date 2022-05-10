@@ -2,15 +2,14 @@
  * tooltip and it's actions
  */
 import { select } from 'd3'
-
 import { MouseEvent } from 'react'
 import { OnMouseEvent } from '../../types/d3-types'
 
-import { TOOLTIP, TOOLTIP_CLASS } from '../../constants/views/tooltip'
+import { TOOLTIP, TOOLTIP_CLASS } from '../../constants/views-general/tooltip'
 import { SVG } from '../../constants/svg'
-import { HTML } from '../../constants/html'
+import { HTML } from '../../constants/others'
 
-import { getClass, px } from './stringGetters'
+import { getClass, px } from '../stringGetters'
 
 export const onMouseOverTooltip =
   <T>(stringFunction: (data: T) => string[]): OnMouseEvent<T> =>

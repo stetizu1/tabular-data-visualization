@@ -1,6 +1,7 @@
 import { schemeCategory10 } from 'd3'
-import { ParallelCoordinatesSettings } from '../../types/views/settings/ParallelCoordinatesSettings'
+
 import { ColorArray } from '../../types/styling/ColorArray'
+import { ParallelCoordinatesSettings } from '../../types/views/settings/ParallelCoordinatesSettings'
 
 export const MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT = 2
 

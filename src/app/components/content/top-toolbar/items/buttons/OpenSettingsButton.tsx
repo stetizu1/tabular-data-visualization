@@ -1,6 +1,6 @@
 import { VoidFunctionComponent } from 'react'
-import { Settings } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
+import { Settings } from '@mui/icons-material'
 
 import { openSettingsButtonStyle } from '../../../../../components-style/content/top-toolbar/items/buttons/openSettingsButtonStyle'
 
@@ -10,7 +10,7 @@ export interface OpenSettingsButtonProps {
 }
 
 export const OpenSettingsButton: VoidFunctionComponent<OpenSettingsButtonProps> = ({ disabled, open }) => (
-  <IconButton size="small" disabled={disabled} onClick={open} sx={openSettingsButtonStyle.settings}>
+  <IconButton disabled={disabled} onClick={open} sx={openSettingsButtonStyle.settings}>
     <Settings />
   </IconButton>
 )

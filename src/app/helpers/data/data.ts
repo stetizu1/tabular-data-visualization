@@ -6,9 +6,9 @@ import {
   SelectableDataType,
   SelectedKey,
 } from '../../types/data/data'
+import { NodeDataPoint, SankeyGraph } from '../../types/d3-sankey'
 
 import { CATEGORY_LIMIT } from '../../constants/data/data'
-import { NodeDataPoint, SankeyGraph } from '../../types/d3-sankey'
 
 const getDatasetSample = (dataset: ReadonlyArray<SelectableDataType>) => dataset[0]
 
@@ -97,12 +97,15 @@ export const getNeighborAttributes = (
 
 export const getGraph = (
   dataset: ReadonlyArray<SelectableDataType>,
+  categoryAttribute: keyof SelectableDataType | undefined,
   record: NominalRecord,
   attFrom: keyof SelectableDataType,
   attTo: keyof SelectableDataType,
 ): SankeyGraph => {
   const nodes: Array<NodeDataPoint> = [...record[attFrom], ...record[attTo]]
   const toIdxStart = record[attFrom].length
+
+  const catAttributeOptions = categoryAttribute ? record[categoryAttribute].map((props) => props.name) : []
 
   const links = record[attFrom].flatMap((from, idxFrom) =>
     record[attTo].map((to, idxTo) => {
@@ -113,7 +116,16 @@ export const getGraph = (
         source: idxFrom,
         target: idxTo + toIdxStart,
         names: [from.name, to.name],
-        selected: filtered.filter((data) => data.selected).length,
+        catAttributesCounts: catAttributeOptions.length
+          ? catAttributeOptions.map(
+              (value) => filtered.filter((data) => String(data[categoryAttribute!]) === value).length,
+            )
+          : undefined,
+        selected: catAttributeOptions.length
+          ? catAttributeOptions.map(
+              (value) => filtered.filter((data) => data.selected && String(data[categoryAttribute!]) === value).length,
+            )
+          : [filtered.filter((data) => data.selected).length],
         value: filtered.length,
       }
     }),

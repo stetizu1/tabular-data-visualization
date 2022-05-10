@@ -1,6 +1,4 @@
-import { ViewType } from '../../constants/views/ViewTypes'
-
-import { SideEffectVoid } from '../basic/functionTypes'
+import { ViewType } from '../../constants/views-general/ViewType'
 
 export type SetComponentBrushing = (newComponent: ViewType | null) => void
 
@@ -21,7 +19,7 @@ export interface Brushable extends Highlightable {
   /**
    * Setter for passing the brushing cleaning function to the Data Context component
    */
-  registerCleanBrushing: (clean: SideEffectVoid) => void
+  registerCleanBrushing: (clean: () => void) => void
 
   /**
    * Set/unset a brushing component

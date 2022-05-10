@@ -13,7 +13,7 @@ import {
 
 import { getAttributeKeys, getDefaultAllAttributesChecked } from '../../../../helpers/data/data'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { DATA_TABLE_DEFAULT, MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/dataTable'
 
 import { DATA_TABLE_MENU_TEXT } from '../../../../text/views-and-menus/dataTable'

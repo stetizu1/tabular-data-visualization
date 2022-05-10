@@ -19,7 +19,8 @@ import {
 } from '../../../../helpers/data/data'
 
 import { GLYPHS_DEFAULT, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views-general/ViewType'
+import { SortType } from '../../../../constants/sort/SortType'
 
 import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/glyphs'
 
@@ -34,7 +35,6 @@ import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 import { ToggleButtons } from '../../data-drawer/items/ToggleButtons'
-import { SortType } from '../../../../helpers/data/comparator'
 
 export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
   const viewType = ViewType.Glyphs

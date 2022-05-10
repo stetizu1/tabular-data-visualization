@@ -16,7 +16,7 @@ import {
   MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT,
   PARALLEL_COORDINATES_DEFAULT,
 } from '../../../../constants/views/parallelCoordinates'
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 
 import { PARALLEL_COORDINATES_MENU_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
 

@@ -1,4 +1,4 @@
-import { calc } from '../helpers/d3/stringGetters'
+import { calc } from '../helpers/stringGetters'
 
 export const HEADER_FONT = {
   titleFontSize: calc(5, `2vmin`),

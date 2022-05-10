@@ -5,7 +5,9 @@ export interface Dimensions {
   /**
    * Width of the element
    */
+
   width: number
+
   /**
    * Height of the element
    */

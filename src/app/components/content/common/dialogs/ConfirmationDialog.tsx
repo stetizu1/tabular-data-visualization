@@ -1,6 +1,8 @@
 import { VoidFunctionComponent } from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
 
+import { BUTTON_VARIANT } from '../../../../constants/mui'
+
 export interface InformationDialogProps {
   isOpen: boolean
   title?: string
@@ -27,10 +29,10 @@ export const ConfirmationDialog: VoidFunctionComponent<InformationDialogProps> =
       <DialogContentText>{description}</DialogContentText>
     </DialogContent>
     <DialogActions>
-      <Button onClick={onConfirm} variant="contained" autoFocus>
+      <Button onClick={onConfirm} variant={BUTTON_VARIANT.contained} autoFocus>
         {confirmText}
       </Button>
-      <Button onClick={onClose} variant="outlined">
+      <Button onClick={onClose} variant={BUTTON_VARIANT.outlined}>
         {cancelText}
       </Button>
     </DialogActions>

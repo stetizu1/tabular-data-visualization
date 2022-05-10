@@ -1,12 +1,14 @@
 import { SxProps } from '@mui/system'
 import { Opacity } from '../../../../types/styling/Opacity'
 
-import { important } from '../../../../helpers/d3/stringGetters'
+import { important, px } from '../../../../helpers/stringGetters'
+
 import { PLOT_COLORS } from '../../../../styles/colors'
 
 export const SCATTER_PLOT_GLYPHS_CLASS = `scatterPlotGlyphs`
 export const SELECTED_CLASS = `scatterPlotGlyphsSelected`
-export const AXIS_CLASS = `scatterPlotAxis`
+export const AXIS_CLASS = `scatterPlotGlyphsAxis`
+export const AXIS_TEXT_CLASS = `scatterPlotGlyphsAxisText`
 export const DUPLICATES_CLASS = `scatterPlotGlyphsDuplicates`
 
 export const getScatterPlotGlyphsStyle = (
@@ -28,10 +30,15 @@ export const getScatterPlotGlyphsStyle = (
   '& .scatterPlotGlyphsDuplicates': {
     opacity: 0,
   },
-  '& .scatterPlotAxis': {
+  '& .scatterPlotGlyphsAxis': {
     shapeRendering: `crispEdges`,
     '& line, path': {
       stroke: PLOT_COLORS.axisLinesDark,
     },
+  },
+  '& .scatterPlotGlyphsAxisText': {
+    fill: PLOT_COLORS.fontColor,
+    fontSize: px(13),
+    fontWeight: `bold`,
   },
 })

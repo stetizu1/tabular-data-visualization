@@ -1,4 +1,4 @@
-import { ViewType } from '../../constants/views/ViewTypes'
+import { ViewType } from '../../constants/views-general/ViewType'
 import { MENU_TEXT, VIEW_NAMES } from './common'
 
 export const PARALLEL_SETS_BUNDLED_TEXT = {
@@ -12,7 +12,6 @@ export const PARALLEL_SETS_MENU_TEXT = {
   tabWidth: `Width of the tabs`,
   tabSpacing: `Spacing between tabs`,
   tabGap: `Gap between tabs`,
-  coloringType: `Coloring from...`,
   brushing: `Brushing...`,
   fontColor: `Inner font color`,
   ...MENU_TEXT,

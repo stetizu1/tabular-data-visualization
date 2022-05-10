@@ -1,6 +1,6 @@
-import { SortType } from '../../../helpers/data/comparator'
-
 import { SelectableDataType } from '../../data/data'
+
+import { SortType } from '../../../constants/sort/SortType'
 
 import { ViewVisualizationSettings } from './VisualizationSettings'
 

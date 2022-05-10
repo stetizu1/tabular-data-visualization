@@ -1,6 +1,8 @@
 import { SxProps } from '@mui/system'
+
+import { calc, important, px } from '../../../../helpers/stringGetters'
+
 import { TABLE_COLORS } from '../../../../styles/colors'
-import { important, px } from '../../../../helpers/d3/stringGetters'
 
 export const getDataTableRowStyle = (
   rowHeight: number,
@@ -59,5 +61,10 @@ export const dataTableStyle: Record<string, SxProps> = {
   },
   notDisplayed: {
     padding: 10,
+  },
+  checkboxAll: {
+    display: `flex`,
+    height: calc(-10, `100%`),
+    padding: px(5),
   },
 }

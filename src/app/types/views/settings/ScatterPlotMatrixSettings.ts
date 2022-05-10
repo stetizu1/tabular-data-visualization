@@ -12,10 +12,12 @@ export interface ScatterPlotMatrixSettings extends ViewVisualizationSettings {
    * Size of a data point
    */
   [pointSizeKey]: number
+
   /**
    * Size of horizontal spacing
    */
   [horizontalSpacingKey]: number
+
   /**
    * Size of vertical spacing
    */

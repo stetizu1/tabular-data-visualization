@@ -1,5 +1,6 @@
-import { ViewType } from '../../constants/views/ViewTypes'
-import { SortType } from '../../helpers/data/comparator'
+import { ViewType } from '../../constants/views-general/ViewType'
+import { SortType } from '../../constants/sort/SortType'
+
 import { MENU_BASE_TEXT, VIEW_NAMES } from './common'
 
 export const DATA_TABLE_MENU_TEXT = {

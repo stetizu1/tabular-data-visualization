@@ -1,7 +1,8 @@
 import { SelectableDataType } from '../../types/data/data'
 import { MatrixItem } from '../../types/data/MatrixData'
 import { Dimensions } from '../../types/basic/dimensions'
-import { getTranslate } from './stringGetters'
+
+import { getTranslate } from '../stringGetters'
 
 export const getMatrix = (keys: Array<keyof SelectableDataType>): MatrixItem[] =>
   keys.map((rowKey, rowIdx) => keys.map((colKey, colIdx) => ({ rowIdx, colIdx, rowKey, colKey }))).flat()

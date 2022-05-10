@@ -32,6 +32,12 @@ export const BUTTON_COLORS = {
   buttonDialogFont: `#d6e1ff`,
 }
 
+export const CARD_COLORS = {
+  background: `#f7f8fd`,
+  backgroundHover: `#dce1ef`,
+  border: `#b3bede`,
+}
+
 export const VIEW_COLORS = {
   itemBackground: `#f2f3fa`,
   border: `#9ea8be`,

@@ -10,26 +10,26 @@ import { ParallelCoordinatesSettings } from '../../../../types/views/settings/Pa
 import { Margin } from '../../../../types/styling/Margin'
 import { Extent, DataEachG, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
 
-import { toStringArray } from '../../../../helpers/basic/retype'
 import { isInRange } from '../../../../helpers/basic/range'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
 import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
-import { getCategoryColor, getTextTogglingYShift, TOGGLE_TEXT_Y_SHIFT } from '../../../../helpers/d3/attributeGetters'
+import { getTogglingYShift, TOGGLE_Y_SHIFT } from '../../../../helpers/views/togglingYShift'
+import { getCategoryColor } from '../../../../helpers/d3/categoryColor'
 import {
   getAttributeFormatted,
   getAttributeValuesWithLabel,
   getClass,
   getEverything,
   getTranslate,
-} from '../../../../helpers/d3/stringGetters'
+} from '../../../../helpers/stringGetters'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { BrushAction } from '../../../../constants/actions/BrushAction'
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { SVG } from '../../../../constants/svg'
 import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelCoordinates'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
 import { PARALLEL_COORDINATES_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
 
@@ -72,7 +72,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
   const margin = useMemo(() => new Margin(...margins), [margins])
   const component = useRef<SVGGElement>(null)
   const color = scaleOrdinal(colorCategory)
-  const upperPadding = TOGGLE_TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
+  const upperPadding = TOGGLE_Y_SHIFT + PLOT_FONT_BOX_SIZE
   const [innerWidth, innerHeight] = [width - margin.width, height - margin.height - upperPadding]
 
   // selected coloring
@@ -85,7 +85,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     svg.selectAll(getEverything()).remove() // clear
 
     const extentInDomains = getExtentInDomains(displayAttributes, dataset)
-    const xScale = scalePoint([0, innerWidth]).domain(toStringArray(displayAttributes))
+    const xScale = scalePoint([0, innerWidth]).domain(displayAttributes.map((attribute) => String(attribute)))
     const yScales = displayAttributes.map((attribute) =>
       scaleLinear([innerHeight, 0]).domain(extentInDomains[attribute]),
     )
@@ -180,7 +180,7 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
     // add text to axes
     brushableAxes
       .append(SVG.elements.text)
-      .attr(SVG.attributes.y, getTextTogglingYShift)
+      .attr(SVG.attributes.y, getTogglingYShift)
       .text(getAttributeFormatted)
       .attr(SVG.attributes.class, AXES_TEXT_CLASS)
 
@@ -232,5 +232,9 @@ export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps
       </Box>
     )
   }
-  return <Box sx={getViewsNotDisplayStyle(width, height, margin)}>{PARALLEL_COORDINATES_TEXT.unavailable}</Box>
+  return (
+    <Box sx={getViewsNotDisplayStyle(width, height, margin)} id={CONTAINER_EMPTY[ViewType.ParallelCoordinates]}>
+      {PARALLEL_COORDINATES_TEXT.unavailable}
+    </Box>
+  )
 }

@@ -1,6 +1,8 @@
 import { SxProps } from '@mui/system'
-import { px } from '../../../helpers/d3/stringGetters'
-import { SITE_COLORS, ERROR_COLORS, BUTTON_COLORS } from '../../../styles/colors'
+
+import { border, important, px } from '../../../helpers/stringGetters'
+
+import { SITE_COLORS, ERROR_COLORS, BUTTON_COLORS, CARD_COLORS } from '../../../styles/colors'
 
 export const dialogStyle: Record<string, SxProps> = {
   dialog: {
@@ -60,5 +62,27 @@ export const dialogStyle: Record<string, SxProps> = {
     '& input': {
       padding: px(8, 10, 6),
     },
+  },
+  card: {
+    display: `flex`,
+    justifyContent: `space-between`,
+    minWidth: px(400),
+    border: border(1, CARD_COLORS.border),
+    margin: px(2),
+    bgcolor: CARD_COLORS.background,
+    '&:hover': {
+      bgcolor: important(CARD_COLORS.backgroundHover),
+    },
+  },
+  image: {
+    width: 220,
+    height: 85,
+    borderRadius: px(2),
+  },
+  cardContent: {
+    padding: px(10),
+  },
+  itemText: {
+    fontSize: px(10),
   },
 }

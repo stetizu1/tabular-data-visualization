@@ -8,6 +8,7 @@ export interface MatrixPosition {
    * Index of a column
    */
   colIdx: number
+
   /**
    * Index of a row
    */
@@ -21,6 +22,7 @@ export interface MatrixItem extends MatrixPosition {
   /**
    * Column attribute key assigned to the item
    */
+
   colKey: keyof SelectableDataType
   /**
    * Row attribute key assigned to the item

@@ -1,20 +1,25 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useCallback, ChangeEvent } from 'react'
-import { Add, AutoGraph } from '@mui/icons-material'
 import { Box, Button } from '@mui/material'
+import { Add, AutoGraph } from '@mui/icons-material'
 
 import { DataType, SelectableDataType } from '../../../../../types/data/data'
 
 import { CsvParse, isArrayOfDataType } from '../../../../../helpers/data/dataConvertors'
+import { getAttributeKeys } from '../../../../../helpers/data/data'
 
-import { DataLoadError, DataLoadState } from '../../../../../constants/data/dataLoadState'
+import { AcceptableFileTypes } from '../../../../../constants/data/data'
+import { DataLoadState } from '../../../../../constants/data/DataLoadState'
 import {
   SAMPLE_DATASET_OPTIONS,
   SampleDataset,
   sampleDatasetIcons,
   sampleDatasets,
 } from '../../../../../constants/data/sampleDataset'
+import { BUTTON_VARIANT, COMPONENT_TYPE } from '../../../../../constants/mui'
+import { INPUT_TYPE } from '../../../../../constants/others'
+import { DataLoadError } from '../../../../../constants/data/DataLoadError'
 
-import { FILE_READER_TEXT } from '../../../../../text/SiteText'
+import { FILE_READER_TEXT } from '../../../../../text/siteText'
 
 import {
   fileReaderStyle,
@@ -23,8 +28,8 @@ import {
 
 import { SelectionDialog } from '../../../common/dialogs/SelectionDialog'
 import { InformationDialog } from '../../../common/dialogs/InformationDialog'
+
 import { ClickableButton } from '../buttons/ClickableButton'
-import { getAttributeKeys } from '../../../../../helpers/data/data'
 import { NullDialog } from './NullDialog'
 
 export interface FileReaderDataProps {
@@ -38,11 +43,6 @@ export interface FileReaderProps extends FileReaderDataProps {
 
 export const addSelected = (data: Array<DataType>): Array<SelectableDataType> =>
   data.map((d) => ({ ...d, selected: false }))
-
-enum AcceptableFileTypes {
-  json = `application/json`,
-  csv = `text/csv`,
-}
 
 const FILE_INPUT_ID = `FILE_INPUT`
 
@@ -168,10 +168,10 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
           icon={<AutoGraph />}
           label={FILE_READER_TEXT.sampleDataLabel}
         />
-        <Button sx={fileReaderStyle.button} variant="contained" component="label">
+        <Button sx={fileReaderStyle.button} variant={BUTTON_VARIANT.contained} component={COMPONENT_TYPE.label}>
           <Add />
           {FILE_READER_TEXT.button}
-          <input type="file" hidden id={FILE_INPUT_ID} onChange={handleFileChange} />
+          <input type={INPUT_TYPE.file} hidden id={FILE_INPUT_ID} onChange={handleFileChange} />
         </Button>
       </Box>
     </>

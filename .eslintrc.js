@@ -37,7 +37,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 1,
     '@typescript-eslint/no-empty-interface': 0,
     'import/order': 1,
-    'no-console': 1,
+    'no-console': [1, { allow: [`error`] }],
     'object-shorthand': 1,
   },
 }

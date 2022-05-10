@@ -1,25 +1,27 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useMemo } from 'react'
-import { Box, Divider, Drawer, IconButton } from '@mui/material'
-import { ChevronRight } from '@mui/icons-material'
+import { Box, Divider, Drawer, IconButton, Link, Typography } from '@mui/material'
+import { ChevronRight, GitHub } from '@mui/icons-material'
 
 import { SelectableDataType } from '../../../types/data/data'
-import { SideEffectVoid } from '../../../types/basic/functionTypes'
+import { Settings } from '../../../types/views/settings/Settings'
 
-import { ViewType } from '../../../constants/views/ViewTypes'
+import { ViewType } from '../../../constants/views-general/ViewType'
+import { ANCHOR, DRAWER_VARIANT } from '../../../constants/mui'
+
+import { DATA_DRAWER_TEXT, GITHUB_LINK } from '../../../text/dataDrawerText'
 
 import { dataDrawerStyle } from '../../../components-style/content/data-drawer/dataDrawerStyle'
 
-import { Settings } from '../../../types/views/settings/Settings'
-import { GlyphsMenu } from '../views/glyphs/GlyphsMenu'
 import { ParallelCoordinatesMenu } from '../views/parallel-coordinates/ParallelCoordinatesMenu'
 import { ScatterPlotMatrixMenu } from '../views/scatter-plot-matrix/ScatterPlotMatrixMenu'
+import { GlyphsMenu } from '../views/glyphs/GlyphsMenu'
 import { ScatterPlotGlyphsMenu } from '../views/scatter-plot-glyphs/ScatterPlotGlyphsMenu'
 import { DataTableMenu } from '../views/data-table/DataTableMenu'
 import { ParallelSetsBundledMenu } from '../views/parallel-sets-bundeled/ParallelSetsBundledMenu'
 
 export interface DataDrawerProps {
   isOpen: boolean
-  close: SideEffectVoid
+  close: () => void
   dataset: ReadonlyArray<SelectableDataType>
   views: ViewType[]
   settings: Settings
@@ -107,7 +109,7 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
     [cleanSelectedIfViewWasBrushing, dataset, setSettings, settings, views],
   )
   return (
-    <Drawer variant="persistent" anchor="right" open={isOpen} sx={dataDrawerStyle.drawer}>
+    <Drawer variant={DRAWER_VARIANT.persistent} anchor={ANCHOR.right} open={isOpen} sx={dataDrawerStyle.drawer}>
       <Box sx={dataDrawerStyle.header}>
         <IconButton onClick={close}>
           <ChevronRight sx={dataDrawerStyle.chevron} />
@@ -115,6 +117,15 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
       </Box>
       <Divider />
       <Box sx={dataDrawerStyle.menu}>{menus.map((menu) => menu)}</Box>
+      <Box sx={dataDrawerStyle.fill} />
+      <Box sx={dataDrawerStyle.footer}>
+        <Typography sx={dataDrawerStyle.text}>{DATA_DRAWER_TEXT.description}</Typography>
+        <Typography sx={dataDrawerStyle.text}>{DATA_DRAWER_TEXT.openSource}</Typography>
+        <Link href={GITHUB_LINK} sx={dataDrawerStyle.text}>
+          <GitHub sx={dataDrawerStyle.githubIcon} />
+          {DATA_DRAWER_TEXT.github}
+        </Link>
+      </Box>
     </Drawer>
   )
 }

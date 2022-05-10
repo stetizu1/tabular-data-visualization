@@ -3,12 +3,12 @@ import { Box, Button, Checkbox, FormControlLabel } from '@mui/material'
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType, SelectableDataType } from '../../../../types/data/data'
+import { Settings, SettingsType } from '../../../../types/views/settings/Settings'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
-import { ViewType } from '../../../../constants/views/ViewTypes'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 
-import { Settings, SettingsType } from '../../../../types/views/settings/Settings'
 import { attributeCheckerStyle } from '../../../../components-style/content/data-drawer/items/attributeCheckerStyle'
 
 export interface AttributeCheckerProps<Opt extends SettingsType> {

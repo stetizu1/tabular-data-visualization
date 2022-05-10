@@ -1,6 +1,7 @@
 import { SxProps } from '@mui/system'
 
-import { border, px } from '../../../helpers/d3/stringGetters'
+import { border, px } from '../../../helpers/stringGetters'
+
 import { TOP_TOOLBAR_COLORS } from '../../../styles/colors'
 
 export const topToolbarStyle: Record<string, SxProps> = {
