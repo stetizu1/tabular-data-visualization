@@ -7,23 +7,20 @@ import { Brushable } from '../../../../types/brushing/Brushable'
 import { VisualizationView } from '../../../../types/views/VisualizationView'
 import { GlyphsSettings } from '../../../../types/views/settings/GlyphsSettings'
 import { Margin } from '../../../../types/styling/Margin'
+import { DataEachP, OnMouseEvent } from '../../../../types/d3-types'
 
 import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
-import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
-import {
-  getAttributeValuesWithLabel,
-  getClass,
-  getEverything,
-  getTranslate,
-} from '../../../../helpers/d3/stringGetters'
+import { getCategoryColor } from '../../../../helpers/d3/categoryColor'
+import { getAttributeValuesWithLabel, getClass, getEverything, getTranslate } from '../../../../helpers/stringGetters'
 import { getComparator } from '../../../../helpers/data/comparator'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { SVG } from '../../../../constants/svg'
 import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { ViewType } from '../../../../constants/views/ViewType'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { GLYPHS_MIN_PERCENT_SHIFT } from '../../../../constants/views-general/glyphs-general'
 
 import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
 
@@ -33,7 +30,6 @@ import {
   SELECTED_CLASS,
 } from '../../../../components-style/content/views/glyphs/glyphsStyle'
 import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
-import { DataEachP, OnMouseEvent } from '../../../../types/d3-types'
 
 export interface GlyphsProps extends VisualizationView, Brushable, GlyphsSettings {}
 
@@ -89,7 +85,7 @@ export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
       scaleLinear([innerHeight, 0]).domain([0, glyphsCountPerHeight]),
     ]
 
-    const extentInDomains = getExtendedExtentInDomains(displayAttributes, dataset, 5)
+    const extentInDomains = getExtendedExtentInDomains(displayAttributes, dataset, GLYPHS_MIN_PERCENT_SHIFT)
 
     const lineRadialGenerator = lineRadial()
     const radialScales = displayAttributes.map((attribute) =>

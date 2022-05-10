@@ -1,4 +1,4 @@
-import { ViewType } from '../views/ViewType'
+import { ViewType } from '../views-general/ViewType'
 
 export const SAVE_ID: Record<ViewType, string> = {
   [ViewType.ParallelCoordinates]: `pcSvgId`,

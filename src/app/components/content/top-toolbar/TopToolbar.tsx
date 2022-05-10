@@ -1,8 +1,6 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
-import { AddCircle, AutoFixOff, Brush, Dashboard, Info, SkipNext } from '@mui/icons-material'
 import { Box } from '@mui/material'
-
-import { SideEffectVoid } from '../../../types/basic/functionTypes'
+import { AddCircle, AutoFixOff, Brush, Dashboard, Info, SkipNext } from '@mui/icons-material'
 
 import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
 
@@ -15,7 +13,7 @@ import { OpenSettingsButton } from './items/buttons/OpenSettingsButton'
 import { ColorButton } from './items/buttons/ColorButton'
 
 export interface TopToolbarProps extends FileReaderDataProps {
-  openDrawer: SideEffectVoid
+  openDrawer: () => void
   isToolsDisabled: boolean
 
   isDetailsVisible: boolean

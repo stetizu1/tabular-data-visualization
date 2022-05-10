@@ -6,9 +6,9 @@ import {
   SelectableDataType,
   SelectedKey,
 } from '../../types/data/data'
+import { NodeDataPoint, SankeyGraph } from '../../types/d3-sankey'
 
 import { CATEGORY_LIMIT } from '../../constants/data/data'
-import { NodeDataPoint, SankeyGraph } from '../../types/d3-sankey'
 
 const getDatasetSample = (dataset: ReadonlyArray<SelectableDataType>) => dataset[0]
 

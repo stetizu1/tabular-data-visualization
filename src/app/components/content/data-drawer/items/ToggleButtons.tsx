@@ -3,7 +3,7 @@ import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material'
 
 import { Settings } from '../../../../types/views/settings/Settings'
 
-import { ViewType } from '../../../../constants/views/ViewType'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 
 import { toggleButtonsStyle } from '../../../../components-style/content/data-drawer/items/toggleButtonsStyle'
 

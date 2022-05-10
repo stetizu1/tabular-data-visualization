@@ -1,4 +1,4 @@
-import { px } from '../../helpers/d3/stringGetters'
+import { px } from '../../helpers/stringGetters'
 
 /**
  * Class for defining margin for the view.

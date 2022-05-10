@@ -1,5 +1,7 @@
 import { SxProps } from '@mui/system'
-import { important, px } from '../../../../helpers/d3/stringGetters'
+
+import { important, px } from '../../../../helpers/stringGetters'
+
 import { BUTTON_COLORS } from '../../../../styles/colors'
 
 export const toggleButtonsStyle: Record<string, SxProps> = {

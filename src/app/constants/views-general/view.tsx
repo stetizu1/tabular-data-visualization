@@ -17,6 +17,8 @@ import { ParallelSetsBundled } from '../../components/content/views/parallel-set
 
 import { ViewType } from './ViewType'
 
+export const VIEW_BORDER_SIZE = 5
+
 type ViewElementFunction = (
   props: Brushable & VisualizationView,
   settings: SettingsType,

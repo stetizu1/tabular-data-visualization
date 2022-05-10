@@ -8,26 +8,30 @@ import { Brushable } from '../../../../types/brushing/Brushable'
 import { ScatterPlotGlyphsSettings } from '../../../../types/views/settings/ScatterPlotGlyphsSettings'
 import { Margin } from '../../../../types/styling/Margin'
 import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
+import { Extent, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
 
 import {
   getAttributeFormatted,
   getAttributeValuesWithLabel,
   getClass,
   getEverything,
+  getRotate,
   getTranslate,
-} from '../../../../helpers/d3/stringGetters'
-import { displayDetails } from '../../../../helpers/d3/displayDetails'
-import { getExtentInDomains } from '../../../../helpers/d3/extent'
-import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
+} from '../../../../helpers/stringGetters'
+import { setDisplay } from '../../../../helpers/d3/setDisplay'
+import { getExtendedExtentInDomains, getExtentInDomains } from '../../../../helpers/d3/extent'
+import { getCategoryColor } from '../../../../helpers/d3/categoryColor'
 import { isInRanges } from '../../../../helpers/basic/range'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
-import { ViewType } from '../../../../constants/views/ViewType'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { SVG } from '../../../../constants/svg'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
 import { BrushAction } from '../../../../constants/actions/BrushAction'
 import { MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotGlyphs'
 import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { TOOLTIP_CLASS } from '../../../../constants/views-general/tooltip'
+import { GLYPHS_MIN_PERCENT_SHIFT } from '../../../../constants/views-general/glyphs-general'
 
 import { SCATTER_PLOT_GLYPHS_TEXT } from '../../../../text/views-and-menus/scatterPlotGlyphs'
 
@@ -40,8 +44,6 @@ import {
   SELECTED_CLASS,
 } from '../../../../components-style/content/views/scatter-plot-glyphs/scatterPlotGlyphsStyle'
 import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
-import { Extent, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
-import { TOOLTIP_CLASS } from '../../../../constants/views/tooltip'
 
 const SCATTER_PLOT_GLYPHS = `SCATTER_PLOT_GLYPHS`
 const AXIS_X = `axisX`
@@ -80,7 +82,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
   // selected coloring
   selectAll(getClass(SCATTER_PLOT_GLYPHS_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
 
-  displayDetails(isDetailsVisible, TOOLTIP_CLASS)
+  setDisplay(isDetailsVisible, TOOLTIP_CLASS)
 
   const createScatterPlotGlyphs = useCallback(() => {
     const node = component.current
@@ -88,16 +90,17 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
     const svg = select(node)
     svg.selectAll(getEverything()).remove() // clear
 
-    const extentInDomains = getExtentInDomains([...displayAttributes, xAttribute, yAttribute], dataset)
+    const linearExtentInDomains = getExtentInDomains([xAttribute, yAttribute], dataset)
+    const radialExtentInDomains = getExtendedExtentInDomains(displayAttributes, dataset, GLYPHS_MIN_PERCENT_SHIFT)
 
     const [xScale, yScale] = [
-      scaleLinear([0, innerWidth]).domain(extentInDomains[xAttribute]),
-      scaleLinear([innerHeight, 0]).domain(extentInDomains[yAttribute]),
+      scaleLinear([0, innerWidth]).domain(linearExtentInDomains[xAttribute]),
+      scaleLinear([innerHeight, 0]).domain(linearExtentInDomains[yAttribute]),
     ]
 
     const lineRadialGenerator = lineRadial()
     const radialScales = displayAttributes.map((attribute) =>
-      scaleRadial([0, glyphSize / 2]).domain(extentInDomains[attribute]),
+      scaleRadial([0, glyphSize / 2]).domain(radialExtentInDomains[attribute]),
     )
 
     const getGlyphPath: DataEachP<SelectableDataType, string | null> = (data) =>
@@ -162,7 +165,7 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
     // axis Y label
     axisY
       .append(SVG.elements.text)
-      .attr(SVG.attributes.transform, `rotate(-90)`)
+      .attr(SVG.attributes.transform, getRotate(-90))
       .attr(SVG.attributes.y, -Y_AXIS_TEXT_SHIFT)
       .text(getAttributeFormatted)
       .attr(SVG.attributes.class, AXIS_TEXT_CLASS)

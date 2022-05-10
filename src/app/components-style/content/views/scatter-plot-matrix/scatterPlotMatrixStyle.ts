@@ -2,7 +2,7 @@ import { SxProps } from '@mui/system'
 
 import { Opacity } from '../../../../types/styling/Opacity'
 
-import { important } from '../../../../helpers/d3/stringGetters'
+import { important } from '../../../../helpers/stringGetters'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
 import { PLOT_FONT } from '../../../../styles/font'

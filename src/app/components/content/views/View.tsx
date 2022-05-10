@@ -5,9 +5,8 @@ import { VisualizationView } from '../../../types/views/VisualizationView'
 import { Brushable } from '../../../types/brushing/Brushable'
 import { Settings } from '../../../types/views/settings/Settings'
 
-import { ViewType } from '../../../constants/views/ViewType'
-import { VIEW_BORDER_SIZE } from '../../../constants/views/common'
-import { getViewRecord } from '../../../constants/views/getViewRecord'
+import { ViewType } from '../../../constants/views-general/ViewType'
+import { VIEW_BORDER_SIZE, getViewRecord } from '../../../constants/views-general/view'
 
 import { getViewBoxStyle } from '../../../components-style/content/views/viewStyle'
 

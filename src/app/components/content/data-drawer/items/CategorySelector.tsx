@@ -2,14 +2,13 @@ import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback } from 're
 import { MenuItem, TextField } from '@mui/material'
 
 import { SelectableDataType } from '../../../../types/data/data'
+import { Settings } from '../../../../types/views/settings/Settings'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
-import { ViewType } from '../../../../constants/views/ViewType'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 
 import { MENU_TEXT } from '../../../../text/views-and-menus/common'
-
-import { Settings } from '../../../../types/views/settings/Settings'
 
 export interface CategorySelectorProps {
   viewType: ViewType

@@ -5,7 +5,7 @@ import { SelectableDataType } from '../../../../types/data/data'
 
 import { dataToReadable } from '../../../../helpers/data/formatText'
 
-import { FORM } from '../../../../constants/form'
+import { CELL_PADDING } from '../../../../constants/mui'
 
 import {
   dataTableStyle,
@@ -38,7 +38,7 @@ export const DataTableBody: VoidFunctionComponent<DataTableBodyProps> = ({
         key={idx}
         sx={getDataTableRowStyle(rowHeight, data.selected, selectedBackgroundColor, selectedFontColor)}
       >
-        <TableCell padding={FORM.checkbox}>
+        <TableCell padding={CELL_PADDING.checkbox}>
           <Checkbox checked={data.selected} />
         </TableCell>
         {displayAttributes.map((attribute) => (

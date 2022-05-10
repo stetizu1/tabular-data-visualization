@@ -1,6 +1,7 @@
 import { schemeCategory10 } from 'd3'
-import { ScatterPlotGlyphsSettings } from '../../types/views/settings/ScatterPlotGlyphsSettings'
+
 import { ColorArray } from '../../types/styling/ColorArray'
+import { ScatterPlotGlyphsSettings } from '../../types/views/settings/ScatterPlotGlyphsSettings'
 
 export const MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT = 3
 

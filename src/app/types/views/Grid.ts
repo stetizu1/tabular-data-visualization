@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react'
 import GridLayout from 'react-grid-layout'
-import { ViewType } from '../../constants/views/ViewType'
+import { ViewType } from '../../constants/views-general/ViewType'
 
 /**
  * Typings for react-grid-layout

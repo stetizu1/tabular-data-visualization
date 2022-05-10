@@ -16,9 +16,10 @@ import {
 
 import { SelectableDataType } from '../../../../../types/data/data'
 
-import { otherCasesToWhitespaces } from '../../../../../helpers/data/formatText'
+import { getLabelledAttribute } from '../../../../../helpers/stringGetters'
 
-import { OPTION_TYPES, OptionType } from '../../../../../constants/data/data'
+import { DATA_NULL_OPTION_TYPES, DataNullOptionType } from '../../../../../constants/data/data'
+import { BUTTON_VARIANT } from '../../../../../constants/mui'
 
 import { FILE_READER_TEXT } from '../../../../../text/siteText'
 
@@ -39,24 +40,24 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
   dataset,
   setDataset,
 }) => {
-  const [optionsChosen, setOptionsChosen] = useState<Record<keyof SelectableDataType, OptionType>>(
-    Object.fromEntries(nullContainingAttributes.map((att) => [att, OptionType.leave])),
+  const [optionsChosen, setOptionsChosen] = useState<Record<keyof SelectableDataType, DataNullOptionType>>(
+    Object.fromEntries(nullContainingAttributes.map((att) => [att, DataNullOptionType.leave])),
   )
   const [replaceValue, setReplaceValue] = useState<Record<keyof SelectableDataType, string>>(
     Object.fromEntries(nullContainingAttributes.map((att) => [att, ``])),
   )
 
   useEffect(() => {
-    setOptionsChosen(Object.fromEntries(nullContainingAttributes.map((att) => [att, OptionType.leave])))
+    setOptionsChosen(Object.fromEntries(nullContainingAttributes.map((att) => [att, DataNullOptionType.leave])))
     setReplaceValue(Object.fromEntries(nullContainingAttributes.map((att) => [att, ``])))
   }, [nullContainingAttributes])
 
   const getFixedDataset = useCallback(
     (dataset: SelectableDataType[], attribute: keyof SelectableDataType) => {
       switch (optionsChosen[attribute]) {
-        case OptionType.filter:
+        case DataNullOptionType.filter:
           return dataset.filter((data) => data[attribute] !== null)
-        case OptionType.change: {
+        case DataNullOptionType.change: {
           const newValue = !isNaN(Number(replaceValue[attribute]))
             ? Number(replaceValue[attribute])
             : replaceValue[attribute]
@@ -65,7 +66,8 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
             [attribute]: data[attribute] === null ? newValue : data[attribute],
           }))
         }
-        case OptionType.leave:
+        case DataNullOptionType.leave:
+        default:
           return dataset
       }
     },
@@ -81,7 +83,7 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
   }, [dataset, getFixedDataset, nullContainingAttributes, setDataset])
 
   const handleToggleChange = useCallback(
-    (value: OptionType, attribute: keyof SelectableDataType) =>
+    (value: DataNullOptionType, attribute: keyof SelectableDataType) =>
       setOptionsChosen((prev) => ({
         ...prev,
         [attribute]: value,
@@ -107,16 +109,16 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
           const option = optionsChosen[attribute]
           return (
             <Box key={attribute} sx={dialogStyle.innerContent}>
-              <Typography sx={dialogStyle.attHeader}>{`${
-                FILE_READER_TEXT.nullDialog.attribute
-              } ${otherCasesToWhitespaces(attribute)}`}</Typography>
+              <Typography sx={dialogStyle.attHeader}>
+                {getLabelledAttribute(FILE_READER_TEXT.nullDialog.attribute, attribute)}
+              </Typography>
               <ToggleButtonGroup
                 sx={dialogStyle.toggleDialogGroup}
                 value={option}
                 exclusive
                 onChange={(e, value) => handleToggleChange(value, attribute)}
               >
-                {OPTION_TYPES.map((optType, idx) => (
+                {DATA_NULL_OPTION_TYPES.map((optType, idx) => (
                   <ToggleButton sx={dialogStyle.toggleDialogButton} value={optType} key={idx}>
                     {FILE_READER_TEXT.nullDialog.optionsText[optType]}
                   </ToggleButton>
@@ -124,7 +126,7 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
               </ToggleButtonGroup>
               <Box sx={dialogStyle.contentBox}>
                 <Typography sx={dialogStyle.text}>{FILE_READER_TEXT.nullDialog.optionsDescription[option]}</Typography>
-                {option === OptionType.change && (
+                {option === DataNullOptionType.change && (
                   <TextField
                     label={FILE_READER_TEXT.nullDialog.changeTo}
                     sx={dialogStyle.textInput}
@@ -138,7 +140,7 @@ export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
         })}
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" onClick={handleNullDialogConfirm} sx={dialogStyle.button} autoFocus>
+        <Button variant={BUTTON_VARIANT.contained} onClick={handleNullDialogConfirm} sx={dialogStyle.button} autoFocus>
           {FILE_READER_TEXT.nullDialog.confirm}
         </Button>
       </DialogActions>

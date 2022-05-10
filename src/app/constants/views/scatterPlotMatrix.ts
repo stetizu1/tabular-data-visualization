@@ -1,6 +1,7 @@
 import { schemeCategory10 } from 'd3'
-import { ScatterPlotMatrixSettings } from '../../types/views/settings/ScatterPlotMatrixSettings'
+
 import { ColorArray } from '../../types/styling/ColorArray'
+import { ScatterPlotMatrixSettings } from '../../types/views/settings/ScatterPlotMatrixSettings'
 
 export const MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT = 2
 

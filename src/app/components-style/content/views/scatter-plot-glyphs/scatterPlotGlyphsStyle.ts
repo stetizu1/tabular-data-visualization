@@ -1,7 +1,8 @@
 import { SxProps } from '@mui/system'
 import { Opacity } from '../../../../types/styling/Opacity'
 
-import { important, px } from '../../../../helpers/d3/stringGetters'
+import { important, px } from '../../../../helpers/stringGetters'
+
 import { PLOT_COLORS } from '../../../../styles/colors'
 
 export const SCATTER_PLOT_GLYPHS_CLASS = `scatterPlotGlyphs`

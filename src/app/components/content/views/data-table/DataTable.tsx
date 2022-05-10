@@ -19,14 +19,17 @@ import { DataTableSettings } from '../../../../types/views/settings/DataTableSet
 import { SelectableDataType, SelectedKey } from '../../../../types/data/data'
 
 import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
-import { getComparator, SortType } from '../../../../helpers/data/comparator'
+import { getComparator } from '../../../../helpers/data/comparator'
 
-import { ViewType } from '../../../../constants/views/ViewType'
+import { ViewType } from '../../../../constants/views-general/ViewType'
+import { SortType } from '../../../../constants/sort/SortType'
 import { MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/dataTable'
-import { FORM } from '../../../../constants/form'
+import { CELL_PADDING } from '../../../../constants/mui'
 
 import { DATA_TABLE_TEXT } from '../../../../text/views-and-menus/dataTable'
+
 import { dataTableStyle } from '../../../../components-style/content/views/data-table/dataTableStyle'
+
 import { DataTableBody } from './DataTableBody'
 
 export interface DataTableProps extends VisualizationView, Brushable, DataTableSettings {
@@ -136,7 +139,7 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
     (indeterminate: boolean, allChecked: boolean) => (
       <TableHead sx={dataTableStyle.tableHead}>
         <TableRow sx={dataTableStyle.tableHeadRow}>
-          <TableCell padding={FORM.none}>
+          <TableCell padding={CELL_PADDING.none}>
             <Box sx={dataTableStyle.checkboxAll}>
               <Tooltip title={DATA_TABLE_TEXT.checkboxTooltip}>
                 <Checkbox
@@ -172,7 +175,7 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
         </TableRow>
         {showFilter && (
           <TableRow sx={dataTableStyle.filterRow}>
-            <TableCell padding={FORM.none}>
+            <TableCell padding={CELL_PADDING.none}>
               <FilterListOutlined sx={dataTableStyle.filterIcon} />
             </TableCell>
             {displayAttributes.map((attribute, idx) => (

@@ -1,7 +1,9 @@
 import { SxProps } from '@mui/system'
 
-import { HEADER_HEIGHT } from '../../../constants/views/common'
-import { px } from '../../../helpers/d3/stringGetters'
+import { px } from '../../../helpers/stringGetters'
+
+import { GRID_HEADER_HEIGHT } from '../../../constants/layout/layout'
+
 import { VIEW_COLORS } from '../../../styles/colors'
 
 export const gridItemStyle: Record<string, SxProps> = {
@@ -36,7 +38,7 @@ export const gridItemStyle: Record<string, SxProps> = {
     padding: px(4),
   },
   header: {
-    height: HEADER_HEIGHT - 2,
+    height: GRID_HEADER_HEIGHT - 2,
     display: `flex`,
     alignItems: `center`,
     justifyContent: `space-between`,

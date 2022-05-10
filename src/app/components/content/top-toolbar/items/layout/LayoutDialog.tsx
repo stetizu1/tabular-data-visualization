@@ -3,12 +3,15 @@ import { Card, CardContent, CardMedia, Dialog, DialogContent, DialogTitle, Divid
 
 import { GridLayoutItem } from '../../../../../types/views/Grid'
 
-import { LAYOUT_IMAGES, LAYOUT_OPTIONS } from '../../../../../constants/views/common'
+import { otherCasesToWhitespaces } from '../../../../../helpers/data/formatText'
+
+import { LAYOUT_OPTIONS } from '../../../../../constants/layout/layout'
+import { LAYOUT_IMAGES } from '../../../../../constants/public-path'
+import { COMPONENT_TYPE } from '../../../../../constants/mui'
 
 import { LAYOUT_DIALOG_TEXT } from '../../../../../text/siteText'
 
 import { dialogStyle } from '../../../../../components-style/content/common/dialogStyle'
-import { otherCasesToWhitespaces } from '../../../../../helpers/data/formatText'
 
 export interface LayoutDialogProps {
   isOpen: boolean
@@ -44,7 +47,7 @@ export const LayoutDialog: VoidFunctionComponent<LayoutDialogProps> = ({ isOpen,
               ))}
             </CardContent>
             <CardMedia
-              component="img"
+              component={COMPONENT_TYPE.image}
               sx={dialogStyle.image}
               image={LAYOUT_IMAGES[idx]}
               alt={LAYOUT_DIALOG_TEXT.alt + idx}

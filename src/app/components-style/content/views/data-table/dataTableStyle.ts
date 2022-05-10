@@ -1,5 +1,7 @@
 import { SxProps } from '@mui/system'
-import { calc, important, px } from '../../../../helpers/d3/stringGetters'
+
+import { calc, important, px } from '../../../../helpers/stringGetters'
+
 import { TABLE_COLORS } from '../../../../styles/colors'
 
 export const getDataTableRowStyle = (

@@ -11,24 +11,26 @@ import { Margin } from '../../../../types/styling/Margin'
 import { DataLink, NodeData, NodeDataPoint } from '../../../../types/d3-sankey'
 import { DataEach, Extent, OnMouseEvent } from '../../../../types/d3-types'
 
-import { getTextTogglingYShift, TOGGLE_TEXT_Y_SHIFT } from '../../../../helpers/d3/attributeGetters'
+import { getTogglingYShift, TOGGLE_Y_SHIFT } from '../../../../helpers/views/togglingYShift'
 import {
   getAttributeFormatted,
   getEverything,
   getLinkDataPointValuesWithLabel,
   getNodeDataPointValuesWithLabel,
+  getSpaced,
   getTranslate,
-} from '../../../../helpers/d3/stringGetters'
+} from '../../../../helpers/stringGetters'
 import { getGraph, getNeighborAttributes, getNominalValuesRecord } from '../../../../helpers/data/data'
+import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
-import { ViewType } from '../../../../constants/views/ViewType'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 import { MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelSetsBundled'
 import { SVG } from '../../../../constants/svg'
 import { AXES_TEXT_CLASS } from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { ColoringType } from '../../../../constants/data/ColoringType'
-import { ParallelSetsBrushingType } from '../../../../constants/data/ParallelSetsBrushingType'
+import { ColoringType } from '../../../../constants/brushing-type/ColoringType'
+import { ParallelSetsBrushingType } from '../../../../constants/brushing-type/ParallelSetsBrushingType'
 
 import { PARALLEL_SETS_BUNDLED_TEXT } from '../../../../text/views-and-menus/parallelSetsBundled'
 
@@ -44,7 +46,6 @@ import {
   TABS_CLASS,
   TABS_SELECTED_CLASS,
 } from '../../../../components-style/content/views/parallel-sets-bundled/parallelSetsBundledStyle'
-import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 export interface ParallelSetsBundledProps extends VisualizationView, Brushable, ParallelSetsBundledSettings {}
 
@@ -77,7 +78,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
 }) => {
   const margin = useMemo(() => new Margin(...margins), [margins])
   const component = useRef<SVGGElement>(null)
-  const upperPadding = TOGGLE_TEXT_Y_SHIFT + PLOT_FONT_BOX_SIZE
+  const upperPadding = TOGGLE_Y_SHIFT + PLOT_FONT_BOX_SIZE
   const [innerWidth, innerHeight] = [width - margin.width, height - margin.height - upperPadding]
 
   const [nominalValuesRecord, setNominalValuesRecord] = useState(getNominalValuesRecord(dataset))
@@ -141,7 +142,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
         .enter()
         .append(SVG.elements.rect)
         .attr(SVG.attributes.class, (d) =>
-          d.count === d.countSelected ? `${TABS_CLASS} ${TABS_SELECTED_CLASS}` : TABS_CLASS,
+          d.count === d.countSelected ? getSpaced(TABS_CLASS, TABS_SELECTED_CLASS) : TABS_CLASS,
         )
         .attr(SVG.attributes.x, (d) => Number(d.x0) + xShift)
         .attr(SVG.attributes.y, (d) => Number(d.y0))
@@ -230,7 +231,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
       .append(SVG.elements.text)
       .attr(SVG.attributes.textAnchor, SVG.values.middle)
       .attr(SVG.attributes.x, (_, idx) => idx * (pairWidth + tabSpacing))
-      .attr(SVG.attributes.y, getTextTogglingYShift)
+      .attr(SVG.attributes.y, getTogglingYShift)
       .text(getAttributeFormatted)
       .attr(SVG.attributes.class, AXES_TEXT_CLASS)
   }, [

@@ -1,4 +1,4 @@
-import { ViewType } from '../../constants/views/ViewType'
+import { ViewType } from '../../constants/views-general/ViewType'
 import { MENU_TEXT, VIEW_NAMES } from './common'
 
 export const PARALLEL_SETS_BUNDLED_TEXT = {

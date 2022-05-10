@@ -29,16 +29,16 @@ import {
   getClass,
   getEverything,
   getTranslate,
-} from '../../../../helpers/d3/stringGetters'
+} from '../../../../helpers/stringGetters'
 import { getExtentInDomains } from '../../../../helpers/d3/extent'
-import { getCellInnerSize, getCellTranslateInMatrix, getMatrix } from '../../../../helpers/d3/matrix'
+import { getCellInnerSize, getCellTranslateInMatrix, getMatrix } from '../../../../helpers/views/matrix'
 import { isInRanges } from '../../../../helpers/basic/range'
-import { getCategoryColor } from '../../../../helpers/d3/attributeGetters'
-import { displayDetails } from '../../../../helpers/d3/displayDetails'
+import { getCategoryColor } from '../../../../helpers/d3/categoryColor'
+import { setDisplay } from '../../../../helpers/d3/setDisplay'
 import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
 
 import { BrushAction } from '../../../../constants/actions/BrushAction'
-import { ViewType } from '../../../../constants/views/ViewType'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { SVG } from '../../../../constants/svg'
 import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
 import { MouseAction } from '../../../../constants/actions/MouseAction'
@@ -103,7 +103,7 @@ export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = 
   // selected coloring
   selectAll(getClass(DATA_POINT_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
 
-  displayDetails(isDetailsVisible, DUPLICATES_CLASS)
+  setDisplay(isDetailsVisible, DUPLICATES_CLASS)
 
   const createScatterPlotMatrix = useCallback(() => {
     const node = component.current

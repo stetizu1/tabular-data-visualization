@@ -1,5 +1,5 @@
-import { ColoringType } from '../../../constants/data/ColoringType'
-import { ParallelSetsBrushingType } from '../../../constants/data/ParallelSetsBrushingType'
+import { ColoringType } from '../../../constants/brushing-type/ColoringType'
+import { ParallelSetsBrushingType } from '../../../constants/brushing-type/ParallelSetsBrushingType'
 
 import { BaseViewVisualizationSettings } from './VisualizationSettings'
 

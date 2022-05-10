@@ -6,8 +6,9 @@ import { Settings } from '../../../../types/views/settings/Settings'
 
 import { useDebounce } from '../../../../helpers/react/useDebounce'
 
-import { ViewType } from '../../../../constants/views/ViewType'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
+import { INPUT_PROPS, INPUT_TYPE } from '../../../../constants/others'
 
 import { MARGIN_MENU_TEXT } from '../../../../text/views-and-menus/common'
 
@@ -58,36 +59,36 @@ export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({
       <Box sx={numberInputStyles.horizontal}>
         <TextField
           label={MARGIN_MENU_TEXT.top}
-          type="number"
+          type={INPUT_TYPE.number}
           defaultValue={margins[0]}
           sx={numberInputStyles.textField}
-          inputProps={{ inputMode: `numeric`, min: 0 }}
+          inputProps={INPUT_PROPS.positiveNumber}
           onChange={(e) => handleMarginChange(Number(e.target.value), 0)}
         />
         <TextField
           label={MARGIN_MENU_TEXT.right}
-          type="number"
+          type={INPUT_TYPE.number}
           defaultValue={margins[1]}
           sx={numberInputStyles.textField}
-          inputProps={{ inputMode: `numeric`, min: 0 }}
+          inputProps={INPUT_PROPS.positiveNumber}
           onChange={(e) => handleMarginChange(Number(e.target.value), 1)}
         />
       </Box>
       <Box sx={numberInputStyles.horizontal}>
         <TextField
           label={MARGIN_MENU_TEXT.bottom}
-          type="number"
+          type={INPUT_TYPE.number}
           defaultValue={margins[2]}
           sx={numberInputStyles.textField}
-          inputProps={{ inputMode: `numeric`, min: 0 }}
+          inputProps={INPUT_PROPS.positiveNumber}
           onChange={(e) => handleMarginChange(Number(e.target.value), 2)}
         />
         <TextField
           label={MARGIN_MENU_TEXT.left}
-          type="number"
+          type={INPUT_TYPE.number}
           defaultValue={margins[3]}
           sx={numberInputStyles.textField}
-          inputProps={{ inputMode: `numeric`, min: 0 }}
+          inputProps={INPUT_PROPS.positiveNumber}
           onChange={(e) => handleMarginChange(Number(e.target.value), 3)}
         />
       </Box>

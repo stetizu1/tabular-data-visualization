@@ -3,10 +3,10 @@ import { useSize } from 'react-use'
 import { Box, IconButton, Typography } from '@mui/material'
 import { Close, RotateRight } from '@mui/icons-material'
 
-import { otherCasesToWhitespaces } from '../../../helpers/data/formatText'
+import { getDisplayAttributesInParentheses } from '../../../helpers/stringGetters'
 
-import { ViewType } from '../../../constants/views/ViewType'
-import { DRAG_HANDLE, HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/views/common'
+import { ViewType } from '../../../constants/views-general/ViewType'
+import { DRAG_HANDLE, GRID_HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/layout/layout'
 
 import { gridItemStyle } from '../../../components-style/content/views/gridItemStyle'
 
@@ -32,9 +32,7 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResi
     (viewType === ViewType.Glyphs || viewType === ViewType.ScatterPlotGlyphs) && rest.settings[viewType] ? (
       <Typography sx={gridItemStyle.text}>
         <RotateRight sx={gridItemStyle.textIcon} />
-        {`(`}
-        {rest.settings[viewType]!.displayAttributes.map((attribute) => otherCasesToWhitespaces(attribute)).join(`; `)}
-        {`)`}
+        {getDisplayAttributesInParentheses(rest.settings[viewType]!.displayAttributes)}
       </Typography>
     ) : null
 
@@ -54,7 +52,13 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResi
           </Box>
         </Box>
         {isResizeFinished && (
-          <View width={width} height={height - HEADER_HEIGHT} viewType={viewType} {...rest} showFilter={showFilter} />
+          <View
+            width={width}
+            height={height - GRID_HEADER_HEIGHT}
+            viewType={viewType}
+            {...rest}
+            showFilter={showFilter}
+          />
         )}
       </Box>
     ),

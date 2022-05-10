@@ -1,7 +1,9 @@
 import { schemeCategory10 } from 'd3'
-import { GlyphsSettings } from '../../types/views/settings/GlyphsSettings'
+
 import { ColorArray } from '../../types/styling/ColorArray'
-import { SortType } from '../../helpers/data/comparator'
+import { GlyphsSettings } from '../../types/views/settings/GlyphsSettings'
+
+import { SortType } from '../sort/SortType'
 
 export const MIN_GLYPHS_ATTRIBUTE_COUNT = 3
 

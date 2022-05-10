@@ -1,28 +1,24 @@
 import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
 
 import { SelectableDataType } from '../../../types/data/data'
-import { SideEffectVoid } from '../../../types/basic/functionTypes'
 import { SetComponentBrushing } from '../../../types/brushing/Brushable'
 import { Settings } from '../../../types/views/settings/Settings'
 import { GridLayoutItem } from '../../../types/views/Grid'
 
 import { useUpdatedRef } from '../../../helpers/react/useUpdatedRef'
 import { useDebounce } from '../../../helpers/react/useDebounce'
+import { getCategoryAttributesKeys, getDefaultQuantitativeAttributesKeys } from '../../../helpers/data/data'
 
-import { DataLoadState } from '../../../constants/data/dataLoadState'
-import { ViewType } from '../../../constants/views/ViewType'
-import {
-  DEFAULT_BRUSH_COLOR,
-  DEFAULT_GRID_LAYOUT_QUANTITATIVE,
-  DEFAULT_GRID_LAYOUT_NOMINAL,
-} from '../../../constants/views/common'
+import { DataLoadState } from '../../../constants/data/DataLoadState'
+import { ViewType } from '../../../constants/views-general/ViewType'
+import { DEFAULT_GRID_LAYOUT_QUANTITATIVE, DEFAULT_GRID_LAYOUT_NOMINAL } from '../../../constants/layout/layout'
+import { DEFAULT_BRUSH_COLOR } from '../../../constants/views-general/defaultSettableColors'
 import { BRUSH_DEBOUNCE } from '../../../constants/debounce/debounce'
 
 import { TopToolbar } from '../top-toolbar/TopToolbar'
 import { ViewGrid } from '../views/ViewGrid'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
-import { getCategoryAttributesKeys, getDefaultQuantitativeAttributesKeys } from '../../../helpers/data/data'
 
 export const DataContext: VoidFunctionComponent = () => {
   const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
@@ -31,7 +27,7 @@ export const DataContext: VoidFunctionComponent = () => {
   const [settings, setSettings] = useState<Settings>({})
 
   const [componentBrushing, setCurrentComponentBrushing] = useState<null | ViewType>(null)
-  const [cleanBrushing, setCleanBrushing] = useState<SideEffectVoid[]>([])
+  const [cleanBrushing, setCleanBrushing] = useState<(() => void)[]>([])
   const [currentRedrawTime, setRedrawTime] = useState(Date.now())
 
   const redrawTime = useDebounce(currentRedrawTime, BRUSH_DEBOUNCE) // used for less component re-renders
@@ -97,7 +93,7 @@ export const DataContext: VoidFunctionComponent = () => {
     [cleanAllBrushes, componentBrushingRef],
   )
 
-  const registerCleanBrushing = useCallback((cleanBrushing: SideEffectVoid) => {
+  const registerCleanBrushing = useCallback((cleanBrushing: () => void) => {
     setCleanBrushing((prev) => [...prev, cleanBrushing])
   }, [])
 

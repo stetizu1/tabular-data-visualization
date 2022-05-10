@@ -1,6 +1,8 @@
 import { SxProps } from '@mui/system'
+
+import { px } from '../../../../helpers/stringGetters'
+
 import { DATA_DRAWER_FONT } from '../../../../styles/font'
-import { px } from '../../../../helpers/d3/stringGetters'
 
 export const menuTextStyle: Record<string, SxProps> = {
   text: {

@@ -1,4 +1,4 @@
-import { ViewType } from '../../constants/views/ViewType'
+import { ViewType } from '../../constants/views-general/ViewType'
 
 export const MENU_BASE_TEXT = {
   more: `More options`,

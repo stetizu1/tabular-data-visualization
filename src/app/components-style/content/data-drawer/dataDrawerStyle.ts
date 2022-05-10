@@ -1,6 +1,7 @@
 import { SxProps } from '@mui/system'
 
-import { border, calc, px } from '../../../helpers/d3/stringGetters'
+import { border, calc, px } from '../../../helpers/stringGetters'
+
 import { DATA_DRAWER_COLORS } from '../../../styles/colors'
 
 export const dataDrawerStyle: Record<string, SxProps> = {

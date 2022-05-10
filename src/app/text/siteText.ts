@@ -1,6 +1,6 @@
 import { SampleDataset } from '../constants/data/sampleDataset'
-import { DataLoadError } from '../constants/data/dataLoadState'
-import { OptionType } from '../constants/data/data'
+import { DataNullOptionType } from '../constants/data/data'
+import { DataLoadError } from '../constants/data/DataLoadError'
 
 export const EMPTY_DATA_TEXT = {
   content: `To use the application, first load the dataset from a JSON or CSV file. You can also try this application with sample data.`,
@@ -53,14 +53,14 @@ export const FILE_READER_TEXT = {
     description: `This application provides only basic operations for modifying null data values. For better processing, use applications designed for this purpose.`,
     confirm: `Confirm`,
     optionsText: {
-      [OptionType.leave]: `Leave as is`,
-      [OptionType.filter]: `Filter`,
-      [OptionType.change]: `Change all`,
+      [DataNullOptionType.leave]: `Leave as is`,
+      [DataNullOptionType.filter]: `Filter`,
+      [DataNullOptionType.change]: `Change all`,
     },
     optionsDescription: {
-      [OptionType.leave]: `This option leaves the data as is. On numeric scales, null values will be cast to 0, in the table they will be displayed as null, for categorical data a separate category will be created.`,
-      [OptionType.filter]: `This option filters out all data with null values. These data will not be considered further in the application.`,
-      [OptionType.change]: `This option replaces all null values with the value entered below.`,
+      [DataNullOptionType.leave]: `This option leaves the data as is. On numeric scales, null values will be cast to 0, in the table they will be displayed as null, for categorical data a separate category will be created.`,
+      [DataNullOptionType.filter]: `This option filters out all data with null values. These data will not be considered further in the application.`,
+      [DataNullOptionType.change]: `This option replaces all null values with the value entered below.`,
     },
     changeTo: `Change to`,
     attribute: `Attribute:`,

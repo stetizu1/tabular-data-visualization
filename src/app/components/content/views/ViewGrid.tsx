@@ -5,16 +5,16 @@ import { AddCircle } from '@mui/icons-material'
 
 import { Brushable } from '../../../types/brushing/Brushable'
 import { SelectableDataType } from '../../../types/data/data'
-import { SideEffectVoid } from '../../../types/basic/functionTypes'
 import { GridLayoutItem, LayoutArray } from '../../../types/views/Grid'
 import { Settings } from '../../../types/views/settings/Settings'
 
-import { getClass } from '../../../helpers/d3/stringGetters'
-import { displayDetails } from '../../../helpers/d3/displayDetails'
+import { getClass } from '../../../helpers/stringGetters'
+import { setDisplay } from '../../../helpers/d3/setDisplay'
 
-import { isViewType, ViewType } from '../../../constants/views/ViewType'
-import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from '../../../constants/views/common'
-import { TOOLTIP_CLASS } from '../../../constants/views/tooltip'
+import { isViewType, ViewType } from '../../../constants/views-general/ViewType'
+import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from '../../../constants/layout/layout'
+import { TOOLTIP_CLASS } from '../../../constants/views-general/tooltip'
+
 import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
 import { VIEW_NAMES } from '../../../text/views-and-menus/common'
 
@@ -32,7 +32,7 @@ export interface ViewGridDataProps extends Brushable {
 export interface ViewGridProps extends ViewGridDataProps {
   isDrawerOpen: boolean
   isDetailsVisible: boolean
-  closeDrawer: SideEffectVoid
+  closeDrawer: () => void
   cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>
@@ -104,7 +104,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
     [setLayout],
   )
 
-  displayDetails(viewProps.isDetailsVisible, TOOLTIP_CLASS)
+  setDisplay(viewProps.isDetailsVisible, TOOLTIP_CLASS)
 
   const views = layout.map((item) => item.i)
   const availableViews = Object.values(ViewType).filter((viewType) => !views.includes(viewType))

@@ -1,4 +1,5 @@
-import { ViewType } from '../../constants/views/ViewType'
+import { ViewType } from '../../constants/views-general/ViewType'
+
 import { MENU_TEXT, VIEW_NAMES } from './common'
 
 export const SCATTER_PLOT_GLYPHS_TEXT = {

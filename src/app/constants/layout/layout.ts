@@ -1,17 +1,10 @@
-import { GridLayoutItem } from '../../types/views/Grid'
 import { Dimensions } from '../../types/basic/dimensions'
-import { ViewType } from './ViewType'
+import { GridLayoutItem } from '../../types/views/Grid'
+import { ViewType } from '../views-general/ViewType'
 
-export const DEFAULT_BRUSH_COLOR = `#830606`
-export const DEFAULT_BRUSH_BG_COLOR_TABLE = `#ffcfcf`
-export const DEFAULT_BRUSH_FONT_COLOR_TABLE = `#111111`
-export const DEFAULT_FONT_COLOR_PARALLEL_SETS = `#252525`
-
-export const VIEW_BORDER_SIZE = 5
+export const GRID_HEADER_HEIGHT = 30
 
 export const DRAG_HANDLE = `drag-handle`
-
-export const HEADER_HEIGHT = 30
 
 export const VIEW_DEFAULT_SIZE: Dimensions = {
   width: 0,
@@ -212,12 +205,4 @@ export const LAYOUT_OPTIONS = [
   LAYOUT_OPT_2,
   LAYOUT_OPT_3,
   LAYOUT_OPT_4,
-]
-
-export const LAYOUT_IMAGES = [
-  `/table-data-visualization/images/layout_0.png`,
-  `/table-data-visualization/images/layout_1.png`,
-  `/table-data-visualization/images/layout_2.png`,
-  `/table-data-visualization/images/layout_3.png`,
-  `/table-data-visualization/images/layout_4.png`,
 ]

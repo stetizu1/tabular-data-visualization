@@ -2,8 +2,9 @@ import { SxProps } from '@mui/system'
 
 import { Opacity } from '../../../../types/styling/Opacity'
 
+import { important } from '../../../../helpers/stringGetters'
+
 import { PLOT_COLORS } from '../../../../styles/colors'
-import { important } from '../../../../helpers/d3/stringGetters'
 
 export const SELECTED_CLASS = `parallelSetsBundledSelected`
 export const TABS_CLASS = `psbTabs`

@@ -7,5 +7,4 @@ export enum ViewType {
   ParallelSetsBundled = `parallelSetsBundled`,
 }
 
-export const isViewType = (viewType: string): viewType is ViewType =>
-  (Object.values(ViewType) as string[]).includes(viewType)
+export const isViewType = (viewType: string): viewType is ViewType => Object.values<string>(ViewType).includes(viewType)

@@ -1,6 +1,8 @@
 import { SxProps } from '@mui/system'
+
+import { px } from '../../../helpers/stringGetters'
+
 import { BUTTON_COLORS } from '../../../styles/colors'
-import { px } from '../../../helpers/d3/stringGetters'
 
 export const inlineButtonStyles: Record<string, SxProps> = {
   button: {

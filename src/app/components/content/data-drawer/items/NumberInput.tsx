@@ -1,13 +1,16 @@
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { Box, TextField } from '@mui/material'
 
-import { ViewType } from '../../../../constants/views/ViewType'
+import { Settings } from '../../../../types/views/settings/Settings'
+
+import { useDebounce } from '../../../../helpers/react/useDebounce'
+import { getInputPropsPositiveNumber } from '../../../../helpers/basic/getInputPropsPositiveNumber'
+
+import { ViewType } from '../../../../constants/views-general/ViewType'
+import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
+import { INPUT_TYPE } from '../../../../constants/others'
 
 import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
-
-import { Settings } from '../../../../types/views/settings/Settings'
-import { useDebounce } from '../../../../helpers/react/useDebounce'
-import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
 
 export interface NumberInputProps<Opt> {
   viewType: ViewType
@@ -51,16 +54,14 @@ export const NumberInput = <Opt,>({
     })
   }, [debouncedValue, setSettings, valueKey, viewType, handleChangeValue, handleChangeSettings])
 
-  const minVal = min ? { min } : { min: 0 }
-  const maxVal = max ? { max } : {}
   return (
     <Box>
       <TextField
         label={label}
-        type="number"
+        type={INPUT_TYPE.number}
         defaultValue={value}
         sx={numberInputStyles.textField}
-        inputProps={{ inputMode: `numeric`, ...minVal, ...maxVal }}
+        inputProps={getInputPropsPositiveNumber({ min, max })}
         onChange={(e) => handleChangeValue(Number(e.target.value))}
       />
     </Box>

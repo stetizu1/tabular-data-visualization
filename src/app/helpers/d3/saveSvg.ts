@@ -1,13 +1,19 @@
-import { ViewType } from '../../constants/views/ViewType'
+import { ViewType } from '../../constants/views-general/ViewType'
 import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../constants/save/save'
 
+const xmlnsSvg = `http://www.w3.org/2000/svg`
+const preface = `<?xml version="1.0" standalone="no"?>\r\n`
+const options = { type: `image/svg+xml;charset=utf-8` }
+const linkElement = `a`
+
 export const saveSvgToFile = (svgEl: Element, fileName: string): void => {
-  svgEl.setAttribute(`xmlns`, `http://www.w3.org/2000/svg`)
-  const svgData = svgEl.outerHTML
-  const preface = `<?xml version="1.0" standalone="no"?>\r\n`
-  const svgBlob = new Blob([preface, svgData], { type: `image/svg+xml;charset=utf-8` })
+  svgEl.setAttribute(`xmlns`, xmlnsSvg)
+
+  const svgBlob = new Blob([preface, svgEl.outerHTML], options)
   const svgUrl = URL.createObjectURL(svgBlob)
-  const downloadLink = document.createElement(`a`)
+
+  // create download link element, append, click and remove
+  const downloadLink = document.createElement(linkElement)
   downloadLink.href = svgUrl
   downloadLink.download = fileName
   document.body.appendChild(downloadLink)
@@ -21,7 +27,6 @@ export const saveSvg = (viewType: ViewType): void => {
   const svgContainer = document.querySelector(`#${CONTAINER_SAVE_ID[viewType]}`)
   const svg = document.querySelector(`#${SAVE_ID[viewType]}`)
   if (!svgContainer || !svg) {
-    // eslint-disable-next-line no-console
     console.error(`Identifier class missing, saving is not possible`)
     return
   }

@@ -1,5 +1,6 @@
 import { DataTableSettings } from '../../types/views/settings/DataTableSettings'
-import { DEFAULT_BRUSH_BG_COLOR_TABLE, DEFAULT_BRUSH_FONT_COLOR_TABLE } from './common'
+
+import { DEFAULT_BRUSH_BG_COLOR_TABLE, DEFAULT_BRUSH_FONT_COLOR_TABLE } from '../views-general/defaultSettableColors'
 
 export const MIN_DATA_TABLE_ATTRIBUTE_COUNT = 1
 

@@ -16,13 +16,13 @@ import {
 
 import { getCategoryAttributesKeys, getDefaultNominalAttributesChecked } from '../../../../helpers/data/data'
 
-import { ViewType } from '../../../../constants/views/ViewType'
+import { ViewType } from '../../../../constants/views-general/ViewType'
 import {
   MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT,
   PARALLEL_SETS_BUNDLED_DEFAULT,
 } from '../../../../constants/views/parallelSetsBundled'
-import { ColoringType } from '../../../../constants/data/ColoringType'
-import { ParallelSetsBrushingType } from '../../../../constants/data/ParallelSetsBrushingType'
+import { ColoringType } from '../../../../constants/brushing-type/ColoringType'
+import { ParallelSetsBrushingType } from '../../../../constants/brushing-type/ParallelSetsBrushingType'
 
 import { PARALLEL_SETS_MENU_TEXT } from '../../../../text/views-and-menus/parallelSetsBundled'
 

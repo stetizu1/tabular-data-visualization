@@ -2,9 +2,10 @@ import { useCallback, useState, VoidFunctionComponent } from 'react'
 import { Button, Tooltip } from '@mui/material'
 import { Save } from '@mui/icons-material'
 
-import { ViewType } from '../../../constants/views/ViewType'
-
 import { getSaveIsDisabled, saveSvg } from '../../../helpers/d3/saveSvg'
+
+import { ViewType } from '../../../constants/views-general/ViewType'
+import { BUTTON_VARIANT } from '../../../constants/mui'
 
 import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
 
@@ -38,7 +39,7 @@ export const DataSaveButton: VoidFunctionComponent<DataSaveButtonProps> = ({ vie
         cancelText={TOP_TOOLBAR_TEXT.saveText.cancel}
       />
       <Button
-        variant="text"
+        variant={BUTTON_VARIANT.text}
         onClick={openDialog}
         disabled={getSaveIsDisabled(viewType)}
         sx={inlineButtonStyles.button}
