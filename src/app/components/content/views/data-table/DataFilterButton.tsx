@@ -14,9 +14,9 @@ export interface DataSaveButtonProps {
 }
 
 export const DataFilterButton: VoidFunctionComponent<DataSaveButtonProps> = ({ showFilter, setShowFilter }) => (
-  <Tooltip title={TOP_TOOLBAR_TEXT.filter}>
-    <Button variant={BUTTON_VARIANT.text} onClick={() => setShowFilter(!showFilter)} sx={inlineButtonStyles.button}>
+  <Button variant={BUTTON_VARIANT.text} onClick={() => setShowFilter(!showFilter)} sx={inlineButtonStyles.button}>
+    <Tooltip title={TOP_TOOLBAR_TEXT.filter}>
       <FilterList sx={showFilter ? inlineButtonStyles.buttonActive : {}} />
-    </Button>
-  </Tooltip>
+    </Tooltip>
+  </Button>
 )

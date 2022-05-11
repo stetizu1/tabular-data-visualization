@@ -37,16 +37,16 @@ export const DataSaveButton: VoidFunctionComponent<DataSaveButtonProps> = ({ vie
         confirmText={TOP_TOOLBAR_TEXT.saveText.confirm}
         cancelText={TOP_TOOLBAR_TEXT.saveText.cancel}
       />
-      <Tooltip title={TOP_TOOLBAR_TEXT.saveText.save}>
-        <IconButton
-          onClick={openDialog}
-          disabled={getSaveIsDisabled(viewType)}
-          sx={inlineButtonStyles.button}
-          aria-label={TOP_TOOLBAR_TEXT.saveText.save}
-        >
+      <IconButton
+        onClick={openDialog}
+        disabled={getSaveIsDisabled(viewType)}
+        sx={inlineButtonStyles.button}
+        aria-label={TOP_TOOLBAR_TEXT.saveText.save}
+      >
+        <Tooltip title={TOP_TOOLBAR_TEXT.saveText.save}>
           <Save />
-        </IconButton>
-      </Tooltip>
+        </Tooltip>
+      </IconButton>
     </>
   )
 }

@@ -48,11 +48,11 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResi
           </Box>
           <Box sx={gridItemStyle.right}>
             {topButton}
-            <Tooltip title={GRID_ITEM_TEXT.tooltipClose}>
-              <IconButton onClick={onRemove}>
+            <IconButton onClick={onRemove}>
+              <Tooltip title={GRID_ITEM_TEXT.tooltipClose}>
                 <Close />
-              </IconButton>
-            </Tooltip>
+              </Tooltip>
+            </IconButton>
           </Box>
         </Box>
         {isResizeFinished && (

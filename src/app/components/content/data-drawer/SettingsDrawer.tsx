@@ -111,11 +111,11 @@ export const SettingsDrawer: VoidFunctionComponent<SettingsDrawerProps> = ({
   return (
     <Drawer variant={DRAWER_VARIANT.persistent} anchor={ANCHOR.right} open={isOpen} sx={settingsDrawerStyle.drawer}>
       <Box sx={settingsDrawerStyle.header}>
-        <Tooltip title={SETTINGS_DRAWER_TEXT.hide}>
-          <IconButton onClick={close}>
+        <IconButton onClick={close}>
+          <Tooltip title={SETTINGS_DRAWER_TEXT.hide}>
             <ChevronRight sx={settingsDrawerStyle.chevron} />
-          </IconButton>
-        </Tooltip>
+          </Tooltip>
+        </IconButton>
       </Box>
       <Divider />
       <Box sx={settingsDrawerStyle.setting}>{settingsComponents}</Box>
