@@ -7,8 +7,9 @@ import { DIALOG_COLORS } from '../../../styles/colors'
 export const helpDialogStyle: Record<string, SxProps> = {
   dialog: {
     '& .MuiPaper-root': {
-      minWidth: px(800),
-      width: px(800),
+      minWidth: px(750),
+      width: px(750),
+      textAlign: `justify`,
     },
   },
   iconedHeaderBox: {
@@ -33,7 +34,7 @@ export const helpDialogStyle: Record<string, SxProps> = {
     margin: px(2),
   },
   text: {
-    padding: px(10),
+    padding: px(10, 10, 5),
     color: DIALOG_COLORS.font,
   },
   image: {
