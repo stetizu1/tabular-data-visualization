@@ -4,12 +4,19 @@ import { px } from '../../../helpers/stringGetters'
 
 import { BUTTON_COLORS } from '../../../styles/colors'
 
+const inlineButton = {
+  margin: 0,
+  padding: px(0, 4),
+  minWidth: 0,
+}
+
 export const inlineButtonStyles: Record<string, SxProps> = {
   button: {
-    margin: 0,
-    padding: 0,
-    minWidth: 0,
+    ...inlineButton,
     color: BUTTON_COLORS.buttonInlined,
+  },
+  buttonClose: {
+    ...inlineButton,
   },
   buttonActive: {
     color: BUTTON_COLORS.buttonInlinedFontOn,

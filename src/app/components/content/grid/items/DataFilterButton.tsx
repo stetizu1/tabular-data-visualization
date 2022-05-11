@@ -8,12 +8,12 @@ import { TOP_TOOLBAR_TEXT } from '../../../../text/siteText'
 
 import { inlineButtonStyles } from '../../../../components-style/content/common/inlineButtonStyles'
 
-export interface DataSaveButtonProps {
+export interface DataFilterButtonProps {
   showFilter?: boolean
   setShowFilter: Dispatch<SetStateAction<boolean | undefined>>
 }
 
-export const DataFilterButton: VoidFunctionComponent<DataSaveButtonProps> = ({ showFilter, setShowFilter }) => (
+export const DataFilterButton: VoidFunctionComponent<DataFilterButtonProps> = ({ showFilter, setShowFilter }) => (
   <Button variant={BUTTON_VARIANT.text} onClick={() => setShowFilter(!showFilter)} sx={inlineButtonStyles.button}>
     <Tooltip title={TOP_TOOLBAR_TEXT.filter}>
       <FilterList sx={showFilter ? inlineButtonStyles.buttonActive : {}} />

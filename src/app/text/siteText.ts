@@ -17,14 +17,25 @@ export const TOP_TOOLBAR_TEXT = {
   labelDialogTitle: `Set predefined layout`,
   noOption: `All view options are currently displayed.`,
   settings: `Settings`,
-  saveText: {
-    header: `Save to file`,
-    description: `Do you want to save the visualization to an SVG file?`,
-    save: `Save`,
-    confirm: `Save`,
-    cancel: `Cancel`,
-  },
   filter: `Filter`,
+}
+
+export const SAVE_TEXT = {
+  header: `Save to file`,
+  description: `Do you want to save the visualization to an SVG file?`,
+  save: `Save as SVG`,
+  confirm: `Save`,
+  cancel: `Cancel`,
+}
+
+export const VIEW_INFO_TEXT = {
+  buttonLabel: `Show view information`,
+  dialog: {
+    brushing: `Brushing`,
+    settings: `Settings`,
+    options: `Options`,
+    close: `Close`,
+  },
 }
 
 export const FILE_READER_TEXT = {

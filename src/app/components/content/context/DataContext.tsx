@@ -16,7 +16,7 @@ import { DEFAULT_BRUSH_COLOR } from '../../../constants/views-general/defaultSet
 import { BRUSH_DEBOUNCE } from '../../../constants/debounce/debounce'
 
 import { TopToolbar } from '../top-toolbar/TopToolbar'
-import { ViewGrid } from '../views/ViewGrid'
+import { ViewGrid } from '../grid/ViewGrid'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
 

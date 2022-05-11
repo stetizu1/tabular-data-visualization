@@ -1,20 +1,18 @@
 import React, { ComponentProps, useState, VoidFunctionComponent } from 'react'
 import { useSize } from 'react-use'
-import { Box, IconButton, Tooltip, Typography } from '@mui/material'
-import { Close, RotateRight } from '@mui/icons-material'
-
-import { getDisplayAttributesInParentheses } from '../../../helpers/stringGetters'
+import { Box, Typography } from '@mui/material'
 
 import { ViewType } from '../../../constants/views-general/ViewType'
 import { DRAG_HANDLE, GRID_HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/layout/layout'
 
-import { GRID_ITEM_TEXT } from '../../../text/gridItemText'
-
 import { gridItemStyle } from '../../../components-style/content/views/gridItemStyle'
 
-import { DataSaveButton } from '../common/DataSaveButton'
-import { View } from './View'
-import { DataFilterButton } from './data-table/DataFilterButton'
+import { View } from '../views/View'
+import { ViewCloseButton } from './items/ViewCloseButton'
+import { ViewHelpButton } from './items/ViewHelpButton'
+import { ViewSaveButton } from './items/ViewSaveButton'
+import { GlyphAxesText } from './items/GlyphAxesText'
+import { DataFilterButton } from './items/DataFilterButton'
 
 type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {
   title: string
@@ -24,35 +22,27 @@ type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {
 
 export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResizeFinished, viewType, ...rest }) => {
   const [showFilter, setShowFilter] = useState<boolean | undefined>(undefined)
-  const topButton =
+  const contextButton =
     viewType !== ViewType.DataTable ? (
-      <DataSaveButton viewType={viewType} />
+      <ViewSaveButton viewType={viewType} />
     ) : (
       <DataFilterButton showFilter={showFilter} setShowFilter={setShowFilter} />
     )
-  const glyphAxesText =
-    (viewType === ViewType.Glyphs || viewType === ViewType.ScatterPlotGlyphs) && rest.settings[viewType] ? (
-      <Typography sx={gridItemStyle.text}>
-        <RotateRight sx={gridItemStyle.textIcon} />
-        {getDisplayAttributesInParentheses(rest.settings[viewType]!.displayAttributes)}
-      </Typography>
-    ) : null
+
+  const isGlyphs = (viewType === ViewType.Glyphs || viewType === ViewType.ScatterPlotGlyphs) && rest.settings[viewType]
 
   const [sized] = useSize(
     ({ width, height }) => (
       <Box sx={gridItemStyle.gridItem}>
         <Box sx={gridItemStyle.header} className={DRAG_HANDLE}>
           <Box sx={gridItemStyle.textBox}>
-            <Typography> {title} </Typography>
-            {glyphAxesText}
+            <Typography>{title}</Typography>
+            {isGlyphs && <GlyphAxesText displayAttributes={rest.settings[viewType]!.displayAttributes} />}
           </Box>
           <Box sx={gridItemStyle.right}>
-            {topButton}
-            <IconButton onClick={onRemove}>
-              <Tooltip title={GRID_ITEM_TEXT.tooltipClose}>
-                <Close />
-              </Tooltip>
-            </IconButton>
+            <ViewHelpButton viewType={viewType} />
+            {contextButton}
+            <ViewCloseButton onRemove={onRemove} />
           </Box>
         </Box>
         {isResizeFinished && (
