@@ -111,11 +111,11 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
   return (
     <Drawer variant={DRAWER_VARIANT.persistent} anchor={ANCHOR.right} open={isOpen} sx={dataDrawerStyle.drawer}>
       <Box sx={dataDrawerStyle.header}>
-        <IconButton onClick={close}>
-          <Tooltip title={DATA_DRAWER_TEXT.hide}>
+        <Tooltip title={DATA_DRAWER_TEXT.hide}>
+          <IconButton onClick={close}>
             <ChevronRight sx={dataDrawerStyle.chevron} />
-          </Tooltip>
-        </IconButton>
+          </IconButton>
+        </Tooltip>
       </Box>
       <Divider />
       <Box sx={dataDrawerStyle.setting}>{settingsComponents}</Box>

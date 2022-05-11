@@ -15,7 +15,9 @@ export interface ClickableButtonDataProps {
 export type ButtonProps = ClickableButtonDataProps
 
 export const ClickableButton: VoidFunctionComponent<ButtonProps> = ({ icon, onClick, disabled, label }) => (
-  <Button variant={BUTTON_VARIANT.contained} onClick={onClick} sx={topToolbarButtonStyle.button} disabled={disabled}>
-    <Tooltip title={label}>{icon}</Tooltip>
-  </Button>
+  <Tooltip title={label}>
+    <Button variant={BUTTON_VARIANT.contained} onClick={onClick} sx={topToolbarButtonStyle.button} disabled={disabled}>
+      {icon}
+    </Button>
+  </Tooltip>
 )

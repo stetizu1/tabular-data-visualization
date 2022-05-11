@@ -32,9 +32,11 @@ export const ToggleButtonSingle: VoidFunctionComponent<ToggleButtonProps> = ({
   )
   return (
     <ToggleButtonGroup value={value ? [ON_VALUE] : []} onChange={handleChange}>
-      <ToggleButton sx={topToolbarButtonStyle.button} value={ON_VALUE} disabled={disabled}>
-        <Tooltip title={label}>{icon}</Tooltip>
-      </ToggleButton>
+      <Tooltip title={label}>
+        <ToggleButton sx={topToolbarButtonStyle.button} value={ON_VALUE} disabled={disabled}>
+          {icon}
+        </ToggleButton>
+      </Tooltip>
     </ToggleButtonGroup>
   )
 }

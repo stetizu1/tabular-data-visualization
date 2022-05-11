@@ -11,9 +11,9 @@ export interface OpenSettingsButtonProps {
 }
 
 export const OpenSettingsButton: VoidFunctionComponent<OpenSettingsButtonProps> = ({ disabled, open }) => (
-  <IconButton disabled={disabled} onClick={open} sx={openSettingsButtonStyle.settings}>
-    <Tooltip title={TOP_TOOLBAR_TEXT.settings}>
+  <Tooltip title={TOP_TOOLBAR_TEXT.settings}>
+    <IconButton disabled={disabled} onClick={open} sx={openSettingsButtonStyle.settings}>
       <Settings />
-    </Tooltip>
-  </IconButton>
+    </IconButton>
+  </Tooltip>
 )

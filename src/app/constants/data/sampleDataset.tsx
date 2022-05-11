@@ -1,4 +1,4 @@
-import { Air, AirportShuttle, DirectionsBoat, DirectionsCar, LocalFlorist } from '@mui/icons-material'
+import { AirportShuttle, DirectionsBoat, DirectionsCar, LocalFlorist, Twitter } from '@mui/icons-material'
 
 import flowerJson from '../../../test-data/flowerData.json'
 import birdJson from '../../../test-data/birdData.json'
@@ -20,7 +20,7 @@ export const SAMPLE_DATASET_OPTIONS = Object.values(SampleDataset)
 
 export const sampleDatasetIcons: Record<SampleDataset, JSX.Element> = {
   [SampleDataset.flowers]: <LocalFlorist />,
-  [SampleDataset.birds]: <Air />,
+  [SampleDataset.birds]: <Twitter />,
   [SampleDataset.cars]: <DirectionsCar />,
   [SampleDataset.titanic]: <DirectionsBoat />,
   [SampleDataset.parallelCars]: <AirportShuttle />,

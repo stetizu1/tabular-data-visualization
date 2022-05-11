@@ -1,11 +1,10 @@
 import { useCallback, useState, VoidFunctionComponent } from 'react'
-import { Button, Tooltip } from '@mui/material'
+import { IconButton, Tooltip } from '@mui/material'
 import { Save } from '@mui/icons-material'
 
 import { getSaveIsDisabled, saveSvg } from '../../../helpers/d3/saveSvg'
 
 import { ViewType } from '../../../constants/views-general/ViewType'
-import { BUTTON_VARIANT } from '../../../constants/mui'
 
 import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
 
@@ -38,17 +37,16 @@ export const DataSaveButton: VoidFunctionComponent<DataSaveButtonProps> = ({ vie
         confirmText={TOP_TOOLBAR_TEXT.saveText.confirm}
         cancelText={TOP_TOOLBAR_TEXT.saveText.cancel}
       />
-      <Button
-        variant={BUTTON_VARIANT.text}
-        onClick={openDialog}
-        disabled={getSaveIsDisabled(viewType)}
-        sx={inlineButtonStyles.button}
-        aria-label={TOP_TOOLBAR_TEXT.saveText.save}
-      >
-        <Tooltip title={TOP_TOOLBAR_TEXT.saveText.save}>
+      <Tooltip title={TOP_TOOLBAR_TEXT.saveText.save}>
+        <IconButton
+          onClick={openDialog}
+          disabled={getSaveIsDisabled(viewType)}
+          sx={inlineButtonStyles.button}
+          aria-label={TOP_TOOLBAR_TEXT.saveText.save}
+        >
           <Save />
-        </Tooltip>
-      </Button>
+        </IconButton>
+      </Tooltip>
     </>
   )
 }

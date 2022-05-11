@@ -11,7 +11,7 @@ export const TOP_TOOLBAR_TEXT = {
   labelDetailsVisible: `Display tooltips`,
   labelClearBrushes: `Clear brushes`,
   labelAddView: `Add a view`,
-  labelBrushingOnEOM: `Brushing set only at the end of the move`,
+  labelBrushingOnEOM: `Set brushing at the end of the move only`,
   labelBrushColor: `Brush color`,
   addViewDialogTitle: `Add a view`,
   labelDialogTitle: `Set predefined layout`,
