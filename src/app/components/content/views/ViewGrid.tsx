@@ -16,7 +16,7 @@ import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from 
 import { TOOLTIP_CLASS } from '../../../constants/views-general/tooltip'
 
 import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
-import { VIEW_NAMES } from '../../../text/views-and-menus/common'
+import { VIEW_NAMES } from '../../../text/views-and-settings/common'
 
 import { viewGridStyle } from '../../../components-style/content/views/viewGridStyle'
 

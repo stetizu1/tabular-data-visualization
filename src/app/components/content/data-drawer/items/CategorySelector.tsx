@@ -8,7 +8,7 @@ import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
 import { ViewType } from '../../../../constants/views-general/ViewType'
 
-import { MENU_TEXT } from '../../../../text/views-and-menus/common'
+import { MENU_TEXT } from '../../../../text/views-and-settings/common'
 
 export interface CategorySelectorProps {
   viewType: ViewType

@@ -33,7 +33,7 @@ import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constan
 import { TOOLTIP_CLASS } from '../../../../constants/views-general/tooltip'
 import { GLYPHS_MIN_PERCENT_SHIFT } from '../../../../constants/views-general/glyphs-general'
 
-import { SCATTER_PLOT_GLYPHS_TEXT } from '../../../../text/views-and-menus/scatterPlotGlyphs'
+import { SCATTER_PLOT_GLYPHS_TEXT } from '../../../../text/views-and-settings/scatterPlotGlyphs'
 
 import {
   AXIS_CLASS,

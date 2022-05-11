@@ -2,7 +2,7 @@ import { ViewType } from '../../constants/views-general/ViewType'
 import { MENU_TEXT, VIEW_NAMES } from './common'
 
 export const PARALLEL_SETS_BUNDLED_TEXT = {
-  unavailable: `Parallel sets plot cannot be displayed with a single attribute. To generate a parallel sets plot, select multiple attributes from the menu.`,
+  unavailable: `Parallel sets plot cannot be displayed with a single attribute. To generate a parallel sets plot, select multiple attributes from settings.`,
 }
 
 export const PARALLEL_SETS_MENU_TEXT = {

@@ -3,7 +3,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { MenuProps } from '../../../../types/views/MenuProps'
+import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
 import {
   DataTableSettings,
   rowHeightKey,
@@ -16,7 +16,7 @@ import { getAttributeKeys, getDefaultAllAttributesChecked } from '../../../../he
 import { ViewType } from '../../../../constants/views-general/ViewType'
 import { DATA_TABLE_DEFAULT, MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/dataTable'
 
-import { DATA_TABLE_MENU_TEXT } from '../../../../text/views-and-menus/dataTable'
+import { DATA_TABLE_MENU_TEXT } from '../../../../text/views-and-settings/dataTable'
 
 import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
 
@@ -24,7 +24,11 @@ import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { ColorPicker } from '../../data-drawer/items/ColorPicker'
 
-export const DataTableMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
+export const DataTableSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
+  dataset,
+  settings,
+  setSettings,
+}) => {
   const viewType = ViewType.DataTable
   const dataTableSettings = settings[viewType]
   const [attributesKeys, setAttributesKeys] = useState(getAttributeKeys(dataset))

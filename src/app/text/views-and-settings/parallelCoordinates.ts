@@ -3,7 +3,7 @@ import { ViewType } from '../../constants/views-general/ViewType'
 import { MENU_TEXT, VIEW_NAMES } from './common'
 
 export const PARALLEL_COORDINATES_TEXT = {
-  unavailable: `Parallel coordinates plot cannot be displayed with a single attribute. To generate a parallel coordinates plot, select multiple attributes from the menu.`,
+  unavailable: `Parallel coordinates plot cannot be displayed with a single attribute. To generate a parallel coordinates plot, select multiple attributes from settings.`,
 }
 
 export const PARALLEL_COORDINATES_MENU_TEXT = {

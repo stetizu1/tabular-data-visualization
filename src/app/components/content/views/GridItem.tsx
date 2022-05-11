@@ -1,12 +1,14 @@
 import React, { ComponentProps, useState, VoidFunctionComponent } from 'react'
 import { useSize } from 'react-use'
-import { Box, IconButton, Typography } from '@mui/material'
+import { Box, IconButton, Tooltip, Typography } from '@mui/material'
 import { Close, RotateRight } from '@mui/icons-material'
 
 import { getDisplayAttributesInParentheses } from '../../../helpers/stringGetters'
 
 import { ViewType } from '../../../constants/views-general/ViewType'
 import { DRAG_HANDLE, GRID_HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/layout/layout'
+
+import { GRID_ITEM_TEXT } from '../../../text/gridItemText'
 
 import { gridItemStyle } from '../../../components-style/content/views/gridItemStyle'
 
@@ -47,7 +49,9 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResi
           <Box sx={gridItemStyle.right}>
             {topButton}
             <IconButton onClick={onRemove}>
-              <Close />
+              <Tooltip title={GRID_ITEM_TEXT.tooltipClose}>
+                <Close />
+              </Tooltip>
             </IconButton>
           </Box>
         </Box>

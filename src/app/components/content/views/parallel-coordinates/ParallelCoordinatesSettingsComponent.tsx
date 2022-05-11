@@ -4,7 +4,7 @@ import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
 import { lineWidthKey, ParallelCoordinatesSettings } from '../../../../types/views/settings/ParallelCoordinatesSettings'
-import { MenuProps } from '../../../../types/views/MenuProps'
+import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
 
 import {
   getCategoryAttributesKeys,
@@ -18,7 +18,7 @@ import {
 } from '../../../../constants/views/parallelCoordinates'
 import { ViewType } from '../../../../constants/views-general/ViewType'
 
-import { PARALLEL_COORDINATES_MENU_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
+import { PARALLEL_COORDINATES_MENU_TEXT } from '../../../../text/views-and-settings/parallelCoordinates'
 
 import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
 
@@ -29,7 +29,7 @@ import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
-export const ParallelCoordinatesMenu: VoidFunctionComponent<MenuProps> = ({
+export const ParallelCoordinatesSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
   dataset,
   settings,
   setSettings,

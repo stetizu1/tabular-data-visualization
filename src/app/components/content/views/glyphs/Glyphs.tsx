@@ -22,7 +22,7 @@ import { ViewType } from '../../../../constants/views-general/ViewType'
 import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 import { GLYPHS_MIN_PERCENT_SHIFT } from '../../../../constants/views-general/glyphs-general'
 
-import { GLYPHS_TEXT } from '../../../../text/views-and-menus/glyphs'
+import { GLYPHS_TEXT } from '../../../../text/views-and-settings/glyphs'
 
 import {
   getGlyphsStyle,

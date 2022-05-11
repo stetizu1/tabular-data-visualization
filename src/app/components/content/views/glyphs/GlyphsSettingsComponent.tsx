@@ -10,7 +10,7 @@ import {
   sortAttributeKey,
   sortTypeKey,
 } from '../../../../types/views/settings/GlyphsSettings'
-import { MenuProps } from '../../../../types/views/MenuProps'
+import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
 
 import {
   getCategoryAttributesKeys,
@@ -22,10 +22,10 @@ import { GLYPHS_DEFAULT, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constant
 import { ViewType } from '../../../../constants/views-general/ViewType'
 import { SortType } from '../../../../constants/sort/SortType'
 
-import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/glyphs'
+import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-settings/glyphs'
 
 import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
-import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
+import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -36,7 +36,11 @@ import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 import { ToggleButtons } from '../../data-drawer/items/ToggleButtons'
 
-export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
+export const GlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
+  dataset,
+  settings,
+  setSettings,
+}) => {
   const viewType = ViewType.Glyphs
   const glyphsSettings = settings[viewType]
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))
@@ -114,7 +118,7 @@ export const GlyphsMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings
               label={GLYPHS_MENU_TEXT.sorting}
               settingsKey={sortAttributeKey}
             />
-            <Typography sx={menuTextStyle.text}>{GLYPHS_MENU_TEXT.sort}</Typography>
+            <Typography sx={settingsTextStyle.text}>{GLYPHS_MENU_TEXT.sort}</Typography>
             <ToggleButtons
               viewType={viewType}
               value={glyphsSettings.sortType}

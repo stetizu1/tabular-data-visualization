@@ -28,7 +28,7 @@ export const dataDrawerStyle: Record<string, SxProps> = {
   chevron: {
     color: DATA_DRAWER_COLORS.icon,
   },
-  menu: {
+  setting: {
     width: `100%`,
     display: `flex`,
     flexDirection: `column`,

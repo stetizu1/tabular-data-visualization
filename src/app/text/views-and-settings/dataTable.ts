@@ -17,5 +17,5 @@ export const DATA_TABLE_TEXT = {
   checkboxTooltip: `Select all`,
   [SortType.asc]: `Sort ascending`,
   [SortType.desc]: `Sort descending`,
-  unavailable: `The Data Table view cannot be displayed without attributes. To generate a Data Table view, select more attributes from the menu.`,
+  unavailable: `The Data Table view cannot be displayed without attributes. To generate a Data Table view, select more attributes from settings.`,
 }

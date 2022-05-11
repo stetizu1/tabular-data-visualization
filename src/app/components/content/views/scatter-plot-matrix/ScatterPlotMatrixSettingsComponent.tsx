@@ -3,7 +3,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { MenuProps } from '../../../../types/views/MenuProps'
+import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
 import {
   horizontalSpacingKey,
   pointSizeKey,
@@ -23,10 +23,10 @@ import {
   SCATTER_PLOT_MATRIX_DEFAULT,
 } from '../../../../constants/views/scatterPlotMatrix'
 
-import { SCATTER_PLOT_MATRIX_MENU_TEXT } from '../../../../text/views-and-menus/scatterPlotMatrix'
+import { SCATTER_PLOT_MATRIX_MENU_TEXT } from '../../../../text/views-and-settings/scatterPlotMatrix'
 
 import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
-import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
+import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -35,7 +35,7 @@ import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
-export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
+export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
   dataset,
   settings,
   setSettings,
@@ -122,7 +122,7 @@ export const ScatterPlotMatrixMenu: VoidFunctionComponent<MenuProps> = ({
                   handleChangeSettings={handleChangeSettings}
                 />
                 <Divider />
-                <Typography sx={menuTextStyle.text}>{SCATTER_PLOT_MATRIX_MENU_TEXT.sizes}</Typography>
+                <Typography sx={settingsTextStyle.text}>{SCATTER_PLOT_MATRIX_MENU_TEXT.sizes}</Typography>
                 <NumberInput
                   value={scatterPlotMatrixSettings.pointSize}
                   valueKey={pointSizeKey}

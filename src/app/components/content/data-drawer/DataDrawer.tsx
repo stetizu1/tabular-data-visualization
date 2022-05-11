@@ -1,5 +1,5 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useMemo } from 'react'
-import { Box, Divider, Drawer, IconButton, Link, Typography } from '@mui/material'
+import { Box, Divider, Drawer, IconButton, Link, Tooltip, Typography } from '@mui/material'
 import { ChevronRight, GitHub } from '@mui/icons-material'
 
 import { SelectableDataType } from '../../../types/data/data'
@@ -12,12 +12,12 @@ import { DATA_DRAWER_TEXT, GITHUB_LINK } from '../../../text/dataDrawerText'
 
 import { dataDrawerStyle } from '../../../components-style/content/data-drawer/dataDrawerStyle'
 
-import { ParallelCoordinatesMenu } from '../views/parallel-coordinates/ParallelCoordinatesMenu'
-import { ScatterPlotMatrixMenu } from '../views/scatter-plot-matrix/ScatterPlotMatrixMenu'
-import { GlyphsMenu } from '../views/glyphs/GlyphsMenu'
-import { ScatterPlotGlyphsMenu } from '../views/scatter-plot-glyphs/ScatterPlotGlyphsMenu'
-import { DataTableMenu } from '../views/data-table/DataTableMenu'
-import { ParallelSetsBundledMenu } from '../views/parallel-sets-bundeled/ParallelSetsBundledMenu'
+import { ParallelCoordinatesSettingsComponent } from '../views/parallel-coordinates/ParallelCoordinatesSettingsComponent'
+import { ScatterPlotMatrixSettingsComponent } from '../views/scatter-plot-matrix/ScatterPlotMatrixSettingsComponent'
+import { GlyphsSettingsComponent } from '../views/glyphs/GlyphsSettingsComponent'
+import { ScatterPlotGlyphsSettingsComponent } from '../views/scatter-plot-glyphs/ScatterPlotGlyphsSettingsComponent'
+import { DataTableSettingsComponent } from '../views/data-table/DataTableSettingsComponent'
+import { ParallelSetsBundledSettingsComponent } from '../views/parallel-sets-bundeled/ParallelSetsBundledSettingsComponent'
 
 export interface DataDrawerProps {
   isOpen: boolean
@@ -38,13 +38,13 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
   setSettings,
   cleanSelectedIfViewWasBrushing,
 }) => {
-  const menus = useMemo(
+  const settingsComponents = useMemo(
     () =>
       views.map((view, idx) => {
         switch (view) {
           case ViewType.Glyphs:
             return (
-              <GlyphsMenu
+              <GlyphsSettingsComponent
                 dataset={dataset}
                 settings={settings}
                 setSettings={setSettings}
@@ -54,7 +54,7 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
             )
           case ViewType.ParallelCoordinates:
             return (
-              <ParallelCoordinatesMenu
+              <ParallelCoordinatesSettingsComponent
                 dataset={dataset}
                 settings={settings!}
                 setSettings={setSettings}
@@ -64,7 +64,7 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
             )
           case ViewType.ScatterPlotMatrix:
             return (
-              <ScatterPlotMatrixMenu
+              <ScatterPlotMatrixSettingsComponent
                 dataset={dataset}
                 settings={settings!}
                 setSettings={setSettings}
@@ -74,7 +74,7 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
             )
           case ViewType.ScatterPlotGlyphs:
             return (
-              <ScatterPlotGlyphsMenu
+              <ScatterPlotGlyphsSettingsComponent
                 dataset={dataset}
                 settings={settings}
                 setSettings={setSettings}
@@ -84,7 +84,7 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
             )
           case ViewType.DataTable:
             return (
-              <DataTableMenu
+              <DataTableSettingsComponent
                 dataset={dataset}
                 settings={settings}
                 setSettings={setSettings}
@@ -94,7 +94,7 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
             )
           case ViewType.ParallelSetsBundled:
             return (
-              <ParallelSetsBundledMenu
+              <ParallelSetsBundledSettingsComponent
                 dataset={dataset}
                 settings={settings}
                 setSettings={setSettings}
@@ -112,11 +112,13 @@ export const DataDrawer: VoidFunctionComponent<DataDrawerProps> = ({
     <Drawer variant={DRAWER_VARIANT.persistent} anchor={ANCHOR.right} open={isOpen} sx={dataDrawerStyle.drawer}>
       <Box sx={dataDrawerStyle.header}>
         <IconButton onClick={close}>
-          <ChevronRight sx={dataDrawerStyle.chevron} />
+          <Tooltip title={DATA_DRAWER_TEXT.hide}>
+            <ChevronRight sx={dataDrawerStyle.chevron} />
+          </Tooltip>
         </IconButton>
       </Box>
       <Divider />
-      <Box sx={dataDrawerStyle.menu}>{menus.map((menu) => menu)}</Box>
+      <Box sx={dataDrawerStyle.setting}>{settingsComponents}</Box>
       <Box sx={dataDrawerStyle.fill} />
       <Box sx={dataDrawerStyle.footer}>
         <Typography sx={dataDrawerStyle.text}>{DATA_DRAWER_TEXT.description}</Typography>

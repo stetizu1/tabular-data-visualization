@@ -8,7 +8,7 @@ export const EMPTY_DATA_TEXT = {
 }
 
 export const TOP_TOOLBAR_TEXT = {
-  labelDetailsVisible: `Display details`,
+  labelDetailsVisible: `Display tooltips`,
   labelClearBrushes: `Clear brushes`,
   labelAddView: `Add a view`,
   labelBrushingOnEOM: `Brushing set only at the end of the move`,
@@ -16,6 +16,7 @@ export const TOP_TOOLBAR_TEXT = {
   addViewDialogTitle: `Add a view`,
   labelDialogTitle: `Set predefined layout`,
   noOption: `All view options are currently displayed.`,
+  settings: `Settings`,
   saveText: {
     header: `Save to file`,
     description: `Do you want to save the visualization to an SVG file?`,

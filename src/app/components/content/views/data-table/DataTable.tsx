@@ -26,7 +26,7 @@ import { SortType } from '../../../../constants/sort/SortType'
 import { MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/dataTable'
 import { CELL_PADDING } from '../../../../constants/mui'
 
-import { DATA_TABLE_TEXT } from '../../../../text/views-and-menus/dataTable'
+import { DATA_TABLE_TEXT } from '../../../../text/views-and-settings/dataTable'
 
 import { dataTableStyle } from '../../../../components-style/content/views/data-table/dataTableStyle'
 

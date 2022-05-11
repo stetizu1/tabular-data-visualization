@@ -32,7 +32,7 @@ import { AXES_TEXT_CLASS } from '../../../../components-style/content/views/para
 import { MouseAction } from '../../../../constants/actions/MouseAction'
 import { ParallelSetsBrushingType } from '../../../../constants/brushing-type/ParallelSetsBrushingType'
 
-import { PARALLEL_SETS_BUNDLED_TEXT } from '../../../../text/views-and-menus/parallelSetsBundled'
+import { PARALLEL_SETS_BUNDLED_TEXT } from '../../../../text/views-and-settings/parallelSetsBundled'
 
 import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 

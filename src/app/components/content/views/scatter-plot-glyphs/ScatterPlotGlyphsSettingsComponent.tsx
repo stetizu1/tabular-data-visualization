@@ -3,7 +3,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { MenuProps } from '../../../../types/views/MenuProps'
+import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
 import {
   glyphSizeKey,
   ScatterPlotGlyphsSettings,
@@ -23,7 +23,7 @@ import {
 } from '../../../../constants/views/scatterPlotGlyphs'
 import { ViewType } from '../../../../constants/views-general/ViewType'
 
-import { SCATTER_PLOT_GLYPHS_MENU_TEXT } from '../../../../text/views-and-menus/scatterPlotGlyphs'
+import { SCATTER_PLOT_GLYPHS_MENU_TEXT } from '../../../../text/views-and-settings/scatterPlotGlyphs'
 
 import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
 
@@ -35,7 +35,7 @@ import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 import { Selector } from '../../data-drawer/items/Selector'
 
-export const ScatterPlotGlyphsMenu: VoidFunctionComponent<MenuProps> = ({
+export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
   dataset,
   settings,
   setSettings,

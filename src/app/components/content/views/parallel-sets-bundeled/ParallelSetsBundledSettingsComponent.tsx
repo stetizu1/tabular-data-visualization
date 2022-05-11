@@ -3,7 +3,7 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography
 import { ExpandMore } from '@mui/icons-material'
 
 import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { MenuProps } from '../../../../types/views/MenuProps'
+import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
 import {
   ParallelSetsBundledSettings,
   brushingTypeKey,
@@ -22,10 +22,10 @@ import {
 } from '../../../../constants/views/parallelSetsBundled'
 import { ParallelSetsBrushingType } from '../../../../constants/brushing-type/ParallelSetsBrushingType'
 
-import { PARALLEL_SETS_MENU_TEXT } from '../../../../text/views-and-menus/parallelSetsBundled'
+import { PARALLEL_SETS_MENU_TEXT } from '../../../../text/views-and-settings/parallelSetsBundled'
 
 import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
-import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
+import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -36,7 +36,11 @@ import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { ToggleButtons } from '../../data-drawer/items/ToggleButtons'
 import { ColorPicker } from '../../data-drawer/items/ColorPicker'
 
-export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ dataset, settings, setSettings }) => {
+export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
+  dataset,
+  settings,
+  setSettings,
+}) => {
   const viewType = ViewType.ParallelSetsBundled
   const parallelSetsBundledSettings = settings[viewType]
 
@@ -97,7 +101,7 @@ export const ParallelSetsBundledMenu: VoidFunctionComponent<MenuProps> = ({ data
               setSettings={setSettings}
               label={PARALLEL_SETS_MENU_TEXT.category}
             />
-            <Typography sx={menuTextStyle.text}>{PARALLEL_SETS_MENU_TEXT.brushing}</Typography>
+            <Typography sx={settingsTextStyle.text}>{PARALLEL_SETS_MENU_TEXT.brushing}</Typography>
             <ToggleButtons
               viewType={viewType}
               value={parallelSetsBundledSettings.brushingType}

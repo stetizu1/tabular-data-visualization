@@ -10,7 +10,7 @@ import { ViewType } from '../../../../constants/views-general/ViewType'
 import { COLOR_DEBOUNCE } from '../../../../constants/debounce/debounce'
 import { INPUT_TYPE } from '../../../../constants/others'
 
-import { PALETTE_PICKER_TEXT } from '../../../../text/views-and-menus/common'
+import { PALETTE_PICKER_TEXT } from '../../../../text/views-and-settings/common'
 
 import {
   getPalettePickerColorInputStyle,

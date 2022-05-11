@@ -3,7 +3,7 @@ import { ViewType } from '../../constants/views-general/ViewType'
 import { MENU_TEXT, VIEW_NAMES } from './common'
 
 export const GLYPHS_TEXT = {
-  unavailable: `The glyph plot cannot be displayed with less than 3 attributes. To generate a glyph plot, select more attributes from the menu.`,
+  unavailable: `The glyph plot cannot be displayed with less than 3 attributes. To generate a glyph plot, select more attributes from settings.`,
 }
 
 export const GLYPHS_MENU_TEXT = {
