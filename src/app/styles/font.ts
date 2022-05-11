@@ -10,7 +10,7 @@ export const FOOTER_FONT = {
 }
 
 export const SETTINGS_DRAWER_FONT = {
-  headerFontSize: 14,
+  headerFontSize: 15,
   labelFontSize: `0.8em`,
   fontSize: 12,
 }

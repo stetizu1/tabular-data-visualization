@@ -53,7 +53,7 @@ export const SETTINGS_DRAWER_COLORS = {
   icon: `#c4cbdc`,
   drawerItemBackground: `#edf1fd`,
   drawerItemBackgroundDimmed: `#e4eafd`,
-  drawerItemBorder: `#8e94a2`,
+  drawerItemBorder: `#98a1b6`,
   label: `#404242`,
 }
 

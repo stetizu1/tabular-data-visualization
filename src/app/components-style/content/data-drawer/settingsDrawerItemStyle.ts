@@ -7,13 +7,15 @@ import { SETTINGS_DRAWER_FONT } from '../../../styles/font'
 
 export const settingsDrawerItemStyle: Record<string, SxProps> = {
   drawerSettings: {
-    width: calc(-20, `100%`),
+    width: calc(-22, `100%`),
     padding: px(10),
     display: `flex`,
     flexDirection: `column`,
     textAlign: `left`,
     bgcolor: SETTINGS_DRAWER_COLORS.drawerItemBackground,
-    borderBottom: border(1, SETTINGS_DRAWER_COLORS.drawerItemBorder),
+    border: border(1, SETTINGS_DRAWER_COLORS.drawerItemBorder),
+    borderRadius: px(4),
+    borderBottom: border(2, SETTINGS_DRAWER_COLORS.drawerItemBorder),
     '& h1': {
       borderBottom: border(1, SETTINGS_DRAWER_COLORS.drawerItemBorder),
       fontSize: SETTINGS_DRAWER_FONT.headerFontSize,
