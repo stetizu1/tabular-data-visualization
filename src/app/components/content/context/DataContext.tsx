@@ -10,7 +10,7 @@ import { useDebounce } from '../../../helpers/react/useDebounce'
 import { getCategoryAttributesKeys, getDefaultQuantitativeAttributesKeys } from '../../../helpers/data/data'
 
 import { DataLoadState } from '../../../constants/data/DataLoadState'
-import { ViewType } from '../../../constants/views-general/ViewType'
+import { brushView, brushViewType, isBrushView, ViewType } from '../../../constants/views-general/ViewType'
 import { DEFAULT_GRID_LAYOUT_QUANTITATIVE, DEFAULT_GRID_LAYOUT_NOMINAL } from '../../../constants/layout/layout'
 import { DEFAULT_BRUSH_COLOR } from '../../../constants/views-general/defaultSettableColors'
 import { BRUSH_DEBOUNCE } from '../../../constants/debounce/debounce'
@@ -82,11 +82,7 @@ export const DataContext: VoidFunctionComponent = () => {
   const setComponentBrushing: SetComponentBrushing = useCallback(
     (newComponent) => {
       if (componentBrushingRef.current !== newComponent) {
-        cleanAllBrushes(
-          newComponent !== ViewType.DataTable &&
-            newComponent !== ViewType.Glyphs &&
-            newComponent !== ViewType.ParallelSetsBundled,
-        )
+        cleanAllBrushes(isBrushView(newComponent))
       }
       setCurrentComponentBrushing(newComponent)
     },
@@ -98,8 +94,11 @@ export const DataContext: VoidFunctionComponent = () => {
   }, [])
 
   const cleanSelectedIfViewWasBrushing = useCallback(
-    (component: ViewType) => {
-      if (componentBrushingRef.current === component) {
+    (component: ViewType | brushViewType) => {
+      if (
+        componentBrushingRef.current === component ||
+        (component === brushView && isBrushView(componentBrushingRef.current))
+      ) {
         cleanAllBrushes()
         setCurrentComponentBrushing(null)
       }

@@ -3,6 +3,7 @@ import GridLayout, { WidthProvider } from 'react-grid-layout'
 import { Box } from '@mui/material'
 import { AddCircle } from '@mui/icons-material'
 
+import { useWindowSize } from 'react-use'
 import { Brushable } from '../../../types/brushing/Brushable'
 import { SelectableDataType } from '../../../types/data/data'
 import { GridLayoutItem, LayoutArray } from '../../../types/views/Grid'
@@ -11,7 +12,7 @@ import { Settings } from '../../../types/views/settings/Settings'
 import { getClass } from '../../../helpers/stringGetters'
 import { setDisplay } from '../../../helpers/d3/setDisplay'
 
-import { isViewType, ViewType } from '../../../constants/views-general/ViewType'
+import { brushView, brushViewType, isViewType, ViewType } from '../../../constants/views-general/ViewType'
 import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from '../../../constants/layout/layout'
 import { TOOLTIP_CLASS } from '../../../constants/views-general/tooltip'
 
@@ -33,7 +34,7 @@ export interface ViewGridProps extends ViewGridDataProps {
   isDrawerOpen: boolean
   isDetailsVisible: boolean
   closeDrawer: () => void
-  cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
+  cleanSelectedIfViewWasBrushing: (viewType: ViewType | brushViewType) => void
   settings: Settings
   setSettings: Dispatch<SetStateAction<Settings>>
 
@@ -64,12 +65,20 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
 }) => {
   const [viewResizing, setViewResizing] = useState<ViewType | null>(null)
   const [lastLayout, setLastLayout] = useState(layout)
+  const { width: windowWidth, height: windowHeight } = useWindowSize()
 
   useEffect(
     () => () => {
       if (layout !== null) setLastLayout(layout)
     },
     [layout],
+  )
+
+  useEffect(
+    () => () => {
+      cleanSelectedIfViewWasBrushing(brushView)
+    },
+    [windowWidth, windowHeight, cleanSelectedIfViewWasBrushing],
   )
 
   const updateLayout = useCallback(
@@ -136,6 +145,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
       />
       <Box sx={viewGridStyle.tooltip} className={TOOLTIP_CLASS} />
       <ReactGridLayout
+        style={{ overflowX: `hidden` }}
         onLayoutChange={updateLayout}
         draggableHandle={getClass(DRAG_HANDLE)}
         onResizeStart={(_, view) => setViewResizing(view.i as ViewType)}
