@@ -23,9 +23,9 @@ import {
   SCATTER_PLOT_MATRIX_DEFAULT,
 } from '../../../../constants/views/scatterPlotMatrix'
 
-import { SCATTER_PLOT_MATRIX_MENU_TEXT } from '../../../../text/views-and-settings/scatterPlotMatrix'
+import { SCATTER_PLOT_MATRIX_SETTINGS_TEXT } from '../../../../text/views-and-settings/scatterPlotMatrix'
 
-import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
+import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
 import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
@@ -55,7 +55,7 @@ export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsC
   )
 
   // first time empty
-  const createScatterPlotMatrixMenu = useCallback(() => {
+  const createScatterPlotMatrixSettings = useCallback(() => {
     const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
@@ -72,7 +72,7 @@ export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsC
   }, [setSettings, dataset])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createScatterPlotMatrixMenu(), [dataset])
+  useEffect(() => createScatterPlotMatrixSettings(), [dataset])
 
   const getNewSettingsForAttributeChecker = useCallback(
     (newChecked: CheckedForSelectableDataType) => ({
@@ -88,8 +88,8 @@ export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsC
 
   if (scatterPlotMatrixSettings) {
     return (
-      <Box sx={dataDrawerMenuStyle.drawerMenu}>
-        <h1>{SCATTER_PLOT_MATRIX_MENU_TEXT.header}</h1>
+      <Box sx={settingsDrawerItemStyle.drawerSettings}>
+        <h1>{SCATTER_PLOT_MATRIX_SETTINGS_TEXT.header}</h1>
         {quantitativeAttributesKeys.length >= MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
@@ -98,7 +98,7 @@ export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsC
               handleChangeSettings={handleChangeSettings}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
-              label={SCATTER_PLOT_MATRIX_MENU_TEXT.attributes}
+              label={SCATTER_PLOT_MATRIX_SETTINGS_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
               setAttributesKeys={setQuantitativeAttributesKeys}
@@ -108,11 +108,11 @@ export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsC
               value={scatterPlotMatrixSettings.categoryAttribute!}
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
-              label={SCATTER_PLOT_MATRIX_MENU_TEXT.category}
+              label={SCATTER_PLOT_MATRIX_SETTINGS_TEXT.category}
             />
-            <Accordion sx={dataDrawerMenuStyle.accordion}>
+            <Accordion sx={settingsDrawerItemStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography>{SCATTER_PLOT_MATRIX_MENU_TEXT.more}</Typography>
+                <Typography>{SCATTER_PLOT_MATRIX_SETTINGS_TEXT.more}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <MarginInput
@@ -122,19 +122,19 @@ export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsC
                   handleChangeSettings={handleChangeSettings}
                 />
                 <Divider />
-                <Typography sx={settingsTextStyle.text}>{SCATTER_PLOT_MATRIX_MENU_TEXT.sizes}</Typography>
+                <Typography sx={settingsTextStyle.text}>{SCATTER_PLOT_MATRIX_SETTINGS_TEXT.sizes}</Typography>
                 <NumberInput
                   value={scatterPlotMatrixSettings.pointSize}
                   valueKey={pointSizeKey}
                   setSettings={setSettings}
-                  label={SCATTER_PLOT_MATRIX_MENU_TEXT.pointSize}
+                  label={SCATTER_PLOT_MATRIX_SETTINGS_TEXT.pointSize}
                   viewType={viewType}
                 />
                 <NumberInput
                   value={scatterPlotMatrixSettings.horizontalSpacing}
                   valueKey={horizontalSpacingKey}
                   setSettings={setSettings}
-                  label={SCATTER_PLOT_MATRIX_MENU_TEXT.horizontalSpacing}
+                  label={SCATTER_PLOT_MATRIX_SETTINGS_TEXT.horizontalSpacing}
                   viewType={viewType}
                   handleChangeSettings={handleChangeSettings}
                 />
@@ -142,13 +142,13 @@ export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsC
                   value={scatterPlotMatrixSettings.verticalSpacing}
                   valueKey={verticalSpacingKey}
                   setSettings={setSettings}
-                  label={SCATTER_PLOT_MATRIX_MENU_TEXT.verticalSpacing}
+                  label={SCATTER_PLOT_MATRIX_SETTINGS_TEXT.verticalSpacing}
                   viewType={viewType}
                   handleChangeSettings={handleChangeSettings}
                 />
                 <Divider />
                 <OpacityInput
-                  header={SCATTER_PLOT_MATRIX_MENU_TEXT.opacity}
+                  header={SCATTER_PLOT_MATRIX_SETTINGS_TEXT.opacity}
                   opacities={scatterPlotMatrixSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
@@ -164,7 +164,9 @@ export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsC
             </Accordion>
           </>
         ) : (
-          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{SCATTER_PLOT_MATRIX_MENU_TEXT.unavailable}</Box>
+          <Box sx={settingsDrawerItemStyle.insufficientAttributeNum}>
+            {SCATTER_PLOT_MATRIX_SETTINGS_TEXT.unavailable}
+          </Box>
         )}
       </Box>
     )

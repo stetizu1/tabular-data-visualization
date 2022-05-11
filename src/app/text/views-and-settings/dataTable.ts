@@ -1,16 +1,16 @@
 import { ViewType } from '../../constants/views-general/ViewType'
 import { SortType } from '../../constants/sort/SortType'
 
-import { MENU_BASE_TEXT, VIEW_NAMES } from './common'
+import { SETTINGS_BASE_TEXT, VIEW_NAMES } from './common'
 
-export const DATA_TABLE_MENU_TEXT = {
+export const DATA_TABLE_SETTINGS_TEXT = {
   header: VIEW_NAMES[ViewType.DataTable],
   unavailable: `The dataset seems to have less than one attribute, which makes him not valid. Please choose different dataset.`,
   attributes: `Display columns`,
   rowHeight: `Table row height`,
   selectedBackgroundColor: `Selected background color`,
   selectedFontColor: `Selected font color`,
-  ...MENU_BASE_TEXT,
+  ...SETTINGS_BASE_TEXT,
 }
 
 export const DATA_TABLE_TEXT = {

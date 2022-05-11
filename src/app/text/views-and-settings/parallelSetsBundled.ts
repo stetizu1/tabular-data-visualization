@@ -1,11 +1,11 @@
 import { ViewType } from '../../constants/views-general/ViewType'
-import { MENU_TEXT, VIEW_NAMES } from './common'
+import { SETTINGS_TEXT, VIEW_NAMES } from './common'
 
 export const PARALLEL_SETS_BUNDLED_TEXT = {
   unavailable: `Parallel sets plot cannot be displayed with a single attribute. To generate a parallel sets plot, select multiple attributes from settings.`,
 }
 
-export const PARALLEL_SETS_MENU_TEXT = {
+export const PARALLEL_SETS_SETTINGS_TEXT = {
   header: VIEW_NAMES[ViewType.ParallelSetsBundled],
   unavailable: `The parallel sets plot cannot be used while data has less than 2 nominal attributes. Try to use different type of visualization that fits your data.`,
   opacity: `Opacity of connectors`,
@@ -14,5 +14,5 @@ export const PARALLEL_SETS_MENU_TEXT = {
   tabGap: `Gap between tabs`,
   brushing: `Brushing...`,
   fontColor: `Inner font color`,
-  ...MENU_TEXT,
+  ...SETTINGS_TEXT,
 }

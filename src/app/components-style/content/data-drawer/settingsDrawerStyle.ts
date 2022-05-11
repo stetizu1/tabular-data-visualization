@@ -2,17 +2,17 @@ import { SxProps } from '@mui/system'
 
 import { border, calc, px } from '../../../helpers/stringGetters'
 
-import { DATA_DRAWER_COLORS } from '../../../styles/colors'
+import { SETTINGS_DRAWER_COLORS } from '../../../styles/colors'
 
-export const dataDrawerStyle: Record<string, SxProps> = {
+export const settingsDrawerStyle: Record<string, SxProps> = {
   drawer: {
     width: px(250),
     flexShrink: 0,
     '& .MuiDrawer-paper': {
-      bgcolor: DATA_DRAWER_COLORS.background,
+      bgcolor: SETTINGS_DRAWER_COLORS.background,
       width: px(250),
       alignItems: `flex-end`,
-      border: border(1, DATA_DRAWER_COLORS.border),
+      border: border(1, SETTINGS_DRAWER_COLORS.border),
     },
     '& hr': {
       width: `100%`,
@@ -26,7 +26,7 @@ export const dataDrawerStyle: Record<string, SxProps> = {
   },
   header: {},
   chevron: {
-    color: DATA_DRAWER_COLORS.icon,
+    color: SETTINGS_DRAWER_COLORS.icon,
   },
   setting: {
     width: `100%`,
@@ -43,7 +43,7 @@ export const dataDrawerStyle: Record<string, SxProps> = {
     fontSize: px(18),
   },
   text: {
-    color: DATA_DRAWER_COLORS.icon,
+    color: SETTINGS_DRAWER_COLORS.icon,
     fontSize: px(9),
     display: `flex`,
     alignItems: `center`,

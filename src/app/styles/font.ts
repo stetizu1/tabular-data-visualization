@@ -9,7 +9,7 @@ export const FOOTER_FONT = {
   fontSize: calc(2, `1vmin`),
 }
 
-export const DATA_DRAWER_FONT = {
+export const SETTINGS_DRAWER_FONT = {
   headerFontSize: 14,
   labelFontSize: `0.8em`,
   fontSize: 12,

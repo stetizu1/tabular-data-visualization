@@ -23,9 +23,9 @@ import {
 } from '../../../../constants/views/scatterPlotGlyphs'
 import { ViewType } from '../../../../constants/views-general/ViewType'
 
-import { SCATTER_PLOT_GLYPHS_MENU_TEXT } from '../../../../text/views-and-settings/scatterPlotGlyphs'
+import { SCATTER_PLOT_GLYPHS_SETTINGS_TEXT } from '../../../../text/views-and-settings/scatterPlotGlyphs'
 
-import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
+import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -55,7 +55,7 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
     [quantitativeAttributesKeys],
   )
 
-  const createScatterPlotGlyphsMenu = useCallback(() => {
+  const createScatterPlotGlyphsSettings = useCallback(() => {
     const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
@@ -74,7 +74,7 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
   }, [setSettings, defaultX, defaultY, dataset])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createScatterPlotGlyphsMenu(), [dataset]) // first time empty, call once
+  useEffect(() => createScatterPlotGlyphsSettings(), [dataset]) // first time empty, call once
 
   const getNewSettingsForAttributeChecker = useCallback(
     (newChecked: CheckedForSelectableDataType): Partial<ScatterPlotGlyphsSettings> => ({
@@ -90,8 +90,8 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
 
   if (scatterPlotGlyphsSettings) {
     return (
-      <Box sx={dataDrawerMenuStyle.drawerMenu}>
-        <h1>{SCATTER_PLOT_GLYPHS_MENU_TEXT.header}</h1>
+      <Box sx={settingsDrawerItemStyle.drawerSettings}>
+        <h1>{SCATTER_PLOT_GLYPHS_SETTINGS_TEXT.header}</h1>
         {quantitativeAttributesKeys.length >= MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
@@ -99,7 +99,7 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
               attributesKeys={quantitativeAttributesKeys}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
-              label={SCATTER_PLOT_GLYPHS_MENU_TEXT.attributes}
+              label={SCATTER_PLOT_GLYPHS_SETTINGS_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
               setAttributesKeys={setQuantitativeAttributesKeys}
@@ -109,7 +109,7 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
               value={scatterPlotGlyphsSettings.xAttribute}
               attributesKeys={quantitativeAttributesKeys}
               setSettings={setSettings}
-              label={SCATTER_PLOT_GLYPHS_MENU_TEXT.xAttribute}
+              label={SCATTER_PLOT_GLYPHS_SETTINGS_TEXT.xAttribute}
               settingsKey={xAttributeKey}
               handleChangeSettings={handleChangeSettings}
             />
@@ -118,7 +118,7 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
               value={scatterPlotGlyphsSettings.yAttribute}
               attributesKeys={quantitativeAttributesKeys}
               setSettings={setSettings}
-              label={SCATTER_PLOT_GLYPHS_MENU_TEXT.yAttribute}
+              label={SCATTER_PLOT_GLYPHS_SETTINGS_TEXT.yAttribute}
               settingsKey={yAttributeKey}
               handleChangeSettings={handleChangeSettings}
             />
@@ -127,11 +127,11 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
               value={scatterPlotGlyphsSettings.categoryAttribute!}
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
-              label={SCATTER_PLOT_GLYPHS_MENU_TEXT.category}
+              label={SCATTER_PLOT_GLYPHS_SETTINGS_TEXT.category}
             />
-            <Accordion sx={dataDrawerMenuStyle.accordion}>
+            <Accordion sx={settingsDrawerItemStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography>{SCATTER_PLOT_GLYPHS_MENU_TEXT.more}</Typography>
+                <Typography>{SCATTER_PLOT_GLYPHS_SETTINGS_TEXT.more}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <MarginInput
@@ -145,12 +145,12 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
                   value={scatterPlotGlyphsSettings.glyphSize}
                   valueKey={glyphSizeKey}
                   setSettings={setSettings}
-                  label={SCATTER_PLOT_GLYPHS_MENU_TEXT.glyphSize}
+                  label={SCATTER_PLOT_GLYPHS_SETTINGS_TEXT.glyphSize}
                   viewType={viewType}
                 />
                 <Divider />
                 <OpacityInput
-                  header={SCATTER_PLOT_GLYPHS_MENU_TEXT.opacity}
+                  header={SCATTER_PLOT_GLYPHS_SETTINGS_TEXT.opacity}
                   opacities={scatterPlotGlyphsSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
@@ -166,7 +166,9 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
             </Accordion>
           </>
         ) : (
-          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{SCATTER_PLOT_GLYPHS_MENU_TEXT.unavailable}</Box>
+          <Box sx={settingsDrawerItemStyle.insufficientAttributeNum}>
+            {SCATTER_PLOT_GLYPHS_SETTINGS_TEXT.unavailable}
+          </Box>
         )}
       </Box>
     )

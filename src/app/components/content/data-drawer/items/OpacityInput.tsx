@@ -11,7 +11,7 @@ import { ViewType } from '../../../../constants/views-general/ViewType'
 import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
 import { INPUT_TYPE } from '../../../../constants/others'
 
-import { OPACITY_MENU_TEXT } from '../../../../text/views-and-settings/common'
+import { OPACITY_SETTINGS_TEXT } from '../../../../text/views-and-settings/common'
 
 import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
 import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
@@ -57,7 +57,7 @@ export const OpacityInput: VoidFunctionComponent<OpacityInputProps> = ({
     <Box sx={numberInputStyles.vertical}>
       <Typography sx={settingsTextStyle.text}>{header}</Typography>
       <TextField
-        label={OPACITY_MENU_TEXT.all}
+        label={OPACITY_SETTINGS_TEXT.all}
         type={INPUT_TYPE.number}
         defaultValue={opacities[0]}
         sx={numberInputStyles.textField}
@@ -66,7 +66,7 @@ export const OpacityInput: VoidFunctionComponent<OpacityInputProps> = ({
       />
       <Box sx={numberInputStyles.horizontal}>
         <TextField
-          label={OPACITY_MENU_TEXT.selected}
+          label={OPACITY_SETTINGS_TEXT.selected}
           type={INPUT_TYPE.number}
           defaultValue={opacities[1]}
           sx={numberInputStyles.textField}
@@ -74,7 +74,7 @@ export const OpacityInput: VoidFunctionComponent<OpacityInputProps> = ({
           onChange={(e) => handleOpacityChange(Number(e.target.value), 1)}
         />
         <TextField
-          label={OPACITY_MENU_TEXT.notSelected}
+          label={OPACITY_SETTINGS_TEXT.notSelected}
           type={INPUT_TYPE.number}
           defaultValue={opacities[2]}
           sx={numberInputStyles.textField}

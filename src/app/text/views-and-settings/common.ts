@@ -1,17 +1,17 @@
 import { ViewType } from '../../constants/views-general/ViewType'
 
-export const MENU_BASE_TEXT = {
+export const SETTINGS_BASE_TEXT = {
   more: `More options`,
   empty: `-----`,
 }
 
-export const MENU_TEXT = {
+export const SETTINGS_TEXT = {
   attributes: `Display attributes:`,
   category: `Colored by`,
-  ...MENU_BASE_TEXT,
+  ...SETTINGS_BASE_TEXT,
 }
 
-export const MARGIN_MENU_TEXT = {
+export const MARGIN_SETTINGS_TEXT = {
   header: `Margin`,
   top: `Top`,
   right: `Right`,
@@ -19,7 +19,7 @@ export const MARGIN_MENU_TEXT = {
   left: `Left`,
 }
 
-export const OPACITY_MENU_TEXT = {
+export const OPACITY_SETTINGS_TEXT = {
   all: `Brushing not active`,
   selected: `Selected`,
   notSelected: `Not selected`,

@@ -43,7 +43,7 @@ export const VIEW_COLORS = {
   border: `#9ea8be`,
 }
 
-export const DATA_DRAWER_COLORS = {
+export const SETTINGS_DRAWER_COLORS = {
   background: `#23262d`,
   border: `#363a46`,
   icon: `#c4cbdc`,

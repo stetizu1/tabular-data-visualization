@@ -18,9 +18,9 @@ import {
 } from '../../../../constants/views/parallelCoordinates'
 import { ViewType } from '../../../../constants/views-general/ViewType'
 
-import { PARALLEL_COORDINATES_MENU_TEXT } from '../../../../text/views-and-settings/parallelCoordinates'
+import { PARALLEL_COORDINATES_SETTINGS_TEXT } from '../../../../text/views-and-settings/parallelCoordinates'
 
-import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
+import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -49,7 +49,7 @@ export const ParallelCoordinatesSettingsComponent: VoidFunctionComponent<Setting
   )
 
   // first time empty
-  const createParallelCoordinatesMenu = useCallback(() => {
+  const createParallelCoordinatesSettings = useCallback(() => {
     const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultCategoryAttribute = getCategoryAttributesKeys(dataset)?.[0]
@@ -66,7 +66,7 @@ export const ParallelCoordinatesSettingsComponent: VoidFunctionComponent<Setting
   }, [setSettings, dataset])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createParallelCoordinatesMenu(), [dataset])
+  useEffect(() => createParallelCoordinatesSettings(), [dataset])
 
   const getNewSettingsForAttributeChecker = useCallback(
     (newChecked: CheckedForSelectableDataType) => ({
@@ -82,8 +82,8 @@ export const ParallelCoordinatesSettingsComponent: VoidFunctionComponent<Setting
 
   if (parallelCoordinatesSettings) {
     return (
-      <Box sx={dataDrawerMenuStyle.drawerMenu}>
-        <h1>{PARALLEL_COORDINATES_MENU_TEXT.header}</h1>
+      <Box sx={settingsDrawerItemStyle.drawerSettings}>
+        <h1>{PARALLEL_COORDINATES_SETTINGS_TEXT.header}</h1>
         {quantitativeAttributesKeys.length >= MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
@@ -92,7 +92,7 @@ export const ParallelCoordinatesSettingsComponent: VoidFunctionComponent<Setting
               handleChangeSettings={handleChangeSettings}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
-              label={PARALLEL_COORDINATES_MENU_TEXT.attributes}
+              label={PARALLEL_COORDINATES_SETTINGS_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
               setAttributesKeys={setQuantitativeAttributesKeys}
@@ -102,11 +102,11 @@ export const ParallelCoordinatesSettingsComponent: VoidFunctionComponent<Setting
               value={parallelCoordinatesSettings.categoryAttribute!}
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
-              label={PARALLEL_COORDINATES_MENU_TEXT.category}
+              label={PARALLEL_COORDINATES_SETTINGS_TEXT.category}
             />
-            <Accordion sx={dataDrawerMenuStyle.accordion}>
+            <Accordion sx={settingsDrawerItemStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography>{PARALLEL_COORDINATES_MENU_TEXT.more}</Typography>
+                <Typography>{PARALLEL_COORDINATES_SETTINGS_TEXT.more}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <MarginInput
@@ -120,12 +120,12 @@ export const ParallelCoordinatesSettingsComponent: VoidFunctionComponent<Setting
                   value={parallelCoordinatesSettings.lineWidth}
                   valueKey={lineWidthKey}
                   setSettings={setSettings}
-                  label={PARALLEL_COORDINATES_MENU_TEXT.lineWidth}
+                  label={PARALLEL_COORDINATES_SETTINGS_TEXT.lineWidth}
                   viewType={viewType}
                 />
                 <Divider />
                 <OpacityInput
-                  header={PARALLEL_COORDINATES_MENU_TEXT.opacity}
+                  header={PARALLEL_COORDINATES_SETTINGS_TEXT.opacity}
                   opacities={parallelCoordinatesSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
@@ -141,7 +141,9 @@ export const ParallelCoordinatesSettingsComponent: VoidFunctionComponent<Setting
             </Accordion>
           </>
         ) : (
-          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{PARALLEL_COORDINATES_MENU_TEXT.unavailable}</Box>
+          <Box sx={settingsDrawerItemStyle.insufficientAttributeNum}>
+            {PARALLEL_COORDINATES_SETTINGS_TEXT.unavailable}
+          </Box>
         )}
       </Box>
     )

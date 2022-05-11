@@ -8,7 +8,7 @@ import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
 
 import { ViewType } from '../../../../constants/views-general/ViewType'
 
-import { MENU_TEXT } from '../../../../text/views-and-settings/common'
+import { SETTINGS_TEXT } from '../../../../text/views-and-settings/common'
 
 export interface CategorySelectorProps {
   viewType: ViewType
@@ -48,7 +48,7 @@ export const CategorySelector: VoidFunctionComponent<CategorySelectorProps> = ({
           {otherCasesToWhitespaces(key)}
         </MenuItem>
       ))}
-      <MenuItem value={-1}>{MENU_TEXT.empty}</MenuItem>
+      <MenuItem value={-1}>{SETTINGS_TEXT.empty}</MenuItem>
     </TextField>
   )
 }

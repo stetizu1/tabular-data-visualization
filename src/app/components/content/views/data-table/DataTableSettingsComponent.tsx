@@ -16,9 +16,9 @@ import { getAttributeKeys, getDefaultAllAttributesChecked } from '../../../../he
 import { ViewType } from '../../../../constants/views-general/ViewType'
 import { DATA_TABLE_DEFAULT, MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/dataTable'
 
-import { DATA_TABLE_MENU_TEXT } from '../../../../text/views-and-settings/dataTable'
+import { DATA_TABLE_SETTINGS_TEXT } from '../../../../text/views-and-settings/dataTable'
 
-import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
+import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
@@ -39,7 +39,7 @@ export const DataTableSettingsComponent: VoidFunctionComponent<SettingsComponent
     [attributesKeys],
   )
 
-  const createDataTableMenu = useCallback(() => {
+  const createDataTableSettings = useCallback(() => {
     const newChecked = getDefaultAllAttributesChecked(dataset)
     const newKeys = getAttributeKeys(dataset)
     setChecked(newChecked)
@@ -54,7 +54,7 @@ export const DataTableSettingsComponent: VoidFunctionComponent<SettingsComponent
   }, [setSettings, dataset])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createDataTableMenu(), [dataset]) // first time empty, call once
+  useEffect(() => createDataTableSettings(), [dataset]) // first time empty, call once
 
   const getNewSettingsForAttributeChecker = useCallback(
     (newChecked: CheckedForSelectableDataType): Partial<DataTableSettings> => ({
@@ -65,8 +65,8 @@ export const DataTableSettingsComponent: VoidFunctionComponent<SettingsComponent
 
   if (dataTableSettings) {
     return (
-      <Box sx={dataDrawerMenuStyle.drawerMenu}>
-        <h1>{DATA_TABLE_MENU_TEXT.header}</h1>
+      <Box sx={settingsDrawerItemStyle.drawerSettings}>
+        <h1>{DATA_TABLE_SETTINGS_TEXT.header}</h1>
         {attributesKeys.length >= MIN_DATA_TABLE_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
@@ -74,14 +74,14 @@ export const DataTableSettingsComponent: VoidFunctionComponent<SettingsComponent
               attributesKeys={attributesKeys}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
-              label={DATA_TABLE_MENU_TEXT.attributes}
+              label={DATA_TABLE_SETTINGS_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
               setAttributesKeys={setAttributesKeys}
             />
-            <Accordion sx={dataDrawerMenuStyle.accordion}>
+            <Accordion sx={settingsDrawerItemStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography>{DATA_TABLE_MENU_TEXT.more}</Typography>
+                <Typography>{DATA_TABLE_SETTINGS_TEXT.more}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <NumberInput
@@ -89,27 +89,27 @@ export const DataTableSettingsComponent: VoidFunctionComponent<SettingsComponent
                   value={dataTableSettings.rowHeight}
                   valueKey={rowHeightKey}
                   setSettings={setSettings}
-                  label={DATA_TABLE_MENU_TEXT.rowHeight}
+                  label={DATA_TABLE_SETTINGS_TEXT.rowHeight}
                 />
                 <ColorPicker
                   viewType={viewType}
                   color={dataTableSettings.selectedBackgroundColor}
                   settingsKey={selectedBackgroundColorKey}
                   setSettings={setSettings}
-                  label={DATA_TABLE_MENU_TEXT.selectedBackgroundColor}
+                  label={DATA_TABLE_SETTINGS_TEXT.selectedBackgroundColor}
                 />
                 <ColorPicker
                   viewType={viewType}
                   color={dataTableSettings.selectedFontColor}
                   settingsKey={selectedFontColorKey}
                   setSettings={setSettings}
-                  label={DATA_TABLE_MENU_TEXT.selectedFontColor}
+                  label={DATA_TABLE_SETTINGS_TEXT.selectedFontColor}
                 />
               </AccordionDetails>
             </Accordion>
           </>
         ) : (
-          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{DATA_TABLE_MENU_TEXT.unavailable}</Box>
+          <Box sx={settingsDrawerItemStyle.insufficientAttributeNum}>{DATA_TABLE_SETTINGS_TEXT.unavailable}</Box>
         )}
       </Box>
     )

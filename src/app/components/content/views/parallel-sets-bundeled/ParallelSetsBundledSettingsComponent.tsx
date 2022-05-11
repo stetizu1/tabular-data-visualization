@@ -22,9 +22,9 @@ import {
 } from '../../../../constants/views/parallelSetsBundled'
 import { ParallelSetsBrushingType } from '../../../../constants/brushing-type/ParallelSetsBrushingType'
 
-import { PARALLEL_SETS_MENU_TEXT } from '../../../../text/views-and-settings/parallelSetsBundled'
+import { PARALLEL_SETS_SETTINGS_TEXT } from '../../../../text/views-and-settings/parallelSetsBundled'
 
-import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
+import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
 import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
@@ -53,7 +53,7 @@ export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<Setting
   )
 
   // first time empty
-  const createParallelSetsBundledMenu = useCallback(() => {
+  const createParallelSetsBundledSettings = useCallback(() => {
     const newChecked = getDefaultNominalAttributesChecked(dataset)
     const newCatKeys = getCategoryAttributesKeys(dataset)
     setChecked(newChecked)
@@ -69,7 +69,7 @@ export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<Setting
   }, [setSettings, dataset])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createParallelSetsBundledMenu(), [dataset])
+  useEffect(() => createParallelSetsBundledSettings(), [dataset])
 
   const getNewSettingsForAttributeChecker = useCallback(
     (newChecked: CheckedForSelectableDataType) => ({
@@ -80,8 +80,8 @@ export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<Setting
 
   if (parallelSetsBundledSettings) {
     return (
-      <Box sx={dataDrawerMenuStyle.drawerMenu}>
-        <h1>{PARALLEL_SETS_MENU_TEXT.header}</h1>
+      <Box sx={settingsDrawerItemStyle.drawerSettings}>
+        <h1>{PARALLEL_SETS_SETTINGS_TEXT.header}</h1>
         {nominalAttributesKeys.length >= MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
@@ -89,7 +89,7 @@ export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<Setting
               attributesKeys={nominalAttributesKeys}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
-              label={PARALLEL_SETS_MENU_TEXT.attributes}
+              label={PARALLEL_SETS_SETTINGS_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
               setAttributesKeys={setNominalAttributesKeys}
@@ -99,9 +99,9 @@ export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<Setting
               value={parallelSetsBundledSettings.categoryAttribute!}
               attributesKeys={nominalAttributesKeys}
               setSettings={setSettings}
-              label={PARALLEL_SETS_MENU_TEXT.category}
+              label={PARALLEL_SETS_SETTINGS_TEXT.category}
             />
-            <Typography sx={settingsTextStyle.text}>{PARALLEL_SETS_MENU_TEXT.brushing}</Typography>
+            <Typography sx={settingsTextStyle.text}>{PARALLEL_SETS_SETTINGS_TEXT.brushing}</Typography>
             <ToggleButtons
               viewType={viewType}
               value={parallelSetsBundledSettings.brushingType}
@@ -109,9 +109,9 @@ export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<Setting
               setSettings={setSettings}
               settingsKey={brushingTypeKey}
             />
-            <Accordion sx={dataDrawerMenuStyle.accordion}>
+            <Accordion sx={settingsDrawerItemStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography>{PARALLEL_SETS_MENU_TEXT.more}</Typography>
+                <Typography>{PARALLEL_SETS_SETTINGS_TEXT.more}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <MarginInput
@@ -122,21 +122,21 @@ export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<Setting
                 <Divider />
                 <NumberInput
                   viewType={viewType}
-                  label={PARALLEL_SETS_MENU_TEXT.tabWidth}
+                  label={PARALLEL_SETS_SETTINGS_TEXT.tabWidth}
                   valueKey={tabWidthKey}
                   value={parallelSetsBundledSettings.tabWidth}
                   setSettings={setSettings}
                 />
                 <NumberInput
                   viewType={viewType}
-                  label={PARALLEL_SETS_MENU_TEXT.tabSpacing}
+                  label={PARALLEL_SETS_SETTINGS_TEXT.tabSpacing}
                   valueKey={tabSpacingKey}
                   value={parallelSetsBundledSettings.tabSpacing}
                   setSettings={setSettings}
                 />
                 <NumberInput
                   viewType={viewType}
-                  label={PARALLEL_SETS_MENU_TEXT.tabGap}
+                  label={PARALLEL_SETS_SETTINGS_TEXT.tabGap}
                   valueKey={tabGapKey}
                   value={parallelSetsBundledSettings.tabGap}
                   setSettings={setSettings}
@@ -147,11 +147,11 @@ export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<Setting
                   color={parallelSetsBundledSettings.fontColor}
                   settingsKey={fontColorKey}
                   setSettings={setSettings}
-                  label={PARALLEL_SETS_MENU_TEXT.fontColor}
+                  label={PARALLEL_SETS_SETTINGS_TEXT.fontColor}
                 />
                 <Divider />
                 <OpacityInput
-                  header={PARALLEL_SETS_MENU_TEXT.opacity}
+                  header={PARALLEL_SETS_SETTINGS_TEXT.opacity}
                   opacities={parallelSetsBundledSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
@@ -166,7 +166,7 @@ export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<Setting
             </Accordion>
           </>
         ) : (
-          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{PARALLEL_SETS_MENU_TEXT.unavailable}</Box>
+          <Box sx={settingsDrawerItemStyle.insufficientAttributeNum}>{PARALLEL_SETS_SETTINGS_TEXT.unavailable}</Box>
         )}
       </Box>
     )

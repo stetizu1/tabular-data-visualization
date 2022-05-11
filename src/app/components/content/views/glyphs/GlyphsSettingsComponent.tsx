@@ -22,9 +22,9 @@ import { GLYPHS_DEFAULT, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constant
 import { ViewType } from '../../../../constants/views-general/ViewType'
 import { SortType } from '../../../../constants/sort/SortType'
 
-import { GLYPHS_MENU_TEXT } from '../../../../text/views-and-settings/glyphs'
+import { GLYPHS_SETTINGS_TEXT } from '../../../../text/views-and-settings/glyphs'
 
-import { dataDrawerMenuStyle } from '../../../../components-style/content/data-drawer/dataDrawerMenuStyle'
+import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
 import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
@@ -54,7 +54,7 @@ export const GlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentPro
     [quantitativeAttributesKeys],
   )
 
-  const createGlyphsMenu = useCallback(() => {
+  const createGlyphsSettings = useCallback(() => {
     const newChecked = getDefaultQuantitativeAttributesChecked(dataset)
     const newQaKeys = getQuantitativeAttributesKeys(dataset)
     const defaultSortAttribute = newQaKeys.filter((key) => newChecked[key])?.[0]
@@ -73,7 +73,7 @@ export const GlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentPro
   }, [setSettings, dataset])
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => createGlyphsMenu(), [dataset]) // first time empty, call once
+  useEffect(() => createGlyphsSettings(), [dataset]) // first time empty, call once
 
   const getNewSettingsForAttributeChecker = useCallback(
     (newChecked: CheckedForSelectableDataType, prevSettings: GlyphsSettings): Partial<GlyphsSettings> => {
@@ -89,8 +89,8 @@ export const GlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentPro
 
   if (glyphsSettings) {
     return (
-      <Box sx={dataDrawerMenuStyle.drawerMenu}>
-        <h1>{GLYPHS_MENU_TEXT.header}</h1>
+      <Box sx={settingsDrawerItemStyle.drawerSettings}>
+        <h1>{GLYPHS_SETTINGS_TEXT.header}</h1>
         {quantitativeAttributesKeys.length >= MIN_GLYPHS_ATTRIBUTE_COUNT ? (
           <>
             <AttributeChecker
@@ -98,7 +98,7 @@ export const GlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentPro
               attributesKeys={quantitativeAttributesKeys}
               getNewSettings={getNewSettingsForAttributeChecker}
               setSettings={setSettings}
-              label={GLYPHS_MENU_TEXT.attributes}
+              label={GLYPHS_SETTINGS_TEXT.attributes}
               checked={checked}
               setChecked={setChecked}
               setAttributesKeys={setQuantitativeAttributesKeys}
@@ -108,17 +108,17 @@ export const GlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentPro
               value={glyphsSettings.categoryAttribute!}
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
-              label={GLYPHS_MENU_TEXT.category}
+              label={GLYPHS_SETTINGS_TEXT.category}
             />
             <Selector
               viewType={viewType}
               value={glyphsSettings.sortAttribute!}
               attributesKeys={sortableAttributes}
               setSettings={setSettings}
-              label={GLYPHS_MENU_TEXT.sorting}
+              label={GLYPHS_SETTINGS_TEXT.sorting}
               settingsKey={sortAttributeKey}
             />
-            <Typography sx={settingsTextStyle.text}>{GLYPHS_MENU_TEXT.sort}</Typography>
+            <Typography sx={settingsTextStyle.text}>{GLYPHS_SETTINGS_TEXT.sort}</Typography>
             <ToggleButtons
               viewType={viewType}
               value={glyphsSettings.sortType}
@@ -126,9 +126,9 @@ export const GlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentPro
               setSettings={setSettings}
               settingsKey={sortTypeKey}
             />
-            <Accordion sx={dataDrawerMenuStyle.accordion}>
+            <Accordion sx={settingsDrawerItemStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography>{GLYPHS_MENU_TEXT.more}</Typography>
+                <Typography>{GLYPHS_SETTINGS_TEXT.more}</Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <MarginInput margins={glyphsSettings.margins} setSettings={setSettings} viewType={viewType} />
@@ -137,19 +137,19 @@ export const GlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentPro
                   value={glyphsSettings.glyphSize}
                   valueKey={glyphSizeKey}
                   setSettings={setSettings}
-                  label={GLYPHS_MENU_TEXT.glyphSize}
+                  label={GLYPHS_SETTINGS_TEXT.glyphSize}
                   viewType={viewType}
                 />
                 <NumberInput
                   value={glyphsSettings.glyphSpacing}
                   valueKey={glyphSpacingKey}
                   setSettings={setSettings}
-                  label={GLYPHS_MENU_TEXT.glyphSpacing}
+                  label={GLYPHS_SETTINGS_TEXT.glyphSpacing}
                   viewType={viewType}
                 />
                 <Divider />
                 <OpacityInput
-                  header={GLYPHS_MENU_TEXT.opacity}
+                  header={GLYPHS_SETTINGS_TEXT.opacity}
                   opacities={glyphsSettings.opacity}
                   setSettings={setSettings}
                   viewType={viewType}
@@ -160,7 +160,7 @@ export const GlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentPro
             </Accordion>
           </>
         ) : (
-          <Box sx={dataDrawerMenuStyle.insufficientAttributeNum}>{GLYPHS_MENU_TEXT.unavailable}</Box>
+          <Box sx={settingsDrawerItemStyle.insufficientAttributeNum}>{GLYPHS_SETTINGS_TEXT.unavailable}</Box>
         )}
       </Box>
     )

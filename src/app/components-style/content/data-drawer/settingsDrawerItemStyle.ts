@@ -2,29 +2,29 @@ import { SxProps } from '@mui/system'
 
 import { calc, border, px } from '../../../helpers/stringGetters'
 
-import { DATA_DRAWER_COLORS, ERROR_COLORS } from '../../../styles/colors'
-import { DATA_DRAWER_FONT } from '../../../styles/font'
+import { SETTINGS_DRAWER_COLORS, ERROR_COLORS } from '../../../styles/colors'
+import { SETTINGS_DRAWER_FONT } from '../../../styles/font'
 
-export const dataDrawerMenuStyle: Record<string, SxProps> = {
-  drawerMenu: {
+export const settingsDrawerItemStyle: Record<string, SxProps> = {
+  drawerSettings: {
     width: calc(-20, `100%`),
     padding: px(10),
     display: `flex`,
     flexDirection: `column`,
     textAlign: `left`,
-    bgcolor: DATA_DRAWER_COLORS.drawerItemBackground,
-    borderBottom: border(1, DATA_DRAWER_COLORS.drawerItemBorder),
+    bgcolor: SETTINGS_DRAWER_COLORS.drawerItemBackground,
+    borderBottom: border(1, SETTINGS_DRAWER_COLORS.drawerItemBorder),
     '& h1': {
-      borderBottom: border(1, DATA_DRAWER_COLORS.drawerItemBorder),
-      fontSize: DATA_DRAWER_FONT.headerFontSize,
+      borderBottom: border(1, SETTINGS_DRAWER_COLORS.drawerItemBorder),
+      fontSize: SETTINGS_DRAWER_FONT.headerFontSize,
       width: `100%`,
     },
     '& hr': {
       margin: px(4, 0, 3),
     },
     '& label': {
-      fontSize: DATA_DRAWER_FONT.labelFontSize,
-      color: DATA_DRAWER_COLORS.label,
+      fontSize: SETTINGS_DRAWER_FONT.labelFontSize,
+      color: SETTINGS_DRAWER_COLORS.label,
     },
     '& .MuiFormControlLabel-root': {
       padding: px(2, 10),
@@ -38,7 +38,7 @@ export const dataDrawerMenuStyle: Record<string, SxProps> = {
   },
   insufficientAttributeNum: {
     padding: px(10),
-    fontSize: DATA_DRAWER_FONT.fontSize,
+    fontSize: SETTINGS_DRAWER_FONT.fontSize,
     color: ERROR_COLORS.font,
   },
   accordion: {
@@ -47,7 +47,7 @@ export const dataDrawerMenuStyle: Record<string, SxProps> = {
     },
     '& .MuiButtonBase-root': {
       minHeight: 0,
-      bgcolor: DATA_DRAWER_COLORS.drawerItemBackgroundDimmed,
+      bgcolor: SETTINGS_DRAWER_COLORS.drawerItemBackgroundDimmed,
       '&.Mui-expanded': {
         minHeight: 0,
       },

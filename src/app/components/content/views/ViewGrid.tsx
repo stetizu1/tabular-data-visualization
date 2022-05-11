@@ -20,7 +20,7 @@ import { VIEW_NAMES } from '../../../text/views-and-settings/common'
 
 import { viewGridStyle } from '../../../components-style/content/views/viewGridStyle'
 
-import { DataDrawer } from '../data-drawer/DataDrawer'
+import { SettingsDrawer } from '../data-drawer/SettingsDrawer'
 import { LayoutDialog } from '../top-toolbar/items/layout/LayoutDialog'
 import { SelectionDialog } from '../common/dialogs/SelectionDialog'
 import { GridItem } from './GridItem'
@@ -125,7 +125,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
         onClose={() => setIsLayoutDialogOpen(false)}
         lastLayout={lastLayout}
       />
-      <DataDrawer
+      <SettingsDrawer
         isOpen={isDrawerOpen}
         close={closeDrawer}
         dataset={viewProps.dataset}
