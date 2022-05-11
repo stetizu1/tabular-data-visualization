@@ -33,12 +33,27 @@ export const helpDialogStyle: Record<string, SxProps> = {
     justifyContent: `space-between`,
     margin: px(2),
   },
+  topText: {
+    padding: px(8, 0, 6),
+    color: DIALOG_COLORS.font,
+  },
   text: {
-    padding: px(10, 10, 5),
+    padding: px(9, 10, 5),
     color: DIALOG_COLORS.font,
   },
   image: {
     height: px(130),
     width: px(238),
+  },
+  iconTextBox: {
+    display: `flex`,
+    alignItems: `flex-start`,
+    '& p': {
+      padding: px(1, 5, 4),
+    },
+  },
+  inlineIcon: {
+    fontSize: px(15),
+    marginRight: px(3),
   },
 }

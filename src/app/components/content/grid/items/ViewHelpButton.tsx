@@ -1,4 +1,4 @@
-import { useCallback, useState, VoidFunctionComponent } from 'react'
+import { useState, VoidFunctionComponent } from 'react'
 import {
   Box,
   Button,
@@ -31,12 +31,10 @@ export interface ViewHelpButtonProps {
 
 export const ViewHelpButton: VoidFunctionComponent<ViewHelpButtonProps> = ({ viewType }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const openDialog = useCallback(() => setIsDialogOpen(true), [])
-  const closeDialog = useCallback(() => setIsDialogOpen(false), [])
 
   return (
     <>
-      <Dialog onClose={closeDialog} open={isDialogOpen} sx={helpDialogStyle.dialog}>
+      <Dialog onClose={() => setIsDialogOpen(false)} open={isDialogOpen} sx={helpDialogStyle.dialog}>
         <DialogTitle>{VIEW_NAMES[viewType]}</DialogTitle>
         <Divider />
         <DialogContent>
@@ -70,12 +68,12 @@ export const ViewHelpButton: VoidFunctionComponent<ViewHelpButtonProps> = ({ vie
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={closeDialog} variant={BUTTON_VARIANT.contained} autoFocus>
+          <Button onClick={() => setIsDialogOpen(false)} variant={BUTTON_VARIANT.contained} autoFocus>
             {VIEW_INFO_TEXT.dialog.close}
           </Button>
         </DialogActions>
       </Dialog>
-      <IconButton onClick={openDialog} sx={inlineButtonStyles.button}>
+      <IconButton onClick={() => setIsDialogOpen(true)} sx={inlineButtonStyles.button}>
         <Tooltip title={VIEW_INFO_TEXT.buttonLabel}>
           <Help />
         </Tooltip>

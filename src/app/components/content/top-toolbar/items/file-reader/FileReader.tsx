@@ -1,6 +1,6 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useCallback, ChangeEvent } from 'react'
 import { Box, Button } from '@mui/material'
-import { Add, AutoGraph } from '@mui/icons-material'
+import { AutoGraph, UploadFile } from '@mui/icons-material'
 
 import { DataType, SelectableDataType } from '../../../../../types/data/data'
 
@@ -169,7 +169,7 @@ export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset,
           label={FILE_READER_TEXT.sampleDataLabel}
         />
         <Button sx={fileReaderStyle.button} variant={BUTTON_VARIANT.contained} component={COMPONENT_TYPE.label}>
-          <Add />
+          <UploadFile />
           {FILE_READER_TEXT.button}
           <input type={INPUT_TYPE.file} hidden id={FILE_INPUT_ID} onChange={handleFileChange} />
         </Button>

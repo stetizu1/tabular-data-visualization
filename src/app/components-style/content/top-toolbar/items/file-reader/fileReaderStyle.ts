@@ -15,11 +15,15 @@ export const getFileReaderBoxStyle = (isHighlighted: boolean): SxProps => ({
 
 export const fileReaderStyle: Record<string, SxProps> = {
   button: {
-    margin: px(0, 6, 0, 2),
+    margin: px(0, 3, 0, 2),
+    padding: px(6, 12, 6, 8),
     bgcolor: BUTTON_COLORS.buttonOnBackground,
     color: BUTTON_COLORS.fontOn,
     '&:hover': {
       bgcolor: BUTTON_COLORS.buttonHoverBackground,
+    },
+    '& svg': {
+      paddingRight: px(5),
     },
   },
 }
