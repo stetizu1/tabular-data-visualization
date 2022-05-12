@@ -60,7 +60,9 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   const filteredDataset = useMemo<SelectableDataType[]>(
     () =>
       [...dataset].filter((data) =>
-        displayAttributes.every((attribute) => String(data[attribute]).includes(filterValues[attribute])),
+        displayAttributes.every((attribute) =>
+          String(data[attribute]).toLowerCase().includes(filterValues[attribute].toLowerCase()),
+        ),
       ),
     [dataset, displayAttributes, filterValues],
   )
