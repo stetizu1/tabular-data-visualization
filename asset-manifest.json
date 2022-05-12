@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/table-data-visualization/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/table-data-visualization/static/js/main.b30cadeb.chunk.js",
-    "main.js.map": "/table-data-visualization/static/js/main.b30cadeb.chunk.js.map",
-    "runtime-main.js": "/table-data-visualization/static/js/runtime-main.5eeada10.js",
-    "runtime-main.js.map": "/table-data-visualization/static/js/runtime-main.5eeada10.js.map",
-    "static/css/2.a72322c1.chunk.css": "/table-data-visualization/static/css/2.a72322c1.chunk.css",
-    "static/js/2.fee16fd4.chunk.js": "/table-data-visualization/static/js/2.fee16fd4.chunk.js",
-    "static/js/2.fee16fd4.chunk.js.map": "/table-data-visualization/static/js/2.fee16fd4.chunk.js.map",
-    "index.html": "/table-data-visualization/index.html",
-    "static/css/2.a72322c1.chunk.css.map": "/table-data-visualization/static/css/2.a72322c1.chunk.css.map",
-    "static/css/main.6dea0f05.chunk.css.map": "/table-data-visualization/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.fee16fd4.chunk.js.LICENSE.txt": "/table-data-visualization/static/js/2.fee16fd4.chunk.js.LICENSE.txt"
+    "main.css": "/tabular-data-visualization/static/css/main.6dea0f05.chunk.css",
+    "main.js": "/tabular-data-visualization/static/js/main.3c1a6bc4.chunk.js",
+    "main.js.map": "/tabular-data-visualization/static/js/main.3c1a6bc4.chunk.js.map",
+    "runtime-main.js": "/tabular-data-visualization/static/js/runtime-main.4c572b3b.js",
+    "runtime-main.js.map": "/tabular-data-visualization/static/js/runtime-main.4c572b3b.js.map",
+    "static/css/2.a72322c1.chunk.css": "/tabular-data-visualization/static/css/2.a72322c1.chunk.css",
+    "static/js/2.fee16fd4.chunk.js": "/tabular-data-visualization/static/js/2.fee16fd4.chunk.js",
+    "static/js/2.fee16fd4.chunk.js.map": "/tabular-data-visualization/static/js/2.fee16fd4.chunk.js.map",
+    "index.html": "/tabular-data-visualization/index.html",
+    "static/css/2.a72322c1.chunk.css.map": "/tabular-data-visualization/static/css/2.a72322c1.chunk.css.map",
+    "static/css/main.6dea0f05.chunk.css.map": "/tabular-data-visualization/static/css/main.6dea0f05.chunk.css.map",
+    "static/js/2.fee16fd4.chunk.js.LICENSE.txt": "/tabular-data-visualization/static/js/2.fee16fd4.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.5eeada10.js",
+    "static/js/runtime-main.4c572b3b.js",
     "static/css/2.a72322c1.chunk.css",
     "static/js/2.fee16fd4.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.b30cadeb.chunk.js"
+    "static/js/main.3c1a6bc4.chunk.js"
   ]
 }
