@@ -82,7 +82,7 @@ export const DataContext: VoidFunctionComponent = () => {
   const setComponentBrushing: SetComponentBrushing = useCallback(
     (newComponent) => {
       if (componentBrushingRef.current !== newComponent) {
-        cleanAllBrushes(isBrushView(newComponent))
+        cleanAllBrushes(isBrushView(newComponent) || newComponent === null)
       }
       setCurrentComponentBrushing(newComponent)
     },
