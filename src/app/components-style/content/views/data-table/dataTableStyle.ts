@@ -21,6 +21,11 @@ export const getDataTableRowStyle = (
   },
 })
 
+export const getFilterDisplayed = (showFilter: boolean): SxProps => {
+  const display = !showFilter ? { display: `none` } : {}
+  return { bgcolor: TABLE_COLORS.filterBackground, ...display }
+}
+
 export const dataTableStyle: Record<string, SxProps> = {
   tableHead: {
     bgcolor: TABLE_COLORS.headerBackground,
@@ -37,9 +42,6 @@ export const dataTableStyle: Record<string, SxProps> = {
   },
   tableBody: {
     bgcolor: TABLE_COLORS.rowsBackground,
-  },
-  filterRow: {
-    bgcolor: TABLE_COLORS.filterBackground,
   },
   filterCell: {
     padding: px(5),

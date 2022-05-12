@@ -9,6 +9,7 @@ import { PLOT_COLORS } from '../../../../styles/colors'
 export const GLYPHS_CLASS = `glyphs`
 export const SELECTED_CLASS = `glyphsSelected`
 
+// all styles need to be in one sxProps for the view saving with css
 export const getGlyphsStyle = (opacity: Opacity, isBrushActive: boolean, brushColor: string): SxProps => ({
   '& svg': {
     bgcolor: PLOT_COLORS.backgroundColor,

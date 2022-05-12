@@ -13,6 +13,7 @@ export const RECT_CLASS = `scatterPlotMatrixRect`
 export const CELL_CLASS = `scatterPlotMatrixCell`
 export const SELECTED_CLASS = `scatterPlotMatrixSelected`
 
+// all styles need to be in one sxProps for the view saving with css
 export const getScatterPlotMatrixStyle = (
   opacity: Opacity,
   isBrushingActive: boolean,

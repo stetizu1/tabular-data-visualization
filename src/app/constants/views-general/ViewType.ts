@@ -1,3 +1,6 @@
+/**
+ * Types of views that can be visualized
+ */
 export enum ViewType {
   ParallelCoordinates = `parallelCoordinates`,
   ScatterPlotMatrix = `scatterPlotMatrix`,
@@ -13,6 +16,10 @@ export enum ViewType {
 export type brushViewType = `brushView`
 export const brushView: brushViewType = `brushView`
 
+/**
+ * Returns true if given string is a view type
+ * @param viewType
+ */
 export const isViewType = (viewType: string): viewType is ViewType => Object.values<string>(ViewType).includes(viewType)
 
 /**

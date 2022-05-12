@@ -1,15 +1,24 @@
 import { InputBaseComponentProps } from '@mui/material/InputBase'
 
+/**
+ * HTML constants
+ */
 export const HTML = {
   newLine: `<br/>`,
 }
 
+/**
+ * Used input types
+ */
 export const INPUT_TYPE = {
   color: `color`,
   number: `number`,
   file: `file`,
 }
 
+/**
+ * Used input props
+ */
 export const INPUT_PROPS: Record<string, InputBaseComponentProps> = {
   positiveNumber: { inputMode: `numeric`, min: 0 },
 }

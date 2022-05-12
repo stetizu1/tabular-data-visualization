@@ -17,7 +17,7 @@ export const EMPTY_DATA_TEXT = {
     description: `The purpose of this application is to visualize multidimensional tabular data.`,
     subHeader: `Options`,
     close: `Close`,
-    sample: `To try the application, you can select one of the sample datasets. You can use flower or car dataset for quantitative data visualizations, titanic or parallel cars for category visualization, or bird dataset for combination of both.`,
+    sample: `To try the application, you can select one of the sample datasets. You can use flower or car dataset for quantitative data visualizations, Titanic or parallel cars for category visualization, or bird dataset for combination of both.`,
     file: `You use applications with your own datasets, JSON or CSV files. Files need to have the right format, for JSON it is the array of the same objects with only simple values.`,
     viewsHelp: `To get more information about a specific view, you can look at its help, which can be found in its header.`,
     add: `... add a new view type to the visualization board`,
@@ -47,7 +47,7 @@ export const TOP_TOOLBAR_TEXT = {
     noOption: `All view options are currently displayed.`,
   },
   layoutDialog: {
-    title: `Set a layout`,
+    title: `Select a layout`,
     alt: `Layout `,
   },
 }

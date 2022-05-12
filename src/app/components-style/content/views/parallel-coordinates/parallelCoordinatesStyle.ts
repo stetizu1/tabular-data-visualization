@@ -10,6 +10,7 @@ export const PARALLEL_COORDINATES_CLASS = `parallelCoordinates`
 export const SELECTED_CLASS = `parallelCoordinatesSelected`
 export const AXES_TEXT_CLASS = `parallelCoordinatesAxesText`
 
+// all styles need to be in one sxProps for the view saving with css
 export const getParallelCoordinatesStyle = (opacity: Opacity, isBrushActive: boolean, brushColor: string): SxProps => ({
   '& svg': {
     bgcolor: PLOT_COLORS.backgroundColor,

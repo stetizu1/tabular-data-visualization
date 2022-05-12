@@ -1,5 +1,5 @@
 /**
- * Constants to work with svg D3.js.
+ * Constants to work with D3.js. SVG
  */
 export const SVG = {
   elements: {

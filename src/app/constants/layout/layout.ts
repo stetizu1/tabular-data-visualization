@@ -2,18 +2,37 @@ import { Dimensions } from '../../types/basic/dimensions'
 import { GridLayoutItem } from '../../types/views/Grid'
 import { ViewType } from '../views-general/ViewType'
 
-export const GRID_HEADER_HEIGHT = 30
+/**
+ * Height of the grid item header panel
+ */
+export const GRID_ITEM_HEADER_HEIGHT = 30
 
+/**
+ * Class to give header panel to be draggable
+ */
 export const DRAG_HANDLE = `drag-handle`
 
+/**
+ * Default size of the view
+ */
 export const VIEW_DEFAULT_SIZE: Dimensions = {
   width: 0,
   height: 0,
 }
 
+/**
+ * Count of layout columns
+ */
 export const COLUMNS_COUNT = 25
+
+/**
+ * Height of layout row
+ */
 export const ROW_HEIGHT = 10
 
+/**
+ * Minimal width/height limits for all views
+ */
 export const VIEW_LIMITS: Record<ViewType, Required<Pick<GridLayoutItem, `minW` | `minH`>>> = {
   [ViewType.ParallelCoordinates]: {
     minW: 4,
@@ -41,6 +60,9 @@ export const VIEW_LIMITS: Record<ViewType, Required<Pick<GridLayoutItem, `minW` 
   },
 }
 
+/**
+ * Default dimensions for all views
+ */
 export const DEFAULT_VIEW_DIMENSIONS: Record<ViewType, Required<Pick<GridLayoutItem, `w` | `h` | `minW` | `minH`>>> = {
   [ViewType.ParallelCoordinates]: {
     w: 12,
@@ -74,6 +96,9 @@ export const DEFAULT_VIEW_DIMENSIONS: Record<ViewType, Required<Pick<GridLayoutI
   },
 }
 
+/**
+ * Default grid layout for dataset with quantitative attributes
+ */
 export const DEFAULT_GRID_LAYOUT_QUANTITATIVE: GridLayoutItem[] = [
   {
     i: ViewType.ParallelCoordinates,
@@ -101,6 +126,9 @@ export const DEFAULT_GRID_LAYOUT_QUANTITATIVE: GridLayoutItem[] = [
   },
 ]
 
+/**
+ * Default grid layout for dataset with nominal attributes
+ */
 export const DEFAULT_GRID_LAYOUT_NOMINAL: GridLayoutItem[] = [
   {
     i: ViewType.ParallelSetsBundled,
@@ -112,6 +140,9 @@ export const DEFAULT_GRID_LAYOUT_NOMINAL: GridLayoutItem[] = [
   },
 ]
 
+/**
+ * Other layout options for dialog selection
+ */
 export const LAYOUT_OPT_2: GridLayoutItem[] = [
   {
     i: ViewType.ParallelCoordinates,
@@ -131,6 +162,9 @@ export const LAYOUT_OPT_2: GridLayoutItem[] = [
   },
 ]
 
+/**
+ * Other layout options for dialog selection
+ */
 export const LAYOUT_OPT_3: GridLayoutItem[] = [
   {
     i: ViewType.ParallelCoordinates,
@@ -165,6 +199,10 @@ export const LAYOUT_OPT_3: GridLayoutItem[] = [
     ...VIEW_LIMITS[ViewType.ParallelSetsBundled],
   },
 ]
+
+/**
+ * Other layout options for dialog selection
+ */
 export const LAYOUT_OPT_4: GridLayoutItem[] = [
   {
     i: ViewType.ParallelCoordinates,
@@ -192,6 +230,9 @@ export const LAYOUT_OPT_4: GridLayoutItem[] = [
   },
 ]
 
+/**
+ * Layout options for dialog selection
+ */
 export const LAYOUT_OPTIONS = [
   DEFAULT_GRID_LAYOUT_QUANTITATIVE,
   DEFAULT_GRID_LAYOUT_NOMINAL,

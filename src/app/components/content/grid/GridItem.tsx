@@ -3,7 +3,7 @@ import { useSize } from 'react-use'
 import { Box, Typography } from '@mui/material'
 
 import { ViewType } from '../../../constants/views-general/ViewType'
-import { DRAG_HANDLE, GRID_HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/layout/layout'
+import { DRAG_HANDLE, GRID_ITEM_HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/layout/layout'
 
 import { gridItemStyle } from '../../../components-style/content/views/gridItemStyle'
 
@@ -48,7 +48,7 @@ export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResi
         {isResizeFinished && (
           <View
             width={width}
-            height={height - GRID_HEADER_HEIGHT}
+            height={height - GRID_ITEM_HEADER_HEIGHT}
             viewType={viewType}
             {...rest}
             showFilter={showFilter}

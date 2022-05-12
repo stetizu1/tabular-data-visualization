@@ -1,3 +1,6 @@
+/**
+ * Paths to files in the public directory
+ */
 import { ViewType } from './views-general/ViewType'
 
 export const PUBLIC_PATH = `/tabular-data-visualization/`

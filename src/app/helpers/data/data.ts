@@ -50,7 +50,7 @@ export const getCategoryAttributesKeys = (
   const keys = getAttributeKeys(dataset)
   return keys.filter((key) => {
     const uniqueValues = new Set(dataset.map((data) => data[key]))
-    return uniqueValues.size < CATEGORY_LIMIT
+    return uniqueValues.size <= CATEGORY_LIMIT
   })
 }
 
