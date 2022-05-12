@@ -1,6 +1,9 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
 import { Box } from '@mui/material'
-import { AddCircle, AutoFixOff, Brush, Dashboard, Info, SkipNext } from '@mui/icons-material'
+import { AddCircle, Brush, Dashboard, SkipNext } from '@mui/icons-material'
+
+import { BrushOffSvg } from '../../../../icons/BrushOffSvg'
+import { TooltipSvg } from '../../../../icons/TooltipSvg'
 
 import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
 
@@ -68,7 +71,7 @@ export const TopToolbar: VoidFunctionComponent<TopToolbarProps> = ({
       />
       <Box sx={topToolbarStyle.separator} />
       <ToggleButtonSingle
-        icon={<Info />}
+        icon={<TooltipSvg />}
         value={isDetailsVisible}
         setValue={setIsDetailsVisible}
         disabled={isToolsDisabled}
@@ -92,7 +95,7 @@ export const TopToolbar: VoidFunctionComponent<TopToolbarProps> = ({
       />
       <Box sx={topToolbarStyle.separator} />
       <ClickableButton
-        icon={<AutoFixOff />}
+        icon={<BrushOffSvg />}
         onClick={clearBrushes}
         disabled={!isBrushingActive}
         label={TOP_TOOLBAR_TEXT.labelClearBrushes}

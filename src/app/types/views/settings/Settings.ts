@@ -15,8 +15,8 @@ export type Settings = Partial<{
   [ViewType.ScatterPlotMatrix]: ScatterPlotMatrixSettings
   [ViewType.Glyphs]: GlyphsSettings
   [ViewType.ScatterPlotGlyphs]: ScatterPlotGlyphsSettings
-  [ViewType.DataTable]: DataTableSettings
   [ViewType.ParallelSetsBundled]: ParallelSetsBundledSettings
+  [ViewType.DataTable]: DataTableSettings
 }>
 
 /**

@@ -31,7 +31,7 @@ import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/
 import { MouseAction } from '../../../../constants/actions/MouseAction'
 import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
 
-import { PARALLEL_COORDINATES_TEXT } from '../../../../text/views-and-menus/parallelCoordinates'
+import { PARALLEL_COORDINATES_TEXT } from '../../../../text/views-and-settings/parallelCoordinates'
 
 import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
 

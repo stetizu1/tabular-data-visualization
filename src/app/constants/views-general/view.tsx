@@ -30,6 +30,6 @@ export const getViewRecord: Record<ViewType, ViewElementFunction> = {
   [ViewType.ParallelCoordinates]: (p, s) => <ParallelCoordinates {...p} {...(s as ParallelCoordinatesSettings)} />,
   [ViewType.ScatterPlotMatrix]: (p, s) => <ScatterPlotMatrix {...p} {...(s as ScatterPlotMatrixSettings)} />,
   [ViewType.ScatterPlotGlyphs]: (p, s) => <ScatterPlotGlyphs {...p} {...(s as ScatterPlotGlyphsSettings)} />,
-  [ViewType.DataTable]: (p, s, f) => <DataTable {...p} {...(s as DataTableSettings)} showFilter={!!f} />,
   [ViewType.ParallelSetsBundled]: (p, s) => <ParallelSetsBundled {...p} {...(s as ParallelSetsBundledSettings)} />,
+  [ViewType.DataTable]: (p, s, f) => <DataTable {...p} {...(s as DataTableSettings)} showFilter={!!f} />,
 }

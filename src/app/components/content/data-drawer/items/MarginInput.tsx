@@ -10,10 +10,10 @@ import { ViewType } from '../../../../constants/views-general/ViewType'
 import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
 import { INPUT_PROPS, INPUT_TYPE } from '../../../../constants/others'
 
-import { MARGIN_MENU_TEXT } from '../../../../text/views-and-menus/common'
+import { MARGIN_SETTINGS_TEXT } from '../../../../text/views-and-settings/common'
 
 import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
-import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
+import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
 
 export interface MarginInputProps {
   margins: MarginArray
@@ -55,10 +55,10 @@ export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({
 
   return (
     <Box sx={numberInputStyles.vertical}>
-      <Typography sx={menuTextStyle.text}>{MARGIN_MENU_TEXT.header}</Typography>
+      <Typography sx={settingsTextStyle.text}>{MARGIN_SETTINGS_TEXT.header}</Typography>
       <Box sx={numberInputStyles.horizontal}>
         <TextField
-          label={MARGIN_MENU_TEXT.top}
+          label={MARGIN_SETTINGS_TEXT.top}
           type={INPUT_TYPE.number}
           defaultValue={margins[0]}
           sx={numberInputStyles.textField}
@@ -66,7 +66,7 @@ export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({
           onChange={(e) => handleMarginChange(Number(e.target.value), 0)}
         />
         <TextField
-          label={MARGIN_MENU_TEXT.right}
+          label={MARGIN_SETTINGS_TEXT.right}
           type={INPUT_TYPE.number}
           defaultValue={margins[1]}
           sx={numberInputStyles.textField}
@@ -76,7 +76,7 @@ export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({
       </Box>
       <Box sx={numberInputStyles.horizontal}>
         <TextField
-          label={MARGIN_MENU_TEXT.bottom}
+          label={MARGIN_SETTINGS_TEXT.bottom}
           type={INPUT_TYPE.number}
           defaultValue={margins[2]}
           sx={numberInputStyles.textField}
@@ -84,7 +84,7 @@ export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({
           onChange={(e) => handleMarginChange(Number(e.target.value), 2)}
         />
         <TextField
-          label={MARGIN_MENU_TEXT.left}
+          label={MARGIN_SETTINGS_TEXT.left}
           type={INPUT_TYPE.number}
           defaultValue={margins[3]}
           sx={numberInputStyles.textField}

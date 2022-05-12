@@ -5,8 +5,8 @@ export const SAVE_ID: Record<ViewType, string> = {
   [ViewType.ScatterPlotMatrix]: `spmSvgId`,
   [ViewType.Glyphs]: `glyphSvgId`,
   [ViewType.ScatterPlotGlyphs]: `spgSvgId`,
-  [ViewType.DataTable]: `dataTableId`,
   [ViewType.ParallelSetsBundled]: `psbSvgId`,
+  [ViewType.DataTable]: `dataTableId`,
 }
 
 export const CONTAINER_SAVE_ID: Record<ViewType, string> = {
@@ -14,8 +14,8 @@ export const CONTAINER_SAVE_ID: Record<ViewType, string> = {
   [ViewType.ScatterPlotMatrix]: `C_spmSvgId`,
   [ViewType.Glyphs]: `C_glyphSvgId`,
   [ViewType.ScatterPlotGlyphs]: `C_spgSvgId`,
-  [ViewType.DataTable]: `C_dataTableId`,
   [ViewType.ParallelSetsBundled]: `C_psbSvgId`,
+  [ViewType.DataTable]: `C_dataTableId`,
 }
 
 export const CONTAINER_EMPTY: Record<ViewType, string> = {
@@ -23,6 +23,6 @@ export const CONTAINER_EMPTY: Record<ViewType, string> = {
   [ViewType.ScatterPlotMatrix]: `C_E_spmSvgId`,
   [ViewType.Glyphs]: `C_E_glyphSvgId`,
   [ViewType.ScatterPlotGlyphs]: `C_E_spgSvgId`,
-  [ViewType.DataTable]: `C_E_dataTableId`,
   [ViewType.ParallelSetsBundled]: `C_E_psbSvgId`,
+  [ViewType.DataTable]: `C_E_dataTableId`,
 }

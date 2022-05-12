@@ -14,6 +14,10 @@ export const TOP_TOOLBAR_COLORS = {
   border: `rgba(72, 80, 100, 0.8)`,
 }
 
+export const DIALOG_COLORS = {
+  font: `#212121`,
+}
+
 export const BUTTON_COLORS = {
   buttonDisableBackground: `#363b46`,
   buttonOffBackground: `#2d3548`,
@@ -43,13 +47,13 @@ export const VIEW_COLORS = {
   border: `#9ea8be`,
 }
 
-export const DATA_DRAWER_COLORS = {
+export const SETTINGS_DRAWER_COLORS = {
   background: `#23262d`,
   border: `#363a46`,
   icon: `#c4cbdc`,
   drawerItemBackground: `#edf1fd`,
   drawerItemBackgroundDimmed: `#e4eafd`,
-  drawerItemBorder: `#8e94a2`,
+  drawerItemBorder: `#98a1b6`,
   label: `#404242`,
 }
 

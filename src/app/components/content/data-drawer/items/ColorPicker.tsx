@@ -13,7 +13,7 @@ import {
   colorPickerStyle,
   getColorPickerInputStyle,
 } from '../../../../components-style/content/data-drawer/items/colorPickerStyle'
-import { menuTextStyle } from '../../../../components-style/content/data-drawer/items/menuTextStyle'
+import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
 
 export interface ColorPickerProps<Opt> {
   viewType: ViewType
@@ -53,7 +53,7 @@ export const ColorPicker = <Opt,>({
   }, [debouncedColor, setSettings, settingsKey, viewType])
   return (
     <Box sx={colorPickerStyle.picker}>
-      <Typography sx={menuTextStyle.text}>{label}</Typography>
+      <Typography sx={settingsTextStyle.text}>{label}</Typography>
       <Box sx={getColorPickerInputStyle(color)}>
         <input type={INPUT_TYPE.color} value={color} onChange={(e) => handleChangeColor(e.target.value)} />
       </Box>
