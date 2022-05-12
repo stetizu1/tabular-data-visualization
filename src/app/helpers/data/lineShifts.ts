@@ -1,11 +1,15 @@
+/**
+ * Functions to compute line shifts for sankey graph in parallel sets
+ */
 import { LinkDataPoint } from '../../types/d3-sankey'
 
-const getCurrentWidth = (currentCount: number, all: number, width: number | undefined) => {
-  if (!width || !currentCount) return 0
-  const fraction = currentCount / all
-  return width * fraction
-}
-
+/**
+ * Get width with the selection
+ * @param all - count of all
+ * @param selected - count of selected
+ * @param width - total width of all-values line
+ * @param isBrush - true if this is the selection, false if it is the other part
+ */
 const getSelectionWidth = (all: number, selected: number, width: number, isBrush: boolean) => {
   if (width === 0) return 0
   const selectedFraction = selected / all
@@ -16,7 +20,7 @@ const getSelectionWidth = (all: number, selected: number, width: number, isBrush
  Get a shift of previously processed values
  * @param valuesCount - list of values counts or undefined, if there is no color category selected
  * @param all - count of all values
- * @param width - width of all-values line
+ * @param width - total width of all-values line
  * @param idx - index of current value
  */
 const getYFormerShift = (valuesCount: number[] | undefined, all: number, width: number, idx: number) => {
@@ -26,12 +30,35 @@ const getYFormerShift = (valuesCount: number[] | undefined, all: number, width: 
   return width * formerFraction
 }
 
+/**
+ * Get width for the given count
+ * @param currentCount - count given
+ * @param all - count of all
+ * @param width - total width of all-values line
+ */
+const getCurrentWidth = (currentCount: number, all: number, width: number | undefined) => {
+  if (!width || !currentCount) return 0
+  const fraction = currentCount / all
+  return width * fraction
+}
+
+/**
+ * Get shift for current count and brush
+ * @param currentCount - count given
+ * @param selected - count of selected
+ * @param all - count of all
+ * @param width - total width of all-values line
+ * @param valuesCounts - counts of values of given category attribute to color with due to this line
+ * @param idx - index of the value processed
+ * @param isBrush - true if this is the selection, false if it is the other part
+ * @param isOverlay - true if brushing is in overlay mode, false if it is on top
+ */
 const getShift = (
   currentCount: number,
   selected: number,
   all: number,
   width: number,
-  valuesCount: number[] | undefined,
+  valuesCounts: number[] | undefined,
   idx: number,
   isBrush: boolean,
   isOverlay: boolean,
@@ -40,7 +67,7 @@ const getShift = (
 
   const currentWidth = getCurrentWidth(currentCount, all, width)
 
-  const yFormerShift = getYFormerShift(valuesCount, all, width, idx)
+  const yFormerShift = getYFormerShift(valuesCounts, all, width, idx)
   const yCatShift = -width / 2 + yFormerShift + currentWidth / 2
 
   if (isOverlay) {

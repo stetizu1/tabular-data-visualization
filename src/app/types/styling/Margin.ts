@@ -1,3 +1,7 @@
+/**
+ * Types to work with margin
+ */
+
 import { px } from '../../helpers/stringGetters'
 
 /**

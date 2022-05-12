@@ -1,14 +1,17 @@
+/**
+ * Settings for scatter plot glyphs
+ */
 import { SelectableDataType } from '../../data/data'
 
 import { ViewVisualizationSettings } from './VisualizationSettings'
 
+// keys for additional attributes
 export const glyphSizeKey = `glyphSize`
-export const glyphSpacingKey = `glyphSpacing`
 export const xAttributeKey = `xAttribute`
 export const yAttributeKey = `yAttribute`
 
 /**
- * Settings for Scatter Plot Glyphs view
+ * Settings for scatter plot glyphs view
  */
 export interface ScatterPlotGlyphsSettings extends ViewVisualizationSettings {
   /**

@@ -1,11 +1,15 @@
+/**
+ * Settings for scatter plot matrix
+ */
 import { ViewVisualizationSettings } from './VisualizationSettings'
 
+// keys for additional attributes
 export const pointSizeKey = `pointSize`
 export const horizontalSpacingKey = `horizontalSpacing`
 export const verticalSpacingKey = `verticalSpacing`
 
 /**
- * Settings for Scatter Plot Matrix view
+ * Settings for scatter plot matrix view
  */
 export interface ScatterPlotMatrixSettings extends ViewVisualizationSettings {
   /**

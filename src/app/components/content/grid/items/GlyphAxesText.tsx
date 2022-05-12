@@ -4,9 +4,9 @@ import { RotateRight } from '@mui/icons-material'
 
 import { SelectableDataType } from '../../../../types/data/data'
 
-import { getDisplayAttributesInParentheses } from '../../../../helpers/stringGetters'
+import { getDisplayAttributesInParentheses, getSpaced } from '../../../../helpers/stringGetters'
 
-import { GRID_ITEM_TEXT } from '../../../../text/gridItemText'
+import { VIEW_TOP_TEXT } from '../../../../text/viewTopText'
 
 import { gridItemStyle } from '../../../../components-style/content/views/gridItemStyle'
 
@@ -15,7 +15,7 @@ export interface GlyphAxesTextProps {
 }
 
 export const GlyphAxesText: VoidFunctionComponent<GlyphAxesTextProps> = ({ displayAttributes }) => (
-  <Tooltip title={`${GRID_ITEM_TEXT.glyphAxes}: ${getDisplayAttributesInParentheses(displayAttributes)}`}>
+  <Tooltip title={getSpaced(VIEW_TOP_TEXT.glyphAxes, getDisplayAttributesInParentheses(displayAttributes))}>
     <Typography sx={gridItemStyle.text}>
       <RotateRight sx={gridItemStyle.textIcon} />
       {getDisplayAttributesInParentheses(displayAttributes)}

@@ -1,3 +1,6 @@
+/**
+ * Text in page footer
+ */
 export const FOOTER_TEXT = {
   author: `Zuzana Štětinová`,
   school: `CTU FEE`,

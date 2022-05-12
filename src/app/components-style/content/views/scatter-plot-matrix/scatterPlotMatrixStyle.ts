@@ -5,7 +5,6 @@ import { Opacity } from '../../../../types/styling/Opacity'
 import { important } from '../../../../helpers/stringGetters'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
-import { PLOT_FONT } from '../../../../styles/font'
 
 export const DATA_POINT_CLASS = `scatterPlotMatrixPoint`
 export const DUPLICATES_CLASS = `scatterPlotMatrixDuplicates`
@@ -20,7 +19,6 @@ export const getScatterPlotMatrixStyle = (
   brushColor: string,
 ): SxProps => ({
   '& svg': {
-    fontSize: PLOT_FONT.fontSize,
     bgcolor: PLOT_COLORS.backgroundColor,
     font: `12px sans-serif`,
   },

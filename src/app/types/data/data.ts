@@ -1,4 +1,8 @@
 /**
+ * Types to work with dataset (sample or loaded) and its attributes
+ */
+
+/**
  * Key to indicate whether the attribute is selected
  */
 export const SelectedKey = `selected`
@@ -12,6 +16,9 @@ export type JsonValue = string | number | boolean | null
  * Interface for loaded JSON data
  */
 export interface DataType {
+  /**
+   * All keys and values, readonly
+   */
   readonly [key: string]: JsonValue
 }
 
@@ -19,6 +26,9 @@ export interface DataType {
  * Interface for loaded JSON data with selected flag
  */
 export interface SelectableDataType extends DataType {
+  /**
+   * Flag showing if item is selected, mutable
+   */
   [SelectedKey]: boolean
 }
 
@@ -37,13 +47,13 @@ export interface NominalValueProperties {
   name: string
   attribute: keyof SelectableDataType
   count: number
-  order: number
   countSelected: number
+  order: number
 }
 
 /**
  * Interface for nominal value records
- * -- every attribute has array of possible values with additional info
+ * -- every attribute has an array of possible values with additional info
  */
 export interface NominalRecord {
   [key: keyof SelectableDataType]: Array<NominalValueProperties>

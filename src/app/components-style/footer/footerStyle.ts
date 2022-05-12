@@ -1,9 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { px } from '../../helpers/stringGetters'
+import { calc, px } from '../../helpers/stringGetters'
 
 import { FOOTER_COLORS } from '../../styles/colors'
-import { FOOTER_FONT } from '../../styles/font'
 
 export const footerStyle: Record<string, SxProps> = {
   footerContainer: {
@@ -18,6 +17,6 @@ export const footerStyle: Record<string, SxProps> = {
   },
   text: {
     padding: px(0, 15),
-    fontSize: FOOTER_FONT.fontSize,
+    fontSize: calc(2, `1vmin`),
   },
 }

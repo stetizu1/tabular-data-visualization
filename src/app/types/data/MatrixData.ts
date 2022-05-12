@@ -1,3 +1,7 @@
+/**
+ * Types to work with matrix (for scatter plot matrix)
+ */
+
 import { SelectableDataType } from './data'
 
 /**
@@ -22,8 +26,8 @@ export interface MatrixItem extends MatrixPosition {
   /**
    * Column attribute key assigned to the item
    */
-
   colKey: keyof SelectableDataType
+
   /**
    * Row attribute key assigned to the item
    */

@@ -1,3 +1,6 @@
+/**
+ * Crossed out brush icon
+ */
 import { forwardRef } from 'react'
 import { Box } from '@mui/material'
 

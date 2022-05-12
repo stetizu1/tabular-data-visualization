@@ -4,8 +4,6 @@ import { ColorArray } from '../../../../types/styling/ColorArray'
 
 import { px } from '../../../../helpers/stringGetters'
 
-import { SETTINGS_DRAWER_FONT } from '../../../../styles/font'
-
 export const getPalettePickerColorInputStyle = (colors: ColorArray, index: number): SxProps => ({
   bgcolor: colors[index],
   '& input': {
@@ -20,7 +18,7 @@ export const palettePickerStyle: Record<string, SxProps> = {
     margin: px(5, 7),
   },
   text: {
-    fontSize: px(SETTINGS_DRAWER_FONT.fontSize),
+    fontSize: px(12),
   },
   row: {
     display: `flex`,

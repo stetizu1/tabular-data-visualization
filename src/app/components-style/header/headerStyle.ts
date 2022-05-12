@@ -1,9 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { px } from '../../helpers/stringGetters'
+import { calc, px } from '../../helpers/stringGetters'
 
 import { HEADER_COLORS } from '../../styles/colors'
-import { HEADER_FONT } from '../../styles/font'
 
 export const headerStyle: Record<string, SxProps> = {
   headerContainer: {
@@ -17,11 +16,11 @@ export const headerStyle: Record<string, SxProps> = {
     color: HEADER_COLORS.font,
   },
   title: {
-    fontSize: HEADER_FONT.titleFontSize,
+    fontSize: calc(5, `2vmin`),
     padding: px(0, 20),
   },
   description: {
     padding: px(0, 15),
-    fontSize: HEADER_FONT.descriptionFontSize,
+    fontSize: calc(2, `1vmin`),
   },
 }

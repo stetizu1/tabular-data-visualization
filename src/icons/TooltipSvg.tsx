@@ -1,3 +1,6 @@
+/**
+ * Graph tooltip icon
+ */
 import { forwardRef } from 'react'
 import { Box } from '@mui/material'
 

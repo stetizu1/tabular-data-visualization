@@ -2,10 +2,9 @@ import { SxProps } from '@mui/system'
 
 import { Opacity } from '../../../../types/styling/Opacity'
 
-import { important } from '../../../../helpers/stringGetters'
+import { important, px } from '../../../../helpers/stringGetters'
 
 import { PLOT_COLORS } from '../../../../styles/colors'
-import { PLOT_FONT } from '../../../../styles/font'
 
 export const PARALLEL_COORDINATES_CLASS = `parallelCoordinates`
 export const SELECTED_CLASS = `parallelCoordinatesSelected`
@@ -28,6 +27,6 @@ export const getParallelCoordinatesStyle = (opacity: Opacity, isBrushActive: boo
     textAnchor: `middle`,
     fontWeight: `bold`,
     fill: PLOT_COLORS.fontColor,
-    fontSize: PLOT_FONT.fontSize,
+    fontSize: px(12),
   },
 })

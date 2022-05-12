@@ -8,7 +8,7 @@ import { Brushable } from '../../../../types/brushing/Brushable'
 import { ParallelSetsBundledSettings } from '../../../../types/views/settings/ParallelSetsBundledSettings'
 import { DataLink, NominalValueProperties } from '../../../../types/data/data'
 import { Margin } from '../../../../types/styling/Margin'
-import { NodeData, NodeDataPoint } from '../../../../types/d3-sankey'
+import { NodeDataPoint } from '../../../../types/d3-sankey'
 import { DataEach, Extent, OnMouseEvent } from '../../../../types/d3-types'
 
 import { getTogglingYShift, TOGGLE_Y_SHIFT } from '../../../../helpers/views/togglingYShift'
@@ -34,8 +34,6 @@ import { ParallelSetsBrushingType } from '../../../../constants/brushing-type/Pa
 
 import { PARALLEL_SETS_BUNDLED_TEXT } from '../../../../text/views-and-settings/parallelSetsBundled'
 
-import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
-
 import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
 import {
   CONNECTORS_CLASS,
@@ -46,6 +44,7 @@ import {
   TABS_CLASS,
   TABS_SELECTED_CLASS,
 } from '../../../../components-style/content/views/parallel-sets-bundled/parallelSetsBundledStyle'
+import { PLOT_FONT_BOX_SIZE } from '../../../../constants/others'
 
 export interface ParallelSetsBundledProps extends VisualizationView, Brushable, ParallelSetsBundledSettings {}
 
@@ -97,7 +96,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
     const pairWidth = (innerWidth - (displayAttributes.length - 2) * tabSpacing) / (displayAttributes.length - 1)
     const valueCounts = displayAttributes.map((att) => nominalValuesRecord[att]).map((arr) => arr.length)
     const spacesAllMax = Math.max(...valueCounts) - 1
-    const isLeft = (d: NodeData): boolean => Number(d.x0) < pairWidth / 2
+    const isLeft = (d: NodeDataPoint): boolean => Number(d.x0) < pairWidth / 2
 
     const half = (displayAttributes.length - 1) / 2
 
@@ -188,7 +187,7 @@ export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps
           .on(MouseAction.mouseOut, onMouseOutTooltip)
       })
 
-      const getTextVisible: DataEach<NodeData, SVGTextElement, number> = (node) => {
+      const getTextVisible: DataEach<NodeDataPoint, SVGTextElement, number> = (node) => {
         if (pairIdx === Math.floor(half)) return 1
         if ((isLeft(node) && pairIdx > half) || (!isLeft(node) && pairIdx < half)) return 0
         return 1

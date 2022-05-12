@@ -3,7 +3,6 @@ import { SxProps } from '@mui/system'
 import { calc, border, px } from '../../../helpers/stringGetters'
 
 import { SETTINGS_DRAWER_COLORS, ERROR_COLORS } from '../../../styles/colors'
-import { SETTINGS_DRAWER_FONT } from '../../../styles/font'
 
 export const settingsDrawerItemStyle: Record<string, SxProps> = {
   drawerSettings: {
@@ -18,14 +17,14 @@ export const settingsDrawerItemStyle: Record<string, SxProps> = {
     borderBottom: border(2, SETTINGS_DRAWER_COLORS.drawerItemBorder),
     '& h1': {
       borderBottom: border(1, SETTINGS_DRAWER_COLORS.drawerItemBorder),
-      fontSize: SETTINGS_DRAWER_FONT.headerFontSize,
+      fontSize: 15,
       width: `100%`,
     },
     '& hr': {
       margin: px(4, 0, 3),
     },
     '& label': {
-      fontSize: SETTINGS_DRAWER_FONT.labelFontSize,
+      fontSize: `0.8em`,
       color: SETTINGS_DRAWER_COLORS.label,
     },
     '& .MuiFormControlLabel-root': {
@@ -40,7 +39,7 @@ export const settingsDrawerItemStyle: Record<string, SxProps> = {
   },
   insufficientAttributeNum: {
     padding: px(10),
-    fontSize: SETTINGS_DRAWER_FONT.fontSize,
+    fontSize: px(12),
     color: ERROR_COLORS.font,
   },
   accordion: {

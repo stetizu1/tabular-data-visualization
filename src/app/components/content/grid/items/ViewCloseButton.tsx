@@ -2,7 +2,7 @@ import React, { VoidFunctionComponent } from 'react'
 import { Button, Tooltip } from '@mui/material'
 import { Close } from '@mui/icons-material'
 
-import { GRID_ITEM_TEXT } from '../../../../text/gridItemText'
+import { VIEW_TOP_TEXT } from '../../../../text/viewTopText'
 
 import { inlineButtonStyles } from '../../../../components-style/content/common/inlineButtonStyles'
 
@@ -12,7 +12,7 @@ interface ViewCloseButtonProps {
 
 export const ViewCloseButton: VoidFunctionComponent<ViewCloseButtonProps> = ({ onRemove }) => (
   <Button onClick={onRemove} sx={inlineButtonStyles.buttonClose}>
-    <Tooltip title={GRID_ITEM_TEXT.tooltipClose}>
+    <Tooltip title={VIEW_TOP_TEXT.close}>
       <Close />
     </Tooltip>
   </Button>

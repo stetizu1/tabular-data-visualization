@@ -4,9 +4,8 @@ import { FilterList } from '@mui/icons-material'
 
 import { BUTTON_VARIANT } from '../../../../constants/mui'
 
-import { TOP_TOOLBAR_TEXT } from '../../../../text/siteText'
-
 import { inlineButtonStyles } from '../../../../components-style/content/common/inlineButtonStyles'
+import { VIEW_TOP_TEXT } from '../../../../text/viewTopText'
 
 export interface DataFilterButtonProps {
   showFilter?: boolean
@@ -15,7 +14,7 @@ export interface DataFilterButtonProps {
 
 export const DataFilterButton: VoidFunctionComponent<DataFilterButtonProps> = ({ showFilter, setShowFilter }) => (
   <Button variant={BUTTON_VARIANT.text} onClick={() => setShowFilter(!showFilter)} sx={inlineButtonStyles.button}>
-    <Tooltip title={TOP_TOOLBAR_TEXT.filter}>
+    <Tooltip title={VIEW_TOP_TEXT.filter}>
       <FilterList sx={showFilter ? inlineButtonStyles.buttonActive : {}} />
     </Tooltip>
   </Button>

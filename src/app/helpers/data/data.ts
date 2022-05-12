@@ -1,3 +1,6 @@
+/**
+ * Functions that works with dataset
+ */
 import {
   CheckedForSelectableDataType,
   DataLink,
@@ -13,18 +16,34 @@ import { CATEGORY_LIMIT } from '../../constants/data/data'
 
 const getDatasetSample = (dataset: ReadonlyArray<SelectableDataType>) => dataset[0]
 
+/**
+ * Get all attribute keys of the dataset
+ * @param dataset
+ */
 export const getAttributeKeys = (dataset: ReadonlyArray<SelectableDataType>): Array<keyof SelectableDataType> =>
   Object.keys(getDatasetSample(dataset)).filter((key) => key !== SelectedKey)
 
+/**
+ * Get keys from dataset, that are default attributes for quantitative visualization (first item numbers)
+ * @param dataset
+ */
 export const getDefaultQuantitativeAttributesKeys = (
   dataset: ReadonlyArray<SelectableDataType>,
 ): Array<keyof SelectableDataType> => getAttributeKeys(dataset).filter((key) => typeof dataset[0][key] === `number`)
 
+/**
+ * Get keys from dataset, that are possible attributes for quantitative visualization (all transferable to number)
+ * @param dataset
+ */
 export const getQuantitativeAttributesKeys = (
   dataset: ReadonlyArray<SelectableDataType>,
 ): Array<keyof SelectableDataType> =>
   getAttributeKeys(dataset).filter((key) => dataset.every((data) => !isNaN(Number(data[key]))))
 
+/**
+ * Get keys from dataset, that are categorical (have less than `CATEGORY_LIMIT` different values)
+ * @param dataset
+ */
 export const getCategoryAttributesKeys = (
   dataset: ReadonlyArray<SelectableDataType>,
 ): Array<keyof SelectableDataType> => {
@@ -35,6 +54,10 @@ export const getCategoryAttributesKeys = (
   })
 }
 
+/**
+ * Get [attribute, true] pair for each attribute from the dataset
+ * @param dataset
+ */
 export const getDefaultAllAttributesChecked = (
   dataset: ReadonlyArray<SelectableDataType>,
 ): CheckedForSelectableDataType => {
@@ -42,6 +65,10 @@ export const getDefaultAllAttributesChecked = (
   return Object.fromEntries(keys.map((key) => [key, true]))
 }
 
+/**
+ * Get [attribute, true] pair for each default quantitative attribute from the dataset
+ * @param dataset
+ */
 export const getDefaultQuantitativeAttributesChecked = (
   dataset: ReadonlyArray<SelectableDataType>,
 ): CheckedForSelectableDataType => {
@@ -53,14 +80,27 @@ export const getDefaultQuantitativeAttributesChecked = (
   )
 }
 
+/**
+ * Get [attribute, true] pair for each nominal attribute from the dataset (less than `CATEGORY_LIMIT` values)
+ * @param dataset
+ */
 export const getDefaultNominalAttributesChecked = (
   dataset: ReadonlyArray<SelectableDataType>,
 ): CheckedForSelectableDataType => Object.fromEntries(getCategoryAttributesKeys(dataset).map((key) => [key, true]))
 
+/**
+ * Get [attribute, null] pair for each of given attribute - default selection for the attributes (parallel coordinates)
+ * @param displayAttributes
+ */
 export const getDefaultSelectionForAttributes = (
   displayAttributes: Array<keyof SelectableDataType>,
 ): ExtentForSelectableDataType => Object.fromEntries(displayAttributes.map((key) => [key, null]))
 
+/**
+ * Get possible values of given nominal attribute of the given dataset.
+ * @param dataset
+ * @param attribute - nominal attribute
+ */
 export const getNominalValueProperties = (
   dataset: ReadonlyArray<SelectableDataType>,
   attribute: keyof SelectableDataType,
@@ -89,16 +129,32 @@ export const getNominalValueProperties = (
     .sort((a, b) => (b.name < a.name ? 1 : b.name > a.name ? -1 : 0))
     .map((nvp, idx) => ({ ...nvp, order: idx }))
 
+/**
+ * Get possible values of all nominal attributes of the given dataset.
+ * @param dataset
+ */
 export const getNominalValuesRecord = (dataset: ReadonlyArray<SelectableDataType>): NominalRecord =>
   Object.fromEntries(
     getCategoryAttributesKeys(dataset).map((attribute) => [attribute, getNominalValueProperties(dataset, attribute)]),
   )
 
+/**
+ * Get pairs of attributes that are neighbors in the displayAttributes list
+ * @param displayAttributes
+ */
 export const getNeighborAttributes = (
   displayAttributes: Array<keyof SelectableDataType>,
 ): Array<[keyof SelectableDataType, keyof SelectableDataType]> =>
   displayAttributes.slice(0, -1).map((att, idx) => [att, displayAttributes[idx + 1]])
 
+/**
+ * Get graph for the sankey plotting (for a pair of the attributes)
+ * @param dataset - given dataset
+ * @param categoryAttribute - category attribute, that is coloring the graph
+ * @param record - the nominal values record of the dataset
+ * @param attFrom - attribute on the left part of the graph
+ * @param attTo - attribute on the right part of the graph
+ */
 export const getGraph = (
   dataset: ReadonlyArray<SelectableDataType>,
   categoryAttribute: keyof SelectableDataType | undefined,

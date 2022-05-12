@@ -1,5 +1,5 @@
 /**
- * tooltip and it's actions
+ * Tooltip and it's actions
  */
 import { select } from 'd3'
 import { MouseEvent } from 'react'

@@ -6,11 +6,10 @@ import { getSaveIsDisabled, saveSvg } from '../../../../helpers/d3/saveSvg'
 
 import { ViewType } from '../../../../constants/views-general/ViewType'
 
-import { SAVE_TEXT } from '../../../../text/siteText'
-
 import { inlineButtonStyles } from '../../../../components-style/content/common/inlineButtonStyles'
 
 import { ConfirmationDialog } from '../../common/dialogs/ConfirmationDialog'
+import { VIEW_TOP_TEXT } from '../../../../text/viewTopText'
 
 export interface ViewSaveButtonProps {
   viewType: ViewType
@@ -30,15 +29,15 @@ export const ViewSaveButton: VoidFunctionComponent<ViewSaveButtonProps> = ({ vie
     <>
       <ConfirmationDialog
         isOpen={isDialogOpen}
-        title={SAVE_TEXT.header}
-        description={SAVE_TEXT.description}
+        title={VIEW_TOP_TEXT.saveDialog.header}
+        description={VIEW_TOP_TEXT.saveDialog.description}
         onConfirm={onConfirm}
         onClose={closeDialog}
-        confirmText={SAVE_TEXT.confirm}
-        cancelText={SAVE_TEXT.cancel}
+        confirmText={VIEW_TOP_TEXT.saveDialog.confirm}
+        cancelText={VIEW_TOP_TEXT.saveDialog.cancel}
       />
       <Button onClick={openDialog} disabled={getSaveIsDisabled(viewType)} sx={inlineButtonStyles.button}>
-        <Tooltip title={SAVE_TEXT.save}>
+        <Tooltip title={VIEW_TOP_TEXT.save}>
           <Save />
         </Tooltip>
       </Button>

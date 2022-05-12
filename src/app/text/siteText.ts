@@ -1,11 +1,17 @@
+/**
+ * Text on site and top toolbar
+ */
+
 import { SampleDataset } from '../constants/data/sampleDataset'
 import { DataNullOptionType } from '../constants/data/data'
 import { DataLoadError } from '../constants/data/DataLoadError'
 
+/**
+ * Text on page before the data is selected/loaded
+ */
 export const EMPTY_DATA_TEXT = {
   content: `To use the application, first load the dataset from a JSON or CSV file. You can also try this application with sample data.`,
   firstTime: `Trying for the first time?`,
-  loading: `loading...`,
   helpDialog: {
     header: `About Tabular Data Visualizer`,
     description: `The purpose of this application is to visualize multidimensional tabular data.`,
@@ -22,39 +28,33 @@ export const EMPTY_DATA_TEXT = {
     brushOff: `... clean all active brushing`,
     settings: `... show more settings for views`,
   },
+  loading: `loading...`,
 }
 
+/**
+ * Text on top toolbar
+ */
 export const TOP_TOOLBAR_TEXT = {
-  labelDetailsVisible: `Display tooltips`,
-  labelClearBrushes: `Clear brushes`,
-  labelAddView: `Add a view`,
-  labelBrushingOnEOM: `Set brushing at the end of the move only`,
-  labelBrushColor: `Brush color`,
-  addViewDialogTitle: `Add a view`,
-  labelDialogTitle: `Set predefined layout`,
-  noOption: `All view options are currently displayed.`,
+  addView: `Add a view`,
+  layout: `Set predefined layout`,
+  detailsVisible: `Display tooltips`,
+  brushingOnEOM: `Set brushing at the end of the move only`,
+  brushColor: `Brush color`,
+  clearBrushes: `Clear brushes`,
   settings: `Settings`,
-  filter: `Filter`,
-}
-
-export const SAVE_TEXT = {
-  header: `Save to file`,
-  description: `Do you want to save the visualization to an SVG file?`,
-  save: `Save as SVG`,
-  confirm: `Save`,
-  cancel: `Cancel`,
-}
-
-export const VIEW_INFO_TEXT = {
-  buttonLabel: `Show view information`,
-  dialog: {
-    brushing: `Brushing`,
-    settings: `Settings`,
-    options: `Options`,
-    close: `Close`,
+  addDialog: {
+    title: `Add a view`,
+    noOption: `All view options are currently displayed.`,
+  },
+  layoutDialog: {
+    title: `Set a layout`,
+    alt: `Layout `,
   },
 }
 
+/**
+ * Text connected to data load / reading file
+ */
 export const FILE_READER_TEXT = {
   button: `Select a file`,
   sampleDataLabel: `Try it on the sample data`,
@@ -94,9 +94,4 @@ export const FILE_READER_TEXT = {
     changeTo: `Change to`,
     attribute: `Attribute:`,
   },
-}
-
-export const LAYOUT_DIALOG_TEXT = {
-  title: `Set a layout`,
-  alt: `Layout `,
 }
