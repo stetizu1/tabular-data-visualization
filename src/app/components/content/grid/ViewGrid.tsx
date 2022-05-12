@@ -12,7 +12,7 @@ import { Settings } from '../../../types/views/settings/Settings'
 import { getClass } from '../../../helpers/stringGetters'
 import { setDisplay } from '../../../helpers/d3/setDisplay'
 
-import { brushView, brushViewType, isViewType, ViewType } from '../../../constants/views-general/ViewType'
+import { brushView, brushViewType, isBrushView, isViewType, ViewType } from '../../../constants/views-general/ViewType'
 import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from '../../../constants/layout/layout'
 import { TOOLTIP_CLASS } from '../../../constants/views-general/tooltip'
 
@@ -148,7 +148,11 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
         style={{ overflowX: `hidden` }}
         onLayoutChange={updateLayout}
         draggableHandle={getClass(DRAG_HANDLE)}
-        onResizeStart={(_, view) => setViewResizing(view.i as ViewType)}
+        onResizeStart={(_, view) => {
+          const viewType = view.i as ViewType
+          if (isBrushView(viewType)) cleanSelectedIfViewWasBrushing(viewType)
+          setViewResizing(viewType)
+        }}
         onResizeStop={() => setViewResizing(null)}
         cols={COLUMNS_COUNT}
         rowHeight={ROW_HEIGHT}
