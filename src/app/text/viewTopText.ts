@@ -14,6 +14,12 @@ export const VIEW_TOP_TEXT = {
     confirm: `Save`,
     cancel: `Cancel`,
   },
+  closeDialog: {
+    header: `Close the view`,
+    description: `Do you really want to close the view?`,
+    confirm: `Close`,
+    cancel: `Cancel`,
+  },
   info: `Show view information`,
   infoDialog: {
     brushing: `Brushing`,

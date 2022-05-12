@@ -17,8 +17,6 @@ export interface ViewSaveButtonProps {
 
 export const ViewSaveButton: VoidFunctionComponent<ViewSaveButtonProps> = ({ viewType }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const openDialog = useCallback(() => setIsDialogOpen(true), [])
-  const closeDialog = useCallback(() => setIsDialogOpen(false), [])
 
   const onConfirm = useCallback(() => {
     saveSvg(viewType)
@@ -32,11 +30,15 @@ export const ViewSaveButton: VoidFunctionComponent<ViewSaveButtonProps> = ({ vie
         title={VIEW_TOP_TEXT.saveDialog.header}
         description={VIEW_TOP_TEXT.saveDialog.description}
         onConfirm={onConfirm}
-        onClose={closeDialog}
+        onClose={() => setIsDialogOpen(false)}
         confirmText={VIEW_TOP_TEXT.saveDialog.confirm}
         cancelText={VIEW_TOP_TEXT.saveDialog.cancel}
       />
-      <Button onClick={openDialog} disabled={getSaveIsDisabled(viewType)} sx={inlineButtonStyles.button}>
+      <Button
+        onClick={() => setIsDialogOpen(true)}
+        disabled={getSaveIsDisabled(viewType)}
+        sx={inlineButtonStyles.button}
+      >
         <Tooltip title={VIEW_TOP_TEXT.save}>
           <Save />
         </Tooltip>
