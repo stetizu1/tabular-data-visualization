@@ -5,4 +5,4 @@ export const SETTINGS_DRAWER_TEXT = {
   hide: `Hide`,
 }
 
-export const GITHUB_LINK = `https://github.com/stetizu1/table-data-visualization`
+export const GITHUB_LINK = `https://github.com/stetizu1/tabular-data-visualization`

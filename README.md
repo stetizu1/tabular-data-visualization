@@ -13,7 +13,7 @@ The application was created as part of Master's thesis.
 ## Status of the project
 The application is available on the GitHub pages.
 
-https://stetizu1.github.io/table-data-visualization/
+https://stetizu1.github.io/tabular-data-visualization/
 
 ## Build and run
 To build/run the application locally, you need to have node and yarn installed.  

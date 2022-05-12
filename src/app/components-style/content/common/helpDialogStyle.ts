@@ -30,7 +30,9 @@ export const helpDialogStyle: Record<string, SxProps> = {
     display: `flex`,
     justifyContent: `space-between`,
     margin: px(2),
-    flexWrap: `wrap`,
+    '@media (max-width: 630px)': {
+      flexWrap: `wrap`,
+    },
   },
   topText: {
     padding: px(8, 0, 6),
