@@ -1,5 +1,5 @@
 /**
- * Possible mouse actions
+ * Mouse event action
  */
 export enum MouseAction {
   mouseOver = `mouseover`,
