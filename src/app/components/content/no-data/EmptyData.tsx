@@ -17,7 +17,7 @@ import { BrushOffSvg } from '../../../../icons/BrushOffSvg'
 
 import { EMPTY_DATA_TEXT } from '../../../text/siteText'
 
-import { BUTTON_VARIANT } from '../../../constants/mui'
+import { BUTTON_VARIANT, DIALOG_MAX_WIDTH } from '../../../constants/mui'
 
 import { emptyDataStyle } from '../../../components-style/content/no-data/emptyDataStyle'
 import { helpDialogStyle } from '../../../components-style/content/common/helpDialogStyle'
@@ -27,7 +27,13 @@ export const EmptyData: VoidFunctionComponent = () => {
 
   return (
     <>
-      <Dialog onClose={() => setIsDialogOpen(false)} open={isDialogOpen} sx={helpDialogStyle.dialog}>
+      <Dialog
+        onClose={() => setIsDialogOpen(false)}
+        open={isDialogOpen}
+        sx={helpDialogStyle.dialog}
+        fullWidth
+        maxWidth={DIALOG_MAX_WIDTH.m}
+      >
         <DialogTitle>{EMPTY_DATA_TEXT.helpDialog.header}</DialogTitle>
         <Divider />
         <DialogContent>

@@ -16,7 +16,7 @@ import {
 import { Brush, Help, Settings } from '@mui/icons-material'
 
 import { ViewType } from '../../../../constants/views-general/ViewType'
-import { BUTTON_VARIANT, COMPONENT_TYPE } from '../../../../constants/mui'
+import { BUTTON_VARIANT, COMPONENT_TYPE, DIALOG_MAX_WIDTH } from '../../../../constants/mui'
 import { BRUSHING_IMAGES } from '../../../../constants/public-path'
 
 import { VIEW_INFO_TEXT } from '../../../../text/siteText'
@@ -34,7 +34,13 @@ export const ViewHelpButton: VoidFunctionComponent<ViewHelpButtonProps> = ({ vie
 
   return (
     <>
-      <Dialog onClose={() => setIsDialogOpen(false)} open={isDialogOpen} sx={helpDialogStyle.dialog}>
+      <Dialog
+        onClose={() => setIsDialogOpen(false)}
+        open={isDialogOpen}
+        sx={helpDialogStyle.dialog}
+        fullWidth
+        maxWidth={DIALOG_MAX_WIDTH.m}
+      >
         <DialogTitle>{VIEW_NAMES[viewType]}</DialogTitle>
         <Divider />
         <DialogContent>

@@ -9,6 +9,7 @@ export const topToolbarButtonStyle: Record<string, SxProps> = {
     margin: px(0, 5),
     padding: px(4),
     minWidth: 0,
+    flexShrink: 0,
     '&.MuiButtonBase-root': {
       bgcolor: BUTTON_COLORS.buttonDisableBackground,
       color: BUTTON_COLORS.fontDisabled,

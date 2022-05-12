@@ -76,6 +76,9 @@ export const dialogStyle: Record<string, SxProps> = {
         opacity: 0.6,
       },
     },
+    '@media (max-width: 520px)': {
+      minWidth: 0,
+    },
   },
   image: {
     width: 220,

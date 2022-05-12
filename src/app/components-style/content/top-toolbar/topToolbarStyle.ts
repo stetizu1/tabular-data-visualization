@@ -13,6 +13,7 @@ export const topToolbarStyle: Record<string, SxProps> = {
     alignItems: `stretch`,
     bgcolor: TOP_TOOLBAR_COLORS.background,
     color: TOP_TOOLBAR_COLORS.font,
+    flexWrap: `wrap`,
   },
   separator: {
     height: `100%`,

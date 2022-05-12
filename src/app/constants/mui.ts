@@ -29,3 +29,11 @@ export const CELL_PADDING = {
   checkbox: `checkbox` as `checkbox`,
   none: `none` as `none`,
 }
+
+export const DIALOG_MAX_WIDTH = {
+  xs: `xs` as `xs`,
+  s: `sm` as `sm`,
+  m: `md` as `md`,
+  l: `lg` as `lg`,
+  xl: `xl` as `xl`,
+}

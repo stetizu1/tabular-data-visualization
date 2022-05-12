@@ -7,8 +7,6 @@ import { DIALOG_COLORS } from '../../../styles/colors'
 export const helpDialogStyle: Record<string, SxProps> = {
   dialog: {
     '& .MuiPaper-root': {
-      minWidth: px(750),
-      width: px(750),
       textAlign: `justify`,
     },
   },
@@ -32,6 +30,7 @@ export const helpDialogStyle: Record<string, SxProps> = {
     display: `flex`,
     justifyContent: `space-between`,
     margin: px(2),
+    flexWrap: `wrap`,
   },
   topText: {
     padding: px(8, 0, 6),
