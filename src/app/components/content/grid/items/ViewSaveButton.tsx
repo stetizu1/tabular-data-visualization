@@ -1,5 +1,5 @@
 import { useCallback, useState, VoidFunctionComponent } from 'react'
-import { IconButton, Tooltip } from '@mui/material'
+import { Button, Tooltip } from '@mui/material'
 import { Save } from '@mui/icons-material'
 
 import { getSaveIsDisabled, saveSvg } from '../../../../helpers/d3/saveSvg'
@@ -37,11 +37,11 @@ export const ViewSaveButton: VoidFunctionComponent<ViewSaveButtonProps> = ({ vie
         confirmText={SAVE_TEXT.confirm}
         cancelText={SAVE_TEXT.cancel}
       />
-      <IconButton onClick={openDialog} disabled={getSaveIsDisabled(viewType)} sx={inlineButtonStyles.button}>
+      <Button onClick={openDialog} disabled={getSaveIsDisabled(viewType)} sx={inlineButtonStyles.button}>
         <Tooltip title={SAVE_TEXT.save}>
           <Save />
         </Tooltip>
-      </IconButton>
+      </Button>
     </>
   )
 }

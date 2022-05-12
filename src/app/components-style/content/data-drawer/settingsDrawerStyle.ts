@@ -49,4 +49,7 @@ export const settingsDrawerStyle: Record<string, SxProps> = {
     alignItems: `center`,
     justifyContent: `center`,
   },
+  button: {
+    minWidth: 0,
+  },
 }

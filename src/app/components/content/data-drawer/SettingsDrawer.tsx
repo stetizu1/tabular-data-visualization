@@ -1,5 +1,5 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useMemo } from 'react'
-import { Box, Divider, Drawer, IconButton, Link, Tooltip, Typography } from '@mui/material'
+import { Box, Divider, Drawer, Button, Link, Tooltip, Typography } from '@mui/material'
 import { ChevronRight, GitHub } from '@mui/icons-material'
 
 import { SelectableDataType } from '../../../types/data/data'
@@ -111,11 +111,11 @@ export const SettingsDrawer: VoidFunctionComponent<SettingsDrawerProps> = ({
   return (
     <Drawer variant={DRAWER_VARIANT.persistent} anchor={ANCHOR.right} open={isOpen} sx={settingsDrawerStyle.drawer}>
       <Box sx={settingsDrawerStyle.header}>
-        <IconButton onClick={close}>
+        <Button onClick={close} sx={settingsDrawerStyle.button}>
           <Tooltip title={SETTINGS_DRAWER_TEXT.hide}>
             <ChevronRight sx={settingsDrawerStyle.chevron} />
           </Tooltip>
-        </IconButton>
+        </Button>
       </Box>
       <Divider />
       <Box sx={settingsDrawerStyle.setting}>{settingsComponents}</Box>

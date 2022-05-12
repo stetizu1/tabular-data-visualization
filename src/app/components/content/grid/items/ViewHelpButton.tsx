@@ -9,7 +9,6 @@ import {
   DialogContentText,
   DialogTitle,
   Divider,
-  IconButton,
   Tooltip,
   Typography,
 } from '@mui/material'
@@ -79,11 +78,11 @@ export const ViewHelpButton: VoidFunctionComponent<ViewHelpButtonProps> = ({ vie
           </Button>
         </DialogActions>
       </Dialog>
-      <IconButton onClick={() => setIsDialogOpen(true)} sx={inlineButtonStyles.button}>
+      <Button onClick={() => setIsDialogOpen(true)} sx={inlineButtonStyles.button}>
         <Tooltip title={VIEW_INFO_TEXT.buttonLabel}>
           <Help />
         </Tooltip>
-      </IconButton>
+      </Button>
     </>
   )
 }

@@ -1,5 +1,5 @@
 import { VoidFunctionComponent } from 'react'
-import { IconButton, Tooltip } from '@mui/material'
+import { Button, Tooltip } from '@mui/material'
 import { Settings } from '@mui/icons-material'
 
 import { TOP_TOOLBAR_TEXT } from '../../../../../text/siteText'
@@ -11,9 +11,9 @@ export interface OpenSettingsButtonProps {
 }
 
 export const OpenSettingsButton: VoidFunctionComponent<OpenSettingsButtonProps> = ({ disabled, open }) => (
-  <IconButton disabled={disabled} onClick={open} sx={openSettingsButtonStyle.settings}>
+  <Button disabled={disabled} onClick={open} sx={openSettingsButtonStyle.settings}>
     <Tooltip title={TOP_TOOLBAR_TEXT.settings}>
       <Settings />
     </Tooltip>
-  </IconButton>
+  </Button>
 )

@@ -9,6 +9,7 @@ export const openSettingsButtonStyle: Record<string, SxProps> = {
     margin: px(0, 10, 0, 6),
     padding: px(4),
     color: BUTTON_COLORS.buttonOnBackground,
+    minWidth: 0,
     '& svg': {
       fontSize: px(30),
     },

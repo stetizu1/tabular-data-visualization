@@ -15,10 +15,10 @@ export interface GlyphAxesTextProps {
 }
 
 export const GlyphAxesText: VoidFunctionComponent<GlyphAxesTextProps> = ({ displayAttributes }) => (
-  <Typography sx={gridItemStyle.text}>
-    <Tooltip title={GRID_ITEM_TEXT.glyphAxes}>
+  <Tooltip title={`${GRID_ITEM_TEXT.glyphAxes}: ${getDisplayAttributesInParentheses(displayAttributes)}`}>
+    <Typography sx={gridItemStyle.text}>
       <RotateRight sx={gridItemStyle.textIcon} />
-    </Tooltip>
-    {getDisplayAttributesInParentheses(displayAttributes)}
-  </Typography>
+      {getDisplayAttributesInParentheses(displayAttributes)}
+    </Typography>
+  </Tooltip>
 )

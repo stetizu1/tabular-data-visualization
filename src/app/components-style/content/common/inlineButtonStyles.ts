@@ -17,6 +17,7 @@ export const inlineButtonStyles: Record<string, SxProps> = {
   },
   buttonClose: {
     ...inlineButton,
+    color: BUTTON_COLORS.buttonClose,
   },
   buttonActive: {
     color: BUTTON_COLORS.buttonInlinedFontOn,

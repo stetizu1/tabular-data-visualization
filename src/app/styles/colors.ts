@@ -29,6 +29,7 @@ export const BUTTON_COLORS = {
   buttonInlined: `#576e9f`,
   buttonInlinedFontOn: `#3965c4`,
   buttonInlinedBgOn: `#e9eeff`,
+  buttonClose: `#4c4f56`,
   border: `rgba(0, 0, 0, 0.12)`,
   colorBorder: `#42495d`,
   buttonDialogBackground: `#363a46`,
