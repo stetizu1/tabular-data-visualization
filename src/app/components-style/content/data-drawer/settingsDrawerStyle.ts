@@ -38,16 +38,9 @@ export const settingsDrawerStyle: Record<string, SxProps> = {
     width: calc(-20, `100%`),
     padding: px(10),
   },
-  githubIcon: {
-    paddingRight: px(6),
-    fontSize: px(18),
-  },
   text: {
     color: SETTINGS_DRAWER_COLORS.icon,
     fontSize: px(9),
-    display: `flex`,
-    alignItems: `center`,
-    justifyContent: `center`,
   },
   button: {
     minWidth: 0,

@@ -18,7 +18,7 @@ export const EMPTY_DATA_TEXT = {
     subHeader: `Options`,
     close: `Close`,
     sample: `To try the application, you can select one of the sample datasets. You can use flower or car dataset for quantitative data visualizations, Titanic or parallel cars for category visualization, or bird dataset for combination of both.`,
-    file: `You use applications with your own datasets, JSON or CSV files. Files need to have the right format, for JSON it is the array of the same objects with only simple values.`,
+    file: `You use applications with your own datasets, JSON or CSV files. To use your own files, they need to have the right format. For JSON it is the array of objects with the same keys and value types (e.g. [{"species": "bird", "weight": 20}, {"species": "fish", "weight": 35},...]), in CSV, it is names of the attributes on the first line and values afterwards. You can also find example datasets in the project repository on GitHub.`,
     viewsHelp: `To get more information about a specific view, you can look at its help, which can be found in its header.`,
     add: `... add a new view type to the visualization board`,
     layout: `... set one of the predefined layouts`,

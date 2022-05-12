@@ -1,13 +1,12 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useMemo } from 'react'
-import { Box, Divider, Drawer, Button, Link, Tooltip, Typography } from '@mui/material'
-import { ChevronRight, GitHub } from '@mui/icons-material'
+import { Box, Divider, Drawer, Button, Tooltip, Typography } from '@mui/material'
+import { ChevronRight } from '@mui/icons-material'
 
 import { SelectableDataType } from '../../../types/data/data'
 import { Settings } from '../../../types/views/settings/Settings'
 
 import { ViewType } from '../../../constants/views-general/ViewType'
 import { ANCHOR, DRAWER_VARIANT } from '../../../constants/mui'
-import { GITHUB_LINK } from '../../../constants/link'
 
 import { SETTINGS_DRAWER_BOTTOM_TEXT } from '../../../text/settingsDrawerBottomText'
 
@@ -123,11 +122,6 @@ export const SettingsDrawer: VoidFunctionComponent<SettingsDrawerProps> = ({
       <Box sx={settingsDrawerStyle.fill} />
       <Box sx={settingsDrawerStyle.footer}>
         <Typography sx={settingsDrawerStyle.text}>{SETTINGS_DRAWER_BOTTOM_TEXT.description}</Typography>
-        <Typography sx={settingsDrawerStyle.text}>{SETTINGS_DRAWER_BOTTOM_TEXT.openSource}</Typography>
-        <Link href={GITHUB_LINK} sx={settingsDrawerStyle.text}>
-          <GitHub sx={settingsDrawerStyle.githubIcon} />
-          {SETTINGS_DRAWER_BOTTOM_TEXT.github}
-        </Link>
       </Box>
     </Drawer>
   )
