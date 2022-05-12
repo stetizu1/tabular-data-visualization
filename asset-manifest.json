@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/tabular-data-visualization/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/tabular-data-visualization/static/js/main.b6dbe0b0.chunk.js",
-    "main.js.map": "/tabular-data-visualization/static/js/main.b6dbe0b0.chunk.js.map",
+    "main.js": "/tabular-data-visualization/static/js/main.4e42defd.chunk.js",
+    "main.js.map": "/tabular-data-visualization/static/js/main.4e42defd.chunk.js.map",
     "runtime-main.js": "/tabular-data-visualization/static/js/runtime-main.4c572b3b.js",
     "runtime-main.js.map": "/tabular-data-visualization/static/js/runtime-main.4c572b3b.js.map",
     "static/css/2.a72322c1.chunk.css": "/tabular-data-visualization/static/css/2.a72322c1.chunk.css",
-    "static/js/2.fee16fd4.chunk.js": "/tabular-data-visualization/static/js/2.fee16fd4.chunk.js",
-    "static/js/2.fee16fd4.chunk.js.map": "/tabular-data-visualization/static/js/2.fee16fd4.chunk.js.map",
+    "static/js/2.316de242.chunk.js": "/tabular-data-visualization/static/js/2.316de242.chunk.js",
+    "static/js/2.316de242.chunk.js.map": "/tabular-data-visualization/static/js/2.316de242.chunk.js.map",
     "index.html": "/tabular-data-visualization/index.html",
     "static/css/2.a72322c1.chunk.css.map": "/tabular-data-visualization/static/css/2.a72322c1.chunk.css.map",
     "static/css/main.6dea0f05.chunk.css.map": "/tabular-data-visualization/static/css/main.6dea0f05.chunk.css.map",
-    "static/js/2.fee16fd4.chunk.js.LICENSE.txt": "/tabular-data-visualization/static/js/2.fee16fd4.chunk.js.LICENSE.txt"
+    "static/js/2.316de242.chunk.js.LICENSE.txt": "/tabular-data-visualization/static/js/2.316de242.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4c572b3b.js",
     "static/css/2.a72322c1.chunk.css",
-    "static/js/2.fee16fd4.chunk.js",
+    "static/js/2.316de242.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.b6dbe0b0.chunk.js"
+    "static/js/main.4e42defd.chunk.js"
   ]
 }
