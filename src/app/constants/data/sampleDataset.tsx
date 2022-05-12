@@ -8,6 +8,9 @@ import parallelCarsJson from '../../../test-data/parallelCarsData.json'
 
 import { DataType } from '../../types/data/data'
 
+/**
+ * Sample datasets options
+ */
 export enum SampleDataset {
   flowers = `flower`,
   birds = `bird`,
@@ -16,8 +19,14 @@ export enum SampleDataset {
   parallelCars = `parallelCars`,
 }
 
+/**
+ * All sample datasets options
+ */
 export const SAMPLE_DATASET_OPTIONS = Object.values(SampleDataset)
 
+/**
+ * Icons for all sample datasets
+ */
 export const sampleDatasetIcons: Record<SampleDataset, JSX.Element> = {
   [SampleDataset.flowers]: <LocalFlorist />,
   [SampleDataset.birds]: <Twitter />,
@@ -26,6 +35,9 @@ export const sampleDatasetIcons: Record<SampleDataset, JSX.Element> = {
   [SampleDataset.parallelCars]: <AirportShuttle />,
 }
 
+/**
+ * Sample datasets data
+ */
 export const sampleDatasets: Record<SampleDataset, DataType[]> = {
   [SampleDataset.flowers]: flowerJson,
   [SampleDataset.birds]: birdJson,

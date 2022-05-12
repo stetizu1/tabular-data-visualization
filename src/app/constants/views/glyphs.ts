@@ -5,8 +5,14 @@ import { GlyphsSettings } from '../../types/views/settings/GlyphsSettings'
 
 import { SortType } from '../sort/SortType'
 
+/**
+ * Minimal attribute count for glyphs
+ */
 export const MIN_GLYPHS_ATTRIBUTE_COUNT = 3
 
+/**
+ * Default values for glyphs settings
+ */
 export const GLYPHS_DEFAULT: Pick<
   GlyphsSettings,
   `glyphSize` | `glyphSpacing` | `margins` | `opacity` | `colorCategory` | `sortType`

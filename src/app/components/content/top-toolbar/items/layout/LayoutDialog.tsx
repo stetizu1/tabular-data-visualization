@@ -9,7 +9,7 @@ import { LAYOUT_OPTIONS } from '../../../../../constants/layout/layout'
 import { LAYOUT_IMAGES } from '../../../../../constants/public-path'
 import { COMPONENT_TYPE } from '../../../../../constants/mui'
 
-import { LAYOUT_DIALOG_TEXT } from '../../../../../text/siteText'
+import { TOP_TOOLBAR_TEXT } from '../../../../../text/siteText'
 
 import { dialogStyle } from '../../../../../components-style/content/common/dialogStyle'
 
@@ -27,7 +27,7 @@ export const LayoutDialog: VoidFunctionComponent<LayoutDialogProps> = ({ isOpen,
   }
   return (
     <Dialog onClose={handleClose} open={isOpen}>
-      <DialogTitle>{LAYOUT_DIALOG_TEXT.title}</DialogTitle>
+      <DialogTitle>{TOP_TOOLBAR_TEXT.layoutDialog.title}</DialogTitle>
       <Divider />
       <DialogContent>
         {LAYOUT_OPTIONS.map((layoutItems, idx) => (
@@ -50,7 +50,7 @@ export const LayoutDialog: VoidFunctionComponent<LayoutDialogProps> = ({ isOpen,
               component={COMPONENT_TYPE.image}
               sx={dialogStyle.image}
               image={LAYOUT_IMAGES[idx]}
-              alt={LAYOUT_DIALOG_TEXT.alt + idx}
+              alt={TOP_TOOLBAR_TEXT.layoutDialog.alt + idx}
             />
           </Card>
         ))}

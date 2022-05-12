@@ -1,9 +1,16 @@
-import { parse } from 'csv-string'
 import { DataType, JsonValue } from '../../types/data/data'
 
+/**
+ * Checks if value is one of the JSON simple values
+ * @param value
+ */
 export const isJsonValue = (value: unknown): value is JsonValue =>
   typeof value === `number` || typeof value === `string` || typeof value === `boolean` || value === null
 
+/**
+ * Checks if the array is an array of a DataType
+ * @param dataset
+ */
 export const isArrayOfDataType = (dataset: unknown): dataset is ReadonlyArray<DataType> => {
   if (Array.isArray(dataset) && dataset.length > 0) {
     const example = dataset[0]
@@ -14,18 +21,3 @@ export const isArrayOfDataType = (dataset: unknown): dataset is ReadonlyArray<Da
   }
   return false
 }
-
-export const CsvParse = (textCsv: string): DataType[] =>
-  parse(textCsv, { output: `objects` }).map((data) =>
-    Object.fromEntries(
-      Object.keys(data).map((key) => {
-        const value = data[key]
-        if (value.toLowerCase() === `null` || value === ``) return [key, null]
-        if (value.toLowerCase() === `true`) return [key, true]
-        if (value.toLowerCase() === `false`) return [key, false]
-        const numValue = Number(value.replace(`,`, `.`))
-        if (!isNaN(numValue)) return [key, numValue]
-        return [key, value]
-      }),
-    ),
-  )

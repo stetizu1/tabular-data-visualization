@@ -1,6 +1,6 @@
 import { Dispatch, VoidFunctionComponent, SetStateAction, useMemo } from 'react'
-import { Box, Divider, Drawer, Button, Link, Tooltip, Typography } from '@mui/material'
-import { ChevronRight, GitHub } from '@mui/icons-material'
+import { Box, Divider, Drawer, Button, Tooltip, Typography } from '@mui/material'
+import { ChevronRight } from '@mui/icons-material'
 
 import { SelectableDataType } from '../../../types/data/data'
 import { Settings } from '../../../types/views/settings/Settings'
@@ -8,7 +8,7 @@ import { Settings } from '../../../types/views/settings/Settings'
 import { ViewType } from '../../../constants/views-general/ViewType'
 import { ANCHOR, DRAWER_VARIANT } from '../../../constants/mui'
 
-import { SETTINGS_DRAWER_TEXT, GITHUB_LINK } from '../../../text/settingsDrawerText'
+import { SETTINGS_DRAWER_BOTTOM_TEXT } from '../../../text/settingsDrawerBottomText'
 
 import { settingsDrawerStyle } from '../../../components-style/content/data-drawer/settingsDrawerStyle'
 
@@ -112,7 +112,7 @@ export const SettingsDrawer: VoidFunctionComponent<SettingsDrawerProps> = ({
     <Drawer variant={DRAWER_VARIANT.persistent} anchor={ANCHOR.right} open={isOpen} sx={settingsDrawerStyle.drawer}>
       <Box sx={settingsDrawerStyle.header}>
         <Button onClick={close} sx={settingsDrawerStyle.button}>
-          <Tooltip title={SETTINGS_DRAWER_TEXT.hide}>
+          <Tooltip title={SETTINGS_DRAWER_BOTTOM_TEXT.hide}>
             <ChevronRight sx={settingsDrawerStyle.chevron} />
           </Tooltip>
         </Button>
@@ -121,12 +121,7 @@ export const SettingsDrawer: VoidFunctionComponent<SettingsDrawerProps> = ({
       <Box sx={settingsDrawerStyle.setting}>{settingsComponents}</Box>
       <Box sx={settingsDrawerStyle.fill} />
       <Box sx={settingsDrawerStyle.footer}>
-        <Typography sx={settingsDrawerStyle.text}>{SETTINGS_DRAWER_TEXT.description}</Typography>
-        <Typography sx={settingsDrawerStyle.text}>{SETTINGS_DRAWER_TEXT.openSource}</Typography>
-        <Link href={GITHUB_LINK} sx={settingsDrawerStyle.text}>
-          <GitHub sx={settingsDrawerStyle.githubIcon} />
-          {SETTINGS_DRAWER_TEXT.github}
-        </Link>
+        <Typography sx={settingsDrawerStyle.text}>{SETTINGS_DRAWER_BOTTOM_TEXT.description}</Typography>
       </Box>
     </Drawer>
   )

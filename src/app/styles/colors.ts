@@ -1,3 +1,7 @@
+/**
+ * Colors used for application styling
+ */
+
 export const HEADER_COLORS = {
   background: `#282c34`,
   font: `#d6e1ff`,

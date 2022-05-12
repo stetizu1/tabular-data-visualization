@@ -6,8 +6,14 @@ import { ParallelSetsBundledSettings } from '../../types/views/settings/Parallel
 import { ParallelSetsBrushingType } from '../brushing-type/ParallelSetsBrushingType'
 import { DEFAULT_FONT_COLOR_PARALLEL_SETS } from '../views-general/defaultSettableColors'
 
+/**
+ * Minimal attribute count for parallel sets
+ */
 export const MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT = 2
 
+/**
+ * Default values for parallel sets (bundled) settings
+ */
 export const PARALLEL_SETS_BUNDLED_DEFAULT: Pick<
   ParallelSetsBundledSettings,
   `margins` | `opacity` | `colorCategory` | `tabWidth` | `tabSpacing` | `tabGap` | `brushingType` | `fontColor`

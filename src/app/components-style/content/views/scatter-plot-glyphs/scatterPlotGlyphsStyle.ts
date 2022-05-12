@@ -11,6 +11,7 @@ export const AXIS_CLASS = `scatterPlotGlyphsAxis`
 export const AXIS_TEXT_CLASS = `scatterPlotGlyphsAxisText`
 export const DUPLICATES_CLASS = `scatterPlotGlyphsDuplicates`
 
+// all styles need to be in one sxProps for the view saving with css
 export const getScatterPlotGlyphsStyle = (
   opacity: Opacity,
   isBrushingActive: boolean,

@@ -17,6 +17,9 @@ import { ParallelSetsBundled } from '../../components/content/views/parallel-set
 
 import { ViewType } from './ViewType'
 
+/**
+ * Size of a view border
+ */
 export const VIEW_BORDER_SIZE = 5
 
 type ViewElementFunction = (
@@ -25,6 +28,10 @@ type ViewElementFunction = (
   showFilter?: boolean,
 ) => JSX.Element
 
+/**
+ * Record of view types and their creation functions.
+ * Functions take general props and settings (and filters in case of data table) and returns the view.
+ */
 export const getViewRecord: Record<ViewType, ViewElementFunction> = {
   [ViewType.Glyphs]: (p, s) => <Glyphs {...p} {...(s as GlyphsSettings)} />,
   [ViewType.ParallelCoordinates]: (p, s) => <ParallelCoordinates {...p} {...(s as ParallelCoordinatesSettings)} />,

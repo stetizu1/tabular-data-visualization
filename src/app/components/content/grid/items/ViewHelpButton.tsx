@@ -18,11 +18,11 @@ import { ViewType } from '../../../../constants/views-general/ViewType'
 import { BUTTON_VARIANT, COMPONENT_TYPE, DIALOG_MAX_WIDTH } from '../../../../constants/mui'
 import { BRUSHING_IMAGES } from '../../../../constants/public-path'
 
-import { VIEW_INFO_TEXT } from '../../../../text/siteText'
-import { INFO_DIALOG_TEXT, VIEW_NAMES } from '../../../../text/views-and-settings/common'
+import { VIEWS_NAMES } from '../../../../text/viewsNames'
 
 import { inlineButtonStyles } from '../../../../components-style/content/common/inlineButtonStyles'
 import { helpDialogStyle } from '../../../../components-style/content/common/helpDialogStyle'
+import { INFO_DIALOG_TEXT, VIEW_TOP_TEXT } from '../../../../text/viewTopText'
 
 export interface ViewHelpButtonProps {
   viewType: ViewType
@@ -40,12 +40,12 @@ export const ViewHelpButton: VoidFunctionComponent<ViewHelpButtonProps> = ({ vie
         fullWidth
         maxWidth={DIALOG_MAX_WIDTH.m}
       >
-        <DialogTitle>{VIEW_NAMES[viewType]}</DialogTitle>
+        <DialogTitle>{VIEWS_NAMES[viewType]}</DialogTitle>
         <Divider />
         <DialogContent>
           <DialogContentText sx={helpDialogStyle.text}>{INFO_DIALOG_TEXT[viewType].description}</DialogContentText>
           <Box sx={helpDialogStyle.iconedHeaderBox}>
-            <Typography sx={helpDialogStyle.header}>{VIEW_INFO_TEXT.dialog.brushing}</Typography>
+            <Typography sx={helpDialogStyle.header}>{VIEW_TOP_TEXT.infoDialog.brushing}</Typography>
             <Brush />
           </Box>
           <Divider />
@@ -61,7 +61,7 @@ export const ViewHelpButton: VoidFunctionComponent<ViewHelpButtonProps> = ({ vie
             </DialogContentText>
           </Box>
           <Box sx={helpDialogStyle.iconedHeaderBox}>
-            <Typography sx={helpDialogStyle.header}>{VIEW_INFO_TEXT.dialog.settings}</Typography>
+            <Typography sx={helpDialogStyle.header}>{VIEW_TOP_TEXT.infoDialog.settings}</Typography>
             <Settings />
           </Box>
           <Divider />
@@ -74,12 +74,12 @@ export const ViewHelpButton: VoidFunctionComponent<ViewHelpButtonProps> = ({ vie
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setIsDialogOpen(false)} variant={BUTTON_VARIANT.contained} autoFocus>
-            {VIEW_INFO_TEXT.dialog.close}
+            {VIEW_TOP_TEXT.infoDialog.close}
           </Button>
         </DialogActions>
       </Dialog>
       <Button onClick={() => setIsDialogOpen(true)} sx={inlineButtonStyles.button}>
-        <Tooltip title={VIEW_INFO_TEXT.buttonLabel}>
+        <Tooltip title={VIEW_TOP_TEXT.info}>
           <Help />
         </Tooltip>
       </Button>

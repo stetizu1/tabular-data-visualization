@@ -1,5 +1,8 @@
 import { ViewType } from '../views-general/ViewType'
 
+/**
+ * IDs for SVGs that can be saved
+ */
 export const SAVE_ID: Record<ViewType, string> = {
   [ViewType.ParallelCoordinates]: `pcSvgId`,
   [ViewType.ScatterPlotMatrix]: `spmSvgId`,
@@ -9,6 +12,9 @@ export const SAVE_ID: Record<ViewType, string> = {
   [ViewType.DataTable]: `dataTableId`,
 }
 
+/**
+ * IDs for containers of SVGs that can be saved
+ */
 export const CONTAINER_SAVE_ID: Record<ViewType, string> = {
   [ViewType.ParallelCoordinates]: `C_pcSvgId`,
   [ViewType.ScatterPlotMatrix]: `C_spmSvgId`,
@@ -18,6 +24,9 @@ export const CONTAINER_SAVE_ID: Record<ViewType, string> = {
   [ViewType.DataTable]: `C_dataTableId`,
 }
 
+/**
+ * IDs for containers when there is no SVG (to disable)
+ */
 export const CONTAINER_EMPTY: Record<ViewType, string> = {
   [ViewType.ParallelCoordinates]: `C_E_pcSvgId`,
   [ViewType.ScatterPlotMatrix]: `C_E_spmSvgId`,

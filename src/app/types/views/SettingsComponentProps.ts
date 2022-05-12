@@ -1,3 +1,7 @@
+/**
+ * Props for SettingComponent
+ */
+
 import { Dispatch, SetStateAction } from 'react'
 
 import { ViewType } from '../../constants/views-general/ViewType'

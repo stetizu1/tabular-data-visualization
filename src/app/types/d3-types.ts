@@ -1,3 +1,6 @@
+/**
+ * Types to work with d3.js
+ */
 import { MouseEvent } from 'react'
 import { BaseType, D3BrushEvent, ValueFn } from 'd3'
 
@@ -32,6 +35,7 @@ export type OnMouseEvent<T> = (event: MouseEvent, data: T) => void
 export type OnBrushEvent<T, K = unknown> = (event: D3BrushEvent<T>, key: K) => void
 
 /**
- * extent
+ * Extent
+ * [xFrom, yFrom], [xTo, yTo]
  */
 export type Extent = [[number, number], [number, number]]

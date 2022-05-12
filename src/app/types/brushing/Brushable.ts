@@ -1,21 +1,20 @@
+/**
+ * Type to work with brushable views
+ */
+
 import { ViewType } from '../../constants/views-general/ViewType'
 
 export type SetComponentBrushing = (newComponent: ViewType | null) => void
 
 /**
- * Interface for views that can show brushed data
+ * Interface for views, that can use brushing
  */
-export interface Highlightable {
+export interface Brushable {
   /**
    * True if some component is brushing
    */
   isBrushingActive: boolean
-}
 
-/**
- * Interface for views, that can use brushing inside
- */
-export interface Brushable extends Highlightable {
   /**
    * Setter for passing the brushing cleaning function to the Data Context component
    */

@@ -1,8 +1,12 @@
+/**
+ * Visualization view interface
+ */
+
 import { SelectableDataType } from '../data/data'
 import { Dimensions } from '../basic/dimensions'
 
 /**
- * Interface for every view window. It assigns dimensions (width, height) and a dataset to the view.
+ * Interface for every view window. It assigns dimensions (width, height) dataset and if details are visible to the view.
  */
 export interface VisualizationView extends Dimensions {
   /**
@@ -11,7 +15,7 @@ export interface VisualizationView extends Dimensions {
   dataset: ReadonlyArray<SelectableDataType>
 
   /**
-   * True if data details are visible on hover
+   * True if data details (tooltip) are visible on hover
    */
   isDetailsVisible?: boolean
 }

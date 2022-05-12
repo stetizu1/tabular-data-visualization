@@ -4,7 +4,8 @@ import { AutoGraph, UploadFile } from '@mui/icons-material'
 
 import { DataType, SelectableDataType } from '../../../../../types/data/data'
 
-import { CsvParse, isArrayOfDataType } from '../../../../../helpers/data/dataConvertors'
+import { isArrayOfDataType } from '../../../../../helpers/data/dataCheckers'
+import { CsvParse } from '../../../../../helpers/data/dataParsers'
 import { getAttributeKeys } from '../../../../../helpers/data/data'
 
 import { AcceptableFileTypes } from '../../../../../constants/data/data'

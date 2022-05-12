@@ -1,12 +1,22 @@
+/**
+ * Functions to save view as an SVG file
+ */
 import { ViewType } from '../../constants/views-general/ViewType'
 import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../constants/save/save'
+
+type StyleNode = { sheet: CSSStyleSheet }
 
 const xmlnsSvg = `http://www.w3.org/2000/svg`
 const preface = `<?xml version="1.0" standalone="no"?>\r\n`
 const options = { type: `image/svg+xml;charset=utf-8` }
 const linkElement = `a`
 
-export const saveSvgToFile = (svgEl: Element, fileName: string): void => {
+/**
+ * Save given element to an SVG file
+ * @param svgEl - svg element
+ * @param fileName - name of the file
+ */
+const saveSvgToFile = (svgEl: Element, fileName: string): void => {
   svgEl.setAttribute(`xmlns`, xmlnsSvg)
 
   const svgBlob = new Blob([preface, svgEl.outerHTML], options)
@@ -21,8 +31,10 @@ export const saveSvgToFile = (svgEl: Element, fileName: string): void => {
   document.body.removeChild(downloadLink)
 }
 
-type StyleNode = { sheet: CSSStyleSheet }
-
+/**
+ * Save given view to an SVG file
+ * @param viewType
+ */
 export const saveSvg = (viewType: ViewType): void => {
   const svgContainer = document.querySelector(`#${CONTAINER_SAVE_ID[viewType]}`)
   const svg = document.querySelector(`#${SAVE_ID[viewType]}`)
@@ -47,6 +59,10 @@ export const saveSvg = (viewType: ViewType): void => {
   newStyleNodes.forEach((node) => node.remove())
 }
 
+/**
+ * Returns true, if the view has not save container and have emptycontainer
+ * @param viewType
+ */
 export const getSaveIsDisabled = (viewType: ViewType): boolean =>
   document.querySelector(`#${CONTAINER_EMPTY[viewType]}`) !== null &&
   document.querySelector(`#${SAVE_ID[viewType]}`) === null

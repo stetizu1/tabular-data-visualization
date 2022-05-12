@@ -1,16 +1,20 @@
+/**
+ * Settings for glyphs
+ */
 import { SelectableDataType } from '../../data/data'
 
 import { SortType } from '../../../constants/sort/SortType'
 
 import { ViewVisualizationSettings } from './VisualizationSettings'
 
+// keys for additional attributes
 export const sortAttributeKey = `sortAttribute`
 export const sortTypeKey = `sortType`
 export const glyphSizeKey = `glyphSize`
 export const glyphSpacingKey = `glyphSpacing`
 
 /**
- * Settings for Glyphs view
+ * Settings for glyphs view
  */
 export interface GlyphsSettings extends ViewVisualizationSettings {
   /**

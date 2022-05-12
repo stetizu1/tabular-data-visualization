@@ -1,7 +1,15 @@
+/**
+ * Functions to get value extents
+ */
 import { extent } from 'd3'
 
 import { ExtentReqForSelectableDataType, SelectableDataType } from '../../types/data/data'
 
+/**
+ * Return extent of values for given attributes (domains)
+ * @param domains - attributes for which we determine the extent
+ * @param dataset
+ */
 export const getExtentInDomains = (
   domains: Array<keyof SelectableDataType>,
   dataset: ReadonlyArray<SelectableDataType>,
@@ -14,6 +22,13 @@ export const getExtentInDomains = (
     }),
   )
 
+/**
+ * Return extent of values for given attributes (domains), with the extension up and down by percent (moves minimum/maximum)
+ * @param domains - attributes for which we determine the extent
+ * @param dataset
+ * @param percentDown - how many percent should be added on minima side
+ * @param percentUp - how many percent should be added on maxima side
+ */
 export const getExtendedExtentInDomains = (
   domains: Array<keyof SelectableDataType>,
   dataset: ReadonlyArray<SelectableDataType>,

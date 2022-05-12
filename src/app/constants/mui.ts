@@ -1,5 +1,5 @@
 /**
- * mui types
+ * Constants to work with mui
  */
 export const COMPONENT_TYPE = {
   image: `img` as `img`,

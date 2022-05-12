@@ -28,7 +28,10 @@ import { CELL_PADDING } from '../../../../constants/mui'
 
 import { DATA_TABLE_TEXT } from '../../../../text/views-and-settings/dataTable'
 
-import { dataTableStyle } from '../../../../components-style/content/views/data-table/dataTableStyle'
+import {
+  dataTableStyle,
+  getFilterDisplayed,
+} from '../../../../components-style/content/views/data-table/dataTableStyle'
 
 import { DataTableBody } from './DataTableBody'
 
@@ -57,7 +60,9 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
   const filteredDataset = useMemo<SelectableDataType[]>(
     () =>
       [...dataset].filter((data) =>
-        displayAttributes.every((attribute) => String(data[attribute]).includes(filterValues[attribute])),
+        displayAttributes.every((attribute) =>
+          String(data[attribute]).toLowerCase().includes(filterValues[attribute].toLowerCase()),
+        ),
       ),
     [dataset, displayAttributes, filterValues],
   )
@@ -173,22 +178,20 @@ export const DataTable: VoidFunctionComponent<DataTableProps> = ({
             )
           })}
         </TableRow>
-        {showFilter && (
-          <TableRow sx={dataTableStyle.filterRow}>
-            <TableCell padding={CELL_PADDING.none}>
-              <FilterListOutlined sx={dataTableStyle.filterIcon} />
+        <TableRow sx={getFilterDisplayed(showFilter)}>
+          <TableCell padding={CELL_PADDING.none}>
+            <FilterListOutlined sx={dataTableStyle.filterIcon} />
+          </TableCell>
+          {displayAttributes.map((attribute, idx) => (
+            <TableCell sx={dataTableStyle.filterCell} key={`filter-${attribute}`}>
+              <TextField
+                defaultValue={filterValues[idx]}
+                sx={dataTableStyle.filter}
+                onChange={(e) => handleFilterValueChange(e.target.value, attribute)}
+              />
             </TableCell>
-            {displayAttributes.map((attribute, idx) => (
-              <TableCell sx={dataTableStyle.filterCell} key={`filter-${attribute}`}>
-                <TextField
-                  defaultValue={filterValues[idx]}
-                  sx={dataTableStyle.filter}
-                  onChange={(e) => handleFilterValueChange(e.target.value, attribute)}
-                />
-              </TableCell>
-            ))}
-          </TableRow>
-        )}
+          ))}
+        </TableRow>
       </TableHead>
     ),
     [

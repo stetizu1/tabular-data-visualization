@@ -1,18 +1,24 @@
+/**
+ * Text on site and top toolbar
+ */
+
 import { SampleDataset } from '../constants/data/sampleDataset'
 import { DataNullOptionType } from '../constants/data/data'
 import { DataLoadError } from '../constants/data/DataLoadError'
 
+/**
+ * Text on page before the data is selected/loaded
+ */
 export const EMPTY_DATA_TEXT = {
   content: `To use the application, first load the dataset from a JSON or CSV file. You can also try this application with sample data.`,
   firstTime: `Trying for the first time?`,
-  loading: `loading...`,
   helpDialog: {
     header: `About Tabular Data Visualizer`,
     description: `The purpose of this application is to visualize multidimensional tabular data.`,
     subHeader: `Options`,
     close: `Close`,
-    sample: `To try the application, you can select one of the sample datasets. You can use flower or car dataset for quantitative data visualizations, titanic or parallel cars for category visualization, or bird dataset for combination of both.`,
-    file: `You use applications with your own datasets, JSON or CSV files. Files need to have the right format, for JSON it is the array of the same objects with only simple values.`,
+    sample: `To try the application, you can select one of the sample datasets. You can use flower or car dataset for quantitative data visualizations, Titanic or parallel cars for category visualization, or bird dataset for combination of both.`,
+    file: `You use applications with your own datasets, JSON or CSV files. To use your own files, they need to have the right format. For JSON it is the array of objects with the same keys and value types (e.g. [{"species": "bird", "weight": 20}, {"species": "fish", "weight": 35},...]), in CSV, it is names of the attributes on the first line and values afterwards. You can also find example datasets in the project repository on GitHub.`,
     viewsHelp: `To get more information about a specific view, you can look at its help, which can be found in its header.`,
     add: `... add a new view type to the visualization board`,
     layout: `... set one of the predefined layouts`,
@@ -22,39 +28,33 @@ export const EMPTY_DATA_TEXT = {
     brushOff: `... clean all active brushing`,
     settings: `... show more settings for views`,
   },
+  loading: `loading...`,
 }
 
+/**
+ * Text on top toolbar
+ */
 export const TOP_TOOLBAR_TEXT = {
-  labelDetailsVisible: `Display tooltips`,
-  labelClearBrushes: `Clear brushes`,
-  labelAddView: `Add a view`,
-  labelBrushingOnEOM: `Set brushing at the end of the move only`,
-  labelBrushColor: `Brush color`,
-  addViewDialogTitle: `Add a view`,
-  labelDialogTitle: `Set predefined layout`,
-  noOption: `All view options are currently displayed.`,
+  addView: `Add a view`,
+  layout: `Set predefined layout`,
+  detailsVisible: `Display tooltips`,
+  brushingOnEOM: `Set brushing at the end of the move only`,
+  brushColor: `Brush color`,
+  clearBrushes: `Clear brushes`,
   settings: `Settings`,
-  filter: `Filter`,
-}
-
-export const SAVE_TEXT = {
-  header: `Save to file`,
-  description: `Do you want to save the visualization to an SVG file?`,
-  save: `Save as SVG`,
-  confirm: `Save`,
-  cancel: `Cancel`,
-}
-
-export const VIEW_INFO_TEXT = {
-  buttonLabel: `Show view information`,
-  dialog: {
-    brushing: `Brushing`,
-    settings: `Settings`,
-    options: `Options`,
-    close: `Close`,
+  addDialog: {
+    title: `Add a view`,
+    noOption: `All view options are currently displayed.`,
+  },
+  layoutDialog: {
+    title: `Select a layout`,
+    alt: `Layout `,
   },
 }
 
+/**
+ * Text connected to data load / reading file
+ */
 export const FILE_READER_TEXT = {
   button: `Select a file`,
   sampleDataLabel: `Try it on the sample data`,
@@ -94,9 +94,4 @@ export const FILE_READER_TEXT = {
     changeTo: `Change to`,
     attribute: `Attribute:`,
   },
-}
-
-export const LAYOUT_DIALOG_TEXT = {
-  title: `Set a layout`,
-  alt: `Layout `,
 }

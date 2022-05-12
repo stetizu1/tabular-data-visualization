@@ -1,3 +1,6 @@
+/**
+ * Application root
+ */
 import { VoidFunctionComponent } from 'react'
 import { Box } from '@mui/material'
 

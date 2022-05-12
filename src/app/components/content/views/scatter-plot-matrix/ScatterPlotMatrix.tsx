@@ -46,8 +46,6 @@ import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constan
 
 import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-settings/scatterPlotMatrix'
 
-import { PLOT_FONT_BOX_SIZE } from '../../../../styles/font'
-
 import {
   AXIS_CLASS,
   getScatterPlotMatrixStyle,
@@ -58,6 +56,7 @@ import {
   CELL_CLASS,
 } from '../../../../components-style/content/views/scatter-plot-matrix/scatterPlotMatrixStyle'
 import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
+import { PLOT_FONT_BOX_SIZE } from '../../../../constants/others'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {}
 

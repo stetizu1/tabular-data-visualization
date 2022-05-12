@@ -13,6 +13,7 @@ export const CONNECTORS_CLASS = `psbConnector`
 export const INNER_TEXT_CLASS = `psbInnerText`
 export const TABS_SELECTED_CLASS = `psbTabsSelected`
 
+// all styles need to be in one sxProps for the view saving with css
 export const getParallelSetsBundledStyle = (
   opacity: Opacity,
   isBrushActive: boolean,

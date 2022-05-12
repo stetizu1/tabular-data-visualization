@@ -17,7 +17,7 @@ import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from 
 import { TOOLTIP_CLASS } from '../../../constants/views-general/tooltip'
 
 import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
-import { VIEW_NAMES } from '../../../text/views-and-settings/common'
+import { VIEWS_NAMES } from '../../../text/viewsNames'
 
 import { viewGridStyle } from '../../../components-style/content/views/viewGridStyle'
 
@@ -117,15 +117,15 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
 
   const views = layout.map((item) => item.i)
   const availableViews = Object.values(ViewType).filter((viewType) => !views.includes(viewType))
-  const dialogOptions = availableViews.map((key) => ({ key, label: VIEW_NAMES[key], icon: <AddCircle /> }))
+  const dialogOptions = availableViews.map((key) => ({ key, label: VIEWS_NAMES[key], icon: <AddCircle /> }))
   return (
     <Box>
       <SelectionDialog
         isOpen={isAddViewDialogOpen}
         onClose={() => setIsAddViewDialogOpen(false)}
-        title={TOP_TOOLBAR_TEXT.addViewDialogTitle}
+        title={TOP_TOOLBAR_TEXT.addDialog.title}
         options={dialogOptions}
-        noOptionText={TOP_TOOLBAR_TEXT.noOption}
+        noOptionText={TOP_TOOLBAR_TEXT.addDialog.noOption}
         handleListItemClick={addView}
       />
       <LayoutDialog
@@ -162,7 +162,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
           <Box key={view.i} data-grid={view}>
             <GridItem
               isResizeFinished={view.i !== viewResizing}
-              title={VIEW_NAMES[view.i]}
+              title={VIEWS_NAMES[view.i]}
               onRemove={() => {
                 cleanSelectedIfViewWasBrushing(view.i)
                 removeView(view.i)

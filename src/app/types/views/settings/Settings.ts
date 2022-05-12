@@ -1,3 +1,7 @@
+/**
+ * Combined visualization settings
+ */
+
 import { ViewType } from '../../../constants/views-general/ViewType'
 
 import { ParallelCoordinatesSettings } from './ParallelCoordinatesSettings'
