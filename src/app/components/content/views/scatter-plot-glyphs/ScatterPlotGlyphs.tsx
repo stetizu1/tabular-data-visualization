@@ -217,6 +217,9 @@ export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = 
     registerCleanBrushing(() => {
       brush().clear(svg)
     })
+
+    // selected coloring, first time
+    selectAll(getClass(SCATTER_PLOT_GLYPHS_CLASS)).classed(SELECTED_CLASS, (d) => (d as SelectableDataType).selected)
   }, [
     dataset,
     innerWidth,

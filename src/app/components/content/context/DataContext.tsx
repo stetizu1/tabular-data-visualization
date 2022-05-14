@@ -27,7 +27,7 @@ export const DataContext: VoidFunctionComponent = () => {
   const [settings, setSettings] = useState<Settings>({})
 
   const [componentBrushing, setCurrentComponentBrushing] = useState<null | ViewType>(null)
-  const [cleanBrushing, setCleanBrushing] = useState<(() => void)[]>([])
+  const [cleanBrushing, setCleanBrushing] = useState<Partial<Record<ViewType, () => void>>>({})
   const [currentRedrawTime, setRedrawTime] = useState(Date.now())
 
   const redrawTime = useDebounce(currentRedrawTime, BRUSH_DEBOUNCE) // used for less component re-renders
@@ -69,7 +69,7 @@ export const DataContext: VoidFunctionComponent = () => {
         dataset.forEach((data) => (data.selected = false))
         refreshViews()
       }
-      cleanBrushingRef.current.forEach((f) => f())
+      Object.values(cleanBrushingRef.current).forEach((f) => f())
     },
     [cleanBrushingRef, dataset, refreshViews],
   )
@@ -89,8 +89,11 @@ export const DataContext: VoidFunctionComponent = () => {
     [cleanAllBrushes, componentBrushingRef],
   )
 
-  const registerCleanBrushing = useCallback((cleanBrushing: () => void) => {
-    setCleanBrushing((prev) => [...prev, cleanBrushing])
+  const registerCleanBrushingAll = useCallback((viewType: ViewType, cleanBrushing: () => void) => {
+    setCleanBrushing((prev) => ({
+      ...prev,
+      [viewType]: cleanBrushing,
+    }))
   }, [])
 
   const cleanSelectedIfViewWasBrushing = useCallback(
@@ -175,7 +178,7 @@ export const DataContext: VoidFunctionComponent = () => {
         layout={layout}
         setLayout={setLayout}
         brushColor={brushColor}
-        registerCleanBrushing={registerCleanBrushing}
+        registerCleanBrushingAll={registerCleanBrushingAll}
         setComponentBrushing={setComponentBrushing}
         refreshViews={refreshViews}
         redrawTime={redrawTime}

@@ -26,8 +26,9 @@ import { LayoutDialog } from '../top-toolbar/items/layout/LayoutDialog'
 import { SelectionDialog } from '../common/dialogs/SelectionDialog'
 import { GridItem } from './GridItem'
 
-export interface ViewGridDataProps extends Brushable {
+export interface ViewGridDataProps extends Omit<Brushable, `registerCleanBrushing`> {
   dataset: ReadonlyArray<SelectableDataType>
+  registerCleanBrushingAll: (viewType: ViewType, clean: () => void) => void
 }
 
 export interface ViewGridProps extends ViewGridDataProps {
@@ -61,6 +62,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
   setIsLayoutDialogOpen,
   layout,
   setLayout,
+  registerCleanBrushingAll,
   ...viewProps
 }) => {
   const [viewResizing, setViewResizing] = useState<ViewType | null>(null)
@@ -169,6 +171,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
               }}
               viewType={view.i}
               settings={settings}
+              registerCleanBrushing={(clean: () => void) => registerCleanBrushingAll(view.i, clean)}
               {...viewProps}
             />
           </Box>
