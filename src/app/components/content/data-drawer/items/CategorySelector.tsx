@@ -16,6 +16,7 @@ export interface CategorySelectorProps {
   attributesKeys: Array<keyof SelectableDataType>
   setSettings: Dispatch<SetStateAction<Settings>>
   label: string
+  handleChangeSettings?: () => void
 }
 
 export const CategorySelector: VoidFunctionComponent<CategorySelectorProps> = ({
@@ -24,9 +25,11 @@ export const CategorySelector: VoidFunctionComponent<CategorySelectorProps> = ({
   attributesKeys,
   setSettings,
   label,
+  handleChangeSettings,
 }) => {
   const handleSelectCategoryChange = useCallback(
     (categoryAttribute: keyof SelectableDataType | -1) => {
+      if (handleChangeSettings) handleChangeSettings()
       setSettings((prev) => {
         const prevSettings = prev[viewType]!
         return {
@@ -38,7 +41,7 @@ export const CategorySelector: VoidFunctionComponent<CategorySelectorProps> = ({
         }
       })
     },
-    [setSettings, viewType],
+    [setSettings, viewType, handleChangeSettings],
   )
 
   return (

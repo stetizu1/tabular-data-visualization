@@ -128,6 +128,7 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
               label={SCATTER_PLOT_GLYPHS_SETTINGS_TEXT.category}
+              handleChangeSettings={handleChangeSettings}
             />
             <Accordion sx={settingsDrawerItemStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>

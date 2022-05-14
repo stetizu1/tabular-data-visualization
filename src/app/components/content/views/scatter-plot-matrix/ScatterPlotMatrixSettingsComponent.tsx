@@ -109,6 +109,7 @@ export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsC
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
               label={SCATTER_PLOT_MATRIX_SETTINGS_TEXT.category}
+              handleChangeSettings={handleChangeSettings}
             />
             <Accordion sx={settingsDrawerItemStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>

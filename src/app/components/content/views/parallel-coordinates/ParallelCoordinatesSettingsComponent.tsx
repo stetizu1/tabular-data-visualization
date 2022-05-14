@@ -103,6 +103,7 @@ export const ParallelCoordinatesSettingsComponent: VoidFunctionComponent<Setting
               attributesKeys={categoricalAttributes}
               setSettings={setSettings}
               label={PARALLEL_COORDINATES_SETTINGS_TEXT.category}
+              handleChangeSettings={handleChangeSettings}
             />
             <Accordion sx={settingsDrawerItemStyle.accordion}>
               <AccordionSummary expandIcon={<ExpandMore />}>
