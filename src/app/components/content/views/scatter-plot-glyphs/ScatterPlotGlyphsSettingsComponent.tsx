@@ -103,6 +103,7 @@ export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsC
               checked={checked}
               setChecked={setChecked}
               setAttributesKeys={setQuantitativeAttributesKeys}
+              handleChangeSettings={handleChangeSettings}
             />
             <Selector
               viewType={viewType}
