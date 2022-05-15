@@ -81,7 +81,7 @@ export const dialogStyle: Record<string, SxProps> = {
     },
   },
   image: {
-    width: 220,
+    width: 165,
     height: 85,
     borderRadius: px(2),
   },
