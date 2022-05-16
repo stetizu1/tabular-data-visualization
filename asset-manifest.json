@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/tabular-data-visualization/static/css/main.6dea0f05.chunk.css",
-    "main.js": "/tabular-data-visualization/static/js/main.6a6a21b1.chunk.js",
-    "main.js.map": "/tabular-data-visualization/static/js/main.6a6a21b1.chunk.js.map",
+    "main.js": "/tabular-data-visualization/static/js/main.91b03bf7.chunk.js",
+    "main.js.map": "/tabular-data-visualization/static/js/main.91b03bf7.chunk.js.map",
     "runtime-main.js": "/tabular-data-visualization/static/js/runtime-main.4c572b3b.js",
     "runtime-main.js.map": "/tabular-data-visualization/static/js/runtime-main.4c572b3b.js.map",
     "static/css/2.a72322c1.chunk.css": "/tabular-data-visualization/static/css/2.a72322c1.chunk.css",
@@ -18,6 +18,6 @@
     "static/css/2.a72322c1.chunk.css",
     "static/js/2.7a40f923.chunk.js",
     "static/css/main.6dea0f05.chunk.css",
-    "static/js/main.6a6a21b1.chunk.js"
+    "static/js/main.91b03bf7.chunk.js"
   ]
 }
