@@ -121,7 +121,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
   const availableViews = Object.values(ViewType).filter((viewType) => !views.includes(viewType))
   const dialogOptions = availableViews.map((key) => ({ key, label: VIEWS_NAMES[key], icon: <AddCircle /> }))
   return (
-    <Box>
+    <>
       <SelectionDialog
         isOpen={isAddViewDialogOpen}
         onClose={() => setIsAddViewDialogOpen(false)}
@@ -147,7 +147,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
       />
       <Box sx={viewGridStyle.tooltip} className={TOOLTIP_CLASS} />
       <ReactGridLayout
-        style={{ overflowX: `hidden` }}
+        style={{ overflowX: `hidden`, flexGrow: 1 }}
         onLayoutChange={updateLayout}
         draggableHandle={getClass(DRAG_HANDLE)}
         onResizeStart={(_, view) => {
@@ -158,6 +158,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
         onResizeStop={() => setViewResizing(null)}
         cols={COLUMNS_COUNT}
         rowHeight={ROW_HEIGHT}
+        useCSSTransforms={navigator.userAgent.toLowerCase().indexOf(`firefox`) === -1}
         isResizable
       >
         {layout.map((view) => (
@@ -177,7 +178,7 @@ const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
           </Box>
         ))}
       </ReactGridLayout>
-    </Box>
+    </>
   )
 }
 
