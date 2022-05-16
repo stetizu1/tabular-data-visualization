@@ -1,3 +1,6 @@
+/**
+ * Select field, works for specified attribute key and select options.
+ */
 import { Dispatch, SetStateAction, useCallback } from 'react'
 import { MenuItem, TextField } from '@mui/material'
 

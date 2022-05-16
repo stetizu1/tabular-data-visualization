@@ -1,3 +1,7 @@
+/**
+ * Selection dialog
+ * Dialog allowing select one of the options or cancel
+ */
 import {
   Avatar,
   Dialog,

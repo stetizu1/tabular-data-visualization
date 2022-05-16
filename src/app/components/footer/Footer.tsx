@@ -1,3 +1,6 @@
+/**
+ * Application footer
+ */
 import { VoidFunctionComponent } from 'react'
 import { Box, Link, Typography } from '@mui/material'
 import { GitHub } from '@mui/icons-material'

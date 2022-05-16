@@ -1,3 +1,6 @@
+/**
+ * Dialog for null data editing.
+ */
 import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
 import {
   Box,

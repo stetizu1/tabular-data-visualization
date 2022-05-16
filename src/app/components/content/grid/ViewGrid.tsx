@@ -1,3 +1,7 @@
+/**
+ * ViewGrid containing all the views and settings.
+ * Also containing layout logic.
+ */
 import React, { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState, memo, useEffect } from 'react'
 import GridLayout, { WidthProvider } from 'react-grid-layout'
 import { Box } from '@mui/material'

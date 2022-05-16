@@ -1,3 +1,6 @@
+/**
+ * Glyphs view
+ */
 import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
 import { Box } from '@mui/material'

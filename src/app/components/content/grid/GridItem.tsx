@@ -1,3 +1,6 @@
+/**
+ * Single item in the grid, passing it's size to the children.
+ */
 import React, { ComponentProps, useState, VoidFunctionComponent } from 'react'
 import { useSize } from 'react-use'
 import { Box, Typography } from '@mui/material'

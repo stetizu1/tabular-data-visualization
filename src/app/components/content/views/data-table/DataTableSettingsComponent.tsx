@@ -1,3 +1,6 @@
+/**
+ * Settings for Data Table view
+ */
 import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'

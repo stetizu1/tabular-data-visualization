@@ -1,3 +1,6 @@
+/**
+ * Data Table view
+ */
 import { useCallback, useEffect, useMemo, useState, VoidFunctionComponent } from 'react'
 import {
   Box,

@@ -1,3 +1,6 @@
+/**
+ * A component to choose all of the colors for category attribute values.
+ */
 import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useEffect, useCallback } from 'react'
 import { Box, Typography } from '@mui/material'
 

@@ -1,3 +1,7 @@
+/**
+ * Confirmation dialog
+ * Text dialog allowing confirm and cancel actions
+ */
 import { VoidFunctionComponent } from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
 

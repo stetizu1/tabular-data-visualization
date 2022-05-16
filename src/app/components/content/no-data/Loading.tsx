@@ -1,3 +1,6 @@
+/**
+ * Page content while loading the dataset.
+ */
 import { VoidFunctionComponent } from 'react'
 import { Box } from '@mui/material'
 

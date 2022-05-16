@@ -1,3 +1,7 @@
+/**
+ * Right-side drawer containing setting for the views
+ */
+
 import { Dispatch, VoidFunctionComponent, SetStateAction, useMemo } from 'react'
 import { Box, Divider, Drawer, Button, Tooltip, Typography } from '@mui/material'
 import { ChevronRight } from '@mui/icons-material'

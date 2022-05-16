@@ -1,3 +1,6 @@
+/**
+ * Number input, works for specified attribute key, allowing to change minimum and maximum.
+ */
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { Box, TextField } from '@mui/material'
 

@@ -1,3 +1,6 @@
+/**
+ * Top toolbar, containing general settings independent of the specific view.
+ */
 import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
 import { Box } from '@mui/material'
 import { AddCircle, Brush, Dashboard, SkipNext } from '@mui/icons-material'

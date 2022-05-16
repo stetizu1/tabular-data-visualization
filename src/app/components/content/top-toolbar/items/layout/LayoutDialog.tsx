@@ -1,3 +1,6 @@
+/**
+ * Dialog with default layout options.
+ */
 import { Dispatch, SetStateAction, VoidFunctionComponent } from 'react'
 import { Card, CardContent, CardMedia, Dialog, DialogContent, DialogTitle, Divider, Typography } from '@mui/material'
 

@@ -1,3 +1,6 @@
+/**
+ * Button that can be toggled (set on/off)
+ */
 import { Dispatch, VoidFunctionComponent, MouseEvent, SetStateAction, useCallback } from 'react'
 import { ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material'
 

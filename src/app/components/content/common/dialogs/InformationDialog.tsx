@@ -1,3 +1,7 @@
+/**
+ * Information dialog
+ * Text dialog containing some information
+ */
 import { VoidFunctionComponent } from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
 

@@ -1,3 +1,6 @@
+/**
+ * A component to choose a category attribute. It allows to select no attribute, too.
+ */
 import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback } from 'react'
 import { MenuItem, TextField } from '@mui/material'
 

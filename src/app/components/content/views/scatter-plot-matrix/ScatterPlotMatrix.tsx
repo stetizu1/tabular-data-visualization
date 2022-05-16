@@ -1,3 +1,6 @@
+/**
+ * Scatter Plot Matrix view
+ */
 import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import {
   Axis,

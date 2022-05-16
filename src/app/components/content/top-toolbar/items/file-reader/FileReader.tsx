@@ -1,3 +1,6 @@
+/**
+ * Component reading the file data
+ */
 import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useCallback, ChangeEvent } from 'react'
 import { Box, Button, Tooltip } from '@mui/material'
 import { AutoGraph, UploadFile } from '@mui/icons-material'

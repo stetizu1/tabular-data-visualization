@@ -1,3 +1,8 @@
+/**
+ * A component for selecting display attributes.
+ * It can also change their order.
+ */
+
 import { Dispatch, SetStateAction, useCallback } from 'react'
 import { Box, Button, Checkbox, FormControlLabel } from '@mui/material'
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material'

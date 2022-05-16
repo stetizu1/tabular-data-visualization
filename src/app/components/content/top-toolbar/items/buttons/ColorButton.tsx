@@ -1,3 +1,6 @@
+/**
+ * Button for color change
+ */
 import { useEffect, useState, VoidFunctionComponent } from 'react'
 import { Box, Tooltip } from '@mui/material'
 
