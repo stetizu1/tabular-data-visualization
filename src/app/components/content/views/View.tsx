@@ -1,3 +1,6 @@
+/**
+ * Component setting a specific view according to the given viewType parameter
+ */
 import { VoidFunctionComponent } from 'react'
 import { Box } from '@mui/material'
 
@@ -25,12 +28,12 @@ export const View: VoidFunctionComponent<ViewProps> = ({
   showFilter,
   ...dataProps
 }) => {
-  const graph = getViewRecord[viewType]
+  const getView = getViewRecord[viewType]
   const settingsCurr = settings[viewType]
   if (!settingsCurr) return null
   return (
     <Box sx={getViewBoxStyle(width, height)}>
-      {graph({ width, height: height - VIEW_BORDER_SIZE, ...dataProps }, settingsCurr, showFilter)}
+      {getView({ width, height: height - VIEW_BORDER_SIZE, ...dataProps }, settingsCurr, showFilter)}
     </Box>
   )
 }

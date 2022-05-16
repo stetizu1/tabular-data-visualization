@@ -1,3 +1,6 @@
+/**
+ * A component to change opacity for all the brushing states.
+ */
 import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useCallback, useEffect } from 'react'
 import { Box, TextField, Typography } from '@mui/material'
 

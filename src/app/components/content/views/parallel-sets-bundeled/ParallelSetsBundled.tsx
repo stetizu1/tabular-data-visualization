@@ -1,3 +1,6 @@
+/**
+ * Parallel Sets (bundled) view
+ */
 import { useCallback, useEffect, useMemo, useRef, useState, VoidFunctionComponent } from 'react'
 import { scaleOrdinal, select } from 'd3'
 import { Box } from '@mui/material'

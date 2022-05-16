@@ -1,3 +1,6 @@
+/**
+ * Settings for Glyphs view
+ */
 import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'

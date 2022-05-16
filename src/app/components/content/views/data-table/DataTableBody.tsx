@@ -1,3 +1,6 @@
+/**
+ * Body of the data table view, built from sorted dataset
+ */
 import { VoidFunctionComponent } from 'react'
 import { Checkbox, TableBody, TableCell, TableRow } from '@mui/material'
 

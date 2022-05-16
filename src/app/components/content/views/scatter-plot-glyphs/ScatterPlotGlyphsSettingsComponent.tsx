@@ -1,3 +1,6 @@
+/**
+ * Settings for Scatter Plot Glyphs view
+ */
 import { useCallback, useEffect, useMemo, useState, VoidFunctionComponent } from 'react'
 import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'

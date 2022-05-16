@@ -1,3 +1,6 @@
+/**
+ * A component to choose a single color.
+ */
 import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material'
 

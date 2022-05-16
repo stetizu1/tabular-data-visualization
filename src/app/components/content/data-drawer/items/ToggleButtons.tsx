@@ -1,3 +1,6 @@
+/**
+ * Toggle buttons, works for specified attribute key, forcing to choose between given options.
+ */
 import { Dispatch, SetStateAction, useCallback } from 'react'
 import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material'
 

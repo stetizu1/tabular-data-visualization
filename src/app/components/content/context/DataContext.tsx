@@ -1,3 +1,9 @@
+/**
+ * Data management component:
+ *  maintains the current state of this data,
+ *  creates functions for working with this data and
+ *  distributes them between the top toolbar and views/settings
+ */
 import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
 
 import { SelectableDataType } from '../../../types/data/data'
@@ -38,9 +44,10 @@ export const DataContext: VoidFunctionComponent = () => {
 
   const [isLayoutDialogOpen, setIsLayoutDialogOpen] = useState(false)
   const [isAddViewDialogOpen, setIsAddViewDialogOpen] = useState(false)
-  const [layout, setLayout] = useState<GridLayoutItem[] | null>(null)
+  const [layout, setLayout] = useState<GridLayoutItem[] | null>(null) // should not be set to null again
   const [brushColor, setBrushColor] = useState<string>(DEFAULT_BRUSH_COLOR)
 
+  // On the first time user adds a dataset, set layout
   useEffect(() => {
     if (!dataset || layout !== null) return
     setLayout(
@@ -53,16 +60,19 @@ export const DataContext: VoidFunctionComponent = () => {
   const cleanBrushingRef = useUpdatedRef(cleanBrushing)
   const componentBrushingRef = useUpdatedRef(componentBrushing)
 
-  const setDatasetAndRemoveBrushing = useCallback((data: ReadonlyArray<SelectableDataType> | null) => {
+  // Setting up a new dataset with the addition of deleting the previous brushing and resetting the settings in case this data remained from the previous one
+  const setNewDataset = useCallback((data: ReadonlyArray<SelectableDataType> | null) => {
     setSettings({})
     setDataset(data)
     setCurrentComponentBrushing(null)
   }, [])
 
+  // Forces redrawing of the views
   const refreshViews = useCallback((): void => {
     setRedrawTime(Date.now()) // redraw component
   }, [])
 
+  // Removes all brush elements from the views; it also resets the previous selection unless told otherwise
   const cleanAllBrushes = useCallback(
     (deletePrevSelection = true) => {
       if (dataset && deletePrevSelection) {
@@ -74,11 +84,13 @@ export const DataContext: VoidFunctionComponent = () => {
     [cleanBrushingRef, dataset, refreshViews],
   )
 
-  const clearBrushesOnButton = useCallback(() => {
+  // Removes all brushing
+  const handleClearBrushesOnButtonClick = useCallback(() => {
     setCurrentComponentBrushing(null)
     cleanAllBrushes()
   }, [cleanAllBrushes])
 
+  // Sets the brushing component. If the component has changed, it removes the brushing elements or even deselects the data, if needed
   const setComponentBrushing: SetComponentBrushing = useCallback(
     (newComponent) => {
       if (componentBrushingRef.current !== newComponent) {
@@ -89,6 +101,7 @@ export const DataContext: VoidFunctionComponent = () => {
     [cleanAllBrushes, componentBrushingRef],
   )
 
+  // Registers the function for cleaning brush elements for a given view
   const registerCleanBrushingAll = useCallback((viewType: ViewType, cleanBrushing: () => void) => {
     setCleanBrushing((prev) => ({
       ...prev,
@@ -96,6 +109,7 @@ export const DataContext: VoidFunctionComponent = () => {
     }))
   }, [])
 
+  // If given view was brushing, this will cancel this brushing
   const cleanSelectedIfViewWasBrushing = useCallback(
     (component: ViewType | brushViewType) => {
       if (
@@ -109,6 +123,7 @@ export const DataContext: VoidFunctionComponent = () => {
     [cleanAllBrushes, componentBrushingRef],
   )
 
+  // Removes current brushing and applies new rule
   const setIsBrushingOnEndOfMoveAndRemoveBrushing = useCallback(
     (newIsBrushingOnEndOfMove: boolean) => {
       cleanAllBrushes()
@@ -130,8 +145,8 @@ export const DataContext: VoidFunctionComponent = () => {
       isBrushingOnEndOfMove={isBrushingOnEndOfMove}
       setIsBrushingOnEndOfMove={setIsBrushingOnEndOfMoveAndRemoveBrushing}
       isBrushingActive={componentBrushingRef.current !== null}
-      clearBrushes={clearBrushesOnButton}
-      setDataset={setDatasetAndRemoveBrushing}
+      clearBrushes={handleClearBrushesOnButtonClick}
+      setDataset={setNewDataset}
       setDataLoadState={setDataLoadState}
       setIsLayoutDialogOpen={setIsLayoutDialogOpen}
       removeLayout={() => setLayout([])}
@@ -157,8 +172,7 @@ export const DataContext: VoidFunctionComponent = () => {
       </>
     )
   }
-
-  if (!layout) return null
+  if (!layout) return null // temporary, useEffect will set the layout
 
   return (
     <>

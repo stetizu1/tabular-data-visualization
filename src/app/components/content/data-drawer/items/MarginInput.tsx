@@ -1,3 +1,6 @@
+/**
+ * A component to change a margin of the view. It provides four number inputs, one for each side, with corresponding labels.
+ */
 import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState, useEffect } from 'react'
 import { Box, TextField, Typography } from '@mui/material'
 

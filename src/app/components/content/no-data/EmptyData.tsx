@@ -1,3 +1,6 @@
+/**
+ * Page content before selecting a dataset.
+ */
 import { useState, VoidFunctionComponent } from 'react'
 import {
   Box,

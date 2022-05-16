@@ -1,3 +1,6 @@
+/**
+ * Parallel Coordinates view
+ */
 import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { Box } from '@mui/material'
 import { axisLeft, brushY, line, scaleLinear, scaleOrdinal, scalePoint, select, selectAll } from 'd3'

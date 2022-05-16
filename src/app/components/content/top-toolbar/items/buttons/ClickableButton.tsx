@@ -1,3 +1,6 @@
+/**
+ * Button that can be clicked
+ */
 import { VoidFunctionComponent } from 'react'
 import { Button, Tooltip } from '@mui/material'
 

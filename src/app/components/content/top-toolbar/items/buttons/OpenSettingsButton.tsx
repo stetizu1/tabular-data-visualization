@@ -1,3 +1,6 @@
+/**
+ * Button to open settings drawer
+ */
 import { VoidFunctionComponent } from 'react'
 import { Button, Tooltip } from '@mui/material'
 import { Settings } from '@mui/icons-material'
