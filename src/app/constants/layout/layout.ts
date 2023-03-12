@@ -1,5 +1,5 @@
-import { Dimensions } from '../../types/basic/dimensions'
-import { GridLayoutItem } from '../../types/views/Grid'
+import { Dimensions } from '@/types/basic/dimensions'
+import { GridLayoutItem } from '@/types/views/Grid'
 import { ViewType } from '../views-general/ViewType'
 
 /**

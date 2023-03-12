@@ -1,8 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { px } from '../../../helpers/stringGetters'
+import { px } from '@/helpers/stringGetters'
 
-import { SITE_COLORS } from '../../../styles/colors'
+import { SITE_COLORS } from '@/styles/colors'
 
 export const emptyDataStyle: Record<string, SxProps> = {
   content: {

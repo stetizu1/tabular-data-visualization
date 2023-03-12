@@ -60,7 +60,7 @@ export const saveSvg = (viewType: ViewType): void => {
 }
 
 /**
- * Returns true, if the view has not save container and have emptycontainer
+ * Returns true, if the view has not saved container and have emptycontainer
  * @param viewType
  */
 export const getSaveIsDisabled = (viewType: ViewType): boolean =>

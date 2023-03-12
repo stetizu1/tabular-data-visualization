@@ -1,7 +1,7 @@
 /**
  * Text on view top bar
  */
-import { ViewType } from '../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
 export const VIEW_TOP_TEXT = {
   filter: `Filter`,

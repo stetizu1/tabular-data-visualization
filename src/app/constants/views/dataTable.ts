@@ -1,4 +1,4 @@
-import { DataTableSettings } from '../../types/views/settings/DataTableSettings'
+import { DataTableSettings } from '@/types/views/settings/DataTableSettings'
 
 import { DEFAULT_BRUSH_BG_COLOR_TABLE, DEFAULT_BRUSH_FONT_COLOR_TABLE } from '../views-general/defaultSettableColors'
 

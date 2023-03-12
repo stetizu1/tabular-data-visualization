@@ -1,8 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { border, px } from '../../../../../helpers/stringGetters'
+import { border, px } from '@/helpers/stringGetters'
 
-import { BUTTON_COLORS, HIGHLIGHT_COLOR } from '../../../../../styles/colors'
+import { BUTTON_COLORS, HIGHLIGHT_COLOR } from '@/styles/colors'
 
 export const getFileReaderBoxStyle = (isHighlighted: boolean): SxProps => ({
   transition: `0.3s all ease`,

@@ -1,7 +1,7 @@
 /**
  * Text for glyphs
  */
-import { ViewType } from '../../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
 import { VIEWS_NAMES } from '../viewsNames'
 import { SETTINGS_TEXT } from './common'

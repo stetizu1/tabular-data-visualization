@@ -2,7 +2,7 @@
  * Type to work with brushable views
  */
 
-import { ViewType } from '../../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
 export type SetComponentBrushing = (newComponent: ViewType | null) => void
 
@@ -33,7 +33,7 @@ export interface Brushable {
 
   /**
    * Property used to redraw a component while setting new selected data (props change for React)
-   * It is not used inside of the component
+   * It is not used inside the component
    */
   redrawTime: number
 

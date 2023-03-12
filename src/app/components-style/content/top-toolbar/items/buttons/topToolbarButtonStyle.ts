@@ -1,8 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { border, px } from '../../../../../helpers/stringGetters'
+import { border, px } from '@/helpers/stringGetters'
 
-import { BUTTON_COLORS } from '../../../../../styles/colors'
+import { BUTTON_COLORS } from '@/styles/colors'
 
 export const topToolbarButtonStyle: Record<string, SxProps> = {
   button: {

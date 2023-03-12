@@ -1,8 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { calc, px } from '../../helpers/stringGetters'
+import { calc, px } from '@/helpers/stringGetters'
 
-import { FOOTER_COLORS, SETTINGS_DRAWER_COLORS } from '../../styles/colors'
+import { FOOTER_COLORS, SETTINGS_DRAWER_COLORS } from '@/styles/colors'
 
 export const footerStyle: Record<string, SxProps> = {
   footerContainer: {

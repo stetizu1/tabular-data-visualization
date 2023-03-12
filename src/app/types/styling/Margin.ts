@@ -2,7 +2,7 @@
  * Types to work with margin
  */
 
-import { px } from '../../helpers/stringGetters'
+import { px } from '@/helpers/stringGetters'
 
 /**
  * Class for defining margin for the view.

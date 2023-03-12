@@ -10,7 +10,7 @@ import { SelectableDataType } from '../data/data'
  */
 export interface VisualizationView extends Dimensions {
   /**
-   * Array of rows from loaded tabular data with selected flag. It should be immutable in views, with the exception of selected attribute
+   * Array of rows from loaded tabular data with selected flag. It should be immutable in views, except for selected attribute
    */
   dataset: ReadonlyArray<SelectableDataType>
 

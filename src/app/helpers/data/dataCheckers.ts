@@ -1,4 +1,4 @@
-import { DataType, JsonValue } from '../../types/data/data'
+import { DataType, JsonValue } from '@/types/data/data'
 
 /**
  * Checks if value is one of the JSON simple values

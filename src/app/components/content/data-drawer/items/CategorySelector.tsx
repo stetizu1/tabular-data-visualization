@@ -1,5 +1,5 @@
 /**
- * A component to choose a category attribute. It allows to select no attribute, too.
+ * A component to choose a category attribute. It allows to not select any attribute too.
  */
 import { MenuItem, TextField } from '@mui/material'
 import { Dispatch, FC, SetStateAction, useCallback } from 'react'

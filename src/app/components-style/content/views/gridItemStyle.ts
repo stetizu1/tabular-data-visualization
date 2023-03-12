@@ -1,10 +1,10 @@
 import { SxProps } from '@mui/system'
 
-import { px } from '../../../helpers/stringGetters'
+import { px } from '@/helpers/stringGetters'
 
-import { GRID_ITEM_HEADER_HEIGHT } from '../../../constants/layout/layout'
+import { GRID_ITEM_HEADER_HEIGHT } from '@/constants/layout/layout'
 
-import { VIEW_COLORS } from '../../../styles/colors'
+import { VIEW_COLORS } from '@/styles/colors'
 
 export const gridItemStyle: Record<string, SxProps> = {
   gridItem: {

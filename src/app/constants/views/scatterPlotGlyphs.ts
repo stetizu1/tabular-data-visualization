@@ -1,7 +1,7 @@
 import { schemeCategory10 } from 'd3'
 
-import { ColorArray } from '../../types/styling/ColorArray'
-import { ScatterPlotGlyphsSettings } from '../../types/views/settings/ScatterPlotGlyphsSettings'
+import { ColorArray } from '@/types/styling/ColorArray'
+import { ScatterPlotGlyphsSettings } from '@/types/views/settings/ScatterPlotGlyphsSettings'
 
 /**
  * Minimal attribute count for scatter plot glyphs

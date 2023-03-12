@@ -1,5 +1,5 @@
 /**
- * Selection dialog
+ * Selection dialog.
  * Dialog allowing select one of the options or cancel
  */
 import {
@@ -8,13 +8,13 @@ import {
   DialogTitle,
   Divider,
   List,
-  ListItem,
   ListItemAvatar,
+  ListItemButton,
   ListItemText,
   Typography,
 } from '@mui/material'
 
-import { dialogStyle } from '../../../../components-style/content/common/dialogStyle'
+import { dialogStyle } from '@/components-style/content/common/dialogStyle'
 
 export interface Option<T> {
   key: T
@@ -44,12 +44,12 @@ export const SelectionDialog = <T,>({
     <Divider />
     <List>
       {options.map((option) => (
-        <ListItem button onClick={() => handleListItemClick(option.key)} key={String(option.key)}>
+        <ListItemButton onClick={() => handleListItemClick(option.key)} key={String(option.key)}>
           <ListItemAvatar>
             <Avatar>{option.icon}</Avatar>
           </ListItemAvatar>
           <ListItemText primary={option.label} />
-        </ListItem>
+        </ListItemButton>
       ))}
       {!options.length && <Typography sx={dialogStyle.description}>{noOptionText}</Typography>}
     </List>

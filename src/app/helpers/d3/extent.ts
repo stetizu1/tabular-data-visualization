@@ -3,7 +3,7 @@
  */
 import { extent } from 'd3'
 
-import { ExtentReqForSelectableDataType, SelectableDataType } from '../../types/data/data'
+import { ExtentReqForSelectableDataType, SelectableDataType } from '@/types/data/data'
 
 /**
  * Return extent of values for given attributes (domains)

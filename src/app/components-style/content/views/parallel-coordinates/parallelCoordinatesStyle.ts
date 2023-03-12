@@ -1,10 +1,10 @@
 import { SxProps } from '@mui/system'
 
-import { Opacity } from '../../../../types/styling/Opacity'
+import { Opacity } from '@/types/styling/Opacity'
 
-import { important, px } from '../../../../helpers/stringGetters'
+import { important, px } from '@/helpers/stringGetters'
 
-import { PLOT_COLORS } from '../../../../styles/colors'
+import { PLOT_COLORS } from '@/styles/colors'
 
 export const PARALLEL_COORDINATES_CLASS = `parallelCoordinates`
 export const SELECTED_CLASS = `parallelCoordinatesSelected`
