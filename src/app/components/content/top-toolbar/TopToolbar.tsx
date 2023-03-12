@@ -1,22 +1,22 @@
 /**
  * Top toolbar, containing general settings independent of the specific view.
  */
-import { Dispatch, VoidFunctionComponent, SetStateAction } from 'react'
-import { Box } from '@mui/material'
 import { AddCircle, Brush, Dashboard, SkipNext } from '@mui/icons-material'
+import { Box } from '@mui/material'
+import { Dispatch, FC, SetStateAction } from 'react'
 
-import { BrushOffSvg } from '../../../../icons/BrushOffSvg'
-import { TooltipSvg } from '../../../../icons/TooltipSvg'
+import { BrushOffSvg } from '@icons/BrushOffSvg'
+import { TooltipSvg } from '@icons/TooltipSvg'
 
-import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
+import { TOP_TOOLBAR_TEXT } from '@/text/siteText'
 
-import { topToolbarStyle } from '../../../components-style/content/top-toolbar/topToolbarStyle'
+import { topToolbarStyle } from '@/components-style/content/top-toolbar/topToolbarStyle'
 
 import { ClickableButton } from './items/buttons/ClickableButton'
-import { FileReader, FileReaderDataProps } from './items/file-reader/FileReader'
-import { ToggleButtonSingle } from './items/buttons/ToggleButtonSingle'
-import { OpenSettingsButton } from './items/buttons/OpenSettingsButton'
 import { ColorButton } from './items/buttons/ColorButton'
+import { OpenSettingsButton } from './items/buttons/OpenSettingsButton'
+import { ToggleButtonSingle } from './items/buttons/ToggleButtonSingle'
+import { FileReader, FileReaderDataProps } from './items/file-reader/FileReader'
 
 export interface TopToolbarProps extends FileReaderDataProps {
   openDrawer: () => void
@@ -38,7 +38,7 @@ export interface TopToolbarProps extends FileReaderDataProps {
   setBrushColor: Dispatch<SetStateAction<string>>
 }
 
-export const TopToolbar: VoidFunctionComponent<TopToolbarProps> = ({
+export const TopToolbar: FC<TopToolbarProps> = ({
   openDrawer,
   isToolsDisabled,
   isDetailsVisible,

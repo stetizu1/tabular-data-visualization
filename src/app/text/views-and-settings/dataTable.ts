@@ -1,8 +1,8 @@
 /**
  * Text for data table
  */
-import { ViewType } from '../../constants/views-general/ViewType'
-import { SortType } from '../../constants/sort/SortType'
+import { SortType } from '@/constants/sort/SortType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
 import { VIEWS_NAMES } from '../viewsNames'
 import { SETTINGS_BASE_TEXT } from './common'

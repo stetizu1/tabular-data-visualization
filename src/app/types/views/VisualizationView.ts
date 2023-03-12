@@ -2,8 +2,8 @@
  * Visualization view interface
  */
 
-import { SelectableDataType } from '../data/data'
 import { Dimensions } from '../basic/dimensions'
+import { SelectableDataType } from '../data/data'
 
 /**
  * Interface for every view window. It assigns dimensions (width, height) dataset and if details are visible to the view.

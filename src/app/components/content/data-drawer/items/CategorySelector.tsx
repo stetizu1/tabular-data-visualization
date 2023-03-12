@@ -1,17 +1,17 @@
 /**
  * A component to choose a category attribute. It allows to select no attribute, too.
  */
-import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback } from 'react'
 import { MenuItem, TextField } from '@mui/material'
+import { Dispatch, FC, SetStateAction, useCallback } from 'react'
 
-import { SelectableDataType } from '../../../../types/data/data'
-import { Settings } from '../../../../types/views/settings/Settings'
+import { SelectableDataType } from '@/types/data/data'
+import { Settings } from '@/types/views/settings/Settings'
 
-import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+import { otherCasesToWhitespaces } from '@/helpers/data/formatText'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { SETTINGS_TEXT } from '../../../../text/views-and-settings/common'
+import { SETTINGS_TEXT } from '@/text/views-and-settings/common'
 
 export interface CategorySelectorProps {
   viewType: ViewType
@@ -22,7 +22,7 @@ export interface CategorySelectorProps {
   handleChangeSettings?: () => void
 }
 
-export const CategorySelector: VoidFunctionComponent<CategorySelectorProps> = ({
+export const CategorySelector: FC<CategorySelectorProps> = ({
   viewType,
   value,
   attributesKeys,

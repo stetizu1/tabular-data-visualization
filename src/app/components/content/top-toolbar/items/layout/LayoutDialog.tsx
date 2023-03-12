@@ -1,20 +1,20 @@
 /**
  * Dialog with default layout options.
  */
-import { Dispatch, SetStateAction, VoidFunctionComponent } from 'react'
 import { Card, CardContent, CardMedia, Dialog, DialogContent, DialogTitle, Divider, Typography } from '@mui/material'
+import { Dispatch, FC, SetStateAction } from 'react'
 
-import { GridLayoutItem } from '../../../../../types/views/Grid'
+import { GridLayoutItem } from '@/types/views/Grid'
 
-import { otherCasesToWhitespaces } from '../../../../../helpers/data/formatText'
+import { otherCasesToWhitespaces } from '@/helpers/data/formatText'
 
-import { LAYOUT_OPTIONS } from '../../../../../constants/layout/layout'
-import { LAYOUT_IMAGES } from '../../../../../constants/public-path'
-import { COMPONENT_TYPE } from '../../../../../constants/mui'
+import { LAYOUT_OPTIONS } from '@/constants/layout/layout'
+import { COMPONENT_TYPE } from '@/constants/mui'
+import { LAYOUT_IMAGES } from '@/constants/public-path'
 
-import { TOP_TOOLBAR_TEXT } from '../../../../../text/siteText'
+import { TOP_TOOLBAR_TEXT } from '@/text/siteText'
 
-import { dialogStyle } from '../../../../../components-style/content/common/dialogStyle'
+import { dialogStyle } from '@/components-style/content/common/dialogStyle'
 
 export interface LayoutDialogProps {
   isOpen: boolean
@@ -23,7 +23,7 @@ export interface LayoutDialogProps {
   lastLayout: GridLayoutItem[] | null
 }
 
-export const LayoutDialog: VoidFunctionComponent<LayoutDialogProps> = ({ isOpen, onClose, setLayout, lastLayout }) => {
+export const LayoutDialog: FC<LayoutDialogProps> = ({ isOpen, onClose, setLayout, lastLayout }) => {
   const handleClose = () => {
     setLayout(lastLayout)
     onClose()

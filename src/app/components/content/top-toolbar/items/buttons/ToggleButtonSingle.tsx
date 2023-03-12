@@ -1,10 +1,10 @@
 /**
  * Button that can be toggled (set on/off)
  */
-import { Dispatch, VoidFunctionComponent, MouseEvent, SetStateAction, useCallback } from 'react'
 import { ToggleButton, ToggleButtonGroup, Tooltip } from '@mui/material'
+import { Dispatch, FC, MouseEvent, SetStateAction, useCallback } from 'react'
 
-import { topToolbarButtonStyle } from '../../../../../components-style/content/top-toolbar/items/buttons/topToolbarButtonStyle'
+import { topToolbarButtonStyle } from '@/components-style/content/top-toolbar/items/buttons/topToolbarButtonStyle'
 
 type SetValue = Dispatch<SetStateAction<boolean>> | ((newValue: boolean) => void)
 
@@ -17,13 +17,7 @@ export interface ToggleButtonProps {
 }
 const ON_VALUE = `on`
 
-export const ToggleButtonSingle: VoidFunctionComponent<ToggleButtonProps> = ({
-  icon,
-  value,
-  setValue,
-  label,
-  disabled,
-}) => {
+export const ToggleButtonSingle: FC<ToggleButtonProps> = ({ icon, value, setValue, label, disabled }) => {
   const handleChange = useCallback(
     (event: MouseEvent<HTMLElement>, checked: string[]) => {
       if (checked.length && checked[0] === ON_VALUE) {

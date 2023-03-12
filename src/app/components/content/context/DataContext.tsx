@@ -4,29 +4,29 @@
  *  creates functions for working with this data and
  *  distributes them between the top toolbar and views/settings
  */
-import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
+import { FC, useCallback, useEffect, useState } from 'react'
 
-import { SelectableDataType } from '../../../types/data/data'
-import { SetComponentBrushing } from '../../../types/brushing/Brushable'
-import { Settings } from '../../../types/views/settings/Settings'
-import { GridLayoutItem } from '../../../types/views/Grid'
+import { SetComponentBrushing } from '@/types/brushing/Brushable'
+import { SelectableDataType } from '@/types/data/data'
+import { GridLayoutItem } from '@/types/views/Grid'
+import { Settings } from '@/types/views/settings/Settings'
 
-import { useUpdatedRef } from '../../../helpers/react/useUpdatedRef'
-import { useDebounce } from '../../../helpers/react/useDebounce'
-import { getCategoryAttributesKeys, getDefaultQuantitativeAttributesKeys } from '../../../helpers/data/data'
+import { getCategoryAttributesKeys, getDefaultQuantitativeAttributesKeys } from '@/helpers/data/data'
+import { useDebounce } from '@/helpers/react/useDebounce'
+import { useUpdatedRef } from '@/helpers/react/useUpdatedRef'
 
-import { DataLoadState } from '../../../constants/data/DataLoadState'
-import { brushView, brushViewType, isBrushView, ViewType } from '../../../constants/views-general/ViewType'
-import { DEFAULT_GRID_LAYOUT_QUANTITATIVE, DEFAULT_GRID_LAYOUT_NOMINAL } from '../../../constants/layout/layout'
-import { DEFAULT_BRUSH_COLOR } from '../../../constants/views-general/defaultSettableColors'
-import { BRUSH_DEBOUNCE } from '../../../constants/debounce/debounce'
+import { DataLoadState } from '@/constants/data/DataLoadState'
+import { BRUSH_DEBOUNCE } from '@/constants/debounce/debounce'
+import { DEFAULT_GRID_LAYOUT_NOMINAL, DEFAULT_GRID_LAYOUT_QUANTITATIVE } from '@/constants/layout/layout'
+import { DEFAULT_BRUSH_COLOR } from '@/constants/views-general/defaultSettableColors'
+import { brushView, brushViewType, isBrushView, ViewType } from '@/constants/views-general/ViewType'
 
-import { TopToolbar } from '../top-toolbar/TopToolbar'
 import { ViewGrid } from '../grid/ViewGrid'
 import { EmptyData } from '../no-data/EmptyData'
 import { Loading } from '../no-data/Loading'
+import { TopToolbar } from '../top-toolbar/TopToolbar'
 
-export const DataContext: VoidFunctionComponent = () => {
+export const DataContext: FC = () => {
   const [dataLoadState, setDataLoadState] = useState(DataLoadState.NoData)
 
   const [dataset, setDataset] = useState<ReadonlyArray<SelectableDataType> | null>(null)

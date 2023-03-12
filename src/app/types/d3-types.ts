@@ -1,8 +1,8 @@
 /**
  * Types to work with d3.js
  */
-import { MouseEvent } from 'react'
 import { BaseType, D3BrushEvent, ValueFn } from 'd3'
+import { MouseEvent } from 'react'
 
 /**
  * For each on data group element.

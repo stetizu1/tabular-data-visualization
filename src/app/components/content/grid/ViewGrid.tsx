@@ -2,33 +2,33 @@
  * ViewGrid containing all the views and settings.
  * Also containing layout logic.
  */
-import React, { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState, memo, useEffect } from 'react'
-import GridLayout, { WidthProvider } from 'react-grid-layout'
-import { Box } from '@mui/material'
 import { AddCircle } from '@mui/icons-material'
+import { Box } from '@mui/material'
+import { Dispatch, FC, memo, SetStateAction, useCallback, useEffect, useState } from 'react'
+import GridLayout, { WidthProvider } from 'react-grid-layout'
 
+import { Brushable } from '@/types/brushing/Brushable'
+import { SelectableDataType } from '@/types/data/data'
+import { GridLayoutItem, LayoutArray } from '@/types/views/Grid'
+import { Settings } from '@/types/views/settings/Settings'
 import { useWindowSize } from 'react-use'
-import { Brushable } from '../../../types/brushing/Brushable'
-import { SelectableDataType } from '../../../types/data/data'
-import { GridLayoutItem, LayoutArray } from '../../../types/views/Grid'
-import { Settings } from '../../../types/views/settings/Settings'
 
-import { getClass } from '../../../helpers/stringGetters'
-import { setDisplay } from '../../../helpers/d3/setDisplay'
+import { setDisplay } from '@/helpers/d3/setDisplay'
+import { getClass } from '@/helpers/stringGetters'
 
-import { brushView, brushViewType, isBrushView, isViewType, ViewType } from '../../../constants/views-general/ViewType'
-import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from '../../../constants/layout/layout'
-import { TOOLTIP_CLASS } from '../../../constants/views-general/tooltip'
-import { IS_FIREFOX } from '../../../constants/browser'
+import { IS_FIREFOX } from '@/constants/browser'
+import { COLUMNS_COUNT, DEFAULT_VIEW_DIMENSIONS, DRAG_HANDLE, ROW_HEIGHT } from '@/constants/layout/layout'
+import { TOOLTIP_CLASS } from '@/constants/views-general/tooltip'
+import { brushView, brushViewType, isBrushView, isViewType, ViewType } from '@/constants/views-general/ViewType'
 
-import { TOP_TOOLBAR_TEXT } from '../../../text/siteText'
-import { VIEWS_NAMES } from '../../../text/viewsNames'
+import { TOP_TOOLBAR_TEXT } from '@/text/siteText'
+import { VIEWS_NAMES } from '@/text/viewsNames'
 
-import { viewGridStyle } from '../../../components-style/content/views/viewGridStyle'
+import { viewGridStyle } from '@/components-style/content/views/viewGridStyle'
 
+import { SelectionDialog } from '../common/dialogs/SelectionDialog'
 import { SettingsDrawer } from '../data-drawer/SettingsDrawer'
 import { LayoutDialog } from '../top-toolbar/items/layout/LayoutDialog'
-import { SelectionDialog } from '../common/dialogs/SelectionDialog'
 import { GridItem } from './GridItem'
 
 export interface ViewGridDataProps extends Omit<Brushable, `registerCleanBrushing`> {
@@ -55,7 +55,7 @@ export interface ViewGridProps extends ViewGridDataProps {
 
 const ReactGridLayout = WidthProvider(GridLayout)
 
-const BaseViewGrid: VoidFunctionComponent<ViewGridProps> = ({
+const BaseViewGrid: FC<ViewGridProps> = ({
   isDrawerOpen,
   closeDrawer,
   cleanSelectedIfViewWasBrushing,

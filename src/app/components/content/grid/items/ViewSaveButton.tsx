@@ -1,21 +1,21 @@
-import { useCallback, useState, VoidFunctionComponent } from 'react'
-import { Button, Tooltip } from '@mui/material'
 import { Save } from '@mui/icons-material'
+import { Button, Tooltip } from '@mui/material'
+import { FC, useCallback, useState } from 'react'
 
-import { getSaveIsDisabled, saveSvg } from '../../../../helpers/d3/saveSvg'
+import { getSaveIsDisabled, saveSvg } from '@/helpers/d3/saveSvg'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { inlineButtonStyles } from '../../../../components-style/content/common/inlineButtonStyles'
+import { inlineButtonStyles } from '@/components-style/content/common/inlineButtonStyles'
 
+import { VIEW_TOP_TEXT } from '@/text/viewTopText'
 import { ConfirmationDialog } from '../../common/dialogs/ConfirmationDialog'
-import { VIEW_TOP_TEXT } from '../../../../text/viewTopText'
 
 export interface ViewSaveButtonProps {
   viewType: ViewType
 }
 
-export const ViewSaveButton: VoidFunctionComponent<ViewSaveButtonProps> = ({ viewType }) => {
+export const ViewSaveButton: FC<ViewSaveButtonProps> = ({ viewType }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   const onConfirm = useCallback(() => {

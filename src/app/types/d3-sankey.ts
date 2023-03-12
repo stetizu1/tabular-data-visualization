@@ -1,7 +1,7 @@
 /**
  * Custom types to work with d3-sankey library
  */
-import { SankeyLink, SankeyNode } from '../../lib/d3-sankey'
+import { SankeyLink, SankeyNode } from '@d3-sankey'
 import { DataLink, NominalValueProperties } from './data/data'
 
 /**

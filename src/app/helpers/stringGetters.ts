@@ -1,9 +1,9 @@
 /**
  * Functions to get consistent strings
  */
-import { SelectableDataType, SelectedKey } from '../types/data/data'
-import { MatrixItem } from '../types/data/MatrixData'
-import { LinkDataPoint, NodeDataPoint } from '../types/d3-sankey'
+import { LinkDataPoint, NodeDataPoint } from '@/types/d3-sankey'
+import { SelectableDataType, SelectedKey } from '@/types/data/data'
+import { MatrixItem } from '@/types/data/MatrixData'
 
 import { otherCasesToWhitespaces } from './data/formatText'
 

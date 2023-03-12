@@ -1,14 +1,16 @@
-import { SelectableDataType } from '../../types/data/data'
+import { SelectableDataType } from '@/types/data/data'
 
-import { SortType } from '../../constants/sort/SortType'
+import { SortType } from '@/constants/sort/SortType'
 
 type Comparator = (a: SelectableDataType, b: SelectableDataType) => number
 
 const descCompare = <T extends SelectableDataType>(a: T, b: T, orderBy: keyof T) => {
-  if (a[orderBy] === true) return b[orderBy] === true ? 0 : 1
-  if (a[orderBy] === false) return b[orderBy] === false ? 0 : -1
+  const [aX, bX] = [a[orderBy], b[orderBy]]
+  if (aX === true) return b[orderBy] === true ? 0 : 1
+  if (aX === false) return b[orderBy] === false ? 0 : -1
+  if (aX === null || bX === null) return aX === null ? (bX === null ? 0 : -1) : 1
 
-  return b[orderBy] < a[orderBy] ? -1 : b[orderBy] > a[orderBy] ? 1 : 0
+  return bX < aX ? -1 : bX > aX ? 1 : 0
 }
 
 /**

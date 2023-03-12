@@ -1,21 +1,21 @@
 /**
  * Single item in the grid, passing it's size to the children.
  */
-import React, { ComponentProps, useState, VoidFunctionComponent } from 'react'
-import { useSize } from 'react-use'
 import { Box, Typography } from '@mui/material'
+import { ComponentProps, FC, useState } from 'react'
+import { useSize } from 'react-use'
 
-import { ViewType } from '../../../constants/views-general/ViewType'
-import { DRAG_HANDLE, GRID_ITEM_HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '../../../constants/layout/layout'
+import { DRAG_HANDLE, GRID_ITEM_HEADER_HEIGHT, VIEW_DEFAULT_SIZE } from '@/constants/layout/layout'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { gridItemStyle } from '../../../components-style/content/views/gridItemStyle'
+import { gridItemStyle } from '@/components-style/content/views/gridItemStyle'
 
 import { View } from '../views/View'
+import { DataFilterButton } from './items/DataFilterButton'
+import { GlyphAxesText } from './items/GlyphAxesText'
 import { ViewCloseButton } from './items/ViewCloseButton'
 import { ViewHelpButton } from './items/ViewHelpButton'
 import { ViewSaveButton } from './items/ViewSaveButton'
-import { GlyphAxesText } from './items/GlyphAxesText'
-import { DataFilterButton } from './items/DataFilterButton'
 
 type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {
   title: string
@@ -23,7 +23,7 @@ type Props = Omit<ComponentProps<typeof View>, `width` | `height`> & {
   isResizeFinished: boolean
 }
 
-export const GridItem: VoidFunctionComponent<Props> = ({ onRemove, title, isResizeFinished, viewType, ...rest }) => {
+export const GridItem: FC<Props> = ({ onRemove, title, isResizeFinished, viewType, ...rest }) => {
   const [showFilter, setShowFilter] = useState<boolean | undefined>(undefined)
   const contextButton =
     viewType !== ViewType.DataTable ? (

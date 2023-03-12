@@ -1,8 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { calc, border, px } from '../../../helpers/stringGetters'
+import { border, calc, px } from '@/helpers/stringGetters'
 
-import { SETTINGS_DRAWER_COLORS, ERROR_COLORS } from '../../../styles/colors'
+import { ERROR_COLORS, SETTINGS_DRAWER_COLORS } from '@/styles/colors'
 
 export const settingsDrawerItemStyle: Record<string, SxProps> = {
   drawerSettings: {

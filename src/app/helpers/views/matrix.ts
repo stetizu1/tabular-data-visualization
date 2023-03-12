@@ -1,9 +1,9 @@
 /**
  * Functions to work with scatter plot matrix
  */
-import { SelectableDataType } from '../../types/data/data'
-import { MatrixItem } from '../../types/data/MatrixData'
-import { Dimensions } from '../../types/basic/dimensions'
+import { Dimensions } from '@/types/basic/dimensions'
+import { SelectableDataType } from '@/types/data/data'
+import { MatrixItem } from '@/types/data/MatrixData'
 
 import { getTranslate } from '../stringGetters'
 

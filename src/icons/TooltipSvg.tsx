@@ -1,8 +1,8 @@
 /**
  * Graph tooltip icon
  */
-import { forwardRef } from 'react'
 import { Box } from '@mui/material'
+import { forwardRef } from 'react'
 
 export const TooltipSvg = forwardRef((props, ref) => (
   <Box ref={ref} style={{ height: 24 }} {...props}>

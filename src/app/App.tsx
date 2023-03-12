@@ -1,16 +1,16 @@
 /**
  * Application root
  */
-import { VoidFunctionComponent } from 'react'
 import { Box } from '@mui/material'
+import { FC } from 'react'
 
-import { Header } from './components/header/Header'
-import { Footer } from './components/footer/Footer'
 import { DataContext } from './components/content/context/DataContext'
+import { Footer } from './components/footer/Footer'
+import { Header } from './components/header/Header'
 
 import { appStyle } from './appStyle'
 
-export const App: VoidFunctionComponent = () => (
+export const App: FC = () => (
   <Box sx={appStyle.app}>
     <Header />
     <Box sx={appStyle.content}>

@@ -1,7 +1,7 @@
 /**
  * Scatter Plot Matrix view
  */
-import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
+import { Box } from '@mui/material'
 import {
   Axis,
   axisBottom,
@@ -14,52 +14,52 @@ import {
   select,
   selectAll,
 } from 'd3'
-import { Box } from '@mui/material'
+import { FC, useCallback, useEffect, useMemo, useRef } from 'react'
 
-import { SelectableDataType } from '../../../../types/data/data'
-import { VisualizationView } from '../../../../types/views/VisualizationView'
-import { Brushable } from '../../../../types/brushing/Brushable'
-import { ScatterPlotMatrixSettings } from '../../../../types/views/settings/ScatterPlotMatrixSettings'
-import { Margin } from '../../../../types/styling/Margin'
-import { Dimensions } from '../../../../types/basic/dimensions'
-import { MatrixItem, MatrixPosition } from '../../../../types/data/MatrixData'
-import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
-import { Extent, DataEachC, DataEachG, OnBrushEvent } from '../../../../types/d3-types'
+import { Dimensions } from '@/types/basic/dimensions'
+import { Brushable } from '@/types/brushing/Brushable'
+import { BrushSelection2d } from '@/types/brushing/BrushSelection'
+import { DataEachC, DataEachG, Extent, OnBrushEvent } from '@/types/d3-types'
+import { SelectableDataType } from '@/types/data/data'
+import { MatrixItem, MatrixPosition } from '@/types/data/MatrixData'
+import { Margin } from '@/types/styling/Margin'
+import { ScatterPlotMatrixSettings } from '@/types/views/settings/ScatterPlotMatrixSettings'
+import { VisualizationView } from '@/types/views/VisualizationView'
 
+import { isInRanges } from '@/helpers/basic/range'
+import { getCategoryColor } from '@/helpers/d3/categoryColor'
+import { getExtentInDomains } from '@/helpers/d3/extent'
+import { setDisplay } from '@/helpers/d3/setDisplay'
+import { onMouseOutTooltip, onMouseOverTooltip } from '@/helpers/d3/tooltip'
 import {
   getAttributeFromMatrixFormatted,
   getAttributeValuesWithLabel,
   getClass,
   getEverything,
   getTranslate,
-} from '../../../../helpers/stringGetters'
-import { getExtentInDomains } from '../../../../helpers/d3/extent'
-import { getCellInnerSize, getCellTranslateInMatrix, getMatrix } from '../../../../helpers/views/matrix'
-import { isInRanges } from '../../../../helpers/basic/range'
-import { getCategoryColor } from '../../../../helpers/d3/categoryColor'
-import { setDisplay } from '../../../../helpers/d3/setDisplay'
-import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
+} from '@/helpers/stringGetters'
+import { getCellInnerSize, getCellTranslateInMatrix, getMatrix } from '@/helpers/views/matrix'
 
-import { BrushAction } from '../../../../constants/actions/BrushAction'
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { SVG } from '../../../../constants/svg'
-import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotMatrix'
-import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
+import { BrushAction } from '@/constants/actions/BrushAction'
+import { MouseAction } from '@/constants/actions/MouseAction'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '@/constants/save/save'
+import { SVG } from '@/constants/svg'
+import { ViewType } from '@/constants/views-general/ViewType'
+import { MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT } from '@/constants/views/scatterPlotMatrix'
 
-import { SCATTER_PLOT_MATRIX_TEXT } from '../../../../text/views-and-settings/scatterPlotMatrix'
+import { SCATTER_PLOT_MATRIX_TEXT } from '@/text/views-and-settings/scatterPlotMatrix'
 
+import { getViewsNotDisplayStyle } from '@/components-style/content/views/getViewsNotDisplayStyle'
 import {
   AXIS_CLASS,
-  getScatterPlotMatrixStyle,
+  CELL_CLASS,
   DATA_POINT_CLASS,
+  DUPLICATES_CLASS,
+  getScatterPlotMatrixStyle,
   RECT_CLASS,
   SELECTED_CLASS,
-  DUPLICATES_CLASS,
-  CELL_CLASS,
-} from '../../../../components-style/content/views/scatter-plot-matrix/scatterPlotMatrixStyle'
-import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
-import { PLOT_FONT_BOX_SIZE } from '../../../../constants/others'
+} from '@/components-style/content/views/scatter-plot-matrix/scatterPlotMatrixStyle'
+import { PLOT_FONT_BOX_SIZE } from '@/constants/others'
 
 export interface ScatterPlotMatrixProps extends VisualizationView, Brushable, ScatterPlotMatrixSettings {}
 
@@ -76,7 +76,7 @@ export const TICKS = {
   Y: 6,
 }
 
-export const ScatterPlotMatrix: VoidFunctionComponent<ScatterPlotMatrixProps> = ({
+export const ScatterPlotMatrix: FC<ScatterPlotMatrixProps> = ({
   width,
   height,
   dataset,

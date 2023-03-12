@@ -1,37 +1,37 @@
 /**
  * Component reading the file data
  */
-import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useCallback, ChangeEvent } from 'react'
-import { Box, Button, Tooltip } from '@mui/material'
 import { AutoGraph, UploadFile } from '@mui/icons-material'
+import { Box, Button, Tooltip } from '@mui/material'
+import { ChangeEvent, Dispatch, FC, SetStateAction, useCallback, useState } from 'react'
 
-import { DataType, SelectableDataType } from '../../../../../types/data/data'
+import { DataType, SelectableDataType } from '@/types/data/data'
 
-import { isArrayOfDataType } from '../../../../../helpers/data/dataCheckers'
-import { CsvParse } from '../../../../../helpers/data/dataParsers'
-import { getAttributeKeys } from '../../../../../helpers/data/data'
+import { getAttributeKeys } from '@/helpers/data/data'
+import { isArrayOfDataType } from '@/helpers/data/dataCheckers'
+import { CsvParse } from '@/helpers/data/dataParsers'
 
-import { AcceptableFileTypes } from '../../../../../constants/data/data'
-import { DataLoadState } from '../../../../../constants/data/DataLoadState'
+import { AcceptableFileTypes } from '@/constants/data/data'
+import { DataLoadError } from '@/constants/data/DataLoadError'
+import { DataLoadState } from '@/constants/data/DataLoadState'
 import {
-  SAMPLE_DATASET_OPTIONS,
   SampleDataset,
   sampleDatasetIcons,
   sampleDatasets,
-} from '../../../../../constants/data/sampleDataset'
-import { BUTTON_VARIANT, COMPONENT_TYPE } from '../../../../../constants/mui'
-import { INPUT_TYPE } from '../../../../../constants/others'
-import { DataLoadError } from '../../../../../constants/data/DataLoadError'
+  SAMPLE_DATASET_OPTIONS,
+} from '@/constants/data/sampleDataset'
+import { BUTTON_VARIANT, COMPONENT_TYPE } from '@/constants/mui'
+import { INPUT_TYPE } from '@/constants/others'
 
-import { FILE_READER_TEXT } from '../../../../../text/siteText'
+import { FILE_READER_TEXT } from '@/text/siteText'
 
 import {
   fileReaderStyle,
   getFileReaderBoxStyle,
-} from '../../../../../components-style/content/top-toolbar/items/file-reader/fileReaderStyle'
+} from '@/components-style/content/top-toolbar/items/file-reader/fileReaderStyle'
 
-import { SelectionDialog } from '../../../common/dialogs/SelectionDialog'
 import { InformationDialog } from '../../../common/dialogs/InformationDialog'
+import { SelectionDialog } from '../../../common/dialogs/SelectionDialog'
 
 import { ClickableButton } from '../buttons/ClickableButton'
 import { NullDialog } from './NullDialog'
@@ -50,7 +50,7 @@ export const addSelected = (data: Array<DataType>): Array<SelectableDataType> =>
 
 const FILE_INPUT_ID = `FILE_INPUT`
 
-export const FileReader: VoidFunctionComponent<FileReaderProps> = ({ setDataset, setDataLoadState, isHighlighted }) => {
+export const FileReader: FC<FileReaderProps> = ({ setDataset, setDataLoadState, isHighlighted }) => {
   const [isSampleDataDialogOpen, setIsSampleDataDialogOpen] = useState(false)
 
   const [isNullDialogOpen, setIsNullDialogOpen] = useState(false)

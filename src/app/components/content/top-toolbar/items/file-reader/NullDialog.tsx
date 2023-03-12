@@ -1,7 +1,6 @@
 /**
  * Dialog for null data editing.
  */
-import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
 import {
   Box,
   Button,
@@ -16,17 +15,18 @@ import {
   ToggleButtonGroup,
   Typography,
 } from '@mui/material'
+import { FC, useCallback, useEffect, useState } from 'react'
 
-import { SelectableDataType } from '../../../../../types/data/data'
+import { getLabelledAttribute } from '@/helpers/stringGetters'
 
-import { getLabelledAttribute } from '../../../../../helpers/stringGetters'
+import { SelectableDataType } from '@/types/data/data'
 
-import { DATA_NULL_OPTION_TYPES, DataNullOptionType } from '../../../../../constants/data/data'
-import { BUTTON_VARIANT } from '../../../../../constants/mui'
+import { DataNullOptionType, DATA_NULL_OPTION_TYPES } from '@/constants/data/data'
+import { BUTTON_VARIANT } from '@/constants/mui'
 
-import { FILE_READER_TEXT } from '../../../../../text/siteText'
+import { FILE_READER_TEXT } from '@/text/siteText'
 
-import { dialogStyle } from '../../../../../components-style/content/common/dialogStyle'
+import { dialogStyle } from '@/components-style/content/common/dialogStyle'
 
 export interface NullDialogProps {
   isOpen: boolean
@@ -36,13 +36,7 @@ export interface NullDialogProps {
   setDataset: (dataset: Array<SelectableDataType>) => void
 }
 
-export const NullDialog: VoidFunctionComponent<NullDialogProps> = ({
-  isOpen,
-  onClose,
-  nullContainingAttributes,
-  dataset,
-  setDataset,
-}) => {
+export const NullDialog: FC<NullDialogProps> = ({ isOpen, onClose, nullContainingAttributes, dataset, setDataset }) => {
   const [optionsChosen, setOptionsChosen] = useState<Record<keyof SelectableDataType, DataNullOptionType>>(
     Object.fromEntries(nullContainingAttributes.map((att) => [att, DataNullOptionType.leave])),
   )

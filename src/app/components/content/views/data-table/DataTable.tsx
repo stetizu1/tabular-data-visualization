@@ -1,7 +1,7 @@
 /**
  * Data Table view
  */
-import { useCallback, useEffect, useMemo, useState, VoidFunctionComponent } from 'react'
+import { FilterListOutlined } from '@mui/icons-material'
 import {
   Box,
   Checkbox,
@@ -14,27 +14,24 @@ import {
   TextField,
   Tooltip,
 } from '@mui/material'
-import { FilterListOutlined } from '@mui/icons-material'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 
-import { VisualizationView } from '../../../../types/views/VisualizationView'
-import { Brushable } from '../../../../types/brushing/Brushable'
-import { DataTableSettings } from '../../../../types/views/settings/DataTableSettings'
-import { SelectableDataType, SelectedKey } from '../../../../types/data/data'
+import { Brushable } from '@/types/brushing/Brushable'
+import { SelectableDataType, SelectedKey } from '@/types/data/data'
+import { DataTableSettings } from '@/types/views/settings/DataTableSettings'
+import { VisualizationView } from '@/types/views/VisualizationView'
 
-import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
-import { getComparator } from '../../../../helpers/data/comparator'
+import { getComparator } from '@/helpers/data/comparator'
+import { otherCasesToWhitespaces } from '@/helpers/data/formatText'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { SortType } from '../../../../constants/sort/SortType'
-import { MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/dataTable'
-import { CELL_PADDING } from '../../../../constants/mui'
+import { CELL_PADDING } from '@/constants/mui'
+import { SortType } from '@/constants/sort/SortType'
+import { ViewType } from '@/constants/views-general/ViewType'
+import { MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '@/constants/views/dataTable'
 
-import { DATA_TABLE_TEXT } from '../../../../text/views-and-settings/dataTable'
+import { DATA_TABLE_TEXT } from '@/text/views-and-settings/dataTable'
 
-import {
-  dataTableStyle,
-  getFilterDisplayed,
-} from '../../../../components-style/content/views/data-table/dataTableStyle'
+import { dataTableStyle, getFilterDisplayed } from '@/components-style/content/views/data-table/dataTableStyle'
 
 import { DataTableBody } from './DataTableBody'
 
@@ -42,7 +39,7 @@ export interface DataTableProps extends VisualizationView, Brushable, DataTableS
   showFilter: boolean
 }
 
-export const DataTable: VoidFunctionComponent<DataTableProps> = ({
+export const DataTable: FC<DataTableProps> = ({
   dataset,
   displayAttributes,
   refreshViews,

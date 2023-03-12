@@ -1,20 +1,22 @@
 /**
  * Parallel Sets (bundled) view
  */
-import { useCallback, useEffect, useMemo, useRef, useState, VoidFunctionComponent } from 'react'
-import { scaleOrdinal, select } from 'd3'
+import { sankey, sankeyLinkHorizontal } from '@d3-sankey'
 import { Box } from '@mui/material'
-import { sankey, sankeyLinkHorizontal } from '../../../../../lib/d3-sankey'
+import { scaleOrdinal, select } from 'd3'
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { VisualizationView } from '../../../../types/views/VisualizationView'
-import { Brushable } from '../../../../types/brushing/Brushable'
-import { ParallelSetsBundledSettings } from '../../../../types/views/settings/ParallelSetsBundledSettings'
-import { DataLink, NominalValueProperties } from '../../../../types/data/data'
-import { Margin } from '../../../../types/styling/Margin'
-import { NodeDataPoint } from '../../../../types/d3-sankey'
-import { DataEach, Extent, OnMouseEvent } from '../../../../types/d3-types'
+import { Brushable } from '@/types/brushing/Brushable'
+import { NodeDataPoint } from '@/types/d3-sankey'
+import { DataEach, Extent, OnMouseEvent } from '@/types/d3-types'
+import { DataLink, NominalValueProperties } from '@/types/data/data'
+import { Margin } from '@/types/styling/Margin'
+import { ParallelSetsBundledSettings } from '@/types/views/settings/ParallelSetsBundledSettings'
+import { VisualizationView } from '@/types/views/VisualizationView'
 
-import { getTogglingYShift, TOGGLE_Y_SHIFT } from '../../../../helpers/views/togglingYShift'
+import { onMouseOutTooltip, onMouseOverTooltip } from '@/helpers/d3/tooltip'
+import { getGraph, getNeighborAttributes, getNominalValuesRecord } from '@/helpers/data/data'
+import { getStrokeWidth, getYShift } from '@/helpers/data/lineShifts'
 import {
   getAttributeFormatted,
   getEverything,
@@ -22,22 +24,20 @@ import {
   getNodeDataPointValuesWithLabel,
   getSpaced,
   getTranslate,
-} from '../../../../helpers/stringGetters'
-import { getGraph, getNeighborAttributes, getNominalValuesRecord } from '../../../../helpers/data/data'
-import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
-import { getStrokeWidth, getYShift } from '../../../../helpers/data/lineShifts'
+} from '@/helpers/stringGetters'
+import { getTogglingYShift, TOGGLE_Y_SHIFT } from '@/helpers/views/togglingYShift'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
-import { MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelSetsBundled'
-import { SVG } from '../../../../constants/svg'
-import { AXES_TEXT_CLASS } from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
-import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { ParallelSetsBrushingType } from '../../../../constants/brushing-type/ParallelSetsBrushingType'
+import { AXES_TEXT_CLASS } from '@/components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
+import { MouseAction } from '@/constants/actions/MouseAction'
+import { ParallelSetsBrushingType } from '@/constants/brushing-type/ParallelSetsBrushingType'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '@/constants/save/save'
+import { SVG } from '@/constants/svg'
+import { ViewType } from '@/constants/views-general/ViewType'
+import { MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT } from '@/constants/views/parallelSetsBundled'
 
-import { PARALLEL_SETS_BUNDLED_TEXT } from '../../../../text/views-and-settings/parallelSetsBundled'
+import { PARALLEL_SETS_BUNDLED_TEXT } from '@/text/views-and-settings/parallelSetsBundled'
 
-import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
+import { getViewsNotDisplayStyle } from '@/components-style/content/views/getViewsNotDisplayStyle'
 import {
   CONNECTORS_CLASS,
   getParallelSetsBundledStyle,
@@ -46,8 +46,8 @@ import {
   SELECTED_CLASS,
   TABS_CLASS,
   TABS_SELECTED_CLASS,
-} from '../../../../components-style/content/views/parallel-sets-bundled/parallelSetsBundledStyle'
-import { PLOT_FONT_BOX_SIZE } from '../../../../constants/others'
+} from '@/components-style/content/views/parallel-sets-bundled/parallelSetsBundledStyle'
+import { PLOT_FONT_BOX_SIZE } from '@/constants/others'
 
 export interface ParallelSetsBundledProps extends VisualizationView, Brushable, ParallelSetsBundledSettings {}
 
@@ -58,7 +58,7 @@ export const TABS = `TABS`
 
 export const TEXT_SHIFT = 2
 
-export const ParallelSetsBundled: VoidFunctionComponent<ParallelSetsBundledProps> = ({
+export const ParallelSetsBundled: FC<ParallelSetsBundledProps> = ({
   width,
   height,
   dataset,

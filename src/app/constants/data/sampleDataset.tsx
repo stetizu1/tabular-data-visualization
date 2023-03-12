@@ -1,12 +1,12 @@
 import { AirportShuttle, DirectionsBoat, DirectionsCar, LocalFlorist, Twitter } from '@mui/icons-material'
 
-import flowerJson from '../../../test-data/flowerData.json'
-import birdJson from '../../../test-data/birdData.json'
-import carJson from '../../../test-data/carData.json'
-import titanicJson from '../../../test-data/titanicData.json'
-import parallelCarsJson from '../../../test-data/parallelCarsData.json'
+import birdJson from '@test-data/birdData.json'
+import carJson from '@test-data/carData.json'
+import flowerJson from '@test-data/flowerData.json'
+import parallelCarsJson from '@test-data/parallelCarsData.json'
+import titanicJson from '@test-data/titanicData.json'
 
-import { DataType } from '../../types/data/data'
+import { DataType } from '@/types/data/data'
 
 /**
  * Sample datasets options

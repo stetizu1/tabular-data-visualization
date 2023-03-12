@@ -1,16 +1,16 @@
 /**
  * Toggle buttons, works for specified attribute key, forcing to choose between given options.
  */
-import { Dispatch, SetStateAction, useCallback } from 'react'
 import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material'
+import { Dispatch, SetStateAction, useCallback } from 'react'
 
-import { Settings } from '../../../../types/views/settings/Settings'
+import { Settings } from '@/types/views/settings/Settings'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { toggleButtonsStyle } from '../../../../components-style/content/data-drawer/items/toggleButtonsStyle'
+import { toggleButtonsStyle } from '@/components-style/content/data-drawer/items/toggleButtonsStyle'
 
-interface ToggleButtonsProps<T, Opt> {
+interface ToggleButtonsProps<T extends string, Opt> {
   viewType: ViewType
   value: T
   options: T[]
@@ -18,7 +18,7 @@ interface ToggleButtonsProps<T, Opt> {
   settingsKey: keyof Opt
 }
 
-export const ToggleButtons = <T, Opt>({
+export const ToggleButtons = <T extends string, Opt>({
   viewType,
   value,
   options,

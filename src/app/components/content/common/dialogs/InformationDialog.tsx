@@ -2,10 +2,10 @@
  * Information dialog
  * Text dialog containing some information
  */
-import { VoidFunctionComponent } from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
+import { FC } from 'react'
 
-import { dialogStyle } from '../../../../components-style/content/common/dialogStyle'
+import { dialogStyle } from '@/components-style/content/common/dialogStyle'
 
 export interface InformationDialogProps {
   isOpen: boolean
@@ -16,7 +16,7 @@ export interface InformationDialogProps {
   alert?: boolean
 }
 
-export const InformationDialog: VoidFunctionComponent<InformationDialogProps> = ({
+export const InformationDialog: FC<InformationDialogProps> = ({
   isOpen,
   onClose,
   title,

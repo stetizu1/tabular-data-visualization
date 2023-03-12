@@ -1,17 +1,17 @@
 /**
  * Application footer
  */
-import { VoidFunctionComponent } from 'react'
-import { Box, Link, Typography } from '@mui/material'
 import { GitHub } from '@mui/icons-material'
+import { Box, Link, Typography } from '@mui/material'
+import { FC } from 'react'
 
-import { GITHUB_LINK } from '../../constants/link'
+import { GITHUB_LINK } from '@/constants/link'
 
-import { FOOTER_TEXT } from '../../text/footerText'
+import { FOOTER_TEXT } from '@/text/footerText'
 
-import { footerStyle } from '../../components-style/footer/footerStyle'
+import { footerStyle } from '@/components-style/footer/footerStyle'
 
-export const Footer: VoidFunctionComponent = () => (
+export const Footer: FC = () => (
   <Box sx={footerStyle.footerContainer}>
     <Typography sx={footerStyle.text}>
       {FOOTER_TEXT.openSource}

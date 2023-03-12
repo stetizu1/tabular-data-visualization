@@ -1,49 +1,49 @@
 /**
  * Parallel Coordinates view
  */
-import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
 import { Box } from '@mui/material'
 import { axisLeft, brushY, line, scaleLinear, scaleOrdinal, scalePoint, select, selectAll } from 'd3'
+import { FC, useCallback, useEffect, useMemo, useRef } from 'react'
 
-import { SelectableDataType } from '../../../../types/data/data'
-import { Brushable } from '../../../../types/brushing/Brushable'
-import { BrushSelection1d } from '../../../../types/brushing/BrushSelection'
-import { VisualizationView } from '../../../../types/views/VisualizationView'
-import { ParallelCoordinatesSettings } from '../../../../types/views/settings/ParallelCoordinatesSettings'
-import { Margin } from '../../../../types/styling/Margin'
-import { Extent, DataEachG, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
+import { Brushable } from '@/types/brushing/Brushable'
+import { BrushSelection1d } from '@/types/brushing/BrushSelection'
+import { DataEachG, DataEachP, Extent, OnBrushEvent } from '@/types/d3-types'
+import { SelectableDataType } from '@/types/data/data'
+import { Margin } from '@/types/styling/Margin'
+import { ParallelCoordinatesSettings } from '@/types/views/settings/ParallelCoordinatesSettings'
+import { VisualizationView } from '@/types/views/VisualizationView'
 
-import { isInRange } from '../../../../helpers/basic/range'
-import { getExtentInDomains } from '../../../../helpers/d3/extent'
-import { getDefaultSelectionForAttributes } from '../../../../helpers/data/data'
-import { getTogglingYShift, TOGGLE_Y_SHIFT } from '../../../../helpers/views/togglingYShift'
-import { getCategoryColor } from '../../../../helpers/d3/categoryColor'
+import { isInRange } from '@/helpers/basic/range'
+import { getCategoryColor } from '@/helpers/d3/categoryColor'
+import { getExtentInDomains } from '@/helpers/d3/extent'
+import { onMouseOutTooltip, onMouseOverTooltip } from '@/helpers/d3/tooltip'
+import { getDefaultSelectionForAttributes } from '@/helpers/data/data'
 import {
   getAttributeFormatted,
   getAttributeValuesWithLabel,
   getClass,
   getEverything,
   getTranslate,
-} from '../../../../helpers/stringGetters'
-import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
+} from '@/helpers/stringGetters'
+import { getTogglingYShift, TOGGLE_Y_SHIFT } from '@/helpers/views/togglingYShift'
 
-import { BrushAction } from '../../../../constants/actions/BrushAction'
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { SVG } from '../../../../constants/svg'
-import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '../../../../constants/views/parallelCoordinates'
-import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
-import { PLOT_FONT_BOX_SIZE } from '../../../../constants/others'
+import { BrushAction } from '@/constants/actions/BrushAction'
+import { MouseAction } from '@/constants/actions/MouseAction'
+import { PLOT_FONT_BOX_SIZE } from '@/constants/others'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '@/constants/save/save'
+import { SVG } from '@/constants/svg'
+import { ViewType } from '@/constants/views-general/ViewType'
+import { MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT } from '@/constants/views/parallelCoordinates'
 
-import { PARALLEL_COORDINATES_TEXT } from '../../../../text/views-and-settings/parallelCoordinates'
+import { PARALLEL_COORDINATES_TEXT } from '@/text/views-and-settings/parallelCoordinates'
 
+import { getViewsNotDisplayStyle } from '@/components-style/content/views/getViewsNotDisplayStyle'
 import {
   AXES_TEXT_CLASS,
   getParallelCoordinatesStyle,
   PARALLEL_COORDINATES_CLASS,
   SELECTED_CLASS,
-} from '../../../../components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
-import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
+} from '@/components-style/content/views/parallel-coordinates/parallelCoordinatesStyle'
 
 const BRUSH_WIDTH = 30
 const BRUSH_RADIUS = BRUSH_WIDTH / 2
@@ -54,7 +54,7 @@ export const PARALLEL_COORDINATES = `PARALLEL_COORDINATES`
 
 export interface ParallelCoordinatesProps extends VisualizationView, Brushable, ParallelCoordinatesSettings {}
 
-export const ParallelCoordinates: VoidFunctionComponent<ParallelCoordinatesProps> = ({
+export const ParallelCoordinates: FC<ParallelCoordinatesProps> = ({
   width,
   height,
   dataset,

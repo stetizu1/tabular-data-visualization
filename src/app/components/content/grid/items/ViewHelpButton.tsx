@@ -1,4 +1,4 @@
-import { useState, VoidFunctionComponent } from 'react'
+import { Brush, Help, Settings } from '@mui/icons-material'
 import {
   Box,
   Button,
@@ -12,23 +12,23 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material'
-import { Brush, Help, Settings } from '@mui/icons-material'
+import { FC, useState } from 'react'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { BUTTON_VARIANT, COMPONENT_TYPE, DIALOG_MAX_WIDTH } from '../../../../constants/mui'
-import { BRUSHING_IMAGES } from '../../../../constants/public-path'
+import { BUTTON_VARIANT, COMPONENT_TYPE, DIALOG_MAX_WIDTH } from '@/constants/mui'
+import { BRUSHING_IMAGES } from '@/constants/public-path'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { VIEWS_NAMES } from '../../../../text/viewsNames'
+import { VIEWS_NAMES } from '@/text/viewsNames'
 
-import { inlineButtonStyles } from '../../../../components-style/content/common/inlineButtonStyles'
-import { helpDialogStyle } from '../../../../components-style/content/common/helpDialogStyle'
-import { INFO_DIALOG_TEXT, VIEW_TOP_TEXT } from '../../../../text/viewTopText'
+import { helpDialogStyle } from '@/components-style/content/common/helpDialogStyle'
+import { inlineButtonStyles } from '@/components-style/content/common/inlineButtonStyles'
+import { INFO_DIALOG_TEXT, VIEW_TOP_TEXT } from '@/text/viewTopText'
 
 export interface ViewHelpButtonProps {
   viewType: ViewType
 }
 
-export const ViewHelpButton: VoidFunctionComponent<ViewHelpButtonProps> = ({ viewType }) => {
+export const ViewHelpButton: FC<ViewHelpButtonProps> = ({ viewType }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   return (

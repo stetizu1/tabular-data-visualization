@@ -1,22 +1,22 @@
 /**
  * A component to choose a single color.
  */
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { Box, Typography } from '@mui/material'
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 
-import { Settings } from '../../../../types/views/settings/Settings'
+import { Settings } from '@/types/views/settings/Settings'
 
-import { useDebounce } from '../../../../helpers/react/useDebounce'
+import { useDebounce } from '@/helpers/react/useDebounce'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { COLOR_DEBOUNCE } from '../../../../constants/debounce/debounce'
-import { INPUT_TYPE } from '../../../../constants/others'
+import { COLOR_DEBOUNCE } from '@/constants/debounce/debounce'
+import { INPUT_TYPE } from '@/constants/others'
+import { ViewType } from '@/constants/views-general/ViewType'
 
 import {
   colorPickerStyle,
   getColorPickerInputStyle,
-} from '../../../../components-style/content/data-drawer/items/colorPickerStyle'
-import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
+} from '@/components-style/content/data-drawer/items/colorPickerStyle'
+import { settingsTextStyle } from '@/components-style/content/data-drawer/items/settingsTextStyle'
 
 export interface ColorPickerProps<Opt> {
   viewType: ViewType

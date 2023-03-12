@@ -1,19 +1,19 @@
 /**
  * Number input, works for specified attribute key, allowing to change minimum and maximum.
  */
-import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 import { Box, TextField } from '@mui/material'
+import { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 
-import { Settings } from '../../../../types/views/settings/Settings'
+import { Settings } from '@/types/views/settings/Settings'
 
-import { useDebounce } from '../../../../helpers/react/useDebounce'
-import { getInputPropsPositiveNumber } from '../../../../helpers/basic/getInputPropsPositiveNumber'
+import { getInputPropsPositiveNumber } from '@/helpers/basic/getInputPropsPositiveNumber'
+import { useDebounce } from '@/helpers/react/useDebounce'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
-import { INPUT_TYPE } from '../../../../constants/others'
+import { TEXT_INPUT_DEBOUNCE } from '@/constants/debounce/debounce'
+import { INPUT_TYPE } from '@/constants/others'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
+import { numberInputStyles } from '@/components-style/content/data-drawer/items/numberInputStyles'
 
 export interface NumberInputProps<Opt> {
   viewType: ViewType

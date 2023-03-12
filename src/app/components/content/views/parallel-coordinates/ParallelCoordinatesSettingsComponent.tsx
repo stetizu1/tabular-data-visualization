@@ -1,38 +1,38 @@
 /**
  * Settings for Parallel coordinates view
  */
-import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
+import { FC, useCallback, useEffect, useState } from 'react'
 
-import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { lineWidthKey, ParallelCoordinatesSettings } from '../../../../types/views/settings/ParallelCoordinatesSettings'
-import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
+import { CheckedForSelectableDataType } from '@/types/data/data'
+import { lineWidthKey, ParallelCoordinatesSettings } from '@/types/views/settings/ParallelCoordinatesSettings'
+import { SettingsComponentProps } from '@/types/views/SettingsComponentProps'
 
 import {
   getCategoryAttributesKeys,
   getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
-} from '../../../../helpers/data/data'
+} from '@/helpers/data/data'
 
+import { ViewType } from '@/constants/views-general/ViewType'
 import {
   MIN_PARALLEL_COORDINATES_ATTRIBUTE_COUNT,
   PARALLEL_COORDINATES_DEFAULT,
-} from '../../../../constants/views/parallelCoordinates'
-import { ViewType } from '../../../../constants/views-general/ViewType'
+} from '@/constants/views/parallelCoordinates'
 
-import { PARALLEL_COORDINATES_SETTINGS_TEXT } from '../../../../text/views-and-settings/parallelCoordinates'
+import { PARALLEL_COORDINATES_SETTINGS_TEXT } from '@/text/views-and-settings/parallelCoordinates'
 
-import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
+import { settingsDrawerItemStyle } from '@/components-style/content/data-drawer/settingsDrawerItemStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
-import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
+import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
-export const ParallelCoordinatesSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
+export const ParallelCoordinatesSettingsComponent: FC<SettingsComponentProps> = ({
   dataset,
   settings,
   setSettings,

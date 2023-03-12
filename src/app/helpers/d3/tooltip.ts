@@ -1,13 +1,13 @@
 /**
  * Tooltip and it's actions
  */
+import { OnMouseEvent } from '@/types/d3-types'
 import { select } from 'd3'
 import { MouseEvent } from 'react'
-import { OnMouseEvent } from '../../types/d3-types'
 
-import { TOOLTIP, TOOLTIP_CLASS } from '../../constants/views-general/tooltip'
-import { SVG } from '../../constants/svg'
-import { HTML } from '../../constants/others'
+import { HTML } from '@/constants/others'
+import { SVG } from '@/constants/svg'
+import { TOOLTIP, TOOLTIP_CLASS } from '@/constants/views-general/tooltip'
 
 import { getClass, px } from '../stringGetters'
 
