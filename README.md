@@ -16,16 +16,16 @@ The application is available on the GitHub pages.
 https://stetizu1.github.io/tabular-data-visualization/
 
 ## Build and run
-To build/run the application locally, you need to have node and yarn installed.  
+To build/run the application locally, you need to have node and npm installed.  
 
 In the root of the application
-* Use `yarn` to install the dependencies.
-* Use `yarn start` to run the application.
+* Use `npm i` to install the dependencies.
+* Use `npm run start` to run the application.
 
 ### Versions
 Application was developed using
-* **node** v16.13.0
-* **yarn** 1.22.17
+* **node** v18.13.0
+* **npm** 8.19.3
 
 ## Example datasets
 Application provides sample datasets. Additional examples of datasets that can be loaded as a file can be found in the `load-test-data` directory. You can also observe the required file format on them.
