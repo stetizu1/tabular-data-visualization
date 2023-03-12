@@ -1,7 +1,7 @@
 /**
  * Page content before selecting a dataset.
  */
-import { useState, VoidFunctionComponent } from 'react'
+import { AddCircle, AutoGraph, Brush, Dashboard, Help, Settings, SkipNext, UploadFile } from '@mui/icons-material'
 import {
   Box,
   Button,
@@ -13,19 +13,19 @@ import {
   Divider,
   Typography,
 } from '@mui/material'
-import { AddCircle, AutoGraph, Brush, Dashboard, Help, Settings, SkipNext, UploadFile } from '@mui/icons-material'
+import { FC, useState } from 'react'
 
-import { TooltipSvg } from '../../../../icons/TooltipSvg'
-import { BrushOffSvg } from '../../../../icons/BrushOffSvg'
+import { BrushOffSvg } from '@icons/BrushOffSvg'
+import { TooltipSvg } from '@icons/TooltipSvg'
 
-import { EMPTY_DATA_TEXT } from '../../../text/siteText'
+import { EMPTY_DATA_TEXT } from '@/text/siteText'
 
-import { BUTTON_VARIANT, DIALOG_MAX_WIDTH } from '../../../constants/mui'
+import { BUTTON_VARIANT, DIALOG_MAX_WIDTH } from '@/constants/mui'
 
-import { emptyDataStyle } from '../../../components-style/content/no-data/emptyDataStyle'
-import { helpDialogStyle } from '../../../components-style/content/common/helpDialogStyle'
+import { helpDialogStyle } from '@/components-style/content/common/helpDialogStyle'
+import { emptyDataStyle } from '@/components-style/content/no-data/emptyDataStyle'
 
-export const EmptyData: VoidFunctionComponent = () => {
+export const EmptyData: FC = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
 
   return (

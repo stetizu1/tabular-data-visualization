@@ -1,6 +1,6 @@
 import { parse } from 'csv-string'
 
-import { DataType } from '../../types/data/data'
+import { DataType } from '@/types/data/data'
 
 /**
  * Parses the CSV file to the DataType array

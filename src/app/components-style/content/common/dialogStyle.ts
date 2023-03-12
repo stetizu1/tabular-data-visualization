@@ -1,8 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { border, important, px } from '../../../helpers/stringGetters'
+import { border, important, px } from '@/helpers/stringGetters'
 
-import { SITE_COLORS, ERROR_COLORS, BUTTON_COLORS, CARD_COLORS } from '../../../styles/colors'
+import { BUTTON_COLORS, CARD_COLORS, ERROR_COLORS, SITE_COLORS } from '@/styles/colors'
 
 export const dialogStyle: Record<string, SxProps> = {
   dialog: {

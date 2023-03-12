@@ -1,4 +1,4 @@
-import { JsonValue } from '../../types/data/data'
+import { JsonValue } from '@/types/data/data'
 
 const withoutSpaces = /([A-Z])([A-Z])([a-z])|([a-z])([A-Z])/g
 

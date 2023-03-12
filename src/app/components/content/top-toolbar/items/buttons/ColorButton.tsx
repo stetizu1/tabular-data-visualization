@@ -1,19 +1,19 @@
 /**
  * Button for color change
  */
-import { useEffect, useState, VoidFunctionComponent } from 'react'
 import { Box, Tooltip } from '@mui/material'
+import { FC, useEffect, useState } from 'react'
 
-import { useDebounce } from '../../../../../helpers/react/useDebounce'
+import { useDebounce } from '@/helpers/react/useDebounce'
 
-import { COLOR_DEBOUNCE } from '../../../../../constants/debounce/debounce'
-import { INPUT_TYPE } from '../../../../../constants/others'
+import { COLOR_DEBOUNCE } from '@/constants/debounce/debounce'
+import { INPUT_TYPE } from '@/constants/others'
 
 import {
   colorInputStyle,
   getColorInputBoxStyle,
   getColorInputStyle,
-} from '../../../../../components-style/content/top-toolbar/items/buttons/colorButtonStyle'
+} from '@/components-style/content/top-toolbar/items/buttons/colorButtonStyle'
 
 export interface ColorButtonProps {
   color: string
@@ -23,13 +23,7 @@ export interface ColorButtonProps {
   icon: JSX.Element
 }
 
-export const ColorButton: VoidFunctionComponent<ColorButtonProps> = ({
-  color,
-  handleSetColor,
-  tooltip,
-  disabled,
-  icon,
-}) => {
+export const ColorButton: FC<ColorButtonProps> = ({ color, handleSetColor, tooltip, disabled, icon }) => {
   const [currentColor, setCurrentColor] = useState(color)
   const debouncedColor = useDebounce(currentColor, COLOR_DEBOUNCE)
   useEffect(() => {

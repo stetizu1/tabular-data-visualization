@@ -1,49 +1,45 @@
 /**
  * Settings for Glyphs view
  */
-import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
+import { FC, useCallback, useEffect, useState } from 'react'
 
-import { CheckedForSelectableDataType } from '../../../../types/data/data'
+import { CheckedForSelectableDataType } from '@/types/data/data'
 import {
   glyphSizeKey,
   glyphSpacingKey,
   GlyphsSettings,
   sortAttributeKey,
   sortTypeKey,
-} from '../../../../types/views/settings/GlyphsSettings'
-import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
+} from '@/types/views/settings/GlyphsSettings'
+import { SettingsComponentProps } from '@/types/views/SettingsComponentProps'
 
 import {
   getCategoryAttributesKeys,
   getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
-} from '../../../../helpers/data/data'
+} from '@/helpers/data/data'
 
-import { GLYPHS_DEFAULT, MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { SortType } from '../../../../constants/sort/SortType'
+import { SortType } from '@/constants/sort/SortType'
+import { ViewType } from '@/constants/views-general/ViewType'
+import { GLYPHS_DEFAULT, MIN_GLYPHS_ATTRIBUTE_COUNT } from '@/constants/views/glyphs'
 
-import { GLYPHS_SETTINGS_TEXT } from '../../../../text/views-and-settings/glyphs'
+import { GLYPHS_SETTINGS_TEXT } from '@/text/views-and-settings/glyphs'
 
-import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
-import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
+import { settingsTextStyle } from '@/components-style/content/data-drawer/items/settingsTextStyle'
+import { settingsDrawerItemStyle } from '@/components-style/content/data-drawer/settingsDrawerItemStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
-import { Selector } from '../../data-drawer/items/Selector'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
 import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
+import { Selector } from '../../data-drawer/items/Selector'
 import { ToggleButtons } from '../../data-drawer/items/ToggleButtons'
 
-export const GlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
-  dataset,
-  settings,
-  setSettings,
-}) => {
+export const GlyphsSettingsComponent: FC<SettingsComponentProps> = ({ dataset, settings, setSettings }) => {
   const viewType = ViewType.Glyphs
   const glyphsSettings = settings[viewType]
   const [quantitativeAttributesKeys, setQuantitativeAttributesKeys] = useState(getQuantitativeAttributesKeys(dataset))

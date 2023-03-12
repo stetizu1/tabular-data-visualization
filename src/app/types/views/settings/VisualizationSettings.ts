@@ -3,9 +3,9 @@
  */
 
 import { SelectableDataType } from '../../data/data'
+import { ColorArray } from '../../styling/ColorArray'
 import { MarginArray } from '../../styling/Margin'
 import { Opacity } from '../../styling/Opacity'
-import { ColorArray } from '../../styling/ColorArray'
 
 /**
  * General settings for any visualization

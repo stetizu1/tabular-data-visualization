@@ -1,8 +1,8 @@
 /**
  * Functions to save view as an SVG file
  */
-import { ViewType } from '../../constants/views-general/ViewType'
-import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../constants/save/save'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '@/constants/save/save'
+import { ViewType } from '@/constants/views-general/ViewType'
 
 type StyleNode = { sheet: CSSStyleSheet }
 
@@ -60,7 +60,7 @@ export const saveSvg = (viewType: ViewType): void => {
 }
 
 /**
- * Returns true, if the view has not save container and have emptycontainer
+ * Returns true, if the view has not saved container and have emptycontainer
  * @param viewType
  */
 export const getSaveIsDisabled = (viewType: ViewType): boolean =>

@@ -1,7 +1,7 @@
 import { schemeCategory10 } from 'd3'
 
-import { ColorArray } from '../../types/styling/ColorArray'
-import { GlyphsSettings } from '../../types/views/settings/GlyphsSettings'
+import { ColorArray } from '@/types/styling/ColorArray'
+import { GlyphsSettings } from '@/types/views/settings/GlyphsSettings'
 
 import { SortType } from '../sort/SortType'
 

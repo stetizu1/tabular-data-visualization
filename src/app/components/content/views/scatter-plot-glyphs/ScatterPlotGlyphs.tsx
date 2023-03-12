@@ -1,18 +1,23 @@
 /**
  * Scatter Plot Glyphs view
  */
-import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
-import { axisBottom, axisLeft, brush, lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
 import { Box } from '@mui/material'
+import { axisBottom, axisLeft, brush, lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
+import { FC, useCallback, useEffect, useMemo, useRef } from 'react'
 
-import { SelectableDataType } from '../../../../types/data/data'
-import { VisualizationView } from '../../../../types/views/VisualizationView'
-import { Brushable } from '../../../../types/brushing/Brushable'
-import { ScatterPlotGlyphsSettings } from '../../../../types/views/settings/ScatterPlotGlyphsSettings'
-import { Margin } from '../../../../types/styling/Margin'
-import { BrushSelection2d } from '../../../../types/brushing/BrushSelection'
-import { Extent, DataEachP, OnBrushEvent } from '../../../../types/d3-types'
+import { Brushable } from '@/types/brushing/Brushable'
+import { BrushSelection2d } from '@/types/brushing/BrushSelection'
+import { DataEachP, Extent, OnBrushEvent } from '@/types/d3-types'
+import { SelectableDataType } from '@/types/data/data'
+import { Margin } from '@/types/styling/Margin'
+import { ScatterPlotGlyphsSettings } from '@/types/views/settings/ScatterPlotGlyphsSettings'
+import { VisualizationView } from '@/types/views/VisualizationView'
 
+import { isInRanges } from '@/helpers/basic/range'
+import { getCategoryColor } from '@/helpers/d3/categoryColor'
+import { getExtendedExtentInDomains, getExtentInDomains } from '@/helpers/d3/extent'
+import { setDisplay } from '@/helpers/d3/setDisplay'
+import { onMouseOutTooltip, onMouseOverTooltip } from '@/helpers/d3/tooltip'
 import {
   getAttributeFormatted,
   getAttributeValuesWithLabel,
@@ -20,24 +25,20 @@ import {
   getEverything,
   getRotate,
   getTranslate,
-} from '../../../../helpers/stringGetters'
-import { setDisplay } from '../../../../helpers/d3/setDisplay'
-import { getExtendedExtentInDomains, getExtentInDomains } from '../../../../helpers/d3/extent'
-import { getCategoryColor } from '../../../../helpers/d3/categoryColor'
-import { isInRanges } from '../../../../helpers/basic/range'
-import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
+} from '@/helpers/stringGetters'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { SVG } from '../../../../constants/svg'
-import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { BrushAction } from '../../../../constants/actions/BrushAction'
-import { MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/scatterPlotGlyphs'
-import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
-import { TOOLTIP_CLASS } from '../../../../constants/views-general/tooltip'
-import { GLYPHS_MIN_PERCENT_SHIFT } from '../../../../constants/views-general/glyphs-general'
+import { BrushAction } from '@/constants/actions/BrushAction'
+import { MouseAction } from '@/constants/actions/MouseAction'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '@/constants/save/save'
+import { SVG } from '@/constants/svg'
+import { GLYPHS_MIN_PERCENT_SHIFT } from '@/constants/views-general/glyphs-general'
+import { TOOLTIP_CLASS } from '@/constants/views-general/tooltip'
+import { ViewType } from '@/constants/views-general/ViewType'
+import { MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT } from '@/constants/views/scatterPlotGlyphs'
 
-import { SCATTER_PLOT_GLYPHS_TEXT } from '../../../../text/views-and-settings/scatterPlotGlyphs'
+import { SCATTER_PLOT_GLYPHS_TEXT } from '@/text/views-and-settings/scatterPlotGlyphs'
 
+import { getViewsNotDisplayStyle } from '@/components-style/content/views/getViewsNotDisplayStyle'
 import {
   AXIS_CLASS,
   AXIS_TEXT_CLASS,
@@ -45,8 +46,7 @@ import {
   getScatterPlotGlyphsStyle,
   SCATTER_PLOT_GLYPHS_CLASS,
   SELECTED_CLASS,
-} from '../../../../components-style/content/views/scatter-plot-glyphs/scatterPlotGlyphsStyle'
-import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
+} from '@/components-style/content/views/scatter-plot-glyphs/scatterPlotGlyphsStyle'
 
 const SCATTER_PLOT_GLYPHS = `SCATTER_PLOT_GLYPHS`
 const AXIS_X = `axisX`
@@ -56,7 +56,7 @@ const Y_AXIS_TEXT_SHIFT = 30
 
 export interface ScatterPlotGlyphsProps extends VisualizationView, Brushable, ScatterPlotGlyphsSettings {}
 
-export const ScatterPlotGlyphs: VoidFunctionComponent<ScatterPlotGlyphsProps> = ({
+export const ScatterPlotGlyphs: FC<ScatterPlotGlyphsProps> = ({
   width,
   height,
   dataset,

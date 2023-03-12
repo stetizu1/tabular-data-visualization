@@ -1,8 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { ColorArray } from '../../../../types/styling/ColorArray'
+import { ColorArray } from '@/types/styling/ColorArray'
 
-import { px } from '../../../../helpers/stringGetters'
+import { px } from '@/helpers/stringGetters'
 
 export const getPalettePickerColorInputStyle = (colors: ColorArray, index: number): SxProps => ({
   bgcolor: colors[index],

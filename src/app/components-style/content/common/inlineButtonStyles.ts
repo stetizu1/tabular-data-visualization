@@ -1,8 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { px } from '../../../helpers/stringGetters'
+import { px } from '@/helpers/stringGetters'
 
-import { BUTTON_COLORS } from '../../../styles/colors'
+import { BUTTON_COLORS } from '@/styles/colors'
 
 const inlineButton = {
   margin: 0,

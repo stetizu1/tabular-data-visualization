@@ -1,7 +1,7 @@
 import { schemeCategory10 } from 'd3'
 
-import { ColorArray } from '../../types/styling/ColorArray'
-import { ScatterPlotMatrixSettings } from '../../types/views/settings/ScatterPlotMatrixSettings'
+import { ColorArray } from '@/types/styling/ColorArray'
+import { ScatterPlotMatrixSettings } from '@/types/views/settings/ScatterPlotMatrixSettings'
 
 /**
  * Minimal attribute count for scatter plot matrix

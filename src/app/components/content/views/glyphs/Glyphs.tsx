@@ -1,44 +1,40 @@
 /**
  * Glyphs view
  */
-import { VoidFunctionComponent, useCallback, useEffect, useMemo, useRef } from 'react'
-import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
 import { Box } from '@mui/material'
+import { lineRadial, scaleLinear, scaleOrdinal, scaleRadial, select, selectAll } from 'd3'
+import { FC, useCallback, useEffect, useMemo, useRef } from 'react'
 
-import { SelectableDataType } from '../../../../types/data/data'
-import { Brushable } from '../../../../types/brushing/Brushable'
-import { VisualizationView } from '../../../../types/views/VisualizationView'
-import { GlyphsSettings } from '../../../../types/views/settings/GlyphsSettings'
-import { Margin } from '../../../../types/styling/Margin'
-import { DataEachP, OnMouseEvent } from '../../../../types/d3-types'
+import { Brushable } from '@/types/brushing/Brushable'
+import { DataEachP, OnMouseEvent } from '@/types/d3-types'
+import { SelectableDataType } from '@/types/data/data'
+import { Margin } from '@/types/styling/Margin'
+import { GlyphsSettings } from '@/types/views/settings/GlyphsSettings'
+import { VisualizationView } from '@/types/views/VisualizationView'
 
-import { getExtendedExtentInDomains } from '../../../../helpers/d3/extent'
-import { getCategoryColor } from '../../../../helpers/d3/categoryColor'
-import { getAttributeValuesWithLabel, getClass, getEverything, getTranslate } from '../../../../helpers/stringGetters'
-import { getComparator } from '../../../../helpers/data/comparator'
-import { onMouseOutTooltip, onMouseOverTooltip } from '../../../../helpers/d3/tooltip'
+import { getCategoryColor } from '@/helpers/d3/categoryColor'
+import { getExtendedExtentInDomains } from '@/helpers/d3/extent'
+import { onMouseOutTooltip, onMouseOverTooltip } from '@/helpers/d3/tooltip'
+import { getComparator } from '@/helpers/data/comparator'
+import { getAttributeValuesWithLabel, getClass, getEverything, getTranslate } from '@/helpers/stringGetters'
 
-import { SVG } from '../../../../constants/svg'
-import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '../../../../constants/views/glyphs'
-import { MouseAction } from '../../../../constants/actions/MouseAction'
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '../../../../constants/save/save'
-import { GLYPHS_MIN_PERCENT_SHIFT } from '../../../../constants/views-general/glyphs-general'
+import { MouseAction } from '@/constants/actions/MouseAction'
+import { CONTAINER_EMPTY, CONTAINER_SAVE_ID, SAVE_ID } from '@/constants/save/save'
+import { SVG } from '@/constants/svg'
+import { GLYPHS_MIN_PERCENT_SHIFT } from '@/constants/views-general/glyphs-general'
+import { ViewType } from '@/constants/views-general/ViewType'
+import { MIN_GLYPHS_ATTRIBUTE_COUNT } from '@/constants/views/glyphs'
 
-import { GLYPHS_TEXT } from '../../../../text/views-and-settings/glyphs'
+import { GLYPHS_TEXT } from '@/text/views-and-settings/glyphs'
 
-import {
-  getGlyphsStyle,
-  GLYPHS_CLASS,
-  SELECTED_CLASS,
-} from '../../../../components-style/content/views/glyphs/glyphsStyle'
-import { getViewsNotDisplayStyle } from '../../../../components-style/content/views/getViewsNotDisplayStyle'
+import { getViewsNotDisplayStyle } from '@/components-style/content/views/getViewsNotDisplayStyle'
+import { getGlyphsStyle, GLYPHS_CLASS, SELECTED_CLASS } from '@/components-style/content/views/glyphs/glyphsStyle'
 
 export interface GlyphsProps extends VisualizationView, Brushable, GlyphsSettings {}
 
 const GLYPHS = `GLYPHS`
 
-export const Glyphs: VoidFunctionComponent<GlyphsProps> = ({
+export const Glyphs: FC<GlyphsProps> = ({
   dataset,
   width,
   height,

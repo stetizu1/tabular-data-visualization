@@ -1,19 +1,16 @@
 /**
  * Body of the data table view, built from sorted dataset
  */
-import { VoidFunctionComponent } from 'react'
 import { Checkbox, TableBody, TableCell, TableRow } from '@mui/material'
+import { FC } from 'react'
 
-import { SelectableDataType } from '../../../../types/data/data'
+import { SelectableDataType } from '@/types/data/data'
 
-import { dataToReadable } from '../../../../helpers/data/formatText'
+import { dataToReadable } from '@/helpers/data/formatText'
 
-import { CELL_PADDING } from '../../../../constants/mui'
+import { CELL_PADDING } from '@/constants/mui'
 
-import {
-  dataTableStyle,
-  getDataTableRowStyle,
-} from '../../../../components-style/content/views/data-table/dataTableStyle'
+import { dataTableStyle, getDataTableRowStyle } from '@/components-style/content/views/data-table/dataTableStyle'
 
 export interface DataTableBodyProps {
   displayAttributes: Array<keyof SelectableDataType>
@@ -25,7 +22,7 @@ export interface DataTableBodyProps {
   redrawTime: number
 }
 
-export const DataTableBody: VoidFunctionComponent<DataTableBodyProps> = ({
+export const DataTableBody: FC<DataTableBodyProps> = ({
   displayAttributes,
   sortedDataset,
   handleSelectClick,

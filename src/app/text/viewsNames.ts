@@ -1,4 +1,4 @@
-import { ViewType } from '../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
 /**
  * Names of the views

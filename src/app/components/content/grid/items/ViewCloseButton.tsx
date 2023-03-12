@@ -1,10 +1,10 @@
-import React, { useCallback, useState, VoidFunctionComponent } from 'react'
-import { Button, Tooltip } from '@mui/material'
 import { Close } from '@mui/icons-material'
+import { Button, Tooltip } from '@mui/material'
+import { FC, useCallback, useState } from 'react'
 
-import { VIEW_TOP_TEXT } from '../../../../text/viewTopText'
+import { VIEW_TOP_TEXT } from '@/text/viewTopText'
 
-import { inlineButtonStyles } from '../../../../components-style/content/common/inlineButtonStyles'
+import { inlineButtonStyles } from '@/components-style/content/common/inlineButtonStyles'
 
 import { ConfirmationDialog } from '../../common/dialogs/ConfirmationDialog'
 
@@ -12,7 +12,7 @@ interface ViewCloseButtonProps {
   onRemove: () => void
 }
 
-export const ViewCloseButton: VoidFunctionComponent<ViewCloseButtonProps> = ({ onRemove }) => {
+export const ViewCloseButton: FC<ViewCloseButtonProps> = ({ onRemove }) => {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const onConfirm = useCallback(() => {
     onRemove()

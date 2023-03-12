@@ -2,9 +2,9 @@
  * Text on site and top toolbar
  */
 
-import { SampleDataset } from '../constants/data/sampleDataset'
-import { DataNullOptionType } from '../constants/data/data'
-import { DataLoadError } from '../constants/data/DataLoadError'
+import { DataNullOptionType } from '@/constants/data/data'
+import { DataLoadError } from '@/constants/data/DataLoadError'
+import { SampleDataset } from '@/constants/data/sampleDataset'
 
 /**
  * Text on page before the data is selected/loaded

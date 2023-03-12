@@ -1,11 +1,11 @@
 /**
  * Page content while loading the dataset.
  */
-import { VoidFunctionComponent } from 'react'
 import { Box } from '@mui/material'
+import { FC } from 'react'
 
-import { EMPTY_DATA_TEXT } from '../../../text/siteText'
+import { EMPTY_DATA_TEXT } from '@/text/siteText'
 
-import { emptyDataStyle } from '../../../components-style/content/no-data/emptyDataStyle'
+import { emptyDataStyle } from '@/components-style/content/no-data/emptyDataStyle'
 
-export const Loading: VoidFunctionComponent = () => <Box sx={emptyDataStyle.text}>{EMPTY_DATA_TEXT.loading}</Box>
+export const Loading: FC = () => <Box sx={emptyDataStyle.text}>{EMPTY_DATA_TEXT.loading}</Box>

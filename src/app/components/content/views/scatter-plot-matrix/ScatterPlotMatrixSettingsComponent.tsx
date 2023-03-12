@@ -1,35 +1,35 @@
 /**
  * Settings for Scatter Plot Matrix view
  */
-import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
+import { FC, useCallback, useEffect, useState } from 'react'
 
-import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
+import { CheckedForSelectableDataType } from '@/types/data/data'
 import {
   horizontalSpacingKey,
   pointSizeKey,
   ScatterPlotMatrixSettings,
   verticalSpacingKey,
-} from '../../../../types/views/settings/ScatterPlotMatrixSettings'
+} from '@/types/views/settings/ScatterPlotMatrixSettings'
+import { SettingsComponentProps } from '@/types/views/SettingsComponentProps'
 
 import {
   getCategoryAttributesKeys,
   getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
-} from '../../../../helpers/data/data'
+} from '@/helpers/data/data'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 import {
   MIN_SCATTER_PLOT_MATRIX_ATTRIBUTE_COUNT,
   SCATTER_PLOT_MATRIX_DEFAULT,
-} from '../../../../constants/views/scatterPlotMatrix'
+} from '@/constants/views/scatterPlotMatrix'
 
-import { SCATTER_PLOT_MATRIX_SETTINGS_TEXT } from '../../../../text/views-and-settings/scatterPlotMatrix'
+import { SCATTER_PLOT_MATRIX_SETTINGS_TEXT } from '@/text/views-and-settings/scatterPlotMatrix'
 
-import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
-import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
+import { settingsTextStyle } from '@/components-style/content/data-drawer/items/settingsTextStyle'
+import { settingsDrawerItemStyle } from '@/components-style/content/data-drawer/settingsDrawerItemStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -38,7 +38,7 @@ import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 
-export const ScatterPlotMatrixSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
+export const ScatterPlotMatrixSettingsComponent: FC<SettingsComponentProps> = ({
   dataset,
   settings,
   setSettings,

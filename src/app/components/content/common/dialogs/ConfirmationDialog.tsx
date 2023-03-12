@@ -1,11 +1,11 @@
 /**
  * Confirmation dialog
- * Text dialog allowing confirm and cancel actions
+ * Text dialog allowing 'confirm' and 'cancel' actions
  */
-import { VoidFunctionComponent } from 'react'
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Divider } from '@mui/material'
+import { FC } from 'react'
 
-import { BUTTON_VARIANT } from '../../../../constants/mui'
+import { BUTTON_VARIANT } from '@/constants/mui'
 
 export interface InformationDialogProps {
   isOpen: boolean
@@ -17,7 +17,7 @@ export interface InformationDialogProps {
   cancelText: string
 }
 
-export const ConfirmationDialog: VoidFunctionComponent<InformationDialogProps> = ({
+export const ConfirmationDialog: FC<InformationDialogProps> = ({
   isOpen,
   title,
   description,

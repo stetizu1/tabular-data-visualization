@@ -3,18 +3,18 @@
  * It can also change their order.
  */
 
-import { Dispatch, SetStateAction, useCallback } from 'react'
-import { Box, Button, Checkbox, FormControlLabel } from '@mui/material'
 import { ArrowDropDown, ArrowDropUp } from '@mui/icons-material'
+import { Box, Button, Checkbox, FormControlLabel } from '@mui/material'
+import { Dispatch, SetStateAction, useCallback } from 'react'
 
-import { CheckedForSelectableDataType, SelectableDataType } from '../../../../types/data/data'
-import { Settings, SettingsType } from '../../../../types/views/settings/Settings'
+import { CheckedForSelectableDataType, SelectableDataType } from '@/types/data/data'
+import { Settings, SettingsType } from '@/types/views/settings/Settings'
 
-import { otherCasesToWhitespaces } from '../../../../helpers/data/formatText'
+import { otherCasesToWhitespaces } from '@/helpers/data/formatText'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { attributeCheckerStyle } from '../../../../components-style/content/data-drawer/items/attributeCheckerStyle'
+import { attributeCheckerStyle } from '@/components-style/content/data-drawer/items/attributeCheckerStyle'
 
 export interface AttributeCheckerProps<Opt extends SettingsType> {
   viewType: ViewType

@@ -1,45 +1,45 @@
 /**
  * Settings for Parallel Sets (bundled) view
  */
-import { useCallback, useEffect, useState, VoidFunctionComponent } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
+import { FC, useCallback, useEffect, useState } from 'react'
 
-import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
+import { CheckedForSelectableDataType } from '@/types/data/data'
 import {
-  ParallelSetsBundledSettings,
   brushingTypeKey,
   fontColorKey,
+  ParallelSetsBundledSettings,
   tabGapKey,
   tabSpacingKey,
   tabWidthKey,
-} from '../../../../types/views/settings/ParallelSetsBundledSettings'
+} from '@/types/views/settings/ParallelSetsBundledSettings'
+import { SettingsComponentProps } from '@/types/views/SettingsComponentProps'
 
-import { getCategoryAttributesKeys, getDefaultNominalAttributesChecked } from '../../../../helpers/data/data'
+import { getCategoryAttributesKeys, getDefaultNominalAttributesChecked } from '@/helpers/data/data'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
+import { ParallelSetsBrushingType } from '@/constants/brushing-type/ParallelSetsBrushingType'
+import { ViewType } from '@/constants/views-general/ViewType'
 import {
   MIN_PARALLEL_SETS_BUNDLED_ATTRIBUTE_COUNT,
   PARALLEL_SETS_BUNDLED_DEFAULT,
-} from '../../../../constants/views/parallelSetsBundled'
-import { ParallelSetsBrushingType } from '../../../../constants/brushing-type/ParallelSetsBrushingType'
+} from '@/constants/views/parallelSetsBundled'
 
-import { PARALLEL_SETS_SETTINGS_TEXT } from '../../../../text/views-and-settings/parallelSetsBundled'
+import { PARALLEL_SETS_SETTINGS_TEXT } from '@/text/views-and-settings/parallelSetsBundled'
 
-import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
-import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
+import { settingsTextStyle } from '@/components-style/content/data-drawer/items/settingsTextStyle'
+import { settingsDrawerItemStyle } from '@/components-style/content/data-drawer/settingsDrawerItemStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
+import { ColorPicker } from '../../data-drawer/items/ColorPicker'
 import { MarginInput } from '../../data-drawer/items/MarginInput'
+import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
-import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { ToggleButtons } from '../../data-drawer/items/ToggleButtons'
-import { ColorPicker } from '../../data-drawer/items/ColorPicker'
 
-export const ParallelSetsBundledSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
+export const ParallelSetsBundledSettingsComponent: FC<SettingsComponentProps> = ({
   dataset,
   settings,
   setSettings,

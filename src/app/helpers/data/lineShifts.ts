@@ -1,7 +1,7 @@
 /**
  * Functions to compute line shifts for sankey graph in parallel sets
  */
-import { LinkDataPoint } from '../../types/d3-sankey'
+import { LinkDataPoint } from '@/types/d3-sankey'
 
 /**
  * Get width with the selection

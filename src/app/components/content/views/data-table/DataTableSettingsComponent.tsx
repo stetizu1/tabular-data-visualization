@@ -1,37 +1,33 @@
 /**
  * Settings for Data Table view
  */
-import { VoidFunctionComponent, useCallback, useEffect, useState } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from '@mui/material'
+import { FC, useCallback, useEffect, useState } from 'react'
 
-import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
+import { CheckedForSelectableDataType } from '@/types/data/data'
 import {
   DataTableSettings,
   rowHeightKey,
   selectedBackgroundColorKey,
   selectedFontColorKey,
-} from '../../../../types/views/settings/DataTableSettings'
+} from '@/types/views/settings/DataTableSettings'
+import { SettingsComponentProps } from '@/types/views/SettingsComponentProps'
 
-import { getAttributeKeys, getDefaultAllAttributesChecked } from '../../../../helpers/data/data'
+import { getAttributeKeys, getDefaultAllAttributesChecked } from '@/helpers/data/data'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { DATA_TABLE_DEFAULT, MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '../../../../constants/views/dataTable'
+import { ViewType } from '@/constants/views-general/ViewType'
+import { DATA_TABLE_DEFAULT, MIN_DATA_TABLE_ATTRIBUTE_COUNT } from '@/constants/views/dataTable'
 
-import { DATA_TABLE_SETTINGS_TEXT } from '../../../../text/views-and-settings/dataTable'
+import { DATA_TABLE_SETTINGS_TEXT } from '@/text/views-and-settings/dataTable'
 
-import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
+import { settingsDrawerItemStyle } from '@/components-style/content/data-drawer/settingsDrawerItemStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
-import { NumberInput } from '../../data-drawer/items/NumberInput'
 import { ColorPicker } from '../../data-drawer/items/ColorPicker'
+import { NumberInput } from '../../data-drawer/items/NumberInput'
 
-export const DataTableSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
-  dataset,
-  settings,
-  setSettings,
-}) => {
+export const DataTableSettingsComponent: FC<SettingsComponentProps> = ({ dataset, settings, setSettings }) => {
   const viewType = ViewType.DataTable
   const dataTableSettings = settings[viewType]
   const [attributesKeys, setAttributesKeys] = useState(getAttributeKeys(dataset))

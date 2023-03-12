@@ -3,7 +3,7 @@
  */
 import { SelectableDataType } from '../../data/data'
 
-import { SortType } from '../../../constants/sort/SortType'
+import { SortType } from '@/constants/sort/SortType'
 
 import { ViewVisualizationSettings } from './VisualizationSettings'
 

@@ -2,7 +2,7 @@
  * Function to move toggling labels for parallel views
  */
 
-import { DataEach } from '../../types/d3-types'
+import { DataEach } from '@/types/d3-types'
 
 /**
  * y shift for parallel coordinates/sets axes labels

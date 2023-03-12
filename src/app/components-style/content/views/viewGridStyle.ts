@@ -1,8 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { px } from '../../../helpers/stringGetters'
+import { px } from '@/helpers/stringGetters'
 
-import { PLOT_COLORS } from '../../../styles/colors'
+import { PLOT_COLORS } from '@/styles/colors'
 
 export const viewGridStyle: Record<string, SxProps> = {
   tooltip: {

@@ -1,7 +1,7 @@
 import { schemeCategory10 } from 'd3'
 
-import { ColorArray } from '../../types/styling/ColorArray'
-import { ParallelSetsBundledSettings } from '../../types/views/settings/ParallelSetsBundledSettings'
+import { ColorArray } from '@/types/styling/ColorArray'
+import { ParallelSetsBundledSettings } from '@/types/views/settings/ParallelSetsBundledSettings'
 
 import { ParallelSetsBrushingType } from '../brushing-type/ParallelSetsBrushingType'
 import { DEFAULT_FONT_COLOR_PARALLEL_SETS } from '../views-general/defaultSettableColors'

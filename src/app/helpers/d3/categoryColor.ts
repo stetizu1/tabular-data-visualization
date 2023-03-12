@@ -3,7 +3,7 @@
  */
 import { ScaleOrdinal } from 'd3'
 
-import { SelectableDataType } from '../../types/data/data'
+import { SelectableDataType } from '@/types/data/data'
 
 export type GetCategoryColor = (data: SelectableDataType) => string
 

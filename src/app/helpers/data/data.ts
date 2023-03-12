@@ -1,6 +1,8 @@
 /**
  * Functions that works with dataset
  */
+import { CATEGORY_LIMIT } from '@/constants/data/data'
+import { NodeDataPoint, SankeyGraph } from '@/types/d3-sankey'
 import {
   CheckedForSelectableDataType,
   DataLink,
@@ -9,10 +11,7 @@ import {
   NominalValueProperties,
   SelectableDataType,
   SelectedKey,
-} from '../../types/data/data'
-import { NodeDataPoint, SankeyGraph } from '../../types/d3-sankey'
-
-import { CATEGORY_LIMIT } from '../../constants/data/data'
+} from '@/types/data/data'
 
 const getDatasetSample = (dataset: ReadonlyArray<SelectableDataType>) => dataset[0]
 

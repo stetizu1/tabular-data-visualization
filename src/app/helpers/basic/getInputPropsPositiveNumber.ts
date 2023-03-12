@@ -1,6 +1,6 @@
 import { InputBaseComponentProps } from '@mui/material/InputBase'
 
-import { INPUT_PROPS } from '../../constants/others'
+import { INPUT_PROPS } from '@/constants/others'
 
 /**
  * Get input props for number input with min and max values

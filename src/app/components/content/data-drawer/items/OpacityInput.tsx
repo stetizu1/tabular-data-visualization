@@ -1,23 +1,23 @@
 /**
  * A component to change opacity for all the brushing states.
  */
-import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useCallback, useEffect } from 'react'
 import { Box, TextField, Typography } from '@mui/material'
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react'
 
-import { Opacity } from '../../../../types/styling/Opacity'
-import { Settings } from '../../../../types/views/settings/Settings'
+import { Opacity } from '@/types/styling/Opacity'
+import { Settings } from '@/types/views/settings/Settings'
 
-import { useDebounce } from '../../../../helpers/react/useDebounce'
-import { getInputPropsPositiveNumber } from '../../../../helpers/basic/getInputPropsPositiveNumber'
+import { getInputPropsPositiveNumber } from '@/helpers/basic/getInputPropsPositiveNumber'
+import { useDebounce } from '@/helpers/react/useDebounce'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
-import { INPUT_TYPE } from '../../../../constants/others'
+import { TEXT_INPUT_DEBOUNCE } from '@/constants/debounce/debounce'
+import { INPUT_TYPE } from '@/constants/others'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { OPACITY_SETTINGS_TEXT } from '../../../../text/views-and-settings/common'
+import { OPACITY_SETTINGS_TEXT } from '@/text/views-and-settings/common'
 
-import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
-import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
+import { numberInputStyles } from '@/components-style/content/data-drawer/items/numberInputStyles'
+import { settingsTextStyle } from '@/components-style/content/data-drawer/items/settingsTextStyle'
 
 export interface OpacityInputProps {
   header: string
@@ -26,12 +26,7 @@ export interface OpacityInputProps {
   viewType: ViewType
 }
 
-export const OpacityInput: VoidFunctionComponent<OpacityInputProps> = ({
-  header,
-  opacities,
-  setSettings,
-  viewType,
-}) => {
+export const OpacityInput: FC<OpacityInputProps> = ({ header, opacities, setSettings, viewType }) => {
   const [currentOpacities, setCurrentOpacities] = useState<Opacity>(opacities)
   const debouncedOpacities = useDebounce(currentOpacities, TEXT_INPUT_DEBOUNCE)
 

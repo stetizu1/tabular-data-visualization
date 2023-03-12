@@ -18,9 +18,21 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "allowJs": true
+    "allowJs": true,
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/app/*"],
+      "@icons/*": ["src/icons/*"],
+      "@test-data/*": ["src/test-data/*"],
+      "@d3-sankey": ["src/lib/d3-sankey"]
+    },
+    "typeRoots": ["node_modules/@types"],
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "./build"
   },
-  "include": [
-    "src"
-  ]
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

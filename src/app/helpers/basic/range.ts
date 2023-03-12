@@ -1,4 +1,4 @@
-import { Extent } from '../../types/d3-types'
+import { Extent } from '@/types/d3-types'
 
 /**
  * Return true if number is in range

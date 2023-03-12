@@ -1,34 +1,34 @@
 /**
  * Settings for Scatter Plot Glyphs view
  */
-import { useCallback, useEffect, useMemo, useState, VoidFunctionComponent } from 'react'
-import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
+import { Accordion, AccordionDetails, AccordionSummary, Box, Divider, Typography } from '@mui/material'
+import { FC, useCallback, useEffect, useMemo, useState } from 'react'
 
-import { CheckedForSelectableDataType } from '../../../../types/data/data'
-import { SettingsComponentProps } from '../../../../types/views/SettingsComponentProps'
+import { CheckedForSelectableDataType } from '@/types/data/data'
 import {
   glyphSizeKey,
   ScatterPlotGlyphsSettings,
   xAttributeKey,
   yAttributeKey,
-} from '../../../../types/views/settings/ScatterPlotGlyphsSettings'
+} from '@/types/views/settings/ScatterPlotGlyphsSettings'
+import { SettingsComponentProps } from '@/types/views/SettingsComponentProps'
 
 import {
   getCategoryAttributesKeys,
   getDefaultQuantitativeAttributesChecked,
   getQuantitativeAttributesKeys,
-} from '../../../../helpers/data/data'
+} from '@/helpers/data/data'
 
+import { ViewType } from '@/constants/views-general/ViewType'
 import {
   MIN_SCATTER_PLOT_GLYPHS_ATTRIBUTE_COUNT,
   SCATTER_PLOT_GLYPHS_DEFAULT,
-} from '../../../../constants/views/scatterPlotGlyphs'
-import { ViewType } from '../../../../constants/views-general/ViewType'
+} from '@/constants/views/scatterPlotGlyphs'
 
-import { SCATTER_PLOT_GLYPHS_SETTINGS_TEXT } from '../../../../text/views-and-settings/scatterPlotGlyphs'
+import { SCATTER_PLOT_GLYPHS_SETTINGS_TEXT } from '@/text/views-and-settings/scatterPlotGlyphs'
 
-import { settingsDrawerItemStyle } from '../../../../components-style/content/data-drawer/settingsDrawerItemStyle'
+import { settingsDrawerItemStyle } from '@/components-style/content/data-drawer/settingsDrawerItemStyle'
 
 import { AttributeChecker } from '../../data-drawer/items/AttributeChecker'
 import { CategorySelector } from '../../data-drawer/items/CategorySelector'
@@ -38,7 +38,7 @@ import { OpacityInput } from '../../data-drawer/items/OpacityInput'
 import { PalettePicker } from '../../data-drawer/items/PalettePicker'
 import { Selector } from '../../data-drawer/items/Selector'
 
-export const ScatterPlotGlyphsSettingsComponent: VoidFunctionComponent<SettingsComponentProps> = ({
+export const ScatterPlotGlyphsSettingsComponent: FC<SettingsComponentProps> = ({
   dataset,
   settings,
   setSettings,

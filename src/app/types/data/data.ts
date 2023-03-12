@@ -60,7 +60,7 @@ export interface NominalRecord {
 }
 
 /**
- * Interface for properties of pair of data, used for on graph
+ * Interface for properties of a pair of data, used for on graph
  * Also can include properties counts for third attribute values
  */
 export type DataLink = {

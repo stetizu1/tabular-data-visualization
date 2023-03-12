@@ -1,6 +1,6 @@
 import { SxProps } from '@mui/system'
 
-import { px } from '../../../../helpers/stringGetters'
+import { px } from '@/helpers/stringGetters'
 
 export const numberInputStyles: Record<string, SxProps> = {
   vertical: {

@@ -1,7 +1,7 @@
 /**
  * Settings for parallel sets bundled
  */
-import { ParallelSetsBrushingType } from '../../../constants/brushing-type/ParallelSetsBrushingType'
+import { ParallelSetsBrushingType } from '@/constants/brushing-type/ParallelSetsBrushingType'
 
 import { ViewVisualizationSettings } from './VisualizationSettings'
 

@@ -1,22 +1,22 @@
 /**
  * A component to change a margin of the view. It provides four number inputs, one for each side, with corresponding labels.
  */
-import { Dispatch, VoidFunctionComponent, SetStateAction, useCallback, useState, useEffect } from 'react'
 import { Box, TextField, Typography } from '@mui/material'
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react'
 
-import { MarginArray } from '../../../../types/styling/Margin'
-import { Settings } from '../../../../types/views/settings/Settings'
+import { MarginArray } from '@/types/styling/Margin'
+import { Settings } from '@/types/views/settings/Settings'
 
-import { useDebounce } from '../../../../helpers/react/useDebounce'
+import { useDebounce } from '@/helpers/react/useDebounce'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { TEXT_INPUT_DEBOUNCE } from '../../../../constants/debounce/debounce'
-import { INPUT_PROPS, INPUT_TYPE } from '../../../../constants/others'
+import { TEXT_INPUT_DEBOUNCE } from '@/constants/debounce/debounce'
+import { INPUT_PROPS, INPUT_TYPE } from '@/constants/others'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { MARGIN_SETTINGS_TEXT } from '../../../../text/views-and-settings/common'
+import { MARGIN_SETTINGS_TEXT } from '@/text/views-and-settings/common'
 
-import { numberInputStyles } from '../../../../components-style/content/data-drawer/items/numberInputStyles'
-import { settingsTextStyle } from '../../../../components-style/content/data-drawer/items/settingsTextStyle'
+import { numberInputStyles } from '@/components-style/content/data-drawer/items/numberInputStyles'
+import { settingsTextStyle } from '@/components-style/content/data-drawer/items/settingsTextStyle'
 
 export interface MarginInputProps {
   margins: MarginArray
@@ -25,12 +25,7 @@ export interface MarginInputProps {
   handleChangeSettings?: () => void
 }
 
-export const MarginInput: VoidFunctionComponent<MarginInputProps> = ({
-  margins,
-  setSettings,
-  viewType,
-  handleChangeSettings,
-}) => {
+export const MarginInput: FC<MarginInputProps> = ({ margins, setSettings, viewType, handleChangeSettings }) => {
   const [currentMargins, setCurrentMargins] = useState<MarginArray>(margins)
   const debouncedMargins = useDebounce(currentMargins, TEXT_INPUT_DEBOUNCE)
 

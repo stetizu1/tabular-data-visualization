@@ -2,14 +2,14 @@
  * Combined visualization settings
  */
 
-import { ViewType } from '../../../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { ParallelCoordinatesSettings } from './ParallelCoordinatesSettings'
-import { ScatterPlotMatrixSettings } from './ScatterPlotMatrixSettings'
-import { GlyphsSettings } from './GlyphsSettings'
-import { ScatterPlotGlyphsSettings } from './ScatterPlotGlyphsSettings'
 import { DataTableSettings } from './DataTableSettings'
+import { GlyphsSettings } from './GlyphsSettings'
+import { ParallelCoordinatesSettings } from './ParallelCoordinatesSettings'
 import { ParallelSetsBundledSettings } from './ParallelSetsBundledSettings'
+import { ScatterPlotGlyphsSettings } from './ScatterPlotGlyphsSettings'
+import { ScatterPlotMatrixSettings } from './ScatterPlotMatrixSettings'
 
 /**
  * Settings types for all views

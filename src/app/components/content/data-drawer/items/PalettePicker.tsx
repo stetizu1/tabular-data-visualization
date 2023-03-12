@@ -1,24 +1,24 @@
 /**
- * A component to choose all of the colors for category attribute values.
+ * A component to choose all the colors for category attribute values.
  */
-import { Dispatch, VoidFunctionComponent, SetStateAction, useState, useEffect, useCallback } from 'react'
 import { Box, Typography } from '@mui/material'
+import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react'
 
-import { ColorArray } from '../../../../types/styling/ColorArray'
-import { Settings } from '../../../../types/views/settings/Settings'
+import { ColorArray } from '@/types/styling/ColorArray'
+import { Settings } from '@/types/views/settings/Settings'
 
-import { useDebounce } from '../../../../helpers/react/useDebounce'
+import { useDebounce } from '@/helpers/react/useDebounce'
 
-import { ViewType } from '../../../../constants/views-general/ViewType'
-import { COLOR_DEBOUNCE } from '../../../../constants/debounce/debounce'
-import { INPUT_TYPE } from '../../../../constants/others'
+import { COLOR_DEBOUNCE } from '@/constants/debounce/debounce'
+import { INPUT_TYPE } from '@/constants/others'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { PALETTE_PICKER_SETTINGS_TEXT } from '../../../../text/views-and-settings/common'
+import { PALETTE_PICKER_SETTINGS_TEXT } from '@/text/views-and-settings/common'
 
 import {
   getPalettePickerColorInputStyle,
   palettePickerStyle,
-} from '../../../../components-style/content/data-drawer/items/palettePickerStyle'
+} from '@/components-style/content/data-drawer/items/palettePickerStyle'
 
 export interface PalettePickerProps {
   viewType: ViewType
@@ -27,12 +27,7 @@ export interface PalettePickerProps {
   handleChangeSettings?: () => void
 }
 
-export const PalettePicker: VoidFunctionComponent<PalettePickerProps> = ({
-  colors,
-  setSettings,
-  viewType,
-  handleChangeSettings,
-}) => {
+export const PalettePicker: FC<PalettePickerProps> = ({ colors, setSettings, viewType, handleChangeSettings }) => {
   const [currentColors, setCurrentColors] = useState<ColorArray>(colors)
   const debouncedColors = useDebounce(currentColors, COLOR_DEBOUNCE)
 

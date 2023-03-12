@@ -4,7 +4,7 @@
 import { ComponentProps } from 'react'
 import GridLayout from 'react-grid-layout'
 
-import { ViewType } from '../../constants/views-general/ViewType'
+import { ViewType } from '@/constants/views-general/ViewType'
 
 type ArrayElement<ArrType> = ArrType extends readonly (infer ElementType)[] ? ElementType : never
 

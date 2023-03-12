@@ -1,8 +1,8 @@
 import { SxProps } from '@mui/system'
 
-import { calc, px } from '../../helpers/stringGetters'
+import { calc, px } from '@/helpers/stringGetters'
 
-import { HEADER_COLORS } from '../../styles/colors'
+import { HEADER_COLORS } from '@/styles/colors'
 
 export const headerStyle: Record<string, SxProps> = {
   headerContainer: {

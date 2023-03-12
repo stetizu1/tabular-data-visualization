@@ -2,26 +2,26 @@
  * Right-side drawer containing setting for the views
  */
 
-import { Dispatch, VoidFunctionComponent, SetStateAction, useMemo } from 'react'
-import { Box, Divider, Drawer, Button, Tooltip, Typography } from '@mui/material'
 import { ChevronRight } from '@mui/icons-material'
+import { Box, Button, Divider, Drawer, Tooltip, Typography } from '@mui/material'
+import { Dispatch, FC, SetStateAction, useMemo } from 'react'
 
-import { SelectableDataType } from '../../../types/data/data'
-import { Settings } from '../../../types/views/settings/Settings'
+import { SelectableDataType } from '@/types/data/data'
+import { Settings } from '@/types/views/settings/Settings'
 
-import { ViewType } from '../../../constants/views-general/ViewType'
-import { ANCHOR, DRAWER_VARIANT } from '../../../constants/mui'
+import { ANCHOR, DRAWER_VARIANT } from '@/constants/mui'
+import { ViewType } from '@/constants/views-general/ViewType'
 
-import { SETTINGS_DRAWER_BOTTOM_TEXT } from '../../../text/settingsDrawerBottomText'
+import { SETTINGS_DRAWER_BOTTOM_TEXT } from '@/text/settingsDrawerBottomText'
 
-import { settingsDrawerStyle } from '../../../components-style/content/data-drawer/settingsDrawerStyle'
+import { settingsDrawerStyle } from '@/components-style/content/data-drawer/settingsDrawerStyle'
 
-import { ParallelCoordinatesSettingsComponent } from '../views/parallel-coordinates/ParallelCoordinatesSettingsComponent'
-import { ScatterPlotMatrixSettingsComponent } from '../views/scatter-plot-matrix/ScatterPlotMatrixSettingsComponent'
-import { GlyphsSettingsComponent } from '../views/glyphs/GlyphsSettingsComponent'
-import { ScatterPlotGlyphsSettingsComponent } from '../views/scatter-plot-glyphs/ScatterPlotGlyphsSettingsComponent'
 import { DataTableSettingsComponent } from '../views/data-table/DataTableSettingsComponent'
+import { GlyphsSettingsComponent } from '../views/glyphs/GlyphsSettingsComponent'
+import { ParallelCoordinatesSettingsComponent } from '../views/parallel-coordinates/ParallelCoordinatesSettingsComponent'
 import { ParallelSetsBundledSettingsComponent } from '../views/parallel-sets-bundeled/ParallelSetsBundledSettingsComponent'
+import { ScatterPlotGlyphsSettingsComponent } from '../views/scatter-plot-glyphs/ScatterPlotGlyphsSettingsComponent'
+import { ScatterPlotMatrixSettingsComponent } from '../views/scatter-plot-matrix/ScatterPlotMatrixSettingsComponent'
 
 export interface SettingsDrawerProps {
   isOpen: boolean
@@ -33,7 +33,7 @@ export interface SettingsDrawerProps {
   cleanSelectedIfViewWasBrushing: (viewType: ViewType) => void
 }
 
-export const SettingsDrawer: VoidFunctionComponent<SettingsDrawerProps> = ({
+export const SettingsDrawer: FC<SettingsDrawerProps> = ({
   isOpen,
   close,
   dataset,
